@@ -1,4 +1,4 @@
-import { buttonStyle } from "./index.style";
+import { buttonStyle } from "./Button.style";
 
 interface ButtonProps {
   children: string;
