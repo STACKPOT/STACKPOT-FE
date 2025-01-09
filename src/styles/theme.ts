@@ -129,6 +129,23 @@ const theme = {
       letter-spacing: -0.16px;
       font-weight: 500;
     `,
+    label1: css`
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.084px;
+      font-weight: 500;
+    `,
+    caption1: css`
+      font-size: 13px;
+      line-height: 20px;
+      font-weight: 400;
+    `,
+    caption2: css`
+      font-size: 14px;
+      line-height: 28px;
+      letter-spacing: -0.084px;
+      font-weight: 500;
+    `,
   },
 };
 
