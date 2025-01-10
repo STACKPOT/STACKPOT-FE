@@ -135,6 +135,12 @@ const theme = {
       letter-spacing: -0.084px;
       font-weight: 500;
     `,
+    label3: css`
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.108px;
+      font-weight: 500;
+    `,
     caption1: css`
       font-size: 13px;
       line-height: 20px;
