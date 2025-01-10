@@ -30,9 +30,8 @@ export const profileImage = css`
     width: 4rem;
     height: 4rem;
     border-radius: 70%;
-    overflow: hidden;
-    border-color: ${theme.color.border.normal};
-    border-width: 0.1rem;
+    border: 0.1rem solid rgba(112, 115, 124, 0.20);
+    object-fit: cover;
 `
 export const nicknameStyle = css`
     width: 14.4rem;

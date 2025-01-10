@@ -1,7 +1,6 @@
-import React, { useState } from "react"
+import React from "react"
 import { cardStyle, titleContainer, profileImage, nicknameStyle, titleStyle, contentStyle, dateStyle, innerContainerStyle, contentContainer, buttonContainer, likeConatiner, likeTextStyle } from "./PostCard.style"
-import { LikePostFilled, LikePostUnfilled, SavePostFilled, SavePostUnfilled } from "@assets/svgs";
-import { MushRoomProfile } from "@assets/images";
+import { LikePostUnfilled, SavePostUnfilled } from "@assets/svgs";
 
 interface PostCardProps {
     postId: number;
@@ -15,14 +14,12 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ postId, profileImageUrl, nickname, createdAt, title, content, likeCount, saveCount }: PostCardProps) => {
-    const [like, setLike] = useState(false)
-    const [save, setSave] = useState(false)
 
     return (
         <div css={cardStyle} >
             <div css={innerContainerStyle}>
                 <div css={titleContainer}>
-                    <img css={profileImage} src={MushRoomProfile} />
+                    <img css={profileImage} src={profileImageUrl} />
                     <p css={nicknameStyle}>{nickname}</p>
                     <p css={dateStyle}>{createdAt}</p>
                 </div>
@@ -32,11 +29,11 @@ const PostCard: React.FC<PostCardProps> = ({ postId, profileImageUrl, nickname, 
                 </div>
                 <div css={buttonContainer}>
                     <div css={likeConatiner}>
-                        {like ? <LikePostFilled /> : <LikePostUnfilled />}
+                        <LikePostUnfilled />
                         <p css={likeTextStyle}>{likeCount}</p>
                     </div>
                     <div css={likeConatiner}>
-                        {save ? <SavePostFilled /> : <SavePostUnfilled />}
+                        <SavePostUnfilled />
                         <p css={likeTextStyle}>{saveCount}</p>
                     </div>
                 </div>
