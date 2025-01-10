@@ -1,0 +1,1 @@
+export {default as MushRoomProfile} from "./MushroomProfile.png"
