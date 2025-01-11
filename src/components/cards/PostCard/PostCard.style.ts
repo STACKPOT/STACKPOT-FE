@@ -26,7 +26,7 @@ export const titleContainer = css`
     gap: 1.6rem;
 `
 
-export const profileImage = css`
+export const profileImageStyle = css`
     width: 4rem;
     height: 4rem;
     border-radius: 70%;

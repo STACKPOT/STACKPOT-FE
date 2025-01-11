@@ -1,10 +1,10 @@
 import React from "react"
-import { cardStyle, titleContainer, profileImage, nicknameStyle, titleStyle, contentStyle, dateStyle, innerContainerStyle, contentContainer, buttonContainer, likeConatiner, likeTextStyle } from "./PostCard.style"
+import { cardStyle, titleContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, innerContainerStyle, contentContainer, buttonContainer, likeConatiner, likeTextStyle } from "./PostCard.style"
 import { LikePostUnfilled, SavePostUnfilled } from "@assets/svgs";
 
 interface PostCardProps {
     postId: number;
-    profileImageUrl: string;
+    profileImage: string;
     nickname: string;
     createdAt: string;
     title: string;
@@ -13,13 +13,13 @@ interface PostCardProps {
     saveCount: number;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ postId, profileImageUrl, nickname, createdAt, title, content, likeCount, saveCount }: PostCardProps) => {
+const PostCard: React.FC<PostCardProps> = ({ postId, profileImage, nickname, createdAt, title, content, likeCount, saveCount }: PostCardProps) => {
 
     return (
         <div css={cardStyle} >
             <div css={innerContainerStyle}>
                 <div css={titleContainer}>
-                    <img css={profileImage} src={profileImageUrl} />
+                    <img css={profileImageStyle} src={profileImage} />
                     <p css={nicknameStyle}>{nickname}</p>
                     <p css={dateStyle}>{createdAt}</p>
                 </div>
