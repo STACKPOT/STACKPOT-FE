@@ -8,5 +8,6 @@ import DdayBadge from "./commons/Badge/DdayBadge/DdayBadge";
 import CategoryButton from "./commons/Badge/CategoryButton/CategoryButton";
 import TaskCard from "./cards/TaskCard/TaskCard";
 import MemberGroup from "./commons/Badge/MemberGroup/MemberGroup";
+import CommonBadge from "./commons/Badge/CommonBadge/CommonBadge";
 
-export { Button, Header, TextField, PostCard, PotCard, StateBadge, DdayBadge, CategoryButton, TaskCard, MemberGroup };
+export { Button, Header, TextField, PostCard, PotCard, StateBadge, DdayBadge, CategoryButton, TaskCard, MemberGroup, CommonBadge };
