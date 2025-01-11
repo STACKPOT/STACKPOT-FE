@@ -50,7 +50,7 @@ export const dateContainer = css`
     gap: 0.8rem;
 `
 export const dateTextStyle = css`
-    ${theme.font.label1}
+    ${theme.font.caption2}
     color: ${theme.color.object.assistive};
 `
 export const lineStyle = css`
@@ -70,6 +70,10 @@ export const profileImageStyle = css`
     border-radius: 75%;
 `
 export const nicknameStyle = css`
-    ${theme.font.label1}
+    ${theme.font.caption1}
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 500;
+    letter-spacing: -0.072px;
     color: ${theme.color.object.assistive};
 `

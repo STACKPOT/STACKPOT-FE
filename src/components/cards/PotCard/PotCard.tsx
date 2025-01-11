@@ -1,26 +1,26 @@
 import { SavePostUnfilled } from "@assets/svgs";
-import { buttonContainer, cardStyle, contentContainer, contentStyle, nicknameStyle, profileImageStyle, saveContainer, saveTextStyle, timeStyle, titleContainer, titleStyle, titleTextContainer } from "./PotCard.style";
+import { buttonContainer, cardStyle, contentContainer, contentStyle, ddayStyle, nicknameStyle, profileContainer, profileImageStyle, saveContainer, saveTextStyle, titleContainer, titleStyle } from "./PotCard.style";
 
 interface PotCardProps {
     profileImage: string;
     nickname: string;
-    createdAt: string;
+    dday: number;
     title: string;
     content: string;
     saveCount: number;
 }
 
-const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, createdAt, title, content, saveCount }: PotCardProps) => {
+const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, content, saveCount }: PotCardProps) => {
 
     return (
         <>
             <div css={cardStyle}>
                 <div css={titleContainer}>
-                    <img css={profileImageStyle} src={profileImage} />
-                    <div css={titleTextContainer}>
+                    <div css={profileContainer} >
+                        <img css={profileImageStyle} src={profileImage} />
                         <p css={nicknameStyle}>{nickname}</p>
-                        <p css={timeStyle}>{createdAt}</p>
                     </div>
+                    <p css={ddayStyle}>D-{dday}</p>
                 </div>
                 <p css={titleStyle}>{title}</p>
                 <div css={contentContainer}>

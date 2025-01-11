@@ -42,18 +42,13 @@ export const nicknameStyle = css`
 `
 
 export const dateStyle = css`
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
     color: ${theme.color.interactive.inactive};
+    ${theme.font.caption2}
 `
 
 export const titleStyle = css`
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 24px;
-    letter-spacing: -0.12px;
     color: ${theme.color.base.darkgray};
+    ${theme.font.title1}
 `
 export const contentContainer = css`
     height: 6rem;
@@ -63,6 +58,7 @@ export const contentContainer = css`
 `
 export const contentStyle = css`
     ${theme.font.caption3}
+    line-height: 2.8rem;
     color: ${theme.color.object.assistive};
     overflow: hidden;
     text-overflow: ellipsis;
@@ -87,9 +83,6 @@ export const likeConatiner = css`
 `
 
 export const likeTextStyle = css`
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: -0.108px;
+    ${theme.font.label3}
     color: ${theme.color.interactive.inactive};
 `

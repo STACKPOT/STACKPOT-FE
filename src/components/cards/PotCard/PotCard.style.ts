@@ -17,6 +17,11 @@ export const titleContainer = css`
     height: 4rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+`
+export const profileContainer = css`
+    display: flex;
+    align-items: center;
     justify-content: flex-start;
     gap: 1.2rem;
 `
@@ -25,19 +30,25 @@ export const profileImageStyle = css`
     height: 4rem;
     border-radius: 75%;
 `
-export const titleTextContainer = css`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1.2rem;
-`
 export const nicknameStyle = css`
-    ${theme.font.label1}
+    ${theme.font.caption1}
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.4rem;
+    letter-spacing: -0.072px;
     color: ${theme.color.object.assistive};
 `
-export const timeStyle = css`
-    ${theme.font.caption1}
-    color: ${theme.color.interactive.inactive};
+export const ddayStyle = css`
+    height: 1.9rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 3.2rem;
+    background-color: ${theme.color.point.gray};
+    color: white;
+    ${theme.font.captionBold1}
+    letter-spacing: -0.128px;
+    line-height: 1.6rem;
+    font-weight: 600;
 `
 export const titleStyle = css`
     ${theme.font.bodyBold1}
