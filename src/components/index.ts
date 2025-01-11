@@ -4,5 +4,6 @@ import Header from "@components/layouts/Header/Header";
 import TextField from "@components/commons/TextField/TextField";
 import PotCard from "./cards/PotCard/PotCard";
 import StateBadge from "./commons/Badge/StateBadge/StateBadge";
+import DdayBadge from "./commons/Badge/DdayBadge/DdayBadge";
 
-export { Button, Header, TextField, PostCard, PotCard, StateBadge };
+export { Button, Header, TextField, PostCard, PotCard, StateBadge, DdayBadge };
