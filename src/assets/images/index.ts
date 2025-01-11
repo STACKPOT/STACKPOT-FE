@@ -1,2 +1,5 @@
-export { default as MushRoomProfile } from "./MushroomProfile.png"
-export { default as MushRoomGroupProfile } from "./MushroomGroupProfile.png"
+export { default as MushRoomProfile } from "./mushroomProfile.png"
+export { default as MushRoomGroupProfile } from "./mushroomGroupProfile.png"
+export { default as CarrotGroupProfile } from "./carrotGroupProfile.png"
+export { default as OnionGroupProfile } from "./onionGroupProfile.png"
+export { default as BroccoliGoupProfile } from "./broccoliGroupProfile.png"
