@@ -65,9 +65,6 @@ export const profileContainer = css`
     gap: 1.2rem;
 `
 export const profileImageStyle = css`
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
     width: 4rem;
     height: 4rem;
     border-radius: 75%;

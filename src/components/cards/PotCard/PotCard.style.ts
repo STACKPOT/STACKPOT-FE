@@ -24,8 +24,6 @@ export const profileImageStyle = css`
     width: 4rem;
     height: 4rem;
     border-radius: 75%;
-    object-fit: cover;
-    border: 0.1rem solid rgba(112, 115, 124, 0.20);
 `
 export const titleTextContainer = css`
     display: flex;

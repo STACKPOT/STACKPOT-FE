@@ -3,7 +3,6 @@ import { cardStyle, titleContainer, profileImageStyle, nicknameStyle, titleStyle
 import { LikePostUnfilled, SavePostUnfilled } from "@assets/svgs";
 
 interface PostCardProps {
-    postId: number;
     profileImage: string;
     nickname: string;
     createdAt: string;
@@ -13,7 +12,7 @@ interface PostCardProps {
     saveCount: number;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ postId, profileImage, nickname, createdAt, title, content, likeCount, saveCount }: PostCardProps) => {
+const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, title, content, likeCount, saveCount }: PostCardProps) => {
 
     return (
         <div css={cardStyle} >
