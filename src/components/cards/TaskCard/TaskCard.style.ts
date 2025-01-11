@@ -10,9 +10,9 @@ export const cardStyle = css`
     height: 35.1rem;
     padding: 1.6rem;
     border-radius: 1.6rem;
-    border: 0.1rem solid rgba(112, 115, 124, 0.20);
+    border: 0.1rem solid ${theme.color.object.alternative};
     background-color: white;
-    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04), 0px 2px 4px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
 `
 export const moreButtonContainer = css`
     width: 100%;

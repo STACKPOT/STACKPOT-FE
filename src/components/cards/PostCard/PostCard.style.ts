@@ -7,7 +7,8 @@ export const cardStyle = css`
     padding: 3.2rem 2.4rem;
     border-radius: 1.6rem;
     background-color: white;
-    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.06), 0px 2px 4px 0px rgba(0, 0, 0, 0.06), 0px 4px 8px 0px rgba(0, 0, 0, 0.13);
+    box-shadow:  0px 0px 1px 0px rgba(0, 0, 0, 0.04);
+    border: 0.1rem solid ${theme.color.object.alternative};
 `
 
 export const innerContainerStyle = css`
