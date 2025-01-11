@@ -10,5 +10,6 @@ import TaskCard from "./cards/TaskCard/TaskCard";
 import MemberGroup from "./commons/Badge/MemberGroup/MemberGroup";
 import CommonBadge from "./commons/Badge/CommonBadge/CommonBadge";
 import MemberGroupPlus from "./commons/Badge/MemberGroupPlus/MemberGroupPlus";
+import NumberBadge from "./commons/Badge/NumberBadge/NumberBadge";
 
-export { Button, Header, TextField, PostCard, PotCard, StateBadge, DdayBadge, CategoryButton, TaskCard, MemberGroup, CommonBadge, MemberGroupPlus };
+export { Button, Header, TextField, PostCard, PotCard, StateBadge, DdayBadge, CategoryButton, TaskCard, MemberGroup, CommonBadge, MemberGroupPlus, NumberBadge };
