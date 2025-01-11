@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const labelStyle = css`
-  ${theme.font.label1}
+  ${theme.font.caption3}
   display: flex;
   flex-direction: column;
   color: ${theme.color.object.assistive};

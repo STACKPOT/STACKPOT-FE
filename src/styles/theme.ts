@@ -20,8 +20,8 @@ const theme = {
       assistive: "#767676", // gray-500
     },
     border: {
-      normal: "#70737C", // transparent-100
-      alternative: "#919191", // transparent-200
+      normal: "rgba(112, 115, 124, 0.2)", // transparent-100
+      alternative: "rgba(145, 145, 145, 0.63)", // transparent-200
     },
     feedback: {
       positive: "#00AF3B", // green-100
@@ -39,12 +39,6 @@ const theme = {
     },
   },
   font: {
-    display4: css`
-      font-size: 44px;
-      line-height: 48px;
-      letter-spacing: -0.792px;
-      font-weight: 700;
-    `,
     display3: css`
       font-size: 40px;
       line-height: 40px;
@@ -129,29 +123,23 @@ const theme = {
       letter-spacing: -0.16px;
       font-weight: 500;
     `,
-    label1: css`
-      font-size: 14px;
-      line-height: 20px;
-      letter-spacing: -0.084px;
-      font-weight: 500;
-    `,
-    label3: css`
-      font-size: 18px;
-      line-height: 24px;
-      letter-spacing: -0.108px;
-      font-weight: 500;
-    `,
-    caption1: css`
-      font-size: 13px;
-      line-height: 20px;
-      font-weight: 400;
-    `,
     caption2: css`
       font-size: 14px;
       line-height: 28px;
       letter-spacing: -0.084px;
       font-weight: 500;
     `,
+    caption1: css`
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: 400;
+    `,
+    label3: css`
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 24px;
+      letter-spacing: -0.108px;
+    `
   },
 };
 
