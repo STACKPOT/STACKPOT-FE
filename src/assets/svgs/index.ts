@@ -5,3 +5,4 @@ export { default as SavePostUnfilled } from "./savePostUnfilled.svg?react";
 export { default as SavePostFilled } from "./savePostFilled.svg?react";
 export { default as MoreButton } from "./moreButton.svg?react"
 export { default as CalendarIcon } from "./calendarIcon.svg?react"
+export { default as AddMemberButton } from "./addMemberButton.svg?react"
