@@ -1,7 +1,7 @@
 import { css } from "@emotion/react"
 import theme from "@styles/theme"
 
-export const unselectedBadgeStyle = css`
+export const unselectedButtonStyle = css`
     height: 4rem;
     display: inline-flex;
     align-items: center;
@@ -12,8 +12,9 @@ export const unselectedBadgeStyle = css`
     border: 0.1rem solid rgba(112, 115, 124, 0.20);
     ${theme.font.captionBold1}
     font-weight: 600;
+    cursor: pointer;
 `
-export const selectedBadgeStyle = css`
+export const selectedButtonStyle = css`
     height: 4rem;
     display: inline-flex;
     align-items: center;
@@ -24,4 +25,5 @@ export const selectedBadgeStyle = css`
     border: 0.1rem solid rgba(112, 115, 124, 0.20);
     ${theme.font.captionBold1}
     font-weight: 600;
+    cursor: pointer;
 `
