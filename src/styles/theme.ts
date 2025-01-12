@@ -20,8 +20,8 @@ const theme = {
       assistive: "#767676", // gray-500
     },
     border: {
-      normal: "#70737C", // transparent-100
-      alternative: "#919191", // transparent-200
+      normal: "rgba(112, 115, 124, 0.2)", // transparent-100
+      alternative: "rgba(145, 145, 145, 0.63)", // transparent-200
     },
     feedback: {
       positive: "#00AF3B", // green-100

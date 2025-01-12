@@ -1,1 +1,11 @@
 export { default as Logo } from "./logo.svg?react";
+export { default as Kakao } from "./kakao.svg?react";
+export { default as ArrowUp } from "./arrowup.svg?react";
+export { default as ArrowDown } from "./arrowdown.svg?react";
+export { default as Profile } from "./profile.svg?react";
+export { default as Home } from "./home.svg?react";
+export { default as MyPot } from "./mypot.svg?react";
+export { default as Spot } from "./spot.svg?react";
+export { default as Save } from "./save.svg?react";
+export { default as SetUp } from "./setup.svg?react";
+export { default as CloseBtn } from "./closebtn.svg?react";
