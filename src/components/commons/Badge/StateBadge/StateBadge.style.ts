@@ -9,4 +9,5 @@ export const badgeStyle = (color: string) => css`
     border: none;
     border-radius: 3.2rem;
     ${theme.font.captionBold1}
+    line-height: 1.9rem;
 `
