@@ -1,19 +1,16 @@
-import { firstProfileStyle, groupContainer, restGroupConatiner, restProfileStyle } from "./MemberGroup.style"
+import { groupContainer, profilePlusStyle, profileStyle } from "./MemberGroup.style"
 
 interface MemberGroupProps {
-    firstProfileImage: string,
     profileImageList: string[]
 }
 
-const MemberGroup: React.FC<MemberGroupProps> = ({ firstProfileImage, profileImageList }: MemberGroupProps) => {
+const MemberGroup: React.FC<MemberGroupProps> = ({ profileImageList }: MemberGroupProps) => {
     return (
         <div css={groupContainer}>
-            <div css={restGroupConatiner}>
-                {profileImageList.map((image) =>
-                    <img css={restProfileStyle} src={image} />
-                )}
-            </div>
-            <img css={firstProfileStyle} src={firstProfileImage} />
+            {profileImageList.length > 4 && <div css={profilePlusStyle}>+{profileImageList.length - 4}</div>}
+            {profileImageList.slice(0, 4).map((image) =>
+                <img css={profileStyle} src={image} />
+            )}
         </div>
     )
 }
