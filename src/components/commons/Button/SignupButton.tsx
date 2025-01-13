@@ -1,5 +1,4 @@
-import { signupButtonStyle } from "./Signupbutton.style";
-
+import { signupButtonStyle } from "./SignupButton.style";
 
 interface SignupButtonProps {
   children: string;

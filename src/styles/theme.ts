@@ -135,39 +135,6 @@ const theme = {
       font-weight: 400;
     `,
   },
-  buttons: {
-    base: css`
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      padding: 12px 16px;
-      border-radius: 32px;
-      border: 1px solid rgba(112, 115, 124, 0.2);
-      flex-shrink: 0;
-    `,
-    variants: {
-        style1: css`
-          background-color: #0283F5;
-          color: #FFFFFF;
-        `,
-        style2: css`
-          background-color: #004E98;
-          color: #FFFFFF;
-        `,
-        style3: css`
-          background-color: #001427;
-          color: #FFFFFF;
-        `,
-        style4: css`
-          background-color: #FFFFFF;
-          color: #001427;
-        `,
-        style5: css `
-          background-color: #001427;
-          color: #FFFFFF;
-        `,
-    }
-  },
 };
 
 export type ColorType = typeof theme.color;
