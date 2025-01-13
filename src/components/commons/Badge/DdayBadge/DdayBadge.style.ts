@@ -6,7 +6,7 @@ export const badgeStyle = css`
     height: 3.1rem;
     padding: 0.6rem 2.4rem;
     border-radius: 3.2rem;
-    background-color: ${theme.color.point.gray};
+    background-color: ${theme.color.point.normal};
     color: white;
     ${theme.font.captionBold1}
     letter-spacing: -0.128px;
