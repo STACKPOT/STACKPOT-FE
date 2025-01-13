@@ -10,11 +10,10 @@ interface TaskCardProps {
     date: string,
     profileImage: string,
     nickname: string,
-    firstGroupProfileImage: string,
     groupProfileImages: string[]
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ title, dday, content, date, profileImage, nickname, firstGroupProfileImage, groupProfileImages }: TaskCardProps) => {
+const TaskCard: React.FC<TaskCardProps> = ({ title, dday, content, date, profileImage, nickname, groupProfileImages }: TaskCardProps) => {
     return (
         <div css={cardStyle}>
             <div css={moreButtonContainer}>
@@ -34,7 +33,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ title, dday, content, date, profile
                 <img css={profileImageStyle} src={profileImage} />
                 <p css={nicknameStyle}>{nickname}</p>
             </div>
-            <MemberGroup firstProfileImage={firstGroupProfileImage} profileImageList={groupProfileImages} />
+            <MemberGroup profileImageList={groupProfileImages} />
         </div>
     )
 }
