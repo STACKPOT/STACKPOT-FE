@@ -1,5 +1,7 @@
 import { SaveIcon } from "@assets/svgs";
-import { buttonContainer, cardStyle, contentContainer, contentStyle, ddayStyle, nicknameStyle, profileContainer, profileImageStyle, saveContainer, saveTextStyle, titleContainer, titleStyle } from "./PotCard.style";
+import { buttonContainer, cardStyle, contentStyle, nicknameDdayContainer, nicknameStyle, profileImageStyle, saveContainer, saveTextStyle, titleContainer, titleStyle } from "./PotCard.style";
+import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
+import { saveIconUnfilledStyle } from "../PostCard/PostCard.style";
 
 interface PotCardProps {
     profileImage: string;
@@ -16,19 +18,17 @@ const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, 
         <>
             <div css={cardStyle}>
                 <div css={titleContainer}>
-                    <div css={profileContainer} >
-                        <img css={profileImageStyle} src={profileImage} />
+                    <img css={profileImageStyle} src={profileImage} />
+                    <div css={nicknameDdayContainer} >
                         <p css={nicknameStyle}>{nickname}</p>
+                        <DdayBadge days={dday} />
                     </div>
-                    <p css={ddayStyle}>D-{dday}</p>
                 </div>
-                <p css={titleStyle}>{title}</p>
-                <div css={contentContainer}>
-                    <p css={contentStyle}>{content}</p>
-                </div>
+                <h1 css={titleStyle}>{title}</h1>
+                <p css={contentStyle}>{content}</p>
                 <div css={buttonContainer}>
                     <div css={saveContainer}>
-                        <SaveIcon />
+                        <SaveIcon css={saveIconUnfilledStyle} />
                         <p css={saveTextStyle}>{saveCount}</p>
                     </div>
                 </div>
