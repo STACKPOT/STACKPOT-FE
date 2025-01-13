@@ -3,40 +3,36 @@ import theme from "@styles/theme"
 
 export const cardStyle = css`
     width: 88.8rem;
-    height: 35.8rem;
-    padding: 3.2rem 2.4rem;
-    border-radius: 1.6rem;
+    height: 31.3rem;
+    padding: 2rem 3rem;
+    border-radius: 2.4rem;
     background-color: white;
-    box-shadow:  0px 0px 1px 0px rgba(0, 0, 0, 0.04);
+    box-shadow:  0px 0px 1px rgba(0, 0, 0, 0.04);
     border: 0.1rem solid ${theme.color.object.alternative};
 `
-
 export const innerContainerStyle = css`
-    width: 100%;
-    height: 27.3rem;
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
+    gap: 2rem;
 `
-
-export const titleContainer = css`
-    height: 4rem;
+export const profileDateContainer = css`
+    height: 7.4rem;
+    display: flex;
+    flex-direction: column;
+`
+export const profileContainer = css`
+    height: 4.6rem;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 1.6rem;
 `
-
 export const profileImageStyle = css`
     width: 4rem;
     height: 4rem;
-    border-radius: 70%;
 `
 export const nicknameStyle = css`
-    width: 14.4rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    height: 4.6rem;
+    padding: 1rem;
     ${theme.font.body1}
     color:${theme.color.object.assistive} ;
 `
@@ -50,13 +46,8 @@ export const titleStyle = css`
     color: ${theme.color.base.darkgray};
     ${theme.font.title1}
 `
-export const contentContainer = css`
-    height: 6rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-`
 export const contentStyle = css`
+    height: 6rem;
     ${theme.font.caption3}
     line-height: 2.8rem;
     color: ${theme.color.object.assistive};
@@ -66,7 +57,6 @@ export const contentStyle = css`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 `
-
 export const buttonContainer = css`
     height: 3.2rem;
     display: flex;
@@ -74,14 +64,12 @@ export const buttonContainer = css`
     align-items: center;
     gap: 2.4rem;
 `
-
-export const likeConatiner = css`
+export const actionConatiner = css`
     display: flex;
-    padding: var(--gap-5xs, 2px) var(--gap-empty, 0px);
+    padding: 0.2rem 0;
     align-items: center;
-    gap: var(--gap-2xs, 8px);
+    gap: 0.8rem;
 `
-
 export const likeTextStyle = css`
     ${theme.font.label3}
     color: ${theme.color.interactive.inactive};

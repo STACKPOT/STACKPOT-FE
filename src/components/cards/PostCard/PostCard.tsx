@@ -1,5 +1,5 @@
 import React from "react"
-import { cardStyle, titleContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, innerContainerStyle, contentContainer, buttonContainer, likeConatiner, likeTextStyle, likeIconUnfilledStyle, saveIconfilledStyle, likeIconfilledStyle, saveIconUnfilledStyle } from "./PostCard.style"
+import { cardStyle, profileContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, innerContainerStyle, buttonContainer, actionConatiner, likeTextStyle, likeIconUnfilledStyle, saveIconUnfilledStyle, profileDateContainer } from "./PostCard.style"
 import { LikeIcon, SaveIcon } from "@assets/svgs";
 
 interface PostCardProps {
@@ -17,21 +17,21 @@ const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, 
     return (
         <div css={cardStyle} >
             <div css={innerContainerStyle}>
-                <div css={titleContainer}>
-                    <img css={profileImageStyle} src={profileImage} />
-                    <p css={nicknameStyle}>{nickname}</p>
+                <div css={profileDateContainer} >
+                    <div css={profileContainer}>
+                        <img css={profileImageStyle} src={profileImage} />
+                        <p css={nicknameStyle}>{nickname}</p>
+                    </div>
                     <p css={dateStyle}>{createdAt}</p>
                 </div>
-                <div css={titleStyle}>{title}</div>
-                <div css={contentContainer}>
-                    <p css={contentStyle}>{content}</p>
-                </div>
+                <h1 css={titleStyle}>{title}</h1>
+                <p css={contentStyle}>{content}</p>
                 <div css={buttonContainer}>
-                    <div css={likeConatiner}>
+                    <div css={actionConatiner}>
                         <LikeIcon css={likeIconUnfilledStyle} />
                         <p css={likeTextStyle}>{likeCount}</p>
                     </div>
-                    <div css={likeConatiner}>
+                    <div css={actionConatiner}>
                         <SaveIcon css={saveIconUnfilledStyle} />
                         <p css={likeTextStyle}>{saveCount}</p>
                     </div>
