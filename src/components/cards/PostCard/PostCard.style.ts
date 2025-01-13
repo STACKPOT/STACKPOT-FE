@@ -86,3 +86,25 @@ export const likeTextStyle = css`
     ${theme.font.label3}
     color: ${theme.color.interactive.inactive};
 `
+export const saveIconUnfilledStyle = css`
+    width: 2.2rem;
+    height: 2.2rem;
+    fill: ${theme.color.interactive.inactive};
+    stroke: ${theme.color.interactive.inactive};
+`
+export const saveIconfilledStyle = css`
+    width: 2.2rem;
+    height: 2.2rem;
+    fill: ${theme.color.point.alternative};
+    stroke: ${theme.color.point.alternative};
+`
+export const likeIconUnfilledStyle = css`
+    width: 2.2rem;
+    height: 2.2rem;
+    fill: ${theme.color.interactive.inactive};
+`
+export const likeIconfilledStyle = css`
+    width: 2.2rem;
+    height: 2.2rem;
+    fill: ${theme.color.feedback.negative};
+`

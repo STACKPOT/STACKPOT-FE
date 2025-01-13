@@ -1,6 +1,6 @@
 import React from "react"
-import { cardStyle, titleContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, innerContainerStyle, contentContainer, buttonContainer, likeConatiner, likeTextStyle } from "./PostCard.style"
-import { LikePostUnfilled, SavePostUnfilled } from "@assets/svgs";
+import { cardStyle, titleContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, innerContainerStyle, contentContainer, buttonContainer, likeConatiner, likeTextStyle, likeIconUnfilledStyle, saveIconfilledStyle, likeIconfilledStyle, saveIconUnfilledStyle } from "./PostCard.style"
+import { LikeIcon, SaveIcon } from "@assets/svgs";
 
 interface PostCardProps {
     profileImage: string;
@@ -28,11 +28,11 @@ const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, 
                 </div>
                 <div css={buttonContainer}>
                     <div css={likeConatiner}>
-                        <LikePostUnfilled />
+                        <LikeIcon css={likeIconUnfilledStyle} />
                         <p css={likeTextStyle}>{likeCount}</p>
                     </div>
                     <div css={likeConatiner}>
-                        <SavePostUnfilled />
+                        <SaveIcon css={saveIconUnfilledStyle} />
                         <p css={likeTextStyle}>{saveCount}</p>
                     </div>
                 </div>

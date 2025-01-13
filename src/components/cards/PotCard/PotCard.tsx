@@ -1,4 +1,4 @@
-import { SavePostUnfilled } from "@assets/svgs";
+import { SaveIcon } from "@assets/svgs";
 import { buttonContainer, cardStyle, contentContainer, contentStyle, ddayStyle, nicknameStyle, profileContainer, profileImageStyle, saveContainer, saveTextStyle, titleContainer, titleStyle } from "./PotCard.style";
 
 interface PotCardProps {
@@ -28,7 +28,7 @@ const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, 
                 </div>
                 <div css={buttonContainer}>
                     <div css={saveContainer}>
-                        <SavePostUnfilled />
+                        <SaveIcon />
                         <p css={saveTextStyle}>{saveCount}</p>
                     </div>
                 </div>
