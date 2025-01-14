@@ -5,7 +5,7 @@ export const unselectedButtonStyle = css`
     height: 4rem;
     display: inline-flex;
     align-items: center;
-    padding: 0.6rem 2.4rem;
+    padding: 1.2rem 2.4rem;
     background-color: white;
     color: ${theme.color.point.navy};
     border-radius: 3.2rem;
@@ -18,9 +18,9 @@ export const selectedButtonStyle = css`
     height: 4rem;
     display: inline-flex;
     align-items: center;
-    padding: 0.6rem 2.4rem;
+    padding: 1.2rem 2.4rem;
     background-color: white;
-    color: ${theme.color.base.black};
+    color: ${theme.color.point.hero};
     border-radius: 3.2rem;
     border: 0.1rem solid ${theme.color.point.neon};
     ${theme.font.captionBold1}
