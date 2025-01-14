@@ -19,6 +19,7 @@ export const moreButtonContainer = css`
     justify-content: flex-end;
 `
 export const titleContainer = css`
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 2rem;
@@ -27,6 +28,9 @@ export const titleTextStyle = css`
     ${theme.font.bodyBold1}
     color: ${theme.color.base.darkgray};
     font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `
 export const contentTextStyle = css`
     height: 6rem;

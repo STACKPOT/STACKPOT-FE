@@ -12,4 +12,5 @@ export const badgeStyle = css`
     letter-spacing: -0.128px;
     line-height: 1.6rem;
     font-weight: 600;
+    white-space: nowrap;
 `
