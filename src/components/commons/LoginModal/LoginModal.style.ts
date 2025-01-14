@@ -7,6 +7,7 @@ export const dialogStyles = {
     height: 36rem;
     background: ${theme.color.base.white};
     box-shadow: 0rem 0.4rem 0.8rem rgba(0, 0, 0, 0.13);
+    border: 1px solid ${theme.color.object.alternative};
     border-radius: 2.4rem;
     flex-direction: column;
   `,
