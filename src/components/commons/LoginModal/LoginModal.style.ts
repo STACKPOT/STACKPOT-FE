@@ -10,7 +10,7 @@ export const dialogStyles = {
     border-radius: 2.4rem;
     flex-direction: column;
   `,
-  closeIcon: css`
+  header: css`
     padding: 1.6rem 2rem;
     display: flex;
     justify-content: end;

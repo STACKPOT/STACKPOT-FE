@@ -1,6 +1,6 @@
 import { Kakao } from "@assets/svgs";
 import { dialogStyles } from "./LoginModal.style";
-import { CloseBtn, Logo } from "@assets/svgs";
+import { CloseIcon, Logo } from "@assets/svgs";
 import theme from "@styles/theme";
 import { css } from "@emotion/react";
 
@@ -13,8 +13,8 @@ interface LoginModalProps {
 const LoginModal: React.FC<LoginModalProps> = ({ onLogin, onCancel }) => {
   return (
     <div css={dialogStyles.container}>
-      <header css={dialogStyles.closeIcon} onClick={onCancel}>
-        <CloseBtn />
+      <header css={dialogStyles.header}>
+        <CloseIcon onClick={onCancel} type="button" />
       </header>
       <body css={dialogStyles.body}>
         <Logo />
