@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as styles from "./Dropdown.style";
-import { ArrowDown, ArrowUp } from "@assets/svgs";
+import { ArrowDownIcon, ArrowUpIcon } from "@assets/svgs";
 
 interface DropdownProps {
   options: readonly { label: string; key: string }[];
@@ -33,9 +33,9 @@ const Dropdown: React.FC<DropdownProps> = ({
       <div css={styles.header} onClick={toggleDropdown}>
         <span css={styles.headerText}>글 순서</span>
         {isOpen ? (
-          <ArrowUp css={styles.icon} />
+          <ArrowUpIcon css={styles.icon} />
         ) : (
-          <ArrowDown css={styles.icon} />
+          <ArrowDownIcon css={styles.icon} />
         )}
       </div>
       {isOpen && (

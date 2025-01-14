@@ -5,10 +5,10 @@ export const container = css`
   width: 16rem;
   background: ${theme.color.base.white};
   border-radius: 1.6rem;
+  border: 0.1rem solid ${theme.color.object.alternative};
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 `;
 
 export const header = css`
