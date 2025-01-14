@@ -18,9 +18,9 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
   return (
     <div css={modalStyles.container}>
-      <header css={modalStyles.header}>
+      <div css={modalStyles.header}>
         <CloseIcon onClick={onCancel} />
-      </header>
+      </div>
       <div css={modalStyles.body}>
         <p
           css={css`

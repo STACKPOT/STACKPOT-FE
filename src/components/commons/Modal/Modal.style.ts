@@ -47,9 +47,8 @@ export const modalStyles = {
     background: ${backgroundColor};
     color: ${theme.color.point.ivory};
     border-radius: 1.6rem;
-    border: 0.1rem solid ${backgroundColor};
+    border: 0.1rem solid rgba(112, 115, 124, 0.2);
     ${theme.font.caption3};
-    text-align: center;
     cursor: pointer;
   `,
 };
