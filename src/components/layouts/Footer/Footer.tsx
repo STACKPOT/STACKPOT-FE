@@ -8,7 +8,6 @@ const Footer: React.FC = () => {
         <Logo />
         <div css={sectionStyle}>
           <p>TEAM STACKPOT</p>
-          <p>고객센터 | 010-1234-5678</p>
           <p>메일 | stackpot@example.com</p>
         </div>
         <div css={sectionStyle}>

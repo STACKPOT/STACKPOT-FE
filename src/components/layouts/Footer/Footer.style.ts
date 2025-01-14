@@ -14,13 +14,13 @@ export const contentStyle = css`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
+  gap: 2rem;
 `;
 
 export const sectionStyle = css`
   display: flex;
   align-items: flex-start;
-  gap: 40px;
+  gap: 4rem;
   ${theme.font.caption3}
   color: ${theme.color.interactive.inactive};
 `;
