@@ -28,6 +28,7 @@ export const nicknameDdayContainer = css`
     width: 18.8rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.4rem;
 `
 export const nicknameStyle = css`

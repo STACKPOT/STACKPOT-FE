@@ -2,16 +2,19 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const cardStyle = css`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
-    width: 42.1rem;
+    width: 34rem;
+    height: 39.9rem;
     padding: 1.6rem 2rem;
     border-radius: 2.4rem;
     border: 0.1rem solid ${theme.color.object.alternative};
     background-color: white;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.04);
+`
+export const innerContaienr = css`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
 `
 export const moreButtonContainer = css`
     width: 100%;
@@ -22,6 +25,7 @@ export const titleContainer = css`
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
 `
 export const titleTextStyle = css`
@@ -52,6 +56,7 @@ export const dateTextStyle = css`
     color: ${theme.color.object.assistive};
 `
 export const lineStyle = css`
+    width: 100%;
     height: 0;
     border: 0.1rem solid ${theme.color.object.alternative};
 `
