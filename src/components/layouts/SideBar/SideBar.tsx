@@ -3,6 +3,7 @@ import { MyPotIcon, HomeIcon, PotIcon, Profile, SetUpIcon } from "@assets/svgs";
 
 import { container, menuContainer, divider } from "./SideBar.style";
 import theme from "@styles/theme";
+import routes from "@constants/routes";
 
 const SideBar: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const SideBar: React.FC = () => {
         <div css={divider} />
 
         <NavLink
-          to="/home"
+          to={routes.home}
           style={({ isActive }) => ({
             color: isActive
               ? theme.color.point.neon
@@ -23,7 +24,7 @@ const SideBar: React.FC = () => {
         </NavLink>
 
         <NavLink
-          to="/spot"
+          to={routes.pot}
           style={({ isActive }) => ({
             color: isActive
               ? theme.color.point.neon
@@ -34,7 +35,7 @@ const SideBar: React.FC = () => {
         </NavLink>
 
         <NavLink
-          to="/my-pot"
+          to={routes.myPot}
           style={({ isActive }) => ({
             color: isActive
               ? theme.color.point.neon
@@ -45,7 +46,7 @@ const SideBar: React.FC = () => {
         </NavLink>
 
         <NavLink
-          to="/setup"
+          to={routes.setting}
           style={({ isActive }) => ({
             color: isActive
               ? theme.color.point.neon
