@@ -16,7 +16,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, onCancel }) => {
       <header css={dialogStyles.header}>
         <CloseIcon onClick={onCancel} type="button" />
       </header>
-      <body css={dialogStyles.body}>
+      <div css={dialogStyles.body}>
         <Logo />
         <div css={dialogStyles.section}>
           <p
@@ -49,7 +49,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, onCancel }) => {
           </a>
           에 동의하는 것으로 간주됩니다.
         </p>
-      </body>
+      </div>
     </div>
   );
 };
