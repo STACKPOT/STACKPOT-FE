@@ -1,5 +1,6 @@
 import { modalStyles } from "./Modal.style";
-import { CloseBtn } from "@assets/svgs";
+import { CloseIcon } from "@assets/svgs";
+import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 interface ModalProps {
@@ -17,24 +18,36 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
   return (
     <div css={modalStyles.container}>
-      <div css={modalStyles.header}>
-        <div css={modalStyles.title}>{title}</div>
-        <div css={modalStyles.closeIcon} onClick={onCancel}>
-          <CloseBtn />
-        </div>
+      <header css={modalStyles.header}>
+        <CloseIcon onClick={onCancel} />
+      </header>
+      <div css={modalStyles.body}>
+        <p
+          css={css`
+            color: ${theme.color.base.darkgray};
+            ${theme.font.title1};
+          `}
+        >
+          {title}
+        </p>
+        <p
+          css={css`
+            color: ${theme.color.object.assistive};
+            ${theme.font.caption3};
+          `}
+        >
+          {message}
+        </p>
       </div>
-      <div css={modalStyles.body}>{message}</div>
       <div css={modalStyles.footer}>
         <button
-          css={modalStyles.button}
-          style={{ color: theme.color.object.assistive }}
+          css={modalStyles.button(theme.color.object.hero)}
           onClick={onCancel}
         >
           아니요
         </button>
         <button
-          css={modalStyles.button}
-          style={{ color: theme.color.feedback.positive }}
+          css={modalStyles.button(theme.color.point.hero)}
           onClick={onConfirm}
         >
           네
