@@ -12,7 +12,7 @@ interface PostCardProps {
     saveCount: number;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, title, content, likeCount, saveCount }: PostCardProps) => {
+const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, title, content, likeCount }: PostCardProps) => {
 
     return (
         <div css={cardStyle} >

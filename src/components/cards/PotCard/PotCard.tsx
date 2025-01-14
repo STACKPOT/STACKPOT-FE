@@ -1,7 +1,5 @@
-import { SaveIcon } from "@assets/svgs";
-import { buttonContainer, cardStyle, contentStyle, nicknameDdayContainer, nicknameStyle, profileImageStyle, saveContainer, saveTextStyle, titleContainer, titleStyle } from "./PotCard.style";
+import { cardStyle, contentStyle, nicknameDdayContainer, nicknameStyle, profileImageStyle, titleContainer, titleStyle } from "./PotCard.style";
 import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
-import { saveIconUnfilledStyle } from "../PostCard/PostCard.style";
 
 interface PotCardProps {
     profileImage: string;
@@ -12,7 +10,7 @@ interface PotCardProps {
     saveCount: number;
 }
 
-const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, content, saveCount }: PotCardProps) => {
+const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, content }: PotCardProps) => {
 
     return (
         <>
@@ -26,12 +24,6 @@ const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, 
                 </div>
                 <h1 css={titleStyle}>{title}</h1>
                 <p css={contentStyle}>{content}</p>
-                <div css={buttonContainer}>
-                    <div css={saveContainer}>
-                        <SaveIcon css={saveIconUnfilledStyle} />
-                        <p css={saveTextStyle}>{saveCount}</p>
-                    </div>
-                </div>
             </div>
         </>
     )
