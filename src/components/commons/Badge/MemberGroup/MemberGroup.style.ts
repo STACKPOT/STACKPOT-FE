@@ -17,16 +17,14 @@ export const profilePlusStyle = css`
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 2rem;
-    height: 2rem;
+    width: 2.2rem;
+    height: 2.2rem;
     padding: 0.4rem;
     margin-left: -0.5rem;
     border-radius: 50%;
     border: 0.1rem solid ${theme.color.object.alternative};
     background-color: ${theme.color.object.normal};
     color: ${theme.color.interactive.inactive};
-    font-size: 12px;
+    ${theme.font.caption1}
     font-weight: 500;
-    line-height: 14px;
-    letter-spacing: -0.072px;
 `
