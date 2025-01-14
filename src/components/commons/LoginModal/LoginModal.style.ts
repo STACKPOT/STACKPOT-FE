@@ -3,40 +3,37 @@ import theme from "@styles/theme";
 
 export const dialogStyles = {
   container: css`
-    width: 100%;
-    max-width: 45rem;
+    width: 51rem;
+    height: 36rem;
     background: ${theme.color.base.white};
     box-shadow: 0rem 0.4rem 0.8rem rgba(0, 0, 0, 0.13);
     border-radius: 2.4rem;
     flex-direction: column;
   `,
-  header: css`
-    width: 100%;
+  closeIcon: css`
     padding: 1.6rem 2rem;
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: ${theme.color.base.black};
-    ${theme.font.title1};
+    display: flex;
+    justify-content: end;
+    align-items: center;
     cursor: pointer;
   `,
-  kakaoIcon: css`
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 0;
-  `,
+
   body: css`
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 1.6rem 2.4rem;
+    justify-content: center;
+    padding: 2.4rem;
+    gap: 2.4rem;
   `,
-  footer: css`
-    text-align: center;
-    color: ${theme.color.object.assistive};
-    ${theme.font.caption1};
-    padding: 0 0 2.4rem 0;
+
+  section: css`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.2rem;
   `,
+
   termsLink: css`
     color: ${theme.color.feedback.positive};
     text-decoration: underline;
