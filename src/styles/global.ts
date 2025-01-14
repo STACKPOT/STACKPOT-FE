@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const globalStyles = css`
   html {
     font-size: 62.5%;
-    /* font-family: "Noto Sans KR", sans-serif; */
+    font-family: "Pretendard", sans-serif;
   }
 
   * {
