@@ -16,11 +16,25 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, onCancel }) => {
       <header css={dialogStyles.header}>
         <CloseIcon onClick={onCancel} type="button" />
       </header>
-      <div css={dialogStyles.body}>
+      <body css={dialogStyles.body}>
         <Logo />
         <div css={dialogStyles.section}>
-          <p>STACKPOT에 오신 것을 환영합니다!</p>
-          <p>로그인하시고 프로젝트를 진행해 보세요.</p>
+          <p
+            css={css`
+              color: ${theme.color.point.navy};
+              ${theme.font.title1};
+            `}
+          >
+            STACKPOT에 오신 것을 환영합니다!
+          </p>
+          <p
+            css={css`
+              color: ${theme.color.object.assistive};
+              ${theme.font.caption3};
+            `}
+          >
+            로그인하시고 프로젝트를 진행해 보세요.
+          </p>
         </div>
         <Kakao onClick={onLogin} />
         <p
@@ -35,7 +49,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, onCancel }) => {
           </a>
           에 동의하는 것으로 간주됩니다.
         </p>
-      </div>
+      </body>
     </div>
   );
 };
