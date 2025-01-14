@@ -11,4 +11,9 @@ export const globalStyles = css`
     padding: 0;
     box-sizing: border-box;
   }
+
+  main {
+    min-height: calc(100vh - 58px);
+    background-color: #f3f3f3;
+  }
 `;
