@@ -11,6 +11,8 @@ export const profileStyle = css`
     width: 2.2rem;
     height: 2.2rem;
     margin-left: -0.5rem;
+    border: 0.1rem solid ${theme.color.object.alternative};
+    border-radius: 50%;
 `
 export const profilePlusStyle = css`
     display: flex;

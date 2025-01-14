@@ -29,6 +29,8 @@ export const profileContainer = css`
 export const profileImageStyle = css`
     width: 4rem;
     height: 4rem;
+    border: 0.1rem solid ${theme.color.object.alternative};
+    border-radius: 50%;
 `
 export const nicknameStyle = css`
     height: 4.6rem;
