@@ -1,4 +1,4 @@
-import { CalendarIcon, MoreButton } from "@assets/svgs"
+import { CalendarIcon, MeatballIcon } from "@assets/svgs"
 import { cardStyle, contentTextStyle, dateContainer, dateTextStyle, innerContaienr, lineStyle, moreButtonContainer, nicknameStyle, profileContainer, profileImageStyle, titleContainer, titleTextStyle } from "./TaskCard.style"
 import MemberGroup from "@components/commons/Badge/MemberGroup/MemberGroup"
 import Badge from "@components/commons/Badge/Badge"
@@ -19,7 +19,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ title, dday, content, date, profile
         <div css={cardStyle}>
             <div css={innerContaienr}>
                 <div css={moreButtonContainer}>
-                    <MoreButton />
+                    <MeatballIcon />
                 </div>
                 <div css={titleContainer}>
                     <h1 css={titleTextStyle}>{title}</h1>
