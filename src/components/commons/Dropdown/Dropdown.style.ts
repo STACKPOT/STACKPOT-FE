@@ -12,16 +12,18 @@ export const container = css`
 `;
 
 export const header = css`
+  width: 16rem;
+  height: 4.8rem;
   padding: 1.6rem 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
 `;
 
 export const headerText = css`
   color: ${theme.color.point.navy};
-  ${theme.font.body1};
+  ${theme.font.caption3};
 `;
 
 export const icon = css`
@@ -30,14 +32,16 @@ export const icon = css`
 `;
 
 export const dropdown = css`
+  width: 16rem;
   background: ${theme.color.base.white};
 `;
 
 export const option = (isSelected: boolean) => css`
-  padding: 1.6rem 2rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
   cursor: pointer;
   border-top: 0.1rem solid ${theme.color.object.alternative};
-
   color: ${isSelected ? theme.color.point.hero : theme.color.point.gray};
-  ${theme.font.body1};
+  ${theme.font.caption3};
 `;
