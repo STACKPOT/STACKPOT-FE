@@ -5,7 +5,6 @@ import theme from "@styles/theme";
 import { css } from "@emotion/react";
 
 interface LoginModalProps {
-  context: string;
   onLogin: () => void;
   onCancel: () => void;
 }
@@ -36,7 +35,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onLogin, onCancel }) => {
             로그인하시고 프로젝트를 진행해 보세요.
           </p>
         </div>
-        <Kakao onClick={onLogin} />
+        <Kakao onClick={onLogin} style={{ borderRadius: "2.4rem" }} />
         <p
           css={css`
             color: ${theme.color.object.hero};

@@ -6,7 +6,7 @@ export const dialogStyles = {
     width: 51rem;
     height: 36rem;
     background: ${theme.color.base.white};
-    box-shadow: 0rem 0.4rem 0.8rem rgba(0, 0, 0, 0.13);
+    box-shadow: 0rem 0rem 0.1rem rgba(0, 0, 0, 0.4);
     border: 1px solid ${theme.color.object.alternative};
     border-radius: 2.4rem;
     flex-direction: column;
@@ -37,7 +37,7 @@ export const dialogStyles = {
 
   termsLink: css`
     color: ${theme.color.feedback.positive};
-    text-decoration: underline;
     cursor: pointer;
+    text-decoration: none;
   `,
 };
