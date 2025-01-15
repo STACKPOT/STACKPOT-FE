@@ -7,7 +7,7 @@ export const modalStyles = {
     height: 30.4rem;
     background: ${theme.color.base.white};
     box-shadow: 0rem 0rem 0.1rem rgba(0, 0, 0, 0.04);
-    border: 1px solid ${theme.color.object.alternative};
+    border: 0.1rem solid ${theme.color.object.alternative};
     border-radius: 2.4rem;
     display: inline-flex;
     flex-direction: column;

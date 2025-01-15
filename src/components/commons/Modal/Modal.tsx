@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({
       </div>
       <div css={modalStyles.footer}>
         <button
-          css={modalStyles.button(theme.color.object.hero)}
+          css={modalStyles.button(theme.color.interactive.inactive)}
           onClick={onCancel}
         >
           아니요
