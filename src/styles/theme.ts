@@ -27,9 +27,9 @@ const theme = {
       positive: "#00AF3B", // green-100
       caution: "#FFB149", // yellow-100
       negative: "#FF5656", // red-100
-      positive_transparent: "#00AF3B", // green-50
-      caution_transparent: "#FFB149", // yellow-50
-      negative_transparent: "#FF5656", // red-50
+      positive_transparent: "#00AF3B80", // green-50
+      caution_transparent: "#FFB14980", // yellow-50
+      negative_transparent: "#FF565680", // red-50
     },
     base: {
       white: "#FFFFFF", // white-100
