@@ -5,6 +5,7 @@ export const searchInputStyle = css`
   display: flex;
   gap: 1rem;
   align-items: center;
+  margin: 0 auto;
 `;
 
 export const inputStyle = css`
