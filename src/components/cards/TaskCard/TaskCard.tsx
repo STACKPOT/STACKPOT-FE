@@ -23,7 +23,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ title, dday, content, date, profile
                 </div>
                 <div css={titleContainer}>
                     <h1 css={titleTextStyle}>{title}</h1>
-                    <Badge content={`D-${dday}`} color={theme.color.point.normal} />
+                    <Badge content={`D-${dday}`} backgroundColor={theme.color.base.white} borderColor={theme.color.feedback.negative} textColor={theme.color.feedback.negative} />
                 </div>
                 <p css={contentTextStyle}>{content}</p>
                 <div css={dateContainer}>

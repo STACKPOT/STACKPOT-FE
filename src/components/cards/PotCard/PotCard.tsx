@@ -19,7 +19,7 @@ const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, 
                     <img css={profileImageStyle} src={profileImage} />
                     <div css={nicknameDdayContainer} >
                         <p css={nicknameStyle}>{nickname}</p>
-                        <Badge content={`D-${dday}`} color={theme.color.point.normal}/>
+                        <Badge content={`D-${dday}`} backgroundColor={theme.color.base.white} borderColor={theme.color.feedback.negative} textColor={theme.color.feedback.negative}/>
                     </div>
                 </div>
                 <h1 css={titleStyle}>{title}</h1>

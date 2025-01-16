@@ -1,17 +1,15 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
-export const badgeStyle = (color:string) =>css`
+export const badgeStyle = (backgroundColor:string, borderColor:string, textColor:string) =>css`
     display: inline-flex;
-    height: 4rem;
-    padding: 1.2rem 2.4rem;
+    height: 2.2rem;
+    padding: 0.4rem 1.5rem;
     border-radius: 3.2rem;
-    border: 0.1rem solid ${theme.color.border.normal};
-    background-color: ${color};
-    color: white;
-    ${theme.font.captionBold1}
-    line-height: 1.6rem;
-    letter-spacing: -0.128px;
-    font-weight: 600;
+    border: 0.1rem solid ${borderColor};
+    background-color: ${backgroundColor};
+    color: ${textColor};
+    ${theme.font.caption1}
+    font-weight: 500;
     white-space: nowrap;
 `
