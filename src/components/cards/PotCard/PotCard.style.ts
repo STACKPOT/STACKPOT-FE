@@ -28,10 +28,10 @@ export const nicknameDdayContainer = css`
     width: 18.8rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 0.4rem;
 `
 export const nicknameStyle = css`
+    width: 10.6rem;
     ${theme.font.caption1}
     font-weight: 500;
     line-height: 2.8rem;
@@ -58,4 +58,8 @@ export const contentStyle = css`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+`
+export const categoriesContainer = css`
+    display: flex;
+    gap: 1rem;
 `
