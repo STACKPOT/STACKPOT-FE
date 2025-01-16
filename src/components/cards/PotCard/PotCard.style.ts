@@ -7,7 +7,7 @@ export const cardStyle = css`
     padding: 1.6rem;
     border-radius: 2.4rem;
     background-color: white;
-    box-shadow:  0px 0px 1px 0px rgba(0, 0, 0, 0.04);
+    box-shadow:  0px 4px 12px 0px rgba(13, 10, 44, 0.06);
     display: flex;
     flex-direction: column;
     gap: 2rem;
