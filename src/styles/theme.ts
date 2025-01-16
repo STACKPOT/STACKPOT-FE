@@ -20,8 +20,8 @@ const theme = {
       assistive: "#767676", // gray-500
     },
     border: {
-      normal: "rgba(112, 115, 124, 0.2)", // transparent-100
-      alternative: "rgba(145, 145, 145, 0.63)", // transparent-200
+      normal: "#70737C33",        // transparent-100
+      alternative: "#919191A1",  // transparent-200
     },
     feedback: {
       positive: "#00AF3B", // green-100
@@ -98,7 +98,7 @@ const theme = {
     `,
     captionBold1: css`
       font-size: 16px;
-      line-height: 24px;
+      line-height: 16px;
       letter-spacing: -0.16px;
       font-weight: 500;
     `,
@@ -122,13 +122,13 @@ const theme = {
     `,
     caption3: css`
       font-size: 16px;
-      line-height: 24px;
+      line-height: 28px;
       letter-spacing: -0.16px;
       font-weight: 500;
     `,
     caption2: css`
       font-size: 14px;
-      line-height: 28px;
+      line-height: 14px;
       letter-spacing: -0.084px;
       font-weight: 500;
     `,
