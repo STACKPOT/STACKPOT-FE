@@ -26,7 +26,7 @@ export const titleContainer = css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 4.8rem;
 `
 export const titleTextStyle = css`
     ${theme.font.bodyBold1}
@@ -40,6 +40,7 @@ export const contentTextStyle = css`
     height: 6rem;
     ${theme.font.caption2}
     color: ${theme.color.object.hero};
+    line-height: 2.8rem;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
