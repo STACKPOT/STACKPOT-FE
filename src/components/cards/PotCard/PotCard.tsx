@@ -8,7 +8,6 @@ interface PotCardProps {
     dday: number;
     title: string;
     content: string;
-    saveCount: number;
 }
 
 const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, content }: PotCardProps) => {
