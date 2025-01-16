@@ -7,6 +7,7 @@ import {
   MyPage,
   NotFound,
   SearchPage,
+  SearchResultPage,
   SettingPage,
 } from "@pages/index";
 import Pot from "@pages/Pot/Pot";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: routes.search,
         element: <SearchPage />,
+      },
+      {
+        path: routes.searchResult,
+        element: <SearchResultPage />,
       },
       {
         path: "/*",
