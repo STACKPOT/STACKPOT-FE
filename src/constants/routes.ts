@@ -5,6 +5,7 @@ const routes = {
   pot: "/pot",
   myPot: "/my-pot",
   setting: "/setting",
+  search: "/search",
 } as const;
 
 export default routes;
