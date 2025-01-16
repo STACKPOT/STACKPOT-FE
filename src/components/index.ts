@@ -10,5 +10,6 @@ import MemberGroup from "./commons/Badge/MemberGroup/MemberGroup";
 import NumberBadge from "./commons/Badge/NumberBadge/NumberBadge";
 import EvaluationBadge from "./commons/Badge/EvaluationBadge/EvaluationBagde";
 import Badge from "./commons/Badge/Badge"
+import SignupButton from "./commons/SignUpButton/SignupButton";
 
-export { Button, Header, TextField, SelectableField, PostCard, PotCard, CategoryButton, TaskCard, MemberGroup, NumberBadge, EvaluationBadge, Badge };
+export { Button, SignupButton, Header, TextField, SelectableField, PostCard, PotCard, CategoryButton, TaskCard, MemberGroup, NumberBadge, EvaluationBadge, Badge };
