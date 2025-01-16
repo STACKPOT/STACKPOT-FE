@@ -12,3 +12,4 @@ export { default as PotIcon } from "./pot.svg?react";
 export { default as SaveIcon } from "./saveIcon.svg?react";
 export { default as SetUpIcon } from "./setupIcon.svg?react";
 export { default as CloseIcon } from "./closeIcon.svg?react";
+export { default as CheckIcon } from "./check.svg?react";
