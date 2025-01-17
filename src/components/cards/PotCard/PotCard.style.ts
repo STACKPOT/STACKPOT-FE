@@ -33,7 +33,6 @@ export const nicknameDdayContainer = css`
 export const nicknameStyle = css`
     width: 10.6rem;
     ${theme.font.caption2}
-    line-height: 2.8rem;
     color: ${theme.color.object.assistive};
     text-overflow: ellipsis;
     overflow: hidden;
@@ -47,9 +46,7 @@ export const titleStyle = css`
     white-space: nowrap;
 `
 export const contentStyle = css`
-    height: 6rem;
     ${theme.font.caption2}
-    line-height: 2.8rem;
     color: ${theme.color.object.hero};
     overflow: hidden;
     text-overflow: ellipsis;

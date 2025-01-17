@@ -42,7 +42,6 @@ export const nicknameStyle = css`
 export const dateStyle = css`
     color: ${theme.color.interactive.inactive};
     ${theme.font.caption2}
-    line-height: 2.8rem;
 `
 
 export const titleStyle = css`

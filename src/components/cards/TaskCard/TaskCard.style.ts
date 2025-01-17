@@ -36,10 +36,8 @@ export const titleTextStyle = css`
     text-overflow: ellipsis;
 `
 export const contentTextStyle = css`
-    height: 6rem;
     ${theme.font.caption2}
     color: ${theme.color.object.hero};
-    line-height: 2.8rem;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
