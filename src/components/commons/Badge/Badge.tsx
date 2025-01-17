@@ -1,15 +1,12 @@
 import { badgeStyle } from "./Badge.style"
 
 interface BadgeProps {
-    content: string,
-    backgroundColor: string,
-    textColor: string,
-    borderColor: string
+    content: string;
 }
 
-const Badge: React.FC<BadgeProps> = ({ content, backgroundColor, borderColor, textColor }: BadgeProps) => {
+const Badge: React.FC<BadgeProps> = ({ content }: BadgeProps) => {
     return (
-        <div css={badgeStyle(backgroundColor, borderColor, textColor)}>{content}</div>
+        <div css={badgeStyle}>{content}</div>
     )
 }
 

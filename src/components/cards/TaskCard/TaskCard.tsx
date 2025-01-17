@@ -1,8 +1,7 @@
 import { CalendarIcon, MeatballIcon } from "@assets/svgs"
 import { cardStyle, contentTextStyle, dateContainer, dateTextStyle, innerContaienr, lineStyle, moreButtonContainer, nicknameStyle, profileContainer, profileImageStyle, titleContainer, titleTextStyle } from "./TaskCard.style"
 import MemberGroup from "@components/commons/Badge/MemberGroup/MemberGroup"
-import Badge from "@components/commons/Badge/Badge"
-import theme from "@styles/theme"
+import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge"
 
 interface TaskCardProps {
     title: string,
@@ -23,7 +22,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ title, dday, content, date, profile
                 </div>
                 <div css={titleContainer}>
                     <h1 css={titleTextStyle}>{title}</h1>
-                    <Badge content={`D-${dday}`} backgroundColor={theme.color.base.white} borderColor={theme.color.feedback.negative} textColor={theme.color.feedback.negative} />
+                    <DdayBadge days={dday} />
                 </div>
                 <p css={contentTextStyle}>{content}</p>
                 <div css={dateContainer}>

@@ -11,5 +11,6 @@ import EvaluationBadge from "./commons/Badge/EvaluationBadge/EvaluationBagde";
 import Badge from "./commons/Badge/Badge"
 import StateBadge from "./commons/Badge/StateBadge/StateBadge";
 import MyPotTodoCard from "./cards/MyPotTodoCard/MyPotTodoCard";
+import DdayBadge from "./commons/Badge/DdayBadge/DdayBadge";
 
-export { Button, Header, TextField, SelectableField, PostCard, PotCard, CategoryButton, TaskCard, MemberGroup, EvaluationBadge, Badge, StateBadge, MyPotTodoCard };
+export { Button, Header, TextField, SelectableField, PostCard, PotCard, CategoryButton, TaskCard, MemberGroup, EvaluationBadge, Badge, StateBadge, MyPotTodoCard, DdayBadge };
