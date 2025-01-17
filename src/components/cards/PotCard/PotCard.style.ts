@@ -32,8 +32,7 @@ export const nicknameDdayContainer = css`
 `
 export const nicknameStyle = css`
     width: 10.6rem;
-    ${theme.font.caption1}
-    font-weight: 500;
+    ${theme.font.caption2}
     line-height: 2.8rem;
     color: ${theme.color.object.assistive};
     text-overflow: ellipsis;
@@ -43,7 +42,6 @@ export const nicknameStyle = css`
 export const titleStyle = css`
     ${theme.font.bodyBold1}
     color: ${theme.color.base.darkgray};
-    font-weight: 700;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

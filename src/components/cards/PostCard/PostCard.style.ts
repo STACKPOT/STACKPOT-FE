@@ -52,7 +52,6 @@ export const titleStyle = css`
 export const contentStyle = css`
     height: 6rem;
     ${theme.font.caption3}
-    line-height: 2.8rem;
     color: ${theme.color.object.assistive};
     overflow: hidden;
     text-overflow: ellipsis;

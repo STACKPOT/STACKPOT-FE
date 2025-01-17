@@ -10,6 +10,5 @@ border: 0.1rem solid rgba(112, 115, 124, 0.20);
 background-color: ${color};
 color: white;
 ${theme.font.captionBold1}
-font-weight: 600;
 white-space: nowrap;
 `

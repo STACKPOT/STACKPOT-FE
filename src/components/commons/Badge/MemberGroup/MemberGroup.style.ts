@@ -28,5 +28,4 @@ export const profilePlusStyle = css`
     background-color: ${theme.color.object.normal};
     color: ${theme.color.interactive.inactive};
     ${theme.font.caption1}
-    font-weight: 500;
 `

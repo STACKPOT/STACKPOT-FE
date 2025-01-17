@@ -31,7 +31,6 @@ export const titleContainer = css`
 export const titleTextStyle = css`
     ${theme.font.bodyBold1}
     color: ${theme.color.base.darkgray};
-    font-weight: 700;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -74,6 +73,5 @@ export const profileImageStyle = css`
 `
 export const nicknameStyle = css`
     ${theme.font.caption1}
-    font-weight: 500;
     color: ${theme.color.object.assistive};
 `

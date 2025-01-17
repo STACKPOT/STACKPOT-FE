@@ -13,8 +13,6 @@ export const badgeStyle = css`
 `
 export const textStyle = css`
     ${theme.font.captionBold1}
-    line-height: normal;
-    font-weight: 600;
     color: white;
 `
 export const emojiStyle = css`

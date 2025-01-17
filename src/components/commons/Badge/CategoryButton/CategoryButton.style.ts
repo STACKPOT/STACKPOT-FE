@@ -10,7 +10,6 @@ export const unselectedButtonStyle = css`
     border-radius: 0.8rem;
     border: 0.1rem solid ${theme.color.point.alternative};
     ${theme.font.captionBold1}
-    font-weight: 600;
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
     cursor: pointer;
 `
@@ -23,7 +22,6 @@ export const selectedButtonStyle = css`
     border-radius: 0.8rem;
     border: 0.1rem solid ${theme.color.point.hero};
     ${theme.font.captionBold1}
-    font-weight: 600;
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
     cursor: pointer;
 `

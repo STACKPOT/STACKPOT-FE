@@ -16,7 +16,6 @@ export const profileImageStyle = css`
 `
 export const nicknameStyle = css`
     ${theme.font.bodyBold1}
-    font-weight: 700;
     color: ${theme.color.point.navy};
 `
 export const statusContainer = css`
