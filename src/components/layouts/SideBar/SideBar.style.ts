@@ -8,7 +8,7 @@ export const container = (top: number) => css`
   display: flex;
   box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
   border-radius: 12px;
-  position: fixed;
+  position: absolute;
   top: ${top}px;
   left: 2rem; 
   transform: translateY(-50%);
