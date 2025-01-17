@@ -4,6 +4,7 @@ import routes from "@constants/routes";
 import {
   HomePage,
   LandingPage,
+  MyApplyPot,
   MyPage,
   NotFound,
   SearchPage,
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: routes.searchResult,
         element: <SearchResultPage />,
+      },
+      {
+        path: routes.myApplyPot,
+        element: <MyApplyPot />,
       },
       {
         path: "/*",
