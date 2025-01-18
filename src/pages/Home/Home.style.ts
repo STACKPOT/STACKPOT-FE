@@ -26,7 +26,9 @@ export const contentTitle = css`
   align-items: center;
   gap: 1.6rem;
 `;
-
+export const iconStyle = css`
+  color: ${theme.color.point.hero};
+`;
 export const contentBody = css`
   display: flex;
   align-items: flex-start;

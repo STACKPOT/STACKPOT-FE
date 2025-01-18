@@ -1,9 +1,9 @@
 import React from "react";
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
-import { PotColoredIcon } from "@assets/svgs";
 import { MushRoomProfile } from "@assets/images";
-import { PotCard, CategoryButton, Dropdown } from "@components/index";
+import { PotIcon } from "@assets/svgs";
+import { PotCard, CategoryButton, Dropdown, PostCard } from "@components/index";
 import {
   container,
   content,
@@ -12,6 +12,7 @@ import {
   buttonContainer,
   contentHeader,
   contentBody,
+  iconStyle,
 } from "./Home.style";
 // Direct React component imports
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,7 +20,6 @@ import { Navigation, Pagination } from "swiper/modules";
 
 import "swiper/swiper-bundle.css";
 import "swiper";
-
 const potCardsData = [
   {
     dday: 5,
@@ -29,6 +29,7 @@ const potCardsData = [
     content:
       "스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다.",
     saveCount: 8,
+    categories: ["프론트엔드", "기획"],
   },
   {
     dday: 12,
@@ -37,6 +38,7 @@ const potCardsData = [
     title: "독서 앱 서비스 사이드 프로젝트 해요",
     content: "책과 함께하는 독서 프로젝트 멤버를 찾습니다.",
     saveCount: 15,
+    categories: ["디자인", "기획"],
   },
   {
     dday: 2,
@@ -46,6 +48,7 @@ const potCardsData = [
     content:
       "공공 데이터를 활용한 약 관리 시스템 프로젝트에 관심이 있다면 참여하세요.",
     saveCount: 10,
+    categories: ["백엔드", "기획"],
   },
   {
     dday: 2,
@@ -55,6 +58,7 @@ const potCardsData = [
     content:
       "공공 데이터를 활용한 약 관리 시스템 프로젝트에 관심이 있다면 참여하세요.",
     saveCount: 10,
+    categories: ["프론트엔드", "백엔드"],
   },
 ];
 
@@ -75,9 +79,9 @@ const Home: React.FC = () => {
         <div css={content}>
           <div css={contentTitle}>
             <p>실시간 인기 팟</p>
-            <PotColoredIcon />
+            <PotIcon css={iconStyle} />
           </div>
-          <Swiper
+          {/* <Swiper
             css={swiperContainer}
             modules={[Pagination, Navigation]}
             centeredSlides={false}
@@ -96,11 +100,11 @@ const Home: React.FC = () => {
                   nickname={pot.nickname}
                   title={pot.title}
                   content={pot.content}
-                  saveCount={pot.saveCount}
+                  categories={pot.categories}
                 />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </Swiper> */}
         </div>
         <div css={content}>
           <div css={contentHeader}>
@@ -130,14 +134,13 @@ const Home: React.FC = () => {
             </p>
           </div>
           <div css={contentBody}>
-            {/* <PostCard
+            <PostCard
               profileImage={MushRoomProfile}
               nickname="너무 착한 버섯"
               createdAt="2025년 2월 8일 15:20"
               title="메인 제목은 여기 입력할 수 있습니다"
               content="국가는 법률이 정하는 바에 의하여 재외국민을 보호할 의무를 진다. 사법권은 법관으로 구성된 법원에 속한다."
               likeCount={8}
-              saveCount={3}
             />
             <PostCard
               profileImage={MushRoomProfile}
@@ -146,8 +149,7 @@ const Home: React.FC = () => {
               title="메인 제목은 여기 입력할 수 있습니다"
               content="국가는 법률이 정하는 바에 의하여 재외국민을 보호할 의무를 진다. 사법권은 법관으로 구성된 법원에 속한다."
               likeCount={8}
-              saveCount={3}
-            /> */}
+            />
           </div>
         </div>
       </div>
