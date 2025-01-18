@@ -5,7 +5,7 @@ const routes = {
   pot: {
     base: "/pot",
     applied: "/pot/applied",
-    madeByMe: "/pot/madebyme",
+    madeByMe: "/pot/created",
   },
   myPot: "/my-pot",
   setting: "/setting",
