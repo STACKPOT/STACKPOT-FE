@@ -9,8 +9,11 @@ import {
   SearchPage,
   SearchResultPage,
   SettingPage,
+  PotMain,
+  AllPotPage,
+  AppliedPotPage,
+  MadePotPage,
 } from "@pages/index";
-import Pot from "@pages/Pot/Pot";
 import MyPot from "@pages/MyPot/MyPot";
 
 const router = createBrowserRouter([
@@ -25,10 +28,6 @@ const router = createBrowserRouter([
       {
         path: routes.home,
         element: <HomePage />,
-      },
-      {
-        path: routes.pot,
-        element: <Pot />,
       },
       {
         path: routes.myPot,
@@ -54,6 +53,15 @@ const router = createBrowserRouter([
         path: "/*",
         element: <NotFound />,
       },
+      {
+        path: routes.pot,
+        element: <PotMain />,
+        children: [
+          { path: "", element: <AllPotPage /> },
+          { path: "applied", element: <AppliedPotPage /> },
+          { path: "madebyme", element: <MadePotPage /> },
+        ],
+      }
     ],
   },
 ]);
