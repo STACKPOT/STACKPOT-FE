@@ -16,6 +16,7 @@ import SearchInput from "./commons/SearchInput/SearchInput";
 import PotButton from "./commons/Button/PotButton/PotButton";
 import SignUpButton from "./commons/SignUpButton/SignupButton";
 import ApplicantCard from "./cards/ApplicantCard/ApplicantCard";
+import CheckBox from "./commons/Button/CheckBox/CheckBox";
 
 export {
     Button,
@@ -35,5 +36,6 @@ export {
     DdayBadge,
     PotButton,
     SignUpButton,
-    ApplicantCard
+    ApplicantCard,
+    CheckBox,
 };
