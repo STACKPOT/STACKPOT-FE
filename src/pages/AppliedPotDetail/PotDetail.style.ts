@@ -22,7 +22,7 @@ export const titleContainerStyle = css`
     display: flex;
     justify-content: space-between;
 `
-export const titleContentConatinerStyle = css`
+export const titleContentContainerStyle = css`
     width: 82.3rem;
     display: flex;
     align-items: center;
@@ -112,11 +112,11 @@ export const applicantInfoTopContainer =css`
     flex-direction: column;
     gap: 0.8rem;
 `
-export const applicantInfoTitleButtonContaienr = css`
+export const applicantInfoTitleButtonContainer = css`
     display: flex;
     justify-content: space-between;
 `
-export const applicantInfoTitleContaienr = css`
+export const applicantInfoTitleContainer = css`
     display: flex;
     justify-content: space-between;
     gap: 1.6rem;
@@ -130,11 +130,11 @@ export const applicantInfoTitleIconStyle =css`
     width: 2.4rem;
     height: 2.4rem;
 `
-export const applicantInfoDiscriptionStyle = css`
+export const applicantInfoDescriptionStyle = css`
     ${theme.font.caption3}
     color: ${theme.color.object.assistive};
 `
-export const applicantListConaitner = css`
+export const applicantListContainerStyle = css`
     display: flex;
     flex-direction: column;
     gap: 3.2rem;
