@@ -1,7 +1,7 @@
 import { css } from "@emotion/react"
 import theme from "@styles/theme"
 
-export const applicantContainer =css`
+export const container =css`
     height: 8.3rem;
     display: flex;
     padding: 2rem 3rem;
@@ -11,7 +11,7 @@ export const applicantContainer =css`
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
     background-color: ${theme.color.base.white};
 `
-export const applicantInnerContainerStyle = css`
+export const innerContainer = css`
     display: flex;
     gap: 6.4rem;
     align-items: center;

@@ -1,5 +1,5 @@
 import { PostIconRight } from "@assets/svgs";
-import { applicantContainer, applicantInnerContainerStyle, nextButtonStyle, nicknameStyle, profileNicknameContainer, profileStyle } from "./ApplicantCard.style";
+import { container, innerContainer, nextButtonStyle, nicknameStyle, profileNicknameContainer, profileStyle } from "./ApplicantCard.style";
 import CheckBox from "@components/commons/Button/CheckBox/CheckBox";
 
 interface ApplicantCardProps {
@@ -12,8 +12,8 @@ interface ApplicantCardProps {
 
 const ApplicantCard: React.FC<ApplicantCardProps> = ({ selected, profileImage, nickname, onSelect, onClickMore }: ApplicantCardProps) => {
     return (
-        <div css={applicantContainer}>
-            <div css={applicantInnerContainerStyle}>
+        <div css={container}>
+            <div css={innerContainer}>
                 <div css={profileNicknameContainer}>
                     <CheckBox selected={selected} onSelect={onSelect} />
                     <img css={profileStyle} src={profileImage} />
