@@ -7,7 +7,7 @@ export const cardStyle = css`
     padding: 1.6rem;
     border-radius: 2.4rem;
     background-color: white;
-    box-shadow:  0px 0px 1px 0px rgba(0, 0, 0, 0.04);
+    box-shadow:  0px 4px 12px 0px rgba(13, 10, 44, 0.06);
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -28,12 +28,11 @@ export const nicknameDdayContainer = css`
     width: 18.8rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 0.4rem;
 `
 export const nicknameStyle = css`
-    ${theme.font.caption1}
-    font-weight: 500;
+    width: 10.6rem;
+    ${theme.font.caption2}
     color: ${theme.color.object.assistive};
     text-overflow: ellipsis;
     overflow: hidden;
@@ -42,13 +41,11 @@ export const nicknameStyle = css`
 export const titleStyle = css`
     ${theme.font.bodyBold1}
     color: ${theme.color.base.darkgray};
-    font-weight: 700;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 `
 export const contentStyle = css`
-    height: 6rem;
     ${theme.font.caption2}
     color: ${theme.color.object.hero};
     overflow: hidden;
@@ -56,4 +53,8 @@ export const contentStyle = css`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+`
+export const categoriesContainer = css`
+    display: flex;
+    gap: 1rem;
 `

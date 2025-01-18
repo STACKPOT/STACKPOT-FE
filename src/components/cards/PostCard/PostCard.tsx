@@ -9,7 +9,6 @@ interface PostCardProps {
     title: string;
     content: string;
     likeCount: number;
-    saveCount: number;
 }
 
 const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, title, content, likeCount }: PostCardProps) => {

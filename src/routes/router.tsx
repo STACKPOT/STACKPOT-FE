@@ -1,11 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import routes from "@constants/routes";
-import { LandingPage, MyPage, NotFound } from "@pages/index";
-import Home from "@pages/Home/Home";
+import {
+  HomePage,
+  LandingPage,
+  MyPage,
+  NotFound,
+  SearchPage,
+  SearchResultPage,
+  SettingPage,
+} from "@pages/index";
 import Pot from "@pages/Pot/Pot";
 import MyPot from "@pages/MyPot/MyPot";
-import Setting from "@pages/Setting/Setting";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: routes.home,
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: routes.pot,
@@ -30,11 +36,19 @@ const router = createBrowserRouter([
       },
       {
         path: routes.setting,
-        element: <Setting />,
+        element: <SettingPage />,
       },
       {
         path: routes.myPage,
         element: <MyPage />,
+      },
+      {
+        path: routes.search,
+        element: <SearchPage />,
+      },
+      {
+        path: routes.searchResult,
+        element: <SearchResultPage />,
       },
       {
         path: "/*",

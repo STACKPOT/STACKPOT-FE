@@ -2,9 +2,9 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const badgeStyle = css`
-    width: 17.1rem;
     height: 4rem;
-    display: flex;
+    display: inline-flex;
+    padding: 1.2rem 2.4rem;
     align-items: center;
     justify-content: center;
     border-radius: 3.2rem;
@@ -13,8 +13,6 @@ export const badgeStyle = css`
 `
 export const textStyle = css`
     ${theme.font.captionBold1}
-    line-height: normal;
-    font-weight: 600;
     color: white;
 `
 export const emojiStyle = css`
