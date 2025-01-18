@@ -2,7 +2,11 @@ const routes = {
   main: "/",
   myPage: "/my-page",
   home: "/home",
-  pot: "/pot",
+  pot: {
+    base: "/pot",
+    applied: "/pot/applied",
+    madeByMe: "/pot/created",
+  },
   myPot: "/my-pot",
   setting: "/setting",
   search: "/search",
