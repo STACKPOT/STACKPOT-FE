@@ -8,7 +8,7 @@ export const cardStyle = css`
     border-radius: 2.4rem;
     border: 0.1rem solid ${theme.color.object.alternative};
     background-color: white;
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
 `
 export const innerContaienr = css`
     display: flex;
@@ -26,18 +26,16 @@ export const titleContainer = css`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 4.8rem;
 `
 export const titleTextStyle = css`
     ${theme.font.bodyBold1}
     color: ${theme.color.base.darkgray};
-    font-weight: 700;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 `
 export const contentTextStyle = css`
-    height: 6rem;
     ${theme.font.caption2}
     color: ${theme.color.object.hero};
     display: -webkit-box;
@@ -73,6 +71,5 @@ export const profileImageStyle = css`
 `
 export const nicknameStyle = css`
     ${theme.font.caption1}
-    font-weight: 500;
     color: ${theme.color.object.assistive};
 `

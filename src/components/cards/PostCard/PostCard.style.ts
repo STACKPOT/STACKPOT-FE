@@ -7,7 +7,7 @@ export const cardStyle = css`
     padding: 2rem 3rem;
     border-radius: 2.4rem;
     background-color: white;
-    box-shadow:  0px 0px 1px rgba(0, 0, 0, 0.04);
+    box-shadow:  0px 4px 12px 0px rgba(13, 10, 44, 0.06);
     border: 0.1rem solid ${theme.color.object.alternative};
 `
 export const innerContainerStyle = css`
@@ -51,7 +51,6 @@ export const titleStyle = css`
 export const contentStyle = css`
     height: 6rem;
     ${theme.font.caption3}
-    line-height: 2.8rem;
     color: ${theme.color.object.assistive};
     overflow: hidden;
     text-overflow: ellipsis;

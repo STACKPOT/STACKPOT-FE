@@ -1,6 +1,6 @@
 import Badge from "@components/commons/Badge/Badge";
-import { cardStyle, contentStyle, nicknameDdayContainer, nicknameStyle, profileImageStyle, titleContainer, titleStyle } from "./PotCard.style";
-import theme from "@styles/theme";
+import { cardStyle, categoriesContainer, contentStyle, nicknameDdayContainer, nicknameStyle, profileImageStyle, titleContainer, titleStyle } from "./PotCard.style";
+import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
 
 interface PotCardProps {
     profileImage: string;
@@ -8,10 +8,10 @@ interface PotCardProps {
     dday: number;
     title: string;
     content: string;
-    saveCount: number;
+    categories: string[];
 }
 
-const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, content }: PotCardProps) => {
+const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, content, categories }: PotCardProps) => {
 
     return (
         <>
@@ -20,11 +20,14 @@ const PotCard: React.FC<PotCardProps> = ({ profileImage, nickname, dday, title, 
                     <img css={profileImageStyle} src={profileImage} />
                     <div css={nicknameDdayContainer} >
                         <p css={nicknameStyle}>{nickname}</p>
-                        <Badge content={`D-${dday}`} color={theme.color.point.normal}/>
+                        <DdayBadge days={dday} />
                     </div>
                 </div>
                 <h1 css={titleStyle}>{title}</h1>
                 <p css={contentStyle}>{content}</p>
+                <div css={categoriesContainer}>
+                    {categories.map((category) => <Badge content={category} />)}
+                </div>
             </div>
         </>
     )

@@ -4,6 +4,7 @@ import theme from "@styles/theme";
 import { Outlet } from "react-router-dom";
 import { Header } from "./components";
 import SideBar from "@components/layouts/SideBar/SideBar";
+import Footer from "@components/layouts/Footer/Footer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Header />
       <SideBar />
       <Outlet />
+      <Footer />
     </ThemeProvider>
   );
 };
