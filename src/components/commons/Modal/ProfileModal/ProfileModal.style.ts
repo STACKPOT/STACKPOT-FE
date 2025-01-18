@@ -7,6 +7,7 @@ export const containerStyle = css`
     border-radius: 2.4rem;
     border: 1px solid ${theme.color.object.alternative};
     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
+    background-color: ${theme.color.base.white};
     display: flex;
     flex-direction: column;
     justify-content: center;
