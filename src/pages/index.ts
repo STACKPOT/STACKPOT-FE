@@ -5,7 +5,7 @@ import NotFound from "./NotFound/NotFound";
 import SearchPage from "./Search/Search";
 import SettingPage from "./Setting/Setting";
 import SearchResultPage from "./SearchResult/SearchResult";
-import PotDetail from "./AppliedPotDetail/PotDetail";
+import PotDetail from "./PotDetail/PotDetail";
 
 export {
   HomePage,
