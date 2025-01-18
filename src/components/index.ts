@@ -17,6 +17,7 @@ import PotButton from "./commons/Button/PotButton/PotButton";
 import SignUpButton from "./commons/SignUpButton/SignupButton";
 import ApplicantCard from "./cards/ApplicantCard/ApplicantCard";
 import CheckBox from "./commons/Button/CheckBox/CheckBox";
+import ProfileModal from "./commons/Modal/ProfileModal/ProfileModal";
 
 export {
     Button,
@@ -38,4 +39,5 @@ export {
     SignUpButton,
     ApplicantCard,
     CheckBox,
+    ProfileModal,
 };
