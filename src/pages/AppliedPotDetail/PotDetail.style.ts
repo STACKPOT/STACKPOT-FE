@@ -8,6 +8,11 @@ export const containerStyle = css`
     gap: 3.2rem;
     padding: 4.8rem 0;
 `
+export const bodyContainerStyle = css`
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+`
 export const sectionContainerStyle = css`
     display: flex;
     flex-direction: column;
@@ -96,4 +101,41 @@ export const modalBackgroundStyle = css`
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.40);
+`
+export const applicantInfoContainer = css`
+    display: flex;
+    flex-direction: column;
+    gap: 4.8rem;
+`
+export const applicantInfoTopContainer =css`
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+`
+export const applicantInfoTitleButtonContaienr = css`
+    display: flex;
+    justify-content: space-between;
+`
+export const applicantInfoTitleContaienr = css`
+    display: flex;
+    justify-content: space-between;
+    gap: 1.6rem;
+`
+export const applicantInfoTitleStyle = css`
+    ${theme.font.bodyBold2}
+    color: ${theme.color.base.darkgray};
+`
+export const applicantInfoTitleIconStyle =css`
+    color: ${theme.color.point.hero};
+    width: 2.4rem;
+    height: 2.4rem;
+`
+export const applicantInfoDiscriptionStyle = css`
+    ${theme.font.caption3}
+    color: ${theme.color.object.assistive};
+`
+export const applicantListConaitner = css`
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
 `
