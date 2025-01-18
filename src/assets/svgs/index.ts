@@ -14,3 +14,5 @@ export { default as CloseIcon } from "./closeIcon.svg?react";
 export { default as CheckIcon } from "./check.svg?react";
 export { default as SearchIcon } from "./search.svg?react";
 export { default as LeftIcon } from "./chevronLeft.svg?react"
+export { default as PostIconRight } from "./postbtnRight.svg?react"
+export { default as PostIconLeft } from "./postbtnLeft.svg?react"

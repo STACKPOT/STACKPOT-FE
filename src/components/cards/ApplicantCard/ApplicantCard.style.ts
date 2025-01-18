@@ -1,0 +1,49 @@
+import { css } from "@emotion/react"
+import theme from "@styles/theme"
+
+export const applicantContainer =css`
+    height: 8.3rem;
+    display: flex;
+    padding: 2rem 3rem;
+    align-items: center;
+    border-radius: 1.6rem;
+    border: 0.1rem solid ${theme.color.object.alternative};
+    box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
+    background-color: ${theme.color.base.white};
+`
+export const applicantInnerContainerStyle = css`
+    display: flex;
+    gap: 6.4rem;
+    align-items: center;
+`
+export const profileNicknameContainer =css`
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+`
+export const checkBoxStyle = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 0.1rem solid ${theme.color.interactive.inactive};
+    border-radius: 0.6rem;
+    background-color: transparent;
+    cursor: pointer;
+`
+export const nicknameStyle =css`
+    ${theme.font.caption1}
+    color: ${theme.color.object.assistive};
+`
+export const nextButtonStyle =css`
+    width: 4.4rem;
+    height: 4.4rem;
+    cursor: pointer;
+`
+export const profileStyle = css`
+    width: 4rem;
+    height: 4rem;
+    border: 0.1rem solid ${theme.color.object.alternative};
+    border-radius: 50%;
+`
