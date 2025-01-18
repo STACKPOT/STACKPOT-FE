@@ -13,8 +13,9 @@ import {
   AllPotPage,
   AppliedPotPage,
   MadePotPage,
+  CreatePotPage,
 } from "@pages/index";
-import MyPot from "@pages/MyPot/MyPot";
+import MyPot from "@pages/CreatePot/CreatePot";
 
 const router = createBrowserRouter([
   {
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: routes.myPot,
-        element: <MyPot />,
+        path: routes.createPot,
+        element: <CreatePotPage />,
       },
       {
         path: routes.setting,
@@ -61,7 +62,7 @@ const router = createBrowserRouter([
           { path: routes.pot.applied, element: <AppliedPotPage /> },
           { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
-      }
+      },
     ],
   },
 ]);

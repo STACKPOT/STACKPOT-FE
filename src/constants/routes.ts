@@ -7,7 +7,7 @@ const routes = {
     applied: "/pot/applied",
     madeByMe: "/pot/created",
   },
-  myPot: "/my-pot",
+  createPot: "/create-pot",
   setting: "/setting",
   search: "/search",
   searchResult: "/search-result",
