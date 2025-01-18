@@ -7,7 +7,7 @@ const routes = {
   setting: "/setting",
   search: "/search",
   searchResult: "/search-result",
-  myApplyPot: "/my-apply-pot",
+  potDetail: "/pot/:potId",
 } as const;
 
 export default routes;

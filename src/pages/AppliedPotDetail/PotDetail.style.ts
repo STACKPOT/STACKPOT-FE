@@ -8,6 +8,11 @@ export const containerStyle = css`
     gap: 3.2rem;
     padding: 4.8rem 0;
 `
+export const sectionContainerStyle = css`
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+`
 export const titleContainerStyle = css`
     display: flex;
     justify-content: space-between;
@@ -18,6 +23,11 @@ export const titleContentConatinerStyle = css`
     align-items: center;
     justify-content: space-between;
 `
+export const editButtonContainerStyle = css`
+    width: 17.2rem;
+    display: flex;
+    justify-content: space-between;
+`
 export const leftButtonStyle = css`
     height: 4rem;
     display: flex;
@@ -26,6 +36,7 @@ export const leftButtonStyle = css`
     border-radius: 0.4rem;
     border: none;
     background-color: transparent;
+    cursor: pointer;
 `
 export const leftButtonIconStyle = css`
     width: 2.4rem;
@@ -74,4 +85,15 @@ export const infoContentStyle = css`
 export const contentStyle = css`
     ${theme.font.body2}
     color: ${theme.color.base.black};
+`
+export const modalBackgroundStyle = css`
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.40);
 `
