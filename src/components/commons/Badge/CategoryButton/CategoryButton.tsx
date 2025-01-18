@@ -1,15 +1,24 @@
+import { useState } from "react";
 import { selectedButtonStyle, unselectedButtonStyle } from "./CategoryButton.style"
 
 interface CategoryButtonProps {
-    content: string,
-    selected: boolean
+    children: string,
+    selected: boolean,
+    onClick: () => void;
 }
 
-const CategoryButton: React.FC<CategoryButtonProps> = ({ content, selected }: CategoryButtonProps) => {
+const CategoryButton: React.FC<CategoryButtonProps> = ({ children, selected, onClick }: CategoryButtonProps) => {
+    const [select, setSelect] = useState(selected);
+
+    const handleClick = () => {
+        setSelect(!select);
+        onClick();
+    }
     return (
         <>
-            {selected ?
-                <button css={selectedButtonStyle}>{content}</button> : <button css={unselectedButtonStyle}>{content}</button>
+            {select ?
+                <button css={selectedButtonStyle} onClick={handleClick}>{children}</button> :
+                <button css={unselectedButtonStyle} onClick={handleClick}>{children}</button>
             }
         </>
     )
