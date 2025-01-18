@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { categoryContainer, category, potCardContainer, potCardLine } from "./AllPotPage.style";
+import { potCardContainer, categoryStyle, categoryButtonWrapper } from "./AllPotPage.style";
 import PotCard from "@components/cards/PotCard/PotCard";
 import potCardsData from "../../../mocks/potCardsData";
 import { CategoryButton } from "@components/index";
@@ -19,36 +19,32 @@ const AllPotPage: React.FC = () => {
 
   return (
     <>
-      <div css={categoryContainer}>
-        <div css={category}>
-          {categories.map((cat) => (
-            <div
-              key={cat}
-              onClick={() => handleCategoryClick(cat)}
-              style={{ display: "inline-block" }}
-            >
-              <CategoryButton
-                content={cat}
-                selected={selectedCategory === cat}
-              />
-            </div>
-          ))}
-        </div>
+      <div css={categoryStyle}>
+        {categories.map((categoryName) => (
+          <div
+            key={categoryName}
+            css={categoryButtonWrapper}
+            onClick={() => handleCategoryClick(categoryName)}
+          >
+            <CategoryButton
+              content={categoryName}
+              selected={selectedCategory === categoryName}
+            />
+          </div>
+        ))}
       </div>
       <div css={potCardContainer}>
-        <div css={potCardLine}>
-          {filteredCards.map((card, index) => (
-            <PotCard
-              key={index}
-              profileImage={card.profileImage}
-              nickname={card.nickname}
-              dday={card.dday}
-              title={card.title}
-              content={card.content}
-              categories={card.categories}
-            />
-          ))}
-        </div>
+        {filteredCards.map((card, index) => (
+          <PotCard
+            key={index}
+            profileImage={card.profileImage}
+            nickname={card.nickname}
+            dday={card.dday}
+            title={card.title}
+            content={card.content}
+            categories={card.categories}
+          />
+        ))}
       </div>
     </>
   );

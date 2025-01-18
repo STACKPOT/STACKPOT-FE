@@ -1,29 +1,20 @@
 import { css } from "@emotion/react";
 
-export const categoryContainer = css`
+export const categoryStyle = css`
   display: flex;
-  align-items: flex-start;
-  padding: 1.6rem 0;
-  width: 86.2rem;
-`;
-
-export const category = css`
-  display: flex;
-  gap: 1.6rem; 
-  justify-content: center;
+  gap: 1.6rem;
+  padding: 1.6rem 0 1.6rem 1.3rem;
+  width: 100%;
 `;
 
 export const potCardContainer = css`
-  display: flex;
-  flex-direction: column;
-  gap: 3.2rem; 
-  width: 100%; 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.2rem;
+  justify-content: center;
+  padding: 0 1.3rem;
 `;
 
-export const potCardLine = css`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3.2rem;
-  justify-content: flex-start;
-  width: 100%; 
-`;
+export const categoryButtonWrapper = css`
+  display: inline-block;
+`

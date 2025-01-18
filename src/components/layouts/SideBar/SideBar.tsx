@@ -11,7 +11,7 @@ const getNavLinkStyle = (isActive: boolean) => ({
 
 const menuItems = [
   { to: routes.home, icon: <HomeIcon stroke="currentColor" /> },
-  { to: routes.pot, icon: <PotIcon stroke="currentColor" /> },
+  { to: routes.pot.base, icon: <PotIcon stroke="currentColor" /> },
   { to: routes.myPot, icon: <MyPotIcon stroke="currentColor" /> },
   { to: routes.setting, icon: <SetUpIcon stroke="currentColor" /> },
 ];

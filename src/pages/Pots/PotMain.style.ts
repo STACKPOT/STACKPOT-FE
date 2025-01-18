@@ -4,13 +4,11 @@ import theme from "@styles/theme";
 export const container = css`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1.6rem;
   padding: 4.8rem 0;
 `;
 
 export const selectContainer = css`
-  width: 91.6rem;
   justify-content: center;
   gap: 1.6rem;
 ` 
