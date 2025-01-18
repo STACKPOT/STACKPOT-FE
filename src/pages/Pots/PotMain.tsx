@@ -17,6 +17,7 @@ const PotMain: React.FC = () => {
             <NavLink
               key={tab.path}
               to={tab.path}
+              end={tab.path === "/pot"}
               css={tabsTextStyle}
               style={({ isActive }) => ({
                 color: isActive ? theme.color.point.hero : theme.color.interactive.inactive,
