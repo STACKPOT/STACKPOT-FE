@@ -4,12 +4,12 @@ import { buttonStyle, closeButtonContainer, closeButtonStyle, containerStyle, co
 interface ExplainModalProps {
     title: string;
     children:React.ReactNode;
-    buttonContent: string;
+    buttonText: string;
     onButtonClick: () => void;
     onCancel: () => void;
 }
 
-const ExplainModal: React.FC<ExplainModalProps> = ({ title, children, buttonContent, onButtonClick: onClick, onCancel }: ExplainModalProps) => {
+const ExplainModal: React.FC<ExplainModalProps> = ({ title, children, buttonText: buttonContent, onButtonClick: onClick, onCancel }: ExplainModalProps) => {
     return (
         <div css={containerStyle}>
             <div css={closeButtonContainer}>

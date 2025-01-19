@@ -3,7 +3,7 @@ import theme from "@styles/theme";
 
 export const containerStyle = css`
     width: 50rem;
-    padding: 1.7rem 2.1rem;
+    padding: 2.6rem 2.4rem;
     border-radius: 2.4rem;
     border: 1px solid ${theme.color.object.alternative};
     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
@@ -12,7 +12,7 @@ export const containerStyle = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.7rem;
+    gap: 1.2rem;
 `
 export const closeButtonContainer = css`
     height: 2.8rem;
@@ -25,6 +25,7 @@ export const closeButtonStyle = css`
     cursor: pointer;
 `
 export const contentButtonContainerStyle = css`
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     gap: 4.8rem;
@@ -51,4 +52,7 @@ export const buttonStyle =css`
     border-radius: 1.6rem;
     border: 1px solid ${theme.color.object.alternative};
     cursor: pointer;
+`
+export const textStyle = css`
+    ${theme.font.caption3}
 `
