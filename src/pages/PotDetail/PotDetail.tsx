@@ -8,15 +8,16 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const PotDetail = () => {
-    const [showCancelModal, setShowCancelModal] = useState<boolean>(false)
-    const [showStartModal, setShowStartModal] = useState<boolean>(false)
-    const [showProfileModal, setShowProfileModal] = useState<boolean>(false)
-    const [showApplyModal, setShowApplyModal] = useState<boolean>(false)
+    const [showCancelModal, setShowCancelModal] = useState<boolean>(false);
+    const [showStartModal, setShowStartModal] = useState<boolean>(false);
+    const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
+    const [showApplyModal, setShowApplyModal] = useState<boolean>(false);
 
-    const [applied, setApplied] = useState<boolean>(false)
-    const [myPot, setMyPot] = useState<boolean>(true)
-    const [applicantExists, setApplicantExists] = useState<boolean>(true)
-    const [selectedApplicants, setSelectedApplicants] = useState<number[]>([])
+    const [applied, setApplied] = useState<boolean>(false);
+    const [myPot, setMyPot] = useState<boolean>(true);
+    const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string }[]>(memberListData);
+    const [selectedApplicants, setSelectedApplicants] = useState<number[]>([]);
+    const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string, stack: string } | null>(null);
     const navigate = useNavigate();
     const { potId } = useParams();
 
@@ -29,17 +30,18 @@ const PotDetail = () => {
     const handleStartPot = () => {
         setShowStartModal(true);
     }
-    const handleShowProfile = () => {
+    const handleShowProfile = (member: { id: number; profileImage: string; nickname: string, stack: string }) => {
+        setShowProfileMember(member);
         setShowProfileModal(true);
     }
     const handleApply = () => {
         setShowApplyModal(true);
     }
     const handleEdit = () => {
-
+        // todo: 수정 페이지로 이동
     }
     const handleDelete = () => {
-
+        // todo: 삭제
     }
     const handleSelect = (id: number) => {
         if (selectedApplicants.includes(id)) {
@@ -121,8 +123,8 @@ const PotDetail = () => {
                 </div>
                 <p css={contentStyle}>안녕하세요</p>
             </div>
-            {myPot && applicantExists && <div css={dividerStyle} />}
-            {myPot && applicantExists &&
+            {myPot && applicants.length > 0 && <div css={dividerStyle} />}
+            {myPot && applicants.length > 0 &&
                 <div css={applicantInfoContainer}>
                     <div css={applicantInfoTopContainer}>
                         <div css={applicantInfoTitleButtonContainer}>
@@ -130,13 +132,18 @@ const PotDetail = () => {
                                 <h1 css={applicantInfoTitleStyle}>나의 팟 지원자가 총 3명 있어요</h1>
                                 <PotIcon css={applicantInfoTitleIconStyle} />
                             </div>
-                            <button onClick={handleStartPot}>팟 시작하기</button>
+                            <button disabled={selectedApplicants.length < 1} onClick={handleStartPot}>팟 시작하기</button>
                         </div>
                         <p css={applicantInfoDescriptionStyle}>함께하고 싶은 지원자를 체크하고, 팟 시작하기를 누르면 팟이 시작돼요. </p>
                     </div>
                     <div css={applicantListContainerStyle}>
-                        {memberListData.map((member) =>
-                            <ApplicantCard selected={selectedApplicants.includes(member.id)} profileImage={member.profileImage} nickname={member.nickname} onClickMore={handleShowProfile} onSelect={() => handleSelect(member.id)} />)}
+                        {applicants.map((member) =>
+                            <ApplicantCard
+                                selected={selectedApplicants.includes(member.id)}
+                                profileImage={member.profileImage}
+                                nickname={member.nickname}
+                                onClickMore={() => handleShowProfile(member)}
+                                onSelect={() => handleSelect(member.id)} />)}
                     </div>
                 </div>}
 
@@ -151,16 +158,16 @@ const PotDetail = () => {
                 <div css={modalBackgroundStyle}>
                     <StartPotModal title="이 멤버들로 팟을 시작할까요?"
                         buttonContent="마이페이지로 이동하기"
-                        memberList={memberListData.filter((member) => selectedApplicants.includes(member.id))}
+                        memberList={applicants.filter((member) => selectedApplicants.includes(member.id))}
                         onCancel={() => setShowStartModal(false)}
                         onClick={handleStartPotConfirm} />
                 </div>}
-            {showProfileModal &&
+            {showProfileModal && showProfileMember &&
                 <div css={modalBackgroundStyle}>
                     <ProfileModal
                         title={`나의 팟 지원자의 프로필이에요.\n지원자 마이페이지로 이동할까요?`}
                         profileImage={MushRoomProfile}
-                        nickname="아아 마시는 버섯"
+                        nickname={showProfileMember?.nickname}
                         buttonContent="마이페이지로 이동하기"
                         onClick={handleShowProfileConfirm}
                         onCancel={() => setShowProfileModal(false)} />

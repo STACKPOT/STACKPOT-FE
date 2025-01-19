@@ -139,3 +139,6 @@ export const applicantListContainerStyle = css`
     flex-direction: column;
     gap: 3.2rem;
 `
+export const startPotButtonStyle = css`
+    width: 20.7rem;
+`
