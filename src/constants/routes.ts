@@ -11,6 +11,7 @@ const routes = {
   setting: "/setting",
   search: "/search",
   searchResult: "/search-result",
+  signUp: "/sign-up"
 } as const;
 
 export default routes;
