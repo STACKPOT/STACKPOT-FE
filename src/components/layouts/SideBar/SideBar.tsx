@@ -18,10 +18,17 @@ const menuItems = [
 
 const SideBar: React.FC = () => {
   const [top, setTop] = useState(0);
+  const [footerTop, setFooterTop] = useState<number | null>(null);
 
   useEffect(() => {
     const initialTop = window.innerHeight / 2 + window.scrollY;
     setTop(initialTop);
+
+    const footerElement = document.querySelector("footer");
+    if (footerElement) {
+      const footerOffsetTop = footerElement.getBoundingClientRect().top + window.scrollY;
+      setFooterTop(footerOffsetTop);
+    }
 
     const debounce = (func: Function, wait: number) => {
       let timeout: number | null = null;
@@ -33,14 +40,20 @@ const SideBar: React.FC = () => {
 
     const handleScroll = debounce(() => {
       const currentTop = window.innerHeight / 2 + window.scrollY;
-      setTop(currentTop);
+      console.log(footerTop);
+      console.log(currentTop);
+      if (footerTop && currentTop + 370 > footerTop) { 
+        setTop(footerTop - 370); 
+      } else {
+        setTop(currentTop);
+      }
     }, 200);
 
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [footerTop]);
 
   return (
     <div css={container(top)}>
