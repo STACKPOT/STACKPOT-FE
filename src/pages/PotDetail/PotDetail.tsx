@@ -1,8 +1,8 @@
-import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, titleContainerStyle, titleContentContainerStyle, titleStyle, startPotButtonStyle, membersInfoContainer, shareLinkButtonStyle } from "./PotDetail.style";
+import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, titleContainerStyle, titleContentContainerStyle, titleStyle, startPotButtonStyle, membersInfoContainer, shareLinkButtonStyle, modalContentContainer, modalProfileStyle, modalMemberListContainer, modalMemberContainer } from "./PotDetail.style";
 import { MushRoomProfile } from "@assets/images";
 import { LeftIcon, PotIcon } from "@assets/svgs";
 import Modal from "@components/commons/Modal/Modal";
-import { ApplicantCard, DdayBadge, PotButton, PotMemberCard, ProfileModal, StartPotModal } from "@components/index";
+import { ApplicantCard, Badge, DdayBadge, ExplainModal, PotButton, PotMemberCard } from "@components/index";
 import memberListData from "mocks/memberListData";
 import potMembersData from "mocks/potMembers";
 import { useState } from "react";
@@ -18,7 +18,7 @@ const PotDetail = () => {
     const [myPot, setMyPot] = useState<boolean>(true);
     const [finished, setFinished] = useState<boolean>(false);
     const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string }[]>(memberListData);
-    const [selectedApplicants, setSelectedApplicants] = useState<number[]>([]);
+    const [selectedApplicants, setSelectedApplicants] = useState<typeof applicants[0][]>([]);
     const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string, stack: string } | null>(null);
     const [potMembers, setPotMembers] = useState<{ id: number; profileImage: string, nickname: string, evaluation: string, evaluationEmoji: string }[]>(potMembersData)
     const navigate = useNavigate();
@@ -46,12 +46,12 @@ const PotDetail = () => {
     const handleDelete = () => {
         // todo: 삭제
     }
-    const handleSelect = (id: number) => {
-        if (selectedApplicants.includes(id)) {
-            setSelectedApplicants((prev) => prev.filter((memberId) => id !== memberId))
+    const handleSelect = (applicant: typeof applicants[0]) => {
+        if (selectedApplicants.includes(applicant)) {
+            setSelectedApplicants((prev) => prev.filter((member) => member.id !== applicant.id))
         }
         else {
-            setSelectedApplicants((prev) => [...prev, id])
+            setSelectedApplicants((prev) => [...prev, applicant])
         }
     }
     const handleShareLink = () => {
@@ -143,11 +143,11 @@ const PotDetail = () => {
                     <div css={applicantListContainerStyle}>
                         {applicants.map((member) =>
                             <ApplicantCard
-                                selected={selectedApplicants.includes(member.id)}
+                                selected={selectedApplicants.includes(member)}
                                 profileImage={member.profileImage}
                                 nickname={member.nickname}
                                 onClickMore={() => handleShowProfile(member)}
-                                onSelect={() => handleSelect(member.id)} />)}
+                                onSelect={() => handleSelect(member)} />)}
                     </div>
                 </div>
             }
@@ -178,31 +178,49 @@ const PotDetail = () => {
                 </div>}
             {showStartModal &&
                 <div css={modalBackgroundStyle}>
-                    <StartPotModal title="이 멤버들로 팟을 시작할까요?"
-                        buttonContent="마이페이지로 이동하기"
-                        memberList={applicants.filter((member) => selectedApplicants.includes(member.id))}
-                        onCancel={() => setShowStartModal(false)}
-                        onClick={handleStartPotConfirm} />
+                    <ExplainModal
+                        title="이 멤버들로 팟을 시작할까요?"
+                        buttonText="마이페이지로 이동하기"
+                        onButtonClick={handleStartPotConfirm}
+                        onCancel={() => setShowStartModal(false)}>
+                        <div css={modalMemberListContainer}>
+                            <>
+                                {selectedApplicants.map((applicant) =>
+                                    <div css={modalMemberContainer}>
+                                        <img css={profileStyle} src={applicant.profileImage} />
+                                        <p css={nicknameStyle}>{applicant.nickname}</p>
+                                        <Badge content={applicant.stack} />
+                                    </div>
+                                )}
+                            </>
+                        </div>
+                    </ExplainModal>
                 </div>}
             {showProfileModal && showProfileMember &&
                 <div css={modalBackgroundStyle}>
-                    <ProfileModal
+                    <ExplainModal
                         title={`나의 팟 지원자의 프로필이에요.\n지원자 마이페이지로 이동할까요?`}
-                        profileImage={MushRoomProfile}
-                        nickname={showProfileMember?.nickname}
-                        buttonContent="마이페이지로 이동하기"
-                        onClick={handleShowProfileConfirm}
-                        onCancel={() => setShowProfileModal(false)} />
+                        buttonText="마이페이지로 이동하기"
+                        onButtonClick={handleShowProfileConfirm}
+                        onCancel={() => setShowProfileModal(false)}>
+                        <div css={modalContentContainer}>
+                            <img css={modalProfileStyle} src={showProfileMember.profileImage} />
+                            <p css={nicknameStyle}>{showProfileMember.nickname}</p>
+                        </div>
+                    </ExplainModal>
                 </div>}
             {showApplyModal &&
                 <div css={modalBackgroundStyle}>
-                    <ProfileModal
+                    <ExplainModal
                         title={`이 팟에 지원할까요?\n팟 게시자가 회원님의 프로필을 확인할 수 있어요.`}
-                        profileImage={MushRoomProfile}
-                        nickname="아아 마시는 버섯"
-                        buttonContent="지원하기"
-                        onClick={handleApplyConfirm}
-                        onCancel={() => setShowApplyModal(false)} />
+                        buttonText="지원하기"
+                        onButtonClick={handleApplyConfirm}
+                        onCancel={() => setShowApplyModal(false)}>
+                        <div css={modalContentContainer}>
+                            <img css={modalProfileStyle} src={MushRoomProfile} />
+                            <p css={nicknameStyle}>아아 마시는 버섯</p>
+                        </div>
+                    </ExplainModal>
                 </div>
             }
         </main>

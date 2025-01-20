@@ -155,3 +155,26 @@ export const shareLinkButtonStyle =css`
     ${buttonStyle};
     width: 20.4rem;
 `
+export const modalContentContainer = css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+`
+export const modalProfileStyle = css`
+    width: 6.4rem;
+    height: 6.4rem;
+    border: 0.1rem solid ${theme.color.object.alternative};
+    border-radius: 50%;
+`
+export const modalMemberListContainer = css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+`
+export const modalMemberContainer = css`
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+`

@@ -15,15 +15,10 @@ import Badge from "./commons/Badge/Badge";
 import SearchInput from "./commons/SearchInput/SearchInput";
 import PotButton from "./commons/Button/PotButton/PotButton";
 import SignUpButton from "./commons/SignUpButton/SignupButton";
-<<<<<<< HEAD
 import ApplicantCard from "./cards/ApplicantCard/ApplicantCard";
 import CheckBox from "./commons/Button/CheckBox/CheckBox";
-import ProfileModal from "./commons/Modal/ProfileModal/ProfileModal";
-import StartPotModal from "./commons/Modal/StartPotModal/StartPotModal";
 import PotMemberCard from "./cards/PotMemberCard/PotMemberCard";
-=======
 import ExplainModal from "./commons/Modal/ExplainModal/ExplainModal";
->>>>>>> 0dd424584a6791db2eb61c377ba315313052c316
 
 export {
     Button,
@@ -43,13 +38,8 @@ export {
     DdayBadge,
     PotButton,
     SignUpButton,
-<<<<<<< HEAD
     ApplicantCard,
     CheckBox,
-    ProfileModal,
-    StartPotModal,
     PotMemberCard,
-=======
     ExplainModal,
->>>>>>> 0dd424584a6791db2eb61c377ba315313052c316
 };
