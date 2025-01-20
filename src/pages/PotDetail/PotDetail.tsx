@@ -1,9 +1,10 @@
-import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, buttonStyle, titleContainerStyle, titleContentContainerStyle, titleStyle, startPotButtonStyle, membersInfoContainer, shareLinkButtonStyle } from "./PotDetail.style";
+import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, titleContainerStyle, titleContentContainerStyle, titleStyle, startPotButtonStyle, membersInfoContainer, shareLinkButtonStyle } from "./PotDetail.style";
 import { MushRoomProfile } from "@assets/images";
 import { LeftIcon, PotIcon } from "@assets/svgs";
 import Modal from "@components/commons/Modal/Modal";
-import { ApplicantCard, DdayBadge, PotButton, ProfileModal, StartPotModal } from "@components/index";
+import { ApplicantCard, DdayBadge, PotButton, PotMemberCard, ProfileModal, StartPotModal } from "@components/index";
 import memberListData from "mocks/memberListData";
+import potMembersData from "mocks/potMembers";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -15,10 +16,11 @@ const PotDetail = () => {
 
     const [applied, setApplied] = useState<boolean>(false);
     const [myPot, setMyPot] = useState<boolean>(true);
-    const [finished, setFinished] = useState<boolean>(true);
+    const [finished, setFinished] = useState<boolean>(false);
     const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string }[]>(memberListData);
     const [selectedApplicants, setSelectedApplicants] = useState<number[]>([]);
     const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string, stack: string } | null>(null);
+    const [potMembers, setPotMembers] = useState<{ id: number; profileImage: string, nickname: string, evaluation: string, evaluationEmoji: string }[]>(potMembersData)
     const navigate = useNavigate();
     const { potId } = useParams();
 
@@ -84,9 +86,10 @@ const PotDetail = () => {
                             </button>
                             <h1 css={titleStyle}>AI 자동화 챗봇 어플 공부할 스터디원 모집</h1>
                         </div>
-                        {!myPot && applied && <PotButton onClick={handleCancelReservation}>지원 취소하기</PotButton>}
-                        {!myPot && !applied && <PotButton onClick={handleApply}>이 팟에 지원하기</PotButton>}
-                        {myPot && <PotButton onClick={handleEdit}>수정</PotButton>}
+                        {!myPot && applied && !finished && <PotButton onClick={handleCancelReservation}>지원 취소하기</PotButton>}
+                        {!myPot && !applied && !finished && <PotButton onClick={handleApply}>이 팟에 지원하기</PotButton>}
+                        {myPot && !finished && <PotButton onClick={handleEdit}>수정</PotButton>}
+                        {finished && <PotButton onClick={handleEdit}>팟 소개 수정</PotButton>}
                     </div>
                     <div css={profileContainerStyle}>
                         <img css={profileStyle} src={MushRoomProfile} />
@@ -157,13 +160,12 @@ const PotDetail = () => {
                         </div>
                         <button css={shareLinkButtonStyle} onClick={handleShareLink}>링크 공유하기</button>
                     </div>
-                    {applicants.map((member) =>
-                        <ApplicantCard
-                            selected={selectedApplicants.includes(member.id)}
+                    {potMembers.map((member) =>
+                        <PotMemberCard
                             profileImage={member.profileImage}
                             nickname={member.nickname}
-                            onClickMore={() => handleShowProfile(member)}
-                            onSelect={() => handleSelect(member.id)} />)}
+                            evaluation={member.evaluation}
+                            evaluationEmoji={member.evaluationEmoji} />)}
                 </div>
             }
 

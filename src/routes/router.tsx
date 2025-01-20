@@ -4,7 +4,7 @@ import routes from "@constants/routes";
 import {
   HomePage,
   LandingPage,
-  PotDetail,
+  PotDetailPage,
   MyPage,
   NotFound,
   SearchPage,
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: routes.potDetail,
-        element: <PotDetail />,
+        element: <PotDetailPage />,
       },
       {
         path: "/*",
