@@ -1,4 +1,4 @@
-import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, startPotButtonStyle, titleContainerStyle, titleContentContainerStyle, titleStyle } from "./PotDetail.style";
+import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, buttonStyle, titleContainerStyle, titleContentContainerStyle, titleStyle, startPotButtonStyle, membersInfoContainer, shareLinkButtonStyle } from "./PotDetail.style";
 import { MushRoomProfile } from "@assets/images";
 import { LeftIcon, PotIcon } from "@assets/svgs";
 import Modal from "@components/commons/Modal/Modal";
@@ -15,6 +15,7 @@ const PotDetail = () => {
 
     const [applied, setApplied] = useState<boolean>(false);
     const [myPot, setMyPot] = useState<boolean>(true);
+    const [finished, setFinished] = useState<boolean>(true);
     const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string }[]>(memberListData);
     const [selectedApplicants, setSelectedApplicants] = useState<number[]>([]);
     const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string, stack: string } | null>(null);
@@ -51,6 +52,10 @@ const PotDetail = () => {
             setSelectedApplicants((prev) => [...prev, id])
         }
     }
+    const handleShareLink = () => {
+        // todo: 링크 공유하기 로직
+    }
+
 
     const handleCancelModalConfirm = () => {
         setApplied(false);
@@ -119,8 +124,8 @@ const PotDetail = () => {
                 </div>
                 <p css={contentStyle}>안녕하세요</p>
             </div>
-            {myPot && applicants.length > 0 && <div css={dividerStyle} />}
-            {myPot && applicants.length > 0 &&
+            {((myPot && applicants.length > 0) || finished) && <div css={dividerStyle} />}
+            {myPot && applicants.length > 0 && !finished &&
                 <div css={applicantInfoContainer}>
                     <div css={applicantInfoTopContainer}>
                         <div css={applicantInfoTitleButtonContainer}>
@@ -141,7 +146,26 @@ const PotDetail = () => {
                                 onClickMore={() => handleShowProfile(member)}
                                 onSelect={() => handleSelect(member.id)} />)}
                     </div>
-                </div>}
+                </div>
+            }
+            {finished &&
+                <div css={membersInfoContainer}>
+                    <div css={applicantInfoTitleButtonContainer}>
+                        <div css={applicantInfoTitleContainer}>
+                            <h1 css={applicantInfoTitleStyle}>나와 함께한 팀원들</h1>
+                            <PotIcon css={applicantInfoTitleIconStyle} />
+                        </div>
+                        <button css={shareLinkButtonStyle} onClick={handleShareLink}>링크 공유하기</button>
+                    </div>
+                    {applicants.map((member) =>
+                        <ApplicantCard
+                            selected={selectedApplicants.includes(member.id)}
+                            profileImage={member.profileImage}
+                            nickname={member.nickname}
+                            onClickMore={() => handleShowProfile(member)}
+                            onSelect={() => handleSelect(member.id)} />)}
+                </div>
+            }
 
             {showCancelModal &&
                 <div css={modalBackgroundStyle}>

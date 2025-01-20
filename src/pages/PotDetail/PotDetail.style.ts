@@ -133,8 +133,7 @@ export const applicantListContainerStyle = css`
     flex-direction: column;
     gap: 4rem;
 `
-export const startPotButtonStyle = css`
-    width: 20.7rem;
+export const buttonStyle = css`
     height: 4.4rem;
     border-radius: 0.8rem;
     border: none;
@@ -142,4 +141,17 @@ export const startPotButtonStyle = css`
     color: white;
     ${theme.font.bodyBold1};
     cursor: pointer;
+`
+export const startPotButtonStyle = css`
+    ${buttonStyle};
+    width: 20.7rem;
+`
+export const membersInfoContainer = css`
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+`
+export const shareLinkButtonStyle =css`
+    ${buttonStyle};
+    width: 20.4rem;
 `
