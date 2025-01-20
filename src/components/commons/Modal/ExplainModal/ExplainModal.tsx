@@ -1,9 +1,9 @@
 import { CloseIcon } from "@assets/svgs";
-import { buttonStyle, closeButtonContainer, closeButtonStyle, containerStyle, contentButtonContainerStyle, titleContentContainerStyle, titleStyle } from "./ExplainModal.style";
+import { buttonStyle, closeButtonStyle, containerStyle, contentButtonContainerStyle, titleContentContainerStyle, titleStyle } from "./ExplainModal.style";
 
 interface ExplainModalProps {
     title: string;
-    children:React.ReactNode;
+    children: React.ReactNode;
     buttonText: string;
     onButtonClick: () => void;
     onCancel: () => void;
@@ -12,9 +12,7 @@ interface ExplainModalProps {
 const ExplainModal: React.FC<ExplainModalProps> = ({ title, children, buttonText: buttonContent, onButtonClick: onClick, onCancel }: ExplainModalProps) => {
     return (
         <div css={containerStyle}>
-            <div css={closeButtonContainer}>
-                <CloseIcon css={closeButtonStyle} onClick={onCancel} />
-            </div>
+            <CloseIcon css={closeButtonStyle} onClick={onCancel} />
             <div css={contentButtonContainerStyle}>
                 <div css={titleContentContainerStyle}>
                     <p css={titleStyle}>{title}</p>

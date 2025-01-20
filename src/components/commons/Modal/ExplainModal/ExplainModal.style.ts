@@ -6,7 +6,6 @@ export const containerStyle = css`
     padding: 2.6rem 2.4rem;
     border-radius: 2.4rem;
     border: 1px solid ${theme.color.object.alternative};
-    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
     background-color: ${theme.color.base.white};
     display: flex;
     flex-direction: column;
@@ -14,14 +13,8 @@ export const containerStyle = css`
     align-items: center;
     gap: 1.2rem;
 `
-export const closeButtonContainer = css`
-    height: 2.8rem;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-`
 export const closeButtonStyle = css`
+    margin-left: auto;
     cursor: pointer;
 `
 export const contentButtonContainerStyle = css`
