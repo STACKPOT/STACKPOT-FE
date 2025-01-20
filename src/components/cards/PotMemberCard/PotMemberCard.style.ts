@@ -25,11 +25,6 @@ export const nicknameStyle =css`
     ${theme.font.caption1}
     color: ${theme.color.object.assistive};
 `
-export const nextButtonStyle =css`
-    width: 4.4rem;
-    height: 4.4rem;
-    cursor: pointer;
-`
 export const profileStyle = css`
     width: 4rem;
     height: 4rem;
