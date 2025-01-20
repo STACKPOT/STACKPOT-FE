@@ -2,19 +2,20 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const container = css`
-  width: 16rem;
+  width: 13.4rem;
+  padding: 0 2.5rem;
   background: ${theme.color.base.white};
   border-radius: 1.6rem;
   border: 0.1rem solid ${theme.color.object.alternative};
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const header = css`
   width: 16rem;
   height: 4.8rem;
-  padding: 1.6rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,6 +30,7 @@ export const headerText = css`
 export const icon = css`
   font-size: 1.4rem;
   transition: transform 0.3s;
+  margin-left: 0.4rem;
 `;
 
 export const dropdown = css`
