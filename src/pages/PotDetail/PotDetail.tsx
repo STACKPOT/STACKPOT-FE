@@ -1,8 +1,8 @@
-import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, editButtonContainerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, titleContainerStyle, titleContentContainerStyle, titleStyle } from "./PotDetail.style";
+import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, startPotButtonStyle, titleContainerStyle, titleContentContainerStyle, titleStyle } from "./PotDetail.style";
 import { MushRoomProfile } from "@assets/images";
 import { LeftIcon, PotIcon } from "@assets/svgs";
 import Modal from "@components/commons/Modal/Modal";
-import { ApplicantCard, DdayBadge, ProfileModal, StartPotModal } from "@components/index";
+import { ApplicantCard, DdayBadge, PotButton, ProfileModal, StartPotModal } from "@components/index";
 import memberListData from "mocks/memberListData";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -73,19 +73,15 @@ const PotDetail = () => {
             <div css={bodyContainerStyle}>
                 <div css={sectionContainerStyle}>
                     <div css={titleContainerStyle}>
-                        <button css={leftButtonStyle} onClick={handleBack}>
-                            <LeftIcon css={leftButtonIconStyle} />
-                        </button>
                         <div css={titleContentContainerStyle}>
+                            <button css={leftButtonStyle} onClick={handleBack}>
+                                <LeftIcon css={leftButtonIconStyle} />
+                            </button>
                             <h1 css={titleStyle}>AI 자동화 챗봇 어플 공부할 스터디원 모집</h1>
-                            {!myPot && applied && <button onClick={handleCancelReservation}>취소하기</button>}
-                            {!myPot && !applied && <button onClick={handleApply}>이 팟에 지원하기</button>}
-                            {myPot &&
-                                <div css={editButtonContainerStyle}>
-                                    <button onClick={handleEdit}>수정</button>
-                                    <button onClick={handleDelete}>삭제</button>
-                                </div>}
                         </div>
+                        {!myPot && applied && <PotButton onClick={handleCancelReservation}>지원 취소하기</PotButton>}
+                        {!myPot && !applied && <PotButton onClick={handleApply}>이 팟에 지원하기</PotButton>}
+                        {myPot && <PotButton onClick={handleEdit}>수정</PotButton>}
                     </div>
                     <div css={profileContainerStyle}>
                         <img css={profileStyle} src={MushRoomProfile} />
@@ -132,7 +128,7 @@ const PotDetail = () => {
                                 <h1 css={applicantInfoTitleStyle}>나의 팟 지원자가 총 3명 있어요</h1>
                                 <PotIcon css={applicantInfoTitleIconStyle} />
                             </div>
-                            <button disabled={selectedApplicants.length < 1} onClick={handleStartPot}>팟 시작하기</button>
+                            <button css={startPotButtonStyle} disabled={selectedApplicants.length < 1} onClick={handleStartPot}>팟 시작하기</button>
                         </div>
                         <p css={applicantInfoDescriptionStyle}>함께하고 싶은 지원자를 체크하고, 팟 시작하기를 누르면 팟이 시작돼요. </p>
                     </div>

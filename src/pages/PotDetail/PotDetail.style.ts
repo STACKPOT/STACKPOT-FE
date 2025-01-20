@@ -23,15 +23,9 @@ export const titleContainerStyle = css`
     justify-content: space-between;
 `
 export const titleContentContainerStyle = css`
-    width: 82.3rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-`
-export const editButtonContainerStyle = css`
-    width: 17.2rem;
-    display: flex;
-    justify-content: space-between;
+    gap: 1rem;
 `
 export const leftButtonStyle = css`
     height: 4rem;
@@ -84,11 +78,11 @@ export const infoTitleStyle = css`
     color: ${theme.color.interactive.inactive};
 `
 export const infoContentStyle = css`
-    ${theme.font.body1}
+    ${theme.font.body1};
     color: ${theme.color.base.darkgray};
 `
 export const contentStyle = css`
-    ${theme.font.body2}
+    ${theme.font.body2};
     color: ${theme.color.base.black};
 `
 export const modalBackgroundStyle = css`
@@ -105,7 +99,7 @@ export const modalBackgroundStyle = css`
 export const applicantInfoContainer = css`
     display: flex;
     flex-direction: column;
-    gap: 4.8rem;
+    gap: 4rem;
 `
 export const applicantInfoTopContainer =css`
     display: flex;
@@ -122,7 +116,7 @@ export const applicantInfoTitleContainer = css`
     gap: 1.6rem;
 `
 export const applicantInfoTitleStyle = css`
-    ${theme.font.bodyBold2}
+    ${theme.font.bodyBold2};
     color: ${theme.color.base.darkgray};
 `
 export const applicantInfoTitleIconStyle =css`
@@ -137,8 +131,15 @@ export const applicantInfoDescriptionStyle = css`
 export const applicantListContainerStyle = css`
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
+    gap: 4rem;
 `
 export const startPotButtonStyle = css`
     width: 20.7rem;
+    height: 4.4rem;
+    border-radius: 0.8rem;
+    border: none;
+    background-color: ${theme.color.point.hero};
+    color: white;
+    ${theme.font.bodyBold1};
+    cursor: pointer;
 `
