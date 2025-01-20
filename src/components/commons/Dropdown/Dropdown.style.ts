@@ -3,7 +3,8 @@ import theme from "@styles/theme";
 
 export const container = css`
   position: relative;
-  width: 16rem;
+  width: 13.4rem;
+  height: 4.8rem;
 `;
 
 export const header = css`
