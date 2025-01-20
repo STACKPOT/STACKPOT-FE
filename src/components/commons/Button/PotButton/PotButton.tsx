@@ -1,12 +1,14 @@
-import { buttonStyle } from "./PotButton.style";
+import { blueButtonStyle, redButtonStyle } from "./PotButton.style";
 
 interface PotButtonProps {
     children: string;
+    type?: string;
+    onClick: () => void;
 }
 
-const PotButton: React.FC<PotButtonProps> = ({ children }: PotButtonProps) => {
+const PotButton: React.FC<PotButtonProps> = ({ children, type, onClick }: PotButtonProps) => {
     return (
-        <button css={buttonStyle}>{children}</button>
+        <button css={type === "red" ? redButtonStyle : blueButtonStyle} onClick={onClick}>{children}</button>
     )
 }
 
