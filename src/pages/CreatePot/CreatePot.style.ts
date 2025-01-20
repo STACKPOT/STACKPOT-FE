@@ -44,9 +44,14 @@ export const inputStyle = css`
   display: flex;
   flex-grow: 1;
   border-radius: 8px;
+  color: ${theme.color.base.darkgray};
   border: 1px solid ${theme.color.object.alternative};
   &::placeholder {
     color: ${theme.color.interactive.inactive};
+  }
+  &:focus {
+    border-color: ${theme.color.point.hero};
+    outline: none;
   }
 `;
 
@@ -75,9 +80,15 @@ export const textareaStyle = css`
   height: 40.6rem;
   font-family: "Pretendard";
   border-radius: 12px;
+  border: 1px solid ${theme.color.object.alternative};
   ${theme.font.caption3}
   resize: none;
+  color: ${theme.color.base.darkgray};
   &::placeholder {
     color: ${theme.color.object.hero};
+  }
+  &:focus {
+    border-color: ${theme.color.point.hero};
+    outline: none;
   }
 `;
