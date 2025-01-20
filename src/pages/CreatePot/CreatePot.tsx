@@ -1,21 +1,25 @@
 import { PotIcon } from "@assets/svgs";
 import {
   buttonContainer,
+  datePickerCalendarStyle,
+  datePickerStyle,
   dividerStyle,
   formContainer,
   headContainer,
   iconStyle,
   inputStyle,
   labelStyle,
+  languageInputStyle,
   mainContainer,
+  StyledPickersLayout,
   textareaStyle,
   titleContainer,
   titleStyle,
 } from "./CreatePot.style";
 import { PotButton } from "@components/index";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import BasicDatePicker from "./datePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DesktopDatePicker } from "@mui/x-date-pickers";
 
 const CreatePot = () => {
   return (
@@ -41,7 +45,18 @@ const CreatePot = () => {
             <PotButton>혼합</PotButton>
           </div>
         </div>
-        <div css={labelStyle}>시작 날짜</div>
+
+        <div css={labelStyle}>
+          시작 날짜
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
+              css={[datePickerCalendarStyle, datePickerStyle]}
+              slots={{
+                layout: StyledPickersLayout,
+              }}
+            />
+          </LocalizationProvider>
+        </div>
         <div css={labelStyle}>
           예상 기간
           <div css={buttonContainer}>
@@ -60,11 +75,17 @@ const CreatePot = () => {
             <PotButton>기획</PotButton>
           </div>
         </div>
-        <div css={labelStyle}>
+        <label css={labelStyle}>
           사용 언어
-          <input css={inputStyle} placeholder="사용 언어 작성" />
-        </div>
-        <textarea css={textareaStyle} placeholder="어떤 팟을 끓이고 싶으세요? 간단하게 소개해 보세요." />
+          <input
+            css={[inputStyle, languageInputStyle]}
+            placeholder="사용 언어 작성"
+          />
+        </label>
+        <textarea
+          css={textareaStyle}
+          placeholder="어떤 팟을 끓이고 싶으세요? 간단하게 소개해 보세요."
+        />
       </form>
     </main>
   );
