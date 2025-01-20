@@ -2,6 +2,7 @@ const routes = {
   main: "/",
   myPage: "/my-page",
   home: "/home",
+  writePost: "/writePost",
   pot: {
     base: "/pot",
     applied: "/pot/applied",

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
-import { MushRoomProfile } from "@assets/images";
+import { Banner, MushRoomProfile } from "@assets/images";
 import { PotIcon } from "@assets/svgs";
 import { PotCard, CategoryButton, Dropdown, PostCard } from "@components/index";
 import {
@@ -14,74 +14,92 @@ import {
   contentBody,
   iconStyle,
 } from "./Home.style";
-// Direct React component imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
 import "swiper/swiper-bundle.css";
 import "swiper";
-const potCardsData = [
+
+const postCardsData = [
   {
-    dday: 5,
+    id: 1,
     profileImage: MushRoomProfile,
-    nickname: "아아 마시는 버섯",
-    title: "AI 자동화 챗봇 어플 공부할 스터디원",
-    content:
-      "스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다.",
-    saveCount: 8,
-    categories: ["프론트엔드", "기획"],
+    nickname: "너무 착한 버섯",
+    createdAt: "2025년 2월 8일 15:20",
+    title: "프론트엔드 관련 프로젝트",
+    content: "프론트엔드 개발을 같이 진행할 멤버를 찾습니다.",
+    likeCount: 8,
+    categories: ["프론트엔드"],
   },
   {
-    dday: 12,
+    id: 2,
     profileImage: MushRoomProfile,
-    nickname: "차분한 탐험가",
-    title: "독서 앱 서비스 사이드 프로젝트 해요",
-    content: "책과 함께하는 독서 프로젝트 멤버를 찾습니다.",
-    saveCount: 15,
-    categories: ["디자인", "기획"],
+    nickname: "친절한 디자이너",
+    createdAt: "2025년 2월 9일 10:00",
+    title: "디자인 컨셉 논의",
+    content: "UI/UX 디자인에 관심 있는 분들과 협업하고 싶습니다.",
+    likeCount: 12,
+    categories: ["디자인"],
   },
   {
-    dday: 2,
+    id: 3,
     profileImage: MushRoomProfile,
-    nickname: "데이터 분석가",
-    title: "공공 데이터 기반 약 관리 앱",
-    content:
-      "공공 데이터를 활용한 약 관리 시스템 프로젝트에 관심이 있다면 참여하세요.",
-    saveCount: 10,
-    categories: ["백엔드", "기획"],
+    nickname: "열정적인 백엔드 개발자",
+    createdAt: "2025년 2월 10일 18:00",
+    title: "백엔드 서버 구축",
+    content: "백엔드 서버를 구축할 팀원을 모집합니다.",
+    likeCount: 5,
+    categories: ["백엔드"],
   },
   {
-    dday: 2,
+    id: 4,
     profileImage: MushRoomProfile,
-    nickname: "데이터 분석가",
-    title: "공공 데이터 기반 약 관리 앱",
-    content:
-      "공공 데이터를 활용한 약 관리 시스템 프로젝트에 관심이 있다면 참여하세요.",
-    saveCount: 10,
-    categories: ["프론트엔드", "백엔드"],
+    nickname: "기획 천재",
+    createdAt: "2025년 2월 11일 09:30",
+    title: "기획 단계 협업",
+    content: "서비스 기획에 함께할 분을 찾고 있습니다.",
+    likeCount: 3,
+    categories: ["기획"],
   },
 ];
-
-const options = [
-  { label: "최신 순", key: "latest" },
-  { label: "인기 순", key: "popular" },
-  { label: "오래된 순", key: "oldest" },
-];
-
-const handleChange = (key: string) => {
-  console.log("선택된 옵션:", key); // 선택된 옵션 출력
-};
 
 const Home: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const categories = ["프론트엔드", "백엔드", "디자인", "기획"];
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory((prev) => (prev === category ? null : category));
+  };
+
+  const options = [
+    { label: "최신 순", key: "latest" },
+    { label: "인기 순", key: "popular" },
+    { label: "오래된 순", key: "oldest" },
+  ];
+
+  const handleChange = (key: string) => {
+    console.log("선택된 옵션:", key);
+  };
+
+  const filteredPostCards = selectedCategory
+    ? postCardsData.filter((post) => post.categories.includes(selectedCategory))
+    : postCardsData;
+
   return (
     <main>
+      <img
+        src={Banner}
+        alt="Banner"
+        style={{ width: "90.8rem", height: "21.1rem", marginTop: "2.4rem" }}
+      />
       <div css={container}>
         <div css={content}>
           <div css={contentTitle}>
             <p>실시간 인기 팟</p>
             <PotIcon css={iconStyle} />
           </div>
-          {/* <Swiper
+          <Swiper
             css={swiperContainer}
             modules={[Pagination, Navigation]}
             centeredSlides={false}
@@ -92,19 +110,19 @@ const Home: React.FC = () => {
             }}
             navigation
           >
-            {potCardsData.map((pot, index) => (
-              <SwiperSlide key={index}>
+            {postCardsData.map((card) => (
+              <SwiperSlide key={card.id}>
                 <PotCard
-                  dday={pot.dday}
-                  profileImage={pot.profileImage}
-                  nickname={pot.nickname}
-                  title={pot.title}
-                  content={pot.content}
-                  categories={pot.categories}
+                  profileImage={card.profileImage}
+                  nickname={card.nickname}
+                  dday={0}
+                  title={card.title}
+                  content={card.content}
+                  categories={card.categories}
                 />
               </SwiperSlide>
             ))}
-          </Swiper> */}
+          </Swiper>
         </div>
         <div css={content}>
           <div css={contentHeader}>
@@ -112,10 +130,17 @@ const Home: React.FC = () => {
               <p>피드</p>
             </div>
             <div css={buttonContainer}>
-              <CategoryButton content="프론트엔드" selected={true} />
-              <CategoryButton content="백엔드" selected={true} />
-              <CategoryButton content="디자인" selected={true} />
-              <CategoryButton content="기획" selected={true} />
+              {categories.map((categoryName) => (
+                <div
+                  key={categoryName}
+                  onClick={() => handleCategoryClick(categoryName)}
+                >
+                  <CategoryButton
+                    content={categoryName}
+                    selected={selectedCategory === categoryName}
+                  />
+                </div>
+              ))}
               <div css={{ marginLeft: "auto" }}>
                 <Dropdown
                   options={options}
@@ -134,22 +159,17 @@ const Home: React.FC = () => {
             </p>
           </div>
           <div css={contentBody}>
-            <PostCard
-              profileImage={MushRoomProfile}
-              nickname="너무 착한 버섯"
-              createdAt="2025년 2월 8일 15:20"
-              title="메인 제목은 여기 입력할 수 있습니다"
-              content="국가는 법률이 정하는 바에 의하여 재외국민을 보호할 의무를 진다. 사법권은 법관으로 구성된 법원에 속한다."
-              likeCount={8}
-            />
-            <PostCard
-              profileImage={MushRoomProfile}
-              nickname="너무 착한 버섯"
-              createdAt="2025년 2월 8일 15:20"
-              title="메인 제목은 여기 입력할 수 있습니다"
-              content="국가는 법률이 정하는 바에 의하여 재외국민을 보호할 의무를 진다. 사법권은 법관으로 구성된 법원에 속한다."
-              likeCount={8}
-            />
+            {filteredPostCards.map((post) => (
+              <PostCard
+                key={post.id}
+                profileImage={post.profileImage}
+                nickname={post.nickname}
+                createdAt={post.createdAt}
+                title={post.title}
+                content={post.content}
+                likeCount={post.likeCount}
+              />
+            ))}
           </div>
         </div>
       </div>

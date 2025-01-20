@@ -13,6 +13,7 @@ import {
   AllPotPage,
   AppliedPotPage,
   MadePotPage,
+  WritePostPage,
 } from "@pages/index";
 import MyPot from "@pages/MyPot/MyPot";
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: routes.home,
         element: <HomePage />,
+      },
+      {
+        path: routes.writePost,
+        element: <WritePostPage />,
       },
       {
         path: routes.myPot,
@@ -61,7 +66,7 @@ const router = createBrowserRouter([
           { path: routes.pot.applied, element: <AppliedPotPage /> },
           { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
-      }
+      },
     ],
   },
 ]);
