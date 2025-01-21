@@ -20,8 +20,8 @@ const theme = {
       assistive: "#767676", // gray-500
     },
     border: {
-      normal: "#70737C33",        // transparent-100
-      alternative: "#919191A1",  // transparent-200
+      normal: "#70737C33", // transparent-100
+      alternative: "#919191A1", // transparent-200
     },
     feedback: {
       positive: "#00AF3B", // green-100
@@ -30,6 +30,7 @@ const theme = {
       positive_transparent: "#00AF3B80", // green-50
       caution_transparent: "#FFB14980", // yellow-50
       negative_transparent: "#FF565680", // red-50
+      positive_blue_transparent: "#4EACFF80",
     },
     base: {
       white: "#FFFFFF", // white-100
@@ -142,7 +143,7 @@ const theme = {
       font-weight: 500;
       line-height: 24px;
       letter-spacing: -0.108px;
-    `
+    `,
   },
 };
 
