@@ -13,9 +13,10 @@ import {
   AllPotPage,
   AppliedPotPage,
   MadePotPage,
+  CreatePotPage,
   WritePostPage,
 } from "@pages/index";
-import MyPot from "@pages/MyPot/MyPot";
+import MyPot from "@pages/CreatePot/CreatePot";
 
 const router = createBrowserRouter([
   {
@@ -35,8 +36,8 @@ const router = createBrowserRouter([
         element: <WritePostPage />,
       },
       {
-        path: routes.myPot,
-        element: <MyPot />,
+        path: routes.createPot,
+        element: <CreatePotPage />,
       },
       {
         path: routes.setting,

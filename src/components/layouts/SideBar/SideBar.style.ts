@@ -10,7 +10,7 @@ export const container = (top: number) => css`
   border-radius: 12px;
   position: absolute;
   top: ${top}px;
-  left: 2rem; 
+  left: 2rem;
   transform: translateY(-50%);
   transition: top 0.5s ease-in-out;
   background: ${theme.color.base.white};
@@ -29,4 +29,14 @@ export const divider = css`
   height: 0.2rem;
   background: ${theme.color.object.alternative};
   border-radius: 0.2rem;
+`;
+
+export const iconStyle = css`
+  width: 2rem;
+  height: 2rem;
+`;
+
+export const potIconStyle = css`
+  width: 2.8rem;
+  height: 2.8rem;
 `;

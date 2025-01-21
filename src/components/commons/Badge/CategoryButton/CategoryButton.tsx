@@ -1,17 +1,14 @@
 import { selectedButtonStyle, unselectedButtonStyle } from "./CategoryButton.style"
 
 interface CategoryButtonProps {
-    content: string,
-    selected: boolean
+    children: string,
+    selected: boolean,
+    onClick: (category: string) => void;
 }
 
-const CategoryButton: React.FC<CategoryButtonProps> = ({ content, selected }: CategoryButtonProps) => {
+const CategoryButton: React.FC<CategoryButtonProps> = ({ children, selected, onClick }: CategoryButtonProps) => {
     return (
-        <>
-            {selected ?
-                <button css={selectedButtonStyle}>{content}</button> : <button css={unselectedButtonStyle}>{content}</button>
-            }
-        </>
+        <button css={selected ? selectedButtonStyle : unselectedButtonStyle} onClick={() => onClick(children)}>{children}</button>
     )
 }
 
