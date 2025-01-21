@@ -1,11 +1,13 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
-export const container = css`
+export const container = (opacity:number) => css`
   display: inline-flex;
   padding: 1.2rem 2.4rem;
   border-radius: 1.6rem;
   background: ${theme.color.point.alternative};
+  opacity: ${opacity/100};
+  transition: opacity 0.3s ease-in-out;
 `
 
 export const toastStyle = css`
