@@ -16,12 +16,29 @@ import {
   titleContainer,
   titleStyle,
 } from "./CreatePot.style";
-import { PotButton } from "@components/index";
+import { Button, CategoryButton, TextField } from "@components/index";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
+import { useState } from "react";
 
 const CreatePot = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  const participation = ["온라인", "오프라인", "혼합"];
+  const period = ["단기-1개월", "단기-2개월", "단기-3개월", "단기-6개월 이상"];
+
+  const partMap: { [key: string]: "FE" | "BE" | "PM" | "DE" } = {
+    프론트엔드: "FE",
+    백엔드: "BE",
+    디자인: "DE",
+    기획: "PM",
+  };
+
+  const handleButtonClick = (category: string) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <main css={mainContainer}>
       <div css={headContainer}>
@@ -29,7 +46,7 @@ const CreatePot = () => {
           <h2 css={titleStyle}>나의 팟 만들기</h2>
           <PotIcon css={iconStyle} />
         </div>
-        <PotButton>게시물 업로드</PotButton>
+        <Button style="action">게시물 업로드</Button>
       </div>
       <form css={formContainer}>
         <label css={labelStyle}>
@@ -40,9 +57,16 @@ const CreatePot = () => {
         <div css={labelStyle}>
           진행 방식
           <div css={buttonContainer}>
-            <PotButton>온라인</PotButton>
-            <PotButton>오프라인</PotButton>
-            <PotButton>혼합</PotButton>
+            {participation.map((participation) => (
+              <CategoryButton
+                key={participation}
+                style="pot"
+                selected={selectedCategory === participation}
+                onClick={handleButtonClick}
+              >
+                {participation}
+              </CategoryButton>
+            ))}
           </div>
         </div>
 
@@ -60,19 +84,31 @@ const CreatePot = () => {
         <div css={labelStyle}>
           예상 기간
           <div css={buttonContainer}>
-            <PotButton>단기-1개월</PotButton>
-            <PotButton>단기-2개월</PotButton>
-            <PotButton>단기-3개월</PotButton>
-            <PotButton>단기-6개월 이상</PotButton>
+            {period.map((period) => (
+              <CategoryButton
+                key={period}
+                style="pot"
+                selected={selectedCategory === period}
+                onClick={handleButtonClick}
+              >
+                {period}
+              </CategoryButton>
+            ))}
           </div>
         </div>
         <div css={labelStyle}>
           모집 파트
           <div css={buttonContainer}>
-            <PotButton>프론트엔드</PotButton>
-            <PotButton>백엔드</PotButton>
-            <PotButton>디자인</PotButton>
-            <PotButton>기획</PotButton>
+            {Object.keys(partMap).map((partName) => (
+              <CategoryButton
+                key={partName}
+                style={partMap[partName]}
+                selected={selectedCategory === partMap[partName]}
+                onClick={() => handleButtonClick(partMap[partName])}
+              >
+                {partName}
+              </CategoryButton>
+            ))}
           </div>
         </div>
         <label css={labelStyle}>
