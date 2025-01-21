@@ -49,15 +49,11 @@ export const swiperContainer = css`
   position: relative;
   overflow: hidden;
   margin: 0 auto;
-  width: 908px;
+  width: 848px;
   height: 299px;
 
   .swiper-wrapper {
     display: flex;
-    overflow: hidden;
-    width: 848px;
-    margin-left: 30px;
-    margin-right: 30px;
   }
 
   .swiper-slide {

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
-import { Banner, MushRoomProfile } from "@assets/images";
+import { Banner } from "@assets/images";
+import postCardsData from "mocks/postCardsData";
+import potCardsData from "mocks/potCardsData";
 import { PotIcon } from "@assets/svgs";
 import {
   PotCard,
@@ -25,49 +27,6 @@ import { Navigation, Pagination } from "swiper/modules";
 
 import "swiper/swiper-bundle.css";
 import "swiper";
-
-const postCardsData = [
-  {
-    id: 1,
-    profileImage: MushRoomProfile,
-    nickname: "너무 착한 버섯",
-    createdAt: "2025년 2월 8일 15:20",
-    title: "프론트엔드 관련 프로젝트",
-    content: "프론트엔드 개발을 같이 진행할 멤버를 찾습니다.",
-    likeCount: 8,
-    categories: ["프론트엔드"],
-  },
-  {
-    id: 2,
-    profileImage: MushRoomProfile,
-    nickname: "친절한 디자이너",
-    createdAt: "2025년 2월 9일 10:00",
-    title: "디자인 컨셉 논의",
-    content: "UI/UX 디자인에 관심 있는 분들과 협업하고 싶습니다.",
-    likeCount: 12,
-    categories: ["디자인"],
-  },
-  {
-    id: 3,
-    profileImage: MushRoomProfile,
-    nickname: "열정적인 백엔드 개발자",
-    createdAt: "2025년 2월 10일 18:00",
-    title: "백엔드 서버 구축",
-    content: "백엔드 서버를 구축할 팀원을 모집합니다.",
-    likeCount: 5,
-    categories: ["백엔드"],
-  },
-  {
-    id: 4,
-    profileImage: MushRoomProfile,
-    nickname: "기획 천재",
-    createdAt: "2025년 2월 11일 09:30",
-    title: "기획 단계 협업",
-    content: "서비스 기획에 함께할 분을 찾고 있습니다.",
-    likeCount: 3,
-    categories: ["기획"],
-  },
-];
 
 const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -97,7 +56,7 @@ const Home: React.FC = () => {
       <img
         src={Banner}
         alt="Banner"
-        style={{ width: "90.8rem", height: "21.1rem", marginTop: "2.4rem" }}
+        style={{ width: "90.8rem", height: "22.2rem", marginTop: "4.8rem" }}
       />
       <div css={container}>
         <div css={content}>
@@ -112,17 +71,18 @@ const Home: React.FC = () => {
             centeredSlides={false}
             spaceBetween={16}
             slidesPerView={3}
+            slidesPerGroup={3}
             pagination={{
               type: "fraction",
             }}
             navigation={true}
           >
-            {postCardsData.map((card) => (
+            {potCardsData.map((card) => (
               <SwiperSlide key={card.id}>
                 <PotCard
                   profileImage={card.profileImage}
                   nickname={card.nickname}
-                  dday={0}
+                  dday={card.dday}
                   title={card.title}
                   content={card.content}
                   categories={card.categories}
@@ -138,15 +98,13 @@ const Home: React.FC = () => {
             </div>
             <div css={buttonContainer}>
               {categories.map((categoryName) => (
-                <div
+                <CategoryButton
                   key={categoryName}
-                  onClick={() => handleCategoryClick(categoryName)}
+                  selected={selectedCategory === categoryName}
+                  onClick={handleCategoryClick}
                 >
-                  <CategoryButton
-                    content={categoryName}
-                    selected={selectedCategory === categoryName}
-                  />
-                </div>
+                  {categoryName}
+                </CategoryButton>
               ))}
               <div css={{ marginLeft: "auto" }}>
                 <Dropdown
