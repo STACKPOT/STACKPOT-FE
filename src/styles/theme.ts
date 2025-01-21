@@ -80,7 +80,7 @@ const theme = {
     `,
     bodyBold3: css`
       font-size: 32px;
-      line-height: 32px;
+      line-height: 40px;
       letter-spacing: -0.144px;
       font-weight: 500;
     `,
