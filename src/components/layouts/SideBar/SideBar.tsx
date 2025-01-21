@@ -41,7 +41,8 @@ const SideBar: React.FC = () => {
 
     const footerElement = document.querySelector("footer");
     if (footerElement) {
-      const footerOffsetTop = footerElement.getBoundingClientRect().top + window.scrollY;
+      const footerOffsetTop =
+        footerElement.getBoundingClientRect().top + window.scrollY;
       setFooterTop(footerOffsetTop);
     }
 
@@ -55,10 +56,8 @@ const SideBar: React.FC = () => {
 
     const handleScroll = debounce(() => {
       const currentTop = window.innerHeight / 2 + window.scrollY;
-      console.log(footerTop);
-      console.log(currentTop);
-      if (footerTop && currentTop + 370 > footerTop) { 
-        setTop(footerTop - 370); 
+      if (footerTop && currentTop + 370 > footerTop) {
+        setTop(footerTop - 370);
       } else {
         setTop(currentTop);
       }
