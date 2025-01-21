@@ -7,7 +7,6 @@ export const container = (opacity:number) => css`
   border-radius: 1.6rem;
   background: ${theme.color.point.alternative};
   opacity: ${opacity/100};
-  transition: opacity 0.3s ease-in-out;
 `
 
 export const toastStyle = css`
