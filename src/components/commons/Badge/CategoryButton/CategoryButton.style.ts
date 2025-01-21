@@ -27,7 +27,7 @@ export const feButtonStyle = (selected: boolean) => css`
   background-color: ${selected
     ? theme.color.point.assistive
     : theme.color.base.white};
-  color: ${selected ? theme.color.base.white : theme.color.point.hero};
+  color: ${selected ? theme.color.base.white : theme.color.point.assistive};
 `;
 
 export const beButtonStyle = (selected: boolean) => css`
