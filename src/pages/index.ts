@@ -10,6 +10,7 @@ import PotMain from "./Pots/PotMain";
 import AllPotPage from "./Pots/AllPot/AllPotPage";
 import AppliedPotPage from "./Pots/AppliedPot/AppliedPotPage";
 import MadePotPage from "./Pots/MadePot/MadePotPage";
+import CreatePotPage from "./CreatePot/CreatePot";
 
 export {
   HomePage,
@@ -24,4 +25,5 @@ export {
   AllPotPage,
   AppliedPotPage,
   MadePotPage,
+  CreatePotPage,
 };
