@@ -16,7 +16,7 @@ import SearchInput from "./commons/SearchInput/SearchInput";
 import PotButton from "./commons/Button/PotButton/PotButton";
 import SignUpButton from "./commons/SignUpButton/SignupButton";
 import Dropdown from "./commons/Dropdown/Dropdown";
-
+import FloatingButton from "./commons/FloatingButton/floatingButton";
 export {
   Button,
   Header,
@@ -36,4 +36,5 @@ export {
   PotButton,
   SignUpButton,
   Dropdown,
+  FloatingButton,
 };
