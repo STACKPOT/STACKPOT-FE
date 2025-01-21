@@ -49,8 +49,8 @@ export const swiperContainer = css`
   position: relative;
   overflow: hidden;
   margin: 0 auto;
-  width: 848px;
-  height: 299px;
+  width: 84.8rem;
+  height: 29.9rem;
 
   .swiper-wrapper {
     display: flex;
@@ -58,7 +58,7 @@ export const swiperContainer = css`
 
   .swiper-slide {
     flex: 0 0 auto;
-    width: 272px !important;
+    width: 27.2rem !important;
   }
   .swiper-pagination {
     ${theme.font.body2}
@@ -102,5 +102,3 @@ export const swiperContainer = css`
     font-weight: bold;
   }
 `;
-
-export const contentFooter = css``;
