@@ -3,7 +3,13 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 import { Banner, MushRoomProfile } from "@assets/images";
 import { PotIcon } from "@assets/svgs";
-import { PotCard, CategoryButton, Dropdown, PostCard } from "@components/index";
+import {
+  PotCard,
+  CategoryButton,
+  Dropdown,
+  PostCard,
+  FloatingButton,
+} from "@components/index";
 import {
   container,
   content,
@@ -99,6 +105,7 @@ const Home: React.FC = () => {
             <p>실시간 인기 팟</p>
             <PotIcon css={iconStyle} />
           </div>
+
           <Swiper
             css={swiperContainer}
             modules={[Pagination, Navigation]}
@@ -108,7 +115,7 @@ const Home: React.FC = () => {
             pagination={{
               type: "fraction",
             }}
-            navigation
+            navigation={true}
           >
             {postCardsData.map((card) => (
               <SwiperSlide key={card.id}>
@@ -173,6 +180,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+      <FloatingButton />
     </main>
   );
 };
