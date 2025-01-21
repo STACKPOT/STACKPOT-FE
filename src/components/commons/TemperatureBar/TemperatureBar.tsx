@@ -1,4 +1,4 @@
-import { FireIcon, Polygon } from "@assets/svgs";
+import { FireIcon, PolygonIcon } from "@assets/svgs";
 import { container, temperatureBase, temperatureRange, toolTip, textStyle } from "./TemperatureBar.style";
 
 interface TemperatureProps {
@@ -15,9 +15,9 @@ const TemperatureBar: React.FC<TemperatureProps> = ({ temperature }) => {
                 <FireIcon />
             </div>
         </div>
-        <Polygon />
+        <PolygonIcon />
         <div css={temperatureBase}>
-            <div css={temperatureRange(temperature)}></div>
+            <div css={temperatureRange(temperature)} />
         </div>
       </div>
     </>

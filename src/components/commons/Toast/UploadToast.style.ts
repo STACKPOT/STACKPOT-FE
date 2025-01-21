@@ -4,8 +4,6 @@ import theme from "@styles/theme";
 export const container = css`
   display: inline-flex;
   padding: 1.2rem 2.4rem;
-  justify-content: center;
-  align-items: center;
   border-radius: 1.6rem;
   background: ${theme.color.point.alternative};
 `

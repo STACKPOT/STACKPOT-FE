@@ -4,7 +4,6 @@ import theme from "@styles/theme";
 export const container = css`
   display: flex;
   width: 35.6rem;
-  padding: 1.3rem 0.5rem;
   flex-direction: column;
   align-items: center;
 `
@@ -39,6 +38,6 @@ export const temperatureBase = css`
 export const temperatureRange = (temperature: number) => css`
   width: ${temperature}%;
   height: 100%;
-  border-radius: 1rem;
+  border-radius: 10px;
   background: ${theme.color.point.hero};
 `
