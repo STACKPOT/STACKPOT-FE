@@ -21,10 +21,11 @@ export const sectionContainerStyle = css`
 export const titleContainerStyle = css`
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    gap: 17.5rem;
 `
 export const titleContentContainerStyle = css`
     display: flex;
-    align-items: center;
     gap: 1rem;
 `
 export const leftButtonStyle = css`
@@ -44,6 +45,7 @@ export const leftButtonIconStyle = css`
 export const titleStyle = css`
     ${theme.font.bodyBold3}
     color: ${theme.color.base.darkgray};
+    word-break: keep-all;
 `
 export const profileContainerStyle = css`
     display: flex;
@@ -118,6 +120,10 @@ export const applicantInfoTitleContainer = css`
 export const applicantInfoTitleStyle = css`
     ${theme.font.bodyBold2};
     color: ${theme.color.base.darkgray};
+`
+export const applicantInfoTitleBlueStyle = css`
+    ${theme.font.bodyBold2};
+    color: ${theme.color.point.hero};
 `
 export const applicantInfoTitleIconStyle =css`
     color: ${theme.color.point.hero};

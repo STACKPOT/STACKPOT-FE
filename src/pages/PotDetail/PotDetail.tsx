@@ -1,4 +1,4 @@
-import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, titleContainerStyle, titleContentContainerStyle, titleStyle, startPotButtonStyle, membersInfoContainer, shareLinkButtonStyle, modalContentContainer, modalProfileStyle, modalMemberListContainer, modalMemberContainer } from "./PotDetail.style";
+import { applicantInfoContainer, applicantInfoDescriptionStyle, applicantInfoTitleButtonContainer, applicantInfoTitleContainer, applicantInfoTitleIconStyle, applicantInfoTitleStyle, applicantInfoTopContainer, applicantListContainerStyle, bodyContainerStyle, containerStyle, contentStyle, dividerStyle, infoContainerStyle, infoContentStyle, infoElementContainerStyle, infoTitleStyle, leftButtonIconStyle, leftButtonStyle, modalBackgroundStyle, nicknameStyle, profileContainerStyle, profileStyle, sectionContainerStyle, titleContainerStyle, titleContentContainerStyle, titleStyle, startPotButtonStyle, membersInfoContainer, shareLinkButtonStyle, modalContentContainer, modalProfileStyle, modalMemberListContainer, modalMemberContainer, applicantInfoTitleBlueStyle } from "./PotDetail.style";
 import { MushRoomProfile } from "@assets/images";
 import { LeftIcon, PotIcon } from "@assets/svgs";
 import Modal from "@components/commons/Modal/Modal";
@@ -15,11 +15,11 @@ const PotDetail = () => {
     const [showApplyModal, setShowApplyModal] = useState<boolean>(false);
 
     const [applied, setApplied] = useState<boolean>(false);
-    const [myPot, setMyPot] = useState<boolean>(true);
-    const [finished, setFinished] = useState<boolean>(false);
+    const [myPot, setMyPot] = useState<boolean>(false);
+    const [finished, setFinished] = useState<boolean>(true);
     const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string }[]>(memberListData);
     const [selectedApplicants, setSelectedApplicants] = useState<typeof applicants[0][]>([]);
-    const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string, stack: string } | null>(null);
+    const [showProfileMember, setShowProfileMember] = useState<typeof applicants[0] | null>(null);
     const [potMembers, setPotMembers] = useState<{ id: number; profileImage: string, nickname: string, evaluation: string, evaluationEmoji: string }[]>(potMembersData)
     const navigate = useNavigate();
     const { potId } = useParams();
@@ -84,7 +84,7 @@ const PotDetail = () => {
                             <button css={leftButtonStyle} onClick={handleBack}>
                                 <LeftIcon css={leftButtonIconStyle} />
                             </button>
-                            <h1 css={titleStyle}>AI 자동화 챗봇 어플 공부할 스터디원 모집</h1>
+                            <h1 css={titleStyle}>제목을 길게 작성할 경우에는 이렇게 돼요 두줄은 이렇게 보여요</h1>
                         </div>
                         {!myPot && applied && !finished && <PotButton onClick={handleCancelReservation}>지원 취소하기</PotButton>}
                         {!myPot && !applied && !finished && <PotButton onClick={handleApply}>이 팟에 지원하기</PotButton>}
@@ -133,7 +133,7 @@ const PotDetail = () => {
                     <div css={applicantInfoTopContainer}>
                         <div css={applicantInfoTitleButtonContainer}>
                             <div css={applicantInfoTitleContainer}>
-                                <h1 css={applicantInfoTitleStyle}>나의 팟 지원자가 총 3명 있어요</h1>
+                                <h1 css={applicantInfoTitleStyle}>나의 팟 지원자가 총 <span css={applicantInfoTitleBlueStyle}>{applicants.length}</span>명 있어요</h1>
                                 <PotIcon css={applicantInfoTitleIconStyle} />
                             </div>
                             <button css={startPotButtonStyle} disabled={selectedApplicants.length < 1} onClick={handleStartPot}>팟 시작하기</button>
