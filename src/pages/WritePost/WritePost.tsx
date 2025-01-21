@@ -7,8 +7,7 @@ import {
   iconStyle,
   contentBody,
   titleText,
-  bodyField,
-  bodyText,
+  textareaStyle,
 } from "./WritePost.style";
 import { PotIcon } from "@assets/svgs";
 import { SelectableField, SignUpButton, TextField } from "@components/index";
@@ -26,10 +25,9 @@ const WritePost: React.FC = () => {
           <SignUpButton>게시물 업로드</SignUpButton>
           <div css={contentBody}>
             <TextField placeholder="메인 제목 작성" inputCss={titleText} />
-            <TextField
+            <textarea
+              css={textareaStyle}
               placeholder="나의 열정을 이야기해봐요"
-              inputCss={bodyText}
-              labelCss={bodyField}
             />
             <SelectableField />
           </div>

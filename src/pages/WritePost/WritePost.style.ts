@@ -37,42 +37,35 @@ export const contentTitle = css`
 
 export const iconStyle = css`
   color: ${theme.color.point.hero};
+  width: 2.4rem;
+  height: 2.4rem;
 `;
 
 export const titleText = css`
   width: 70.8rem;
   height: 5.2rem;
   padding: 1.2rem 1.6rem;
-  resize: none; /* 크기 조정 비활성화 */
-  overflow-wrap: break-word; /* 줄바꿈 활성화 */
-  white-space: pre-wrap; /* 공백 및 줄바꿈 유지 */
 `;
 
-export const bodyField = css`
+export const textareaStyle = css`
+  ${theme.font.caption3};
+  font-family: "Pretendard";
+  resize: none;
   width: 70.8rem;
   height: 34.9rem;
   border: 1px solid ${theme.color.border.alternative};
   border-radius: 0.8rem;
   box-sizing: border-box;
   overflow: auto;
+  padding: 2.4rem;
 
-  &:focus-within {
-    border-color: ${theme.color.point.hero};
-    border-width: 2px;
+  &::placeholder {
+    color: ${theme.color.object.hero};
+    ${theme.font.caption3};
   }
-`;
-
-export const bodyText = css`
-  width: 66rem;
-  border: none;
-  box-sizing: border-box;
-  padding: 1.2rem 1.6rem;
-
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 
   &:focus {
-    outline: none;
+    border-color: ${theme.color.point.hero};
+    border-width: 2px;
   }
 `;
