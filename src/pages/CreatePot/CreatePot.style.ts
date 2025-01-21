@@ -122,7 +122,7 @@ export const datePickerCalendarStyle = css`
 `;
 
 export const StyledPickersLayout = styled(PickersLayout)<
-  PickersLayoutProps<Dayjs | Date | null, Dayjs | Date, DateView>
+  PickersLayoutProps<Dayjs | null, Dayjs, DateView>
 >({
   ".MuiPickersCalendarHeader-label": {
     fontSize: "1.6rem",
