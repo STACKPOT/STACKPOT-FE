@@ -13,7 +13,7 @@ const UploadToast: React.FC = () => {
       fadeInTimer = setInterval(() => {
         setOpacity((prevOpacity) => {
           if (prevOpacity < 100) {
-            return prevOpacity + 2;
+            return prevOpacity + 10;
           } else {
             clearInterval(fadeInTimer!);
             setTimeout(() => fadeOut(), 1000);
@@ -27,7 +27,7 @@ const UploadToast: React.FC = () => {
       fadeOutTimer = setInterval(() => {
         setOpacity((prevOpacity) => {
           if (prevOpacity > 0) {
-            return prevOpacity - 2;
+            return prevOpacity - 8;
           } else {
             clearInterval(fadeOutTimer!);
             return prevOpacity;
