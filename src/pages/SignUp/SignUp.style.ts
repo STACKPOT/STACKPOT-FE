@@ -164,3 +164,36 @@ export const nicknameMessageWarningStyle =css`
     ${theme.font.caption2};
     color: ${theme.color.feedback.negative};
 `
+export const modalBackgroundContainer =css`
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.40);
+`
+export const modalProfileContainer = css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+`
+export const modalProfileStyle =css`
+    width: 6.4rem;
+    height: 6.4rem;
+    border: 1px solid ${theme.color.object.alternative};
+    border-radius: 50%;
+`
+export const modalNicknameStyle =css`
+    ${theme.font.bodyBold1};
+    color: ${theme.color.object.assistive};
+`
+export const modalContentStyle =css`
+    ${theme.font.caption3};
+    color: ${theme.color.object.assistive};
+    text-align: center;
+    white-space: pre-line;
+`

@@ -1,11 +1,12 @@
 import { PotIcon } from "@assets/svgs"
-import { bodyContainer, buttonContainer, container, contractContainer, contractDetailStyle, contractSectionContainer, contractStyle, dividerStyle, headerContainer, headerStyle, interestContainer, mainContainer, mainContentContainer, makeNicknameContainer, nicknameButtonStyle, nicknameContainer, nicknameInputContainer, nicknameInputDoneStyle, nicknameInputStyle, nicknameMessageStyle, nicknameMessageWarningStyle, nicknameSectionContainer, potIconStyle, sectionBodyContainer, sectionContainer, sectionDescriptionStyle, sectionTitleContainer, stackContainer, stackTitleStyle } from "./SignUp.style"
-import { CategoryButton, SignUpButton, TextField } from "@components/index"
+import { bodyContainer, buttonContainer, container, contractContainer, contractDetailStyle, contractSectionContainer, contractStyle, dividerStyle, headerContainer, headerStyle, interestContainer, mainContainer, mainContentContainer, makeNicknameContainer, modalBackgroundContainer, modalContentStyle, modalNicknameStyle, modalProfileContainer, modalProfileStyle, nicknameButtonStyle, nicknameContainer, nicknameInputContainer, nicknameInputDoneStyle, nicknameInputStyle, nicknameMessageStyle, nicknameMessageWarningStyle, nicknameSectionContainer, potIconStyle, sectionBodyContainer, sectionContainer, sectionDescriptionStyle, sectionTitleContainer, stackContainer, stackTitleStyle } from "./SignUp.style"
+import { CategoryButton, ExplainModal, SignUpButton, TextField } from "@components/index"
 import { useState } from "react";
+import { MushRoomProfile } from "@assets/images";
 
 const contracts = [
-    { agreed: false, title: "서비스 약관에 동의합니다", content: "" },
-    { agreed: false, title: "개인정보 수집 및 이용에 동의합니다.", content: "" }
+    { agreed: false, preview: "서비스 약관에 동의합니다", title: "서비스 약관", content: `본 약관은 회원가입 시 동의한 것으로 간주되며, 서비스 이용 시 회원에게 적용됩니다\n본 약관은 회원가입 시 동의한 것으로 간주되며, 서비스 이용 시 회원에게 적용됩니다\n본 약관은 회원가입 시 동의한 것으로 간주되며, 서비스 이용 시 회원에게 적용됩니다\n` },
+    { agreed: false, preview: "개인정보 수집 및 이용에 동의합니다.", title: "개인정보 수집 및 이용 약관", content: "" }
 ];
 const SignUp = () => {
     const [stacks, setStacks] = useState<string[]>(["프론트엔드", "백엔드", "디자인", "기획"]);
@@ -16,7 +17,11 @@ const SignUp = () => {
     const [nickname, setNickname] = useState<string>("");
     const [kakaoId, setKakaoId] = useState<string>("");
 
-    const [nicknameState, setNicknameState] = useState<boolean|null>(null);
+    const [nicknameState, setNicknameState] = useState<boolean | null>(null);
+
+    const [signUpCompleteModal, setSignUpCompleteModal] = useState<boolean>(false);
+    const [contractModal, setContractModal] = useState<typeof contracts[0] | null>(null);
+
 
     const handleSelectStack = (stack: string) => {
         if (selectedStacks.includes(stack)) {
@@ -40,22 +45,25 @@ const SignUp = () => {
         setNicknameState(false)
     }
     const onNicknameBlur = () => {
-        if(nickname.length>0) 
+        if (nickname.length > 0)
             setNicknameState(true)
         else setNicknameState(null)
     }
-    const onKakaoIdChange = (value:string) => {
+    const onKakaoIdChange = (value: string) => {
         setKakaoId(value);
     }
 
-    const handleAgree = (agree: typeof contracts[0]) => {
-        agree.agreed = !agree.agreed;
+    const handleAgree = (contract: typeof contracts[0]) => {
+        contract.agreed = !contract.agreed;
     }
-    const handleAgreeDetail = (agree: typeof contracts[0]) => {
-
+    const handleContractDetail = (contract: typeof contracts[0]) => {
+        setContractModal(contract)
     }
     const handleSubmit = () => {
-
+        setSignUpCompleteModal(true)
+    }
+    const handleSignUpComplete = () => {
+        setSignUpCompleteModal(false);
     }
 
     return (
@@ -105,15 +113,15 @@ const SignUp = () => {
                                     <div css={sectionDescriptionStyle}>{`STACKPOT은 네 가지의 재료 안에서 랜덤 닉네임을 부여받아요.\n<닉네임 생성하기>를 눌러 닉네임을 만들어 주세요.`} </div>
                                     <div css={nicknameContainer}>
                                         <div css={makeNicknameContainer}>
-                                            <input css={nickname.length < 1 ? nicknameInputStyle : nicknameInputDoneStyle} 
-                                                    value={nickname} 
-                                                    placeholder="닉네임 생성하기를 눌러주세요"
-                                                    readOnly={true} 
-                                                    onFocus={onNicknameFocus} 
-                                                    onBlur={onNicknameBlur} />
-                                            <button css={nicknameButtonStyle} onClick={handleMakeNickname}>{nickname.length<1?"닉네임 생성하기":"다시 생성하기"}</button>
+                                            <input css={nickname.length < 1 ? nicknameInputStyle : nicknameInputDoneStyle}
+                                                value={nickname}
+                                                placeholder="닉네임 생성하기를 눌러주세요"
+                                                readOnly={true}
+                                                onFocus={onNicknameFocus}
+                                                onBlur={onNicknameBlur} />
+                                            <button css={nicknameButtonStyle} onClick={handleMakeNickname}>{nickname.length < 1 ? "닉네임 생성하기" : "다시 생성하기"}</button>
                                         </div>
-                                        <p css={nicknameState ? nicknameMessageStyle: nicknameMessageWarningStyle}>{(nicknameState && "생성 완료!") || (nicknameState===false && "닉네임은 편집할 수 없어요") || ""}</p>
+                                        <p css={nicknameState ? nicknameMessageStyle : nicknameMessageWarningStyle}>{(nicknameState && "생성 완료!") || (nicknameState === false && "닉네임은 편집할 수 없어요") || ""}</p>
                                     </div>
                                 </div>
                             </div>
@@ -132,14 +140,38 @@ const SignUp = () => {
                             {contracts.map((contract) =>
                                 <div css={contractContainer}>
                                     <button></button>
-                                    <p css={contractStyle}>{contract.title}</p>
-                                    <button css={contractDetailStyle}>내용보기</button>
+                                    <p css={contractStyle}>{contract.preview}</p>
+                                    <button css={contractDetailStyle} onClick={() => handleContractDetail(contract)}>내용보기</button>
                                 </div>)}
                         </div>
                     </div>
-                    <button onClick={handleSubmit}>가입하기</button>
+                    <button disabled={nickname.length < 1 || kakaoId.length < 1} onClick={handleSubmit}>가입하기</button>
                 </div>
             </div>
+            {signUpCompleteModal &&
+                <div css={modalBackgroundContainer}>
+                    <ExplainModal
+                        title="가입이 완료되었어요! 완성된 나의 프로필이에요."
+                        buttonText="메인 홈으로 이동하기"
+                        onButtonClick={handleSignUpComplete}
+                        onCancel={() => setSignUpCompleteModal(false)}>
+                        <div css={modalProfileContainer}>
+                            <img css={modalProfileStyle} src={MushRoomProfile} />
+                            <p css={modalNicknameStyle}>{nickname}</p>
+                        </div>
+                    </ExplainModal>
+                </div>}
+            {contractModal &&
+                <div css={modalBackgroundContainer}>
+                    <ExplainModal
+                        title={contractModal.title}
+                        buttonText="확인했습니다"
+                        onButtonClick={() => setContractModal(null)}
+                        onCancel={() => setContractModal(null)}>
+                        <p css={modalContentStyle}>{contractModal.content}  </p>
+                    </ExplainModal>
+                </div>
+            }
         </main>
     )
 }
