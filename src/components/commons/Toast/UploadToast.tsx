@@ -3,29 +3,44 @@ import { container, textStyle, toastStyle } from "./UploadToast.style";
 import { useEffect, useState } from "react";
 
 const UploadToast: React.FC = () => {
-  const [opacity, setOpacity] = useState(100);
+  const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout | null = null;
+    let fadeInTimer: NodeJS.Timeout | null = null;
+    let fadeOutTimer: NodeJS.Timeout | null = null;
 
-    const fadeOut = () => {
+    const fadeIn = () => {
+      fadeInTimer = setInterval(() => {
         setOpacity((prevOpacity) => {
-          if ( prevOpacity > 80 ) {
-            timer = setTimeout(fadeOut, 1000); 
-            return prevOpacity - 1;
-          } else if ( prevOpacity > 0 ) {
-            timer = setTimeout(fadeOut, 200);
-            return prevOpacity -1;
+          if (prevOpacity < 100) {
+            return prevOpacity + 2;
           } else {
+            clearInterval(fadeInTimer!);
+            setTimeout(() => fadeOut(), 1000);
             return prevOpacity;
           }
-        });          
+        });
+      }, 40);
     };
 
-    fadeOut();
+    const fadeOut = () => {
+      fadeOutTimer = setInterval(() => {
+        setOpacity((prevOpacity) => {
+          if (prevOpacity > 0) {
+            return prevOpacity - 2;
+          } else {
+            clearInterval(fadeOutTimer!);
+            return prevOpacity;
+          }
+        });
+      }, 40);
+    };
+
+    fadeIn();
 
     return () => {
-      if (timer) clearTimeout(timer); 
+      if (fadeInTimer) clearInterval(fadeInTimer);
+      if (fadeOutTimer) clearInterval(fadeOutTimer);
     };
   }, []);
 
