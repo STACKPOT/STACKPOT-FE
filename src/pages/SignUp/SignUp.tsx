@@ -1,5 +1,5 @@
 import { PotIcon } from "@assets/svgs"
-import { bodyContainer, buttonContainer, container, contractContainer, contractDetailStyle, contractSectionContainer, contractStyle, dividerStyle, headerContainer, headerStyle, interestContainer, mainContainer, mainContentContainer, makeNicknameContainer, nicknameButtonStyle, nicknameInputContainer, nicknameSectionContainer, potIconStyle, sectionBodyContainer, sectionContainer, sectionDescriptionStyle, sectionTitleContainer, stackContainer, stackTitleStyle } from "./SignUp.style"
+import { bodyContainer, buttonContainer, container, contractContainer, contractDetailStyle, contractSectionContainer, contractStyle, dividerStyle, headerContainer, headerStyle, interestContainer, mainContainer, mainContentContainer, makeNicknameContainer, nicknameButtonStyle, nicknameContainer, nicknameInputContainer, nicknameInputDoneStyle, nicknameInputStyle, nicknameMessageStyle, nicknameMessageWarningStyle, nicknameSectionContainer, potIconStyle, sectionBodyContainer, sectionContainer, sectionDescriptionStyle, sectionTitleContainer, stackContainer, stackTitleStyle } from "./SignUp.style"
 import { CategoryButton, SignUpButton, TextField } from "@components/index"
 import { useState } from "react";
 
@@ -16,6 +16,8 @@ const SignUp = () => {
     const [nickname, setNickname] = useState<string>("");
     const [kakaoId, setKakaoId] = useState<string>("");
 
+    const [nicknameState, setNicknameState] = useState<boolean|null>(null);
+
     const handleSelectStack = (stack: string) => {
         if (selectedStacks.includes(stack)) {
             setSelectedStacks((prev) => prev.filter((item) => item !== stack));
@@ -31,10 +33,21 @@ const SignUp = () => {
         }
     }
     const handleMakeNickname = () => {
+        setNickname("닉네임");
+        setNicknameState(true)
     }
-    const onKakaoIdChange = (id: string) => {
-        setKakaoId(id);
+    const onNicknameFocus = () => {
+        setNicknameState(false)
     }
+    const onNicknameBlur = () => {
+        if(nickname.length>0) 
+            setNicknameState(true)
+        else setNicknameState(null)
+    }
+    const onKakaoIdChange = (value:string) => {
+        setKakaoId(value);
+    }
+
     const handleAgree = (agree: typeof contracts[0]) => {
         agree.agreed = !agree.agreed;
     }
@@ -65,13 +78,18 @@ const SignUp = () => {
                                     <div css={stackContainer}>
                                         <p css={stackTitleStyle}>역할</p>
                                         <div css={buttonContainer}>
-                                            {stacks.map((stack) => <CategoryButton content={stack} selected={selectedStacks.includes(stack)} />)}
+                                            {stacks.map((stack) =>
+                                                <CategoryButton
+                                                    selected={selectedStacks.includes(stack)}
+                                                    onClick={(content: string) => handleSelectStack(content)}>{stack}</CategoryButton>)}
                                         </div>
                                     </div>
                                     <div css={interestContainer}>
                                         <p css={stackTitleStyle}>관심사</p>
                                         <div css={buttonContainer}>
-                                            {interests.map((interest) => <CategoryButton content={interest} selected={true} />)}
+                                            {interests.map((interest) => <CategoryButton
+                                                selected={selectedInterests.includes(interest)}
+                                                onClick={(content: string) => handleSelectInterest(content)}>{interest}</CategoryButton>)}
                                         </div>
                                     </div>
                                 </div>
@@ -85,11 +103,17 @@ const SignUp = () => {
                             <div css={headerContainer}>
                                 <div css={nicknameSectionContainer}>
                                     <div css={sectionDescriptionStyle}>{`STACKPOT은 네 가지의 재료 안에서 랜덤 닉네임을 부여받아요.\n<닉네임 생성하기>를 눌러 닉네임을 만들어 주세요.`} </div>
-                                    <div css={makeNicknameContainer}>
-                                        <div css={nicknameInputContainer}>
-                                            <TextField placeholder="닉네임 생성하기를 눌러 주세요" />
+                                    <div css={nicknameContainer}>
+                                        <div css={makeNicknameContainer}>
+                                            <input css={nickname.length < 1 ? nicknameInputStyle : nicknameInputDoneStyle} 
+                                                    value={nickname} 
+                                                    placeholder="닉네임 생성하기를 눌러주세요"
+                                                    readOnly={true} 
+                                                    onFocus={onNicknameFocus} 
+                                                    onBlur={onNicknameBlur} />
+                                            <button css={nicknameButtonStyle} onClick={handleMakeNickname}>{nickname.length<1?"닉네임 생성하기":"다시 생성하기"}</button>
                                         </div>
-                                        <button css={nicknameButtonStyle} onClick={handleMakeNickname}>닉네임 생성하기</button>
+                                        <p css={nicknameState ? nicknameMessageStyle: nicknameMessageWarningStyle}>{(nicknameState && "생성 완료!") || (nicknameState===false && "닉네임은 편집할 수 없어요") || ""}</p>
                                     </div>
                                 </div>
                             </div>

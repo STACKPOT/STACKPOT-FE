@@ -13,6 +13,7 @@ export const mainContainer = css`
     width: 71.3rem;
     padding: 4.5rem 8.2rem;
     border: 1px solid ${theme.color.object.alternative};
+    border-radius: 0.8rem;
 `
 export const mainContentContainer = css`
     display: flex;
@@ -88,8 +89,8 @@ export const nicknameSectionContainer = css`
 export const makeNicknameContainer = css`
     width: 100%;
     display: flex;
-    gap: 1.5rem;
     align-items: center;
+    justify-content: space-between;
 `
 export const nicknameInputContainer =css`
     width: 38rem;
@@ -105,9 +106,6 @@ export const nicknameButtonStyle =css`
     color: white;
     background-color: ${theme.color.point.navy};
     cursor: pointer;
-    &:active {
-        border: none;
-    }
 `
 export const contractSectionContainer = css`
     display: flex;
@@ -131,4 +129,38 @@ export const contractDetailStyle =css`
     background-color: transparent;
     border: none;
     cursor: pointer;
+`
+export const nicknameContainer = css`
+    display: flex;
+    flex-direction: column;
+`
+export const nicknameInputStyle =css`
+    width: 38rem;
+    padding: 1.2rem 1.6rem;
+    border-radius: 0.8rem;
+    ${theme.font.caption3};
+    border: 1px solid ${theme.color.object.alternative};
+    color: ${theme.color.point.hero};
+    
+    ::placeholder {
+        color: ${theme.color.interactive.inactive};
+    }
+
+    &:focus {
+        border: 1px solid ${theme.color.feedback.negative};
+        outline: none;
+        color: ${theme.color.interactive.inactive};
+    }
+`
+export const nicknameInputDoneStyle =css`
+    ${nicknameInputStyle};
+    border-color: ${theme.color.point.hero};
+`
+export const nicknameMessageStyle =css`
+    ${theme.font.caption2};
+    color: ${theme.color.feedback.positive};
+`
+export const nicknameMessageWarningStyle =css`
+    ${theme.font.caption2};
+    color: ${theme.color.feedback.negative};
 `
