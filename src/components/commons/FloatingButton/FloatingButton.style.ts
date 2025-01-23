@@ -2,12 +2,10 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const WriteButton = css`
-  width: 12.2rem;
   height: 5.4rem;
   padding: 1.6rem 2.4rem;
-  background: rgba(112, 115, 124, 0.2);
+  background: ${theme.color.border.normal};
   border-radius: 5rem;
-  backdrop-filter: blur(30px);
   align-items: center;
   display: flex;
   color: ${theme.color.point.alternative};
@@ -15,6 +13,10 @@ export const WriteButton = css`
   gap: 1rem;
   cursor: pointer;
   position: fixed;
-  bottom: 2.5rem;
-  right: 3.9rem;
+  top: 72.3rem;
+  left: 127.7rem;
+`;
+
+export const iconStyle = css`
+  margin: 0.4rem;
 `;
