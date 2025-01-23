@@ -144,6 +144,12 @@ const theme = {
       line-height: 24px;
       letter-spacing: -0.108px;
     `,
+    label2: css`
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: -0.096px;
+    `,
   },
 };
 
