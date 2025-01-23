@@ -1,29 +1,37 @@
 import { PotIcon } from "@assets/svgs";
 import {
   buttonContainer,
+  countInputStyle,
   datePickerCalendarStyle,
   datePickerStyle,
   dividerStyle,
   formContainer,
   headContainer,
   iconStyle,
+  inputContainer,
   inputStyle,
   labelStyle,
   languageInputStyle,
   mainContainer,
+  partButtonContainer,
+  partContainer,
+  partStyle,
   StyledPickersLayout,
   textareaStyle,
   titleContainer,
   titleStyle,
 } from "./CreatePot.style";
-import { Button, CategoryButton, TextField } from "@components/index";
+import { Button, CategoryButton } from "@components/index";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CreatePot = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedParts, setSelectedParts] = useState<string[]>([]);
 
   const participation = ["온라인", "오프라인", "혼합"];
   const period = ["단기-1개월", "단기-2개월", "단기-3개월", "단기-6개월 이상"];
@@ -35,8 +43,28 @@ const CreatePot = () => {
     기획: "PM",
   };
 
+  const [visibleInputs, setVisibleInputs] = useState<{
+    [key: string]: boolean;
+  }>({});
+
   const handleButtonClick = (category: string) => {
     setSelectedCategory(category);
+  };
+
+  const handlePartClick = (partName: string) => {
+    setSelectedParts((prev) =>
+      prev.includes(partName)
+        ? prev.filter((item) => item !== partName)
+        : [...prev, partName]
+    );
+    setVisibleInputs((prev) => ({
+      ...prev,
+      [partName]: !prev[partName],
+    }));
+  };
+
+  const handleUploading = () => {
+    // navigate("/");
   };
 
   return (
@@ -46,7 +74,9 @@ const CreatePot = () => {
           <h2 css={titleStyle}>나의 팟 만들기</h2>
           <PotIcon css={iconStyle} />
         </div>
-        <Button style="action">게시물 업로드</Button>
+        <Button style="action" onClick={handleUploading}>
+          게시물 업로드
+        </Button>
       </div>
       <form css={formContainer}>
         <label css={labelStyle}>
@@ -96,18 +126,23 @@ const CreatePot = () => {
             ))}
           </div>
         </div>
-        <div css={labelStyle}>
+        <div css={partStyle}>
           모집 파트
-          <div css={buttonContainer}>
+          <div css={partContainer}>
             {Object.keys(partMap).map((partName) => (
-              <CategoryButton
-                key={partName}
-                style={partMap[partName]}
-                selected={selectedCategory === partMap[partName]}
-                onClick={() => handleButtonClick(partMap[partName])}
-              >
-                {partName}
-              </CategoryButton>
+              <div key={partName} css={partButtonContainer}>
+                <CategoryButton
+                  style={partMap[partName]}
+                  selected={selectedParts.includes(partName)}
+                  onClick={() => handlePartClick(partName)}
+                >
+                  {partName}
+                </CategoryButton>
+                <div css={inputContainer(visibleInputs[partName])}>
+                  <input css={countInputStyle} />
+                  <p>명</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
