@@ -15,7 +15,6 @@ import Badge from "./commons/Badge/Badge";
 import SearchInput from "./commons/SearchInput/SearchInput";
 import PotButton from "./commons/Button/PotButton/PotButton";
 import SignUpButton from "./commons/SignUpButton/SignupButton";
-import ApplicantCard from "./cards/ApplicantCard/ApplicantCard";
 import CheckBox from "./commons/Button/CheckBox/CheckBox";
 import ExplainModal from "./commons/Modal/ExplainModal/ExplainModal";
 import ArrowButton from "./commons/Button/ArrowButton/ArrowButton";
@@ -38,7 +37,6 @@ export {
     DdayBadge,
     PotButton,
     SignUpButton,
-    ApplicantCard,
     CheckBox,
     ExplainModal,
     ArrowButton,
