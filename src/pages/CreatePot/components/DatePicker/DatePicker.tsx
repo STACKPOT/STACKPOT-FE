@@ -5,7 +5,7 @@ import {
   datePickerCalendarStyle,
   datePickerStyle,
   StyledPickersLayout,
-} from "./DatePicker.style";
+} from "./DatePicker/DatePicker.style";
 
 const DatePicker = () => {
   return (

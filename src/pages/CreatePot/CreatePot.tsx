@@ -21,8 +21,8 @@ import {
 import { Button, CategoryButton } from "@components/index";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DatePicker from "./components/DatePicker";
 import { participation, partMap, period } from "@constants/categories";
+import { DatePicker } from "./components";
 
 const CreatePot = () => {
   const navigate = useNavigate();
