@@ -2,8 +2,6 @@ import { PotIcon } from "@assets/svgs";
 import {
   buttonContainer,
   countInputStyle,
-  datePickerCalendarStyle,
-  datePickerStyle,
   dividerStyle,
   formContainer,
   headContainer,
@@ -16,32 +14,20 @@ import {
   partButtonContainer,
   partContainer,
   partStyle,
-  StyledPickersLayout,
   textareaStyle,
   titleContainer,
   titleStyle,
 } from "./CreatePot.style";
 import { Button, CategoryButton } from "@components/index";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "./components/DatePicker";
+import { participation, partMap, period } from "@constants/categories";
 
 const CreatePot = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedParts, setSelectedParts] = useState<string[]>([]);
-
-  const participation = ["온라인", "오프라인", "혼합"];
-  const period = ["단기-1개월", "단기-2개월", "단기-3개월", "단기-6개월 이상"];
-
-  const partMap: { [key: string]: "FE" | "BE" | "PM" | "DE" } = {
-    프론트엔드: "FE",
-    백엔드: "BE",
-    디자인: "DE",
-    기획: "PM",
-  };
 
   const [visibleInputs, setVisibleInputs] = useState<{
     [key: string]: boolean;
@@ -102,14 +88,7 @@ const CreatePot = () => {
 
         <div css={labelStyle}>
           시작 날짜
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-              css={[datePickerCalendarStyle, datePickerStyle]}
-              slots={{
-                layout: StyledPickersLayout,
-              }}
-            />
-          </LocalizationProvider>
+          <DatePicker />
         </div>
         <div css={labelStyle}>
           예상 기간
