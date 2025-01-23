@@ -13,9 +13,13 @@ const TextField: React.FC<TextFieldProps> = ({
   supportingText,
   onTextChange,
 }) => {
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    onTextChange(e.target.value);
+  }
+
   return (
     <div css={containerStyle}>
-      <input value={children} placeholder={placeholder} css={inputStyle} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onTextChange(e.target.value)} />
+      <input value={children} placeholder={placeholder} css={inputStyle} onChange={handleChange} />
       <p css={textStyle}>{supportingText}</p>
     </div>
   );

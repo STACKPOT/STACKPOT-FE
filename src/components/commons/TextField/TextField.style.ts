@@ -20,7 +20,7 @@ export const inputStyle = css`
   box-sizing: border-box;
 
   &:focus {
-    border-color: ${theme.color.point.alternative};
+    border-color: ${theme.color.point.hero};
   }
 `;
 
