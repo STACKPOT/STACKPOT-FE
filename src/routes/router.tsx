@@ -14,8 +14,10 @@ import {
   AppliedPotPage,
   MadePotPage,
   CreatePotPage,
+  MyPotMainPage
 } from "@pages/index";
-import MyPot from "@pages/CreatePot/CreatePot";
+import MyPotStatusPage from "@pages/MyPot/MyPotStatus/MyPotStatus";
+import MyPotCalendarPage from "@pages/MyPot/MyPotCalendar/MyPotCalendar";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,14 @@ const router = createBrowserRouter([
           { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
       },
+      {
+        path: routes.myPot.base,
+        element: <MyPotMainPage />,
+        children: [
+          { index: true, element: <MyPotStatusPage /> },
+          { path: routes.myPot.calendar, element: <MyPotCalendarPage /> }
+        ]
+      }
     ],
   },
 ]);
