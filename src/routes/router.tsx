@@ -13,6 +13,7 @@ import {
   AllPotPage,
   AppliedPotPage,
   MadePotPage,
+  SignUpPage,
   CreatePotPage,
 } from "@pages/index";
 import MyPot from "@pages/CreatePot/CreatePot";
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: routes.searchResult,
         element: <SearchResultPage />,
+      },
+      {
+        path: routes.signUp,
+        element: <SignUpPage />,
       },
       {
         path: "/*",
