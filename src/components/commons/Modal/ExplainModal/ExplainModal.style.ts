@@ -2,8 +2,8 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const containerStyle = css`
-    width: 50rem;
-    padding: 2.6rem 2.4rem;
+    width: 54rem;
+    padding: 3.2rem;
     border-radius: 2.4rem;
     border: 1px solid ${theme.color.object.alternative};
     background-color: ${theme.color.base.white};
