@@ -24,7 +24,7 @@ const PotDetail = () => {
 
     const [isApplied, setIsApplied] = useState<boolean>(true);
     const [isMyPot, setIsMyPot] = useState<boolean>(true);
-    const [isFinished, setIsFinished] = useState<boolean>(false);
+    const [isFinished, setIsFinished] = useState<boolean>(true);
 
     const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string, kakaoId: string }[]>(memberListData);
     const [selectedApplicants, setSelectedApplicants] = useState<typeof applicants[0][]>([]);

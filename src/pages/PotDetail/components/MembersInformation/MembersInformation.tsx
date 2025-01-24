@@ -1,4 +1,4 @@
-import { ArrowButton } from "@components/index";
+import { ArrowButton, Button } from "@components/index";
 import { headerContainer, titleContainer, titleIconStyle, titleStyle, container, buttonStyle, listContainer, memberContainer, profileStyle, nicknameStyle, moreButtonWrapper } from "./MembersInformation.style"
 import { PotIcon } from "@assets/svgs";
 
@@ -15,7 +15,7 @@ const MemberInformation: React.FC<MemberInformationProps> = ({ potMembers, onCli
                     <h1 css={titleStyle}>나와 함께한 팀원들</h1>
                     <PotIcon css={titleIconStyle} />
                 </div>
-                <button css={buttonStyle} onClick={onShareLink}>링크 공유하기</button>
+                <Button style="action" onClick={onShareLink}>링크 공유하기</Button>
             </div>
             <div css={listContainer}>
                 {potMembers.map((member) =>
