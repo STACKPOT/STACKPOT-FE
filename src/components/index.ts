@@ -13,27 +13,25 @@ import MyPotTodoCard from "./cards/MyPotTodoCard/MyPotTodoCard";
 import DdayBadge from "./commons/Badge/DdayBadge/DdayBadge";
 import Badge from "./commons/Badge/Badge";
 import SearchInput from "./commons/SearchInput/SearchInput";
-import PotButton from "./commons/Button/PotButton/PotButton";
-import SignUpButton from "./commons/SignUpButton/SignupButton";
+import PotButton from "./commons/PotButton/PotButton";
 import ExplainModal from "./commons/Modal/ExplainModal/ExplainModal";
 
 export {
-    Button,
-    Header,
-    TextField,
-    SelectableField,
-    PostCard,
-    PotCard,
-    CategoryButton,
-    TaskCard,
-    MemberGroup,
-    EvaluationBadge,
-    Badge,
-    SearchInput,
-    StateBadge,
-    MyPotTodoCard,
-    DdayBadge,
-    PotButton,
-    SignUpButton,
-    ExplainModal,
+  Button,
+  Header,
+  TextField,
+  SelectableField,
+  PostCard,
+  PotCard,
+  CategoryButton,
+  TaskCard,
+  MemberGroup,
+  EvaluationBadge,
+  Badge,
+  SearchInput,
+  StateBadge,
+  MyPotTodoCard,
+  DdayBadge,
+  PotButton,
+  ExplainModal,
 };
