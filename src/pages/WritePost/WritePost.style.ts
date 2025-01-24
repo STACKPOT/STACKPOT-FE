@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const container = css`
-  padding: 4.4rem 0;
+  margin-top: 5.55rem;
   overflow: hidden;
   gap: 3.2rem;
   display: flex;

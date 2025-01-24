@@ -14,3 +14,4 @@ export { default as CloseIcon } from "./closeIcon.svg?react";
 export { default as CheckIcon } from "./check.svg?react";
 export { default as SearchIcon } from "./search.svg?react";
 export { default as PostBtnIcon } from "./postbtnIcon.svg?react";
+export { default as PencilIcon } from "./pencil.svg?react";
