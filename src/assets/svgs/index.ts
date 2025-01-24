@@ -13,6 +13,8 @@ export { default as SetUpIcon } from "./setUp.svg?react";
 export { default as CloseIcon } from "./closeIcon.svg?react";
 export { default as CheckIcon } from "./check.svg?react";
 export { default as SearchIcon } from "./search.svg?react";
+export { default as PostBtnIcon } from "./postbtnIcon.svg?react";
+export { default as PencilIcon } from "./pencil.svg?react";
 export { default as PartyIcon } from "./party.svg?react";
 export { default as PolygonIcon } from "./polygon.svg?react";
 export { default as FireIcon } from "./fire.svg?react";

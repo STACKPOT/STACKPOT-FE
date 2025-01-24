@@ -2,23 +2,22 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const container = css`
-  width: 16rem;
-  background: ${theme.color.base.white};
-  border-radius: 1.6rem;
-  border: 0.1rem solid ${theme.color.object.alternative};
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  width: 13.4rem;
+  height: 4.8rem;
 `;
 
 export const header = css`
-  width: 16rem;
+  border: 0.1rem solid ${theme.color.object.alternative};
+  border-radius: 2rem;
+  background: ${theme.color.base.white};
+  width: 100%;
   height: 4.8rem;
-  padding: 1.6rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
 `;
 
 export const headerText = css`
@@ -27,21 +26,30 @@ export const headerText = css`
 `;
 
 export const icon = css`
+  margin-left: 0.4rem;
   font-size: 1.4rem;
-  transition: transform 0.3s;
 `;
 
 export const dropdown = css`
-  width: 16rem;
+  position: absolute;
+  top: 5.2rem;
+  width: 100%;
+  border: 0.1rem solid ${theme.color.object.alternative};
+  border-radius: 1.6rem;
   background: ${theme.color.base.white};
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+  z-index: 10;
 `;
 
 export const option = (isSelected: boolean) => css`
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
+  padding: 1.2rem 0;
+  text-align: center;
   cursor: pointer;
-  border-top: 0.1rem solid ${theme.color.object.alternative};
+  border-bottom: 0.1rem solid ${theme.color.object.alternative};
   color: ${isSelected ? theme.color.point.hero : theme.color.point.gray};
   ${theme.font.caption3};
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 `;

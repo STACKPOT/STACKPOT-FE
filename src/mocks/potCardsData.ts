@@ -1,6 +1,9 @@
+import { MushRoomProfile } from "@assets/images";
+
 const potCardsData = [
   {
-    profileImage: "https://via.placeholder.com/50", 
+    id: 1,
+    profileImage: MushRoomProfile,
     nickname: "아이 마시는 버섯",
     dday: 5,
     title: "AI 자동화 챗봇 이틀 공부할 스터디원",
@@ -9,7 +12,8 @@ const potCardsData = [
     categories: ["기획", "백엔드"],
   },
   {
-    profileImage: "https://via.placeholder.com/50",
+    id: 2,
+    profileImage: MushRoomProfile,
     nickname: "코딩 마시는 버섯",
     dday: 3,
     title: "프론트엔드 스터디 모집",
@@ -18,7 +22,8 @@ const potCardsData = [
     categories: ["프론트엔드", "디자인"],
   },
   {
-    profileImage: "https://via.placeholder.com/50",
+    id: 3,
+    profileImage: MushRoomProfile,
     nickname: "몬스터 마시는 버섯",
     dday: 7,
     title: "UX/UI 디자인 워크샵 참가자 모집",
@@ -27,7 +32,8 @@ const potCardsData = [
     categories: ["디자인", "UX/UI"],
   },
   {
-    profileImage: "https://via.placeholder.com/50",
+    id: 4,
+    profileImage: MushRoomProfile,
     nickname: "데이터 분석 한숟갈 버섯",
     dday: 10,
     title: "데이터 분석 스터디 모집",
@@ -36,7 +42,8 @@ const potCardsData = [
     categories: ["데이터", "백엔드"],
   },
   {
-    profileImage: "https://via.placeholder.com/50",
+    id: 5,
+    profileImage: MushRoomProfile,
     nickname: "AI 한국자 버섯",
     dday: 2,
     title: "머신러닝 알고리즘 스터디",
@@ -45,7 +52,8 @@ const potCardsData = [
     categories: ["AI", "머신러닝"],
   },
   {
-    profileImage: "https://via.placeholder.com/50",
+    id: 6,
+    profileImage: MushRoomProfile,
     nickname: "하나 둘 셋 넷 버섯",
     dday: 12,
     title: "창의적인 기획 스터디 모집",
@@ -54,7 +62,8 @@ const potCardsData = [
     categories: ["기획", "트렌드"],
   },
   {
-    profileImage: "https://via.placeholder.com/50",
+    id: 7,
+    profileImage: MushRoomProfile,
     nickname: "프론트 노예 버섯",
     dday: 4,
     title: "리액트 성능 최적화 스터디",
@@ -63,7 +72,8 @@ const potCardsData = [
     categories: ["프론트엔드", "React"],
   },
   {
-    profileImage: "https://via.placeholder.com/50",
+    id: 8,
+    profileImage: MushRoomProfile,
     nickname: "스타트업 꿈나무 버섯",
     dday: 8,
     title: "스타트업 비즈니스 모델 스터디",
@@ -72,7 +82,8 @@ const potCardsData = [
     categories: ["기획", "비즈니스"],
   },
   {
-    profileImage: "https://via.placeholder.com/50",
+    id: 9,
+    profileImage: MushRoomProfile,
     nickname: "뎁섹옵 버섯",
     dday: 6,
     title: "클라우드 아키텍처 설계 스터디",
