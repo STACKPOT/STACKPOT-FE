@@ -1,27 +1,58 @@
 import { PotIcon } from "@assets/svgs";
 import {
   buttonContainer,
-  datePickerCalendarStyle,
-  datePickerStyle,
+  countInputStyle,
   dividerStyle,
   formContainer,
   headContainer,
   iconStyle,
+  inputContainer,
   inputStyle,
   labelStyle,
   languageInputStyle,
   mainContainer,
-  StyledPickersLayout,
+  partButtonContainer,
+  partContainer,
+  partStyle,
   textareaStyle,
   titleContainer,
   titleStyle,
 } from "./CreatePot.style";
-import { PotButton } from "@components/index";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDatePicker } from "@mui/x-date-pickers";
+import { Button, CategoryButton } from "@components/index";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { participation, partMap, period } from "@constants/categories";
+import { DatePicker } from "./components";
 
 const CreatePot = () => {
+  const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedParts, setSelectedParts] = useState<string[]>([]);
+
+  const [visibleInputs, setVisibleInputs] = useState<{
+    [key: string]: boolean;
+  }>({});
+
+  const handleButtonClick = (category: string) => {
+    setSelectedCategory(category);
+  };
+
+  const handlePartClick = (partName: string) => {
+    setSelectedParts((prev) =>
+      prev.includes(partName)
+        ? prev.filter((item) => item !== partName)
+        : [...prev, partName]
+    );
+    setVisibleInputs((prev) => ({
+      ...prev,
+      [partName]: !prev[partName],
+    }));
+  };
+
+  const handleUploading = () => {
+    // navigate("/");
+  };
+
   return (
     <main css={mainContainer}>
       <div css={headContainer}>
@@ -29,7 +60,9 @@ const CreatePot = () => {
           <h2 css={titleStyle}>나의 팟 만들기</h2>
           <PotIcon css={iconStyle} />
         </div>
-        <PotButton>게시물 업로드</PotButton>
+        <Button style="action" onClick={handleUploading}>
+          게시물 업로드
+        </Button>
       </div>
       <form css={formContainer}>
         <label css={labelStyle}>
@@ -40,39 +73,56 @@ const CreatePot = () => {
         <div css={labelStyle}>
           진행 방식
           <div css={buttonContainer}>
-            <PotButton>온라인</PotButton>
-            <PotButton>오프라인</PotButton>
-            <PotButton>혼합</PotButton>
+            {participation.map((participation) => (
+              <CategoryButton
+                key={participation}
+                style="pot"
+                selected={selectedCategory === participation}
+                onClick={handleButtonClick}
+              >
+                {participation}
+              </CategoryButton>
+            ))}
           </div>
         </div>
 
         <div css={labelStyle}>
           시작 날짜
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-              css={[datePickerCalendarStyle, datePickerStyle]}
-              slots={{
-                layout: StyledPickersLayout,
-              }}
-            />
-          </LocalizationProvider>
+          <DatePicker />
         </div>
         <div css={labelStyle}>
           예상 기간
           <div css={buttonContainer}>
-            <PotButton>단기-1개월</PotButton>
-            <PotButton>단기-2개월</PotButton>
-            <PotButton>단기-3개월</PotButton>
-            <PotButton>단기-6개월 이상</PotButton>
+            {period.map((period) => (
+              <CategoryButton
+                key={period}
+                style="pot"
+                selected={selectedCategory === period}
+                onClick={handleButtonClick}
+              >
+                {period}
+              </CategoryButton>
+            ))}
           </div>
         </div>
-        <div css={labelStyle}>
+        <div css={partStyle}>
           모집 파트
-          <div css={buttonContainer}>
-            <PotButton>프론트엔드</PotButton>
-            <PotButton>백엔드</PotButton>
-            <PotButton>디자인</PotButton>
-            <PotButton>기획</PotButton>
+          <div css={partContainer}>
+            {Object.keys(partMap).map((partName) => (
+              <div key={partName} css={partButtonContainer}>
+                <CategoryButton
+                  style={partMap[partName]}
+                  selected={selectedParts.includes(partName)}
+                  onClick={() => handlePartClick(partName)}
+                >
+                  {partName}
+                </CategoryButton>
+                <div css={inputContainer(visibleInputs[partName])}>
+                  <input css={countInputStyle} />
+                  <p>명</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <label css={labelStyle}>

@@ -13,8 +13,7 @@ import MyPotTodoCard from "./cards/MyPotTodoCard/MyPotTodoCard";
 import DdayBadge from "./commons/Badge/DdayBadge/DdayBadge";
 import Badge from "./commons/Badge/Badge";
 import SearchInput from "./commons/SearchInput/SearchInput";
-import PotButton from "./commons/Button/PotButton/PotButton";
-import SignUpButton from "./commons/SignUpButton/SignupButton";
+import PotButton from "./commons/PotButton/PotButton";
 import ExplainModal from "./commons/Modal/ExplainModal/ExplainModal";
 import Dropdown from "./commons/Dropdown/Dropdown";
 import FloatingButton from "./commons/FloatingButton/FloatingButton";
@@ -35,7 +34,6 @@ export {
   MyPotTodoCard,
   DdayBadge,
   PotButton,
-  SignUpButton,
   ExplainModal,
   Dropdown,
   FloatingButton,
