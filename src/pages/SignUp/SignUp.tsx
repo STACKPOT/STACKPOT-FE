@@ -1,5 +1,5 @@
 import { bodyContainer, container, contractSectionContainer, dividerStyle, headerContainer, headerStyle, mainContainer, categoryContainer } from "./SignUp.style"
-import { TextField } from "@components/index"
+import { Button, TextField } from "@components/index"
 import { useState } from "react";
 import { MushRoomProfile } from "@assets/images";
 import Contract from "./components/Contract";
@@ -10,8 +10,8 @@ import ContractModal from "./components/ContractModal";
 import ProfileModal from "./components/ProfileModal";
 
 const contracts = [
-    { agreed: false, preview: "서비스 약관에 동의합니다", title: "서비스 약관", content: `본 약관은 회원가입 시 동의한 것으로 간주되며, 서비스 이용 시 회원에게 적용됩니다\n본 약관은 회원가입 시 동의한 것으로 간주되며, 서비스 이용 시 회원에게 적용됩니다\n본 약관은 회원가입 시 동의한 것으로 간주되며, 서비스 이용 시 회원에게 적용됩니다\n` },
-    { agreed: false, preview: "개인정보 수집 및 이용에 동의합니다.", title: "개인정보 수집 및 이용 약관", content: "" }
+    { agreed: true, preview: "서비스 약관에 동의합니다", title: "서비스 약관", content: `본 약관은 회원가입 시 동의한 것으로 간주되며, 서비스 이용 시 회원에게 적용됩니다\n\n1. 회원 가입은 실명, 이메일 주소, 비밀번호를 포함한 필수 정보를 제공하여 완료됩니다.\n2. 회원은 제공한 정보의 정확성을 유지하고, 회사는 회원의 정보를 보호하기 위해 노력합니다.\n3. 회원은 서비스를 본래 용도에 맞게 사용해야 합니다.\n4. 팟이 시작될 경우, 원활한 진행을 위해 팀장에게 카카오 아이디가 보여집니다.\n5. 본 약관은 회원가입 시 동의한 것으로 간주되며, 서비스 이용 시 회원에게 적용됩니다.` },
+    { agreed: true, preview: "개인정보 수집 및 이용에 동의합니다.", title: "개인정보 수집 및 이용 약관", content: "1. STACKPOT(이하 \"회사\"라 칭함)은\n다음과 같은 개인 정보를 수집합니다." }
 ];
 
 const SignUp = () => {
@@ -42,17 +42,22 @@ const SignUp = () => {
         }
     }
     const handleMakeNickname = () => {
-        setNickname("닉네임");
+        setNickname("아아 마시는 버섯");
     }
-    const onKakaoIdChange = (value: string) => {
-        setKakaoId(value);
-    }
-
     const handleAgree = (contract: typeof contracts[0]) => {
         contract.agreed = !contract.agreed;
     }
     const handleContractDetail = (contract: typeof contracts[0]) => {
         setContractModal(contract)
+    }
+    const handleSignUp = () => {
+        if (selectedStacks.length > 0 &&
+            selectedInterests.length > 0 &&
+            nickname.length > 0 &&
+            kakaoId.length > 0 &&
+            contracts.every((contract) => contract.agreed === true)) {
+            setSignUpCompleteModal(true);
+        }
     }
     const handleSignUpComplete = () => {
         setSignUpCompleteModal(false);
@@ -95,7 +100,7 @@ const SignUp = () => {
                     <Section
                         title="카카오톡 아이디"
                         description={`팟이 시작될 경우, 원활한 진행을 위해 팀장에게 카카오 아이디가 보여집니다.\n카카오톡 아이디를 작성해 주세요. `} >
-                        <TextField placeholder="닉네임 생성하기를 눌러 주세요" />
+                        <TextField placeholder="닉네임 생성하기를 눌러 주세요" onTextChange={(text) => setKakaoId(text)}>{kakaoId}</TextField>
                     </Section>
                     <div css={contractSectionContainer}>
                         {contracts.map((contract) =>
@@ -106,7 +111,7 @@ const SignUp = () => {
                         )}
                     </div>
                 </div>
-                <button disabled={nickname.length < 1 || kakaoId.length < 1} onClick={() => setSignUpCompleteModal(true)}>가입하기</button>
+                <Button style="action" actionType="join" onClick={handleSignUp}>가입하기</Button>
             </div>
             {signUpCompleteModal &&
                 <ProfileModal

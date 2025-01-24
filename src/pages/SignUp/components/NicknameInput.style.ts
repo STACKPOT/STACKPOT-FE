@@ -14,7 +14,7 @@ export const inputContainer = css`
 export const inputStyle =css`
     width: 38rem;
     padding: 1.2rem 1.6rem;
-    border-radius: 0.8rem;
+    border-radius: 8px;
     ${theme.font.caption3};
     border: 1px solid ${theme.color.object.alternative};
     color: ${theme.color.point.hero};
@@ -47,7 +47,7 @@ export const buttonStyle =css`
     justify-content: center;
     align-items: center;
     padding: 0 2.4rem;
-    border-radius: 0.8rem;
+    border-radius: 8px;
     border: 1px solid ${theme.color.object.alternative};
     color: white;
     background-color: ${theme.color.point.navy};

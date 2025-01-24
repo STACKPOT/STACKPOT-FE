@@ -9,7 +9,7 @@ interface ContractProps {
     onCheck: () => void,
 }
 
-const Contract: React.FC<ContractProps> = ({ agreed, preview, title, content, onShowDetail, onCheck }: ContractProps) => {
+const Contract: React.FC<ContractProps> = ({ agreed, preview, onShowDetail, onCheck }: ContractProps) => {
     return (
         <div css={container}>
             <button onClick={onCheck}></button>

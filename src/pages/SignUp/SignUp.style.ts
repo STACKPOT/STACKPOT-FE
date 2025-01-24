@@ -16,7 +16,7 @@ export const mainContainer = css`
     width: 71.3rem;
     padding: 4.5rem 8.2rem;
     border: 1px solid ${theme.color.object.alternative};
-    border-radius: 0.8rem;
+    border-radius: 8px;
 `
 export const headerContainer = css`
     display: flex;

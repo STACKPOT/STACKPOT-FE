@@ -13,8 +13,8 @@ export const modalBackgroundContainer =css`
     background: rgba(0, 0, 0, 0.40);
 `
 export const contentStyle =css`
+    width: 100%;
     ${theme.font.caption3};
     color: ${theme.color.object.assistive};
-    text-align: center;
     white-space: pre-line;
 `
