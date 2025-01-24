@@ -1,12 +1,5 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
-import { styled } from "@mui/system";
-import {
-  DateView,
-  PickersLayout,
-  PickersLayoutProps,
-} from "@mui/x-date-pickers";
-import { Dayjs } from "dayjs";
 
 export const mainContainer = css`
   margin-top: 4.8rem;
@@ -104,33 +97,41 @@ export const textareaStyle = css`
   }
 `;
 
-export const datePickerStyle = css`
+export const inputContainer = (visible: boolean) => css`
   display: flex;
-  flex-grow: 1;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: 1.2rem;
+  opacity: ${visible ? 1 : 0};
+`;
+
+export const countInputStyle = css`
+  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 32px;
+  width: 4.7rem;
+  padding: 0.8rem;
+  text-align: center;
+  &:focus {
+    border: 1px solid ${theme.color.point.hero};
+    outline: none;
+  }
+`;
+
+export const partContainer = css`
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 1.6rem 1.2rem;
   margin-left: 3rem;
-  font-size: 1.6rem;
 `;
 
-export const datePickerCalendarStyle = css`
-  & .MuiInputBase-root {
-    font-size: 1.6rem;
-  }
-  & .MuiSvgIcon-root {
-    width: 2rem;
-    height: 2rem;
-  }
+export const partButtonContainer = css`
+  display: flex;
+  justify-content: space-between;
 `;
 
-export const StyledPickersLayout = styled(PickersLayout)<
-  PickersLayoutProps<Dayjs | Date | null, Dayjs | Date, DateView>
->({
-  ".MuiPickersCalendarHeader-label": {
-    fontSize: "1.6rem",
-  },
-  ".MuiDayCalendar-weekDayLabel": {
-    fontSize: "1.6rem",
-  },
-  ".MuiPickersDay-root": {
-    fontSize: "1.6rem",
-  },
-});
+export const partStyle = css`
+  display: flex;
+  color: ${theme.color.base.darkgray};
+  display: flex;
+  ${theme.font.caption3}
+`;

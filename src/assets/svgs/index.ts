@@ -17,3 +17,6 @@ export { default as LeftIcon } from "./chevronLeft.svg?react"
 export { default as PostIconRight } from "./postbtnRight.svg?react"
 export { default as PostIconLeft } from "./postbtnLeft.svg?react"
 export { default as ArrowLeftRoundIcon } from "./arrowLeftRound.svg?react"
+export { default as PartyIcon } from "./party.svg?react";
+export { default as PolygonIcon } from "./polygon.svg?react";
+export { default as FireIcon } from "./fire.svg?react";
