@@ -21,6 +21,7 @@ import {
   contentHeader,
   contentBody,
   iconStyle,
+  bannerStyle,
 } from "./Home.style";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -53,11 +54,7 @@ const Home: React.FC = () => {
 
   return (
     <main>
-      <img
-        src={Banner}
-        alt="Banner"
-        style={{ width: "90.8rem", height: "22.2rem", marginTop: "4.8rem" }}
-      />
+      <img css={bannerStyle} src={Banner} alt="Banner" />
       <div css={container}>
         <div css={content}>
           <div css={contentTitle}>
@@ -98,13 +95,15 @@ const Home: React.FC = () => {
             </div>
             <div css={buttonContainer}>
               {categories.map((categoryName) => (
-                <CategoryButton
-                  key={categoryName}
-                  selected={selectedCategory === categoryName}
-                  onClick={handleCategoryClick}
-                >
-                  {categoryName}
-                </CategoryButton>
+                <div key={categoryName} css={categories}>
+                  <CategoryButton
+                    style="pot"
+                    selected={selectedCategory === categoryName}
+                    onClick={handleCategoryClick}
+                  >
+                    {categoryName}
+                  </CategoryButton>
+                </div>
               ))}
               <div css={{ marginLeft: "auto" }}>
                 <Dropdown

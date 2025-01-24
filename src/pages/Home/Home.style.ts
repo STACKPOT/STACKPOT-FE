@@ -7,6 +7,13 @@ export const container = css`
   gap: 3.2rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const bannerStyle = css`
+  width: 90.8rem;
+  height: 22.2rem;
+  margin-top: 4.8rem;
 `;
 
 export const content = css`
@@ -23,7 +30,6 @@ export const contentTitle = css`
   ${theme.font.bodyBold2};
   color: ${theme.color.base.darkgray};
   display: flex;
-  align-items: center;
   gap: 1.6rem;
 `;
 export const iconStyle = css`
@@ -43,46 +49,31 @@ export const buttonContainer = css`
   flex-direction: row;
   gap: 1.3rem;
   align-items: center;
+  justify-content: right;
 `;
 
 export const swiperContainer = css`
   position: relative;
   overflow: hidden;
-  margin: 0 auto;
   width: 84.8rem;
   height: 29.9rem;
 
-  .swiper-wrapper {
-    display: flex;
-  }
-
-  .swiper-slide {
-    flex: 0 0 auto;
-    width: 27.2rem !important;
-  }
   .swiper-pagination {
     ${theme.font.body2}
     color: ${theme.color.object.assistive};
-    position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
-    z-index: 16;
     width: 5rem;
   }
 
   .swiper-button-next,
   .swiper-button-prev {
     opacity: 1 !important;
-    position: absolute;
     width: 4.4rem;
-    height: 4.4rem;
     background-color: ${theme.color.interactive.disable};
     border-radius: 50%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
     transform: translateY(290%);
   }
