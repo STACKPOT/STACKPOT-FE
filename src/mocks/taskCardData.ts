@@ -1,0 +1,95 @@
+import { MushRoomProfile, CarrotProfile, BroccoliProfile, OnionProfile } from "@assets/images";
+
+const taskCardkData = [
+  {
+    title: "와이어 프레임 완료하기",
+    content: "와이어 프레임 제작을 끝내고 넘기기 위한 작업입니다.",
+    dday: 3,
+    date: "2025. 1. 6",
+    profileImage: MushRoomProfile,
+    nickname: "자전거 타는 브로콜리",
+    groupProfileImages: [
+      MushRoomProfile,
+      CarrotProfile,
+      BroccoliProfile,
+      OnionProfile,
+    ],
+    status: "진행 전",
+    tag: "디자인",
+  },
+  {
+    title: "공통 컴포넌트 제작",
+    content: "피드 카드, 나의 피드 등을 제작하는 작업입니다.",
+    dday: 1,
+    date: "2025. 1. 5",
+    profileImage: CarrotProfile,
+    nickname: "웃는 당근",
+    groupProfileImages: [
+      MushRoomProfile,
+      CarrotProfile,
+      BroccoliProfile,
+    ],
+    status: "진행 중",
+    tag: "프론트엔드",
+  },
+  {
+    title: "캘린더 라이브러리 구현",
+    content: "캘린더 라이브러리 기반으로 일정 관리 기능을 구현합니다.",
+    dday: 5,
+    date: "2025. 1. 8",
+    profileImage: OnionProfile,
+    nickname: "성실한 양파",
+    groupProfileImages: [
+      MushRoomProfile,
+      BroccoliProfile,
+      OnionProfile,
+    ],
+    status: "진행 전",
+    tag: "라이브러리",
+  },
+  {
+    title: "회원가입 약관 문구 작성",
+    content: "회원가입 시 필요한 약관 문구를 작성하고 검토합니다.",
+    dday: 2,
+    date: "2025. 1. 7",
+    profileImage: CarrotProfile,
+    nickname: "웃는 당근",
+    groupProfileImages: [
+      CarrotProfile,
+      BroccoliProfile,
+    ],
+    status: "완료",
+    tag: "문서 작업",
+  },
+  {
+    title: "노션 회의록 작성",
+    content: "팀 회의 내용을 노션에 기록하고 요약합니다.",
+    dday: 4,
+    date: "2025. 1. 4",
+    profileImage: BroccoliProfile,
+    nickname: "부지런한 브로콜리",
+    groupProfileImages: [
+      MushRoomProfile,
+      CarrotProfile,
+    ],
+    status: "완료",
+    tag: "기록",
+  },
+  {
+    title: "화면 설계서 정리",
+    content: "화면 설계 초안을 정리하고 팀원들에게 공유합니다.",
+    dday: 2,
+    date: "2025. 1. 6",
+    profileImage: MushRoomProfile,
+    nickname: "자전거 타는 브로콜리",
+    groupProfileImages: [
+      MushRoomProfile,
+      CarrotProfile,
+      OnionProfile,
+    ],
+    status: "진행 중",
+    tag: "설계",
+  },
+];
+
+export default taskCardkData;

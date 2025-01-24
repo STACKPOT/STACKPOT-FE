@@ -16,3 +16,6 @@ export { default as SearchIcon } from "./search.svg?react";
 export { default as PartyIcon } from "./party.svg?react";
 export { default as PolygonIcon } from "./polygon.svg?react";
 export { default as FireIcon } from "./fire.svg?react";
+export { default as ArrowRightIcon } from "./arrowRightIcon.svg?react";
+export { default as ArrowLeftIcon } from "./arrowLeftIcon.svg?react";
+export { default as PlusButtonIcon } from "./plusButton.svg?react";
