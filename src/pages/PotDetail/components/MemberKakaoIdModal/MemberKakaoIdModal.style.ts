@@ -16,7 +16,7 @@ export const modalStyle = css`
     display: flex;
     width: 73.5rem;
     padding: 3.2rem;
-    border-radius: 2.4rem;
+    border-radius: 24px;
     border: 1px solid ${theme.color.object.alternative};
     flex-direction: column;
     align-items: center;

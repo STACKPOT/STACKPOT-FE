@@ -59,7 +59,7 @@ export const applicantContainer = css`
     align-items: center;
     gap: 1.6rem;
     padding: 2rem 3rem;
-    border-radius: 1.6rem;
+    border-radius: 16px;
     border: 1px solid ${theme.color.object.alternative};
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);;
 `
@@ -70,7 +70,7 @@ export const nicknameStyle = css`
 export const profileStyle = css`
     width: 4rem;
     height: 4rem;
-    border: 0.1rem solid ${theme.color.object.alternative};
+    border: 1px solid ${theme.color.object.alternative};
     border-radius: 50%;
 `
 export const moreButtonStyle = css`
