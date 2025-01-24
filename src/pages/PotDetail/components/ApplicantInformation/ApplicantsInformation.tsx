@@ -1,5 +1,5 @@
 import { PotIcon } from "@assets/svgs";
-import { container, descriptionStyle, titleBlueStyle, titleButtonContainer, titleContainer, titleIconStyle, titleStyle, headerContainer, listContainer, buttonStyle, applicantContainer, profileStyle, nicknameStyle } from "./ApplicantsInformation.style"
+import { container, descriptionStyle, titleBlueStyle, titleButtonContainer, titleContainer, titleIconStyle, titleStyle, headerContainer, listContainer, buttonStyle, applicantContainer, profileStyle, nicknameStyle, moreButtonStyle } from "./ApplicantsInformation.style"
 import { Button, CheckBox } from "@components/index";
 
 interface ApplicantsInformationProps {
@@ -24,7 +24,7 @@ const ApplicantsInformation: React.FC<ApplicantsInformationProps> = ({ applicant
             </div>
             <div css={listContainer}>
                 {applicants.map((applicant) =>
-                    <div css={applicantContainer}>
+                    <div css={applicantContainer} onClick={() => onClickApplicantMore(applicant)}>
                         <CheckBox selected={selectedApplicants.includes(applicant)} onSelect={() => onSelectApplicant(applicant)} />
                         <img css={profileStyle} src={applicant.profileImage} />
                         <p css={nicknameStyle}>{applicant.nickname}</p>

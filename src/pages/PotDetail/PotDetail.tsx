@@ -13,21 +13,24 @@ import ProfileModal from "./components/ProfileModal/ProfileModal";
 import PotHeader from "./components/PotHeader/PotHeader";
 import ProfileInformation from "./components/ProfileInformation/ProfileInformation";
 import MemberKakaoIdModal from "./components/MemberKakaoIdModal/MemberKakaoIdModal";
+import ApplyStackModal from "./components/ApplyStackModal/ApplyStackModal";
 
 const PotDetail = () => {
     const navigate = useNavigate();
 
     const [showStartModal, setShowStartModal] = useState<boolean>(false);
+    const [showApplyStackModal, setShowApplyStackModal] = useState<boolean>(false);
     const [showApplyModal, setShowApplyModal] = useState<boolean>(false);
     const [showCancelApplyModal, setShowCancelApplyModal] = useState<boolean>(false);
     const [showKakaoIdModal, setShowKakaoIdModal] = useState<boolean>(false);
 
-    const [isApplied, setIsApplied] = useState<boolean>(true);
+    const [isApplied, setIsApplied] = useState<boolean>(false);
     const [isMyPot, setIsMyPot] = useState<boolean>(true);
-    const [isFinished, setIsFinished] = useState<boolean>(true);
+    const [isFinished, setIsFinished] = useState<boolean>(false);
 
     const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string, kakaoId: string }[]>(memberListData);
     const [selectedApplicants, setSelectedApplicants] = useState<typeof applicants[0][]>([]);
+    const [selectedApplyStack, setSelectedApplyStack] = useState<string | null>(null);
     const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string } | null>(null);
     const [potMembers, setPotMembers] = useState<{ id: number; profileImage: string, nickname: string }[]>(potMembersData);
     const { potId } = useParams();
@@ -50,6 +53,12 @@ const PotDetail = () => {
         // todo: 링크 공유하기 로직
     }
 
+    const handleApplyNext = () => {
+        if (selectedApplyStack) {
+            setShowApplyStackModal(false);
+            setShowApplyModal(true);
+        }
+    }
     const handleApplyConfirm = () => {
         // todo: 지원하기 api
         setShowApplyModal(false)
@@ -63,6 +72,7 @@ const PotDetail = () => {
     const handleStartPotConfirm = () => {
         // todo: 팟 시작 api
         setShowStartModal(false);
+        setShowKakaoIdModal(true);
     }
     const handleShowProfileConfirm = () => {
         setShowProfileMember(null)
@@ -79,7 +89,7 @@ const PotDetail = () => {
                         isApplied={isApplied}
                         isFinished={isFinished}
                         onClickBack={() => navigate(-1)}
-                        onApply={() => setShowApplyModal(true)}
+                        onApply={() => setShowApplyStackModal(true)}
                         onCancelApply={() => setShowCancelApplyModal(true)}
                         onEdit={handleEdit} />
                     <ProfileInformation
@@ -137,6 +147,13 @@ const PotDetail = () => {
                     onButtonClick={handleShowProfileConfirm}
                     onCancelModal={() => setShowProfileMember(null)} />
             }
+            {showApplyStackModal &&
+                <ApplyStackModal
+                    selectedStack={selectedApplyStack}
+                    onSelectStack={(stack) => setSelectedApplyStack(stack)}
+                    onClickNext={handleApplyNext}
+                    onModalCancel={() => setShowApplyStackModal(false)} />
+            }
             {showApplyModal &&
                 <ProfileModal
                     type="apply"
@@ -147,7 +164,8 @@ const PotDetail = () => {
             }
             {showKakaoIdModal &&
                 <MemberKakaoIdModal
-                    members={selectedApplicants} />}
+                    members={selectedApplicants}
+                    onModalCancel={() => setShowKakaoIdModal(false)} />}
         </main>
     )
 }

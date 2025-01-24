@@ -1,16 +1,17 @@
 import { CloseIcon } from "@assets/svgs";
-import { closeIconStyle, descriptionStyle, kakaoIdStyle, memberContainer, membersContainer, modalStyle, nicknameStyle, profileStyle, titleStyle } from "./MemberKakaoIdModal.style";
+import { closeIconStyle, container, descriptionBlueStyle, descriptionStyle, kakaoIdStyle, memberContainer, membersContainer, modalStyle, nicknameStyle, profileStyle, titleStyle } from "./MemberKakaoIdModal.style";
 
 interface MemberKakaoIdModalProps {
     members: { id: number; profileImage: string, nickname: string, kakaoId: string }[];
+    onModalCancel: () => void;
 }
-const MemberKakaoIdModal: React.FC<MemberKakaoIdModalProps> = ({ members }: MemberKakaoIdModalProps) => {
+const MemberKakaoIdModal: React.FC<MemberKakaoIdModalProps> = ({ members, onModalCancel }: MemberKakaoIdModalProps) => {
     return (
         <div css={modalStyle}>
-            <CloseIcon css={closeIconStyle} />
-            <>
-                <h1 css={titleStyle}></h1>
-                <p css={descriptionStyle}></p>
+            <CloseIcon css={closeIconStyle} onClick={onModalCancel} />
+            <div css={container}>
+                <h1 css={titleStyle}>팀원 카카오톡 아이디를 알려드립니다.</h1>
+                <p css={descriptionStyle}>팀장인 <span css={descriptionBlueStyle}>아아 마시는 버섯</span>은 업무별 현황 페이지 상단에서 확인 가능합니다.</p>
                 <div css={membersContainer}>
                     {members.map((member) =>
                         <div css={memberContainer}>
@@ -19,7 +20,7 @@ const MemberKakaoIdModal: React.FC<MemberKakaoIdModalProps> = ({ members }: Memb
                             <p css={kakaoIdStyle}>{member.kakaoId}</p>
                         </div>)}
                 </div>
-            </>
+            </div>
         </div>
     )
 }

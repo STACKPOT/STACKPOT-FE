@@ -1,21 +1,10 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
-export const modalBackgroundStyle = css`
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.40);
-`
 export const memberListContainer = css`
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    grid-row-gap: 2rem;
+    grid-row-gap: 3.2rem;
 `
 export const memberContainer = css`
     display: flex;

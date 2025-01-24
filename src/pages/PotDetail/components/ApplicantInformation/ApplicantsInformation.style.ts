@@ -41,10 +41,8 @@ export const listContainer = css`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 3.2rem;
-    padding: 2rem 3rem;
-    border: 1px solid ${theme.color.object.alternative};
-    border-radius: 16px;
-    box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
+    grid-column-gap: 1.6rem;
+    cursor: pointer;
 `
 export const buttonStyle = css`
     height: 4.4rem;
@@ -58,16 +56,22 @@ export const buttonStyle = css`
 export const applicantContainer = css`
     display: inline-flex;
     align-items: center;
+    gap: 1.6rem;
+    padding: 2rem 3rem;
+    border-radius: 1.6rem;
+    border: 1px solid ${theme.color.object.alternative};
+    box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);;
 `
 export const nicknameStyle = css`
     ${theme.font.caption1}
     color: ${theme.color.object.assistive};
-    margin-left: 0.8rem;
 `
 export const profileStyle = css`
     width: 4rem;
     height: 4rem;
     border: 0.1rem solid ${theme.color.object.alternative};
     border-radius: 50%;
-    margin-left: 2rem;
+`
+export const moreButtonStyle=css`
+    cursor: pointer;
 `
