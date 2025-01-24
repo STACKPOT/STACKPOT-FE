@@ -12,7 +12,7 @@ const FloatingButton: React.FC = () => {
   return (
     <div css={WriteButton} onClick={handleClick}>
       <PencilIcon css={iconStyle} />
-      글쓰기
+      피드 작성
     </div>
   );
 };
