@@ -7,8 +7,12 @@ interface CheckBoxProps {
 }
 
 const CheckBox: React.FC<CheckBoxProps> = ({ selected, onSelect }: CheckBoxProps) => {
+    const handleSelect = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.stopPropagation();
+        onSelect();
+    }
     return (
-        <button css={checkBoxStyle} onClick={onSelect}>
+        <button css={checkBoxStyle} onClick={handleSelect}>
             {selected && <CheckIcon />}
         </button>
     )
