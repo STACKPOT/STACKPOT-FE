@@ -1,5 +1,5 @@
-import { ArrowButton, Button } from "@components/index";
-import { headerContainer, titleContainer, titleIconStyle, titleStyle, container, buttonStyle, listContainer, memberContainer, profileStyle, nicknameStyle, moreButtonWrapper } from "./MembersInformation.style"
+import { Button } from "@components/index";
+import { headerContainer, titleContainer, titleIconStyle, titleStyle, container, listContainer, memberContainer, profileStyle, nicknameStyle } from "./MembersInformation.style"
 import { PotIcon } from "@assets/svgs";
 
 interface MemberInformationProps {
@@ -20,11 +20,8 @@ const MemberInformation: React.FC<MemberInformationProps> = ({ potMembers, onCli
             <div css={listContainer}>
                 {potMembers.map((member) =>
                     <div css={memberContainer}>
-                        <img css={profileStyle} src={member.profileImage} />
+                        <img css={profileStyle} src={member.profileImage} onClick={() => onClickMore(member)} />
                         <p css={nicknameStyle}>{member.nickname}</p>
-                        <div css={moreButtonWrapper}>
-                            <ArrowButton direction="right" onClick={() => onClickMore(member)} />
-                        </div>
                     </div>
 
                 )}

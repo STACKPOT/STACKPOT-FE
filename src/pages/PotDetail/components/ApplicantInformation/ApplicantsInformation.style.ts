@@ -18,6 +18,7 @@ export const titleButtonContainer = css`
 export const titleContainer = css`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1.6rem;
 `
 export const titleStyle = css`
@@ -72,6 +73,6 @@ export const profileStyle = css`
     border: 0.1rem solid ${theme.color.object.alternative};
     border-radius: 50%;
 `
-export const moreButtonStyle=css`
+export const moreButtonStyle = css`
     cursor: pointer;
 `

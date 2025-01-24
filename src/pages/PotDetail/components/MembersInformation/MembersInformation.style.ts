@@ -13,6 +13,7 @@ export const headerContainer = css`
 export const titleContainer = css`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1.6rem;
 `
 export const titleStyle = css`
@@ -42,6 +43,7 @@ export const listContainer = css`
     gap: 2rem;
     border-radius: 16px;
     border: 1px solid ${theme.color.object.alternative};
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
 `
 export const memberContainer = css`
     display: flex;
@@ -52,12 +54,10 @@ export const profileStyle = css`
     height: 4rem;
     border: 1px solid ${theme.color.object.alternative};
     border-radius: 50%;
+    cursor: pointer;
 `
 export const nicknameStyle = css`
     ${theme.font.caption1};
     color: ${theme.color.object.assistive};
     margin-left: 2rem;
-`
-export const moreButtonWrapper = css`
-    margin-left: 0.8rem;
 `

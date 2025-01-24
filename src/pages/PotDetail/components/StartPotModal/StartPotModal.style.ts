@@ -4,6 +4,7 @@ import theme from "@styles/theme";
 export const memberListContainer = css`
     display: grid;
     grid-template-columns: repeat(2,1fr);
+    grid-column-gap: 4.8rem;
     grid-row-gap: 3.2rem;
 `
 export const memberContainer = css`
@@ -24,6 +25,6 @@ export const profileStyle = css`
     border-radius: 50%;
 `
 export const nicknameStyle = css`
-    ${theme.font.bodyBold1};
+    ${theme.font.caption1};
     color: ${theme.color.object.assistive};
 `

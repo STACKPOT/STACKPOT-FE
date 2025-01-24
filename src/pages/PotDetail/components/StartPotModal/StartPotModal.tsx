@@ -10,7 +10,7 @@ const StartPotModal: React.FC<StartPotModalProps> = ({ selectedApplicants, onSta
     return (
         <ExplainModal
             title="이 멤버들로 팟을 시작할까요?"
-            buttonText="마이페이지로 이동하기"
+            buttonText="팟 시작하기"
             onButtonClick={onStart}
             onCancel={onCancelModal}>
             <div css={memberListContainer}>
