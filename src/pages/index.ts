@@ -11,6 +11,7 @@ import AllPotPage from "./Pots/AllPot/AllPotPage";
 import AppliedPotPage from "./Pots/AppliedPot/AppliedPotPage";
 import MadePotPage from "./Pots/MadePot/MadePotPage";
 import CreatePotPage from "./CreatePot/CreatePot";
+import WritingPage from "./WritePost/WritePost";
 
 export {
   HomePage,
@@ -26,4 +27,5 @@ export {
   AppliedPotPage,
   MadePotPage,
   CreatePotPage,
+  WritingPage,
 };
