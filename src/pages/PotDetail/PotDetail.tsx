@@ -2,12 +2,10 @@ import { bodyContainerStyle, containerStyle, contentStyle, dividerStyle, modalBa
 import { MushRoomProfile } from "@assets/images";
 import Modal from "@components/commons/Modal/Modal";
 import memberListData from "mocks/memberListData";
-import potMembersData from "mocks/potMembers";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PotInformation from "./components/PotInformation/PotInformation";
 import ApplicantsInformation from "./components/ApplicantInformation/ApplicantsInformation";
-import MemberInformation from "./components/MembersInformation/MembersInformation";
 import StartPotModal from "./components/StartPotModal/StartPotModal";
 import ProfileModal from "./components/ProfileModal/ProfileModal";
 import PotHeader from "./components/PotHeader/PotHeader";
@@ -32,7 +30,6 @@ const PotDetail = () => {
     const [selectedApplicants, setSelectedApplicants] = useState<typeof applicants[0][]>([]);
     const [selectedApplyStack, setSelectedApplyStack] = useState<string | null>(null);
     const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string } | null>(null);
-    const [potMembers, setPotMembers] = useState<{ id: number; profileImage: string, nickname: string }[]>(potMembersData);
     const { potId } = useParams();
 
     const handleShowProfile = (member: typeof showProfileMember) => {
@@ -48,9 +45,6 @@ const PotDetail = () => {
         else {
             setSelectedApplicants((prev) => [...prev, applicant])
         }
-    }
-    const handleShareLink = () => {
-        // todo: 링크 공유하기 로직
     }
 
     const handleApplyNext = () => {
@@ -68,6 +62,11 @@ const PotDetail = () => {
         // todo: 지원 취소하기 api
         setIsApplied(false);
         setShowCancelApplyModal(false);
+    }
+    const handleShowStartPot = () => {
+        if (selectedApplicants.length > 0) {
+            setShowStartModal(true);
+        }
     }
     const handleStartPotConfirm = () => {
         // todo: 팟 시작 api
@@ -110,20 +109,14 @@ const PotDetail = () => {
                 <p css={contentStyle}>{`본문 내용입니다\n본문 내용입니다\n본문 내용입니다`}</p>
             </div>
 
-            {((isMyPot && applicants.length > 0) || isFinished) && <div css={dividerStyle} />}
+            {(isMyPot && applicants.length > 0 && !isFinished) && <div css={dividerStyle} />}
             {isMyPot && applicants.length > 0 && !isFinished &&
                 <ApplicantsInformation
                     applicants={applicants}
                     selectedApplicants={selectedApplicants}
                     onClickApplicantMore={(member) => handleShowProfile(member)}
                     onSelectApplicant={(member) => handleSelect(member)}
-                    onStartPot={() => setShowStartModal(true)} />
-            }
-            {isFinished &&
-                <MemberInformation
-                    potMembers={potMembers}
-                    onClickMore={(member) => handleShowProfile(member)}
-                    onShareLink={handleShareLink} />
+                    onStartPot={handleShowStartPot} />
             }
 
             {showCancelApplyModal &&
