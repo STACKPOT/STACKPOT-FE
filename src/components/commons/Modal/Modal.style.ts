@@ -2,6 +2,17 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const modalStyles = {
+  background: css`
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.40);
+  `,
   container: css`
     width: 50rem;
     height: 30.4rem;
