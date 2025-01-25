@@ -1,34 +1,24 @@
-import { DdayBadge, PotButton } from "@components/index";
-import { columnContainer, container, ddayBadgeWrapper, elementContainer, elementContentStyle, elementTitleStyle, nicknameStyle, potDetailContainer, profileContainer, profileStyle, titleContainer, titleStyle } from "./PotInformationCard.style";
+import { PotButton } from "@components/index";
+import { columnContainer, container, elementContainer, elementContentStyle, elementTitleStyle, potDetailContainer, titleContainer, titleStyle } from "./FinishedPotCard.style";
 
-interface PotInformationCardProps {
+interface FinishedPotCardProps {
     id: number;
-    type: "applied" | "my";
     title: string;
-    profileImage: string;
-    nickname: string;
-    dday: number;
     startDate: string;
     period: string;
     method: string;
     stacks: string;
     languages: string;
-    onButtonClick: (id: number) => void;
-    onCardClick: (id: number) => void;
+    onEdit: (id: number) => void;
+    onClickCard: (id: number) => void;
 }
-const PotInformationCard: React.FC<PotInformationCardProps> = ({ id, type, title, profileImage, nickname, dday, startDate, period, method, stacks, languages, onButtonClick, onCardClick }: PotInformationCardProps) => {
+
+const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, startDate, period, method, stacks, languages, onEdit, onClickCard }: FinishedPotCardProps) => {
     return (
-        <div css={container} onClick={() => onCardClick(id)}>
+        <div css={container} onClick={() => onClickCard(id)}>
             <div css={titleContainer}>
                 <h1 css={titleStyle}>{title}</h1>
-                <PotButton onClick={() => onButtonClick(id)}>{(type === "applied" && "지원 취소하기") || "팟 소개 수정"}</PotButton>
-            </div>
-            <div css={profileContainer}>
-                <img css={profileStyle} src={profileImage} />
-                <p css={nicknameStyle}>{nickname}</p>
-                <div css={ddayBadgeWrapper}>
-                    <DdayBadge days={dday} />
-                </div>
+                <PotButton onClick={() => onEdit(id)}>팟 소개 수정</PotButton>
             </div>
             <div css={potDetailContainer}>
                 <div css={columnContainer}>
@@ -56,8 +46,7 @@ const PotInformationCard: React.FC<PotInformationCardProps> = ({ id, type, title
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
-export default PotInformationCard;
+export default FinishedPotCard;
