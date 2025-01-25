@@ -21,3 +21,14 @@ export const potsContainer = css`
     flex-direction: column;
     gap: 3.2rem;
 `
+export const modalBackground = css`
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.40);
+`

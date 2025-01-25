@@ -1,5 +1,5 @@
 import { PotIcon } from "@assets/svgs"
-import { potIconStyle, potsContainer, titleContainer, titleStyle } from "./AppliedPotPage.style"
+import { modalBackground, potIconStyle, potsContainer, titleContainer, titleStyle } from "./AppliedPotPage.style"
 import { useState } from "react"
 import { PotInformationCard } from "../components";
 import appliedPotsData from "mocks/appliedPotsData";
@@ -45,12 +45,15 @@ const AppliedPotPage = () => {
             onCardClick={() => handlePotDetail(pot.id)} />)}
       </div>
       {cancelApplyPotId !== null &&
-        <Modal
-          title="지원을 취소하시겠어요?"
-          message="팟 게시자는 지원자를 팟에 추가할 수 없게 됩니다."
-          onConfirm={() => handleCancelApplyConfirm(cancelApplyPotId)}
-          onCancel={() => setCancelApplyPotId(null)}
-        />}
+        <div css={modalBackground}>
+          <Modal
+            title="지원을 취소하시겠어요?"
+            message="팟 게시자는 지원자를 팟에 추가할 수 없게 됩니다."
+            onConfirm={() => handleCancelApplyConfirm(cancelApplyPotId)}
+            onCancel={() => setCancelApplyPotId(null)}
+          />
+        </div>
+      }
     </>
   )
 }
