@@ -11,6 +11,9 @@ import AppliedPotPage from "./Pots/AppliedPot/AppliedPotPage";
 import MadePotPage from "./Pots/MadePot/MadePotPage";
 import CreatePotPage from "./CreatePot/CreatePot";
 import MyPotMainPage from "./MyPot/MyPotMain";
+import MyPotStatusPage from "./MyPot/MyPotStatus/MyPotStatus";
+import MyPotCalendarPage from "./MyPot/MyPotCalendar/MyPotCalendar";
+import TaskDetailPage from "./MyPot/MyPotStatus/TaskDetail/TaskDetail";
 
 export {
   HomePage,
@@ -26,4 +29,7 @@ export {
   MadePotPage,
   CreatePotPage,
   MyPotMainPage,
+  MyPotStatusPage,
+  MyPotCalendarPage,
+  TaskDetailPage,
 };

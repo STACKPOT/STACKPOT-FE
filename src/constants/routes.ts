@@ -10,6 +10,7 @@ const routes = {
   createPot: "/create-pot",
   myPot: {
     base: "/my-pot",
+    detail: "/my-pot/:taskId",
     calendar: "/my-pot/calendar",
   },
   setting: "/setting",

@@ -22,7 +22,8 @@ import { StateBadge, MyPotTodoCard, TaskCard } from "@components/index";
 import myPotTodoCardData from "mocks/myPotTodoCardData";
 import taskCardkData from "mocks/taskCardData";
 import { iconStyle } from "../MyPotMain.style";
-import theme from "@styles/theme";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1); 
@@ -52,6 +53,12 @@ const MyPotStatusPage: React.FC = () => {
     "진행 전": taskCardkData.filter((data) => data.status === "진행 전"),
     "진행 중": taskCardkData.filter((data) => data.status === "진행 중"),
     완료: taskCardkData.filter((data) => data.status === "완료"),
+  };
+
+  const navigate = useNavigate();
+
+  const handleTaskCardClick = (taskId: string) => {
+    navigate(`${routes.myPot.base}/${taskId}`);
   };
 
   return (
@@ -104,16 +111,7 @@ const MyPotStatusPage: React.FC = () => {
         {(Object.keys(todoStatusData) as TodoStatus[]).map((status, index) => (
           <div css={toDoStatusContainer} key={index}>
             <div css={toDoStatusHeader}>
-              <StateBadge
-                content={status}
-                color={
-                  status === "진행 전"
-                    ? theme.color.feedback.negative_transparent
-                    : status === "진행 중"
-                    ? theme.color.feedback.positive_transparent
-                    : theme.color.feedback.positive_blue_transparent
-                }
-              />
+              <StateBadge content={status}/>
               <PlusButtonIcon />
             </div>
       
@@ -128,6 +126,7 @@ const MyPotStatusPage: React.FC = () => {
                 profileImage={task.profileImage}
                 nickname={task.nickname}
                 groupProfileImages={task.groupProfileImages}
+                onClick={() => handleTaskCardClick(task.id)}
               />
             ))}
           </div>

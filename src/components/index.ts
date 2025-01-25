@@ -15,6 +15,7 @@ import Badge from "./commons/Badge/Badge";
 import SearchInput from "./commons/SearchInput/SearchInput";
 import PotButton from "./commons/PotButton/PotButton";
 import ExplainModal from "./commons/Modal/ExplainModal/ExplainModal";
+import FeedDropdown from "./commons/FeedDropdown/FeedDropdown";
 
 export {
   Button,
@@ -34,4 +35,5 @@ export {
   DdayBadge,
   PotButton,
   ExplainModal,
+  FeedDropdown,
 };
