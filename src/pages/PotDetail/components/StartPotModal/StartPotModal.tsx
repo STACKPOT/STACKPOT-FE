@@ -3,15 +3,21 @@ import { memberContainer, memberListContainer, nicknameStyle, profileStyle, stac
 
 interface StartPotModalProps {
     selectedApplicants: { id: number; profileImage: string; nickname: string, stack: string }[];
-    onStart: () => void;
+    onStartPotSuccess: () => void;
     onCancelModal: () => void;
 }
-const StartPotModal: React.FC<StartPotModalProps> = ({ selectedApplicants, onStart, onCancelModal }: StartPotModalProps) => {
+const StartPotModal: React.FC<StartPotModalProps> = ({ selectedApplicants, onStartPotSuccess, onCancelModal }: StartPotModalProps) => {
+    const handleStartPot = () => {
+        // todo: 팟 시작하기 api
+        onCancelModal();
+        onStartPotSuccess();
+    }
+
     return (
         <ExplainModal
             title="이 멤버들로 팟을 시작할까요?"
             buttonText="팟 시작하기"
-            onButtonClick={onStart}
+            onButtonClick={handleStartPot}
             onCancel={onCancelModal}>
             <div css={memberListContainer}>
                 <>

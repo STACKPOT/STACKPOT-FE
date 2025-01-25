@@ -4,7 +4,11 @@ import theme from "@styles/theme"
 export const container = css`
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 3.2rem;
+`
+export const dividerStyle = css`
+    height: 0.1rem;
+    background-color: ${theme.color.object.alternative};
 `
 export const headerContainer = css`
     display: flex;
