@@ -15,6 +15,7 @@ export const innerContaienr = css`
     gap: 0.8rem;
 `
 export const moreButtonContainer = css`
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -84,3 +85,6 @@ export const nicknameStyle = css`
     ${theme.font.caption1}
     color: ${theme.color.object.assistive};
 `
+export const clickableIconStyle = css`
+  cursor: pointer; 
+`;
