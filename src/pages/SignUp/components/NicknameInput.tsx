@@ -2,11 +2,11 @@ import { useState } from "react";
 import { inputContainer, buttonStyle, container, inputDoneStyle, inputStyle, messageStyle, messageWarningStyle } from "./NicknameInput.style"
 
 interface NicknameInputProps {
-    nickname: string,
-    onMakeNickname: () => void,
+    onMakeNickname: (newNickname: string) => void,
 }
 
-const NicknameInput: React.FC<NicknameInputProps> = ({ nickname, onMakeNickname }: NicknameInputProps) => {
+const NicknameInput: React.FC<NicknameInputProps> = ({ onMakeNickname }: NicknameInputProps) => {
+    const [nickname, setNickname] = useState<string>("");
     const [nicknameState, setNicknameState] = useState<boolean | null>(null);
 
     const onNicknameFocus = () => {
@@ -18,8 +18,10 @@ const NicknameInput: React.FC<NicknameInputProps> = ({ nickname, onMakeNickname 
         else setNicknameState(null)
     }
     const handleMakeNickname = () => {
-        onMakeNickname();
-        setNicknameState(true)
+        // todo: 닉네임 생성 api 호출
+        setNickname("아아 마시는 버섯");
+        setNicknameState(true);
+        onMakeNickname("아아 마시는 버섯");
     }
 
     return (
