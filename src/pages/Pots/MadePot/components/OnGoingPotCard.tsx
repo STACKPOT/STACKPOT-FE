@@ -9,9 +9,9 @@ interface OnGoingPotCardProps {
     onFinishPot: (id: number) => void;
     onClickCard: (id: number) => void;
 }
-const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({ id, title, memberList, onFinishPot }: OnGoingPotCardProps) => {
+const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({ id, title, memberList, onFinishPot, onClickCard }: OnGoingPotCardProps) => {
     return (
-        <div css={container}>
+        <div css={container} onClick={() => onClickCard(id)}>
             <div css={contentContainer}>
                 <MyPotIcon css={myPotIconStyle} />
                 <p css={titleStyle}>{title}</p>
