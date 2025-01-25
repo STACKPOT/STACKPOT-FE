@@ -18,3 +18,4 @@ export { default as PencilIcon } from "./pencil.svg?react";
 export { default as PartyIcon } from "./party.svg?react";
 export { default as PolygonIcon } from "./polygon.svg?react";
 export { default as FireIcon } from "./fire.svg?react";
+export { default as DropDownIcon } from "./dropdownIcon.svg?react";
