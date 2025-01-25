@@ -1,0 +1,63 @@
+import { DdayBadge, PotButton } from "@components/index";
+import { columnContainer, container, ddayBadgeWrapper, elementContainer, elementContentStyle, elementTitleStyle, nicknameStyle, potDetailContainer, profileContainer, profileStyle, titleContainer, titleStyle } from "./PotInformationCard.style";
+
+interface PotInformationCardProps {
+    id: number;
+    type: "applied" | "my";
+    title: string;
+    profileImage: string;
+    nickname: string;
+    dday: number;
+    startDate: string;
+    period: string;
+    method: string;
+    stacks: string;
+    languages: string;
+    onButtonClick: (id: number) => void;
+    onCardClick: (id: number) => void;
+}
+const PotInformationCard: React.FC<PotInformationCardProps> = ({ id, type, title, profileImage, nickname, dday, startDate, period, method, stacks, languages, onButtonClick, onCardClick }: PotInformationCardProps) => {
+    return (
+        <div css={container}>
+            <div css={titleContainer}>
+                <h1 css={titleStyle}>{title}</h1>
+                <PotButton onClick={() => onButtonClick(id)}>{(type === "applied" && "지원 취소하기") || "팟 소개 수정"}</PotButton>
+            </div>
+            <div css={profileContainer}>
+                <img css={profileStyle} src={profileImage} />
+                <p css={nicknameStyle}>{nickname}</p>
+                <div css={ddayBadgeWrapper}>
+                    <DdayBadge days={dday} />
+                </div>
+            </div>
+            <div css={potDetailContainer} onClick={() => onCardClick(id)}>
+                <div css={columnContainer}>
+                    <div css={elementContainer}>
+                        <p css={elementTitleStyle}>시작 날짜</p>
+                        <p css={elementContentStyle}>{startDate}</p>
+                    </div>
+                    <div css={elementContainer}>
+                        <p css={elementTitleStyle}>사용 언어</p>
+                        <p css={elementContentStyle}>{languages}</p>
+                    </div>
+                    <div css={elementContainer}>
+                        <p css={elementTitleStyle}>모집 분야</p>
+                        <p css={elementContentStyle}>{stacks}</p>
+                    </div>
+                </div>
+                <div css={columnContainer}>
+                    <div css={elementContainer}>
+                        <p css={elementTitleStyle}>진행 방식</p>
+                        <p css={elementContentStyle}>{method}</p>
+                    </div>
+                    <div css={elementContainer}>
+                        <p css={elementTitleStyle}>예상 기간</p>
+                        <p css={elementContentStyle}>{period}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    )
+}
+export default PotInformationCard;

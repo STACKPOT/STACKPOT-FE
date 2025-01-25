@@ -1,9 +1,58 @@
+import { PotIcon } from "@assets/svgs"
+import { potIconStyle, potsContainer, titleContainer, titleStyle } from "./AppliedPotPage.style"
+import { useState } from "react"
+import { PotInformationCard } from "../components";
+import appliedPotsData from "mocks/appliedPotsData";
+import Modal from "@components/commons/Modal/Modal";
 
 
 const AppliedPotPage = () => {
-    return (
-      <main>지원한 팟</main>
-    )
+  const [pots, setPots] = useState<{
+    id: number;
+    type: "applied" | "my";
+    title: string;
+    profileImage: string;
+    nickname: string;
+    dday: number;
+    startDate: string;
+    period: string;
+    method: string;
+    stacks: string;
+    languages: string;
+  }[]>(appliedPotsData);
+  const [cancelApplyPotId, setCancelApplyPotId] = useState<number | null>(null);
+
+  const handlePotDetail = (potId: number) => {
+    // todo: 팟 상세 페이지로 이동
   }
-  
-  export default AppliedPotPage
+  const handleCancelApplyConfirm = (potId: number) => {
+    // todo: 팟 지원 취소하기 api 호출
+    setCancelApplyPotId(null);
+    setPots((prev) => prev.filter((pot) => pot.id !== potId));
+  }
+
+  return (
+    <>
+      <div css={titleContainer}>
+        <h1 css={titleStyle}>내가 지원한 팟</h1>
+        <PotIcon css={potIconStyle} />
+      </div>
+      <div css={potsContainer}>
+        {pots.map((pot) =>
+          <PotInformationCard
+            {...pot}
+            onButtonClick={() => setCancelApplyPotId(pot.id)}
+            onCardClick={() => handlePotDetail(pot.id)} />)}
+      </div>
+      {cancelApplyPotId !== null &&
+        <Modal
+          title="지원을 취소하시겠어요?"
+          message="팟 게시자는 지원자를 팟에 추가할 수 없게 됩니다."
+          onConfirm={() => handleCancelApplyConfirm(cancelApplyPotId)}
+          onCancel={() => setCancelApplyPotId(null)}
+        />}
+    </>
+  )
+}
+
+export default AppliedPotPage
