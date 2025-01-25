@@ -18,6 +18,7 @@ import ExplainModal from "./commons/Modal/ExplainModal/ExplainModal";
 import Dropdown from "./commons/Dropdown/Dropdown";
 import FloatingButton from "./commons/FloatingButton/FloatingButton";
 import Modal from "./commons/Modal/Modal";
+import MyFeedDropdown from "./commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 export {
   Modal,
   Button,
@@ -39,4 +40,5 @@ export {
   ExplainModal,
   Dropdown,
   FloatingButton,
+  MyFeedDropdown,
 };
