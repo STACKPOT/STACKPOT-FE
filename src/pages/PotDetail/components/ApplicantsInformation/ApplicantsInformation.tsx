@@ -1,5 +1,5 @@
 import { PotIcon } from "@assets/svgs";
-import { container, descriptionStyle, titleBlueStyle, titleButtonContainer, titleContainer, titleIconStyle, titleStyle, headerContainer, listContainer, buttonStyle, applicantContainer, profileStyle, nicknameStyle, moreButtonStyle } from "./ApplicantsInformation.style"
+import { container, descriptionStyle, titleBlueStyle, titleButtonContainer, titleContainer, titleIconStyle, titleStyle, headerContainer, listContainer, applicantContainer, profileStyle, nicknameStyle } from "./ApplicantsInformation.style"
 import { Button, CheckBox } from "@components/index";
 
 interface ApplicantsInformationProps {

@@ -1,17 +1,10 @@
 import { bodyContainerStyle, containerStyle, contentStyle, dividerStyle, modalBackgroundStyle, sectionContainerStyle } from "./PotDetail.style";
 import { MushRoomProfile } from "@assets/images";
-import Modal from "@components/commons/Modal/Modal";
+import { Modal } from "@components/index";
 import memberListData from "mocks/memberListData";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PotInformation from "./components/PotInformation/PotInformation";
-import ApplicantsInformation from "./components/ApplicantInformation/ApplicantsInformation";
-import StartPotModal from "./components/StartPotModal/StartPotModal";
-import ProfileModal from "./components/ProfileModal/ProfileModal";
-import PotHeader from "./components/PotHeader/PotHeader";
-import ProfileInformation from "./components/ProfileInformation/ProfileInformation";
-import MemberKakaoIdModal from "./components/MemberKakaoIdModal/MemberKakaoIdModal";
-import ApplyStackModal from "./components/ApplyStackModal/ApplyStackModal";
+import { ApplicantsInformation, ApplyStackModal, MemberKakaoIdModal, PotHeader, PotInformation, ProfileInformation, ProfileModal, StartPotModal } from "./components";
 
 const PotDetail = () => {
     const navigate = useNavigate();

@@ -17,6 +17,7 @@ import CheckBox from "./commons/Button/CheckBox/CheckBox";
 import PotButton from "./commons/PotButton/PotButton";
 import ExplainModal from "./commons/Modal/ExplainModal/ExplainModal";
 import ArrowButton from "./commons/Button/ArrowButton/ArrowButton";
+import Modal from "./commons/Modal/Modal";
 
 export {
   Button,
@@ -38,4 +39,5 @@ export {
   ExplainModal,
   CheckBox,
   ArrowButton,
+  Modal,
 };
