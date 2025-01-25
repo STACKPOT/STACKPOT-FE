@@ -3,8 +3,8 @@ import theme from "@styles/theme";
 
 export const modalStyles = {
   container: css`
-    width: 50rem;
-    height: 30.4rem;
+    width: 54rem;
+    padding: 3.2rem;
     background: ${theme.color.base.white};
     box-shadow: 0rem 0rem 0.1rem rgba(0, 0, 0, 0.04);
     border: 0.1rem solid ${theme.color.object.alternative};
@@ -13,16 +13,13 @@ export const modalStyles = {
     flex-direction: column;
   `,
   header: css`
-    padding: 1.6rem 2.4rem;
     display: flex;
     justify-content: end;
     align-items: center;
     cursor: pointer;
   `,
   body: css`
-    width: 50rem;
-    height: 15rem;
-    padding: 1.6rem 2.4rem;
+    width: 47.6rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,13 +28,12 @@ export const modalStyles = {
   `,
 
   footer: css`
-    width: 50rem;
-    height: 9.4rem;
+    margin-top: 1.6rem;
+    height: 5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 0 1rem 0;
-    gap: 3rem;
+    gap: 1.6rem;
   `,
 
   button: (backgroundColor: string) => css`

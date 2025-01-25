@@ -26,6 +26,7 @@ const Modal: React.FC<ModalProps> = ({
           css={css`
             color: ${theme.color.base.darkgray};
             ${theme.font.title1};
+            margin-top: 1.6rem;
           `}
         >
           {title}
