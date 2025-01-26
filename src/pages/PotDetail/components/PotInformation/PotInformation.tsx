@@ -1,4 +1,4 @@
-import { columnContainer, elementContentStyle, elementContainer, elementTitleStyle, container } from "./PotInformation.style"
+import { elementContainer, elementContentStyle, elementTitleStyle, gridContainer } from "./PotInformation.style"
 
 interface PotInformationProps {
     startDate: string,
@@ -8,34 +8,23 @@ interface PotInformationProps {
     languages: string,
 }
 const PotInformation: React.FC<PotInformationProps> = ({ startDate, period, method, stacks, languages }: PotInformationProps) => {
+    const elementList: { title: string, content: string }[] = [
+        { title: "시작 날짜", content: startDate },
+        { title: "진행 방식", content: method },
+        { title: "사용 언어", content: languages },
+        { title: "예상 기간", content: period },
+        { title: "모집 파트", content: stacks },
+    ]
+
     return (
-        <div css={container}>
-            <div css={columnContainer}>
-                <div css={elementContainer}>
-                    <p css={elementTitleStyle}>시작 날짜</p>
-                    <p css={elementContentStyle}>{startDate}</p>
-                </div>
-                <div css={elementContainer}>
-                    <p css={elementTitleStyle}>사용 언어</p>
-                    <p css={elementContentStyle}>{languages}</p>
-                </div>
-                <div css={elementContainer}>
-                    <p css={elementTitleStyle}>모집 분야</p>
-                    <p css={elementContentStyle}>{stacks}</p>
-                </div>
 
-
-            </div>
-            <div css={columnContainer}>
+        <div css={gridContainer}>
+            {elementList.map((element) =>
                 <div css={elementContainer}>
-                    <p css={elementTitleStyle}>진행 방식</p>
-                    <p css={elementContentStyle}>{method}</p>
+                    <p css={elementTitleStyle}>{element.title}</p>
+                    <p css={elementContentStyle}>{element.content}</p>
                 </div>
-                <div css={elementContainer}>
-                    <p css={elementTitleStyle}>예상 기간</p>
-                    <p css={elementContentStyle}>{period}</p>
-                </div>
-            </div>
+            )}
         </div>
     )
 }

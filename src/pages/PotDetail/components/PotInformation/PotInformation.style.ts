@@ -1,14 +1,11 @@
 import { css } from "@emotion/react"
 import theme from "@styles/theme"
 
-export const container = css`
-    display: flex;
-    gap: 17rem;
-`
-export const columnContainer = css`
-    display: flex;
-    flex-direction: column;
-    gap: 1.8rem;
+export const gridContainer = css`
+    display: grid;
+    grid-template-columns: max-content max-content;
+    column-gap: 17rem;
+    row-gap: 1.8rem;
 `
 export const elementContainer = css`
     display: flex;
