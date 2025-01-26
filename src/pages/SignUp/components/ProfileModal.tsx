@@ -1,6 +1,5 @@
 import { ExplainModal } from "@components/index"
 import { modalBackgroundContainer, nicknameStyle, profileContainer, profileStyle } from "./ProfileModal.style"
-import { useNavigate } from "react-router-dom"
 
 interface ProfileModalProps {
     profile: string,
@@ -8,7 +7,6 @@ interface ProfileModalProps {
     onModalCancel: () => void,
 }
 const ProfileModal: React.FC<ProfileModalProps> = ({ profile, nickname, onModalCancel }: ProfileModalProps) => {
-    const navigate = useNavigate();
 
     const handleNavigateToHome = () => {
         onModalCancel();

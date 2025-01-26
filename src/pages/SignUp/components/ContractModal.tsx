@@ -1,5 +1,5 @@
 import { ExplainModal } from "@components/index";
-import { modalBackgroundContainer, contentStyle } from "./ContractModal.styel";
+import { modalBackgroundContainer, contentStyle } from "./ContractModal.style";
 
 interface ContractModalProps {
     title: string,
