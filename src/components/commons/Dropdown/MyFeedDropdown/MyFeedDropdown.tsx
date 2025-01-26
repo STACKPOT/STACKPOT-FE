@@ -1,4 +1,4 @@
-import { DropDownIcon } from "@assets/svgs";
+import { MeatballIcon } from "@assets/svgs";
 import React, { useState, useRef, useEffect } from "react";
 import {
   dropdownStyle,
@@ -29,9 +29,9 @@ const MyFeedDropdown: React.FC = () => {
 
   return (
     <div ref={ref}>
-      <DropDownIcon onClick={toggleDropdown}>
+      <MeatballIcon onClick={toggleDropdown}>
         {isDropdownOpen ? "Close Menu" : "Open Menu"}
-      </DropDownIcon>
+      </MeatballIcon>
       {isDropdownOpen && (
         <div css={dropdownStyle}>
           <div css={topContainer}>수정하기</div>
