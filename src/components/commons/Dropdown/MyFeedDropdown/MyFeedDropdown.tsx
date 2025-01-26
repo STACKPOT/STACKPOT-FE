@@ -8,11 +8,18 @@ import {
 import theme from "@styles/theme";
 
 interface FeedDropdownProps {
-  onEdit: () => void;
-  onDelete: () => void;
+  topMessage: string;
+  bottomMessage: string;
+  onTop: () => void;
+  onBottom: () => void;
 }
 
-const MyFeedDropdown: React.FC<FeedDropdownProps> = ({ onDelete, onEdit }) => {
+const MyFeedDropdown: React.FC<FeedDropdownProps> = ({
+  topMessage,
+  bottomMessage,
+  onTop,
+  onBottom,
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -45,17 +52,17 @@ const MyFeedDropdown: React.FC<FeedDropdownProps> = ({ onDelete, onEdit }) => {
               borderBottom: `1px solid ${theme.color.object.alternative}`,
               color: theme.color.point.gray,
             })}
-            onClick={onEdit}
+            onClick={onTop}
           >
-            수정하기
+            {topMessage}
           </div>
           <div
             css={containerStyle({
               color: theme.color.feedback.negative,
             })}
-            onClick={onDelete}
+            onClick={onBottom}
           >
-            삭제하기
+            {bottomMessage}
           </div>
         </div>
       )}
