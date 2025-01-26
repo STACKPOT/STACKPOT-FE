@@ -5,13 +5,10 @@ interface ProfileModalProps {
     type: "apply" | "member"
     profileImage: string;
     nickname: string;
-    stack?: string;
-    potId?: number;
-    memberId?: number;
     onButtonClick?: () => void;
     onCancelModal: () => void;
 }
-const ProfileModal: React.FC<ProfileModalProps> = ({ type, profileImage, nickname, stack, potId, memberId, onButtonClick, onCancelModal }: ProfileModalProps) => {
+const ProfileModal: React.FC<ProfileModalProps> = ({ type, profileImage, nickname, onButtonClick, onCancelModal }: ProfileModalProps) => {
     const handleApply = () => {
         // todo: 지원하기 api 호출
         onCancelModal();

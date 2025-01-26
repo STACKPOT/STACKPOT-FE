@@ -9,13 +9,13 @@ const PotDetail = () => {
     const [isMyPot, setIsMyPot] = useState<boolean>(false);
     const [isFinished, setIsFinished] = useState<boolean>(false);
     const { potId } = useParams();
+    const potIdNumber = Number(potId);
 
     return (
         <main css={containerStyle}>
             <div css={bodyContainerStyle}>
                 <div css={sectionContainerStyle}>
                     <PotHeader
-                        potId={Number(potId)}
                         title="제목을 길게 작성할 경우에는 이렇게 돼요 두줄은 이렇게 보여요"
                         isMyPot={isMyPot}
                         isApplied={isApplied}
@@ -40,8 +40,7 @@ const PotDetail = () => {
                 <p css={contentStyle}>{`본문 내용입니다\n본문 내용입니다\n본문 내용입니다`}</p>
             </div>
             {isMyPot && !isFinished &&
-                <ApplicantsInformation
-                    potId={Number(potId)} />
+                <ApplicantsInformation />
             }
         </main>
     )

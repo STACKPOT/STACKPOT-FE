@@ -8,7 +8,6 @@ import ProfileModal from "../ProfileModal/ProfileModal";
 import { MushRoomProfile } from "@assets/images";
 
 interface PotHeaderProps {
-    potId: number;
     title: string;
     isMyPot: boolean;
     isApplied: boolean;
@@ -16,13 +15,13 @@ interface PotHeaderProps {
     onApplySuccess: () => void;
     onCancelApplySuccess: () => void;
 }
-const PotHeader: React.FC<PotHeaderProps> = ({ potId, title, isMyPot, isApplied, isFinished, onApplySuccess, onCancelApplySuccess }: PotHeaderProps) => {
+const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, isFinished, onApplySuccess, onCancelApplySuccess }: PotHeaderProps) => {
     const navigate = useNavigate();
 
     const [showCancelApplyModal, setShowCancelApplyModal] = useState<boolean>(false);
     const [showApplyStackModal, setShowApplyStackModal] = useState<boolean>(false);
     const [showApplyModal, setShowApplyModal] = useState<boolean>(false);
-    
+
     const [selectedApplyStack, setSelectedApplyStack] = useState<string | null>(null);
 
     const handleEdit = () => {
@@ -78,8 +77,6 @@ const PotHeader: React.FC<PotHeaderProps> = ({ potId, title, isMyPot, isApplied,
                     type="apply"
                     profileImage={MushRoomProfile}
                     nickname="아아 마시는 버섯"
-                    potId={Number(potId)}
-                    stack={selectedApplyStack}
                     onButtonClick={handleApplyConfirm}
                     onCancelModal={() => setShowApplyModal(false)} />
             }

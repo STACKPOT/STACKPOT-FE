@@ -7,10 +7,9 @@ import ProfileModal from "../ProfileModal/ProfileModal";
 import MemberKakaoIdModal from "../MemberKakaoIdModal/MemberKakaoIdModal";
 import StartPotModal from "../StartPotModal/StartPotModal";
 
-interface ApplicantsInformationProps {
-    potId: number;
-}
-const ApplicantsInformation: React.FC<ApplicantsInformationProps> = ({ potId }: ApplicantsInformationProps) => {
+interface ApplicantsInformationProps { }
+
+const ApplicantsInformation: React.FC<ApplicantsInformationProps> = () => {
     const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string, kakaoId: string }[]>(memberListData);
     const [selectedApplicants, setSelectedApplicants] = useState<typeof applicants>([]);
     const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string } | null>(null);
@@ -62,7 +61,6 @@ const ApplicantsInformation: React.FC<ApplicantsInformationProps> = ({ potId }: 
                     type="member"
                     profileImage={showProfileMember.profileImage}
                     nickname={showProfileMember.nickname}
-                    memberId={showProfileMember.id}
                     onCancelModal={() => setShowProfileMember(null)} />
             }
             {showStartModal &&
