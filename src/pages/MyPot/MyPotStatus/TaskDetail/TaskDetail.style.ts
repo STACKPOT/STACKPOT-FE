@@ -33,6 +33,16 @@ export const titleStyle = css`
   max-width: 100%; 
 `;
 
+export const iconStyle = css`
+  width: 2.4rem;
+  height: 2.4rem;
+`
+
+export const prevButtonStyle = css`
+  all: unset; 
+  cursor: pointer;
+`
+
 export const profileContainer = css`
   display: flex;
   width: 100%;

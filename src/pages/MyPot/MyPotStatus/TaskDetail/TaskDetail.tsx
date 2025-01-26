@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   leftContainer,
   profileContainer,
@@ -17,23 +17,33 @@ import {
   contributorCard,
   contributorInner,
   contributorNicknameStyle,
+  iconStyle,
+  prevButtonStyle,
 } from "./TaskDetail.style";
 import taskCardkData from "mocks/taskCardData";
 import { DdayBadge, StateBadge } from "@components/index";
 import { CalendarIcon, MeatballIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
-import { headerStyle, iconStyle } from "@pages/MyPot/MyPotMain.style";
+import { headerStyle } from "@pages/MyPot/MyPotMain.style";
 import { statusTextStyle } from "../MyPotStatus.style";
+import routes from "@constants/routes";
 
 const TaskDetailPage: React.FC = () => {
   const { taskId } = useParams<{ taskId: string }>();
   const task = taskCardkData.find((item) => item.id === taskId);
 
+  const navigate = useNavigate();
+
+  const handlePrev = () => {
+    navigate(`${routes.myPot.base}`);
+  };
+
+
   return (
     <>
       <div css={titleContainer}>
         <div css={leftContainer}>
-          <ArrowLeftIcon />
+          <button onClick={()=>handlePrev()} css={prevButtonStyle}><ArrowLeftIcon css={iconStyle} /></button>
           {task?.title && <div css={titleStyle}>{task.title}</div>}
         </div>
         <div css={rightContainer}>
