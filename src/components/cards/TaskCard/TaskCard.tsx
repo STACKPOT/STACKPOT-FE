@@ -7,7 +7,7 @@ import {
   contentContainer,
   contentTextStyle,
   dateTextStyle,
-  innerContaienr,
+  innerContainer,
   lineStyle,
   moreButtonContainer,
   nicknameStyle,
@@ -75,7 +75,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
 
   return (
     <div css={cardStyle} onClick={onClick}>
-      <div css={innerContaienr}>
+      <div css={innerContainer}>
         <div css={moreButtonContainer} ref={dropdownRef}>
           <div css={badgeContainer}>
             <DdayBadge days={dday} />

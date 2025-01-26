@@ -22,9 +22,8 @@ const MyPotMainPage: React.FC = () => {
       <div css={tabsContainer}>
         {tabs.map((tab) => {
           const isActive =
-            location.pathname === tab.path ||
+            location.pathname === tab.path || 
             (tab.path === routes.myPot.base && location.pathname.startsWith(`${routes.myPot.base}/`));
-
           return (
             <NavLink
               key={tab.path}
