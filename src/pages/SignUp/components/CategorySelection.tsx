@@ -1,6 +1,7 @@
 import { CategoryButton } from "@components/index";
 import { categoriesContainer, container, titleStyle } from "./CategorySelection.style";
 import { useState } from "react";
+import { interests, partMap } from "@constants/categories";
 
 interface CategorySelectionProps {
     type: "stack" | "interest";
@@ -8,11 +9,8 @@ interface CategorySelectionProps {
     onSelect: (selectedCategory: string | null) => void;
 }
 
-const stacks = ["프론트엔드", "백엔드", "디자인", "기획"];
-const interests = ["사이드 프로젝트", "공모전", "창업", "네트워킹 행사"];
-
 const CategorySelection: React.FC<CategorySelectionProps> = ({ type, title, onSelect }: CategorySelectionProps) => {
-    const categories = (type === "stack") ? stacks : interests;
+    const categories = (type === "stack") ? Object.keys(partMap) : interests;
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
     const handleSelectCategory = (category: string) => {

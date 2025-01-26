@@ -15,7 +15,7 @@ const Section: React.FC<SectionProps> = ({ children, title, description }: Secti
                 <PotIcon css={potIconStyle} />
             </div>
             <div css={bodyContainer}>
-                <div css={descriptionStyle}>{description} </div>
+                <p css={descriptionStyle}>{description} </p>
                 {children}
             </div>
         </div>

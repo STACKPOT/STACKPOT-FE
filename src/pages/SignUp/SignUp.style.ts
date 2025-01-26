@@ -2,8 +2,6 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const container = css`
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     padding: 6.4rem 0;
@@ -23,7 +21,7 @@ export const headerContainer = css`
     flex-direction: column;
     gap: 1.2rem;
 `
-export const headerStyle =css`
+export const headerStyle = css`
     ${theme.font.bodyBold2}
     color: ${theme.color.base.darkgray};
 `
@@ -36,7 +34,7 @@ export const bodyContainer = css`
     flex-direction: column;
     gap: 5.6rem;
 `
-export const categoryContainer =css`
+export const categoryContainer = css`
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
