@@ -7,12 +7,21 @@ export const cardStyle = css`
     border: 0.1rem solid ${theme.color.object.alternative};
     background-color: ${theme.color.base.white};
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
+    height: 21rem;
+    cursor: pointer; 
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0px 8px 16px 0px rgba(13, 10, 44, 0.12); 
+    }
 `
-export const innerContaienr = css`
+export const innerContainer = css`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.8rem;
+    height: 100%;
 `
 export const moreButtonContainer = css`
     position: relative;
@@ -41,6 +50,7 @@ export const titleTextStyle = css`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
 `
 export const contentTextStyle = css`
     ${theme.font.caption2}
@@ -50,6 +60,7 @@ export const contentTextStyle = css`
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    min-height: calc(14px * 2);
 `
 
 export const dateTextStyle = css`
