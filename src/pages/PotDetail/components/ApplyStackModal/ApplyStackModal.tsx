@@ -1,6 +1,7 @@
 import { CategoryButton, ExplainModal } from "@components/index";
 import { container } from "./ApplyStackModal.style";
 import { useState } from "react";
+import { partMap } from "@constants/categories";
 
 interface ApplyStackModalProps {
     onClickNext: (stack: string) => void;
@@ -23,10 +24,9 @@ const ApplyStackModal: React.FC<ApplyStackModalProps> = ({ onClickNext, onModalC
             onButtonClick={handleNext}
             onCancel={onModalCancel}>
             <div css={container}>
-                <CategoryButton style="FE" onClick={() => setSelectedStack("프론트엔드")} selected={selectedStack === "프론트엔드"}>프론트엔드</CategoryButton>
-                <CategoryButton style="BE" onClick={() => setSelectedStack("백엔드")} selected={selectedStack === "백엔드"}>백엔드</CategoryButton>
-                <CategoryButton style="DE" onClick={() => setSelectedStack("디자인")} selected={selectedStack === "디자인"}>디자인</CategoryButton>
-                <CategoryButton style="PM" onClick={() => setSelectedStack("기획")} selected={selectedStack === "기획"}>기획</CategoryButton>
+                {Object.keys(partMap).map((part) =>
+                    <CategoryButton style={partMap[part]} onClick={() => setSelectedStack(part)} selected={selectedStack === part}>{part}</CategoryButton>
+                )}
             </div>
         </ExplainModal>
     )
