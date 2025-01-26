@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
-export const containerStyle = css`
+export const containerStyle = (gap: string) => css`
     width: 54rem;
     padding: 3.2rem;
     border-radius: 2.4rem;
@@ -11,17 +11,17 @@ export const containerStyle = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.2rem;
+    gap: ${gap};
 `
 export const closeButtonStyle = css`
     margin-left: auto;
     cursor: pointer;
 `
-export const contentButtonContainerStyle = css`
+export const contentButtonContainerStyle = (gap: string) => css`
     padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 4.8rem;
+    gap: ${gap};
     align-items: center;
 `
 export const titleContentContainerStyle = css`
@@ -37,7 +37,7 @@ export const titleStyle = css`
     white-space: pre-wrap;
     text-align: center;
 `
-export const buttonStyle =css`
+export const buttonStyle = css`
     height: 5rem;
     width: 42.9rem;
     ${theme.font.captionBold1}
