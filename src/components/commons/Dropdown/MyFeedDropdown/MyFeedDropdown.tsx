@@ -1,12 +1,18 @@
 import { MeatballIcon } from "@assets/svgs";
 import React, { useState, useRef, useEffect } from "react";
 import {
+  containerStyle,
   dropdownStyle,
-  topContainer,
-  underContainer,
+  iconStyle,
 } from "./MyFeedDropdown.style";
+import theme from "@styles/theme";
 
-const MyFeedDropdown: React.FC = () => {
+interface FeedDropdownProps {
+  onEdit: () => void;
+  onDelete: () => void;
+}
+
+const MyFeedDropdown: React.FC<FeedDropdownProps> = ({ onDelete, onEdit }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -29,13 +35,28 @@ const MyFeedDropdown: React.FC = () => {
 
   return (
     <div ref={ref}>
-      <MeatballIcon onClick={toggleDropdown}>
+      <MeatballIcon css={iconStyle} onClick={toggleDropdown}>
         {isDropdownOpen ? "Close Menu" : "Open Menu"}
       </MeatballIcon>
       {isDropdownOpen && (
         <div css={dropdownStyle}>
-          <div css={topContainer}>수정하기</div>
-          <div css={underContainer}>삭제하기</div>
+          <div
+            css={containerStyle({
+              borderBottom: `1px solid ${theme.color.object.alternative}`,
+              color: theme.color.point.gray,
+            })}
+            onClick={onEdit}
+          >
+            수정하기
+          </div>
+          <div
+            css={containerStyle({
+              color: theme.color.feedback.negative,
+            })}
+            onClick={onDelete}
+          >
+            삭제하기
+          </div>
         </div>
       )}
     </div>

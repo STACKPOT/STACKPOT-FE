@@ -10,21 +10,20 @@ export const dropdownStyle = css`
   position: fixed;
 `;
 
-export const topContainer = css`
-  padding: 1rem;
-  border-bottom: 1px solid ${theme.color.object.alternative};
-  color: ${theme.color.point.gray};
-  ${theme.font.caption3};
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const iconStyle = css`
+  cursor: pointer;
 `;
 
-export const underContainer = css`
+export const containerStyle = (props: {
+  borderBottom?: string;
+  color: string;
+}) => css`
   padding: 1rem;
-  color: ${theme.color.feedback.negative};
+  ${props.borderBottom ? `border-bottom: ${props.borderBottom};` : ""}
+  color: ${props.color};
   ${theme.font.caption3};
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
