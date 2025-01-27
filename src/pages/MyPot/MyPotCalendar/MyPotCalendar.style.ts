@@ -15,6 +15,11 @@ export const titleContainer = css`
   margin: 4.8rem 0;
 `;
 
+export const taskContainerStyle = css`
+  height: 46.4rem;
+  overflow-y: auto;
+`;
+
 export const titleStyle = css`
   display: flex;
   gap: 7.4rem;
@@ -53,47 +58,11 @@ export const dividerStyle = css`
   margin: 1.6rem 0;
 `;
 
-export const taskBoxStyle = css`
-  padding: 0.8rem 0;
+export const noticeStyle = css`
+  ${theme.font.title1};
+  color: ${theme.color.interactive.inactive};
   display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-`;
-
-export const taskTitleContainer = css`
-  display: flex;
-  gap: 1.2rem;
+  justify-content: center;
   align-items: center;
-`;
-
-export const contentStyle = css`
-  ${theme.font.caption1};
-  color: ${theme.color.object.assistive};
-  height: 2.7rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-`;
-
-export const taskTitleStyle = css`
-  ${theme.font.bodyBold1}
-  color: ${theme.color.base.darkgray}
-`;
-
-export const memberContainer = css`
-  display: flex;
-  justify-content: space-between;
-`;
-
-export const profileContainer = css`
-  display: flex;
-  gap: 1.2rem;
-  align-items: center;
-`;
-
-export const nickNameStyle = css`
-  ${theme.font.caption1}
-  color: ${theme.color.object.assistive}
+  height: 100%;
 `;

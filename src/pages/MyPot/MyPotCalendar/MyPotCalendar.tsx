@@ -4,24 +4,17 @@ import { Datepicker, setOptions, localeKo } from "@mobiscroll/react";
 import {
   calendarStyle,
   container,
-  contentStyle,
   dateStyle,
   dividerStyle,
   mainContainer,
-  memberContainer,
-  nickNameStyle,
-  profileContainer,
-  taskBoxStyle,
+  noticeStyle,
   taskContainer,
-  taskTitleContainer,
-  taskTitleStyle,
+  taskContainerStyle,
   titleContainer,
   titleStyle,
 } from "./MyPotCalendar.style";
-import { DdayBadge, MemberGroup } from "@components/index";
-import { Profile } from "@assets/svgs";
-import { CarrotProfile, MushRoomProfile, OnionProfile } from "@assets/images";
-
+import { TaskBox } from "./components";
+import { taskData } from "mocks/taskData";
 setOptions({
   locale: localeKo,
   themeVariant: "light",
@@ -80,32 +73,13 @@ const MyPotCalendar = () => {
               : ""}
           </p>
           <div css={dividerStyle} />
-          <div css={taskBoxStyle}>
-            <div css={taskTitleContainer}>
-              <DdayBadge days={3} />
-              <p css={taskTitleStyle}>와이어프레임 완료</p>
-            </div>
-            <p css={contentStyle}>
-              와이어 프레임 제작해서 넘기기 두줄와이어 프레임 제작해서 넘기기
-              두줄와이어 프레임 제작해서 넘기기 두줄와이어 프레임 제작와이어
-              프레임 제작해서 넘기기 두줄와이어 프레임 제작해서 넘기기
-              두줄와이어 프레임 제작해서 넘기기 두줄와이어 프레임 제작...
-            </p>
-            <div css={memberContainer}>
-              <div css={profileContainer}>
-                <Profile />
-                <p css={nickNameStyle}>닉네임</p>
-              </div>
-              <MemberGroup
-                profileImageList={[
-                  MushRoomProfile,
-                  CarrotProfile,
-                  OnionProfile,
-                ]}
-              />
-            </div>
+          <div css={taskContainerStyle}>
+            {taskData.length === 0 ? (
+              <p css={noticeStyle}>일정이 없습니다</p>
+            ) : (
+              taskData.map((task) => <TaskBox task={task} key={task.id} />)
+            )}
           </div>
-          <div css={dividerStyle} />
         </div>
       </div>
     </main>
