@@ -577,6 +577,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@mobiscroll/react@npm:@mobiscroll/react-next-trial@5.33.0":
+  version "5.33.0"
+  resolved "https://npm.mobiscroll.com/@mobiscroll%2freact-next-trial/-/react-next-trial-5.33.0.tgz#7018799df238c551d75d6723e06c671551127912"
+  integrity sha512-WpTiaAkpRCEOlHdGmTX90VY/CSIi6pw7HYC4UZEgZBKFmWFnY3zBOGcbDLh2rLpFcmKvMaZIKpKLlS4zNqdImw==
+
 "@mui/core-downloads-tracker@^6.4.0":
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-6.4.0.tgz#b83f3f390d4e692a4f86f413c32f3131da38d492"
@@ -1270,11 +1275,6 @@ cli-width@^1.0.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-1.1.1.tgz#a4d293ef67ebb7b88d4a4d42c0ccf00c4d1e366d"
   integrity sha512-eMU2akIeEIkCxGXUNmDnJq1KzOIiPnJ+rKqRe6hcxE3vIOPvpMrBYOn/Bl7zNlYJj/zQxXquAnozHUCf9Whnsg==
-
-clsx@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/clsx/-/clsx-2.1.1.tgz#eed397c9fd8bd882bfb18deab7102049a2f32999"
-  integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
 
 clsx@^2.1.1:
   version "2.1.1"
