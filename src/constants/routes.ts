@@ -14,6 +14,7 @@ const routes = {
   search: "/search",
   searchResult: "/search-result",
   potDetail: "/pot/:potId",
+  callback: "/callback"
 } as const;
 
 export default routes;

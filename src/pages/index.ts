@@ -12,6 +12,7 @@ import AppliedPotPage from "./Pots/AppliedPot/AppliedPotPage";
 import MadePotPage from "./Pots/MadePot/MadePotPage";
 import CreatePotPage from "./CreatePot/CreatePot";
 import WritingPage from "./WritePost/WritePost";
+import CallbackPage from "./Callback/Callback";
 
 export {
   HomePage,
@@ -28,4 +29,5 @@ export {
   MadePotPage,
   CreatePotPage,
   WritingPage,
+  CallbackPage,
 };

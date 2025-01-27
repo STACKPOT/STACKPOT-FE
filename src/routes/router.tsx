@@ -16,8 +16,8 @@ import {
   MadePotPage,
   CreatePotPage,
   WritingPage,
+  CallbackPage,
 } from "@pages/index";
-import MyPot from "@pages/CreatePot/CreatePot";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +72,10 @@ const router = createBrowserRouter([
           { path: routes.pot.applied, element: <AppliedPotPage /> },
           { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
+      },
+      {
+        path: routes.callback,
+        element: <CallbackPage />,
       },
     ],
   },
