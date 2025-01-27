@@ -5,9 +5,9 @@ import {
   calendarStyle,
   container,
   contentStyle,
-  datePickerStyle,
   dateStyle,
   dividerStyle,
+  mainContainer,
   memberContainer,
   nickNameStyle,
   profileContainer,
@@ -55,20 +55,18 @@ const MyPotCalendar = () => {
   };
 
   return (
-    <main>
+    <main css={mainContainer}>
       <div css={titleContainer}>
         <p css={titleStyle}>캘린더</p>
       </div>
       <div css={container}>
         <div css={calendarStyle}>
-          <div className="mbsc-grid" css={datePickerStyle}>
-            <Datepicker
-              display="inline"
-              marked={myMarked}
-              value={date}
-              onChange={(e) => setDate(e.value)}
-            />
-          </div>
+          <Datepicker
+            display="inline"
+            marked={myMarked}
+            value={date}
+            onChange={(e) => setDate(e.value)}
+          />
         </div>
         <div css={taskContainer}>
           <p css={dateStyle}>
