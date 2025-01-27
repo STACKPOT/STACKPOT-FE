@@ -10,9 +10,18 @@ export const container = css`
   gap: 7.4rem;
 `;
 
+export const iconStyle = css`
+  color: ${theme.color.point.hero};
+  height: 2.4rem;
+  width: 2.4rem;
+`;
+
 export const titleContainer = css`
   ${theme.font.bodyBold2}
   margin: 4.8rem 0;
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
 `;
 
 export const taskContainerStyle = css`

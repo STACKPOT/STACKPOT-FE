@@ -6,6 +6,7 @@ import {
   container,
   dateStyle,
   dividerStyle,
+  iconStyle,
   mainContainer,
   noticeStyle,
   taskContainer,
@@ -15,6 +16,7 @@ import {
 } from "./MyPotCalendar.style";
 import { TaskBox } from "./components";
 import { taskData } from "mocks/taskData";
+import { PotIcon } from "@assets/svgs";
 setOptions({
   locale: localeKo,
   themeVariant: "light",
@@ -51,6 +53,7 @@ const MyPotCalendar = () => {
     <main css={mainContainer}>
       <div css={titleContainer}>
         <p css={titleStyle}>캘린더</p>
+        <PotIcon css={iconStyle} />
       </div>
       <div css={container}>
         <div css={calendarStyle}>
