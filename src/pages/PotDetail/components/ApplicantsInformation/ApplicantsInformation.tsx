@@ -7,9 +7,8 @@ import ProfileModal from "../ProfileModal/ProfileModal";
 import MemberKakaoIdModal from "../MemberKakaoIdModal/MemberKakaoIdModal";
 import StartPotModal from "../StartPotModal/StartPotModal";
 
-interface ApplicantsInformationProps { }
 
-const ApplicantsInformation: React.FC<ApplicantsInformationProps> = () => {
+const ApplicantsInformation = () => {
     const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string, kakaoId: string }[]>(memberListData);
     const [selectedApplicants, setSelectedApplicants] = useState<typeof applicants>([]);
     const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string } | null>(null);
