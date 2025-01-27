@@ -39,8 +39,3 @@ export const categoryContainer = css`
     flex-direction: column;
     gap: 1.6rem;
 `
-export const contractSectionContainer = css`
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
-`

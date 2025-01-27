@@ -12,9 +12,12 @@ export const modalBackgroundContainer = css`
     align-items: center;
     background: rgba(0, 0, 0, 0.40);
 `
-export const contentStyle = css`
-    width: 45.8rem;
+export const contentStyle = (height: string) => css`
+    height: ${height};
+    display: flex;
     ${theme.font.caption3};
     color: ${theme.color.object.assistive};
     white-space: pre-line;
+    text-align: center;
+    align-items: center;
 `

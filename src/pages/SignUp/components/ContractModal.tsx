@@ -8,11 +8,12 @@ interface ContractModalProps {
 }
 
 const ContractModal: React.FC<ContractModalProps> = ({ type, onCancelModal }: ContractModalProps) => {
-    const contracts: { content: string, childContracts: string[] }[] =
+    const contracts: { content: string, childContracts: string[], style?: "normal" | "none", value?: number }[] =
         type === "service" ?
 
             [
-                { content: `회원 가입은 실명, 이메일 주소, 비밀번호를 포함한 필수 정보를\n제공하여 완료됩니다.`, childContracts: [] },
+                { content: `본 약관은 회원 가입 시 동의한 것으로 간주되며, 서비스 이용 시\n회원에게 적용됩니다.\n\n`, childContracts: [], style: "none" },
+                { content: `회원 가입은 실명, 이메일 주소, 비밀번호를 포함한 필수 정보를\n제공하여 완료됩니다.`, childContracts: [], value: 1 },
                 { content: `회원은 제공한 정보의 정확성을 유지하고, 회사는 회원 정보를\n보호하기 위해 노력합니다.`, childContracts: [] },
                 { content: `회원은 서비스를 본래 용도에 맞게 사용해야 합니다.`, childContracts: [] },
                 { content: `팟이 시작될 경우, 원활한 진행을 위해 팀장에게 카카오 아이디가\n보여집니다.`, childContracts: [] },
@@ -31,7 +32,9 @@ const ContractModal: React.FC<ContractModalProps> = ({ type, onCancelModal }: Co
                         `개인 정보는 수집 및 이용 목적이 달성된 경우,\n또는 회원 탈퇴 요청 시에 안전하게 파기됩니다.`,
                         `파기된 개인 정보는 기록, 전자적 파일 등의 형태로\n남지 않도록 파기됩니다.\n\n`
                     ]
-                },
+                }, {
+                    content: `본 약관은 회원 가입 시 동의한 것으로 간주되며,\n서비스 이용 시 회원에게 적용됩니다.`, childContracts: [], style: "none"
+                }
             ]
 
     return (
@@ -39,10 +42,9 @@ const ContractModal: React.FC<ContractModalProps> = ({ type, onCancelModal }: Co
             <ExplainModal
                 title={type === "service" ? "서비스 약관" : "개인정보 수집 및 이용 약관"}
                 buttonText="확인했습니다"
-                type="contract"
                 onButtonClick={onCancelModal}
                 onCancel={onCancelModal}>
-                <p css={contentStyle}>
+                <p css={contentStyle(type === "service" ? "38.7rem" : "53.6rem")}>
                     <ContractDetailList contracts={contracts} />
                 </p>
             </ExplainModal>
