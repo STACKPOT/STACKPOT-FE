@@ -3,49 +3,18 @@ import theme from "@styles/theme"
 
 export const container = css`
     display: flex;
-    flex-direction: column;
+    gap: 1.2rem;
 `
 export const inputContainer = css`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-`
-export const inputStyle =css`
     width: 38rem;
-    padding: 1.2rem 1.6rem;
-    border-radius: 8px;
-    ${theme.font.caption3};
-    border: 1px solid ${theme.color.object.alternative};
-    color: ${theme.color.point.hero};
-    
-    ::placeholder {
-        color: ${theme.color.interactive.inactive};
-    }
-
-    &:focus {
-        border: 1px solid ${theme.color.feedback.negative};
-        outline: none;
-        color: ${theme.color.interactive.inactive};
-    }
 `
-export const inputDoneStyle =css`
-    ${inputStyle};
-    border-color: ${theme.color.point.hero};
-`
-export const messageStyle =css`
-    ${theme.font.caption2};
-    color: ${theme.color.feedback.positive};
-`
-export const messageWarningStyle =css`
-    ${theme.font.caption2};
-    color: ${theme.color.feedback.negative};
-`
-export const buttonStyle =css`
-    height: 4rem;
+export const buttonContainer = css`
     display: flex;
+    padding: 0.6rem 0;
     justify-content: center;
-    align-items: center;
+`
+export const buttonStyle = css`
+    height: 4rem;
     padding: 0 2.4rem;
     border-radius: 8px;
     border: 1px solid ${theme.color.object.alternative};
