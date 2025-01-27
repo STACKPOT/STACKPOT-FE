@@ -28,7 +28,7 @@ export const titleStyle = css`
 export const calendarStyle = css`
   padding: 6.5rem 5rem;
   border-radius: 24px;
-  width: 53.7rem;
+  width: 53.6rem;
   border: 1px solid ${theme.color.object.alternative};
   box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
   .mbsc-ios.mbsc-datepicker-inline {
