@@ -31,6 +31,11 @@ export const moreButtonContainer = css`
     align-items: center;
 `
 
+export const forDropdownStyle = css`
+    position: relative;
+    display: inline-block;
+`
+
 export const badgeContainer = css`
     display: flex;
     align-items: center;

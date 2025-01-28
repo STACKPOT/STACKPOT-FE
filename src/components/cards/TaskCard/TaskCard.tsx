@@ -1,5 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
-import { MeatballIcon } from "@assets/svgs";
 import {
   badgeContainer,
   bottomContainer,
@@ -7,6 +5,7 @@ import {
   contentContainer,
   contentTextStyle,
   dateTextStyle,
+  forDropdownStyle,
   innerContainer,
   lineStyle,
   moreButtonContainer,
@@ -14,12 +13,11 @@ import {
   profileContainer,
   profileImageStyle,
   titleTextStyle,
-  clickableIconStyle,
 } from "./TaskCard.style";
 import MemberGroup from "@components/commons/Badge/MemberGroup/MemberGroup";
 import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
 import Badge from "@components/commons/Badge/Badge";
-import FeedDropdown from "@components/commons/FeedDropdown/FeedDropdown";
+import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 
 interface TaskCardProps {
   title: string;
@@ -44,48 +42,25 @@ const TaskCard: React.FC<TaskCardProps> = ({
   groupProfileImages,
   onClick,
 }: TaskCardProps) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const handleEdit = () => {
-    setIsDropdownOpen(false);
-  };
-
-  const handleDelete = () => {
-    setIsDropdownOpen(false);
-  };
-
-  const handleDropdownToggle = () => {
-    setIsDropdownOpen((prev) => !prev);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    window.addEventListener("click", handleClickOutside);
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   return (
     <div css={cardStyle} onClick={onClick}>
       <div css={innerContainer}>
-        <div css={moreButtonContainer} ref={dropdownRef}>
+        <div css={moreButtonContainer}>
           <div css={badgeContainer}>
             <DdayBadge days={dday} />
             <Badge content={tag} />
           </div>
-          <MeatballIcon css={clickableIconStyle} onClick={handleDropdownToggle} />
-          {isDropdownOpen && (
-            <FeedDropdown onEdit={handleEdit} onDelete={handleDelete} />
-          )}
+
+          <div css={forDropdownStyle} onClick={(event) => {event.stopPropagation();}}>
+            <MyFeedDropdown
+              topMessage="수정하기"
+              bottomMessage="삭제하기"
+              onTop={() => alert("수정하기 클릭됨")}
+              onBottom={() => alert("삭제하기 클릭됨")}
+            />
+          </div>
         </div>
+        
         <div css={contentContainer}>
           <p css={titleTextStyle}>{title}</p>
           <p css={contentTextStyle}>{content}</p>
