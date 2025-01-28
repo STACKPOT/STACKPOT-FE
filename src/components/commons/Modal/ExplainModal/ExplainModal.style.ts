@@ -20,8 +20,6 @@ export const containerStyle = css`
     background-color: ${theme.color.base.white};
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 1.6rem;
 `
 export const closeButtonStyle = css`
@@ -29,7 +27,6 @@ export const closeButtonStyle = css`
     cursor: pointer;
 `
 export const contentButtonContainerStyle = css`
-    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     gap: 3.2rem;
@@ -44,7 +41,7 @@ export const titleContentContainerStyle = css`
 `
 export const titleStyle = css`
     ${theme.font.title1}
-    color: ${theme.color.base.black};
+    color: ${theme.color.base.darkgray};
     white-space: pre-wrap;
     text-align: center;
 `
@@ -55,9 +52,10 @@ export const buttonStyle = css`
     color: ${theme.color.base.white};
     background-color: ${theme.color.point.hero};
     border-radius: 1.6rem;
-    border: 1px solid ${theme.color.object.alternative};
+    border: 1px solid ${theme.color.border.normal};
     cursor: pointer;
 `
 export const textStyle = css`
-    ${theme.font.caption3}
+    ${theme.font.caption3};
+    color: ${theme.color.object.assistive};
 `

@@ -1,18 +1,18 @@
-import { listItemStyle, orderedListStyle, unOrderedListStyle } from "./ContractDetailList.style";
+import { normalTextStyle, orderedListItemStyle, unorderedListItemStyle } from "./ContractDetailList.style";
 
 interface ContractDetailListProps {
-    contracts: { content: string, childContracts: string[], style?: "normal" | "none", value?: number }[];
+    contracts: { content: string, childContracts: string[], bullet: boolean, value?: number }[];
 }
 
 const ContractDetailList: React.FC<ContractDetailListProps> = ({ contracts }: ContractDetailListProps) => {
     return (
-        <ol css={orderedListStyle} start={1}>
+        <ol>
             {contracts.map((contract) =>
                 <>
-                    <li css={listItemStyle(contract.style)} value={contract.value}>{contract.content}</li>
-                    <ul css={unOrderedListStyle}>
+                    <li css={contract.bullet ? orderedListItemStyle : normalTextStyle} value={contract.value}>{contract.content}</li>
+                    <ul >
                         {contract.childContracts.map((childContract) =>
-                            <li css={listItemStyle(contract.style)}>{childContract}</li>
+                            <li css={unorderedListItemStyle}><span>{childContract}</span></li>
                         )}
                     </ul>
                 </>
