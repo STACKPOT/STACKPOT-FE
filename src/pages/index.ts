@@ -5,12 +5,14 @@ import NotFound from "./NotFound/NotFound";
 import SearchPage from "./Search/Search";
 import SettingPage from "./Setting/Setting";
 import SearchResultPage from "./SearchResult/SearchResult";
+import PotDetailPage from "./PotDetail/PotDetail";
 import PotMain from "./Pots/PotMain";
 import AllPotPage from "./Pots/AllPot/AllPotPage";
 import AppliedPotPage from "./Pots/AppliedPot/AppliedPotPage";
 import MadePotPage from "./Pots/MadePot/MadePotPage";
 import CreatePotPage from "./CreatePot/CreatePot";
 import WritingPage from "./WritePost/WritePost";
+import MyPotCalendarPage from "./MyPot/MyPotCalendar/MyPotCalendar";
 
 export {
   HomePage,
@@ -20,10 +22,12 @@ export {
   SearchPage,
   SettingPage,
   SearchResultPage,
+  PotDetailPage,
   PotMain,
   AllPotPage,
   AppliedPotPage,
   MadePotPage,
   CreatePotPage,
   WritingPage,
+  MyPotCalendarPage,
 };

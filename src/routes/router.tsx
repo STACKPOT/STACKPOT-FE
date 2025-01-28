@@ -4,6 +4,7 @@ import routes from "@constants/routes";
 import {
   HomePage,
   LandingPage,
+  PotDetailPage,
   MyPage,
   NotFound,
   SearchPage,
@@ -15,8 +16,8 @@ import {
   MadePotPage,
   CreatePotPage,
   WritingPage,
+  MyPotCalendarPage,
 } from "@pages/index";
-import MyPot from "@pages/CreatePot/CreatePot";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
         element: <SearchResultPage />,
       },
       {
+        path: routes.potDetail,
+        element: <PotDetailPage />,
+      },
+      {
         path: "/*",
         element: <NotFound />,
       },
@@ -66,6 +71,13 @@ const router = createBrowserRouter([
           { index: true, element: <AllPotPage /> },
           { path: routes.pot.applied, element: <AppliedPotPage /> },
           { path: routes.pot.madeByMe, element: <MadePotPage /> },
+        ],
+      },
+      {
+        path: routes.myPot.base,
+        // element: <MyPotMainPage />,
+        children: [
+          { path: routes.myPot.calendar, element: <MyPotCalendarPage /> },
         ],
       },
     ],
