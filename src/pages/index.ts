@@ -12,6 +12,7 @@ import AppliedPotPage from "./Pots/AppliedPot/AppliedPotPage";
 import MadePotPage from "./Pots/MadePot/MadePotPage";
 import CreatePotPage from "./CreatePot/CreatePot";
 import WritingPage from "./WritePost/WritePost";
+import MyPotCalendarPage from "./MyPot/MyPotCalendar/MyPotCalendar";
 import CallbackPage from "./Callback/Callback";
 
 export {
@@ -29,5 +30,6 @@ export {
   MadePotPage,
   CreatePotPage,
   WritingPage,
+  MyPotCalendarPage,
   CallbackPage,
 };
