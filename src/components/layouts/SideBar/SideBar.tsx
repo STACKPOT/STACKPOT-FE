@@ -22,7 +22,7 @@ const menuItems = [
     icon: <PotIcon stroke="currentColor" css={potIconStyle} />,
   },
   {
-    to: routes.myPot,
+    to: routes.myPot.base,
     icon: <MyPotIcon stroke="currentColor" css={iconStyle} />,
   },
   {
