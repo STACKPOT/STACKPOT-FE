@@ -9,10 +9,15 @@ const routes = {
     madeByMe: "/pot/created",
   },
   createPot: "/create-pot",
-  myPot: "/my-pot",
+  myPot: {
+    base: "/my-pot",
+    detail: "/my-pot/:taskId",
+    calendar: "/my-pot/calendar",
+  },
   setting: "/setting",
   search: "/search",
   searchResult: "/search-result",
+  potDetail: "/pot/:potId",
 } as const;
 
 export default routes;
