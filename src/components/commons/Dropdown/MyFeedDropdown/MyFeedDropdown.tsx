@@ -5,7 +5,6 @@ import {
   dropdownStyle,
   iconStyle,
 } from "./MyFeedDropdown.style";
-import theme from "@styles/theme";
 
 interface FeedDropdownProps {
   topMessage: string;
@@ -42,26 +41,13 @@ const MyFeedDropdown: React.FC<FeedDropdownProps> = ({
 
   return (
     <div ref={ref}>
-      <MeatballIcon css={iconStyle} onClick={toggleDropdown}>
-        {isDropdownOpen ? "Close Menu" : "Open Menu"}
-      </MeatballIcon>
+      <MeatballIcon css={iconStyle} onClick={toggleDropdown} />
       {isDropdownOpen && (
         <div css={dropdownStyle}>
-          <div
-            css={containerStyle({
-              borderBottom: `1px solid ${theme.color.object.alternative}`,
-              color: theme.color.point.gray,
-            })}
-            onClick={onTop}
-          >
+          <div css={containerStyle(true)} onClick={onTop}>
             {topMessage}
           </div>
-          <div
-            css={containerStyle({
-              color: theme.color.feedback.negative,
-            })}
-            onClick={onBottom}
-          >
+          <div css={containerStyle(false)} onClick={onBottom}>
             {bottomMessage}
           </div>
         </div>
