@@ -57,7 +57,7 @@ const SignUp = () => {
                     <Section
                         title="카카오톡 아이디"
                         description={`팟이 시작될 경우, 원활한 진행을 위해 팀장에게 카카오 아이디가 보여집니다.\n카카오톡 아이디를 작성해 주세요. `} >
-                        <TextField placeholder="닉네임 생성하기를 눌러 주세요" onTextChange={setKakaoId}>{kakaoId}</TextField>
+                        <TextField placeholder="카카오톡 아이디 작성" onTextChange={setKakaoId}>{kakaoId}</TextField>
                     </Section>
                     <ContractsSection
                         onAgree={setContractsAgreed} />

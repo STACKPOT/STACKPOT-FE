@@ -14,9 +14,9 @@ export const contractContainer = css`
 export const contractStyle = css`
     ${theme.font.caption3}
     color: ${theme.color.object.assistive};
-    width: 44rem;
 `
 export const detailButtonStyle = css`
+    margin-left: auto;
     ${theme.font.caption3}
     color: ${theme.color.feedback.positive};
     text-decoration: solid underline;

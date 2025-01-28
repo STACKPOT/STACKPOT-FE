@@ -8,7 +8,7 @@ export const container = css`
 `
 export const titleContainer = css`
     display: flex;
-    gap: 1.6rem;
+    gap: 0.9rem;
     align-items: center;
 `
 export const titleStyle =css`
@@ -17,7 +17,7 @@ export const titleStyle =css`
 `
 export const potIconStyle= css`
     width: 2.4rem;
-    height: 2.4rem;
+    height: 2.2rem;
     color: ${theme.color.point.hero};
 `
 export const bodyContainer = css`
