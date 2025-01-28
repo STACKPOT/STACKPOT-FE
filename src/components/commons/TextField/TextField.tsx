@@ -22,7 +22,7 @@ const TextField: React.FC<TextFieldProps> = ({
   const [inputState, setInputState] = useState<boolean>(true);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onTextChange(e.target.value);
-  }
+  };
 
   return (
     <div css={containerStyle}>

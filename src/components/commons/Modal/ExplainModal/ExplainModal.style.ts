@@ -1,6 +1,17 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
+export const modalBackgroundStyle = css`
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.40);
+`
 export const containerStyle = css`
     width: 54rem;
     padding: 3.2rem;
