@@ -5,6 +5,7 @@ import NotFound from "./NotFound/NotFound";
 import SearchPage from "./Search/Search";
 import SettingPage from "./Setting/Setting";
 import SearchResultPage from "./SearchResult/SearchResult";
+import PotDetailPage from "./PotDetail/PotDetail";
 import PotMain from "./Pots/PotMain";
 import AllPotPage from "./Pots/AllPot/AllPotPage";
 import AppliedPotPage from "./Pots/AppliedPot/AppliedPotPage";
@@ -14,6 +15,7 @@ import MyPotMainPage from "./MyPot/MyPotMain";
 import MyPotStatusPage from "./MyPot/MyPotStatus/MyPotStatus";
 import MyPotCalendarPage from "./MyPot/MyPotCalendar/MyPotCalendar";
 import TaskDetailPage from "./MyPot/MyPotStatus/TaskDetail/TaskDetail";
+import WritingPage from "./WritePost/WritePost";
 
 export {
   HomePage,
@@ -23,6 +25,7 @@ export {
   SearchPage,
   SettingPage,
   SearchResultPage,
+  PotDetailPage,
   PotMain,
   AllPotPage,
   AppliedPotPage,
@@ -32,4 +35,5 @@ export {
   MyPotStatusPage,
   MyPotCalendarPage,
   TaskDetailPage,
+  WritingPage,
 };

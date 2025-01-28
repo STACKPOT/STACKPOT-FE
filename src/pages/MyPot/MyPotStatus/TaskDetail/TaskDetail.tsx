@@ -19,10 +19,11 @@ import {
   contributorNicknameStyle,
   iconStyle,
   prevButtonStyle,
+  dropdownWrapperStyle,
 } from "./TaskDetail.style";
 import taskCardkData from "mocks/taskCardData";
-import { DdayBadge, StateBadge } from "@components/index";
-import { CalendarIcon, MeatballIcon, PotIcon } from "@assets/svgs";
+import { DdayBadge, StateBadge, MyFeedDropdown } from "@components/index";
+import { CalendarIcon, PotIcon } from "@assets/svgs"; 
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { headerStyle } from "@pages/MyPot/MyPotMain.style";
 import { statusTextStyle } from "../MyPotStatus.style";
@@ -38,17 +39,31 @@ const TaskDetailPage: React.FC = () => {
     navigate(`${routes.myPot.base}`);
   };
 
-
   return (
     <>
       <div css={titleContainer}>
         <div css={leftContainer}>
-          <button onClick={()=>handlePrev()} css={prevButtonStyle}><ArrowLeftIcon css={iconStyle} /></button>
+          <button onClick={handlePrev} css={prevButtonStyle}>
+            <ArrowLeftIcon css={iconStyle} />
+          </button>
           {task?.title && <div css={titleStyle}>{task.title}</div>}
         </div>
         <div css={rightContainer}>
           {task?.status && <StateBadge content={task.status} />}
-          <MeatballIcon />
+          
+          <div
+            css={dropdownWrapperStyle} 
+            onClick={(event) => {
+              event.stopPropagation(); 
+            }}
+          >
+            <MyFeedDropdown
+              topMessage="수정하기"
+              bottomMessage="삭제하기"
+              onTop={() => alert("수정하기 클릭됨")}
+              onBottom={() => alert("삭제하기 클릭됨")}
+            />
+          </div>
         </div>
       </div>
       <div css={profileContainer}>

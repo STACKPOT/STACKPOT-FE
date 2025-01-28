@@ -4,6 +4,7 @@ import routes from "@constants/routes";
 import {
   HomePage,
   LandingPage,
+  PotDetailPage,
   MyPage,
   NotFound,
   SearchPage,
@@ -18,6 +19,8 @@ import {
   MyPotStatusPage,
   MyPotCalendarPage,
   TaskDetailPage,
+  WritingPage,
+  MyPotCalendarPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -32,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: routes.home,
         element: <HomePage />,
+      },
+      {
+        path: routes.writePost,
+        element: <WritingPage />,
       },
       {
         path: routes.createPot,
@@ -52,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: routes.searchResult,
         element: <SearchResultPage />,
+      },
+      {
+        path: routes.potDetail,
+        element: <PotDetailPage />,
       },
       {
         path: "/*",

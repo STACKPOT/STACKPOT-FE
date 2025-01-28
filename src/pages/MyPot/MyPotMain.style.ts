@@ -2,13 +2,12 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const container = css`
-  width: 1060px;
+  width: 1062px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3.2rem;
   padding: 4.8rem 0;
-  margin: 0 auto;
 `;
 
 export const headerStyle = css`

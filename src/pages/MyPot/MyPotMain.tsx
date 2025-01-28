@@ -14,7 +14,7 @@ const MyPotMainPage: React.FC = () => {
   const location = useLocation();
 
   return (
-    <div css={container}>
+    <main css={container}>
       <header css={headerStyle}>
         <div css={textStyle}>{title}</div>
         <PotIcon css={iconStyle} />
@@ -42,7 +42,7 @@ const MyPotMainPage: React.FC = () => {
         })}
       </div>
       <Outlet />
-    </div>
+    </main>
   );
 };
 

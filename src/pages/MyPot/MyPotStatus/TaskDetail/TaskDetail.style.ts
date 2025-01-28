@@ -129,3 +129,9 @@ export const contributorNicknameStyle = css`
   ${theme.font.caption1};
   color: ${theme.color.object.assistive};
 `
+
+export const dropdownWrapperStyle = css`
+  position: relative; /* 드롭다운 기준점 설정 */
+  display: inline-block; /* 드롭다운과 아이콘이 함께 위치 */
+  z-index: 1000; /* 드롭다운이 다른 요소 위로 오도록 설정 */
+`;
