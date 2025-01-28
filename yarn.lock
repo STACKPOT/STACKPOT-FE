@@ -577,6 +577,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@mobiscroll/react@npm:@mobiscroll/react-next-trial@5.33.0":
+  version "5.33.0"
+  resolved "https://npm.mobiscroll.com/@mobiscroll%2freact-next-trial/-/react-next-trial-5.33.0.tgz#7018799df238c551d75d6723e06c671551127912"
+  integrity sha512-WpTiaAkpRCEOlHdGmTX90VY/CSIi6pw7HYC4UZEgZBKFmWFnY3zBOGcbDLh2rLpFcmKvMaZIKpKLlS4zNqdImw==
+
 "@mui/core-downloads-tracker@^6.4.0":
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-6.4.0.tgz#b83f3f390d4e692a4f86f413c32f3131da38d492"
