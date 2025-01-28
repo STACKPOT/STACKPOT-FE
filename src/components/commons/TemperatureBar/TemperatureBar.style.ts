@@ -6,6 +6,7 @@ export const container = css`
   width: 35.6rem;
   flex-direction: column;
   align-items: center;
+  gap: 1.4rem;
 `
 
 const moveTooltip = (start: number, end: number) => keyframes`
@@ -31,6 +32,8 @@ export const toolTipContainer = (start: number, end: number) => css`
 export const toolTip = css`
   padding: 1.1rem 1.6rem;
   border-radius: 8px;
+  width: 7.8rem;
+  height: 3.9rem;
   background: ${theme.color.point.hero};
 `
 
