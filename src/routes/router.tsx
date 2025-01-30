@@ -18,6 +18,7 @@ import {
   CreatePotPage,
   WritingPage,
   MyPotCalendarPage,
+  CallbackPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
           { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
       },
+      // {
+      //   path: routes.callback,
+      //   element: <CallbackPage />,
+      // },//
       {
         path: routes.myPot.base,
         // element: <MyPotMainPage />,
