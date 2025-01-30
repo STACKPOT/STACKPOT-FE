@@ -13,18 +13,19 @@ import {
   toastStyle,
 } from "./WritePost.style";
 import { PotIcon } from "@assets/svgs";
-import { Button, CategoryButton } from "@components/index";
 import { partMap } from "@constants/categories";
+import { Button, CategoryButton } from "@components/index";
 import UploadToast from "@components/commons/Toast/UploadToast";
 
 const WritePost: React.FC = () => {
-  const [selectedParts, setSelectedParts] = useState<string[]>([]);
+  const [selectedPart, setSelectedPart] = useState<string | null>(null);
 
   const [visibleInputs, setVisibleInputs] = useState<{
     [key: string]: boolean;
   }>({});
-
   const [showToast, setShowToast] = useState(false);
+
+  const categories = ["프론트엔드", "백엔드", "디자인", "기획"];
 
   const handleUploading = () => {
     setShowToast(true);
@@ -34,15 +35,8 @@ const WritePost: React.FC = () => {
   };
 
   const handlePartClick = (partName: string) => {
-    setSelectedParts((prev) =>
-      prev.includes(partName)
-        ? prev.filter((item) => item !== partName)
-        : [...prev, partName]
-    );
-    setVisibleInputs((prev) => ({
-      ...prev,
-      [partName]: !prev[partName],
-    }));
+    setSelectedPart((prev) => (prev === partName ? null : partName));
+    setVisibleInputs({ [partName]: true });
   };
 
   return (
@@ -72,19 +66,17 @@ const WritePost: React.FC = () => {
             />
             <div css={categoryContainer}>
               카테고리
-              <div css={categories}>
-                {Object.keys(partMap).map((partName) => (
-                  <div key={partName} css={categories}>
-                    <CategoryButton
-                      style={partMap[partName]}
-                      selected={selectedParts.includes(partName)}
-                      onClick={() => handlePartClick(partName)}
-                    >
-                      {partName}
-                    </CategoryButton>
-                  </div>
-                ))}
-              </div>
+              {Object.keys(partMap).map((partName) => (
+                <div key={partName} css={categories}>
+                  <CategoryButton
+                    style={partMap[partName]}
+                    selected={selectedPart === partName}
+                    onClick={() => handlePartClick(partName)}
+                  >
+                    {partName}
+                  </CategoryButton>
+                </div>
+              ))}
             </div>
           </div>
         </div>
