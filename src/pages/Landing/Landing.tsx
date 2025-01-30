@@ -8,6 +8,7 @@ import {
   LogoContainer,
   logoStyle,
   mainContainer,
+  MyPotImageStyle,
   profileContainer,
   profileImageStyle,
   profileTextContainer,
@@ -22,9 +23,18 @@ import {
   CarraotImage,
   OnionImage,
   MushroomImage,
+  MyPotImage,
 } from "@assets/images";
+import routes from "@constants/routes";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(routes.home);
+  };
+
   return (
     <main css={mainContainer}>
       <div css={bgContainer}>
@@ -38,7 +48,9 @@ const Landing = () => {
           <p>에서</p>
         </div>
       </div>
-      <Button variant="landing">팟 만들러 가기</Button>
+      <Button variant="landing" onClick={handleClick}>
+        팟 만들러 가기
+      </Button>
       <img src={TaskImgage} alt="taskImage" css={TaskImgageStyle} />
       <div css={iconContainer}>
         <ExpandMoreIcon />
@@ -70,9 +82,10 @@ const Landing = () => {
           </div>
           <Logo css={logoStyle} />
         </div>
-        <Button variant="landing" css={buttonStyle}>
+        <Button variant="landing" onClick={handleClick} css={buttonStyle}>
           팟 만들러 가기
         </Button>
+        <img src={MyPotImage} css={MyPotImageStyle} alt="MyPotImage" />
       </div>
     </main>
   );
