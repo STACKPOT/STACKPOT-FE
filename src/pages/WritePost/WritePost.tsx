@@ -13,8 +13,8 @@ import {
   toastStyle,
 } from "./WritePost.style";
 import { PotIcon } from "@assets/svgs";
-import { partMap } from "@constants/categories";
 import { Button, CategoryButton } from "@components/index";
+import { partMap } from "@constants/categories";
 import UploadToast from "@components/commons/Toast/UploadToast";
 
 const WritePost: React.FC = () => {
@@ -24,8 +24,6 @@ const WritePost: React.FC = () => {
     [key: string]: boolean;
   }>({});
   const [showToast, setShowToast] = useState(false);
-
-  const categories = ["프론트엔드", "백엔드", "디자인", "기획"];
 
   const handleUploading = () => {
     setShowToast(true);
@@ -66,17 +64,19 @@ const WritePost: React.FC = () => {
             />
             <div css={categoryContainer}>
               카테고리
-              {Object.keys(partMap).map((partName) => (
-                <div key={partName} css={categories}>
-                  <CategoryButton
-                    style={partMap[partName]}
-                    selected={selectedPart === partName}
-                    onClick={() => handlePartClick(partName)}
-                  >
-                    {partName}
-                  </CategoryButton>
-                </div>
-              ))}
+              <div css={categories}>
+                {Object.keys(partMap).map((partName) => (
+                  <div key={partName} css={categories}>
+                    <CategoryButton
+                      style={partMap[partName]}
+                      selected={selectedPart === partName}
+                      onClick={() => handlePartClick(partName)}
+                    >
+                      {partName}
+                    </CategoryButton>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
