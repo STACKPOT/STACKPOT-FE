@@ -60,7 +60,6 @@ const router = createBrowserRouter([
       {
         path: routes.signUp,
         element: <SignUpPage />,
-
       },
       {
         path: routes.potDetail,
