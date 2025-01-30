@@ -17,7 +17,9 @@ const routes = {
   setting: "/setting",
   search: "/search",
   searchResult: "/search-result",
+  signUp: "/sign-up",
   potDetail: "/pot/:potId",
+  callback: "/callback"
 } as const;
 
 export default routes;

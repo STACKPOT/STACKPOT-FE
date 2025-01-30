@@ -10,12 +10,14 @@ import PotMain from "./Pots/PotMain";
 import AllPotPage from "./Pots/AllPot/AllPotPage";
 import AppliedPotPage from "./Pots/AppliedPot/AppliedPotPage";
 import MadePotPage from "./Pots/MadePot/MadePotPage";
+import SignUpPage from "./SignUp/SignUp";
 import CreatePotPage from "./CreatePot/CreatePot";
 import MyPotMainPage from "./MyPot/MyPotMain";
 import MyPotStatusPage from "./MyPot/MyPotStatus/MyPotStatus";
 import MyPotCalendarPage from "./MyPot/MyPotCalendar/MyPotCalendar";
 import TaskDetailPage from "./MyPot/MyPotStatus/TaskDetail/TaskDetail";
 import WritingPage from "./WritePost/WritePost";
+
 
 export {
   HomePage,
@@ -30,6 +32,7 @@ export {
   AllPotPage,
   AppliedPotPage,
   MadePotPage,
+  SignUpPage,
   CreatePotPage,
   MyPotMainPage,
   MyPotStatusPage,

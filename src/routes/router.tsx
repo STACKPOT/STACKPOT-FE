@@ -14,6 +14,7 @@ import {
   AllPotPage,
   AppliedPotPage,
   MadePotPage,
+  SignUpPage,
   CreatePotPage,
   MyPotMainPage,
   MyPotStatusPage,
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
         element: <SearchResultPage />,
       },
       {
+        path: routes.signUp,
+        element: <SignUpPage />,
+      },
+      {
         path: routes.potDetail,
         element: <PotDetailPage />,
       },
@@ -76,6 +81,10 @@ const router = createBrowserRouter([
           { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
       },
+      // {
+      //   path: routes.callback,
+      //   element: <CallbackPage />,
+      // },//
       {
         path: routes.myPot.base,
         element: <MyPotMainPage />,
