@@ -2,31 +2,52 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const cardStyle = css`
-    width: 34rem;
-    height: 39.9rem;
-    padding: 1.6rem 2rem;
-    border-radius: 2.4rem;
+    padding: 1.6rem;
+    border-radius: 24px;
     border: 0.1rem solid ${theme.color.object.alternative};
-    background-color: white;
+    background-color: ${theme.color.base.white};
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
+    height: auto;
+    cursor: pointer; 
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0px 8px 16px 0px rgba(13, 10, 44, 0.12); 
+    }
 `
-export const innerContaienr = css`
+export const innerContainer = css`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 0.8rem;
+    height: 100%;
 `
 export const moreButtonContainer = css`
+    position: relative;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
 `
-export const titleContainer = css`
-    width: 100%;
+
+export const forDropdownStyle = css`
+    position: relative;
+    display: inline-block;
+`
+
+export const badgeContainer = css`
     display: flex;
     align-items: center;
+    gap: 0.8rem;
+`
+
+export const contentContainer = css`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    gap: 4.8rem;
+    gap: 1.2rem;
 `
 export const titleTextStyle = css`
     ${theme.font.bodyBold1}
@@ -34,6 +55,7 @@ export const titleTextStyle = css`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
 `
 export const contentTextStyle = css`
     ${theme.font.caption2}
@@ -43,25 +65,31 @@ export const contentTextStyle = css`
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    min-height: calc(4.8rem);
 `
-export const dateContainer = css`
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-`
+
 export const dateTextStyle = css`
     ${theme.font.caption2}
     color: ${theme.color.object.assistive};
+    align-self: flex-end;
+    padding: 0.6rem 0;
 `
 export const lineStyle = css`
     width: 100%;
-    height: 0;
     border: 0.1rem solid ${theme.color.object.alternative};
 `
+
+export const bottomContainer = css`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+`
+
 export const profileContainer = css`
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 0.8rem;
 `
 export const profileImageStyle = css`
     width: 4rem;
@@ -73,3 +101,6 @@ export const nicknameStyle = css`
     ${theme.font.caption1}
     color: ${theme.color.object.assistive};
 `
+export const clickableIconStyle = css`
+  cursor: pointer; 
+`;
