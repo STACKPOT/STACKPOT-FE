@@ -6,21 +6,22 @@ import {
   loginButtonStyle,
 } from "./Button.style";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
-  style: "login" | "action" | "landing";
+  variant: "login" | "action" | "landing";
   actionType?: "action" | "join";
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
-  style,
+  variant,
   actionType = "action",
   onClick,
+  ...props
 }) => {
   const buttonType: SerializedStyles = (() => {
-    switch (style) {
+    switch (variant) {
       case "login":
         return loginButtonStyle;
       case "action":
@@ -33,7 +34,12 @@ const Button: React.FC<ButtonProps> = ({
   })();
 
   return (
-    <button type="button" css={[buttonType, buttonStyle]} onClick={onClick}>
+    <button
+      type="button"
+      css={[buttonType, buttonStyle]}
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </button>
   );
