@@ -23,7 +23,7 @@ export const loginButtonStyle = css`
 `;
 
 export const landingButtonStyle = css`
-  padding: 2rem 3.2rem;
+  padding: 2rem 4.3rem;
   background-color: ${theme.color.point.hero};
   border-radius: 32px;
   ${theme.font.title1};
