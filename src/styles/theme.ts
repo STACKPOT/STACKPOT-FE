@@ -129,7 +129,7 @@ const theme = {
     `,
     caption2: css`
       font-size: 14px;
-      line-height: 14px;
+      line-height: 24px;
       letter-spacing: -0.084px;
       font-weight: 500;
     `,
