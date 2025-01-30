@@ -20,15 +20,21 @@ import UploadToast from "@components/commons/Toast/UploadToast";
 import { useBlocker } from "react-router-dom";
 
 const WritePost: React.FC = () => {
-  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    return currentLocation.pathname !== nextLocation.pathname;
-  });
   const [selectedPart, setSelectedPart] = useState<string | null>(null);
 
   const [visibleInputs, setVisibleInputs] = useState<{
     [key: string]: boolean;
   }>({});
   const [showToast, setShowToast] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
+
+  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    return isDirty && currentLocation.pathname !== nextLocation.pathname;
+  });
+
+  const handleInputChange = () => {
+    setIsDirty(true);
+  };
 
   const handleUploading = () => {
     setShowToast(true);
@@ -40,6 +46,7 @@ const WritePost: React.FC = () => {
   const handlePartClick = (partName: string) => {
     setSelectedPart((prev) => (prev === partName ? null : partName));
     setVisibleInputs({ [partName]: true });
+    setIsDirty(true);
   };
 
   return (
@@ -62,10 +69,15 @@ const WritePost: React.FC = () => {
           </div>
 
           <div css={contentBody}>
-            <input css={inputStyle} placeholder="메인 제목 작성" />
+            <input
+              css={inputStyle}
+              placeholder="메인 제목 작성"
+              onChange={handleInputChange}
+            />
             <textarea
               css={textareaStyle}
               placeholder="나의 열정을 이야기해봐요"
+              onChange={handleInputChange}
             />
             <div css={categoryContainer}>
               카테고리
