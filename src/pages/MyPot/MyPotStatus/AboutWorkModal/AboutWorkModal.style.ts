@@ -197,6 +197,7 @@ export const saveButtonStyle = css`
   border: 1px solid ${theme.color.object.alternative};
   background: ${theme.color.point.hero};
   color: ${theme.color.point.ivory};
+  cursor: pointer;
 `
 
 export const buttonTextStyle = css`
@@ -205,7 +206,6 @@ export const buttonTextStyle = css`
   border: none;
   outline: none;
   background-color: inherit ;
-  cursor: pointer;
   color: inherit;
 `
 
@@ -226,6 +226,7 @@ export const anotherSaveButtonStyle = css`
   border: 1px solid ${theme.color.object.alternative};
   background: ${theme.color.point.hero};
   color: ${theme.color.point.ivory};
+  cursor: pointer;
 `
 
 export const deleteButtonStyle = css`
@@ -239,4 +240,5 @@ export const deleteButtonStyle = css`
   border: 1px solid ${theme.color.feedback.negative};
   background: ${theme.color.base.white};
   color: ${theme.color.feedback.negative};
+  cursor: pointer;
 `
