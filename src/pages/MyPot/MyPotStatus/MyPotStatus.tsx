@@ -21,7 +21,7 @@ import {
   modalOverlayStyle,
 } from "./MyPotStatus.style";
 import myPotMockData from "mocks/myPotData";
-import AboutWorkModal from "../AboutWorkModal/AboutWorkModal";
+import AboutWorkModal from "./AboutWorkModal/AboutWorkModal";
 import { StateBadge, MyPotTodoCard, TaskCard } from "@components/index";
 import myPotTodoCardData from "mocks/myPotTodoCardData";
 import taskCardkData from "mocks/taskCardData";
@@ -33,13 +33,18 @@ const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1); 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const totalPages = Math.ceil(myPotTodoCardData.result.length / 3);
 
-  const totalPages = Math.ceil(myPotTodoCardData.length / 3);
-
-  const paginatedData = myPotTodoCardData.slice(
+  const paginatedData = myPotTodoCardData.result.slice(
     (currentPage - 1) * 3,
     currentPage * 3
-  );
+  ).map((data) => ({
+    ...data,
+    todos: data.todos.map(todo => ({
+      ...todo,
+      status: todo.status as "NOT_STARTED" | "COMPLETED" 
+    }))
+  }));
 
   const handlePrev = () => {
     if (currentPage > 1) {
@@ -62,14 +67,12 @@ const MyPotStatusPage: React.FC = () => {
   };
 
   const navigate = useNavigate();
-
   const handleTaskCardClick = (taskId: string) => {
     navigate(`${routes.myPot.base}/${taskId}`);
   };
 
   const [activeStatus, setActiveStatus] = useState<"진행 전" | "진행 중" | "완료" | null>(null);
   const [taskCardData, setTaskCardData] = useState([...taskCardkData]); 
-
   const [modalTitle, setModalTitle] = useState<string>("새로운 업무 추가");
 
   const handleOpenModal = (status: "진행 전" | "진행 중" | "완료" | null, title: string) => {
@@ -87,19 +90,21 @@ const MyPotStatusPage: React.FC = () => {
     }
     setIsModalOpen(false);
   };
+
   return (
     <>
       {isModalOpen && <div css={blurOverlayStyle} />}
-        {isModalOpen && (
-          <div css={modalOverlayStyle}>
-            <AboutWorkModal
+      {isModalOpen && (
+        <div css={modalOverlayStyle}>
+          <AboutWorkModal
             onClose={() => setIsModalOpen(false)}
             activeStatus={activeStatus}
             onSave={handleSaveStatus}
             title={modalTitle}
           />
-          </div>
+        </div>
       )}
+      
       <div css={boardStyle}>
         <MyPotIcon css={potIconStyle} />
         <div css={boardTextStyle}>
@@ -114,10 +119,7 @@ const MyPotStatusPage: React.FC = () => {
           {paginatedData.map((data, index) => (
             <MyPotTodoCard
               key={index}
-              profileImage={data.profileImage}
-              nickname={data.nickname}
-              status={data.status}
-              statusColor={data.statusColor}
+              nickname={data.userNickname} 
               todos={data.todos}
             />
           ))}
@@ -138,8 +140,8 @@ const MyPotStatusPage: React.FC = () => {
 
       <div css={statusBoardContainer}>
         <div css={statusBoardStyle}>
-            <div css={statusTextStyle}>업무 보드</div>
-            <PotIcon css={iconStyle} />
+          <div css={statusTextStyle}>업무 보드</div>
+          <PotIcon css={iconStyle} />
         </div>
         <button css={buttonStyle} onClick={() => handleOpenModal(null, "새로운 업무 추가")}>새로운 업무 추가</button>
       </div>
@@ -151,7 +153,7 @@ const MyPotStatusPage: React.FC = () => {
               <StateBadge content={status}/>
               <PlusButtonIcon
                 css={plusButtonStyle}
-                onClick={() => handleOpenModal(status, "업무 수정하기")} 
+                onClick={() => handleOpenModal(status, "새로운 업무 추가")} 
               />
             </div>
       
