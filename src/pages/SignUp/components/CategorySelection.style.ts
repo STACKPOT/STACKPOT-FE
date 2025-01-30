@@ -1,12 +1,12 @@
 import { css } from "@emotion/react"
 import theme from "@styles/theme"
 
-export const container  = (gap:string)=>css`
+export const container = (type: "stack" | "interest") => css`
     display: flex;
     align-items: center;
-    gap: ${gap};
+    gap: ${(type === "stack" && "3.6rem") || "2rem"};
 `
-export const titleStyle =css`
+export const titleStyle = css`
     ${theme.font.caption3}
     color: ${theme.color.base.black};
 `

@@ -19,7 +19,7 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({ type, title, onSe
     }
 
     return (
-        <div css={container(type === "stack" ? "3.6rem" : "2rem")}>
+        <div css={container(type)}>
             <p css={titleStyle}>{title}</p>
             <div css={categoriesContainer}>
                 {categories.map((category) =>

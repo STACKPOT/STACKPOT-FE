@@ -43,7 +43,7 @@ const ContractModal: React.FC<ContractModalProps> = ({ type, onCancelModal }: Co
             buttonText="확인했습니다"
             onButtonClick={onCancelModal}
             onCancel={onCancelModal}>
-            <p css={contentStyle(type === "service" ? "38.7rem" : "41.7rem")}>
+            <p css={contentStyle(type)}>
                 <ContractDetailList contracts={contracts} />
             </p>
         </ExplainModal>
