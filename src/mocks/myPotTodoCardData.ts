@@ -1,103 +1,113 @@
-const myPotTodoCardData = [
-  {
-    profileImage: "profile1.jpg",
-    nickname: "너무 착한 버섯",
-    status: "진행 중",
-    statusColor: "blue",
-    todos: [
-      { content: "할 일 1", checked: true },
-      { content: "할 일 2", checked: false },
-      { content: "할 일 3", checked: true },
-    ],
-  },
-  {
-    profileImage: "profile2.jpg",
-    nickname: "열정적인 고양이",
-    status: "완료",
-    statusColor: "green",
-    todos: [
-      { content: "할 일 1", checked: true },
-      { content: "할 일 2", checked: true },
-      { content: "할 일 3", checked: true },
-    ],
-  },
-  {
-    profileImage: "profile3.jpg",
-    nickname: "성실한 강아지",
-    status: "대기 중",
-    statusColor: "yellow",
-    todos: [
-      { content: "할 일 1", checked: false },
-      { content: "할 일 2", checked: false },
-      { content: "할 일 3", checked: false },
-    ],
-  },
-  {
-    profileImage: "profile4.jpg",
-    nickname: "조용한 호랑이",
-    status: "진행 중",
-    statusColor: "blue",
-    todos: [
-      { content: "할 일 1", checked: true },
-      { content: "할 일 2", checked: true },
-      { content: "할 일 3", checked: false },
-    ],
-  },
-  {
-    profileImage: "profile5.jpg",
-    nickname: "웃음 많은 토끼",
-    status: "완료",
-    statusColor: "green",
-    todos: [
-      { content: "할 일 1", checked: true },
-      { content: "할 일 2", checked: true },
-      { content: "할 일 3", checked: true },
-    ],
-  },
-  {
-    profileImage: "profile6.jpg",
-    nickname: "침착한 거북이",
-    status: "대기 중",
-    statusColor: "yellow",
-    todos: [
-      { content: "할 일 1", checked: false },
-      { content: "할 일 2", checked: true },
-      { content: "할 일 3", checked: false },
-    ],
-  },
-  {
-    profileImage: "profile7.jpg",
-    nickname: "호기심 많은 새",
-    status: "진행 중",
-    statusColor: "blue",
-    todos: [
-      { content: "할 일 1", checked: true },
-      { content: "할 일 2", checked: false },
-      { content: "할 일 3", checked: true },
-    ],
-  },
-  {
-    profileImage: "profile8.jpg",
-    nickname: "창의적인 여우",
-    status: "완료",
-    statusColor: "green",
-    todos: [
-      { content: "할 일 1", checked: true },
-      { content: "할 일 2", checked: true },
-      { content: "할 일 3", checked: true },
-    ],
-  },
-  {
-    profileImage: "profile9.jpg",
-    nickname: "느긋한 곰",
-    status: "대기 중",
-    statusColor: "yellow",
-    todos: [
-      { content: "할 일 1", checked: false },
-      { content: "할 일 2", checked: false },
-      { content: "할 일 3", checked: false },
-    ],
-  },
-];
+const myPotTodoCardData = {
+  result: [
+    {
+      userNickname: "성실한 브로콜리",
+      userId: 1,
+      todos: [
+        {
+          todoId: 101,
+          content: "프로젝트 계획서 작성",
+          status: "NOT_STARTED",
+        },
+        {
+          todoId: 102,
+          content: "디자인 초안 검토",
+          status: "IN_PROGRESS",
+        },
+      ],
+    },
+    {
+      userNickname: "웃는 당근",
+      userId: 2,
+      todos: [
+        {
+          todoId: 103,
+          content: "API 명세서 정리",
+          status: "COMPLETED",
+        },
+      ],
+    },
+    {
+      userNickname: "부지런한 양파",
+      userId: 3,
+      todos: [
+        {
+          todoId: 104,
+          content: "프론트엔드 UI 개발",
+          status: "IN_PROGRESS",
+        },
+        {
+          todoId: 105,
+          content: "테스트 코드 작성",
+          status: "NOT_STARTED",
+        },
+        {
+          todoId: 106,
+          content: "서버 배포 테스트",
+          status: "COMPLETED",
+        },
+      ],
+    },
+    {
+      userNickname: "천재 버섯",
+      userId: 4,
+      todos: [
+        {
+          todoId: 107,
+          content: "리팩토링 진행",
+          status: "IN_PROGRESS",
+        },
+      ],
+    },
+    {
+      userNickname: "바쁜 고구마",
+      userId: 5,
+      todos: [],
+    },
+    {
+      userNickname: "한가한 감자",
+      userId: 6,
+      todos: [
+        {
+          todoId: 108,
+          content: "회의록 정리",
+          status: "COMPLETED",
+        },
+        {
+          todoId: 109,
+          content: "팀원 피드백 반영",
+          status: "NOT_STARTED",
+        },
+      ],
+    },
+    {
+      userNickname: "노련한 무",
+      userId: 7,
+      todos: [
+        {
+          todoId: 110,
+          content: "데이터베이스 스키마 설계",
+          status: "IN_PROGRESS",
+        },
+      ],
+    },
+    {
+      userNickname: "초보 상추",
+      userId: 8,
+      todos: [
+        {
+          todoId: 111,
+          content: "기본 문서 읽기",
+          status: "NOT_STARTED",
+        },
+        {
+          todoId: 112,
+          content: "온보딩 완료하기",
+          status: "IN_PROGRESS",
+        },
+      ],
+    },
+  ],
+};
 
 export default myPotTodoCardData;
