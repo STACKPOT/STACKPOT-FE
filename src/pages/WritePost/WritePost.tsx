@@ -11,13 +11,18 @@ import {
   buttonContainer,
   inputStyle,
   toastStyle,
+  modalContainer,
 } from "./WritePost.style";
 import { PotIcon } from "@assets/svgs";
-import { Button, CategoryButton } from "@components/index";
+import { Button, CategoryButton, Modal } from "@components/index";
 import { partMap } from "@constants/categories";
 import UploadToast from "@components/commons/Toast/UploadToast";
+import { useBlocker } from "react-router-dom";
 
 const WritePost: React.FC = () => {
+  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    return currentLocation.pathname !== nextLocation.pathname;
+  });
   const [selectedPart, setSelectedPart] = useState<string | null>(null);
 
   const [visibleInputs, setVisibleInputs] = useState<{
@@ -81,6 +86,16 @@ const WritePost: React.FC = () => {
           </div>
         </div>
       </div>
+      {blocker.state === "blocked" && (
+        <div css={modalContainer}>
+          <Modal
+            title="어떠한 내용을 전달합니다. 진행할까요?"
+            message="모든 하위 정보는 여기에 작성됩니다."
+            onConfirm={blocker.proceed}
+            onCancel={blocker.reset}
+          />
+        </div>
+      )}
     </main>
   );
 };
