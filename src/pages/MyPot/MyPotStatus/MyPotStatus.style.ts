@@ -39,6 +39,7 @@ export const gridContainerStyle = css`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  height: 23.9rem;
 `;
 
 export const paginationContainer = css`

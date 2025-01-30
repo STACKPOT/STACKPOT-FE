@@ -7,7 +7,7 @@ export const cardStyle = css`
     border: 0.1rem solid ${theme.color.object.alternative};
     background-color: ${theme.color.base.white};
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
-    height: 21rem;
+    height: auto;
     cursor: pointer; 
 
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -39,7 +39,7 @@ export const forDropdownStyle = css`
 export const badgeContainer = css`
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.8rem;
 `
 
 export const contentContainer = css`
@@ -65,7 +65,7 @@ export const contentTextStyle = css`
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    min-height: calc(14px * 2);
+    min-height: calc(4.8rem);
 `
 
 export const dateTextStyle = css`
