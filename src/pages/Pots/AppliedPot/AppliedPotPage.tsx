@@ -22,9 +22,6 @@ const AppliedPotPage = () => {
   }[]>(appliedPotsData);
   const [cancelApplyPotId, setCancelApplyPotId] = useState<number | null>(null);
 
-  const handlePotDetail = (potId: number) => {
-    // todo: 팟 상세 페이지로 이동
-  }
   const handleCancelApplyConfirm = (potId: number) => {
     // todo: 팟 지원 취소하기 api 호출
     setCancelApplyPotId(null);
@@ -40,8 +37,7 @@ const AppliedPotPage = () => {
       {pots.map((pot) =>
         <PotInformationCard
           {...pot}
-          onButtonClick={() => setCancelApplyPotId(pot.id)}
-          onCardClick={() => handlePotDetail(pot.id)} />)}
+          onButtonClick={() => setCancelApplyPotId(pot.id)} />)}
       {cancelApplyPotId !== null &&
         <Modal
           title="지원을 취소하시겠어요?"

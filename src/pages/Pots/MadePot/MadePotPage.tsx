@@ -38,14 +38,8 @@ const MadePotPage = () => {
     languages: string;
   }[]>(appliedPotsData);
 
-  const handlePotDetail = (id: number) => {
-    // todo: 팟 상세 페이지로 이동
-  }
   const handleEditPot = (id: number) => {
     // todo: 팟 수정 페이지로 이동
-  }
-  const handleFinishPot = (id: number) => {
-    // todo: 팟 끓이기 페이지로 이동
   }
 
   return (
@@ -57,27 +51,21 @@ const MadePotPage = () => {
               <PotInformationCard
                 {...pot}
                 type="made"
-                onButtonClick={handleEditPot}
-                onCardClick={handlePotDetail} />)}
+                onButtonClick={handleEditPot} />)}
           </>
         </Section>
         <Section title="진행 중인 나의 팟">
           <>
             {onGoingPots.map((pot) =>
               <OnGoingPotCard
-                {...pot}
-                onFinishPot={handleFinishPot}
-                onClickCard={handlePotDetail} />)}
+                {...pot} />)}
           </>
         </Section>
         <Section title="끓인 나의 팟">
           <>
             {finishedPots.map((pot) =>
               <FinishedPotCard
-                {...pot}
-                onEdit={handleEditPot}
-                onClickCard={handlePotDetail}
-              />)}
+                {...pot} />)}
           </>
         </Section>
       </div>

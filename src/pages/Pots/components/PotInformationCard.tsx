@@ -1,5 +1,6 @@
 import { DdayBadge, PotButton, PotInformation } from "@components/index";
 import { container, ddayBadgeWrapper, nicknameStyle, profileContainer, profileStyle, titleContainer, titleStyle } from "./PotInformationCard.style";
+import { useNavigate } from "react-router-dom";
 
 interface PotInformationCardProps {
     id: number;
@@ -14,11 +15,15 @@ interface PotInformationCardProps {
     stacks: string;
     languages: string;
     onButtonClick: (id: number) => void;
-    onCardClick: (id: number) => void;
 }
-const PotInformationCard: React.FC<PotInformationCardProps> = ({ id, type, title, profileImage, nickname, dday, startDate, period, method, stacks, languages, onButtonClick, onCardClick }: PotInformationCardProps) => {
+const PotInformationCard: React.FC<PotInformationCardProps> = ({ id, type, title, profileImage, nickname, dday, startDate, period, method, stacks, languages, onButtonClick }: PotInformationCardProps) => {
+    const navigate = useNavigate();
+    const handleClickPot = (id: number) => {
+        navigate(`/pot/${id}`);
+    }
+
     return (
-        <div css={container} onClick={() => onCardClick(id)}>
+        <div css={container} onClick={() => handleClickPot(id)}>
             <div css={titleContainer}>
                 <h1 css={titleStyle}>{title}</h1>
                 <PotButton onClick={() => onButtonClick(id)}>{(type === "applied" && "지원 취소하기") || "팟 소개 수정"}</PotButton>
