@@ -1,7 +1,7 @@
 import { bodyContainer, container, dividerStyle, headerContainer, headerStyle, mainContainer, categoryContainer } from "./SignUp.style"
 import { Button, TextField } from "@components/index"
 import { useState } from "react";
-import { MushRoomProfile } from "@assets/images";
+import { MushroomImage } from "@assets/images";
 import { CategorySelection, ContractsSection, NicknameInput, ProfileModal, Section } from "./components";
 
 const SignUp = () => {
@@ -66,7 +66,7 @@ const SignUp = () => {
             </div>
             {signUpCompleteModal &&
                 <ProfileModal
-                    profile={MushRoomProfile}
+                    profile={MushroomImage}
                     nickname={nickname}
                     onModalCancel={() => setSignUpCompleteModal(false)}>
                 </ProfileModal>

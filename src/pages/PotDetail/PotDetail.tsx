@@ -1,5 +1,5 @@
 import { bodyContainerStyle, containerStyle, contentStyle, dividerStyle, sectionContainerStyle } from "./PotDetail.style";
-import { MushRoomProfile } from "@assets/images";
+import { MushroomImage } from "@assets/images";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { ApplicantsInformation, PotHeader, PotInformation, ProfileInformation } from "./components";
@@ -24,7 +24,7 @@ const PotDetail = () => {
                         onCancelApplySuccess={() => setIsApplied(false)} />
                     <ProfileInformation
                         nickname="아아 마시는 버섯"
-                        profileImage={MushRoomProfile}
+                        profileImage={MushroomImage}
                         dday={5} />
                     <div css={dividerStyle} />
                 </div>
