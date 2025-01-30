@@ -62,7 +62,7 @@ const SignUp = () => {
                     <ContractsSection
                         onAgree={setContractsAgreed} />
                 </div>
-                <Button style="action" actionType="join" onClick={handleSignUp}>가입하기</Button>
+                <Button variant="action" actionType="join" onClick={handleSignUp}>가입하기</Button>
             </div>
             {signUpCompleteModal &&
                 <ProfileModal
