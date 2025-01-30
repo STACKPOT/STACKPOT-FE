@@ -8,6 +8,7 @@ export const dropdownStyle = css`
   border-radius: 1.6rem;
   flex-direction: column;
   position: fixed;
+  background-color: ${theme.color.base.white};
 `;
 
 export const iconStyle = css`
@@ -26,4 +27,8 @@ export const containerStyle = (edit: boolean) => css`
   justify-content: center;
   cursor: pointer;
   padding: 1rem;
+`;
+
+export const bodyStyle = css`
+  height: 2.8rem;
 `;
