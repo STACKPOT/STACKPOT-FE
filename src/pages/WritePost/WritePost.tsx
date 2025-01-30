@@ -89,8 +89,8 @@ const WritePost: React.FC = () => {
       {blocker.state === "blocked" && (
         <div css={modalContainer}>
           <Modal
-            title="어떠한 내용을 전달합니다. 진행할까요?"
-            message="모든 하위 정보는 여기에 작성됩니다."
+            title="페이지를 나가시겠어요?"
+            message="입력한 내용을 처음부터 시작해야 해요."
             onConfirm={blocker.proceed}
             onCancel={blocker.reset}
           />
