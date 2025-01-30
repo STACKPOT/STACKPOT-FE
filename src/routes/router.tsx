@@ -14,6 +14,7 @@ import {
   AllPotPage,
   AppliedPotPage,
   MadePotPage,
+  SignUpPage,
   CreatePotPage,
   WritingPage,
   MyPotCalendarPage,
@@ -55,6 +56,11 @@ const router = createBrowserRouter([
       {
         path: routes.searchResult,
         element: <SearchResultPage />,
+      },
+      {
+        path: routes.signUp,
+        element: <SignUpPage />,
+
       },
       {
         path: routes.potDetail,

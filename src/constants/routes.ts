@@ -17,6 +17,7 @@ const routes = {
   setting: "/setting",
   search: "/search",
   searchResult: "/search-result",
+  signUp: "/sign-up",
   potDetail: "/pot/:potId",
 } as const;
 

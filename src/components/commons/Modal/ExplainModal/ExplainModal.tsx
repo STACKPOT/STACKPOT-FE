@@ -9,7 +9,7 @@ interface ExplainModalProps {
     onCancel: () => void;
 }
 
-const ExplainModal: React.FC<ExplainModalProps> = ({ title, children, buttonText: buttonContent, onButtonClick: onClick, onCancel }: ExplainModalProps) => {
+const ExplainModal: React.FC<ExplainModalProps> = ({ title, children, buttonText, onButtonClick: onClick, onCancel }: ExplainModalProps) => {
     return (
         <div css={modalBackgroundStyle}>
             <div css={containerStyle}>
@@ -19,7 +19,7 @@ const ExplainModal: React.FC<ExplainModalProps> = ({ title, children, buttonText
                         <p css={titleStyle}>{title}</p>
                         {children}
                     </div>
-                    <button css={buttonStyle} onClick={onClick}>{buttonContent}</button>
+                    <button css={buttonStyle} onClick={onClick}>{buttonText}</button>
                 </div>
             </div>
         </div>
