@@ -9,7 +9,7 @@ import onGoingPotsData from "mocks/onGoingPotsData";
 const MadePotPage = () => {
   const [recruitingPots, setRecruitingPots] = useState<{
     id: number;
-    type: "applied" | "my";
+    type: "applied" | "made";
     title: string;
     profileImage: string;
     nickname: string;
@@ -29,7 +29,7 @@ const MadePotPage = () => {
 
   const [finishedPots, setFinishedPots] = useState<{
     id: number;
-    type: "applied" | "my";
+    type: "applied" | "made";
     title: string;
     startDate: string;
     period: string;
@@ -56,7 +56,7 @@ const MadePotPage = () => {
             {recruitingPots.map((pot) =>
               <PotInformationCard
                 {...pot}
-                type="my"
+                type="made"
                 onButtonClick={handleEditPot}
                 onCardClick={handlePotDetail} />)}
           </>

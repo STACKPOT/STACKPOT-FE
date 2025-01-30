@@ -1,5 +1,5 @@
 import { PotIcon } from "@assets/svgs";
-import { potIconStyle, potsContainer, sectionContainer, titleContainer, titleStyle } from "./Section.style";
+import { potIconStyle, potCardsContainer, sectionContainer, titleContainer, titleStyle } from "./Section.style";
 
 interface SectionProps {
     children: React.ReactNode;
@@ -12,7 +12,7 @@ const Section: React.FC<SectionProps> = ({ children, title }: SectionProps) => {
                 <h1 css={titleStyle}>{title}</h1>
                 <PotIcon css={potIconStyle} />
             </div>
-            <div css={potsContainer}>
+            <div css={potCardsContainer}>
                 {children}
             </div>
         </div>

@@ -8,6 +8,7 @@ export const container = css`
     border-radius: 16px;
     border: 1px solid ${theme.color.object.alternative};
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
+    cursor: pointer;
 `
 export const contentContainer = css`
     display: flex;

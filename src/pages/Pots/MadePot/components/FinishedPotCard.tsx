@@ -1,5 +1,5 @@
-import { PotButton } from "@components/index";
-import { columnContainer, container, elementContainer, elementContentStyle, elementTitleStyle, potDetailContainer, titleContainer, titleStyle } from "./FinishedPotCard.style";
+import { PotButton, PotInformation } from "@components/index";
+import { container, titleContainer, titleStyle } from "./FinishedPotCard.style";
 
 interface FinishedPotCardProps {
     id: number;
@@ -20,32 +20,12 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, startDate,
                 <h1 css={titleStyle}>{title}</h1>
                 <PotButton onClick={() => onEdit(id)}>팟 소개 수정</PotButton>
             </div>
-            <div css={potDetailContainer}>
-                <div css={columnContainer}>
-                    <div css={elementContainer}>
-                        <p css={elementTitleStyle}>시작 날짜</p>
-                        <p css={elementContentStyle}>{startDate}</p>
-                    </div>
-                    <div css={elementContainer}>
-                        <p css={elementTitleStyle}>사용 언어</p>
-                        <p css={elementContentStyle}>{languages}</p>
-                    </div>
-                    <div css={elementContainer}>
-                        <p css={elementTitleStyle}>모집 분야</p>
-                        <p css={elementContentStyle}>{stacks}</p>
-                    </div>
-                </div>
-                <div css={columnContainer}>
-                    <div css={elementContainer}>
-                        <p css={elementTitleStyle}>진행 방식</p>
-                        <p css={elementContentStyle}>{method}</p>
-                    </div>
-                    <div css={elementContainer}>
-                        <p css={elementTitleStyle}>예상 기간</p>
-                        <p css={elementContentStyle}>{period}</p>
-                    </div>
-                </div>
-            </div>
+            <PotInformation
+                startDate={startDate}
+                period={period}
+                method={method}
+                stacks={stacks}
+                languages={languages} />
         </div>
     )
 }

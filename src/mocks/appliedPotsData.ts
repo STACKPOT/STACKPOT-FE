@@ -2,7 +2,7 @@ import { MushRoomProfile } from "@assets/images";
 
 const appliedPotsData: {
     id: number;
-    type: "applied" | "my";
+    type: "applied" | "made";
     title: string;
     profileImage: string;
     nickname: string;
