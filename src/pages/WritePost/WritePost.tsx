@@ -11,7 +11,6 @@ import {
   buttonContainer,
   inputStyle,
   toastStyle,
-  modalContainer,
 } from "./WritePost.style";
 import { PotIcon } from "@assets/svgs";
 import { Button, CategoryButton, Modal } from "@components/index";
@@ -99,14 +98,12 @@ const WritePost: React.FC = () => {
         </div>
       </div>
       {blocker.state === "blocked" && (
-        <div css={modalContainer}>
-          <Modal
-            title="페이지를 나가시겠어요?"
-            message="입력한 내용을 처음부터 시작해야 해요."
-            onConfirm={blocker.proceed}
-            onCancel={blocker.reset}
-          />
-        </div>
+        <Modal
+          title="페이지를 나가시겠어요?"
+          message="입력한 내용을 처음부터 시작해야 해요."
+          onConfirm={blocker.proceed}
+          onCancel={blocker.reset}
+        />
       )}
     </main>
   );

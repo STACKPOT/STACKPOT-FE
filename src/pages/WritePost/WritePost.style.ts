@@ -110,16 +110,3 @@ export const categories = css`
   flex-direction: row;
   gap: 2.4rem;
 `;
-
-export const modalContainer = css`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 7.5rem;
-  background-color: rgba(0, 0, 0, 0.4);
-`;
