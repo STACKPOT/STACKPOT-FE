@@ -1,12 +1,11 @@
 import {
   container,
-  header,
-  body,
   footer,
   button,
   titleStyle,
   messageStyle,
   background,
+  closeIconStyle,
 } from "./Modal.style";
 import { CloseIcon } from "@assets/svgs";
 import theme from "@styles/theme";
@@ -27,13 +26,9 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <div css={background}>
       <div css={container}>
-        <div css={header}>
-          <CloseIcon onClick={onCancel} />
-        </div>
-        <div css={body}>
-          <p css={titleStyle}>{title}</p>
-          <p css={messageStyle}>{message}</p>
-        </div>
+        <CloseIcon css={closeIconStyle} onClick={onCancel} />
+        <p css={titleStyle}>{title}</p>
+        <p css={messageStyle}>{message}</p>
         <div css={footer}>
           <button
             css={button(theme.color.interactive.inactive)}
