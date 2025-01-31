@@ -7,19 +7,7 @@ import Modal from "@components/commons/Modal/Modal";
 
 
 const AppliedPotPage = () => {
-  const [pots, setPots] = useState<{
-    id: number;
-    type: "applied" | "made";
-    title: string;
-    profileImage: string;
-    nickname: string;
-    dday: number;
-    startDate: string;
-    period: string;
-    method: string;
-    stacks: string;
-    languages: string;
-  }[]>(appliedPotsData);
+  const [pots, setPots] = useState(appliedPotsData);
   const [cancelApplyPotId, setCancelApplyPotId] = useState<number | null>(null);
 
   const handleCancelApplyConfirm = (potId: number) => {

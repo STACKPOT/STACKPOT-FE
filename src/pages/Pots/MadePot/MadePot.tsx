@@ -7,36 +7,9 @@ import onGoingPotsData from "mocks/onGoingPotsData";
 
 
 const MadePotPage = () => {
-  const [recruitingPots, setRecruitingPots] = useState<{
-    id: number;
-    type: "applied" | "made";
-    title: string;
-    profileImage: string;
-    nickname: string;
-    dday: number;
-    startDate: string;
-    period: string;
-    method: string;
-    stacks: string;
-    languages: string;
-  }[]>(appliedPotsData);
-
-  const [onGoingPots, setOnGoingPots] = useState<{
-    id: number;
-    title: string;
-    memberList: string[];
-  }[]>(onGoingPotsData);
-
-  const [finishedPots, setFinishedPots] = useState<{
-    id: number;
-    type: "applied" | "made";
-    title: string;
-    startDate: string;
-    period: string;
-    method: string;
-    stacks: string;
-    languages: string;
-  }[]>(appliedPotsData);
+  const [recruitingPots, setRecruitingPots] = useState(appliedPotsData);
+  const [onGoingPots, setOnGoingPots] = useState(onGoingPotsData);
+  const [finishedPots, setFinishedPots] = useState(appliedPotsData);
 
   const handleEditPot = (id: number) => {
     // todo: 팟 수정 페이지로 이동
