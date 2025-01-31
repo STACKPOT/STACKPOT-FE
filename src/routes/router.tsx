@@ -79,10 +79,10 @@ const router = createBrowserRouter([
           { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
       },
-      // {
-      //   path: routes.callback,
-      //   element: <CallbackPage />,
-      // },//
+      {
+        path: routes.callback,
+        element: <CallbackPage />,
+      },
       {
         path: routes.myPot.base,
         // element: <MyPotMainPage />,
