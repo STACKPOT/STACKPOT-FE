@@ -1,4 +1,5 @@
 import { Global, ThemeProvider } from "@emotion/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { globalStyles } from "@styles/global";
 import theme from "@styles/theme";
 import { Outlet } from "react-router-dom";
@@ -12,17 +13,28 @@ import {
 
 const muiTheme = createTheme();
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      throwOnError: true,
+    },
+  },
+});
+
 function App() {
   return (
-    <MUIThemeProvider theme={muiTheme}>
-      <ThemeProvider theme={theme}>
-        <Global styles={globalStyles} />
-        <Header />
-        <SideBar />
-        <Outlet />
-        <Footer />
-      </ThemeProvider>
-    </MUIThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <MUIThemeProvider theme={muiTheme}>
+        <ThemeProvider theme={theme}>
+          <Global styles={globalStyles} />
+          <Header />
+          <SideBar />
+          <Outlet />
+          <Footer />
+        </ThemeProvider>
+      </MUIThemeProvider>
+    </QueryClientProvider>
   );
 }
 
