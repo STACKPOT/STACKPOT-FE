@@ -58,6 +58,10 @@ export const buttonStyle = css`
     ${theme.font.bodyBold1};
     cursor: pointer;    width: 20.7rem;
 `
+export const nicknameStyle = css`
+    ${theme.font.caption1}
+    color: ${theme.color.object.assistive};
+`
 export const applicantContainer = css`
     display: inline-flex;
     align-items: center;
@@ -65,11 +69,13 @@ export const applicantContainer = css`
     padding: 2rem 3rem;
     border-radius: 16px;
     border: 1px solid ${theme.color.object.alternative};
-    box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);;
-`
-export const nicknameStyle = css`
-    ${theme.font.caption1}
-    color: ${theme.color.object.assistive};
+    box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
+
+    &:hover p {
+        color: ${theme.color.base.darkgray};
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+    }
 `
 export const profileStyle = css`
     width: 4rem;
