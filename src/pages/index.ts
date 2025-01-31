@@ -14,7 +14,7 @@ import SignUpPage from "./SignUp/SignUp";
 import CreatePotPage from "./CreatePot/CreatePot";
 import WritingPage from "./WritePost/WritePost";
 import MyPotCalendarPage from "./MyPot/MyPotCalendar/MyPotCalendar";
-import CallbackPage from "./Callback/Callback";
+import MyPotPage from "./MyPot/MyPot";
 
 export {
   HomePage,
@@ -33,5 +33,5 @@ export {
   CreatePotPage,
   WritingPage,
   MyPotCalendarPage,
-  CallbackPage,
+  MyPotPage,
 };

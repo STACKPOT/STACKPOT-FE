@@ -1,9 +1,17 @@
-import React from 'react'
+import { PotIcon } from "@assets/svgs";
+import { container, content, contentHeader, iconStyle } from "./MyPot.style";
 
-const MyPot = () => {
+const MyPot: React.FC = () => {
   return (
-    <div>MyPot</div>
-  )
-}
+    <div css={container}>
+      <div css={content}>
+        <div css={contentHeader}>
+          <p>나의 팟</p>
+          <PotIcon css={iconStyle} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default MyPot
+export default MyPot;
