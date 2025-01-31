@@ -14,7 +14,6 @@ export const sloganContainer = css`
   flex-direction: column;
   align-items: center;
   gap: 2.4rem;
-  margin-bottom: 2.4rem;
 `;
 
 export const LogoContainer = css`
@@ -55,9 +54,10 @@ export const TaskImgageStyle = css`
   margin-top: 1.6rem;
 `;
 
-export const container = css`
-  display: flex;
-  flex-direction: column;
+export const subTitleStyle = css`
+  ${theme.font.title1};
+  color: ${theme.color.object.assistive};
+  margin: 2rem 0 2.4rem 0;
 `;
 
 export const iconContainer = css`

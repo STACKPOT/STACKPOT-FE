@@ -13,6 +13,7 @@ import {
   profileImageStyle,
   profileTextContainer,
   sloganContainer,
+  subTitleStyle,
   TaskImgageStyle,
   titleStyle,
 } from "./Landing.style";
@@ -48,6 +49,7 @@ const Landing = () => {
           <p>에서</p>
         </div>
       </div>
+      <p css={subTitleStyle}>더욱 효율적으로 하는 사이드 프로젝트</p>
       <Button variant="landing" onClick={handleClick}>
         팟 만들러 가기
       </Button>
