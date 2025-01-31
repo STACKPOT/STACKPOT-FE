@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import { cardStyle, profileContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, likeContainer, likeIconStyle, nicknameDateContainer, likeTextStyle } from "./PostCard.style"
+import { cardStyle, profileContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, likeContainer, likeIconStyle, nicknameDateContainer, likeTextStyle, moreIconStyle } from "./PostCard.style"
 import { LikeIcon } from "@assets/svgs";
+import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 
 interface PostCardProps {
     profileImage: string;
@@ -15,6 +16,7 @@ interface PostCardProps {
 const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, title, content, likeCount, isLiked }: PostCardProps) => {
     const [isLike, setIsLike] = useState<boolean>(isLiked);
     const [likes, setLikes] = useState<number>(likeCount);
+    const [isMyPost, setIsMyPost] = useState<boolean>(true);
     const handleLike = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
         setIsLike(!isLike);
@@ -23,6 +25,12 @@ const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, 
     const handleClickCard = () => {
         // todo: 게시글 페이지로 이동
         console.log("click card")
+    }
+    const handleEdit = () => {
+        // todo: 수정 페이지로 이동
+    }
+    const handleDelete = () => {
+        // todo: 삭제하기 api
     }
 
     return (
@@ -33,6 +41,13 @@ const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, 
                     <p css={nicknameStyle}>{nickname}</p>
                     <p css={dateStyle}>{createdAt}</p>
                 </div>
+                {isMyPost && <div css={moreIconStyle} onClick={(e) => { e.stopPropagation(); }}>
+                    <MyFeedDropdown
+                        topMessage="수정하기"
+                        bottomMessage="삭제하기"
+                        onTop={handleEdit}
+                        onBottom={handleDelete} />
+                </div>}
             </div>
             <h1 css={titleStyle}>{title}</h1>
             <p css={contentStyle}>{content}</p>

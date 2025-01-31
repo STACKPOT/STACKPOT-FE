@@ -34,6 +34,13 @@ export const nicknameStyle = css`
     color:${theme.color.object.assistive};
 `
 
+export const moreIconStyle = css`
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-bottom: auto;
+    margin-left: auto;
+`
+
 export const dateStyle = css`
     color: ${theme.color.interactive.inactive};
     ${theme.font.caption2}
@@ -65,10 +72,10 @@ export const likeTextStyle = css`
     ${theme.font.label3}
     color: ${theme.color.interactive.inactive};
 `
-export const likeIconStyle = (isLike:boolean) => css`
+export const likeIconStyle = (isLike: boolean) => css`
     width: 2.2rem;
     height: 2.2rem;
-    fill: ${isLike? theme.color.feedback.negative : theme.color.interactive.inactive};
+    fill: ${isLike ? theme.color.feedback.negative : theme.color.interactive.inactive};
 `
 export const likeIconfilledStyle = css`
     width: 2.2rem;
