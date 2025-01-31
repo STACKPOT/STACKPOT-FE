@@ -1,4 +1,4 @@
-import { MushRoomProfile } from "@assets/images";
+import { MushroomImage, OnionImage } from "@assets/images";
 
 const appliedPotsData: {
     id: number;
@@ -17,7 +17,7 @@ const appliedPotsData: {
             id: 0,
             type: "applied",
             title: "AI 자동화 챗봇 어플 공부할 스터디원",
-            profileImage: MushRoomProfile,
+            profileImage: MushroomImage,
             nickname: "치킨 먹는 브로콜리",
             dday: 5,
             startDate: "2025 .2. 18",
@@ -30,7 +30,7 @@ const appliedPotsData: {
             id: 1,
             type: "applied",
             title: "AI 자동화 챗봇 어플 공부할 스터디원1",
-            profileImage: MushRoomProfile,
+            profileImage: MushroomImage,
             nickname: "치킨 먹는 브로콜리",
             dday: 5,
             startDate: "2025 .2. 18",
@@ -43,7 +43,7 @@ const appliedPotsData: {
             id: 2,
             type: "applied",
             title: "AI 자동화 챗봇 어플 공부할 스터디원2",
-            profileImage: MushRoomProfile,
+            profileImage: OnionImage,
             nickname: "치킨 먹는 브로콜리",
             dday: 5,
             startDate: "2025 .2. 18",

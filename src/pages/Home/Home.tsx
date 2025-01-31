@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
-import { Banner } from "@assets/images";
 import postCardsData from "mocks/postCardsData";
 import potCardsData from "mocks/potCardsData";
 import { PotIcon } from "@assets/svgs";
@@ -28,6 +27,7 @@ import { Navigation, Pagination } from "swiper/modules";
 
 import "swiper/swiper-bundle.css";
 import "swiper";
+import { BannerImage } from "@assets/images";
 
 const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -54,7 +54,7 @@ const Home: React.FC = () => {
 
   return (
     <main>
-      <img css={bannerStyle} src={Banner} alt="Banner" />
+      <img css={bannerStyle} src={BannerImage} alt="Banner" />
       <div css={container}>
         <div css={content}>
           <div css={contentTitle}>

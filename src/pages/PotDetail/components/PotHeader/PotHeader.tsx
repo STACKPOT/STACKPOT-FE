@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ApplyStackModal from "../ApplyStackModal/ApplyStackModal";
 import ProfileModal from "../ProfileModal/ProfileModal";
-import { MushRoomProfile } from "@assets/images";
+import { MushroomImage } from "@assets/images";
 
 interface PotHeaderProps {
     title: string;
@@ -75,7 +75,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, isFini
             {showApplyModal && selectedApplyStack &&
                 <ProfileModal
                     type="apply"
-                    profileImage={MushRoomProfile}
+                    profileImage={MushroomImage}
                     nickname="아아 마시는 버섯"
                     onButtonClick={handleApplyConfirm}
                     onCancelModal={() => setShowApplyModal(false)} />

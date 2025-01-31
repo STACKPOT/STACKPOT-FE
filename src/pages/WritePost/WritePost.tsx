@@ -58,7 +58,7 @@ const WritePost: React.FC = () => {
             피드 작성하기
             <PotIcon css={iconStyle} />
             <div css={buttonContainer}>
-              <Button style="action" onClick={handleUploading}>
+              <Button variant="action" onClick={handleUploading}>
                 피드 업로드
               </Button>
             </div>
