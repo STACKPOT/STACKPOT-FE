@@ -1,5 +1,5 @@
-import React from "react"
-import { cardStyle, profileContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, innerContainerStyle, buttonContainer, likeConatiner, likeIconUnfilledStyle, profileDateContainer, likeTextStyle } from "./PostCard.style"
+import React, { useState } from "react"
+import { cardStyle, profileContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, likeContainer, likeIconStyle, nicknameDateContainer, likeTextStyle } from "./PostCard.style"
 import { LikeIcon } from "@assets/svgs";
 
 interface PostCardProps {
@@ -9,28 +9,36 @@ interface PostCardProps {
     title: string;
     content: string;
     likeCount: number;
+    isLiked: boolean;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, title, content, likeCount }: PostCardProps) => {
+const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, title, content, likeCount, isLiked }: PostCardProps) => {
+    const [isLike, setIsLike] = useState<boolean>(isLiked);
+    const [likes, setLikes] = useState<number>(likeCount);
+    const handleLike = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+        setIsLike(!isLike);
+        setLikes((prev) => isLike ? prev - 1 : prev + 1);
+    }
+    const handleClickCard = () => {
+        // todo: 게시글 페이지로 이동
+        console.log("click card")
+    }
 
     return (
-        <div css={cardStyle} >
-            <div css={innerContainerStyle}>
-                <div css={profileDateContainer} >
-                    <div css={profileContainer}>
-                        <img css={profileImageStyle} src={profileImage} />
-                        <p css={nicknameStyle}>{nickname}</p>
-                    </div>
+        <div css={cardStyle} onClick={handleClickCard}>
+            <div css={profileContainer}>
+                <img css={profileImageStyle} src={profileImage} />
+                <div css={nicknameDateContainer}>
+                    <p css={nicknameStyle}>{nickname}</p>
                     <p css={dateStyle}>{createdAt}</p>
                 </div>
-                <h1 css={titleStyle}>{title}</h1>
-                <p css={contentStyle}>{content}</p>
-                <div css={buttonContainer}>
-                    <div css={likeConatiner}>
-                        <LikeIcon css={likeIconUnfilledStyle} />
-                        <p css={likeTextStyle}>{likeCount}</p>
-                    </div>
-                </div>
+            </div>
+            <h1 css={titleStyle}>{title}</h1>
+            <p css={contentStyle}>{content}</p>
+            <div css={likeContainer} onClick={handleLike}>
+                <LikeIcon css={likeIconStyle(isLike)} />
+                <p css={likeTextStyle}>{likes}</p>
             </div>
         </div>
     )
