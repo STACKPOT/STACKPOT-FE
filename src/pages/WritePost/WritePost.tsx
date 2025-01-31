@@ -26,14 +26,14 @@ const WritePost: React.FC = () => {
     [key: string]: boolean;
   }>({});
   const [showToast, setShowToast] = useState(false);
-  const [isDirty, setIsDirty] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
 
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    return isDirty && currentLocation.pathname !== nextLocation.pathname;
+    return isFilled && currentLocation.pathname !== nextLocation.pathname;
   });
 
   const handleInputChange = () => {
-    setIsDirty(true);
+    setIsFilled(true);
   };
 
   const handleUploading = () => {
@@ -46,7 +46,7 @@ const WritePost: React.FC = () => {
   const handlePartClick = (partName: string) => {
     setSelectedPart((prev) => (prev === partName ? null : partName));
     setVisibleInputs({ [partName]: true });
-    setIsDirty(true);
+    setIsFilled(true);
   };
 
   return (
