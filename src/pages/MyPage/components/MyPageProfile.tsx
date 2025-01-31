@@ -1,6 +1,7 @@
 import { SetUpIcon } from "@assets/svgs";
 import { contentContainer, introductionStyle, nicknameContainer, nicknameStyle, profileContainer, profileStyle, setUpIconStyle, } from "./MyPageProfile.style";
 import TemperatureBar from "@components/commons/TemperatureBar/TemperatureBar";
+import { useNavigate } from "react-router-dom";
 
 interface MyPageProfileProps {
     profileImage: string;
@@ -9,8 +10,10 @@ interface MyPageProfileProps {
     temperature: number;
 }
 const MyPageProfile: React.FC<MyPageProfileProps> = ({ profileImage, nickname, introduction, temperature }: MyPageProfileProps) => {
+    const navigate = useNavigate();
+
     const handleSetUp = () => {
-        // todo: 설정 페이지로 이동
+        navigate("/setting")
     }
 
     return (

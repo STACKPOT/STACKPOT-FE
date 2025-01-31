@@ -2,15 +2,14 @@ import { useState } from 'react'
 import { bodyContainer, container, dividerStyle, listContainer, tabsContainer, tabsTextStyle } from './MyPage.style'
 import { MyPageProfile } from './components'
 import postCardsData from 'mocks/postCardsData'
-import potCardsData from 'mocks/potCardsData'
-import { PostCard } from '@components/index'
+import { FinishedPotCard, FloatingButton, PostCard } from '@components/index'
 import { MushroomImage } from '@assets/images'
+import appliedPotsData from 'mocks/appliedPotsData'
 
 const MyPage = () => {
   const [contentType, setContentType] = useState<"feed" | "pot">("feed");
-
   const [posts, setPosts] = useState(postCardsData);
-  const [finishedPots, setFinishedPots] = useState(potCardsData);
+  const [finishedPots, setFinishedPots] = useState(appliedPotsData);
 
   return (
     <main css={container}>
@@ -33,11 +32,12 @@ const MyPage = () => {
             )
             :
             finishedPots.map((pot) =>
-              <></>
+              <FinishedPotCard {...pot} />
             )
           }
         </div>
       </div>
+      <FloatingButton />
     </main>
   )
 }
