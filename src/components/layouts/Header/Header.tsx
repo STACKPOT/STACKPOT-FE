@@ -6,7 +6,7 @@ const Header: React.FC = () => {
   return (
     <header css={headerStyle}>
       <Logo />
-      <Button style="login">로그인/회원가입</Button>
+      <Button variant="login">로그인/회원가입</Button>
     </header>
   );
 };

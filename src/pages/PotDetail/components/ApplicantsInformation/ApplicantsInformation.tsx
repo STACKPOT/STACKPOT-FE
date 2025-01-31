@@ -40,7 +40,7 @@ const ApplicantsInformation = () => {
                                 <h1 css={titleStyle}>나의 팟 지원자가 총 <span css={titleBlueStyle}>{applicants.length}</span>명 있어요</h1>
                                 <PotIcon css={titleIconStyle} />
                             </div>
-                            <Button style="action" onClick={handleStartPot}>팟 시작하기</Button>
+                            <Button variant="action" onClick={handleStartPot}>팟 시작하기</Button>
                         </div>
                         <p css={descriptionStyle}>함께하고 싶은 지원자를 체크하고, 팟 시작하기를 누르면 팟이 시작돼요. </p>
                     </div>

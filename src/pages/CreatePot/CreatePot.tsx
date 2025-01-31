@@ -60,7 +60,7 @@ const CreatePot = () => {
           <h2 css={titleStyle}>나의 팟 만들기</h2>
           <PotIcon css={iconStyle} />
         </div>
-        <Button style="action" onClick={handleUploading}>
+        <Button variant="action" onClick={handleUploading}>
           게시물 업로드
         </Button>
       </div>
