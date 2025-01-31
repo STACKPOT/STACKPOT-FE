@@ -2,7 +2,8 @@ import { bodyContainerStyle, containerStyle, contentStyle, dividerStyle, section
 import { MushroomImage } from "@assets/images";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { ApplicantsInformation, PotHeader, PotInformation, ProfileInformation } from "./components";
+import { ApplicantsInformation, PotHeader, ProfileInformation } from "./components";
+import { PotInformation } from "@components/index";
 
 const PotDetail = () => {
     const [isApplied, setIsApplied] = useState<boolean>(false);
