@@ -18,10 +18,7 @@ export const titleStyle = css`
 export const potIconStyle = css`
     width: 2.4rem;
     height: 2.2rem;
-    padding: 0.3rem;
     color: ${theme.color.point.hero};
-    stroke-width: 0.5px;
-    stroke: ${theme.color.point.hero};
 `
 export const potCardsContainer = css`
     display: flex;
