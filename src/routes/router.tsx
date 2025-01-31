@@ -18,7 +18,6 @@ import {
   CreatePotPage,
   WritingPage,
   MyPotCalendarPage,
-  CallbackPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
