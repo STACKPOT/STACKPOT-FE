@@ -13,15 +13,25 @@ export const container = css`
 export const content = css`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
 `;
 
-export const contentHeader = css`
+export const contentTitle = css`
+  ${theme.font.bodyBold2};
+  color: ${theme.color.base.darkgray};
   display: flex;
-  flex-direction: column;
+  justify-content: row;
+  align-items: center;
   gap: 1.6rem;
 `;
 
 export const iconStyle = css`
   color: ${theme.color.point.hero};
 `;
+
+export const description = css`
+  margin-top: 0.8rem;
+  color: ${theme.color.object.assistive};
+  ${theme.font.caption3};
+`;
+
+export const contentBody = css``;
