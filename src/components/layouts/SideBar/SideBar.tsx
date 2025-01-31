@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { MyPotIcon, HomeIcon, PotIcon, Profile, SetUpIcon } from "@assets/svgs";
+import { MyPotIcon, HomeIcon, PotIcon } from "@assets/svgs";
 import {
   container,
   menuContainer,
   divider,
   iconStyle,
   potIconStyle,
+  profileStyle,
+  mainContainer,
 } from "./SideBar.style";
 import theme from "@styles/theme";
 import routes from "@constants/routes";
+import { MushroomImage } from "@assets/images";
+import SideBarProfileModal from "../SideBarProfileModal/SideBarProfileModal";
 
 const getNavLinkStyle = (isActive: boolean) => ({
   color: isActive ? theme.color.point.hero : theme.color.interactive.inactive,
@@ -19,21 +23,22 @@ const menuItems = [
   { to: routes.home, icon: <HomeIcon stroke="currentColor" css={iconStyle} /> },
   {
     to: routes.pot.base,
-    icon: <PotIcon stroke="currentColor" css={potIconStyle} />,
+    icon: <PotIcon css={potIconStyle} />,
   },
   {
     to: routes.myPot.base,
     icon: <MyPotIcon stroke="currentColor" css={iconStyle} />,
-  },
-  {
-    to: routes.setting,
-    icon: <SetUpIcon stroke="currentColor" css={iconStyle} />,
   },
 ];
 
 const SideBar: React.FC = () => {
   const [top, setTop] = useState(0);
   const [footerTop, setFooterTop] = useState<number | null>(null);
+  const [profileModal, setProfileModal] = useState<boolean>(false);
+
+  const handleClickProfile = () => {
+    setProfileModal(!profileModal);
+  }
 
   useEffect(() => {
     const initialTop = window.innerHeight / 2 + window.scrollY;
@@ -70,20 +75,23 @@ const SideBar: React.FC = () => {
   }, [footerTop]);
 
   return (
-    <div css={container(top)}>
-      <div css={menuContainer}>
-        <Profile />
-        <div css={divider} />
-        {menuItems.map(({ to, icon }, index) => (
-          <NavLink
-            key={index}
-            to={to}
-            style={({ isActive }) => getNavLinkStyle(isActive)}
-          >
-            {icon}
-          </NavLink>
-        ))}
+    <div css={mainContainer(top)}>
+      <div css={container}>
+        <div css={menuContainer}>
+          <img css={profileStyle} src={MushroomImage} onClick={handleClickProfile} />
+          <div css={divider} />
+          {menuItems.map(({ to, icon }, index) => (
+            <NavLink
+              key={index}
+              to={to}
+              style={({ isActive }) => getNavLinkStyle(isActive)}
+            >
+              {icon}
+            </NavLink>
+          ))}
+        </div>
       </div>
+      {profileModal && <SideBarProfileModal onClose={() => setProfileModal(false)} />}
     </div>
   );
 };

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { FinishedPotCard, OnGoingPotCard, Section } from "./components"
+import { OnGoingPotCard, Section } from "./components"
 import { container } from "./MadePot.style"
 import { PotInformationCard } from "../components";
 import appliedPotsData from "mocks/appliedPotsData";
 import onGoingPotsData from "mocks/onGoingPotsData";
+import { FinishedPotCard } from "@components/index";
 
 
 const MadePotPage = () => {
