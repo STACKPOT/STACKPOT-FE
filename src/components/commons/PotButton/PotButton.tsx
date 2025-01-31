@@ -1,3 +1,4 @@
+import React from "react";
 import { blueButtonStyle, redButtonStyle } from "./PotButton.style";
 
 interface PotButtonProps {
@@ -7,8 +8,12 @@ interface PotButtonProps {
 }
 
 const PotButton: React.FC<PotButtonProps> = ({ children, type, onClick }: PotButtonProps) => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        onClick();
+    }
     return (
-        <button css={type === "red" ? redButtonStyle : blueButtonStyle} onClick={onClick}>{children}</button>
+        <button css={type === "red" ? redButtonStyle : blueButtonStyle} onClick={handleClick}>{children}</button>
     )
 }
 

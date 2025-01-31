@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { bodyContainer, container, dividerStyle, listContainer, tabsContainer, tabsTextStyle } from './MyPage.style'
 import { MyPageProfile } from './components'
-import { MushRoomProfile } from '@assets/images'
 import postCardsData from 'mocks/postCardsData'
 import potCardsData from 'mocks/potCardsData'
 import { PostCard } from '@components/index'
+import { MushroomImage } from '@assets/images'
 
 const MyPage = () => {
   const [contentType, setContentType] = useState<"feed" | "pot">("feed");
@@ -15,7 +15,7 @@ const MyPage = () => {
   return (
     <main css={container}>
       <MyPageProfile
-        profileImage={MushRoomProfile}
+        profileImage={MushroomImage}
         nickname='아아 마시는 버섯'
         introduction='개발전공 대학생입니다'
         temperature={65} />
