@@ -2,15 +2,16 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const background = css`
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.40);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 7.5rem;
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 export const container = css`
   width: 54rem;
@@ -25,7 +26,7 @@ export const container = css`
 export const closeIconStyle = css`
   margin-left: auto;
   cursor: pointer;
-`
+`;
 export const titleStyle = css`
   color: ${theme.color.base.darkgray};
   ${theme.font.title1};
