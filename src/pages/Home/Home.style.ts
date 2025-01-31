@@ -30,10 +30,14 @@ export const contentTitle = css`
   ${theme.font.bodyBold2};
   color: ${theme.color.base.darkgray};
   display: flex;
-  gap: 1.6rem;
+  justify-content: row;
+  align-items: center;
+  gap: 0.8rem;
 `;
 export const iconStyle = css`
   color: ${theme.color.point.hero};
+  width: 2.4rem;
+  height: 2.2rem;
 `;
 export const contentBody = css`
   display: flex;
