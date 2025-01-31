@@ -2,6 +2,7 @@ import Badge from "@components/commons/Badge/Badge";
 import {
   cardStyle,
   categoriesContainer,
+  contentContainer,
   contentStyle,
   nicknameDdayContainer,
   nicknameStyle,
@@ -10,8 +11,10 @@ import {
   titleStyle,
 } from "./PotCard.style";
 import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
+import { useNavigate } from "react-router-dom";
 
 interface PotCardProps {
+  id: number;
   profileImage: string;
   nickname: string;
   dday: number;
@@ -21,6 +24,7 @@ interface PotCardProps {
 }
 
 const PotCard: React.FC<PotCardProps> = ({
+  id,
   profileImage,
   nickname,
   dday,
@@ -28,9 +32,13 @@ const PotCard: React.FC<PotCardProps> = ({
   content,
   categories,
 }: PotCardProps) => {
+  const navigate = useNavigate();
+  const handleClickCard = () => {
+    navigate(`/pot/${id}`);
+  }
   return (
     <>
-      <div css={cardStyle}>
+      <div css={cardStyle} onClick={handleClickCard}>
         <div css={titleContainer}>
           <img css={profileImageStyle} src={profileImage} />
           <div css={nicknameDdayContainer}>
@@ -39,7 +47,9 @@ const PotCard: React.FC<PotCardProps> = ({
           </div>
         </div>
         <h1 css={titleStyle}>{title}</h1>
-        <p css={contentStyle}>{content}</p>
+        <div css={contentContainer}>
+          <p css={contentStyle}>{content}</p>
+        </div>
         <div css={categoriesContainer}>
           {categories.map((category, index) => (
             <Badge key={index} content={category} />
