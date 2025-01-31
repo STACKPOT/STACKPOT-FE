@@ -9,7 +9,7 @@ import {
   textStyle,
   topContainer,
 } from "./SearchResult.style";
-import { MushRoomProfile } from "@assets/images";
+import { MushroomImage } from "@assets/images";
 
 const SearchResult = () => {
   const location = useLocation();
@@ -50,7 +50,7 @@ const SearchResult = () => {
       <div css={gridContainer}>
         <PotCard
           dday={5}
-          profileImage={MushRoomProfile}
+          profileImage={MushroomImage}
           nickname="아아 마시는 버섯"
           title="AI 자동화 챗봇 어플 공부할 스터디원"
           content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
@@ -58,7 +58,7 @@ const SearchResult = () => {
         />
         <PotCard
           dday={5}
-          profileImage={MushRoomProfile}
+          profileImage={MushroomImage}
           nickname="아아 마시는 버섯"
           title="AI 자동화 챗봇 어플 공부할 스터디원"
           content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
@@ -66,7 +66,7 @@ const SearchResult = () => {
         />
         <PotCard
           dday={5}
-          profileImage={MushRoomProfile}
+          profileImage={MushroomImage}
           nickname="아아 마시는 버섯"
           title="AI 자동화 챗봇 어플 공부할 스터디원"
           content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
@@ -74,7 +74,7 @@ const SearchResult = () => {
         />
         <PotCard
           dday={5}
-          profileImage={MushRoomProfile}
+          profileImage={MushroomImage}
           nickname="아아 마시는 버섯"
           title="AI 자동화 챗봇 어플 공부할 스터디원"
           content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."

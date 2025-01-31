@@ -1,7 +1,7 @@
 import { bodyContainer, container, dividerStyle, headerContainer, headerStyle, mainContainer, categoryContainer } from "./SignUp.style"
 import { Button, TextField } from "@components/index"
 import { useState } from "react";
-import { MushRoomProfile } from "@assets/images";
+import { MushroomImage } from "@assets/images";
 import { CategorySelection, ContractsSection, NicknameInput, ProfileModal, Section } from "./components";
 
 const SignUp = () => {
@@ -62,11 +62,11 @@ const SignUp = () => {
                     <ContractsSection
                         onAgree={setContractsAgreed} />
                 </div>
-                <Button style="action" actionType="join" onClick={handleSignUp}>가입하기</Button>
+                <Button variant="action" actionType="join" onClick={handleSignUp}>가입하기</Button>
             </div>
             {signUpCompleteModal &&
                 <ProfileModal
-                    profile={MushRoomProfile}
+                    profile={MushroomImage}
                     nickname={nickname}
                     onModalCancel={() => setSignUpCompleteModal(false)}>
                 </ProfileModal>

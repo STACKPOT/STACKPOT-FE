@@ -1,11 +1,11 @@
 import {
   container,
-  header,
-  body,
   footer,
   button,
   titleStyle,
   messageStyle,
+  background,
+  closeIconStyle,
 } from "./Modal.style";
 import { CloseIcon } from "@assets/svgs";
 import theme from "@styles/theme";
@@ -24,24 +24,22 @@ const Modal: React.FC<ModalProps> = ({
   onCancel,
 }) => {
   return (
-    <div css={container}>
-      <div css={header}>
-        <CloseIcon onClick={onCancel} />
-      </div>
-      <div css={body}>
+    <div css={background}>
+      <div css={container}>
+        <CloseIcon css={closeIconStyle} onClick={onCancel} />
         <p css={titleStyle}>{title}</p>
         <p css={messageStyle}>{message}</p>
-      </div>
-      <div css={footer}>
-        <button
-          css={button(theme.color.interactive.inactive)}
-          onClick={onCancel}
-        >
-          아니요
-        </button>
-        <button css={button(theme.color.point.hero)} onClick={onConfirm}>
-          네
-        </button>
+        <div css={footer}>
+          <button
+            css={button(theme.color.interactive.inactive)}
+            onClick={onCancel}
+          >
+            아니요
+          </button>
+          <button css={button(theme.color.point.hero)} onClick={onConfirm}>
+            네
+          </button>
+        </div>
       </div>
     </div>
   );
