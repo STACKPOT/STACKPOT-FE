@@ -35,6 +35,7 @@ const Landing = () => {
   const handleClick = () => {
     navigate(routes.home);
   };
+  //
 
   return (
     <main css={mainContainer}>
