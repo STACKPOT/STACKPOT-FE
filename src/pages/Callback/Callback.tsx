@@ -13,7 +13,7 @@ const Callback: React.FC = () => {
     }
   }, [code, mutate]);
 
-  return null;
+  return <main />;
 };
 
 export default Callback;
