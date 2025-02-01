@@ -18,7 +18,7 @@ import {
   CreatePotPage,
   WritingPage,
   MyPotCalendarPage,
-  CallbackPage,
+  EditPostPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -89,6 +89,10 @@ const router = createBrowserRouter([
         children: [
           { path: routes.myPot.calendar, element: <MyPotCalendarPage /> },
         ],
+      },
+      {
+        path: routes.editPost,
+        element: <EditPostPage />
       },
     ],
   },
