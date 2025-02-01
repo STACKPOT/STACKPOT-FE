@@ -23,3 +23,7 @@ export { default as ExpandMoreIcon } from "./expandMore.svg?react";
 export { default as ArrowRightIcon } from "./arrowRightIcon.svg?react";
 export { default as ArrowLeftIcon } from "./arrowLeftIcon.svg?react";
 export { default as PlusButtonIcon } from "./plusButton.svg?react";
+export { default as KaKaoTalkIcon } from "./kakaoTalk.svg?react"
+export { default as DeleteIcon } from "./delteIcon.svg?react"
+export { default as TodoCheckIcon } from "./todoCheckIcon.svg?react"
+export { default as TodoPlusButtonIcon } from "./todoPlusButton.svg?react"
