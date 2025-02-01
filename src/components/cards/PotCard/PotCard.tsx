@@ -40,7 +40,7 @@ const PotCard: React.FC<PotCardProps> = ({
     <>
       <div css={cardStyle} onClick={handleClickCard}>
         <div css={titleContainer}>
-          <img css={profileImageStyle} src={profileImage} />
+          <img css={profileImageStyle} src={profileImage} alt="profile" />
           <div css={nicknameDdayContainer}>
             <p css={nicknameStyle}>{nickname}</p>
             <DdayBadge days={dday} />

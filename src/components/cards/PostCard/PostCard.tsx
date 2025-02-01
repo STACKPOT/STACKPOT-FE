@@ -36,7 +36,7 @@ const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, 
     return (
         <div css={cardStyle} onClick={handleClickCard}>
             <div css={profileContainer}>
-                <img css={profileImageStyle} src={profileImage} />
+                <img css={profileImageStyle} src={profileImage} alt="profile"/>
                 <div css={nicknameDateContainer}>
                     <p css={nicknameStyle}>{nickname}</p>
                     <p css={dateStyle}>{createdAt}</p>
