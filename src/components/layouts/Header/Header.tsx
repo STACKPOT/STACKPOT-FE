@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   return (
     <header css={headerStyle}>
       <Logo />
-      <Button variant="login" onClick={hadleClick}>
+      <Button variant="entry" onClick={hadleClick}>
         로그인/회원가입
       </Button>
     </header>
