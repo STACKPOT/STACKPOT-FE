@@ -29,10 +29,10 @@ export const dropdownItemStyle = css`
 
 export const dropdownDeleteItemStyle = css`
   ${dropdownItemStyle};
-  color: ${theme.color.feedback.negative}; /* 빨간색으로 표시 */
+  color: ${theme.color.feedback.negative}; 
   font-weight: bold; /* 강조 */
   &:hover {
-    background: rgba(255, 0, 0, 0.1); /* Hover 시 연한 빨간색 배경 */
+    background: rgba(255, 0, 0, 0.1); 
   }
 `;
 
@@ -40,5 +40,5 @@ export const dropdownDividerStyle = css`
   width: 100%;
   height: 1px;
   background-color: ${theme.color.object.alternative};
-  margin: 0.4rem 0; /* 상하 여백 */
+  margin: 0.4rem 0; 
 `;

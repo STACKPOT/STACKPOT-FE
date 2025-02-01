@@ -8,16 +8,13 @@ import {
   forDropdownStyle,
   innerContainer,
   lineStyle,
-  moreButtonContainer,
+  taskCardInnerTopContainer,
   nicknameStyle,
   profileContainer,
   profileImageStyle,
   titleTextStyle,
 } from "./TaskCard.style";
-import MemberGroup from "@components/commons/Badge/MemberGroup/MemberGroup";
-import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
-import Badge from "@components/commons/Badge/Badge";
-import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
+import { MemberGroup, DdayBadge, Badge, MyFeedDropdown } from "@components/index"
 
 interface TaskCardProps {
   title: string;
@@ -45,7 +42,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
   return (
     <div css={cardStyle} onClick={onClick}>
       <div css={innerContainer}>
-        <div css={moreButtonContainer}>
+        <div css={taskCardInnerTopContainer}>
           <div css={badgeContainer}>
             <DdayBadge days={dday} />
             <Badge content={tag} />

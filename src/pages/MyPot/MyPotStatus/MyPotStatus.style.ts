@@ -40,6 +40,7 @@ export const gridContainerStyle = css`
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   height: 23.9rem;
+  padding: 0 6.4rem;
 `;
 
 export const paginationContainer = css`
@@ -86,7 +87,6 @@ export const statusTextStyle = css`
 
 export const buttonStyle = css`
   padding: 1.2rem 2.4rem;
-  justify-content: center;
   align-item: center;
   border-radius: 8px;
   border: 0.1rem solid ${theme.color.point.alternative};

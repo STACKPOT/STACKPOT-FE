@@ -1,8 +1,8 @@
-import { container, headerStyle, textStyle, iconStyle, tabsContainer, tabsTextStyle } from "./MyPotMain.style";
+import { container, headerStyle, textStyle, iconStyle, tabsContainer, tabsTextStyle, viewId, viewTextStyle } from "./MyPotMain.style";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import theme from "@styles/theme";
 import routes from "@constants/routes";
-import { PotIcon } from "@assets/svgs";
+import { KaKaoTalkIcon, PotIcon } from "@assets/svgs";
 
 const MyPotMainPage: React.FC = () => {
   const tabs = [
@@ -10,8 +10,10 @@ const MyPotMainPage: React.FC = () => {
     { label: "캘린더", path: routes.myPot.calendar },
   ];
 
-  const title = "STACKPOT"; // 데이터 어떻게 넘어올지 몰라서 일단 이렇게 했습니다
+  const title = "STACKPOT"; 
   const location = useLocation();
+
+  const showViewId = location.pathname === routes.myPot.base;
 
   return (
     <main css={container}>
@@ -24,6 +26,7 @@ const MyPotMainPage: React.FC = () => {
           const isActive =
             location.pathname === tab.path || 
             (tab.path === routes.myPot.base && location.pathname.startsWith(`${routes.myPot.base}/`));
+
           return (
             <NavLink
               key={tab.path}
@@ -40,6 +43,13 @@ const MyPotMainPage: React.FC = () => {
             </NavLink>
           );
         })}
+
+        {showViewId && (
+          <div css={viewId}>
+            <KaKaoTalkIcon />
+            <text css={viewTextStyle}>아이디 보기</text>
+          </div>
+        )}
       </div>
       <Outlet />
     </main>

@@ -19,16 +19,11 @@ export const cardStyle = css`
 export const innerContainer = css`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 0.8rem;
-    height: 100%;
 `
-export const moreButtonContainer = css`
-    position: relative;
-    width: 100%;
+export const taskCardInnerTopContainer = css`
     display: flex;
     justify-content: space-between;
-    align-items: center;
 `
 
 export const forDropdownStyle = css`
@@ -65,15 +60,15 @@ export const contentTextStyle = css`
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    min-height: calc(4.8rem);
+    min-height: calc(3.6rem);
 `
 
 export const dateTextStyle = css`
     ${theme.font.caption2}
     color: ${theme.color.object.assistive};
     align-self: flex-end;
-    padding: 0.6rem 0;
 `
+
 export const lineStyle = css`
     width: 100%;
     border: 0.1rem solid ${theme.color.object.alternative};

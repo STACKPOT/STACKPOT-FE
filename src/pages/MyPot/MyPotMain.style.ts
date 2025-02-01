@@ -13,7 +13,7 @@ export const container = css`
 export const headerStyle = css`
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.6rem;
 `
 
@@ -40,4 +40,18 @@ export const tabsTextStyle = css`
     transform: scale(1.05);
   }
 
+`
+
+export const viewId = css `
+  padding: 0.8rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 4px;
+  background: #FEE500;
+`
+
+export const viewTextStyle = css`
+  ${theme.font.caption1};
+  color: rgba(0, 0, 0, 0.85);
 `
