@@ -9,7 +9,9 @@ export const buttonStyle = css`
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
     transition: all 0.3s ease;
     ${theme.font.captionBold1};
+    align-items: center;
     white-space: pre;
+    cursor: pointer;
 `
 export const blueButtonStyle = css`
     ${buttonStyle}

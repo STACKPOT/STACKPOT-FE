@@ -22,6 +22,7 @@ import FloatingButton from "./commons/FloatingButton/FloatingButton";
 import Modal from "./commons/Modal/Modal";
 import MyFeedDropdown from "./commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import PotInformation from "./commons/PotInformation/PotInformation";
+import UploadToast from "./commons/Toast/UploadToast";
 export {
   Modal,
   Button,
@@ -47,4 +48,5 @@ export {
   FloatingButton,
   MyFeedDropdown,
   PotInformation,
+  UploadToast
 };
