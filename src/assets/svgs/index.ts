@@ -22,3 +22,4 @@ export { default as FireIcon } from "./fire.svg?react";
 export { default as InfoIcon } from "./info.svg?react";
 export { default as PinIcon } from "./pin.svg?react"
 export { default as ExpandMoreIcon } from "./expandMore.svg?react";
+export { default as AngularCloseIcon } from "./angularClose.svg?react";
