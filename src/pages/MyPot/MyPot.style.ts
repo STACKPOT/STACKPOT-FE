@@ -34,4 +34,8 @@ export const description = css`
   ${theme.font.caption3};
 `;
 
-export const contentBody = css``;
+export const contentBody = css`
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+`;
