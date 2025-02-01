@@ -50,11 +50,19 @@ export const buttonDividerStyle = css`
     background-color: ${theme.color.object.alternative};
 `
 export const buttonStyle = css`
-    padding: 1.1rem 2.9rem;
+    padding: 1.1rem 0;
+    width: 11rem;
     ${theme.font.caption1};
+    font-family: "Pretendard";
     color: ${theme.color.base.darkgray};
     border: none;
     background-color: white;
     white-space: pre;
     cursor: pointer;
+    transition-duration: 300ms;
+    transition: ease-out;
+
+    &:active {
+        background-color: ${theme.color.border.normal};
+    }
 `
