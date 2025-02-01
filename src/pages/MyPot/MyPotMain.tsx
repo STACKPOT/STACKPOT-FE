@@ -13,7 +13,9 @@ const MyPotMainPage: React.FC = () => {
   const title = "STACKPOT"; 
   const location = useLocation();
 
-  const showViewId = location.pathname === routes.myPot.base;
+  const isPotPage = location.pathname === routes.myPot.base || location.pathname.startsWith(routes.myPot.base + "/") && !location.pathname.includes("calendar");
+
+  const showViewId = location.pathname === routes.myPot.base || isPotPage;
 
   return (
     <main css={container}>
@@ -24,8 +26,9 @@ const MyPotMainPage: React.FC = () => {
       <div css={tabsContainer}>
         {tabs.map((tab) => {
           const isActive =
-            location.pathname === tab.path || 
-            (tab.path === routes.myPot.base && location.pathname.startsWith(`${routes.myPot.base}/`));
+            (tab.path === routes.myPot.base && location.pathname === tab.path) || 
+            (tab.path === routes.myPot.base && isPotPage) ||
+            (tab.path === routes.myPot.calendar && location.pathname === tab.path);
 
           return (
             <NavLink

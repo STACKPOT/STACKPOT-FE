@@ -1,6 +1,5 @@
 import { container, selectContainer, tabsContainer, tabsTextStyle } from "./PotMain.style";
 import { NavLink, Outlet } from "react-router-dom";
-import theme from "@styles/theme";
 import routes from "@constants/routes";
 
 const PotMain: React.FC = () => {
@@ -20,10 +19,7 @@ const PotMain: React.FC = () => {
               to={tab.path}
               end={tab.path === routes.pot.base}
               css={tabsTextStyle}
-              style={({ isActive }) => ({
-                color: isActive ? theme.color.point.hero : theme.color.interactive.inactive,
-                textDecoration: "none",
-              })}
+              className={({ isActive }) => (isActive ? "active" : "")} 
             >
               {tab.label}
             </NavLink>
