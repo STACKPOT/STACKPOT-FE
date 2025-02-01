@@ -14,16 +14,18 @@ export const container = css`
     top: -4.8rem;
 `
 export const closeIconStyle = css`
-    width: 0.7977rem;
-    height: 0.7977rem;
+    height: 1.2rem;
+    width: 1.2rem;
+    padding: 0.2rem;
     margin-left: auto;
+    margin-right: 1.1rem;
+    color: ${theme.color.interactive.inactive};
     cursor: pointer;
 `
 export const profileContainer = css`
     display: flex;
     gap: 1.6rem;
     align-items: center;
-    margin-top: 0.8rem;
 `
 export const profileStyle = css`
     width: 4rem;
@@ -32,7 +34,7 @@ export const profileStyle = css`
     border-radius: 50%;
 `
 export const nicknameStyle = css`
-    ${theme.font.caption1}
+    ${theme.font.caption2}
     color: ${theme.color.base.darkgray};
 `
 export const dividerStyle = css`
@@ -49,7 +51,7 @@ export const buttonDividerStyle = css`
     width: 1px;
     background-color: ${theme.color.object.alternative};
 `
-export const buttonStyle = css`
+export const buttonStyle = (type: "myPage" | "logout") => css`
     padding: 1.1rem 0;
     width: 11rem;
     ${theme.font.caption1};
@@ -62,7 +64,8 @@ export const buttonStyle = css`
     transition-duration: 300ms;
     transition: ease-out;
 
-    &:active {
-        background-color: ${theme.color.border.normal};
+    &:hover {
+        text-decoration: underline;
+        color: ${type === "myPage" ? theme.color.point.hero : theme.color.feedback.negative};
     }
 `

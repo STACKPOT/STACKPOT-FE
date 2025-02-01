@@ -2,6 +2,7 @@ import { SetUpIcon } from "@assets/svgs";
 import { contentContainer, introductionStyle, nicknameContainer, nicknameStyle, profileContainer, profileStyle, setUpIconStyle, } from "./MyPageProfile.style";
 import TemperatureBar from "@components/commons/TemperatureBar/TemperatureBar";
 import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface MyPageProfileProps {
     profileImage: string;
@@ -13,7 +14,7 @@ const MyPageProfile: React.FC<MyPageProfileProps> = ({ profileImage, nickname, i
     const navigate = useNavigate();
 
     const handleSetUp = () => {
-        navigate("/setting")
+        navigate(routes.setting)
     }
 
     return (
@@ -22,7 +23,7 @@ const MyPageProfile: React.FC<MyPageProfileProps> = ({ profileImage, nickname, i
             <div css={contentContainer}>
                 <div css={nicknameContainer}>
                     <h1 css={nicknameStyle}>{nickname}</h1>
-                    <SetUpIcon css={setUpIconStyle} onClick={handleSetUp} />
+                    <SetUpIcon type={"button"} css={setUpIconStyle} onClick={handleSetUp} />
                 </div>
                 <p css={introductionStyle}>{introduction}</p>
                 <TemperatureBar temperature={temperature} />

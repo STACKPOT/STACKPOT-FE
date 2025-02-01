@@ -19,7 +19,7 @@ const TemperatureBar: React.FC<TemperatureProps> = ({ temperature }) => {
       <div css={container}>
         <div css={titleContainer}>
           <p css={titleStyle}>나의 온도</p>
-          <InfoIcon css={temperatureInformationIconStyle} onClick={handleClickInformation} />
+          <InfoIcon type="button" css={temperatureInformationIconStyle} onClick={handleClickInformation} />
           <Popper
             open={openPopover}
             anchorEl={anchorEl}

@@ -28,11 +28,14 @@ const MyPage = () => {
           {contentType === "feed" ?
             posts.map((post) =>
               <PostCard
+                key={post.id}
                 {...post} />
             )
             :
             finishedPots.map((pot) =>
-              <FinishedPotCard {...pot} />
+              <FinishedPotCard
+                key={pot.id}
+                {...pot} />
             )
           }
         </div>
