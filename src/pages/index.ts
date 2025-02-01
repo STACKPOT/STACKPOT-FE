@@ -15,6 +15,7 @@ import CreatePotPage from "./CreatePot/CreatePot";
 import MyPotMainPage from "./MyPot/MyPotMain";
 import MyPotStatusPage from "./MyPot/MyPotStatus/MyPotStatus";
 import MyPotCalendarPage from "./MyPot/MyPotCalendar/MyPotCalendar";
+import CallbackPage from "./Callback/Callback";
 import TaskDetailPage from "./MyPot/MyPotStatus/TaskDetail/TaskDetail";
 import WritingPage from "./WritePost/WritePost";
 
@@ -37,6 +38,7 @@ export {
   MyPotMainPage,
   MyPotStatusPage,
   MyPotCalendarPage,
+  CallbackPage,
   TaskDetailPage,
   WritingPage,
 };
