@@ -21,6 +21,7 @@ import {
   MyPotCalendarPage,
   TaskDetailPage,
   WritingPage,
+  CallbackPage
 } from "@pages/index";
 
 const router = createBrowserRouter([
