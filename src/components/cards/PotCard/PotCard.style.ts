@@ -45,9 +45,6 @@ export const titleStyle = css`
     overflow: hidden;
     white-space: nowrap;
 `
-export const contentContainer =css`
-    height: 6rem;
-`
 export const contentStyle = css`
     ${theme.font.caption2}
     color: ${theme.color.object.hero};

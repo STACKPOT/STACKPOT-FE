@@ -2,7 +2,6 @@ import Badge from "@components/commons/Badge/Badge";
 import {
   cardStyle,
   categoriesContainer,
-  contentContainer,
   contentStyle,
   nicknameDdayContainer,
   nicknameStyle,
@@ -47,9 +46,7 @@ const PotCard: React.FC<PotCardProps> = ({
           </div>
         </div>
         <h1 css={titleStyle}>{title}</h1>
-        <div css={contentContainer}>
-          <p css={contentStyle}>{content}</p>
-        </div>
+        <p css={contentStyle}>{content}</p>
         <div css={categoriesContainer}>
           {categories.map((category, index) => (
             <Badge key={index} content={category} />
