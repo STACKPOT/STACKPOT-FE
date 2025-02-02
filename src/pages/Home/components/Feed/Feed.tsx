@@ -1,31 +1,34 @@
 import { CategoryButton, Dropdown, PostCard } from "@components/index";
 import { buttonContainer, contentBody, contentHeader } from "./Feed.style";
 import { contentTitle, subTitleStyle } from "@pages/Home/Home.style";
-import postCardsData from "mocks/postCardsData";
 import { useState } from "react";
+import { categories } from "@constants/categories";
+import useGetFeeds from "apis/hooks/feeds/useGetFeeds";
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  const categories = ["프론트엔드", "백엔드", "디자인", "기획"];
+  const [sort, setSort] = useState<string>("new");
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory((prev) => (prev === category ? null : category));
   };
 
   const options = [
-    { label: "최신 순", key: "latest" },
+    { label: "최신 순", key: "new" },
     { label: "인기 순", key: "popular" },
-    { label: "오래된 순", key: "oldest" },
+    { label: "오래된 순", key: "old" },
   ];
 
   const handleChange = (key: string) => {
-    console.log("선택된 옵션:", key);
+    setSort(key);
   };
 
-  const filteredPostCards = selectedCategory
-    ? postCardsData.filter((post) => post.categories.includes(selectedCategory))
-    : postCardsData;
+  const { data } = useGetFeeds({
+    category: selectedCategory || "ALL",
+    sort: sort,
+    limit: 10,
+    cursor: "",
+  });
 
   return (
     <>
@@ -46,11 +49,7 @@ const Feed = () => {
             </div>
           ))}
           <div css={{ marginLeft: "auto" }}>
-            <Dropdown
-              options={options}
-              handleChange={handleChange}
-              selectedKey="latest"
-            />
+            <Dropdown options={options} handleChange={handleChange} />
           </div>
         </div>
         <p css={subTitleStyle}>
@@ -58,17 +57,21 @@ const Feed = () => {
         </p>
       </div>
       <div css={contentBody}>
-        {filteredPostCards.map((post) => (
-          <PostCard
-            key={post.id}
-            profileImage={post.profileImage}
-            nickname={post.nickname}
-            createdAt={post.createdAt}
-            title={post.title}
-            content={post.content}
-            likeCount={post.likeCount}
-          />
-        ))}
+        {data?.feeds && data.feeds.length > 0 ? (
+          data.feeds.map((item) => (
+            <PostCard
+              key={item.id}
+              role={item.writerRole}
+              nickname={item.writer}
+              createdAt={item.createdAt}
+              title={item.title}
+              content={item.content}
+              likeCount={item.likeCount}
+            />
+          ))
+        ) : (
+          <p>게시물이 없습니다.</p>
+        )}
       </div>
     </>
   );
