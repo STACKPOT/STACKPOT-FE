@@ -21,11 +21,6 @@ export const content = css`
   flex-direction: column;
   gap: 3.2rem;
 `;
-export const contentHeader = css`
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-`;
 export const contentTitle = css`
   ${theme.font.bodyBold2};
   color: ${theme.color.base.darkgray};
@@ -34,24 +29,14 @@ export const contentTitle = css`
   align-items: center;
   gap: 0.8rem;
 `;
+
 export const iconStyle = css`
   color: ${theme.color.point.hero};
   width: 2.4rem;
   height: 2.2rem;
 `;
-export const contentBody = css`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
 
-  gap: 3.2rem;
-`;
-
-export const buttonContainer = css`
-  display: flex;
-  flex-direction: row;
-  gap: 1.3rem;
-  align-items: center;
-  justify-content: right;
+export const subTitleStyle = css`
+  color: ${theme.color.object.assistive};
+  ${theme.font.caption3};
 `;
