@@ -1,5 +1,5 @@
 import { SearchIcon } from "@assets/svgs";
-import { inputStyle, buttonStyle, searchInputStyle } from "./SearchInput.style";
+import { inputStyle, buttonStyle, searchInputStyle, iconStyle } from "./SearchInput.style";
 
 interface SearchInputProps {
   query: string;
@@ -17,7 +17,7 @@ const SearchInput = ({ query, setQuery, onSearch }: SearchInputProps) => {
         onChange={(e) => setQuery(e.target.value)}
       />
       <button type="button" css={buttonStyle} onClick={onSearch}>
-        <SearchIcon />
+        <SearchIcon css={iconStyle} />
       </button>
     </div>
   );
