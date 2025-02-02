@@ -3,12 +3,12 @@ import {
   actionButtonStyle,
   buttonStyle,
   landingButtonStyle,
-  loginButtonStyle,
+  entryButtonStyle,
 } from "./Button.style";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
-  variant: "login" | "action" | "landing";
+  variant: "entry" | "action" | "landing";
   actionType?: "action" | "join";
   onClick: () => void;
 }
@@ -22,8 +22,8 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const buttonType: SerializedStyles = (() => {
     switch (variant) {
-      case "login":
-        return loginButtonStyle;
+      case "entry":
+        return entryButtonStyle;
       case "action":
         return actionButtonStyle(actionType);
       case "landing":
