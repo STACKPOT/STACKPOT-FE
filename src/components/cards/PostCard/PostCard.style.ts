@@ -13,6 +13,10 @@ export const cardStyle = css`
     border: 1px solid ${theme.color.object.alternative};
     cursor: pointer;
 `
+export const headerContainer = css`
+    display: flex;
+    justify-content: space-between;
+`
 export const profileContainer = css`
     display: flex;
     align-items: center;

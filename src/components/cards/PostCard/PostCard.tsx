@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { cardStyle, profileContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, likeContainer, likeIconStyle, nicknameDateContainer, likeTextStyle, moreIconStyle } from "./PostCard.style"
+import { cardStyle, profileContainer, profileImageStyle, nicknameStyle, titleStyle, contentStyle, dateStyle, likeContainer, likeIconStyle, nicknameDateContainer, likeTextStyle, moreIconStyle, headerContainer } from "./PostCard.style"
 import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 
@@ -35,11 +35,13 @@ const PostCard: React.FC<PostCardProps> = ({ profileImage, nickname, createdAt, 
 
     return (
         <div css={cardStyle} onClick={handleClickCard}>
-            <div css={profileContainer}>
-                <img css={profileImageStyle} src={profileImage} alt="profile"/>
-                <div css={nicknameDateContainer}>
-                    <p css={nicknameStyle}>{nickname}</p>
-                    <p css={dateStyle}>{createdAt}</p>
+            <div css={headerContainer}>
+                <div css={profileContainer}>
+                    <img css={profileImageStyle} src={profileImage} alt="profile" />
+                    <div css={nicknameDateContainer}>
+                        <p css={nicknameStyle}>{nickname}</p>
+                        <p css={dateStyle}>{createdAt}</p>
+                    </div>
                 </div>
                 {isMyPost && <div css={moreIconStyle} onClick={(e) => { e.stopPropagation(); }}>
                     <MyFeedDropdown
