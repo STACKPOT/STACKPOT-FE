@@ -12,7 +12,7 @@ import "swiper/swiper-bundle.css";
 import "swiper";
 import { BannerImage } from "@assets/images";
 import PopularPots from "./components/PopularPots/PopularPots";
-import Feed from "./components/\bFeed/Feed";
+import Feed from "./components/Feed/Feed";
 
 const Home: React.FC = () => {
   return (
