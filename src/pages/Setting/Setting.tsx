@@ -16,15 +16,23 @@ import {
   buttonContainer,
 } from "./Setting.style";
 import { PotIcon } from "@assets/svgs";
-import { CategoryButton, TextField } from "@components/index";
+import {
+  CategoryButton,
+  ExplainModal,
+  Modal,
+  TextField,
+} from "@components/index";
 import { useState } from "react";
 import { SaveButton } from "./components";
 
 const Setting = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [pendingCategory, setPendingCategory] = useState<string | null>(null);
   const [selectedInterest, setSelectedInterest] = useState<string[]>([]);
   const [kakaoId, setKakaoId] = useState<string>("");
   const [introduction, setIntroduction] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExplainOpen, setIsExplainOpen] = useState(false);
 
   const categories = ["프론트엔드", "백엔드", "디자인", "기획"];
 
@@ -45,16 +53,43 @@ const Setting = () => {
   };
 
   const handleCategoryClick = (category: string) => {
-    setSelectedCategory((prev) => (prev === category ? null : category));
+    if (selectedCategory && selectedCategory !== category) {
+      setPendingCategory(category);
+      setIsModalOpen(true);
+    } else {
+      setSelectedCategory((prev) => (prev === category ? null : category));
+    }
   };
-
-  function handleClick(): void {}
 
   const handleIntroductionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setIntroduction(e.target.value);
   };
+
+  function handleClick(category: string): void {
+    setIsExplainOpen(true);
+  }
+
+  function handleSave(): void {
+    throw new Error("Function not implemented.");
+  }
+
+  const handleConfirm = () => {
+    if (pendingCategory) {
+      setSelectedCategory(pendingCategory);
+      setPendingCategory(null);
+    }
+    setIsModalOpen(false);
+  };
+
+  const handleClose = () => {
+    setPendingCategory(null);
+    setIsModalOpen(false);
+  };
+  function setShowApplyModal(arg0: boolean): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <main>
@@ -148,9 +183,18 @@ const Setting = () => {
           </div>
         </div>
         <div css={buttonContainer}>
-          <SaveButton onClick={handleClick}>저장하기</SaveButton>
+          <SaveButton onClick={handleSave}>저장하기</SaveButton>
         </div>
       </div>
+
+      {isModalOpen && (
+        <Modal
+          title="메인 역할을 변경할까요?"
+          message="메인 역할을 변경할 경우, 닉네임 또한 [너무 착한 양파]에서 새로운 닉네임으로 변경됩니다."
+          onConfirm={handleConfirm}
+          onCancel={handleClose}
+        />
+      )}
     </main>
   );
 };
