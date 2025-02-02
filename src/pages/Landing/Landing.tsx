@@ -66,7 +66,7 @@ const Landing = () => {
               <img
                 src={CarrotImage}
                 css={profileImageStyle}
-                alt="CarraotImage"
+                alt="CarrotImage"
               />
               <img src={OnionImage} css={profileImageStyle} alt="OnionImage" />
               <img

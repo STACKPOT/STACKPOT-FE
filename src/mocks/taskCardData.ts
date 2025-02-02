@@ -1,4 +1,4 @@
-import { MushroomImage, CarraotImage, BroccoliImage, OnionImage } from "@assets/images";
+import { MushroomImage, CarrotImage, BroccoliImage, OnionImage } from "@assets/images";
 
 const taskCardkData = [
   {
@@ -15,7 +15,7 @@ const taskCardkData = [
     nickname: "자전거 타는 브로콜리",
     groupProfileImages: [
       MushroomImage,
-      CarraotImage,
+      CarrotImage,
       BroccoliImage,
       OnionImage,
     ],
@@ -23,10 +23,10 @@ const taskCardkData = [
     tag: "디자인",
     contributors: [
       { profileImage: MushroomImage, nickname: "자전거 타는 브로콜리" },
-      { profileImage: CarraotImage, nickname: "웃는 당근" },
+      { profileImage: CarrotImage, nickname: "웃는 당근" },
       { profileImage: BroccoliImage, nickname: "성실한 브로콜리" },
       { profileImage: MushroomImage, nickname: "자전거 타는 브로콜리" },
-      { profileImage: CarraotImage, nickname: "웃는 당근" },
+      { profileImage: CarrotImage, nickname: "웃는 당근" },
       { profileImage: BroccoliImage, nickname: "성실한 브로콜리" },
     ],
   },
@@ -37,13 +37,13 @@ const taskCardkData = [
     content: "피드 카드, 나의 피드 등을 제작하는 작업입니다.",
     dday: 1,
     date: "2025. 1. 5",
-    profileImage: CarraotImage,
+    profileImage: CarrotImage,
     nickname: "웃는 당근",
-    groupProfileImages: [MushroomImage, CarraotImage, BroccoliImage],
+    groupProfileImages: [MushroomImage, CarrotImage, BroccoliImage],
     status: "진행 중" as const,
     tag: "프론트엔드",
     contributors: [
-      { profileImage: CarraotImage, nickname: "웃는 당근" },
+      { profileImage: CarrotImage, nickname: "웃는 당근" },
       { profileImage: MushroomImage, nickname: "자전거 타는 브로콜리" },
     ],
   },
@@ -76,13 +76,13 @@ const taskCardkData = [
     `,
     dday: 2,
     date: "2025. 1. 7",
-    profileImage: CarraotImage,
+    profileImage: CarrotImage,
     nickname: "웃는 당근",
-    groupProfileImages: [CarraotImage, BroccoliImage],
+    groupProfileImages: [CarrotImage, BroccoliImage],
     status: "완료" as const,
     tag: "문서 작업",
     contributors: [
-      { profileImage: CarraotImage, nickname: "웃는 당근" },
+      { profileImage: CarrotImage, nickname: "웃는 당근" },
     ],
   },
   {
@@ -93,12 +93,12 @@ const taskCardkData = [
     date: "2025. 1. 4",
     profileImage: BroccoliImage,
     nickname: "부지런한 브로콜리",
-    groupProfileImages: [MushroomImage, CarraotImage],
+    groupProfileImages: [MushroomImage, CarrotImage],
     status: "완료" as const,
     tag: "기록",
     contributors: [
       { profileImage: BroccoliImage, nickname: "부지런한 브로콜리" },
-      { profileImage: CarraotImage, nickname: "웃는 당근" },
+      { profileImage: CarrotImage, nickname: "웃는 당근" },
     ],
   },
   {
@@ -113,7 +113,7 @@ const taskCardkData = [
     date: "2025. 1. 6",
     profileImage: MushroomImage,
     nickname: "자전거 타는 브로콜리",
-    groupProfileImages: [MushroomImage, CarraotImage, OnionImage],
+    groupProfileImages: [MushroomImage, CarrotImage, OnionImage],
     status: "진행 중" as const,
     tag: "설계",
     contributors: [
@@ -148,7 +148,7 @@ const taskCardkData = [
     date: "2025. 1. 1",
     profileImage: OnionImage,
     nickname: "테스트 양파",
-    groupProfileImages: [MushroomImage, CarraotImage],
+    groupProfileImages: [MushroomImage, CarrotImage],
     status: "완료" as const,
     tag: "빈 데이터",
     contributors: [
