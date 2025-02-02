@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 import postCardsData from "mocks/postCardsData";
-import potCardsData from "mocks/potCardsData";
 import { PotIcon } from "@assets/svgs";
 import {
-  PotCard,
   CategoryButton,
   Dropdown,
   PostCard,
@@ -14,7 +12,6 @@ import {
 import {
   container,
   content,
-  swiperContainer,
   contentTitle,
   buttonContainer,
   contentHeader,
@@ -22,12 +19,11 @@ import {
   iconStyle,
   bannerStyle,
 } from "./Home.style";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
 
 import "swiper/swiper-bundle.css";
 import "swiper";
 import { BannerImage } from "@assets/images";
+import PopularPots from "./components/PopularPots/PopularPots";
 
 const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -61,32 +57,7 @@ const Home: React.FC = () => {
             <p>실시간 인기 팟</p>
             <PotIcon css={iconStyle} />
           </div>
-
-          <Swiper
-            css={swiperContainer}
-            modules={[Pagination, Navigation]}
-            centeredSlides={false}
-            spaceBetween={16}
-            slidesPerView={3}
-            slidesPerGroup={3}
-            pagination={{
-              type: "fraction",
-            }}
-            navigation={true}
-          >
-            {potCardsData.map((card) => (
-              <SwiperSlide key={card.id}>
-                <PotCard
-                  profileImage={card.profileImage}
-                  nickname={card.nickname}
-                  dday={card.dday}
-                  title={card.title}
-                  content={card.content}
-                  categories={card.categories}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <PopularPots />
         </div>
         <div css={content}>
           <div css={contentHeader}>
