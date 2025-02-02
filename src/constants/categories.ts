@@ -12,4 +12,11 @@ export const partMap: { [key: string]: "FE" | "BE" | "PM" | "DE" } = {
   디자인: "DE",
   기획: "PM",
 };
-export const interests = ["사이드 프로젝트", "공모전", "창업", "네트워킹 행사"] as const;
+export const interests = [
+  "사이드 프로젝트",
+  "공모전",
+  "창업",
+  "네트워킹 행사",
+] as const;
+
+export const categories = ["프론트엔드", "백엔드", "디자인", "기획"] as const;
