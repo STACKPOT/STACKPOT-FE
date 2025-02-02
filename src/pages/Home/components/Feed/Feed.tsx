@@ -2,15 +2,17 @@ import { CategoryButton, Dropdown, PostCard } from "@components/index";
 import { buttonContainer, contentBody, contentHeader } from "./Feed.style";
 import { contentTitle, subTitleStyle } from "@pages/Home/Home.style";
 import { useState } from "react";
-import { categories } from "@constants/categories";
+import { categories, partMap } from "@constants/categories";
 import useGetFeeds from "apis/hooks/feeds/useGetFeeds";
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [category, setCategory] = useState<string | null>(null);
   const [sort, setSort] = useState<string>("new");
 
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory((prev) => (prev === category ? null : category));
+  const handleCategoryClick = (category: string, partName: string) => {
+    setSelectedCategory((prev) => (prev === partName ? null : partName));
+    setCategory(category);
   };
 
   const options = [
@@ -24,7 +26,7 @@ const Feed = () => {
   };
 
   const { data } = useGetFeeds({
-    category: selectedCategory || "ALL",
+    category: category || "ALL",
     sort: sort,
     limit: 10,
     cursor: "",
@@ -37,14 +39,14 @@ const Feed = () => {
           <p>피드</p>
         </div>
         <div css={buttonContainer}>
-          {categories.map((categoryName) => (
-            <div key={categoryName} css={categories}>
+          {Object.keys(partMap).map((partName) => (
+            <div key={partName} css={categories}>
               <CategoryButton
                 style="pot"
-                selected={selectedCategory === categoryName}
-                onClick={handleCategoryClick}
+                selected={selectedCategory === partName}
+                onClick={() => handleCategoryClick(partMap[partName], partName)}
               >
-                {categoryName}
+                {partName}
               </CategoryButton>
             </div>
           ))}
