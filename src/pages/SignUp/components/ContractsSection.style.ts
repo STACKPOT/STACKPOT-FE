@@ -17,10 +17,14 @@ export const contractStyle = css`
 `
 export const detailButtonStyle = css`
     margin-left: auto;
-    ${theme.font.caption3}
-    color: ${theme.color.feedback.positive};
+    ${theme.font.caption3};
+    font-family: Pretendard;
+    color: ${theme.color.base.darkgray};
     text-decoration: solid underline;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    &:hover {
+        color: ${theme.color.feedback.positive};
+    }
 `

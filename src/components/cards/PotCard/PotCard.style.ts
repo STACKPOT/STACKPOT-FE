@@ -12,26 +12,26 @@ export const cardStyle = css`
     flex-direction: column;
     gap: 2rem;
     border: 0.1rem solid ${theme.color.object.alternative};
+    cursor: pointer;
 `
 export const titleContainer = css`
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    justify-content: space-between;
 `
 export const profileImageStyle = css`
     width: 4rem;
     height: 4rem;
-    border: 0.1rem solid ${theme.color.object.alternative};
+    border: 1px solid ${theme.color.object.alternative};
     border-radius: 50%;
 `
 export const nicknameDdayContainer = css`
-    width: 18.8rem;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 3rem;
 `
 export const nicknameStyle = css`
-    width: 10.6rem;
+    width: 10.3rem;
     ${theme.font.caption2}
     color: ${theme.color.object.assistive};
     text-overflow: ellipsis;
@@ -39,7 +39,7 @@ export const nicknameStyle = css`
     white-space: nowrap;
 `
 export const titleStyle = css`
-    ${theme.font.bodyBold1}
+    ${theme.font.bodyBold1};
     color: ${theme.color.base.darkgray};
     text-overflow: ellipsis;
     overflow: hidden;

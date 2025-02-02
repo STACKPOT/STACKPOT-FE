@@ -10,8 +10,10 @@ import {
   titleStyle,
 } from "./PotCard.style";
 import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
+import { useNavigate } from "react-router-dom";
 
 interface PotCardProps {
+  id: number;
   profileImage: string;
   nickname: string;
   dday: number;
@@ -21,6 +23,7 @@ interface PotCardProps {
 }
 
 const PotCard: React.FC<PotCardProps> = ({
+  id,
   profileImage,
   nickname,
   dday,
@@ -28,11 +31,15 @@ const PotCard: React.FC<PotCardProps> = ({
   content,
   categories,
 }: PotCardProps) => {
+  const navigate = useNavigate();
+  const handleClickCard = () => {
+    navigate(`/pot/${id}`);
+  }
   return (
     <>
-      <div css={cardStyle}>
+      <div css={cardStyle} onClick={handleClickCard}>
         <div css={titleContainer}>
-          <img css={profileImageStyle} src={profileImage} />
+          <img css={profileImageStyle} src={profileImage} alt="profile" />
           <div css={nicknameDdayContainer}>
             <p css={nicknameStyle}>{nickname}</p>
             <DdayBadge days={dday} />

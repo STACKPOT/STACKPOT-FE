@@ -19,7 +19,10 @@ export { default as PencilIcon } from "./pencil.svg?react";
 export { default as PartyIcon } from "./party.svg?react";
 export { default as PolygonIcon } from "./polygon.svg?react";
 export { default as FireIcon } from "./fire.svg?react";
+export { default as InfoIcon } from "./info.svg?react";
+export { default as PinIcon } from "./pin.svg?react"
 export { default as ExpandMoreIcon } from "./expandMore.svg?react";
+export { default as AngularCloseIcon } from "./angularClose.svg?react";
 export { default as ArrowRightIcon } from "./arrowRightIcon.svg?react";
 export { default as ArrowLeftIcon } from "./arrowLeftIcon.svg?react";
 export { default as PlusButtonIcon } from "./plusButton.svg?react";

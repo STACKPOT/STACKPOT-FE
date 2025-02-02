@@ -21,6 +21,8 @@ import FloatingButton from "./commons/FloatingButton/FloatingButton";
 import Modal from "./commons/Modal/Modal";
 import MyFeedDropdown from "./commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import PotInformation from "./commons/PotInformation/PotInformation";
+import FinishedPotCard from "./cards/FinishedPotCard/FinishedPotCard";
+import SideBarProfileModal from "./layouts/SideBarProfileModal/SideBarProfileModal";
 
 export {
   Modal,
@@ -46,4 +48,6 @@ export {
   FloatingButton,
   MyFeedDropdown,
   PotInformation,
+  FinishedPotCard,
+  SideBarProfileModal,
 };

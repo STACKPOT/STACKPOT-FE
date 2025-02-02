@@ -16,7 +16,7 @@ const MemberKakaoIdModal: React.FC<MemberKakaoIdModalProps> = ({ members, onModa
                     <div css={membersContainer}>
                         {members.map((member) =>
                             <div css={memberContainer}>
-                                <img css={profileStyle} src={member.profileImage} />
+                                <img css={profileStyle} src={member.profileImage} alt="profile"/>
                                 <div css={nicknameIdContainer}>
                                     <p css={nicknameStyle}>{member.nickname}</p>
                                     <p css={kakaoIdStyle}>{member.kakaoId}</p>
