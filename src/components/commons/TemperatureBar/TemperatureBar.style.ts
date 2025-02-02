@@ -67,6 +67,7 @@ export const temperatureBarContainer = css`
   width: 37.9rem;
   flex-direction: column;
   align-items: center;
+  gap: 1.4rem;
 `
 
 export const temperatureBase = css`

@@ -16,7 +16,10 @@ export const profileImageStyle = css`
 `
 export const nicknameStyle = css`
     ${theme.font.bodyBold1}
-    color: ${theme.color.point.navy};
+    color: ${theme.color.object.assistive};
+    display: flex;
+    align-items: center; 
+    gap: 1rem;
 `
 export const statusContainer = css`
     display: flex;
@@ -46,4 +49,8 @@ export const checkBoxStyle = css`
 export const todoTextStyle = css`
     ${theme.font.caption3}
     color: ${theme.color.base.darkgray};
+`
+
+export const plusButtonStyle = css`
+  cursor: pointer;
 `
