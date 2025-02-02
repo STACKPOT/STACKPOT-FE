@@ -26,7 +26,11 @@ const queryClient = new QueryClient({
 function App() {
   const location = useLocation();
 
-  const isSidebarVisible = location.pathname !== routes.main;
+  const excludedPaths = [routes.main, routes.signUp, routes.callback];
+
+  const isSidebarVisible = !excludedPaths.includes(
+    location.pathname as (typeof excludedPaths)[number]
+  );
 
   return (
     <QueryClientProvider client={queryClient}>
