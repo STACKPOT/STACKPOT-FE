@@ -18,7 +18,7 @@ export const closeIconStyle = css`
     width: 1.2rem;
     padding: 0.2rem;
     margin-left: auto;
-    margin-right: 1.1rem;
+    margin-right: 0.9rem;
     color: ${theme.color.interactive.inactive};
     cursor: pointer;
 `
@@ -38,22 +38,22 @@ export const nicknameStyle = css`
     color: ${theme.color.base.darkgray};
 `
 export const dividerStyle = css`
-    width: 22.1rem;
+    width: 100%;
     height: 1px;
-    margin-top: 2rem;
+    margin-top: 1.6rem;
     background-color: ${theme.color.object.alternative};
 `
 export const buttonContainer = css`
+    height: 3.2rem;
     display: flex;
     justify-content: center;
+    gap: 3rem;
 `
 export const buttonDividerStyle = css`
     width: 1px;
     background-color: ${theme.color.object.alternative};
 `
 export const buttonStyle = (type: "myPage" | "logout") => css`
-    padding: 1.1rem 0;
-    width: 11rem;
     ${theme.font.caption1};
     font-family: "Pretendard";
     color: ${theme.color.base.darkgray};
