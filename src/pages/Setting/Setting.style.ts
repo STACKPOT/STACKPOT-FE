@@ -2,24 +2,51 @@ import theme from "@styles/theme";
 import { css } from "@emotion/react";
 
 export const container = css`
-  padding: 4.8rem 0;
+  padding: 4.5rem 8.2rem;
+  width: 71.3rem;
+  margin: 4.8rem auto;
+  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 0.8rem;
+`;
+export const detailContainer = css`
   gap: 3.2rem;
   display: flex;
   flex-direction: column;
+  margin: 4.4rem 0;
 `;
-
 export const content = (larger: boolean) => css`
   display: flex;
   flex-direction: column;
-  gap: ${larger ? "3.2rem" : "0.8rem"};
+  gap: ${larger ? "0.8rem" : ""};
 `;
-export const contentHeader = css`
+
+export const titleContent = css`
   display: flex;
-  gap: 1.6rem;
-  ${theme.font.bodyBold2};
+  flex-direction: column;
+  gap: 0.8rem;
+  border-bottom: 1px solid ${theme.color.object.alternative};
+`;
+
+export const title = css`
+  ${theme.font.body3};
   color: ${theme.color.base.darkgray};
   display: flex;
   align-items: center;
+`;
+export const contentHeader = css`
+  gap: 1.6rem;
+  ${theme.font.body2};
+  color: ${theme.color.base.darkgray};
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const describe = css`
+  ${theme.font.caption3};
+  color: ${theme.color.object.assistive};
+  margin-bottom: 0.4rem;
 `;
 
 export const iconStyle = css`
@@ -33,37 +60,9 @@ export const contentBody = css`
   ${theme.font.caption3};
   color: ${theme.color.object.assistive};
 `;
-export const profileStyle = css`
-  ${theme.font.bodyBold1};
-  color: ${theme.color.base.darkgray};
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 41.1rem;
-  gap: 3.9rem;
-`;
-
-export const imageStyle = css`
-  margin-left: 40.8rem;
-  height: 9.2rem;
-  width: 9.2rem;
-`;
-
-export const contentFooter = css`
-  ${theme.font.caption3};
-
-  padding: 2.1rem 27.1rem;
-  box-shadow: 0rem 4rem 12rem rgba(13, 10, 44, 0.06);
-  border: 1px solid ${theme.color.object.alternative};
-  border-radius: 1.6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.6rem;
-  margin-bottom: 4rem;
-`;
 
 export const categoryContainer = css`
+  margin-top: 1.6rem;
   ${theme.font.caption3};
   color: ${theme.color.base.black};
   display: flex;
@@ -72,9 +71,8 @@ export const categoryContainer = css`
 `;
 
 export const textStyle = css`
-  ${theme.font.caption3};
-  color: ${theme.color.base.black};
-  margin-right: 2.8rem;
+  width: 38rem;
+  height: 5.2rem;
 `;
 
 export const categories = css`
@@ -83,12 +81,21 @@ export const categories = css`
   gap: 0.8rem;
 `;
 
-export const textareaStyle = css`
-  height: 18.5rem;
-  padding: 2.4rem;
+export const textareaWrapper = css`
+  position: relative;
+`;
+
+export const textareaStyle = (isOverLimit: boolean) => css`
+  width: 100%;
+  height: 8.9rem;
+  padding: 1.2rem 1.6rem;
   border-radius: 1.2rem;
   ${theme.font.caption3};
   font-family: "Pretendard";
+  border: 1px solid
+    ${isOverLimit
+      ? theme.color.feedback.negative
+      : theme.color.border.alternative};
 
   &::placeholder {
     color: ${theme.color.object.hero};
@@ -96,9 +103,20 @@ export const textareaStyle = css`
   }
 
   &:focus {
-    border-color: ${theme.color.point.hero};
+    border-color: ${isOverLimit
+      ? theme.color.feedback.negative
+      : theme.color.point.hero};
     outline: none;
   }
+`;
+export const charCountStyle = (isOverLimit: boolean) => css`
+  position: absolute;
+  bottom: 1.2rem;
+  right: 1.6rem;
+  ${theme.font.caption3};
+  color: ${isOverLimit
+    ? theme.color.feedback.negative
+    : theme.color.base.darkgray};
 `;
 
 export const buttonContainer = css`
