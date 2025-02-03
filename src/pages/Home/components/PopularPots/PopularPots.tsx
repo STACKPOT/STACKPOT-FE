@@ -11,10 +11,12 @@ import { PotCard } from "@components/index";
 import useGetPots from "apis/hooks/pots/useGetPots";
 import { useState } from "react";
 import { LeftIcon } from "@assets/svgs";
+import Skeleton from "react-loading-skeleton";
+import { cardStyle } from "@components/cards/PotCard/PotCard.style";
 
 const PopularPots = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useGetPots({ page: currentPage, size: 3 });
+  const { data, isLoading } = useGetPots({ page: currentPage, size: 3 });
 
   const totalPages = data?.totalPages || 1;
 
@@ -32,7 +34,7 @@ const PopularPots = () => {
 
   return (
     <>
-      {!data?.pots?.length ? (
+      {data?.pots?.length == 0 ? (
         <p>데이터가 없습니다.</p>
       ) : (
         <>
@@ -45,19 +47,27 @@ const PopularPots = () => {
             slidesPerGroup={3}
             navigation={true}
           >
-            {data.pots.map((pot) => (
-              <SwiperSlide key={pot.userId}>
-                <PotCard
-                  id={pot.userId}
-                  role={pot.userRole}
-                  nickname={pot.userNickname}
-                  dday={pot.dday}
-                  title={pot.potName}
-                  content={pot.potContent}
-                  categories={pot.recruitmentRoles}
-                />
-              </SwiperSlide>
-            ))}
+            {isLoading
+              ? Array.from({ length: 3 }).map((_, index) => (
+                  <SwiperSlide key={index}>
+                    <div css={cardStyle}>
+                      <Skeleton />
+                    </div>
+                  </SwiperSlide>
+                ))
+              : data?.pots.map((pot) => (
+                  <SwiperSlide key={pot.userId}>
+                    <PotCard
+                      id={pot.userId}
+                      role={pot.userRole}
+                      nickname={pot.userNickname}
+                      dday={pot.dday}
+                      title={pot.potName}
+                      content={pot.potContent}
+                      categories={pot.recruitmentRoles}
+                    />
+                  </SwiperSlide>
+                ))}
             <div css={buttonContainer}>
               <button
                 type="button"
