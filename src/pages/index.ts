@@ -19,6 +19,7 @@ import EditPostPage from "./EditPost/EditPost";
 import CallbackPage from "./Callback/Callback";
 import TaskDetailPage from "./MyPot/MyPotStatus/TaskDetail/TaskDetail";
 import WritingPage from "./WritePost/WritePost";
+import EditFinishedPotPage from "./EditFinishedPot/EditFinishedPot";
 
 
 export {
@@ -43,4 +44,5 @@ export {
   CallbackPage,
   TaskDetailPage,
   WritingPage,
+  EditFinishedPotPage,
 };

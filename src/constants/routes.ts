@@ -20,7 +20,8 @@ const routes = {
   signUp: "/sign-up",
   potDetail: "/pot/:potId",
   callback: "/callback",
-  editPost: "/edit-post/:postId"
+  editPost: "/edit-post/:postId",
+  editFinishedPot: "/edit-finished-pot/:potId"
 } as const;
 
 export default routes;

@@ -22,7 +22,8 @@ import {
   EditPostPage,
   TaskDetailPage,
   WritingPage,
-  CallbackPage
+  CallbackPage,
+  EditFinishedPotPage
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
       {
         path: routes.editPost,
         element: <EditPostPage />
+      },
+      {
+        path: routes.editFinishedPot,
+        element: <EditFinishedPotPage />
       },
     ],
   },
