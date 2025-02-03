@@ -1,11 +1,20 @@
 import { CategoryButton, Dropdown, PostCard } from "@components/index";
-import { buttonContainer, contentBody, contentHeader, iconStyle } from "./Feed.style";
+import {
+  buttonContainer,
+  cardStyle,
+  contentBody,
+  contentHeader,
+  iconContainer,
+  iconStyle,
+} from "./Feed.style";
 import { contentTitle, subTitleStyle } from "@pages/Home/Home.style";
 import { useState, useEffect } from "react";
 import { categories, partMap } from "@constants/categories";
 import useGetFeeds from "apis/hooks/feeds/useGetFeeds";
 import { useInView } from "react-intersection-observer";
 import { LoadingSpinnerIcon } from "@assets/svgs";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -70,7 +79,9 @@ const Feed = () => {
         </p>
       </div>
       <div css={contentBody}>
-        {data?.pages && data.pages.length > 0 ? (
+        {isLoading ? (
+          <Skeleton css={cardStyle} />
+        ) : data?.pages && data.pages.length > 0 ? (
           data.pages.map((page, pageIndex) => (
             <div css={contentBody} key={pageIndex}>
               {page.result?.feeds && page.result.feeds.length > 0 ? (
@@ -100,7 +111,9 @@ const Feed = () => {
           <p>게시물이 없습니다.</p>
         )}
         {isFetchingNextPage && (
-         <LoadingSpinnerIcon css={iconStyle} />
+          <div css={iconContainer}>
+            <LoadingSpinnerIcon css={iconStyle} />
+          </div>
         )}
       </div>
     </>
