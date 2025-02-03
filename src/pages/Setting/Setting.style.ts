@@ -122,5 +122,14 @@ export const charCountStyle = (isOverLimit: boolean) => css`
 export const buttonContainer = css`
   display: flex;
   justify-content: center;
-  margin-top: 1.6rem;
+`;
+
+export const buttonStyle = css`
+  width: 54.9rem;
+  height: 6rem;
+  padding: 1.6rem 3.3rem;
+  border-radius: 0.8rem;
+  background-color: ${theme.color.point.hero};
+  border: none;
+  cursor: pointer;
 `;
