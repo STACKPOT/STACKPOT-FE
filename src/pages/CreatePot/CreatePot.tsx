@@ -23,20 +23,52 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { participation, partMap, period } from "@constants/categories";
 import { DatePicker } from "./components";
+import useCreatePot from "apis/hooks/pots/useCreatePot";
+import { Dayjs } from "dayjs";
 
 const CreatePot = () => {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const { mutate } = useCreatePot();
+  console.log("Mutation Object:", mutate);
+
+  const [potName, setPotName] = useState<string>("");
+  const [language, setLanguage] = useState<string>("");
+  const [selectedPeriod, setSelectedPeriod] = useState<string>("");
+  const [selectedParticipation, setSelectedParticipation] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  //const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedParts, setSelectedParts] = useState<string[]>([]);
 
   const [visibleInputs, setVisibleInputs] = useState<{
     [key: string]: boolean;
   }>({});
 
-  const handleButtonClick = (category: string) => {
-    setSelectedCategory(category);
-  };
 
+
+  /*const handleButtonClick = (category: string) => {
+    setSelectedCategory(category);
+  };*/
+  const handleSelectPeriod = (selected: string) => {
+    setSelectedPeriod(selected);
+  }
+  const handleSelectMethod = (selected: string) => {
+    setSelectedParticipation(selected);
+  }
+  const handlePotName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPotName(e.target.value);
+  }
+  const handleContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+  }
+  const handleLanguage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLanguage(e.target.value);
+  }
+  const handleDate = (day: Dayjs | null) => {
+    if(day){
+      setDate(day.format('YYYY-MM-DD'))
+    }
+  }
   const handlePartClick = (partName: string) => {
     setSelectedParts((prev) =>
       prev.includes(partName)
@@ -50,7 +82,31 @@ const CreatePot = () => {
   };
 
   const handleUploading = () => {
+    /*console.log(potName);
+    console.log(date);
+    console.log(selectedPeriod);
+    console.log(language);
+    console.log(content);*/
+    if (!mutate) {
+      console.log("mutate is undefined! useCreatePot() is not returning it properly.");
+      return;
+  }
+  console.log("Mutation function exists, executing mutate...");
+
+    
+    mutate({
+      potName: potName,
+      potStartDate: date,
+      potDuration: selectedPeriod,
+      potLan: language,
+      potContent: content,
+      potModeOfOperation: "ONLINE",
+      recruitmentDetails: [
+        {recruitmentRole:"BACKEND", recruitmentCount:2}
+      ],
+    })
     // navigate("/");
+    console.log("Mutation function executed!");
   };
 
   return (
@@ -67,7 +123,7 @@ const CreatePot = () => {
       <form css={formContainer}>
         <label css={labelStyle}>
           팟 네임
-          <input css={inputStyle} placeholder="메인 제목 작성" />
+          <input css={inputStyle} placeholder="메인 제목 작성" onChange={handlePotName} value={potName} />
         </label>
         <div css={dividerStyle} />
         <div css={labelStyle}>
@@ -77,8 +133,8 @@ const CreatePot = () => {
               <CategoryButton
                 key={participation}
                 style="pot"
-                selected={selectedCategory === participation}
-                onClick={handleButtonClick}
+                selected={selectedParticipation === participation}
+                onClick={handleSelectMethod}
               >
                 {participation}
               </CategoryButton>
@@ -88,7 +144,7 @@ const CreatePot = () => {
 
         <div css={labelStyle}>
           시작 날짜
-          <DatePicker />
+          <DatePicker onChange={handleDate} />
         </div>
         <div css={labelStyle}>
           예상 기간
@@ -97,8 +153,8 @@ const CreatePot = () => {
               <CategoryButton
                 key={period}
                 style="pot"
-                selected={selectedCategory === period}
-                onClick={handleButtonClick}
+                selected={selectedPeriod === period}
+                onClick={handleSelectPeriod}
               >
                 {period}
               </CategoryButton>
@@ -130,11 +186,15 @@ const CreatePot = () => {
           <input
             css={[inputStyle, languageInputStyle]}
             placeholder="사용 언어 작성"
+            onChange={handleLanguage}
+            value={language}
           />
         </label>
         <textarea
           css={textareaStyle}
           placeholder="어떤 팟을 끓이고 싶으세요? 간단하게 소개해 보세요."
+          onChange={handleContent}
+          value={content}
         />
       </form>
     </main>
