@@ -1,10 +1,10 @@
-<svg width="104" height="104" viewBox="0 0 104 104" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M52 -2.27299e-06C80.7188 -3.52833e-06 104 23.2812 104 52C104 80.7188 80.7188 104 52 104C23.2812 104 4.47587e-05 80.7188 4.35034e-05 52C4.2248e-05 23.2812 23.2812 -1.01765e-06 52 -2.27299e-06ZM52 91C73.5392 91 91 73.5391 91 52C91 30.4609 73.5392 13 52 13C30.4609 13 13 30.4609 13 52C13 73.5391 30.4609 91 52 91Z" fill="url(#paint0_angular_4810_16403)"/>
-<circle cx="97.5" cy="51.5" r="6.5" transform="rotate(-90 97.5 51.5)" fill="#4EACFF"/>
-<defs>
-<radialGradient id="paint0_angular_4810_16403" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(52 52) scale(52)">
-<stop stop-color="#4EACFF"/>
-<stop offset="1" stop-color="white" stop-opacity="0"/>
-</radialGradient>
-</defs>
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="22" width="4" height="12" rx="2" fill="#D4D4D4"/>
+<rect x="22" y="36" width="4" height="12" rx="2" fill="#0283F5"/>
+<rect y="26" width="4" height="12" rx="2" transform="rotate(-90 0 26)" fill="#D4D4D4"/>
+<rect x="36" y="26" width="4" height="12" rx="2" transform="rotate(-90 36 26)" fill="#D4D4D4"/>
+<rect x="5.61523" y="8.44336" width="4" height="12" rx="2" transform="rotate(-45 5.61523 8.44336)" fill="#D4D4D4"/>
+<rect x="31.071" y="33.8994" width="4" height="12" rx="2" transform="rotate(-45 31.071 33.8994)" fill="#D4D4D4"/>
+<rect x="8.4436" y="42.3848" width="4" height="12" rx="2" transform="rotate(-135 8.4436 42.3848)" fill="#D4D4D4"/>
+<rect x="33.8994" y="16.9287" width="4" height="12" rx="2" transform="rotate(-135 33.8994 16.9287)" fill="#D4D4D4"/>
 </svg>
