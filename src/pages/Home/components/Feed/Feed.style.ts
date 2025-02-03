@@ -19,3 +19,9 @@ export const contentBody = css`
   flex-direction: column;
   gap: 3.2rem;
 `;
+
+export const iconStyle = css`
+  animation: spin 1s linear infinite;
+  width: 3rem;
+  height: 3rem;
+`;

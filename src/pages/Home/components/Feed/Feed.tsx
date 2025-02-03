@@ -1,10 +1,11 @@
 import { CategoryButton, Dropdown, PostCard } from "@components/index";
-import { buttonContainer, contentBody, contentHeader } from "./Feed.style";
+import { buttonContainer, contentBody, contentHeader, iconStyle } from "./Feed.style";
 import { contentTitle, subTitleStyle } from "@pages/Home/Home.style";
 import { useState, useEffect } from "react";
 import { categories, partMap } from "@constants/categories";
 import useGetFeeds from "apis/hooks/feeds/useGetFeeds";
 import { useInView } from "react-intersection-observer";
+import { LoadingSpinnerIcon } from "@assets/svgs";
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -97,6 +98,9 @@ const Feed = () => {
           ))
         ) : (
           <p>게시물이 없습니다.</p>
+        )}
+        {isFetchingNextPage && (
+         <LoadingSpinnerIcon css={iconStyle} />
         )}
       </div>
     </>
