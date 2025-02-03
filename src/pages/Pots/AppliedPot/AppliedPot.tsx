@@ -24,6 +24,7 @@ const AppliedPotPage = () => {
       </div>
       {pots.map((pot) =>
         <PotInformationCard
+          key={pot.id}
           {...pot}
           onButtonClick={() => setCancelApplyPotId(pot.id)} />)}
       {cancelApplyPotId !== null &&

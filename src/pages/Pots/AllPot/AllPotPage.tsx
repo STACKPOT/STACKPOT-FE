@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { potCardContainer, categoryStyle, categoryButtonWrapper } from "./AllPotPage.style";
 import PotCard from "@components/cards/PotCard/PotCard";
 import potCardsData from "../../../mocks/potCardsData";
-import { CategoryButton } from "@components/index";
+import CategoryButton from "./components/CategoryButton";
 
 const AllPotPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);

@@ -23,7 +23,7 @@ const StartPotModal: React.FC<StartPotModalProps> = ({ selectedApplicants, onSta
                 <>
                     {selectedApplicants.map((applicant) =>
                         <div css={memberContainer}>
-                            <img css={profileStyle} src={applicant.profileImage} />
+                            <img css={profileStyle} src={applicant.profileImage} alt="profile" />
                             <div css={stackNicknameContainer}>
                                 <Badge content={applicant.stack} />
                                 <p css={nicknameStyle}>{applicant.nickname}</p>

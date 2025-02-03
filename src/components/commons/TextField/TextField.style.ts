@@ -8,6 +8,7 @@ export const containerStyle = css`
 export const inputStyle = css`
   padding: 1.2rem 1.6rem;
   ${theme.font.caption3};
+  font-family: "Pretendard";
   ::placeholder {
     color: ${theme.color.interactive.inactive};
   }

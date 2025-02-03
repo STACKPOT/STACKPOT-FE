@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { FinishedPotCard, OnGoingPotCard, Section } from "./components"
+import { OnGoingPotCard, Section } from "./components"
 import { container } from "./MadePot.style"
 import { PotInformationCard } from "../components";
 import appliedPotsData from "mocks/appliedPotsData";
 import onGoingPotsData from "mocks/onGoingPotsData";
+import { FinishedPotCard } from "@components/index";
 
 
 const MadePotPage = () => {
@@ -22,6 +23,7 @@ const MadePotPage = () => {
           <>
             {recruitingPots.map((pot) =>
               <PotInformationCard
+                key={pot.id}
                 {...pot}
                 type="made"
                 onButtonClick={handleEditPot} />)}
@@ -31,6 +33,7 @@ const MadePotPage = () => {
           <>
             {onGoingPots.map((pot) =>
               <OnGoingPotCard
+                key={pot.id}
                 {...pot} />)}
           </>
         </Section>
@@ -38,6 +41,7 @@ const MadePotPage = () => {
           <>
             {finishedPots.map((pot) =>
               <FinishedPotCard
+                key={pot.id}
                 {...pot} />)}
           </>
         </Section>

@@ -24,6 +24,7 @@ const CategorySelection: React.FC<CategorySelectionProps> = ({ type, title, onSe
             <div css={categoriesContainer}>
                 {categories.map((category) =>
                     <CategoryButton
+                        key={category}
                         style="pot"
                         selected={selectedCategory === category}
                         onClick={() => handleSelectCategory(category)}>{category}</CategoryButton>)}
