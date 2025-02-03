@@ -24,6 +24,7 @@ import PotInformation from "./commons/PotInformation/PotInformation";
 import UploadToast from "./commons/Toast/UploadToast";
 import FinishedPotCard from "./cards/FinishedPotCard/FinishedPotCard";
 import SideBarProfileModal from "./layouts/SideBarProfileModal/SideBarProfileModal";
+import InformationPopper from "./commons/Popover/InformationPopper";
 
 export {
   Modal,
@@ -52,4 +53,5 @@ export {
   UploadToast,
   FinishedPotCard,
   SideBarProfileModal,
+  InformationPopper,
 };
