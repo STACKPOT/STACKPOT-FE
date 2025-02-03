@@ -16,9 +16,10 @@ export const contentStyle = css`
     padding: 0.8rem 1.6rem;
     border-radius: 12px;
     background-color: ${theme.color.object.hero};
-    color: ${theme.color.base.white};
+    color: ${theme.color.object.normal};
     ${theme.font.caption1};
     word-wrap: break-word;
+    white-space: pre;
 `
 export const pinStyle = css`
     height: 1.2rem;

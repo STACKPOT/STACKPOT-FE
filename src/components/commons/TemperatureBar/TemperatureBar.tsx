@@ -1,6 +1,6 @@
 import { container, fireIconStyle, temperatureBarContainer, temperatureBase, temperatureRange, titleContainer, titleStyle, valueContainer, valueStyle } from "./TemperatureBar.style";
 import { FireIcon } from "@assets/svgs";
-import InformationPopper from "../Popover/InformationPopper";
+import InformationPopper from "../InformationPopper/InformationPopper";
 
 interface TemperatureProps {
   temperature: number;
