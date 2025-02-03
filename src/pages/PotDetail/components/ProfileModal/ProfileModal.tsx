@@ -26,7 +26,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ type, profileImage, nicknam
             onButtonClick={(type === "apply" && handleApply) || handleMemberProfile}
             onCancel={onCancelModal}>
             <div css={container}>
-                <img css={profileStyle} src={profileImage} />
+                <img css={profileStyle} src={profileImage} alt="profile"/>
                 <p css={nicknameStyle}>{nickname}</p>
             </div>
         </ExplainModal>

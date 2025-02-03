@@ -16,9 +16,13 @@ import {
   MadePotPage,
   SignUpPage,
   CreatePotPage,
-  WritingPage,
+  MyPotMainPage,
+  MyPotStatusPage,
   MyPotCalendarPage,
   EditPostPage,
+  TaskDetailPage,
+  WritingPage,
+  CallbackPage
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -79,16 +83,18 @@ const router = createBrowserRouter([
           { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
       },
-      // {
-      //   path: routes.callback,
-      //   element: <CallbackPage />,
-      // },//
+      {
+        path: routes.callback,
+        element: <CallbackPage />,
+      },
       {
         path: routes.myPot.base,
-        // element: <MyPotMainPage />,
+        element: <MyPotMainPage />,
         children: [
+          { index: true, element: <MyPotStatusPage /> },
           { path: routes.myPot.calendar, element: <MyPotCalendarPage /> },
-        ],
+          { path: ":taskId", element: <TaskDetailPage /> },
+        ]
       },
       {
         path: routes.editPost,

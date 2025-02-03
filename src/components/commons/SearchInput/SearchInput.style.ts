@@ -39,3 +39,7 @@ export const buttonStyle = css`
   height: 4.4rem;
   border-radius: 50%;
 `;
+
+export const iconStyle = css`
+  color: white;
+`;

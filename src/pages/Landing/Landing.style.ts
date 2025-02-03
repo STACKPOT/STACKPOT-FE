@@ -93,6 +93,8 @@ export const profileContainer = css`
 export const profileImageStyle = css`
   width: 5.5rem;
   height: 5.5rem;
+  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 50%;
 `;
 
 export const buttonStyle = css`

@@ -20,7 +20,8 @@ const PotInformation: React.FC<PotInformationProps> = ({ startDate, period, meth
 
         <div css={gridContainer}>
             {elementList.map((element) =>
-                <div css={elementContainer}>
+                <div css={elementContainer}
+                    key={element.title}>
                     <p css={elementTitleStyle}>{element.title}</p>
                     <p css={elementContentStyle}>{element.content}</p>
                 </div>

@@ -22,9 +22,17 @@ export const tabsContainer = css`
 
 export const tabsTextStyle = css`
   ${theme.font.bodyBold2};
+  color: ${theme.color.interactive.inactive}; 
+  text-decoration: none;
+  transition: color 0.3s ease-out;
 
   &:hover {
     transform: scale(1.05);
+    color: ${theme.color.point.hero};
   }
 
-`
+  /* NavLink가 active일 때 색상 */
+  &.active {
+    color: ${theme.color.point.hero};  
+  }
+`;

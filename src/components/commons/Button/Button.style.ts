@@ -15,7 +15,7 @@ export const buttonStyle = css`
   }
 `;
 
-export const loginButtonStyle = css`
+export const entryButtonStyle = css`
   padding: 1.2rem 2.4rem;
   background-color: ${theme.color.point.hero};
   border-radius: 32px;
