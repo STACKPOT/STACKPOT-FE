@@ -151,7 +151,7 @@ const Setting = () => {
             <div css={contentHeader}>
               <p>계정 탈퇴하기</p>
               <CategoryButton
-                style="PM"
+                style="PLANNING"
                 selected={selectedCategory === "participation"}
                 onClick={handleClick}
               >
