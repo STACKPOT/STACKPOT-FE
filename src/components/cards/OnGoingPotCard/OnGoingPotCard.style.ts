@@ -5,6 +5,7 @@ export const container = css`
     display: flex;
     justify-content: space-between;
     padding: 2rem 3rem;
+    height: 8.4rem;
     border-radius: 16px;
     border: 1px solid ${theme.color.object.alternative};
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
