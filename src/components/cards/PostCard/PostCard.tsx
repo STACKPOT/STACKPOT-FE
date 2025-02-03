@@ -17,7 +17,6 @@ import {
 import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import { roleImages } from "@constants/roleImage";
-import { MushroomImage } from "@assets/images";
 
 interface PostCardProps {
   role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
