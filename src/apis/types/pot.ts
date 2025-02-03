@@ -11,7 +11,7 @@ export interface PotsResponse {
 
 interface Pots {
   userId: number;
-  userRole: string;
+  userRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
   userNickname: string;
   potId: number;
   potName: string;

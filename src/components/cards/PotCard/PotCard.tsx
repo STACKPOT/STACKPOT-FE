@@ -40,24 +40,22 @@ const PotCard: React.FC<PotCardProps> = ({
   const profileImage = roleImages[role];
 
   return (
-    <>
-      <div css={cardStyle} onClick={handleClickCard}>
-        <div css={titleContainer}>
-          <img css={profileImageStyle} src={profileImage} alt="profile" />
-          <div css={nicknameDdayContainer}>
-            <p css={nicknameStyle}>{nickname}</p>
-            <DdayBadge days={dday} />
-          </div>
-        </div>
-        <h1 css={titleStyle}>{title}</h1>
-        <p css={contentStyle}>{content}</p>
-        <div css={categoriesContainer}>
-          {categories.map((category, index) => (
-            <Badge key={index} content={category} />
-          ))}
+    <div css={cardStyle} onClick={handleClickCard}>
+      <div css={titleContainer}>
+        <img css={profileImageStyle} src={profileImage} alt="profile" />
+        <div css={nicknameDdayContainer}>
+          <p css={nicknameStyle}>{nickname}</p>
+          <DdayBadge days={dday} />
         </div>
       </div>
-    </>
+      <h1 css={titleStyle}>{title}</h1>
+      <p css={contentStyle}>{content}</p>
+      <div css={categoriesContainer}>
+        {categories.map((category, index) => (
+          <Badge key={index} content={category} />
+        ))}
+      </div>
+    </div>
   );
 };
 
