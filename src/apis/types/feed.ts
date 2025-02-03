@@ -1,6 +1,6 @@
 export interface FeedResponse {
   feeds: Feeds[];
-  nextCursor: string;
+  nextCursor: number;
 }
 
 interface Feeds {
@@ -17,5 +17,5 @@ export interface GetFeedParams {
   category: string;
   sort: string;
   limit: number;
-  cursor: string;
+  cursor: number | null;
 }

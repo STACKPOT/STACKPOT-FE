@@ -16,8 +16,6 @@ export const buttonContainer = css`
 
 export const contentBody = css`
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
   flex-direction: column;
   gap: 3.2rem;
 `;
