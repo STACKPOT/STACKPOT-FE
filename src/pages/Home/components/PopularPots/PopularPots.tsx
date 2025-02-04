@@ -41,6 +41,7 @@ const PopularPots = () => {
         <>
           <Swiper
             css={swiperContainer}
+            key={currentPage}
             modules={[Pagination, Navigation]}
             centeredSlides={false}
             spaceBetween={16}
