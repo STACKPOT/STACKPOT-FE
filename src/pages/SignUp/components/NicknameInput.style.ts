@@ -21,4 +21,6 @@ export const buttonStyle = css`
     color: white;
     background-color: ${theme.color.point.navy};
     cursor: pointer;
+    ${theme.font.captionBold1};
+    font-family: "Pretendard";
 `

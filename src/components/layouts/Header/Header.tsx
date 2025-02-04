@@ -28,7 +28,6 @@ const Header: React.FC = () => {
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     setAccessToken(token);
-    console.log(accessToken);
   }, [localStorage.getItem("accessToken")]);
 
   return (
