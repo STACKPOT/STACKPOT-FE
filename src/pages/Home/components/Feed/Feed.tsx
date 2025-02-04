@@ -22,8 +22,13 @@ const Feed = () => {
   const [sort, setSort] = useState<string>("new");
 
   const handleCategoryClick = (category: string, partName: string) => {
-    setSelectedCategory((prev) => (prev === partName ? null : partName));
-    setCategory(category);
+    if (selectedCategory === partName) {
+      setSelectedCategory(null);
+      setCategory("ALL");
+    } else {
+      setSelectedCategory(partName);
+      setCategory(category);
+    }
   };
 
   const options = [
