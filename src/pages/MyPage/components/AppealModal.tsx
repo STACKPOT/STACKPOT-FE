@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 
 interface AppealModalProps {
     potId: number;
-    onClose: () => void;
+    onCancel: () => void;
 }
 
-const AppealModal: React.FC<AppealModalProps> = ({ potId }: AppealModalProps) => {
+const AppealModal: React.FC<AppealModalProps> = ({ potId, onCancel }: AppealModalProps) => {
     const [potName, setPotName] = useState<string>("Stackpot");
     const [role, setRole] = useState<string>("프론트엔드");
     const [startDate, setStartDate] = useState<string>("2025.2.16");
@@ -27,7 +27,7 @@ const AppealModal: React.FC<AppealModalProps> = ({ potId }: AppealModalProps) =>
         <div css={backgroundStyle}>
             <div css={modalStyle}>
                 <div css={closeButtonContainer}>
-                    <CloseIcon css={closeIconStyle} />
+                    <CloseIcon css={closeIconStyle} onClick={onCancel} />
                 </div>
                 <div css={bodyContainer}>
                     <div css={titleContainer}>
