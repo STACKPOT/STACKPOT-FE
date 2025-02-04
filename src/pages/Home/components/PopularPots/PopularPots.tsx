@@ -13,6 +13,7 @@ import { useState } from "react";
 import { LeftIcon } from "@assets/svgs";
 import Skeleton from "react-loading-skeleton";
 import { cardStyle } from "@components/cards/PotCard/PotCard.style";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const PopularPots = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,19 +41,19 @@ const PopularPots = () => {
         <>
           <Swiper
             css={swiperContainer}
+            key={currentPage}
             modules={[Pagination, Navigation]}
             centeredSlides={false}
             spaceBetween={16}
             slidesPerView={3}
             slidesPerGroup={3}
-            navigation={true}
+            observer={true}
+            observeParents={true}
           >
             {isLoading
               ? Array.from({ length: 3 }).map((_, index) => (
-                  <SwiperSlide key={index}>
-                    <div css={cardStyle}>
-                      <Skeleton />
-                    </div>
+                  <SwiperSlide key={`skeleton-${index}`}>
+                    <Skeleton css={cardStyle} />
                   </SwiperSlide>
                 ))
               : data?.pots.map((pot) => (
