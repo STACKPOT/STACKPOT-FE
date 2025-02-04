@@ -3,7 +3,7 @@ export { default as YawnEmoji } from "./yawnEmoji.png";
 export { default as CheckEmoji } from "./checkEmoji.png";
 export { default as SunglassEmoji } from "./sunglassEmoji.png";
 export { default as TaskImgage } from "./landingTask.webp";
-export { default as CarraotImage } from "./carrot.webp";
+export { default as CarrotImage } from "./carrot.webp";
 export { default as BroccoliImage } from "./broccoli.webp";
 export { default as OnionImage } from "./onion.webp";
 export { default as MushroomImage } from "./mushroom.webp";
