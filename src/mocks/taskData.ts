@@ -1,4 +1,4 @@
-import { CarraotImage, MushroomImage, OnionImage } from "@assets/images";
+import { CarrotImage, MushroomImage, OnionImage } from "@assets/images";
 
 export interface Task {
   id: number;
@@ -17,7 +17,7 @@ export const taskData = [
       "와이어 프레임 제작해서 넘기기 두줄와이어 프레임 제작해서 넘기기...",
     daysLeft: 3,
     nickName: "아이 마시는 버섯",
-    profileImageList: [MushroomImage, CarraotImage, OnionImage],
+    profileImageList: [MushroomImage, CarrotImage, OnionImage],
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ export const taskData = [
     content: "디자인 초안을 제출해야 합니다. 내용이 길어질 수 있습니다...",
     daysLeft: 5,
     nickName: "디자인 초안 마스터",
-    profileImageList: [MushroomImage, CarraotImage],
+    profileImageList: [MushroomImage, CarrotImage],
   },
   {
     id: 3,
@@ -41,6 +41,6 @@ export const taskData = [
     content: "기능별 테스트 케이스를 작성하여 품질을 보장합니다...",
     daysLeft: 10,
     nickName: "디자인 초안 마스터",
-    profileImageList: [CarraotImage, OnionImage],
+    profileImageList: [CarrotImage, OnionImage],
   },
 ];

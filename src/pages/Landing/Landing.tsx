@@ -21,7 +21,7 @@ import { Button } from "@components/index";
 import {
   TaskImgage,
   BroccoliImage,
-  CarraotImage,
+  CarrotImage,
   OnionImage,
   MushroomImage,
   MyPotImage,
@@ -64,9 +64,9 @@ const Landing = () => {
             <p>내가 가장</p>
             <div css={profileContainer}>
               <img
-                src={CarraotImage}
+                src={CarrotImage}
                 css={profileImageStyle}
-                alt="CarraotImage"
+                alt="CarrotImage"
               />
               <img src={OnionImage} css={profileImageStyle} alt="OnionImage" />
               <img

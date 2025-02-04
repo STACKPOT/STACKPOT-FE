@@ -7,7 +7,7 @@ export const cardStyle = css`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    border-radius: 2.4rem;
+    border-radius: 24px;
     background-color: white;
     box-shadow:  0px 4px 12px 0px rgba(13, 10, 44, 0.06);
     border: 1px solid ${theme.color.object.alternative};
