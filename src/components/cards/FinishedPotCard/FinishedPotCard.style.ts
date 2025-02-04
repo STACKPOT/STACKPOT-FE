@@ -14,7 +14,15 @@ export const container = css`
 export const titleContainer = css`
     display: flex;
     justify-content: space-between;
+    height: 4rem;
     align-items: center;
+`
+export const titleProfileContainer = css`
+    display: flex;
+    flex-direction: column;
+`
+export const profileContainer =css`
+    display: flex;
 `
 export const titleStyle = css`
     ${theme.font.title1};

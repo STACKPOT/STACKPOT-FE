@@ -4,12 +4,12 @@ import { MyPageProfile } from './components'
 import postCardsData from 'mocks/postCardsData'
 import { FinishedPotCard, FloatingButton, PostCard } from '@components/index'
 import { MushroomImage } from '@assets/images'
-import appliedPotsData from 'mocks/appliedPotsData'
+import finishedPotsData from 'mocks/finishedPotsData'
 
 const MyPage = () => {
   const [contentType, setContentType] = useState<"feed" | "pot">("feed");
   const [posts, setPosts] = useState(postCardsData);
-  const [finishedPots, setFinishedPots] = useState(appliedPotsData);
+  const [finishedPots, setFinishedPots] = useState(finishedPotsData);
 
   return (
     <main css={container}>
@@ -35,7 +35,9 @@ const MyPage = () => {
             finishedPots.map((pot) =>
               <FinishedPotCard
                 key={pot.id}
-                {...pot} />
+                {...pot}
+                editButton={true}
+                isMyPot={true} />
             )
           }
         </div>
