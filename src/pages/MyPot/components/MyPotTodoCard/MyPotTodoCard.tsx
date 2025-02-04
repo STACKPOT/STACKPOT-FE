@@ -2,20 +2,16 @@ import { useState } from "react";
 import { cardStyle, checkBoxStyle, nicknameStyle, plusButtonStyle, profileImageStyle, statusContainer, todoContainer, todoListContainer, todoTextStyle } from "./MyPotTodoCard.style";
 import { CheckIcon, PlusButtonIcon } from "@assets/svgs";
 import { MushroomImage } from "@assets/images";
-import MyTodoModalWrapper from "../MyTodoModal/MyTodoModal";
-
-interface TodoItem {
-  content: string;
-  status: string;
-}
-
+import MyTodoModalWrapper from "../MyTodoModalWrapper/MyTodoModalWrapper";
+import { Todo } from "apis/types/todo";
 interface MyPotTodoCardProps {
   nickname: string;
-  todos: TodoItem[];
+  todos: Todo[];
   isFirst: boolean;
+  potId: number;
 }
 
-const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst }) => {
+const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handlePlusButtonClick = () => {
@@ -35,7 +31,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst 
       </div>
       <div css={statusContainer}>
         <div css={todoListContainer}>
-          {todos.slice(0, 3).map((todo, index) => (
+          {(todos || []).slice(0, 3).map((todo, index) => ( 
             <div css={todoContainer} key={index}>
               <div css={checkBoxStyle}>
                 {todo.status === "COMPLETED" && <CheckIcon />}
@@ -46,7 +42,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst 
         </div>
       </div>
 
-      <MyTodoModalWrapper isModalOpen={isModalOpen} onClose={handleCloseModal} />
+      <MyTodoModalWrapper potId={potId} isModalOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
   );
 };

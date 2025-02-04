@@ -10,7 +10,7 @@ import Pagination from "./Pagination/Pagination";
 import StatusBoard from "./Statusboard/StatusBoard";
 import TaskCardList from "./TaskCardList/TaskCardList";
 import TodoStatusSection from "./TodoStatusSection/TodoStatusSection";
-import MyTodoModalWrapper from "./MyTodoModal/MyTodoModal";
+import MyTodoModalWrapper from "./MyTodoModalWrapper/MyTodoModalWrapper";
 
 export {
   TextInput,
