@@ -26,6 +26,7 @@ import FinishedPotCard from "./cards/FinishedPotCard/FinishedPotCard";
 import SideBarProfileModal from "./layouts/SideBarProfileModal/SideBarProfileModal";
 import InformationPopper from "./commons/InformationPopper/InformationPopper";
 import OnGoingPotCard from "./cards/OnGoingPotCard/OnGoingPotCard";
+import AppealModal from "@pages/MyPage/components/AppealModal";
 
 export {
   Modal,
@@ -56,4 +57,5 @@ export {
   SideBarProfileModal,
   InformationPopper,
   OnGoingPotCard,
+  AppealModal,
 };
