@@ -10,10 +10,8 @@ const useCreatePot = () => {
         onSuccess: (data) => {
             if (data.result) {
                 const { potId } = data.result;
-                //navigate(`/pot/${potId}`);
-                console.log(data.result);
+                navigate(`/pot/${potId}`);
             } else {
-                console.log("create-pot fail");
             }
         }
     })

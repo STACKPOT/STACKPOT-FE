@@ -20,15 +20,13 @@ import {
 } from "./CreatePot.style";
 import { Button, CategoryButton } from "@components/index";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { participation, partMap, period } from "@constants/categories";
+import { participation, participationMap, partMap, period } from "@constants/categories";
 import { DatePicker } from "./components";
 import useCreatePot from "apis/hooks/pots/useCreatePot";
 import { Dayjs } from "dayjs";
 import { RecruitmentDetail } from "apis/types/pot";
 
 const CreatePot = () => {
-  const navigate = useNavigate();
   const { mutate } = useCreatePot();
 
   const [potName, setPotName] = useState<string>("");
@@ -69,29 +67,24 @@ const CreatePot = () => {
   };
 
   const handleUploading = () => {
-    let recruitments: RecruitmentDetail[] = [{recruitmentRole:"BACKEND",recruitmentCount: 1}];
-    /*Object.entries(partNumber).forEach((part) => {
+    let recruits: RecruitmentDetail[] = [];
+    Object.entries(partNumber).forEach((part) => {
       if (visibleInputs[part[0]] && part[1] > 0) {
-        recruitments = [
-          ...recruitments,
-          { recruitmentRole: part[0], recruitmentCount: part[1] }]
+        recruits = [
+          ...recruits,
+          { recruitmentRole: partMap[part[0]], recruitmentCount: part[1] }]
       }
-    })*/
+    })
 
     mutate({
       potName: potName,
       potStartDate: date,
-      potEndDate: date,
       potDuration: selectedPeriod,
       potLan: language,
       potContent: content,
-      potStatus:"RECRUITING",
-      potModeOfOperation: "ONLINE"/*participationMap[selectedParticipation*/,
-      potSummary:"",
-      recruitmentDeadline:date,
-      recruitmentDetails: recruitments,
+      potModeOfOperation: participationMap[selectedParticipation],
+      recruitmentDetails: recruits,
     })
-    // navigate("/");
   };
 
   return (

@@ -20,3 +20,9 @@ export const interests = [
 ] as const;
 
 export const categories = ["프론트엔드", "백엔드", "디자인", "기획"] as const;
+
+export const participationMap: { [key: string]: "ONLINE" | "OFFLINE" | "HYBRID" } = {
+  온라인: "ONLINE",
+  오프라인: "OFFLINE",
+  혼합: "HYBRID",
+}
