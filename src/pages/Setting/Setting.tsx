@@ -15,11 +15,12 @@ import {
   detailContainer,
   buttonContainer,
   buttonStyle,
+  categories,
 } from "./Setting.style";
 import { PotIcon } from "@assets/svgs";
 import { Button, CategoryButton, Modal, TextField } from "@components/index";
 import { useState } from "react";
-import { interests } from "@constants/categories";
+import { interests, partMap } from "@constants/categories";
 
 const Setting = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -29,8 +30,6 @@ const Setting = () => {
   const [introduction, setIntroduction] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExplainOpen, setIsExplainOpen] = useState(false);
-
-  const categories = ["프론트엔드", "백엔드", "디자인", "기획"];
 
   const handleInterestClick = (interestName: string) => {
     setSelectedInterest((prev) =>
@@ -91,7 +90,7 @@ const Setting = () => {
               역할은 하나만 선택해 주세요. 변경 시 닉네임도 바뀌게 됩니다.
             </p>
             <div css={categoryContainer}>
-              {categories.map((categoryName) => (
+              {Object.keys(partMap).map((categoryName) => (
                 <div key={categoryName} css={categories}>
                   <CategoryButton
                     style="pot"

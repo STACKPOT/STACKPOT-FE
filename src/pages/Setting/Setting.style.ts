@@ -126,9 +126,8 @@ export const buttonContainer = css`
 
 export const buttonStyle = css`
   width: 54.9rem;
-  height: 6rem;
-  padding: 1.6rem 3.3rem;
-  border-radius: 0.8rem;
+  padding: 1.6rem 2.4rem;
+  border-radius: 8px;
   background-color: ${theme.color.point.hero};
   border: none;
   cursor: pointer;
