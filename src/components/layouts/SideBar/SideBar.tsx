@@ -29,7 +29,6 @@ const menuItems = [
 const SideBar: React.FC = () => {
   const [top, setTop] = useState(0);
   const [footerTop, setFooterTop] = useState<number | null>(null);
-  const [profileModal, setProfileModal] = useState<boolean>(false);
 
   useEffect(() => {
     const initialTop = window.innerHeight / 2 + window.scrollY;
