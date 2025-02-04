@@ -2,7 +2,7 @@ import { PotIcon } from "@assets/svgs";
 import {
     buttonContainer, countInputStyle, dividerStyle, formContainer, headContainer, iconStyle, informationIconContainer, inputContainer, inputStyle, labelStyle, languageInputStyle, mainContainer, modalContentStyle, partButtonContainer, partContainer, partStyle, textareaStyle, titleContainer, titleStyle,
 } from "./EditFinishedPot.style"
-import { Button, CategoryButton, InformationPopper, Modal, PotButton, TextField } from "@components/index";
+import { Button, CategoryButton, InformationPopper, Modal, PotButton } from "@components/index";
 import { DatePicker } from "@pages/CreatePot/components";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -22,7 +22,7 @@ const EditFinishedPot = () => {
     const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
     useEffect(() => {
-        const partValues = Object.values(partMap);
+        const partValues = Object.keys(partMap);
         setPartNumber(Object.fromEntries(partValues.map(key =>
             [key, 0])) as Record<typeof partValues[number], number>);
     }, []);
@@ -42,11 +42,17 @@ const EditFinishedPot = () => {
     const handlePartNumber = (partName: string, e: React.ChangeEvent<HTMLInputElement>) => {
         setPartNumber(prev => ({
             ...prev,
-            [partMap[partName]]: Number(e.target.value),
+            [partName]: Number(e.target.value),
         }));
     };
 
     const handleUploading = () => {
+        let recruits: { roleName: string, roleNumber: number }[] = [];
+        Object.entries(partNumber).forEach((part) => {
+            if (visibleInputs[part[0]] && part[1] > 0) {
+                recruits = [...recruits, { roleName: partMap[part[0]], roleNumber: part[1] }]
+            }
+        });
         // navigate("/");
     };
 
@@ -101,13 +107,10 @@ const EditFinishedPot = () => {
                 </div>
                 <label css={partStyle}>
                     사용 언어
-                    <div css={languageInputStyle}>
-                        <TextField
-                            placeholder="사용 언어 작성"
-                            readonly={true}
-                            warningMessage="팟 게시자만 편집 가능해요"
-                            onTextChange={(text) => setLanguage(text)} >{language}</TextField>
-                    </div>
+                    <input css={[inputStyle, languageInputStyle]}
+                        placeholder="사용 언어 작성"
+                        onChange={(e) => setLanguage(e.target.value)}
+                        value={language} />
                 </label>
                 <textarea
                     css={textareaStyle}
