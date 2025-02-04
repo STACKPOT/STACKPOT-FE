@@ -6,10 +6,12 @@ import {
   headerStyle,
   mainContainer,
   categoryContainer,
+  buttonStyle,
 } from "./SignUp.style";
 import { Button, TextField } from "@components/index";
 import { useState } from "react";
 import { CategorySelection, ContractsSection, Section } from "./components";
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 const SignUp = () => {
   const [selectedStack, setSelectedStack] = useState<string | null>(null);
@@ -31,46 +33,51 @@ const SignUp = () => {
 
   return (
     <main css={container}>
-      <div css={mainContainer}>
+      {/* <FormProvider> */}
+      <form css={mainContainer}>
         <div css={headerContainer}>
-          <h1 css={headerStyle}>STACKPOT 회원가입</h1>
+          <h1 css={headerStyle}>회원가입</h1>
           <div css={dividerStyle} />
         </div>
         <div css={bodyContainer}>
           <Section
             title="카테고리 설정"
             description="STACKPOT에 가입하기 위해 카테고리를 설정해 주세요!"
-          >
-            <div css={categoryContainer}>
-              <CategorySelection
-                type="stack"
-                title="역할"
-                onSelect={(stack) => setSelectedStack(stack)}
-              />
-              <CategorySelection
-                type="interest"
-                title="관심사"
-                onSelect={setSelectedInterest}
-              />
-            </div>
-          </Section>
+          />
+          <div css={categoryContainer}>
+            <CategorySelection
+              type="stack"
+              title="역할"
+              onSelect={(stack) => setSelectedStack(stack)}
+            />
+            <CategorySelection
+              type="interest"
+              title="관심사"
+              onSelect={setSelectedInterest}
+            />
+          </div>
           <Section
             title="카카오톡 아이디"
             description={`팟이 시작될 경우, 원활한 진행을 위해 팀장에게 카카오 아이디가 보여집니다.\n카카오톡 아이디를 작성해 주세요. `}
+          />
+          <TextField
+            placeholder="카카오톡 아이디 작성"
+            onTextChange={setKakaoId}
           >
-            <TextField
-              placeholder="카카오톡 아이디 작성"
-              onTextChange={setKakaoId}
-            >
-              {kakaoId}
-            </TextField>
-          </Section>
+            {kakaoId}
+          </TextField>
           <ContractsSection onAgree={setContractsAgreed} />
         </div>
-        <Button variant="action" actionType="join" onClick={handleSignUp}>
+        <Button
+          variant="action"
+          actionType="join"
+          css={buttonStyle}
+          onClick={handleSignUp}
+        >
           가입하기
         </Button>
-      </div>
+      </form>
+      {/* </FormProvider> */}
     </main>
   );
 };
