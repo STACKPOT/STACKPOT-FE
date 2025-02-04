@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { OnGoingPotCard, Section } from "./components"
+import { Section } from "./components"
 import { container } from "./MadePot.style"
 import { PotInformationCard } from "../components";
 import appliedPotsData from "mocks/appliedPotsData";
 import onGoingPotsData from "mocks/onGoingPotsData";
-import { FinishedPotCard } from "@components/index";
+import { FinishedPotCard, OnGoingPotCard } from "@components/index";
 import finishedPotsData from "mocks/finishedPotsData";
 
 
@@ -35,7 +35,8 @@ const MadePotPage = () => {
             {onGoingPots.map((pot) =>
               <OnGoingPotCard
                 key={pot.id}
-                {...pot} />)}
+                {...pot}
+                isMyPot={true} />)}
           </>
         </Section>
         <Section title="끓인 나의 팟">

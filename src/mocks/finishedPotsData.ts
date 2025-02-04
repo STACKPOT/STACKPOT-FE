@@ -1,4 +1,4 @@
-import { BroccoliImage, CarraotImage, MushroomImage, OnionImage } from "@assets/images";
+import { BroccoliImage, CarrotImage, MushroomImage, OnionImage } from "@assets/images";
 
 const finishedPotsData: {
     id: number;
@@ -26,7 +26,7 @@ const finishedPotsData: {
             method: "온라인",
             stacks: "프론트엔드(2), 디자이너(1)",
             languages: "React, Javascripts ",
-            memberProfiles: [MushroomImage, BroccoliImage, OnionImage, MushroomImage, CarraotImage],
+            memberProfiles: [MushroomImage, BroccoliImage, OnionImage, MushroomImage, CarrotImage],
         },
         {
             id: 1,
@@ -40,7 +40,7 @@ const finishedPotsData: {
             method: "온라인",
             stacks: "프론트엔드(2), 디자이너(1)",
             languages: "React, Javascripts ",
-            memberProfiles: [MushroomImage, BroccoliImage, OnionImage, MushroomImage, CarraotImage],
+            memberProfiles: [MushroomImage, BroccoliImage, OnionImage, MushroomImage, CarrotImage],
         },
         {
             id: 2,
@@ -54,7 +54,7 @@ const finishedPotsData: {
             method: "온라인",
             stacks: "프론트엔드(2), 디자이너(1)",
             languages: "React, Javascripts ",
-            memberProfiles: [MushroomImage, BroccoliImage, OnionImage, MushroomImage, CarraotImage],
+            memberProfiles: [MushroomImage, BroccoliImage, OnionImage, MushroomImage, CarrotImage],
         }
     ]
 

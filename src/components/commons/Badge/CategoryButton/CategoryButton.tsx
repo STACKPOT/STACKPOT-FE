@@ -12,7 +12,7 @@ interface CategoryButtonProps {
   children: string;
   selected: boolean;
   onClick: (category: string) => void;
-  style: "pot" | "FE" | "BE" | "PM" | "DE";
+  style: "pot" | "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
 }
 
 const CategoryButton: React.FC<CategoryButtonProps> = ({
@@ -24,13 +24,13 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
   const buttonType: SerializedStyles =
     style === "pot"
       ? potButtonStyle(selected)
-      : style === "FE"
+      : style === "FRONTEND"
       ? feButtonStyle(selected)
-      : style === "BE"
+      : style === "BACKEND"
       ? beButtonStyle(selected)
-      : style === "PM"
+      : style === "PLANNING"
       ? pmButtonStyle(selected)
-      : style === "DE"
+      : style === "DESIGN"
       ? deButtonStyle(selected)
       : potButtonStyle(selected);
 
