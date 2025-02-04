@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   bodyContainer,
   container,
@@ -8,40 +8,27 @@ import {
   tabsTextStyle,
 } from "./MyPage.style";
 import { MyPageProfile } from "./components";
-import postCardsData from "mocks/postCardsData";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
 import { MushroomImage } from "@assets/images";
-import appliedPotsData from "mocks/appliedPotsData";
 import useGetMyPage from "apis/hooks/mypage/useGetMyPage";
+import { error } from "console";
 
 const MyPage = () => {
-  const { data, isLoading, error } = useGetMyPage();
   const [contentType, setContentType] = useState<"feed" | "pot">("feed");
-  const [posts, setPosts] = useState(postCardsData);
-  const [finishedPots, setFinishedPots] = useState(appliedPotsData);
 
-  useEffect(() => {
-    if (data) {
-      setPosts(data.feeds || []);
-      setFinishedPots(data.completedPosts || []);
-    }
-  }, [data]);
+  // API 데이터 연동
+  const { data, isLoading, isError } = useGetMyPage({ dataType: "ALL" });
 
-  if (isLoading) {
-    return <div>로딩 중...</div>;
-  }
-
-  if (error) {
-    return <div>에러가 발생했습니다. 다시 시도해주세요.</div>;
-  }
+  if (isLoading) return <p>로딩 중...</p>;
+  if (isError) return console.log(error);
 
   return (
     <main css={container}>
       <MyPageProfile
         profileImage={MushroomImage}
-        nickname={data?.nickname || "닉네임"}
-        introduction={data?.userIntroduction || "소개 없음"}
-        temperature={data?.userTemperature || 0}
+        nickname={data?.result.nickname || "닉네임 없음"}
+        introduction={data?.result.userIntroduction || "소개 없음"}
+        temperature={data?.result.userTemperature || 0}
       />
       <div css={dividerStyle} />
       <div css={bodyContainer}>
@@ -61,9 +48,27 @@ const MyPage = () => {
         </div>
         <div css={listContainer(contentType)}>
           {contentType === "feed"
-            ? posts.map((post) => <PostCard key={post.id} {...post} />)
-            : finishedPots.map((pot) => (
-                <FinishedPotCard key={pot.id} {...pot} />
+            ? data?.result.feeds?.map((post) => (
+                <PostCard
+                  role={post.writerRole}
+                  nickname={post.writer}
+                  isLiked={false}
+                  key={post.feedId}
+                  {...post}
+                />
+              ))
+            : data?.result.completedPots?.map((pot) => (
+                <FinishedPotCard
+                  id={pot.potId}
+                  title={pot.potName}
+                  startDate={pot.potStartDate}
+                  period={`${pot.potStartDate} ~ ${pot.potEndDate}`}
+                  method={""}
+                  stacks={""}
+                  languages={""}
+                  key={pot.potId}
+                  {...pot}
+                />
               ))}
         </div>
       </div>
