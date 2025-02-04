@@ -19,17 +19,17 @@ import {
   titleStyle,
 } from "./CreatePot.style";
 import { Button, CategoryButton } from "@components/index";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { participation, partMap, period } from "@constants/categories";
 import { DatePicker } from "./components";
 import useCreatePot from "apis/hooks/pots/useCreatePot";
 import { Dayjs } from "dayjs";
+import { RecruitmentDetail } from "apis/types/pot";
 
 const CreatePot = () => {
   const navigate = useNavigate();
   const { mutate } = useCreatePot();
-  console.log("Mutation Object:", mutate);
 
   const [potName, setPotName] = useState<string>("");
   const [language, setLanguage] = useState<string>("");
@@ -37,76 +37,61 @@ const CreatePot = () => {
   const [selectedParticipation, setSelectedParticipation] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [date, setDate] = useState<string>("");
-  //const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [selectedParts, setSelectedParts] = useState<string[]>([]);
-
+  const [partNumber, setPartNumber] = useState<{ [key: string]: number }>({});
   const [visibleInputs, setVisibleInputs] = useState<{
     [key: string]: boolean;
   }>({});
 
+  useEffect(() => {
+    const partValues = Object.keys(partMap);
+    setPartNumber(Object.fromEntries(partValues.map(key =>
+      [key, 0])) as Record<typeof partValues[number], number>);
+  }, []);
 
 
-  /*const handleButtonClick = (category: string) => {
-    setSelectedCategory(category);
-  };*/
-  const handleSelectPeriod = (selected: string) => {
-    setSelectedPeriod(selected);
-  }
-  const handleSelectMethod = (selected: string) => {
-    setSelectedParticipation(selected);
-  }
-  const handlePotName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPotName(e.target.value);
-  }
-  const handleContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
-  }
-  const handleLanguage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLanguage(e.target.value);
-  }
   const handleDate = (day: Dayjs | null) => {
-    if(day){
+    if (day) {
       setDate(day.format('YYYY-MM-DD'))
     }
   }
   const handlePartClick = (partName: string) => {
-    setSelectedParts((prev) =>
-      prev.includes(partName)
-        ? prev.filter((item) => item !== partName)
-        : [...prev, partName]
-    );
     setVisibleInputs((prev) => ({
       ...prev,
       [partName]: !prev[partName],
     }));
   };
 
-  const handleUploading = () => {
-    /*console.log(potName);
-    console.log(date);
-    console.log(selectedPeriod);
-    console.log(language);
-    console.log(content);*/
-    if (!mutate) {
-      console.log("mutate is undefined! useCreatePot() is not returning it properly.");
-      return;
-  }
-  console.log("Mutation function exists, executing mutate...");
+  const handlePartNumber = (partName: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    setPartNumber(prev => ({
+      ...prev,
+      [partName]: Number(e.target.value),
+    }));
+  };
 
-    
+  const handleUploading = () => {
+    let recruitments: RecruitmentDetail[] = [{recruitmentRole:"BACKEND",recruitmentCount: 1}];
+    /*Object.entries(partNumber).forEach((part) => {
+      if (visibleInputs[part[0]] && part[1] > 0) {
+        recruitments = [
+          ...recruitments,
+          { recruitmentRole: part[0], recruitmentCount: part[1] }]
+      }
+    })*/
+
     mutate({
       potName: potName,
       potStartDate: date,
+      potEndDate: date,
       potDuration: selectedPeriod,
       potLan: language,
       potContent: content,
-      potModeOfOperation: "ONLINE",
-      recruitmentDetails: [
-        {recruitmentRole:"BACKEND", recruitmentCount:2}
-      ],
+      potStatus:"RECRUITING",
+      potModeOfOperation: "ONLINE"/*participationMap[selectedParticipation*/,
+      potSummary:"",
+      recruitmentDeadline:date,
+      recruitmentDetails: recruitments,
     })
     // navigate("/");
-    console.log("Mutation function executed!");
   };
 
   return (
@@ -123,7 +108,7 @@ const CreatePot = () => {
       <form css={formContainer}>
         <label css={labelStyle}>
           팟 네임
-          <input css={inputStyle} placeholder="메인 제목 작성" onChange={handlePotName} value={potName} />
+          <input css={inputStyle} placeholder="메인 제목 작성" onChange={(e) => setPotName(e.target.value)} value={potName} />
         </label>
         <div css={dividerStyle} />
         <div css={labelStyle}>
@@ -134,7 +119,7 @@ const CreatePot = () => {
                 key={participation}
                 style="pot"
                 selected={selectedParticipation === participation}
-                onClick={handleSelectMethod}
+                onClick={() => setSelectedParticipation(participation)}
               >
                 {participation}
               </CategoryButton>
@@ -154,7 +139,7 @@ const CreatePot = () => {
                 key={period}
                 style="pot"
                 selected={selectedPeriod === period}
-                onClick={handleSelectPeriod}
+                onClick={() => setSelectedPeriod(period)}
               >
                 {period}
               </CategoryButton>
@@ -168,13 +153,14 @@ const CreatePot = () => {
               <div key={partName} css={partButtonContainer}>
                 <CategoryButton
                   style={partMap[partName]}
-                  selected={selectedParts.includes(partName)}
+                  selected={visibleInputs[partName]}
                   onClick={() => handlePartClick(partName)}
                 >
                   {partName}
                 </CategoryButton>
                 <div css={inputContainer(visibleInputs[partName])}>
-                  <input css={countInputStyle} />
+                  <input css={countInputStyle}
+                    onChange={(e) => handlePartNumber(partName, e)} />
                   <p>명</p>
                 </div>
               </div>
@@ -186,14 +172,14 @@ const CreatePot = () => {
           <input
             css={[inputStyle, languageInputStyle]}
             placeholder="사용 언어 작성"
-            onChange={handleLanguage}
+            onChange={(e) => setLanguage(e.target.value)}
             value={language}
           />
         </label>
         <textarea
           css={textareaStyle}
           placeholder="어떤 팟을 끓이고 싶으세요? 간단하게 소개해 보세요."
-          onChange={handleContent}
+          onChange={(e) => setContent(e.target.value)}
           value={content}
         />
       </form>
