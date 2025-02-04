@@ -10,6 +10,7 @@ export const mainContainer = (top: number) => css`
   transform: translateY(-50%);
   transition: top 0.5s ease-in-out;
   z-index: 10;
+  background-color: white;
 `;
 export const container = css`
   width: 8.6rem;
