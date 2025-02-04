@@ -6,7 +6,7 @@ export interface FeedResponse {
 interface Feeds {
   id: number;
   writer: string;
-  writerRole: string;
+  writerRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
   title: string;
   content: string;
   likeCount: number;
