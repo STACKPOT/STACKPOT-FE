@@ -6,7 +6,9 @@ export const period = [
   "단기-6개월 이상",
 ] as const;
 
-export const partMap: { [key: string]: "FRONTEND" | "BACKEND" | "DESIGN" | "PLANNING" } = {
+export const partMap: {
+  [key: string]: "FRONTEND" | "BACKEND" | "DESIGN" | "PLANNING";
+} = {
   프론트엔드: "FRONTEND",
   백엔드: "BACKEND",
   디자인: "DESIGN",
@@ -14,6 +16,7 @@ export const partMap: { [key: string]: "FRONTEND" | "BACKEND" | "DESIGN" | "PLAN
 };
 export const interests = [
   "사이드 프로젝트",
+  "1인 개발",
   "공모전",
   "창업",
   "네트워킹 행사",
