@@ -19,7 +19,7 @@ export const contentStyle = css`
     color: ${theme.color.object.normal};
     ${theme.font.caption1};
     word-wrap: break-word;
-    white-space: pre;
+    white-space: pre-wrap;
 `
 export const pinStyle = css`
     height: 1.2rem;
