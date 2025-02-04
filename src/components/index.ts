@@ -23,6 +23,7 @@ import MyFeedDropdown from "./commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import PotInformation from "./commons/PotInformation/PotInformation";
 import FinishedPotCard from "./cards/FinishedPotCard/FinishedPotCard";
 import SideBarProfileModal from "./layouts/SideBarProfileModal/SideBarProfileModal";
+import OnGoingPotCard from "./cards/OnGoingPotCard/OnGoingPotCard";
 
 export {
   Modal,
@@ -50,4 +51,5 @@ export {
   PotInformation,
   FinishedPotCard,
   SideBarProfileModal,
+  OnGoingPotCard,
 };
