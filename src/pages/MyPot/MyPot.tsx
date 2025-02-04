@@ -9,7 +9,7 @@ import {
 } from "./MyPot.style";
 import { useState } from "react";
 import onGoingPotsData from "mocks/onGoingPotsData";
-import { OnGoingPotCard } from "@pages/Pots/MadePot/components";
+import { OnGoingPotCard } from "@components/index";
 
 const MyPot: React.FC = () => {
   const [onGoingPots, setOnGoingPots] = useState(onGoingPotsData);
@@ -29,7 +29,7 @@ const MyPot: React.FC = () => {
               보세요.
             </p>
             {onGoingPots.map((pot) => (
-              <OnGoingPotCard {...pot} />
+              <OnGoingPotCard isMyPot={false} {...pot} />
             ))}
           </div>
         </div>

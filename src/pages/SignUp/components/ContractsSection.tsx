@@ -28,7 +28,7 @@ const ContractsSection: React.FC<ContractsSectionProps> = ({ onAgree }: Contract
         <>
             <div css={container}>
                 {contracts.map((contract, i) =>
-                    <div css={contractContainer} >
+                    <div key={contract.type} css={contractContainer} >
                         <CheckBox selected={contract.agreed} onSelect={() => handleAgree(i)}></CheckBox>
                         <p css={contractStyle}>{contract.preview}</p>
                         <button css={detailButtonStyle} onClick={() => setContractModal(contract)}>내용보기</button>

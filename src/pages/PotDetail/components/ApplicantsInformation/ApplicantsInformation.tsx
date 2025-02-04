@@ -46,9 +46,9 @@ const ApplicantsInformation = () => {
                     </div>
                     <div css={listContainer}>
                         {applicants.map((applicant) =>
-                            <div css={applicantContainer} onClick={() => setShowProfileMember(applicant)}>
+                            <div key={applicant.id} css={applicantContainer} onClick={() => setShowProfileMember(applicant)}>
                                 <CheckBox selected={selectedApplicants.includes(applicant)} onSelect={() => handleSelectApplicant(applicant)} />
-                                <img css={profileStyle} src={applicant.profileImage} />
+                                <img css={profileStyle} src={applicant.profileImage} alt="profile" />
                                 <p css={nicknameStyle}>{applicant.nickname}</p>
                             </div>
                         )}

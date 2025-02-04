@@ -9,3 +9,10 @@ export const headerStyle = css`
   background-color: ${theme.color.point.ivory};
   border-bottom: 1px solid ${theme.color.object.alternative};
 `;
+
+export const iconStyle = css`
+  width: 2rem;
+  height: 2rem;
+  color: ${theme.color.interactive.inactive};
+  cursor: pointer;
+`;

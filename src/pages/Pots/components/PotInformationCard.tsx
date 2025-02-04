@@ -29,7 +29,7 @@ const PotInformationCard: React.FC<PotInformationCardProps> = ({ id, type, title
                 <PotButton onClick={() => onButtonClick(id)}>{(type === "applied" && "지원 취소하기") || "팟 소개 수정"}</PotButton>
             </div>
             <div css={profileContainer}>
-                <img css={profileStyle} src={profileImage} />
+                <img css={profileStyle} src={profileImage} alt="profile" />
                 <p css={nicknameStyle}>{nickname}</p>
                 <div css={ddayBadgeWrapper}>
                     <DdayBadge days={dday} />

@@ -7,16 +7,28 @@ const tokenInstance = axios.create({
   headers: {
     Accept: "*/*",
   },
-  withCredentials: true,
 });
+
+tokenInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("accessToken"); 
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`; 
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 tokenInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
-      window.location.href = "/";
+      window.location.href = "/"; 
     } else {
-      window.location.href = "/404";
+      window.location.href = "/404";  
     }
     return Promise.reject(error);
   },
