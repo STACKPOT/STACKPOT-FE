@@ -13,15 +13,17 @@ export const container = css`
 `
 export const contentContainer = css`
     display: flex;
-    gap: 5rem;
+    gap: 1.6rem;
     align-items: center;
-`
-export const myPotIconStyle = css`
-    height: 2rem;
-    width: 2rem;
-    color: ${theme.color.interactive.inactive};
 `
 export const titleStyle = css`
     ${theme.font.bodyBold1};
     color: ${theme.color.point.hero};
+    max-width: 57.1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+`
+export const buttonContainer = css`
+    margin-left: auto;
 `

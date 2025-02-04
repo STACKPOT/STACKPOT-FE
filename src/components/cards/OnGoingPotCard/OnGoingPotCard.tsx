@@ -1,5 +1,4 @@
-import { MyPotIcon } from "@assets/svgs";
-import { container, contentContainer, myPotIconStyle, titleStyle } from "./OnGoingPotCard.style";
+import { buttonContainer, container, contentContainer, titleStyle } from "./OnGoingPotCard.style";
 import { MemberGroup, PotButton } from "@components/index";
 import { useNavigate } from "react-router-dom";
 
@@ -21,12 +20,13 @@ const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({ id, title, memberList, 
     return (
         <div css={container} onClick={() => handleClickPot(id)}>
             <div css={contentContainer}>
-                <MyPotIcon css={myPotIconStyle} />
                 <p css={titleStyle}>{title}</p>
                 <MemberGroup profileImageList={memberList} />
             </div>
             {isMyPot &&
-                <PotButton onClick={() => handleFinishPot(id)}>다 끓였어요</PotButton>}
+                <div css={buttonContainer}>
+                    <PotButton onClick={() => handleFinishPot(id)}>다 끓였어요</PotButton>
+                </div>}
         </div>
     )
 }
