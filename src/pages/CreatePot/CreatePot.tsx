@@ -88,7 +88,6 @@ const CreatePot = () => {
       potDuration: selectedPeriod,
       potLan: language,
       potContent: content,
-      potStatus: "RECRUITING",
       potModeOfOperation: participationMap[selectedParticipation],
       recruitmentDeadline: deadline,
       recruitmentDetails: recruits,
