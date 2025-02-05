@@ -9,7 +9,7 @@ export interface TokenServiceResponse {
 }
 
 export interface postSignInPayload {
-  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN" | undefined;
   interest: string;
   kakaoId: string;
 }

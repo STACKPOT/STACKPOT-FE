@@ -10,28 +10,24 @@ import {
   inputStyle,
 } from "./SignUp.style";
 import { Button } from "@components/index";
-import { useState } from "react";
 import { CategorySelection, ContractsSection, Section } from "./components";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import usePatchSignIn from "apis/hooks/users/usePostSignIn";
+import usePatchSignIn from "apis/hooks/users/usePatchSignIn";
 
 type SignInFormData = {
   kakaoId: string;
-  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN" | undefined;
   interest: string;
 };
 
 const SignUp = () => {
-  const [selectedStack, setSelectedStack] = useState<string | null>(null);
-  const [selectedInterest, setSelectedInterest] = useState<string | null>(null);
-  const [contractsAgreed, setContractsAgreed] = useState<boolean>(false);
-
-  const methods = useForm<SignInFormData>({
+  const methods = useForm({
     mode: "onChange",
     defaultValues: {
       kakaoId: "",
       role: undefined,
       interest: "",
+      contractsAgreed: false,
     },
   });
 
@@ -43,7 +39,12 @@ const SignUp = () => {
   } = methods;
   const { mutate } = usePatchSignIn();
 
-  const [role, interest, kakaoId] = watch(["role", "interest", "kakaoId"]);
+  const [role, interest, kakaoId, contractsAgreed] = watch([
+    "role",
+    "interest",
+    "kakaoId",
+    "contractsAgreed",
+  ]);
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
     console.log(kakaoId, role, interest);
@@ -64,16 +65,8 @@ const SignUp = () => {
               description="STACKPOT에 가입하기 위해 카테고리를 설정해 주세요!"
             />
             <div css={categoryContainer}>
-              <CategorySelection
-                type="role"
-                title="역할"
-                onSelect={(stack) => setSelectedStack(stack)}
-              />
-              <CategorySelection
-                type="interest"
-                title="관심사"
-                onSelect={setSelectedInterest}
-              />
+              <CategorySelection type="role" title="역할" />
+              <CategorySelection type="interest" title="관심사" />
             </div>
             <Section
               title="카카오톡 아이디"
@@ -85,14 +78,14 @@ const SignUp = () => {
               placeholder="카카오톡 아이디 작성"
               {...register("kakaoId", { required: true })}
             />
-            <ContractsSection onAgree={setContractsAgreed} />
+            <ContractsSection />
           </div>
           <Button
             type="submit"
             variant="action"
             actionType="join"
             css={buttonStyle}
-            disabled={!isValid}
+            disabled={!isValid || !contractsAgreed}
           >
             가입하기
           </Button>
