@@ -12,9 +12,16 @@ export const globalStyles = css`
     box-sizing: border-box;
   }
 
+  button,
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+  }
+
   main {
     min-height: calc(100vh - 58px);
     width: 908px;
-    margin: 0 auto; 
+    margin: 0 auto;
   }
 `;
