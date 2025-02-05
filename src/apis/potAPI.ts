@@ -1,4 +1,4 @@
-import { apiGet, authApiGet, authApiPost } from "./apiUtils";
+import { apiGet, authApiDelete, authApiGet, authApiPost } from "./apiUtils";
 import { GetPotsParams, PotsResponse, CreatePotParams, CreatePotResponse, PotDetailResponse, Member, PotMemberInfo, ApplyPotBody, StartPotBody, StartPotResponse } from "./types/pot";
 
 export const CreatePot = async (createPotParams: CreatePotParams) => {
@@ -28,3 +28,7 @@ export const ApplyPot = async (potId: number, body: ApplyPotBody) => {
 export const StartPot = async (potId: number, body: StartPotBody) => {
   return authApiPost<StartPotResponse>(`/pots/${potId}/members`, body);
 };
+
+export const CancelApply = async (potId: number) => {
+  return authApiDelete(`/pots/${potId}/applications`);
+}

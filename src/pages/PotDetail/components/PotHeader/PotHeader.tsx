@@ -6,6 +6,7 @@ import { useState } from "react";
 import ApplyStackModal from "../ApplyStackModal/ApplyStackModal";
 import ProfileModal from "../ProfileModal/ProfileModal";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
+import useCancelApply from "apis/hooks/pots/useCancelApply";
 
 interface PotHeaderProps {
     title: string;
@@ -18,6 +19,7 @@ interface PotHeaderProps {
 }
 const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId, potStatus, onApplySuccess, onCancelApplySuccess }: PotHeaderProps) => {
     const navigate = useNavigate();
+    const { mutate: cancelApply } = useCancelApply();
 
     const [showCancelApplyModal, setShowCancelApplyModal] = useState<boolean>(false);
     const [showApplyStackModal, setShowApplyStackModal] = useState<boolean>(false);
@@ -32,9 +34,15 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         // todo: 끓인 팟 수정 페이지로 이동
     }
     const handleCancelApplyModalConfirm = () => {
-        // todo: 지원 취소하기 api
-        setShowCancelApplyModal(false);
-        onCancelApplySuccess();
+        cancelApply(potId,
+            {
+                onSuccess: () => {
+                    setShowCancelApplyModal(false);
+                    onCancelApplySuccess();
+                    alert("지원이 취소되었습니다");
+                }
+            }
+        )
     }
     const handleApplyNext = (stack: string) => {
         setSelectedApplyStack(stack);
