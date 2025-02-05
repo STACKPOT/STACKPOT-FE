@@ -1,3 +1,5 @@
+import { Role } from "types/role";
+
 export interface LogInResponse {
   tokenServiceResponse: TokenServiceResponse;
   isNewUser: boolean;
@@ -9,12 +11,12 @@ export interface TokenServiceResponse {
 }
 
 export interface postSignInPayload {
-  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN" | undefined;
+  role: Role | undefined;
   interest: string;
   kakaoId: string;
 }
 
 export interface SignInResponse {
   id: number;
-  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  role: Role;
 }

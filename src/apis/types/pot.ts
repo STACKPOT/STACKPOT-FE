@@ -1,3 +1,5 @@
+import { Role } from "types/role";
+
 export interface GetPotsParams {
   page: number;
   size: number;
@@ -11,7 +13,7 @@ export interface PotsResponse {
 
 interface Pots {
   userId: number;
-  userRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  userRole: Role;
   userNickname: string;
   potId: number;
   potName: string;
