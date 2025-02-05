@@ -13,6 +13,11 @@ export const buttonStyle = css`
   &:active {
     background-color: ${theme.color.point.navy};
   }
+  &:disabled {
+    background-color: ${theme.color.object.alternative};
+    cursor: not-allowed;
+    color: ${theme.color.interactive.inactive};
+  }
 `;
 
 export const entryButtonStyle = css`

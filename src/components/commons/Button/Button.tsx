@@ -18,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   variant,
   actionType = "action",
   onClick,
+  disabled,
   ...props
 }) => {
   const buttonType: SerializedStyles = (() => {
@@ -38,6 +39,7 @@ const Button: React.FC<ButtonProps> = ({
       type="button"
       css={[buttonType, buttonStyle]}
       onClick={onClick}
+      disabled={disabled}
       {...props}
     >
       {children}
