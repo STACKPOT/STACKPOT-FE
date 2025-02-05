@@ -10,7 +10,6 @@ export const mainContainer = (top: number) => css`
   transform: translateY(-50%);
   transition: top 0.5s ease-in-out;
   z-index: 10;
-  background-color: white;
 `;
 export const container = css`
   width: 8.6rem;
@@ -22,6 +21,7 @@ export const container = css`
   align-items: center;
   box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
   border-radius: 12px;
+  background-color: white;
 `;
 
 export const iconStyle = css`
