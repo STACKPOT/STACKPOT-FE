@@ -13,10 +13,10 @@ interface FinishedPotCardProps {
     languages: string;
     memberProfiles: string[];
     editButton: boolean;
-    isMyPot: boolean;
+    buttonType?: "edit" | "appeal";
 }
 
-const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, startDate, endDate, stacks, languages, memberProfiles, editButton, isMyPot }: FinishedPotCardProps) => {
+const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, startDate, endDate, stacks, languages, memberProfiles, editButton, buttonType }: FinishedPotCardProps) => {
     const navigate = useNavigate();
 
     const [appealModal, setAppealModal] = useState<number | null>(null);
@@ -33,7 +33,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, st
         navigate(`/pot/${id}`);
     }
     const handleEditPot = (id: number) => {
-        if (isMyPot) {
+        if (buttonType === "edit") {
             navigate(`/edit-finished-pot/${id}`);
         } else {
             setAppealModal(id)
@@ -46,7 +46,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, st
                 <div css={titleProfileContainer}>
                     <div css={titleContainer}>
                         <h1 css={titleStyle}>{title}</h1>
-                        {editButton && <PotButton onClick={() => handleEditPot(id)}>{isMyPot ? "팟 소개 수정" : "어필하기"}</PotButton>}
+                        {editButton && <PotButton onClick={() => handleEditPot(id)}>{buttonType === "edit" ? "팟 소개 수정" : "여기서 저는요"}</PotButton>}
                     </div>
                     <div css={profileContainer}>
                         <MemberGroup profileImageList={memberProfiles} />

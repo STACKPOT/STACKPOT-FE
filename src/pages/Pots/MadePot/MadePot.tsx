@@ -46,7 +46,7 @@ const MadePotPage = () => {
                 key={pot.id}
                 {...pot}
                 editButton={true}
-                isMyPot={true} />)}
+                buttonType="edit" />)}
           </>
         </Section>
       </div>

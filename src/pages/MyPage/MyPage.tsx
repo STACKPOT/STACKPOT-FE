@@ -37,7 +37,7 @@ const MyPage = () => {
                 key={pot.id}
                 {...pot}
                 editButton={true}
-                isMyPot={true} />
+                buttonType="appeal" />
             )
           }
         </div>
