@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { postSignInPayload } from "apis/types/user";
-import { postSignIn } from "apis/userAPI";
+import { patchSignIn } from "apis/userAPI";
 
-const usePostSignIn = () => {
+const usePatchSignIn = () => {
   return useMutation({
-    mutationFn: (data: postSignInPayload) => postSignIn(data),
+    mutationFn: (data: postSignInPayload) => patchSignIn(data),
   });
 };
 
-export default usePostSignIn;
+export default usePatchSignIn;

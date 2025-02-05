@@ -1,35 +1,52 @@
+import { forwardRef, useState } from "react";
 import { CategoryButton } from "@components/index";
-import { categoriesContainer, container, titleStyle } from "./CategorySelection.style";
-import { useState } from "react";
+import {
+  categoriesContainer,
+  container,
+  titleStyle,
+} from "./CategorySelection.style";
 import { interests, partMap } from "@constants/categories";
+import { useFormContext } from "react-hook-form";
 
 interface CategorySelectionProps {
-    type: "stack" | "interest";
-    title: string;
-    onSelect: (selectedCategory: string | null) => void;
+  type: "role" | "interest";
+  title: string;
+  onSelect: (selectedCategory: string | null) => void;
 }
 
-const CategorySelection: React.FC<CategorySelectionProps> = ({ type, title, onSelect }: CategorySelectionProps) => {
-    const categories = (type === "stack") ? Object.keys(partMap) : interests;
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
+  ({ type, title, onSelect }, ref) => {
+    const { setValue } = useFormContext();
+    const categories = type === "role" ? Object.keys(partMap) : interests;
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(
+      null
+    );
 
     const handleSelectCategory = (category: string) => {
-        setSelectedCategory(category);
-        onSelect(category);
-    }
+      setSelectedCategory(category);
+      const value = type === "role" ? partMap[category] : category;
+      setValue(type, value);
+      onSelect(value);
+    };
 
     return (
-        <div css={container(type)}>
-            <p css={titleStyle}>{title}</p>
-            <div css={categoriesContainer}>
-                {categories.map((category) =>
-                    <CategoryButton
-                        key={category}
-                        style="pot"
-                        selected={selectedCategory === category}
-                        onClick={() => handleSelectCategory(category)}>{category}</CategoryButton>)}
-            </div>
+      <div ref={ref} css={container(type)}>
+        <p css={titleStyle}>{title}</p>
+        <div css={categoriesContainer}>
+          {categories.map((category) => (
+            <CategoryButton
+              key={category}
+              style="pot"
+              selected={selectedCategory === category}
+              onClick={() => handleSelectCategory(category)}
+            >
+              {category}
+            </CategoryButton>
+          ))}
         </div>
-    )
-}
+      </div>
+    );
+  }
+);
+
 export default CategorySelection;
