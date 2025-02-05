@@ -7,15 +7,15 @@ import MemberKakaoIdModal from "../MemberKakaoIdModal/MemberKakaoIdModal";
 import StartPotModal from "../StartPotModal/StartPotModal";
 import useGetPotApplicants from "apis/hooks/pots/useGetPotApplicants";
 import { roleImages } from "@constants/roleImage";
-import { Applicant } from "apis/types/pot";
+import { Member } from "apis/types/pot";
 
 interface ApplicantsInformationProps {
     potId: number;
 }
 
 const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
-    const [selectedApplicants, setSelectedApplicants] = useState<Applicant[]>([]);
-    const [showProfileMember, setShowProfileMember] = useState<Applicant | null>(null);
+    const [selectedApplicants, setSelectedApplicants] = useState<Member[]>([]);
+    const [showProfileMember, setShowProfileMember] = useState<Member | null>(null);
 
     const [showStartModal, setShowStartModal] = useState<boolean>(false);
     const [showKakaoIdModal, setShowKakaoIdModal] = useState<boolean>(false);
@@ -25,7 +25,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
             setShowStartModal(true);
         }
     }
-    const handleSelectApplicant = (applicant: Applicant) => {
+    const handleSelectApplicant = (applicant: Member) => {
         if (selectedApplicants.includes(applicant)) {
             setSelectedApplicants((prev) => prev.filter((member) => member.userId !== applicant.userId))
         } else {

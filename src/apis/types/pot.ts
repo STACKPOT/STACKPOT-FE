@@ -59,7 +59,7 @@ interface Pots {
 
 export interface PotDetailResponse {
   potDetail: PotDetail;
-  applicants: Applicant[];
+  applicants: Member[];
 }
 export interface PotDetail {
   userId: number;
@@ -78,7 +78,7 @@ export interface PotDetail {
   owner: boolean;
   dday: string;
 }
-export interface Applicant {
+export interface Member {
   potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
   status: string;
   userId: number;
@@ -87,4 +87,11 @@ export interface Applicant {
 export interface PotMemberInfo {
   nickname: string;
   kakaoId: string;
+}
+export interface ApplyPotParams {
+  potId: number;
+  body: ApplyPotBody;
+}
+export interface ApplyPotBody {
+  potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
 }

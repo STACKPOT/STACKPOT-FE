@@ -1,19 +1,31 @@
 import { ExplainModal } from "@components/index";
 import { container, profileStyle, nicknameStyle } from "./ProfileModal.style";
 import { roleImages } from "@constants/roleImage";
+import useApplyPot from "apis/hooks/pots/useApplyPot";
 
 interface ProfileModalProps {
     type: "apply" | "member"
     potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
     nickname: string;
+    potId?: number;
     onButtonClick?: () => void;
     onCancelModal: () => void;
 }
-const ProfileModal: React.FC<ProfileModalProps> = ({ type, potRole, nickname, onButtonClick, onCancelModal }: ProfileModalProps) => {
+const ProfileModal: React.FC<ProfileModalProps> = ({ type, potRole, nickname, potId, onButtonClick, onCancelModal }: ProfileModalProps) => {
+    const { mutate } = useApplyPot();
     const handleApply = () => {
-        // todo: 지원하기 api 호출
-        onCancelModal();
-        onButtonClick && onButtonClick();
+        if (potId) {
+            mutate(
+                { potId: potId, body: { potRole: potRole } },
+                {
+                    onSuccess: () => {
+                        onCancelModal();
+                        onButtonClick && onButtonClick();
+                    },
+                    onError: () => alert("지원에 실패하였습니다")
+                })
+
+        }
     }
     const handleMemberProfile = () => {
         // todo: 해당 멤버 페이지로 이동

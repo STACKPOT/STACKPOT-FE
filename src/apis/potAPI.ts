@@ -1,5 +1,5 @@
 import { apiGet, authApiGet, authApiPost } from "./apiUtils";
-import { GetPotsParams, PotsResponse, CreatePotParams, CreatePotResponse, PotDetailResponse, Applicant, PotMemberInfo } from "./types/pot";
+import { GetPotsParams, PotsResponse, CreatePotParams, CreatePotResponse, PotDetailResponse, Member, PotMemberInfo, ApplyPotBody } from "./types/pot";
 
 export const CreatePot = async (createPotParams: CreatePotParams) => {
   return authApiPost<CreatePotResponse>("pots", createPotParams);
@@ -14,9 +14,13 @@ export const GetPotDetail = async (potId: number) => {
 };
 
 export const GetPotApplicants = async (potId: number) => {
-  return authApiGet<Applicant[]>(`/pots/${potId}/applications`);
+  return authApiGet<Member[]>(`/pots/${potId}/applications`);
 };
 
 export const GetPotMemberInformation = async (potId: number) => {
   return authApiGet<PotMemberInfo[]>(`/pots/${potId}/members`);
+};
+
+export const ApplyPot = async (potId: number, body: ApplyPotBody) => {
+  return authApiPost<Member>(`pots/${potId}/applications`, body);
 };

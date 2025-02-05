@@ -23,17 +23,18 @@ const PotDetail = () => {
         }
     }, [data]);
 
+    //localStorage.removeItem("accessToken")
     return (
         <>
-            {typeof data === 'undefined' ?
-                <p>로딩중</p>
-                : <main css={containerStyle}>
+            {typeof data !== 'undefined' &&
+                <main css={containerStyle}>
                     <div css={bodyContainerStyle}>
                         <div css={sectionContainerStyle}>
                             <PotHeader
                                 title={data.potDetail.potName}
                                 isMyPot={isMyPot}
                                 isApplied={isApplied}
+                                potId={potIdNumber}
                                 potStatus={data.potDetail.potStatus}
                                 onApplySuccess={() => setIsApplied(true)}
                                 onCancelApplySuccess={() => setIsApplied(false)} />
