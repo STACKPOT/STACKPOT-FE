@@ -45,7 +45,7 @@ const MadePotPage = () => {
               <FinishedPotCard
                 key={pot.id}
                 {...pot}
-                editButton={true}
+                isMyPage={true}
                 buttonType="edit" />)}
           </>
         </Section>

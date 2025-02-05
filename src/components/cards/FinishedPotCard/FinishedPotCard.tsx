@@ -1,7 +1,8 @@
-import { AppealModal, MemberGroup, PotButton } from "@components/index";
+import { MemberGroup, PotButton } from "@components/index";
 import { container, elementContainer, elementContentStyle, elementTitleStyle, gridContainer, profileContainer, teamElementContainer, titleContainer, titleProfileContainer, titleStyle } from "./FinishedPotCard.style";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { AppealModal, PotSummaryModal } from "@pages/MyPage/components";
 
 interface FinishedPotCardProps {
     id: number;
@@ -12,14 +13,16 @@ interface FinishedPotCardProps {
     stacks: string;
     languages: string;
     memberProfiles: string[];
-    editButton: boolean;
+    isMyPage: boolean;
     buttonType?: "edit" | "appeal";
 }
 
-const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, startDate, endDate, stacks, languages, memberProfiles, editButton, buttonType }: FinishedPotCardProps) => {
+const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, startDate, endDate, stacks, languages, memberProfiles, isMyPage, buttonType }: FinishedPotCardProps) => {
     const navigate = useNavigate();
 
     const [appealModal, setAppealModal] = useState<number | null>(null);
+    const [summaryModal, setSummaryModal] = useState<number | null>(null);
+
 
     const elementList: { title: string, content: string }[] = [
         { title: "나의 역할", content: myRole },
@@ -30,7 +33,11 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, st
     ]
 
     const handleClickPot = (id: number) => {
-        navigate(`/pot/${id}`);
+        if (isMyPage) {
+            navigate(`/pot/${id}`);
+        } else {
+            setSummaryModal(id);
+        }
     }
     const handleEditPot = (id: number) => {
         if (buttonType === "edit") {
@@ -46,7 +53,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, st
                 <div css={titleProfileContainer}>
                     <div css={titleContainer}>
                         <h1 css={titleStyle}>{title}</h1>
-                        {editButton && <PotButton onClick={() => handleEditPot(id)}>{buttonType === "edit" ? "팟 소개 수정" : "여기서 저는요"}</PotButton>}
+                        {isMyPage && <PotButton onClick={() => handleEditPot(id)}>{buttonType === "edit" ? "팟 소개 수정" : "여기서 저는요"}</PotButton>}
                     </div>
                     <div css={profileContainer}>
                         <MemberGroup profileImageList={memberProfiles} />
@@ -64,6 +71,8 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, st
             </div>
             {appealModal !== null &&
                 <AppealModal potId={appealModal} onCancel={() => setAppealModal(null)} />}
+            {summaryModal !== null &&
+                <PotSummaryModal potId={summaryModal} onCancel={() => setSummaryModal(null)} />}
         </>
     )
 }

@@ -20,15 +20,10 @@ export const modalStyle = css`
     height: 66.5rem;
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
     padding: 3.2rem;
     border-radius: 2.4rem;
     border: 1px solid ${theme.color.object.alternative};
     background-color: white;
-`
-export const container = css`
-    display: flex;
-    flex-direction: column;
 `
 export const closeButtonContainer = css`
     height: 2.9rem;
@@ -94,31 +89,4 @@ export const introductionContentStyle = css`
     ::-webkit-scrollbar {
         display: none;
     }
-`
-export const textAreaStyle = css`
-    height: 15.7rem;
-    width: 100%;
-    padding: 1.2rem 1.6rem;
-    border-radius: 0.8rem;
-    border: 1px solid ${theme.color.object.alternative};
-    ${theme.font.caption3};
-    font-family: "Pretendard";
-    color: ${theme.color.base.darkgray};
-    ::placeholder{
-        color: ${theme.color.interactive.inactive};
-    }
-    &:focus {
-    border-color: ${theme.color.point.hero};
-    outline: none;
-    }
-    resize: none;
-`
-export const buttonStyle = css`
-    padding: 1.4rem 0;
-    ${theme.font.bodyBold1}
-    color: ${theme.color.base.white};
-    background-color: ${theme.color.point.hero};
-    border-radius: 0.8rem;
-    border: none;
-    cursor: pointer;
 `

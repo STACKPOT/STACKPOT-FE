@@ -36,7 +36,7 @@ const MyPage = () => {
               <FinishedPotCard
                 key={pot.id}
                 {...pot}
-                editButton={true}
+                isMyPage={true}
                 buttonType="appeal" />
             )
           }
