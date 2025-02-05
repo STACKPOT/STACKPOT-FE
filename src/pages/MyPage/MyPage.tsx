@@ -8,27 +8,23 @@ import {
   tabsTextStyle,
 } from "./MyPage.style";
 import { MyPageProfile } from "./components";
+import postCardsData from "mocks/postCardsData";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
 import { MushroomImage } from "@assets/images";
-import useGetMyPage from "apis/hooks/mypage/useGetMyPage";
-import { error } from "console";
+import appliedPotsData from "mocks/appliedPotsData";
 
 const MyPage = () => {
   const [contentType, setContentType] = useState<"feed" | "pot">("feed");
-
-  // API 데이터 연동
-  const { data, isLoading, isError } = useGetMyPage({ dataType: "ALL" });
-
-  if (isLoading) return <p>로딩 중...</p>;
-  if (isError) return console.log(error);
+  const [posts, setPosts] = useState(postCardsData);
+  const [finishedPots, setFinishedPots] = useState(appliedPotsData);
 
   return (
     <main css={container}>
       <MyPageProfile
         profileImage={MushroomImage}
-        nickname={data?.result.nickname || "닉네임 없음"}
-        introduction={data?.result.userIntroduction || "소개 없음"}
-        temperature={data?.result.userTemperature || 0}
+        nickname="아아 마시는 버섯"
+        introduction="개발전공 대학생입니다"
+        temperature={65}
       />
       <div css={dividerStyle} />
       <div css={bodyContainer}>
@@ -48,27 +44,16 @@ const MyPage = () => {
         </div>
         <div css={listContainer(contentType)}>
           {contentType === "feed"
-            ? data?.result.feeds?.map((post) => (
+            ? posts.map((post) => (
                 <PostCard
-                  role={post.writerRole}
-                  nickname={post.writer}
+                  role={"BACKEND"}
                   isLiked={false}
-                  key={post.feedId}
+                  key={post.id}
                   {...post}
                 />
               ))
-            : data?.result.completedPots?.map((pot) => (
-                <FinishedPotCard
-                  id={pot.potId}
-                  title={pot.potName}
-                  startDate={pot.potStartDate}
-                  period={`${pot.potStartDate} ~ ${pot.potEndDate}`}
-                  method={""}
-                  stacks={""}
-                  languages={""}
-                  key={pot.potId}
-                  {...pot}
-                />
+            : finishedPots.map((pot) => (
+                <FinishedPotCard key={pot.id} {...pot} />
               ))}
         </div>
       </div>
