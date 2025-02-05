@@ -46,3 +46,18 @@ export const buttonStyle = css`
   width: 54.8rem;
   ${theme.font.title1}
 `;
+
+export const inputStyle = css`
+  padding: 1.2rem 1.6rem;
+  ${theme.font.caption3};
+  ::placeholder {
+    color: ${theme.color.interactive.inactive};
+  }
+  color: ${theme.color.base.darkgray};
+  border-radius: 8px;
+  border: 1px solid ${theme.color.border.alternative};
+  outline: none;
+  &:focus {
+    border-color: ${theme.color.point.hero};
+  }
+`;
