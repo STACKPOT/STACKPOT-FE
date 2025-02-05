@@ -75,11 +75,6 @@ export const dividerStyle = css`
   background-color: ${theme.color.object.alternative};
 `;
 
-export const buttonContainer = css`
-  display: flex;
-  gap: 2.2rem;
-  margin-left: auto;
-`;
 
 export const textareaStyle = css`
   padding: 2.4rem;
@@ -138,16 +133,3 @@ export const partStyle = css`
   ${theme.font.caption3};
   white-space: pre;
 `;
-
-export const informationIconContainer = css`
-    display: flex;
-    align-items: center;
-    margin-left: 0.8rem;
-`
-export const modalContentStyle = css`
-    ${theme.font.caption3};
-    color: ${theme.color.object.assistive};
-    word-wrap: break-word;
-    white-space: pre;
-    text-align: center;
-`
