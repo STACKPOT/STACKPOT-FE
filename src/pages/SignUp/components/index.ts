@@ -3,8 +3,8 @@ import ContractModal from "./ContractModal/ContractModal";
 import NicknameInput from "./NicknameInput";
 import ProfileModal from "./ProfileModal/ProfileModal";
 import Section from "./Section/Section";
-import ContractsSection from "./CategorySelection/CategorySelection";
-import ContractDetailList from "./CategorySelection/CategorySelection";
+import ContractsSection from "./ContractsSection/ContractsSection";
+import ContractionDetailList from "./ContractionDetailList/ContractDetailList";
 
 export {
   CategorySelection,
@@ -13,5 +13,5 @@ export {
   ProfileModal,
   Section,
   ContractsSection,
-  ContractDetailList,
+  ContractionDetailList,
 };

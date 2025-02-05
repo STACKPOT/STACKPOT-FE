@@ -1,6 +1,6 @@
 import { ExplainModal } from "@components/index";
 import { contentStyle } from "./ContractModal.style";
-import ContractDetailList from "./ContractDetailList";
+import ContractDetailList from "../ContractionDetailList/ContractDetailList";
 
 interface ContractModalProps {
   type: "service" | "privacy";
