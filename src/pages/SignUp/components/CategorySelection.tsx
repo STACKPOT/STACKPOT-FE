@@ -11,11 +11,10 @@ import { useFormContext } from "react-hook-form";
 interface CategorySelectionProps {
   type: "role" | "interest";
   title: string;
-  onSelect: (selectedCategory: string | null) => void;
 }
 
 const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
-  ({ type, title, onSelect }, ref) => {
+  ({ type, title }, ref) => {
     const { setValue } = useFormContext();
     const categories = type === "role" ? Object.keys(partMap) : interests;
     const [selectedCategory, setSelectedCategory] = useState<string | null>(
@@ -26,7 +25,6 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
       setSelectedCategory(category);
       const value = type === "role" ? partMap[category] : category;
       setValue(type, value);
-      onSelect(value);
     };
 
     return (
