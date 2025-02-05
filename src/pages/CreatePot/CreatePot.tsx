@@ -34,7 +34,8 @@ const CreatePot = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<string>("");
   const [selectedParticipation, setSelectedParticipation] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [date, setDate] = useState<string>("");
+  const [startDate, setStartDate] = useState<string>("");
+  const [deadline, setDeadline] = useState<string>("");
   const [partNumber, setPartNumber] = useState<{ [key: string]: number }>({});
   const [visibleInputs, setVisibleInputs] = useState<{
     [key: string]: boolean;
@@ -47,9 +48,14 @@ const CreatePot = () => {
   }, []);
 
 
-  const handleDate = (day: Dayjs | null) => {
+  const handleStartDate = (day: Dayjs | null) => {
     if (day) {
-      setDate(day.format('YYYY-MM-DD'))
+      setStartDate(day.format('YYYY-MM-DD'))
+    }
+  }
+  const handleDeadline = (day: Dayjs | null) => {
+    if (day) {
+      setDeadline(day.format('YYYY-MM-DD'))
     }
   }
   const handlePartClick = (partName: string) => {
@@ -78,11 +84,13 @@ const CreatePot = () => {
 
     mutate({
       potName: potName,
-      potStartDate: date,
+      potStartDate: startDate,
       potDuration: selectedPeriod,
       potLan: language,
       potContent: content,
+      potStatus: "RECRUITING",
       potModeOfOperation: participationMap[selectedParticipation],
+      recruitmentDeadline: deadline,
       recruitmentDetails: recruits,
     })
   };
@@ -122,7 +130,11 @@ const CreatePot = () => {
 
         <div css={labelStyle}>
           시작 날짜
-          <DatePicker onChange={handleDate} />
+          <DatePicker onChange={handleStartDate} />
+        </div>
+        <div css={labelStyle}>
+          마감 날짜
+          <DatePicker onChange={handleDeadline} />
         </div>
         <div css={labelStyle}>
           예상 기간

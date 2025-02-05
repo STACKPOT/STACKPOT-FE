@@ -8,7 +8,7 @@ export interface CreatePotParams {
   potStatus?: "RECRUITING" | "ONGOING" | "COMPLETED";
   potModeOfOperation: "ONLINE" | "OFFLINE" | "HYBRID";
   potSummary?: string;
-  recruitmentDeadline?: string;
+  recruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetail[];
 }
 
