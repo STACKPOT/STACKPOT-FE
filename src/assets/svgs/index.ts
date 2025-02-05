@@ -33,3 +33,4 @@ export { default as TodoPlusButtonIcon } from "./todoPlusButton.svg?react"
 export { default as CreateIcon } from "./create.svg?react";
 export { default as BookIcon } from "./book.svg?react";
 export { default as AppealIcon } from "./appeal.svg?react";
+export { default as LoadingSpinnerIcon } from "./loadingSpinner.svg?react";

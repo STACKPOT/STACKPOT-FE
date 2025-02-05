@@ -1,6 +1,7 @@
 import { MeatballIcon } from "@assets/svgs";
 import React, { useState, useRef, useEffect } from "react";
 import {
+  bodyStyle,
   containerStyle,
   dropdownStyle,
   iconStyle,
@@ -40,18 +41,20 @@ const MyFeedDropdown: React.FC<FeedDropdownProps> = ({
   }, [ref]);
 
   return (
-    <div ref={ref}>
-      <MeatballIcon css={iconStyle} onClick={toggleDropdown} />
-      {isDropdownOpen && (
-        <div css={dropdownStyle}>
-          <div css={containerStyle(true)} onClick={onTop}>
-            {topMessage}
+    <div css={bodyStyle}>
+      <div ref={ref}>
+        <MeatballIcon css={iconStyle} onClick={toggleDropdown} />
+        {isDropdownOpen && (
+          <div css={dropdownStyle}>
+            <div css={containerStyle(true)} onClick={onTop}>
+              {topMessage}
+            </div>
+            <div css={containerStyle(false)} onClick={onBottom}>
+              {bottomMessage}
+            </div>
           </div>
-          <div css={containerStyle(false)} onClick={onBottom}>
-            {bottomMessage}
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

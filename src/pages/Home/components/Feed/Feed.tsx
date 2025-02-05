@@ -1,9 +1,20 @@
 import { CategoryButton, Dropdown, PostCard } from "@components/index";
-import { buttonContainer, contentBody, contentHeader } from "./Feed.style";
+import {
+  buttonContainer,
+  cardStyle,
+  contentBody,
+  contentHeader,
+  iconContainer,
+  iconStyle,
+} from "./Feed.style";
 import { contentTitle, subTitleStyle } from "@pages/Home/Home.style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { categories, partMap } from "@constants/categories";
 import useGetFeeds from "apis/hooks/feeds/useGetFeeds";
+import { useInView } from "react-intersection-observer";
+import { LoadingSpinnerIcon } from "@assets/svgs";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Feed = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -11,8 +22,13 @@ const Feed = () => {
   const [sort, setSort] = useState<string>("new");
 
   const handleCategoryClick = (category: string, partName: string) => {
-    setSelectedCategory((prev) => (prev === partName ? null : partName));
-    setCategory(category);
+    if (selectedCategory === partName) {
+      setSelectedCategory(null);
+      setCategory("ALL");
+    } else {
+      setSelectedCategory(partName);
+      setCategory(category);
+    }
   };
 
   const options = [
@@ -25,12 +41,21 @@ const Feed = () => {
     setSort(key);
   };
 
-  const { data } = useGetFeeds({
-    category: category || "ALL",
-    sort: sort,
-    limit: 10,
-    cursor: "",
-  });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useGetFeeds({
+      category: category || "ALL",
+      sort,
+      limit: 10,
+      cursor: null,
+    });
+
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <>
@@ -59,20 +84,41 @@ const Feed = () => {
         </p>
       </div>
       <div css={contentBody}>
-        {data?.feeds && data.feeds.length > 0 ? (
-          data.feeds.map((item) => (
-            <PostCard
-              key={item.id}
-              role={item.writerRole}
-              nickname={item.writer}
-              createdAt={item.createdAt}
-              title={item.title}
-              content={item.content}
-              likeCount={item.likeCount}
-            />
+        {isLoading ? (
+          <Skeleton css={cardStyle} />
+        ) : data?.pages && data.pages.length > 0 ? (
+          data.pages.map((page, pageIndex) => (
+            <div css={contentBody} key={pageIndex}>
+              {page.result?.feeds && page.result.feeds.length > 0 ? (
+                page.result.feeds.map((item, itemIndex) => {
+                  const isLastItem =
+                    pageIndex === data.pages.length - 1 &&
+                    itemIndex === page.result.feeds.length - 1;
+                  return (
+                    <div key={item.id} ref={isLastItem ? ref : null}>
+                      <PostCard
+                        role={item.writerRole}
+                        nickname={item.writer}
+                        createdAt={item.createdAt}
+                        title={item.title}
+                        content={item.content}
+                        likeCount={item.likeCount}
+                      />
+                    </div>
+                  );
+                })
+              ) : (
+                <p>게시물이 없습니다.</p>
+              )}
+            </div>
           ))
         ) : (
           <p>게시물이 없습니다.</p>
+        )}
+        {isFetchingNextPage && (
+          <div css={iconContainer}>
+            <LoadingSpinnerIcon css={iconStyle} />
+          </div>
         )}
       </div>
     </>

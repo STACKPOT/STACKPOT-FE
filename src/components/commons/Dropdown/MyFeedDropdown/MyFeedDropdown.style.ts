@@ -12,8 +12,10 @@ export const dropdownStyle = css`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   width: 16rem;
   height: auto;
-  display: flex; 
+  display: flex;
   flex-direction: column;
+  position: fixed;
+  background-color: ${theme.color.base.white};
 `;
 
 export const iconStyle = css`
@@ -21,7 +23,9 @@ export const iconStyle = css`
 `;
 
 export const containerStyle = (edit: boolean) => css`
-  border-bottom: ${edit ? `1px solid ${theme.color.object.alternative}` : "none"};
+  border-bottom: ${edit
+    ? `1px solid ${theme.color.object.alternative}`
+    : "none"};
   color: ${edit ? theme.color.point.gray : theme.color.feedback.negative};
   ${theme.font.caption3};
   display: flex;
@@ -29,4 +33,8 @@ export const containerStyle = (edit: boolean) => css`
   justify-content: center;
   cursor: pointer;
   padding: 1rem;
+`;
+
+export const bodyStyle = css`
+  height: 2.8rem;
 `;
