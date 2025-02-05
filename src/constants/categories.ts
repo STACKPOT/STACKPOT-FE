@@ -13,7 +13,7 @@ export const partMap: {
   백엔드: "BACKEND",
   디자인: "DESIGN",
   기획: "PLANNING",
-};
+} as const;
 export const interests = [
   "사이드 프로젝트",
   "1인 개발",
