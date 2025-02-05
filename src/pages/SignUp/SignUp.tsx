@@ -10,17 +10,28 @@ import {
   inputStyle,
 } from "./SignUp.style";
 import { Button } from "@components/index";
-import { CategorySelection, ContractsSection, Section } from "./components";
+import {
+  CategorySelection,
+  ContractsSection,
+  ProfileModal,
+  Section,
+} from "./components";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import usePatchSignIn from "apis/hooks/users/usePatchSignIn";
+import { useState } from "react";
+import { SignInResponse } from "apis/types/user";
+import { Role } from "types/role";
 
 type SignInFormData = {
   kakaoId: string;
-  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN" | undefined;
+  role: Role | undefined;
   interest: string;
 };
 
 const SignUp = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [responseData, setResponseData] = useState<SignInResponse | null>(null);
+
   const methods = useForm({
     mode: "onChange",
     defaultValues: {
@@ -47,8 +58,16 @@ const SignUp = () => {
   ]);
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
-    console.log(kakaoId, role, interest);
-    mutate(data);
+    mutate(data, {
+      onSuccess: (response) => {
+        setResponseData(response.result ?? null);
+        setIsModalOpen(true);
+      },
+    });
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -91,6 +110,9 @@ const SignUp = () => {
           </Button>
         </form>
       </FormProvider>
+      {isModalOpen && (
+        <ProfileModal onModalCancel={handleCancel} role={responseData?.role} />
+      )}
     </main>
   );
 };
