@@ -14,7 +14,7 @@ const PotDetail = () => {
 
     const { data } = useGetPotDetail(potIdNumber);
     useEffect(() => {
-        if (typeof data !== 'undefined') {
+        if (data) {
             if (data.applicants.length > 0) {
                 setIsMyPot(true);
             }
@@ -25,7 +25,7 @@ const PotDetail = () => {
 
     return (
         <>
-            {typeof data !== 'undefined' &&
+            {data &&
                 <main css={containerStyle}>
                     <div css={bodyContainerStyle}>
                         <div css={sectionContainerStyle}>

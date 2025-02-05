@@ -37,7 +37,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
 
     return (
         <>
-            {typeof applicants !== 'undefined' && applicants.length > 0 ?
+            {applicants && applicants.length > 0 ?
                 <div css={container}>
                     <div css={dividerStyle} />
                     <div css={headerContainer}>

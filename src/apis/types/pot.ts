@@ -87,6 +87,8 @@ export interface Member {
 export interface PotMemberInfo {
   nickname: string;
   kakaoId: string;
+  potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  owner: boolean;
 }
 export interface ApplyPotParams {
   potId: number;
