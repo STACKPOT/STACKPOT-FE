@@ -1,5 +1,5 @@
 import { AppealIcon, BookIcon, CloseIcon, CreateIcon } from "@assets/svgs";
-import { appealIconStyle, backgroundStyle, bodyContainer, bodyTitleContainer, bodyTitleIconStyle, bodyTitleStyle, closeButtonContainer, closeIconStyle, dateContainer, dateStyle, dividerStyle, introductionContentStyle, modalStyle, titleContainer, titleStyle } from "./PotSummaryModal.style";
+import { appealIconStyle, backgroundStyle, bodyContainer, bodyTitleContainer, bodyTitleIconStyle, bodyTitleStyle, closeButtonContainer, closeIconStyle, dateContainer, dateStyle, dividerStyle, contentStyle, modalStyle, titleContainer, titleStyle, appealContentStyle } from "./PotSummaryModal.style";
 import { useEffect, useState } from "react";
 import { ExplainModal } from "@components/index";
 
@@ -45,13 +45,13 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel }: Po
                         <BookIcon css={bodyTitleIconStyle} />
                         <p css={bodyTitleStyle}>소개</p>
                     </div>
-                    <p css={introductionContentStyle}>{introduction}</p>
+                    <p css={contentStyle}>{introduction}</p>
                     <div css={dividerStyle} />
                     <div css={bodyTitleContainer}>
                         <CreateIcon css={bodyTitleIconStyle} />
                         <p css={bodyTitleStyle}>여기서 저는요</p>
                     </div>
-                    <p css={introductionContentStyle}>{appeal}</p>
+                    <p css={appealContentStyle}>{appeal}</p>
                 </div>
             </div>
         </div>

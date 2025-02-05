@@ -79,7 +79,7 @@ export const bodyTitleStyle = css`
     ${theme.font.bodyBold1};
     color: ${theme.color.point.hero};
 `
-export const introductionContentStyle = css`
+export const contentStyle = css`
     height: 15.6rem;
     width: 100%;
     overflow-y: auto;
@@ -89,4 +89,8 @@ export const introductionContentStyle = css`
     ::-webkit-scrollbar {
         display: none;
     }
+`
+export const appealContentStyle = css`
+    ${contentStyle};
+    height: 21.8rem;
 `
