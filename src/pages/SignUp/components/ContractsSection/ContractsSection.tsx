@@ -5,9 +5,9 @@ import {
   detailButtonStyle,
   contractStyle,
 } from "./ContractsSection.style";
-import ContractModal from "./ContractModal";
 import { CheckBox } from "@components/index";
 import { useFormContext } from "react-hook-form";
+import ContractModal from "../ContractModal/ContractModal";
 
 interface ContractsSectionProps {
   onAgree?: (agreed: boolean) => void;
