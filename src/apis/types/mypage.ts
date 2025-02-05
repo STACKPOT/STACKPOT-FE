@@ -1,22 +1,23 @@
 export interface MyPageResponse {
-  result: Result;
+  id: number;
+  nickname: string;
+  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  userTemperature: number;
+  userIntroduction: string;
+  completedPots: CompletedPots[];
+  feeds: Feeds[];
 }
-export interface GetMyPageParams {
-  dataType: string;
+interface Feeds {
+  id: number;
+  writer: string;
+  writerRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  title: string;
+  content: string;
+  likeCount: number;
+  createdAt: string;
 }
 
-type Role = "BACKEND" | "FRONTEND" | "DESIGN" | "PLANNING";
-
-export interface BadgeDto {
-  badgeId: number;
-  badgeName: string;
-}
-
-export interface MemberCounts {
-  [key: string]: number;
-}
-
-export interface CompletedPotBadgeResponseDto {
+interface CompletedPots {
   potId: number;
   potName: string;
   potStartDate: string;
@@ -24,27 +25,15 @@ export interface CompletedPotBadgeResponseDto {
   potLan: string;
   members: string;
   userPotRole: string;
-  myBadges: BadgeDto[];
-  memberCounts: MemberCounts;
+  myBadges: MyBadges[];
+  memberCounts: number;
 }
 
-export interface FeedDto {
-  feedId: number;
-  writerId: number;
-  writer: string;
-  writerRole: Role;
-  title: string;
-  content: string;
-  likeCount: number;
-  createdAt: string;
+interface MyBadges {
+  badgeId: number;
+  badgeName: string;
 }
 
-export interface Result {
-  id: number;
-  nickname: string;
-  role: Role;
-  userTemperature: number;
-  userIntroduction: string;
-  completedPots: CompletedPotBadgeResponseDto[];
-  feeds: FeedDto[];
+export interface GetMyPageParams {
+  dataType: string;
 }
