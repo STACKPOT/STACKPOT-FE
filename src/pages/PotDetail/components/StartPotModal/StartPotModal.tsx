@@ -1,8 +1,10 @@
 import { Badge, ExplainModal } from "@components/index";
 import { memberContainer, memberListContainer, nicknameStyle, profileStyle, stackNicknameContainer } from "./StartPotModal.style";
+import { Applicant } from "apis/types/pot";
+import { roleImages } from "@constants/roleImage";
 
 interface StartPotModalProps {
-    selectedApplicants: { id: number; profileImage: string; nickname: string, stack: string }[];
+    selectedApplicants: Applicant[];
     onStartPotSuccess: () => void;
     onCancelModal: () => void;
 }
@@ -23,10 +25,10 @@ const StartPotModal: React.FC<StartPotModalProps> = ({ selectedApplicants, onSta
                 <>
                     {selectedApplicants.map((applicant) =>
                         <div css={memberContainer}>
-                            <img css={profileStyle} src={applicant.profileImage} alt="profile" />
+                            <img css={profileStyle} src={roleImages[applicant.potRole]} alt="profile" />
                             <div css={stackNicknameContainer}>
-                                <Badge content={applicant.stack} />
-                                <p css={nicknameStyle}>{applicant.nickname}</p>
+                                <Badge content={applicant.potRole} />
+                                <p css={nicknameStyle}>{applicant.userNickname}</p>
                             </div>
                         </div>
                     )}

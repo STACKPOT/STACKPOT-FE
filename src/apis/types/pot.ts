@@ -56,3 +56,35 @@ interface Pots {
   recruitmentRoles: string[];
   dday: string;
 }
+
+export interface PotDetailResponse {
+  potDetail: PotDetail;
+  applicants: Applicant[];
+}
+export interface PotDetail {
+  userId: number;
+  userRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  userNickname: string;
+  potId: number;
+  potName: string;
+  potStartDate: string;
+  potDuration: string;
+  potLan: string;
+  potStatus: "RECRUITING" | "ONGOING" | "COMPLETED";
+  applied: boolean;
+  potModeOfOperation: "ONLINE" | "OFFLINE" | "HYBRID";
+  potContent: string;
+  recruitmentDetails: string;
+  owner: boolean;
+  dday: string;
+}
+export interface Applicant {
+  potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  status: string;
+  userId: number;
+  userNickname: string;
+}
+export interface PotMemberInfo {
+  nickname: string;
+  kakaoId: string;
+}

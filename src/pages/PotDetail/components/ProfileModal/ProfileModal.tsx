@@ -1,14 +1,15 @@
 import { ExplainModal } from "@components/index";
 import { container, profileStyle, nicknameStyle } from "./ProfileModal.style";
+import { roleImages } from "@constants/roleImage";
 
 interface ProfileModalProps {
     type: "apply" | "member"
-    profileImage: string;
+    potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
     nickname: string;
     onButtonClick?: () => void;
     onCancelModal: () => void;
 }
-const ProfileModal: React.FC<ProfileModalProps> = ({ type, profileImage, nickname, onButtonClick, onCancelModal }: ProfileModalProps) => {
+const ProfileModal: React.FC<ProfileModalProps> = ({ type, potRole, nickname, onButtonClick, onCancelModal }: ProfileModalProps) => {
     const handleApply = () => {
         // todo: 지원하기 api 호출
         onCancelModal();
@@ -26,7 +27,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ type, profileImage, nicknam
             onButtonClick={(type === "apply" && handleApply) || handleMemberProfile}
             onCancel={onCancelModal}>
             <div css={container}>
-                <img css={profileStyle} src={profileImage} alt="profile"/>
+                <img css={profileStyle} src={roleImages[potRole]} alt="profile" />
                 <p css={nicknameStyle}>{nickname}</p>
             </div>
         </ExplainModal>
