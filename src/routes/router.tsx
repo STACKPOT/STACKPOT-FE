@@ -23,7 +23,8 @@ import {
   TaskDetailPage,
   WritingPage,
   CallbackPage,
-  EditFinishedPotPage
+  EditFinishedPotPage,
+  UserPage
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
       {
         path: routes.editFinishedPot,
         element: <EditFinishedPotPage />
+      },
+      {
+        path: routes.userProfile,
+        element: <UserPage />
       },
     ],
   },
