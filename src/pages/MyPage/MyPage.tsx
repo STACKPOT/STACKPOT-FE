@@ -12,11 +12,20 @@ import postCardsData from "mocks/postCardsData";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
 import { MushroomImage } from "@assets/images";
 import appliedPotsData from "mocks/appliedPotsData";
+import useGetMyPage from "apis/hooks/mypage/useGetMyPage";
 
 const MyPage = () => {
   const [contentType, setContentType] = useState<"feed" | "pot">("feed");
   const [posts, setPosts] = useState(postCardsData);
   const [finishedPots, setFinishedPots] = useState(appliedPotsData);
+
+  const { data } = useGetMyPage({
+    dataType: contentType,
+  });
+
+  if (!data) {
+    return <div>데이터가 없습니다.</div>;
+  }
 
   return (
     <main css={container}>
@@ -44,16 +53,27 @@ const MyPage = () => {
         </div>
         <div css={listContainer(contentType)}>
           {contentType === "feed"
-            ? posts.map((post) => (
+            ? data.feeds.map((post) => (
                 <PostCard
-                  role={"BACKEND"}
+                  nickname={post.writer}
+                  role={post.writerRole}
                   isLiked={false}
                   key={post.id}
                   {...post}
                 />
               ))
-            : finishedPots.map((pot) => (
-                <FinishedPotCard key={pot.id} {...pot} />
+            : data.completedPots.map((pot) => (
+                <FinishedPotCard
+                  id={pot.potId}
+                  title={pot.potName}
+                  startDate={pot.potStartDate}
+                  period={pot.potEndDate}
+                  method={""}
+                  stacks={""}
+                  languages={pot.potLan}
+                  key={pot.potId}
+                  {...pot}
+                />
               ))}
         </div>
       </div>
