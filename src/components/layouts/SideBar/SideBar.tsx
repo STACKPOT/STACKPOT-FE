@@ -38,7 +38,7 @@ const SideBar: React.FC = () => {
 
   const handleClickProfile = () => {
     setProfileModal(!profileModal);
-  }
+  };
 
   useEffect(() => {
     const initialTop = window.innerHeight / 2 + window.scrollY;
@@ -78,7 +78,11 @@ const SideBar: React.FC = () => {
     <div css={mainContainer(top)}>
       <div css={container}>
         <div css={menuContainer}>
-          <img css={profileStyle} src={MushroomImage} onClick={handleClickProfile} />
+          <img
+            css={profileStyle}
+            src={MushroomImage}
+            onClick={handleClickProfile}
+          />
           <div css={divider} />
           {menuItems.map(({ to, icon }, index) => (
             <NavLink
@@ -91,7 +95,9 @@ const SideBar: React.FC = () => {
           ))}
         </div>
       </div>
-      {profileModal && <SideBarProfileModal onClose={() => setProfileModal(false)} />}
+      {profileModal && (
+        <SideBarProfileModal onClose={() => setProfileModal(false)} />
+      )}
     </div>
   );
 };

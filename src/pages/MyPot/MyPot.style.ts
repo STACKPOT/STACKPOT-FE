@@ -2,12 +2,10 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const container = css`
-  padding: 3.2rem 0;
-  overflow: hidden;
+  padding: 4.8rem 0;
   gap: 3.2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 
 export const content = css`
