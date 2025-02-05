@@ -95,3 +95,20 @@ export interface ApplyPotParams {
 export interface ApplyPotBody {
   potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
 }
+
+export interface StartPotParams {
+  potId: number;
+  body: StartPotBody;
+}
+export interface StartPotBody {
+  applicantIds: number[];
+}
+export interface StartPotResponse {
+  potMemberId: number;
+  potId: number;
+  userId: number;
+  roleName: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  kakaoId: string;
+  nickname: string;
+  appealContent: string;
+}

@@ -23,7 +23,6 @@ const PotDetail = () => {
         }
     }, [data]);
 
-    //localStorage.removeItem("accessToken")
     return (
         <>
             {typeof data !== 'undefined' &&

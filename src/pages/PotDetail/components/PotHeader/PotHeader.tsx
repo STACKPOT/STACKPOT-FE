@@ -2,10 +2,9 @@ import { LeftIcon } from "@assets/svgs";
 import { backButtonIconStyle, backButtonStyle, container, titleContainer, titleStyle } from "./PotHeader.style";
 import { Modal, PotButton } from "@components/index";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ApplyStackModal from "../ApplyStackModal/ApplyStackModal";
 import ProfileModal from "../ProfileModal/ProfileModal";
-import { UserResponse } from "apis/types/user";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 
 interface PotHeaderProps {

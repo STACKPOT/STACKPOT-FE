@@ -2,17 +2,32 @@ import { Badge, ExplainModal } from "@components/index";
 import { memberContainer, memberListContainer, nicknameStyle, profileStyle, stackNicknameContainer } from "./StartPotModal.style";
 import { Member } from "apis/types/pot";
 import { roleImages } from "@constants/roleImage";
+import useStartPot from "apis/hooks/pots/useStartPot";
 
 interface StartPotModalProps {
+    potId: number;
     selectedApplicants: Member[];
     onStartPotSuccess: () => void;
     onCancelModal: () => void;
 }
-const StartPotModal: React.FC<StartPotModalProps> = ({ selectedApplicants, onStartPotSuccess, onCancelModal }: StartPotModalProps) => {
+const StartPotModal: React.FC<StartPotModalProps> = ({ potId, selectedApplicants, onStartPotSuccess, onCancelModal }: StartPotModalProps) => {
+    const { mutate } = useStartPot();
     const handleStartPot = () => {
         // todo: 팟 시작하기 api
-        onCancelModal();
-        onStartPotSuccess();
+        mutate(
+            {
+                potId: potId,
+                body: {
+                    applicantIds: selectedApplicants.map((applicant) => applicant.userId)
+                },
+            },
+            {
+                onSuccess: () => {
+                    onCancelModal();
+                    onStartPotSuccess();
+                }
+            }
+        )
     }
 
     return (

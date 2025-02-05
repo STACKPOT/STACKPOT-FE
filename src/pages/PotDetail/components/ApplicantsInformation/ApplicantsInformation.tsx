@@ -70,6 +70,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
             }
             {showStartModal &&
                 <StartPotModal
+                    potId={potId}
                     selectedApplicants={selectedApplicants}
                     onStartPotSuccess={() => setShowKakaoIdModal(true)}
                     onCancelModal={() => setShowStartModal(false)} />
