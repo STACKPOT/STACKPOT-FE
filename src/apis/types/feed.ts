@@ -1,12 +1,12 @@
 export interface FeedResponse {
   feeds: Feeds[];
-  nextCursor: string;
+  nextCursor: number;
 }
 
 interface Feeds {
   id: number;
   writer: string;
-  writerRole: string;
+  writerRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
   title: string;
   content: string;
   likeCount: number;
@@ -17,5 +17,5 @@ export interface GetFeedParams {
   category: string;
   sort: string;
   limit: number;
-  cursor: string;
+  cursor: number | null;
 }
