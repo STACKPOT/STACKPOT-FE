@@ -50,7 +50,7 @@ const MyPotMainPage: React.FC = () => {
         {showViewId && (
           <div css={viewId}>
             <KaKaoTalkIcon />
-            <text css={viewTextStyle}>아이디 보기</text>
+            <p css={viewTextStyle}>아이디 보기</p>
           </div>
         )}
       </div>

@@ -20,6 +20,7 @@ export const nicknameStyle = css`
     display: flex;
     align-items: center; 
     gap: 1rem;
+    height: 19px;
 `
 export const statusContainer = css`
     display: flex;
@@ -31,6 +32,14 @@ export const todoListContainer = css`
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
+    height: 11.6rem;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
 `
 export const todoContainer = css`
     display: flex;
