@@ -83,7 +83,7 @@ const theme = {
       font-size: 32px;
       line-height: 40px;
       letter-spacing: -0.144px;
-      font-weight: 500;
+      font-weight: 700;
     `,
     bodyBold2: css`
       font-size: 24px;
@@ -95,13 +95,13 @@ const theme = {
       font-size: 16px;
       line-height: 19px;
       letter-spacing: -0.144px;
-      font-weight: 500;
+      font-weight: 700;
     `,
     captionBold1: css`
       font-size: 16px;
       line-height: 16px;
       letter-spacing: -0.16px;
-      font-weight: 500;
+      font-weight: 600;
     `,
     body3: css`
       font-size: 24px;

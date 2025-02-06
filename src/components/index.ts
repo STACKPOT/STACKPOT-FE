@@ -21,8 +21,10 @@ import FloatingButton from "./commons/FloatingButton/FloatingButton";
 import Modal from "./commons/Modal/Modal";
 import MyFeedDropdown from "./commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import PotInformation from "./commons/PotInformation/PotInformation";
+import UploadToast from "./commons/Toast/UploadToast";
 import FinishedPotCard from "./cards/FinishedPotCard/FinishedPotCard";
 import SideBarProfileModal from "./layouts/SideBarProfileModal/SideBarProfileModal";
+import InformationPopper from "./commons/InformationPopper/InformationPopper";
 import OnGoingPotCard from "./cards/OnGoingPotCard/OnGoingPotCard";
 
 export {
@@ -49,7 +51,9 @@ export {
   FloatingButton,
   MyFeedDropdown,
   PotInformation,
+  UploadToast,
   FinishedPotCard,
   SideBarProfileModal,
+  InformationPopper,
   OnGoingPotCard,
 };
