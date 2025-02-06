@@ -1,16 +1,33 @@
 import { Badge, ExplainModal } from "@components/index";
 import { memberContainer, memberListContainer, nicknameStyle, profileStyle, stackNicknameContainer } from "./StartPotModal.style";
+import { Member } from "apis/types/pot";
+import { roleImages } from "@constants/roleImage";
+import useStartPot from "apis/hooks/pots/useStartPot";
 
 interface StartPotModalProps {
-    selectedApplicants: { id: number; profileImage: string; nickname: string, stack: string }[];
+    potId: number;
+    selectedApplicants: Member[];
     onStartPotSuccess: () => void;
     onCancelModal: () => void;
 }
-const StartPotModal: React.FC<StartPotModalProps> = ({ selectedApplicants, onStartPotSuccess, onCancelModal }: StartPotModalProps) => {
+const StartPotModal: React.FC<StartPotModalProps> = ({ potId, selectedApplicants, onStartPotSuccess, onCancelModal }: StartPotModalProps) => {
+    const { mutate } = useStartPot();
     const handleStartPot = () => {
         // todo: 팟 시작하기 api
-        onCancelModal();
-        onStartPotSuccess();
+        mutate(
+            {
+                potId: potId,
+                body: {
+                    applicantIds: selectedApplicants.map((applicant) => applicant.userId)
+                },
+            },
+            {
+                onSuccess: () => {
+                    onCancelModal();
+                    onStartPotSuccess();
+                }
+            }
+        )
     }
 
     return (
@@ -23,10 +40,10 @@ const StartPotModal: React.FC<StartPotModalProps> = ({ selectedApplicants, onSta
                 <>
                     {selectedApplicants.map((applicant) =>
                         <div css={memberContainer}>
-                            <img css={profileStyle} src={applicant.profileImage} alt="profile" />
+                            <img css={profileStyle} src={roleImages[applicant.potRole]} alt="profile" />
                             <div css={stackNicknameContainer}>
-                                <Badge content={applicant.stack} />
-                                <p css={nicknameStyle}>{applicant.nickname}</p>
+                                <Badge content={applicant.potRole} />
+                                <p css={nicknameStyle}>{applicant.userNickname}</p>
                             </div>
                         </div>
                     )}

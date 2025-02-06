@@ -19,38 +19,79 @@ import {
   titleStyle,
 } from "./CreatePot.style";
 import { Button, CategoryButton } from "@components/index";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { participation, partMap, period } from "@constants/categories";
+import { useEffect, useState } from "react";
+import { participation, participationMap, partMap, period } from "@constants/categories";
 import { DatePicker } from "./components";
+import useCreatePot from "apis/hooks/pots/useCreatePot";
+import { Dayjs } from "dayjs";
+import { RecruitmentDetail } from "apis/types/pot";
 
 const CreatePot = () => {
-  const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [selectedParts, setSelectedParts] = useState<string[]>([]);
+  const { mutate } = useCreatePot();
 
+  const [potName, setPotName] = useState<string>("");
+  const [language, setLanguage] = useState<string>("");
+  const [selectedPeriod, setSelectedPeriod] = useState<string>("");
+  const [selectedParticipation, setSelectedParticipation] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [startDate, setStartDate] = useState<string>("");
+  const [deadline, setDeadline] = useState<string>("");
+  const [partNumber, setPartNumber] = useState<{ [key: string]: number }>({});
   const [visibleInputs, setVisibleInputs] = useState<{
     [key: string]: boolean;
   }>({});
 
-  const handleButtonClick = (category: string) => {
-    setSelectedCategory(category);
-  };
+  useEffect(() => {
+    const partValues = Object.keys(partMap);
+    setPartNumber(Object.fromEntries(partValues.map(key =>
+      [key, 0])) as Record<typeof partValues[number], number>);
+  }, []);
 
+
+  const handleStartDate = (day: Dayjs | null) => {
+    if (day) {
+      setStartDate(day.format('YYYY-MM-DD'))
+    }
+  }
+  const handleDeadline = (day: Dayjs | null) => {
+    if (day) {
+      setDeadline(day.format('YYYY-MM-DD'))
+    }
+  }
   const handlePartClick = (partName: string) => {
-    setSelectedParts((prev) =>
-      prev.includes(partName)
-        ? prev.filter((item) => item !== partName)
-        : [...prev, partName]
-    );
     setVisibleInputs((prev) => ({
       ...prev,
       [partName]: !prev[partName],
     }));
   };
 
+  const handlePartNumber = (partName: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    setPartNumber(prev => ({
+      ...prev,
+      [partName]: Number(e.target.value),
+    }));
+  };
+
   const handleUploading = () => {
-    // navigate("/");
+    let recruits: RecruitmentDetail[] = [];
+    Object.entries(partNumber).forEach((part) => {
+      if (visibleInputs[part[0]] && part[1] > 0) {
+        recruits = [
+          ...recruits,
+          { recruitmentRole: partMap[part[0]], recruitmentCount: part[1] }]
+      }
+    })
+
+    mutate({
+      potName: potName,
+      potStartDate: startDate,
+      potDuration: selectedPeriod,
+      potLan: language,
+      potContent: content,
+      potModeOfOperation: participationMap[selectedParticipation],
+      recruitmentDeadline: deadline,
+      recruitmentDetails: recruits,
+    })
   };
 
   return (
@@ -67,7 +108,7 @@ const CreatePot = () => {
       <form css={formContainer}>
         <label css={labelStyle}>
           팟 네임
-          <input css={inputStyle} placeholder="메인 제목 작성" />
+          <input css={inputStyle} placeholder="메인 제목 작성" onChange={(e) => setPotName(e.target.value)} value={potName} />
         </label>
         <div css={dividerStyle} />
         <div css={labelStyle}>
@@ -77,8 +118,8 @@ const CreatePot = () => {
               <CategoryButton
                 key={participation}
                 style="pot"
-                selected={selectedCategory === participation}
-                onClick={handleButtonClick}
+                selected={selectedParticipation === participation}
+                onClick={() => setSelectedParticipation(participation)}
               >
                 {participation}
               </CategoryButton>
@@ -88,7 +129,11 @@ const CreatePot = () => {
 
         <div css={labelStyle}>
           시작 날짜
-          <DatePicker />
+          <DatePicker onChange={handleStartDate} />
+        </div>
+        <div css={labelStyle}>
+          마감 날짜
+          <DatePicker onChange={handleDeadline} />
         </div>
         <div css={labelStyle}>
           예상 기간
@@ -97,8 +142,8 @@ const CreatePot = () => {
               <CategoryButton
                 key={period}
                 style="pot"
-                selected={selectedCategory === period}
-                onClick={handleButtonClick}
+                selected={selectedPeriod === period}
+                onClick={() => setSelectedPeriod(period)}
               >
                 {period}
               </CategoryButton>
@@ -112,13 +157,14 @@ const CreatePot = () => {
               <div key={partName} css={partButtonContainer}>
                 <CategoryButton
                   style={partMap[partName]}
-                  selected={selectedParts.includes(partName)}
+                  selected={visibleInputs[partName]}
                   onClick={() => handlePartClick(partName)}
                 >
                   {partName}
                 </CategoryButton>
                 <div css={inputContainer(visibleInputs[partName])}>
-                  <input css={countInputStyle} />
+                  <input css={countInputStyle}
+                    onChange={(e) => handlePartNumber(partName, e)} />
                   <p>명</p>
                 </div>
               </div>
@@ -130,11 +176,15 @@ const CreatePot = () => {
           <input
             css={[inputStyle, languageInputStyle]}
             placeholder="사용 언어 작성"
+            onChange={(e) => setLanguage(e.target.value)}
+            value={language}
           />
         </label>
         <textarea
           css={textareaStyle}
           placeholder="어떤 팟을 끓이고 싶으세요? 간단하게 소개해 보세요."
+          onChange={(e) => setContent(e.target.value)}
+          value={content}
         />
       </form>
     </main>
