@@ -54,7 +54,6 @@ export const inputStyle = css`
   width: 70.8rem;
   padding: 1.2rem 1.6rem;
   ${theme.font.caption3};
-  font-family: "Pretendard";
   display: flex;
   flex-grow: 1;
   border-radius: 8px;
@@ -72,7 +71,6 @@ export const inputStyle = css`
 
 export const textareaStyle = css`
   ${theme.font.caption3};
-  font-family: "Pretendard";
   resize: none;
   width: 70.8rem;
   height: 34.9rem;

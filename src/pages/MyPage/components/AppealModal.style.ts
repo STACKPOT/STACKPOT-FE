@@ -84,7 +84,6 @@ export const textAreaStyle = css`
     border-radius: 8px;
     border: 1px solid ${theme.color.object.alternative};
     ${theme.font.caption3};
-    font-family: "Pretendard";
     color: ${theme.color.base.darkgray};
     ::placeholder{
         color: ${theme.color.interactive.inactive};
@@ -102,6 +101,4 @@ export const buttonStyle = css`
     color: ${theme.color.base.white};
     background-color: ${theme.color.point.hero};
     border-radius: 8px;
-    border: none;
-    cursor: pointer;
 `

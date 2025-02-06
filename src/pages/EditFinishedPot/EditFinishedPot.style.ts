@@ -41,7 +41,6 @@ export const inputStyle = css`
   margin-left: 4.4rem;
   padding: 1.2rem 1.6rem;
   ${theme.font.caption3};
-  font-family: "Pretendard";
   display: flex;
   flex-grow: 1;
   border-radius: 8px;
@@ -79,7 +78,6 @@ export const dividerStyle = css`
 export const textareaStyle = css`
   padding: 2.4rem;
   height: 40.6rem;
-  font-family: "Pretendard";
   border-radius: 12px;
   border: 1px solid ${theme.color.object.alternative};
   ${theme.font.caption3}

@@ -10,9 +10,6 @@ const EditPost = () => {
     const [content, setContent] = useState<string>("원래 내용입니다.");
     const [selectedPart, setSelectedPart] = useState<string | null>("프론트엔드");
 
-    const [visibleInputs, setVisibleInputs] = useState<{
-        [key: string]: boolean;
-    }>({});
     const [isFilled, setIsFilled] = useState(false);
 
     const blocker = useBlocker(({ currentLocation, nextLocation }) => {
@@ -34,7 +31,6 @@ const EditPost = () => {
 
     const handlePartClick = (partName: string) => {
         setSelectedPart((prev) => (prev === partName ? null : partName));
-        setVisibleInputs({ [partName]: true });
         setIsFilled(true);
     };
 
