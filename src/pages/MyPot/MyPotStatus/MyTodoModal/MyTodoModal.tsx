@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { usePatchTodo } from "../../../../apis/hooks/todos/usePatchTodo";
-import { buttonContainer, buttonStyle, buttonTextStyle, container, innerContainer, titleContainer, titleTextStyle, cancelIconStyle, todoContainer, eachTodoContainer } from "./MyTodoModal.style";
-import { cancelContainer } from "../AboutWorkModal/AboutWorkModal.style"; 
-import { inputFieldStyle } from "@pages/MyPot/components/TextInput/TextInput.style"; 
-import { saveButtonStyle } from "@pages/MyPot/components/ActionButton/ActionButton.style"; 
-import { CloseIcon, DeleteIcon, TodoCheckIcon, TodoPlusButtonIcon } from "@assets/svgs"; 
-import { noTaskTextContainer, noneTodoTextStyle } from "./MyTodoModal.style";  
 import { GetTodos } from "apis/getTodoAPI";
+import { CloseIcon, DeleteIcon, TodoCheckIcon, TodoPlusButtonIcon } from "@assets/svgs"; 
+import { buttonContainer, buttonStyle, buttonTextStyle, container, innerContainer, titleContainer, titleTextStyle, cancelIconStyle, todoContainer, eachTodoContainer, saveButtonStyle } from "./MyTodoModal.style"; 
+import { noTaskTextContainer, noneTodoTextStyle } from "./MyTodoModal.style";  
+import { cancelContainer } from "../AboutWorkModal/AboutWorkModal.style";
+import { inputFieldStyle } from "@pages/MyPot/components/TextInput/TextInput.style";
 
 interface MyTodoModalProps {
   potId: number; 
@@ -14,34 +13,34 @@ interface MyTodoModalProps {
 }
 
 const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
-  const { patchTodoRequest, loading, error } = usePatchTodo(); 
+  const { patchTodoRequest } = usePatchTodo(); 
   const [tasks, setTasks] = useState<{ todoId: number | null, content: string, status: string }[]>([]);  
   const [loadingTasks, setLoadingTasks] = useState<boolean>(true); 
 
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await GetTodos(4);  
+        const response = await GetTodos(4, 1, 3);
         if (response.isSuccess && response.result) {
-          const allTodos = response.result.todos.flatMap((user) => 
-            user.todos.map((todo) => ({
-              todoId: todo.todoId,
-              content: todo.content,
-              status: todo.status,
-            }))
-          );
-          setTasks(allTodos); 
+          const allTodos = response.result.todos?.[0]?.todos?.flatMap((todo) => ({
+            todoId: todo.todoId,
+            content: todo.content,
+            status: todo.status,
+          })) || [];
+    
+          setTasks(allTodos);
         }
       } catch (error) {
         console.error("API 호출 중 에러 발생", error);
       } finally {
-        setLoadingTasks(false); 
+        setLoadingTasks(false);
       }
     };
   
-    fetchTodos();  
+    fetchTodos();
   }, [potId]);
-
+  
+  
   const handleAddTask = () => {
     if (tasks.length >= 10) {
       alert("할 일은 최대 10개까지 추가할 수 있습니다.");
@@ -69,7 +68,7 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
         status: task.status || "NOT_STARTED",
       }));
 
-      await patchTodoRequest(potId, tasksToSend);
+      await patchTodoRequest({ potId, tasks: tasksToSend });
 
       alert("할 일이 저장되었습니다!");
       onClose();
@@ -78,8 +77,7 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
     }
   };
 
-  if (loadingTasks || loading) return <div>Loading...</div>;
-  if (error) return <div>{`Error: ${error}`}</div>;
+  if (loadingTasks) return <div>Loading...</div>;
 
   return (
     <div css={container}>
@@ -89,14 +87,14 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
         </div>
 
         <div css={titleContainer}>
-          <text css={titleTextStyle}>나의 할 일</text>
+          <p css={titleTextStyle}>나의 할 일</p>
           <div 
             css={buttonStyle} 
             className={tasks.length >= 10 ? 'max-tasks' : ''}
             onClick={handleAddTask} 
           >
             <div css={buttonContainer}>
-              <text css={buttonTextStyle}>할 일 추가</text>
+              <p css={buttonTextStyle}>할 일 추가</p>
               <TodoPlusButtonIcon /> 
             </div>
           </div>
@@ -105,7 +103,7 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
         <div css={todoContainer} className={tasks.length === 0 ? 'empty' : ''}>
           {tasks.length === 0 ? (
             <div css={noTaskTextContainer}>
-              <text css={noneTodoTextStyle}>{"<할 일 추가> 버튼을 눌러서 작성할 수 있어요."}</text>
+              <p css={noneTodoTextStyle}>{"<할 일 추가> 버튼을 눌러서 작성할 수 있어요."}</p>
             </div>
           ) : (
             tasks.map((task, index) => (
@@ -123,9 +121,9 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
           )}
         </div>
 
-        <div css={saveButtonStyle}>
-          <button css={buttonTextStyle} onClick={handleSaveTasks}>작성 완료</button>
-        </div>
+        <button css={saveButtonStyle}>
+          <div css={buttonTextStyle} onClick={handleSaveTasks}>작성 완료</div>
+        </button>
       </div>
     </div>  
   );

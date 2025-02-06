@@ -1,52 +1,46 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react";
+import useGetTodo from "apis/hooks/todos/useGetTodo"; 
 import { MyPotIcon } from "@assets/svgs";
 import { boardStyle, potIconStyle, boardTextStyle, highlightStyle, containerStyle, gridContainerStyle, toDoGirdContainer } from "./MyPotStatus.style";
-import { GetTodos } from "apis/getTodoAPI";  
-import routes from "@constants/routes";
 import { MyPotTodoCard, AboutWorkModalWrapper, StatusBoard, Pagination, TodoStatusSection } from "../components/index";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 import taskCardkData from "mocks/taskCardData";
-import { Todo } from "apis/types/todo";
 
 const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // AboutWorkModal 상태 관리
   const [activeStatus, setActiveStatus] = useState<"진행 전" | "진행 중" | "완료" | null>(null);
   const [modalTitle, setModalTitle] = useState("새로운 업무 추가");
   const [potData, setPotData] = useState<any>({
     title: "",
     nickname: "",
     taskCount: 0,
-    todos: []
-  });  
-  const [loading, setLoading] = useState<boolean>(true); 
+    todos: [],
+    totalElements: 0,
+  });
 
   const navigate = useNavigate();
 
-  const totalPages = potData.todos.length > 0 ? Math.ceil(potData.todos.length / 3) : 0;
-  const paginatedData: { userNickname: string; todos: Todo[] }[] = potData.todos.slice((currentPage - 1) * 3, currentPage * 3); 
+  const { data, isLoading, error, refetch } = useGetTodo({
+    potId: 4,
+    page: currentPage,
+    size: 3,
+  });
 
   useEffect(() => {
-    const fetchPotData = async () => {
-      try {
-        const response = await GetTodos(4); 
-        if (response.isSuccess && response.result) {
-          setPotData({
-            title: response.result.potName,  
-            nickname: response.result.todos[0].userNickname,
-            taskCount: response.result.todos[0].todoCount,
-            todos: response.result.todos,
-          });
-        }
-      } catch (error) {
-        console.error("API 호출 중 에러 발생", error);
-      } finally {
-        setLoading(false); 
-      }
-    };
+    if (data?.result) {
+      setPotData({
+        title: data.result.potName ?? "",
+        nickname: data.result.todos[0]?.userNickname ?? "",
+        taskCount: data.result.todos[0]?.todoCount ?? 0,
+        todos: data.result.todos ?? [],
+        totalElements: data.result.totalElements ?? 0,  
+      });
+    }
+  }, [data]); 
 
-    fetchPotData(); 
-  }, []);
+  const totalPages = potData.totalElements > 0 ? Math.ceil(potData.totalElements / 3) : 0;
 
   const handlePrev = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -66,7 +60,24 @@ const MyPotStatusPage: React.FC = () => {
     navigate(`${routes.myPot.base}/${taskId}`);
   };
 
-  if (loading) return <div>Loading...</div>; 
+  const handleTodoModalClose = useCallback(() => {
+    refetch().then(({ data }) => {
+      if (data?.result) {
+        setPotData({
+          title: data.result.potName ?? "",
+          nickname: data.result.todos[0]?.userNickname ?? "",
+          taskCount: data.result.todos[0]?.todoCount ?? 0,
+          todos: data.result.todos ?? [],
+          totalElements: data.result.totalElements ?? 0,
+        });
+      }
+    }).catch(error => {
+      console.error("Error fetching data:", error);
+    });
+  }, [refetch]);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {(error as any).message}</div>;
 
   return (
     <>
@@ -81,15 +92,23 @@ const MyPotStatusPage: React.FC = () => {
       <div css={boardStyle}>
         <MyPotIcon css={potIconStyle} />
         <div css={boardTextStyle}>
-          {potData.title}- 안녕하세요, <span css={highlightStyle}>{potData.nickname}</span> 님! 오늘 할 일이{" "}
-          <span css={highlightStyle}>{potData.taskCount}</span>개 있어요.
+          {potData?.title}- 안녕하세요, <span css={highlightStyle}>{potData?.nickname}</span> 님! 오늘 할 일이{" "}
+          <span css={highlightStyle}>{potData?.taskCount}</span>개 있어요.
         </div>
       </div>
 
       <div css={containerStyle}>
         <div css={gridContainerStyle}>
-          {paginatedData.map((data, index) => (
-            <MyPotTodoCard key={index} nickname={data.userNickname} todos={data.todos} isFirst={index === 0} potId={4}/>
+          {data?.result?.todos.map((data, index) => (
+            <MyPotTodoCard
+              key={index}
+              nickname={data.userNickname}
+              todos={data.todos}
+              isFirst={index === 0}
+              potId={4}
+              currentPage={currentPage}
+              onModalClose={handleTodoModalClose}  // MyPotTodoModal 닫힐 때 refetch 호출
+            />
           ))}
         </div>
 
@@ -114,7 +133,6 @@ const MyPotStatusPage: React.FC = () => {
           />
         ))}
       </div>
-
     </>
   );
 };

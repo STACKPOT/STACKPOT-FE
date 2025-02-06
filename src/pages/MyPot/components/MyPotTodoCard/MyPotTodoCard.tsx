@@ -4,14 +4,17 @@ import { CheckIcon, PlusButtonIcon } from "@assets/svgs";
 import { MushroomImage } from "@assets/images";
 import MyTodoModalWrapper from "../MyTodoModalWrapper/MyTodoModalWrapper";
 import { Todo } from "apis/types/todo";
+
 interface MyPotTodoCardProps {
   nickname: string;
   todos: Todo[];
   isFirst: boolean;
   potId: number;
+  currentPage: number;
+  onModalClose: () => void;
 }
 
-const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId}) => {
+const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId, currentPage, onModalClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handlePlusButtonClick = () => {
@@ -20,6 +23,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    onModalClose();  // MyPotStatus에 모달이 닫혔음을 알림
   };
 
   return (
@@ -27,7 +31,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
       <img css={profileImageStyle} src={MushroomImage} />
       <div css={nicknameStyle}>
         <p>{nickname}</p>
-        {isFirst && <PlusButtonIcon css={plusButtonStyle} onClick={handlePlusButtonClick} />}
+        {isFirst && currentPage === 1 && <PlusButtonIcon css={plusButtonStyle} onClick={handlePlusButtonClick} />} 
       </div>
       <div css={statusContainer}>
         <div css={todoListContainer}>

@@ -19,3 +19,9 @@ export interface Result {
   currentPage: number;
   totalElements: number;
 }
+
+export interface GetTodoParams {
+  potId: number;
+  page: number;
+  size: number;
+}
