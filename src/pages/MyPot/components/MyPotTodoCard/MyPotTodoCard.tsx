@@ -23,7 +23,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    onModalClose();  // MyPotStatus에 모달이 닫혔음을 알림
+    onModalClose();  
   };
 
   return (
@@ -35,7 +35,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
       </div>
       <div css={statusContainer}>
         <div css={todoListContainer}>
-          {(todos || []).slice(0, 3).map((todo, index) => ( 
+          {(todos || []).map((todo, index) => ( 
             <div css={todoContainer} key={index}>
               <div css={checkBoxStyle}>
                 {todo.status === "COMPLETED" && <CheckIcon />}
