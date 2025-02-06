@@ -1,5 +1,5 @@
 import { Role } from "types/role";
-import { apiGet, authApiGet, authApiPatch } from "./apiUtils";
+import { apiGet, authApiGet, authApiPatch, authApiPost } from "./apiUtils";
 import { LogInResponse, postSignInPayload, SignInResponse } from "./types/user";
 
 export const getKakaoLogIn = async (code: string) => {
@@ -12,4 +12,8 @@ export const patchSignIn = async (data: postSignInPayload) => {
 
 export const getNickname = async (role: Role) => {
   return authApiGet("/users/nickname", { role });
+};
+
+export const postNickname = async (nickname: string) => {
+  return authApiPost("/users/nickname/save", undefined, { nickname });
 };

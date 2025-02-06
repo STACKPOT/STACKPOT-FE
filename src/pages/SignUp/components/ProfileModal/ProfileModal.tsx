@@ -11,6 +11,7 @@ import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
 import { useState } from "react";
 import useGetNickname from "apis/hooks/users/useGetNickname";
+import usePostNickname from "apis/hooks/users/usePostNickname";
 
 interface ProfileModalProps {
   role: Role | undefined;
@@ -20,23 +21,23 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   role,
   onModalCancel,
 }: ProfileModalProps) => {
-  const handleNavigateToHome = () => {
-    onModalCancel();
-    //todo: 홈 페이지로 이동
-  };
+  const profileImage = roleImages[role];
+  const [nickname, setNickname] = useState<string>("");
 
-  const { mutate, isPending } = useGetNickname(role);
+  const { mutate: getNickname, isPending } = useGetNickname(role);
+  const { mutate: postNickname } = usePostNickname();
 
   const handleClick = () => {
-    mutate(role, {
+    getNickname(role, {
       onSuccess: (response) => {
         setNickname(response.result);
       },
     });
   };
 
-  const profileImage = roleImages[role];
-  const [nickname, setNickname] = useState<string>("");
+  const handleConfirm = () => {
+    postNickname(nickname);
+  };
 
   const roleDescription = {
     FRONTEND: "프론트엔드는 최상단에 보이는 강한 풍미를 지닌 버섯!",
@@ -57,7 +58,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
       subtitle={`가입 전, 닉네임을 만들어 주세요.
         STACKPOT은 네 가지의 재료 안에서 랜덤 닉네임을 부여받아요.`}
       buttonText="이렇게 할래요"
-      onButtonClick={handleNavigateToHome}
+      onButtonClick={handleConfirm}
       onCancel={onModalCancel}
     >
       <div css={profileContainer}>
