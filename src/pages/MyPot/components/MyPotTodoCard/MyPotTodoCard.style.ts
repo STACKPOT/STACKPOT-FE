@@ -20,6 +20,7 @@ export const nicknameStyle = css`
     display: flex;
     align-items: center; 
     gap: 1rem;
+    height: 19px;
 `
 export const statusContainer = css`
     display: flex;

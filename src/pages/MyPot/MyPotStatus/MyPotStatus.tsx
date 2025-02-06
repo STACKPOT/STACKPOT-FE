@@ -107,7 +107,7 @@ const MyPotStatusPage: React.FC = () => {
               isFirst={index === 0}
               potId={4}
               currentPage={currentPage}
-              onModalClose={handleTodoModalClose}  // MyPotTodoModal 닫힐 때 refetch 호출
+              onModalClose={handleTodoModalClose}
             />
           ))}
         </div>
