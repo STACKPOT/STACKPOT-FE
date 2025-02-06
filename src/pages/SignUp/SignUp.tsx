@@ -89,8 +89,7 @@ const SignUp = () => {
             </div>
             <Section
               title="카카오톡 아이디"
-              description={`팟이 시작될 경우, 원활한 진행을 위해 팀장에게 카카오 아이디가 보여집니다.
-                카카오톡 아이디를 작성해 주세요.`}
+              description={`팟이 시작될 경우, 원활한 진행을 위해 팀장에게 카카오 아이디가 보여집니다.\n카카오톡 아이디를 작성해 주세요.`}
             />
             <input
               css={inputStyle}
