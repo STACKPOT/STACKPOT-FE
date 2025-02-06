@@ -21,20 +21,15 @@ export const modalStyle = css`
     display: flex;
     flex-direction: column;
     padding: 3.2rem;
-    border-radius: 2.4rem;
+    border-radius: 24px;
     border: 1px solid ${theme.color.object.alternative};
     background-color: white;
-`
-export const closeButtonContainer = css`
-    height: 2.9rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
 `
 export const closeIconStyle = css`
     width: 1.2rem;
     height: 1.2rem;
+    margin: 0.85rem 0;
+    margin-left: auto;
     cursor: pointer;
 `
 export const bodyContainer = css`
@@ -45,10 +40,6 @@ export const bodyContainer = css`
 export const titleContainer = css`
     display: flex;
     justify-content: center;
-`
-export const appealIconStyle = css`
-    width: 2.1rem;
-    height: 2.2rem;
 `
 export const titleStyle = css`
     ${theme.font.title1};
@@ -70,10 +61,6 @@ export const dividerStyle = css`
 export const bodyTitleContainer = css`
     display: flex;
     gap: 0.8rem;
-`
-export const bodyTitleIconStyle = css`
-    width: 1.9rem;
-    height: 1.9rem;
 `
 export const bodyTitleStyle = css`
     ${theme.font.bodyBold1};

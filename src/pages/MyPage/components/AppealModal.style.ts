@@ -17,29 +17,19 @@ export const backgroundStyle = css`
 `;
 export const modalStyle = css`
     width: 65.2rem;
-    height: 66.5rem;
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
+    align-items: center;
     padding: 3.2rem;
-    border-radius: 2.4rem;
+    border-radius: 24px;
     border: 1px solid ${theme.color.object.alternative};
     background-color: white;
-`
-export const container = css`
-    display: flex;
-    flex-direction: column;
-`
-export const closeButtonContainer = css`
-    height: 2.9rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
 `
 export const closeIconStyle = css`
     width: 1.2rem;
     height: 1.2rem;
+    margin: 0.85rem 0;
+    margin-left: auto;
     cursor: pointer;
 `
 export const bodyContainer = css`
@@ -50,10 +40,6 @@ export const bodyContainer = css`
 export const titleContainer = css`
     display: flex;
     justify-content: center;
-`
-export const appealIconStyle = css`
-    width: 2.1rem;
-    height: 2.2rem;
 `
 export const titleStyle = css`
     ${theme.font.title1};
@@ -76,10 +62,6 @@ export const bodyTitleContainer = css`
     display: flex;
     gap: 0.8rem;
 `
-export const bodyTitleIconStyle = css`
-    width: 1.9rem;
-    height: 1.9rem;
-`
 export const bodyTitleStyle = css`
     ${theme.font.bodyBold1};
     color: ${theme.color.point.hero};
@@ -99,7 +81,7 @@ export const textAreaStyle = css`
     height: 15.7rem;
     width: 100%;
     padding: 1.2rem 1.6rem;
-    border-radius: 0.8rem;
+    border-radius: 8px;
     border: 1px solid ${theme.color.object.alternative};
     ${theme.font.caption3};
     font-family: "Pretendard";
@@ -114,11 +96,12 @@ export const textAreaStyle = css`
     resize: none;
 `
 export const buttonStyle = css`
-    padding: 1.4rem 0;
-    ${theme.font.bodyBold1}
+    padding: 1.6rem 24rem;
+    margin-top: 3.2rem;
+    ${theme.font.title1}
     color: ${theme.color.base.white};
     background-color: ${theme.color.point.hero};
-    border-radius: 0.8rem;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
 `

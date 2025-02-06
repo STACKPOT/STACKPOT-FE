@@ -1,7 +1,6 @@
 import { AppealIcon, BookIcon, CloseIcon, CreateIcon } from "@assets/svgs";
-import { appealIconStyle, backgroundStyle, bodyContainer, bodyTitleContainer, bodyTitleIconStyle, bodyTitleStyle, closeButtonContainer, closeIconStyle, dateContainer, dateStyle, dividerStyle, contentStyle, modalStyle, titleContainer, titleStyle, appealContentStyle } from "./PotSummaryModal.style";
+import { backgroundStyle, bodyContainer, bodyTitleContainer, bodyTitleStyle, closeIconStyle, dateContainer, dateStyle, dividerStyle, contentStyle, modalStyle, titleContainer, titleStyle, appealContentStyle } from "./PotSummaryModal.style";
 import { useEffect, useState } from "react";
-import { ExplainModal } from "@components/index";
 
 interface PotSummaryModalProps {
     potId: number;
@@ -27,12 +26,10 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel }: Po
     return (
         <div css={backgroundStyle}>
             <div css={modalStyle}>
-                <div css={closeButtonContainer}>
-                    <CloseIcon css={closeIconStyle} onClick={onCancel} />
-                </div>
+                <CloseIcon css={closeIconStyle} onClick={onCancel} />
                 <div css={bodyContainer}>
                     <div css={titleContainer}>
-                        <AppealIcon css={appealIconStyle} />
+                        <AppealIcon />
                         <h1 css={titleStyle}>{`${potName} ${role} 역할`}</h1>
                     </div>
                     < div css={dateContainer}>
@@ -42,13 +39,13 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel }: Po
                     </div>
                     <div css={dividerStyle} />
                     <div css={bodyTitleContainer}>
-                        <BookIcon css={bodyTitleIconStyle} />
+                        <BookIcon />
                         <p css={bodyTitleStyle}>소개</p>
                     </div>
                     <p css={contentStyle}>{introduction}</p>
                     <div css={dividerStyle} />
                     <div css={bodyTitleContainer}>
-                        <CreateIcon css={bodyTitleIconStyle} />
+                        <CreateIcon />
                         <p css={bodyTitleStyle}>여기서 저는요</p>
                     </div>
                     <p css={appealContentStyle}>{appeal}</p>
