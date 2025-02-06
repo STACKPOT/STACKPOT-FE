@@ -4,12 +4,11 @@ import {
   MushroomImage,
   OnionImage,
 } from "@assets/images";
-
-type Role = "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+import { Role } from "types/role";
 
 export const roleImages: Record<Role, string> = {
   FRONTEND: MushroomImage,
   BACKEND: OnionImage,
   PLANNING: CarrotImage,
   DESIGN: BroccoliImage,
-};
+} as const;

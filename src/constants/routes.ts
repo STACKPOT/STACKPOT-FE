@@ -20,7 +20,7 @@ const routes = {
   searchResult: "/search-result",
   signUp: "/sign-up",
   potDetail: "/pot/:potId",
-  callback: "/callback"
+  callback: "/callback",
 } as const;
 
 export default routes;

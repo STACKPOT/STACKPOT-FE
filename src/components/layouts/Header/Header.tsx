@@ -1,5 +1,5 @@
-import { Logo, SearchIcon } from "@assets/svgs";
-import { headerStyle, iconStyle } from "./Header.style";
+import { Logo, ProfileIcon, SearchIcon } from "@assets/svgs";
+import { headerStyle, iconContainer, iconStyle } from "./Header.style";
 import Button from "@components/commons/Button/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,14 @@ const Header: React.FC = () => {
           로그인/회원가입
         </Button>
       ) : (
-        <SearchIcon type="button" css={iconStyle} onClick={handleSearchClick} />
+        <div css={iconContainer}>
+          <SearchIcon
+            type="button"
+            css={iconStyle}
+            onClick={handleSearchClick}
+          />
+          <ProfileIcon />
+        </div>
       )}
     </header>
   );

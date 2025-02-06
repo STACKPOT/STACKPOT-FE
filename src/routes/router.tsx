@@ -21,7 +21,8 @@ import {
   MyPotCalendarPage,
   TaskDetailPage,
   WritingPage,
-  CallbackPage
+  MyPotPage,
+  CallbackPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -93,8 +94,12 @@ const router = createBrowserRouter([
           { index: true, element: <MyPotStatusPage /> },
           { path: routes.myPot.calendar, element: <MyPotCalendarPage /> },
           { path: routes.myPot.detail, element: <TaskDetailPage /> },
-        ]
-      }
+        ],
+      },
+      {
+        path: routes.myPot.base,
+        element: <MyPotPage />,
+      },
     ],
   },
 ]);

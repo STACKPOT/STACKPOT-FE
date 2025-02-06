@@ -4,11 +4,12 @@ import theme from "@styles/theme";
 export const containerStyle = css`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
+
 export const inputStyle = css`
   padding: 1.2rem 1.6rem;
   ${theme.font.caption3};
-  font-family: "Pretendard";
   ::placeholder {
     color: ${theme.color.interactive.inactive};
   }
@@ -20,25 +21,29 @@ export const inputStyle = css`
     border-color: ${theme.color.point.hero};
   }
 `;
+
 export const readOnlyInputStyle = css`
   ${inputStyle};
   &:focus {
-        border: 1px solid ${theme.color.feedback.negative};
-    }
-`
+    border: 1px solid ${theme.color.feedback.negative};
+  }
+`;
+
 export const nicknameInputDoneStyle = css`
-    ${readOnlyInputStyle};
-    color: ${theme.color.point.hero};
-    border-color: ${theme.color.point.hero};
-    &:focus {
-      color: ${theme.color.base.darkgray};
-    }
-`
+  ${readOnlyInputStyle};
+  color: ${theme.color.point.hero};
+  border-color: ${theme.color.point.hero};
+  &:focus {
+    color: ${theme.color.base.darkgray};
+  }
+`;
+
 export const supportingTextStyle = css`
-    ${theme.font.caption2};
-    color: ${theme.color.feedback.positive};
-`
+  ${theme.font.caption2};
+  color: ${theme.color.feedback.positive};
+`;
+
 export const supportingTextWarningStyle = css`
-    ${theme.font.caption2};
-    color: ${theme.color.feedback.negative};
-`
+  ${theme.font.caption2};
+  color: ${theme.color.feedback.negative};
+`;

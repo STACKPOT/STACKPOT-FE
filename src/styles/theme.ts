@@ -89,7 +89,7 @@ const theme = {
       font-size: 24px;
       line-height: 32px;
       letter-spacing: -0.144px;
-      font-weight: 500;
+      font-weight: 700;
     `,
     bodyBold1: css`
       font-size: 16px;
