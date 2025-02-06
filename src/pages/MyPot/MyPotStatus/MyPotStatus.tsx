@@ -6,10 +6,12 @@ import { MyPotTodoCard, AboutWorkModalWrapper, StatusBoard, Pagination, TodoStat
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import taskCardkData from "mocks/taskCardData";
+import { useParams } from "react-router-dom";
+
 
 const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false); // AboutWorkModal 상태 관리
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeStatus, setActiveStatus] = useState<"진행 전" | "진행 중" | "완료" | null>(null);
   const [modalTitle, setModalTitle] = useState("새로운 업무 추가");
   const [potData, setPotData] = useState<any>({
@@ -19,11 +21,14 @@ const MyPotStatusPage: React.FC = () => {
     todos: [],
     totalElements: 0,
   });
+  
+  const { potId } = useParams<{ potId: string }>();
+  const potIdNumber = Number(potId) || 0;
 
   const navigate = useNavigate();
 
   const { data, isLoading, error, refetch } = useGetTodo({
-    potId: 4,
+    potId: potIdNumber,
     page: currentPage,
     size: 3,
   });
@@ -105,7 +110,7 @@ const MyPotStatusPage: React.FC = () => {
               nickname={data.userNickname}
               todos={data.todos}
               isFirst={index === 0}
-              potId={4}
+              potId={potIdNumber}
               currentPage={currentPage}
               onModalClose={handleTodoModalClose}
             />

@@ -20,7 +20,7 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await GetTodos(4, 1, 3);
+        const response = await GetTodos(potId, 1, 3);
         if (response.isSuccess && response.result) {
           const allTodos = response.result.todos?.[0]?.todos?.flatMap((todo) => ({
             todoId: todo.todoId,
