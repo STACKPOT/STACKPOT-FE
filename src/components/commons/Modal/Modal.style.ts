@@ -37,6 +37,7 @@ export const messageStyle = css`
   color: ${theme.color.object.assistive};
   ${theme.font.caption3};
   text-align: center;
+  white-space: pre-line;
 `;
 export const footer = css`
   display: flex;
