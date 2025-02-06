@@ -22,6 +22,7 @@ import WritingPage from "./WritePost/WritePost";
 import EditFinishedPotPage from "./EditFinishedPot/EditFinishedPot";
 import UserPage from "./UserPage/UserPage";
 
+import MyPotPage from "./MyPot/MyPot";
 
 export {
   HomePage,
@@ -47,4 +48,5 @@ export {
   WritingPage,
   EditFinishedPotPage,
   UserPage,
+  MyPotPage,
 };

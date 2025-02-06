@@ -17,9 +17,10 @@ import {
 import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import { roleImages } from "@constants/roleImage";
+import { Role } from "types/role";
 
 interface PostCardProps {
-  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  role: Role
   nickname: string;
   createdAt: string;
   title: string;

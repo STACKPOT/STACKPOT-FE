@@ -22,9 +22,10 @@ import {
   EditPostPage,
   TaskDetailPage,
   WritingPage,
-  CallbackPage,
   EditFinishedPotPage,
-  UserPage
+  UserPage,
+  MyPotPage,
+  CallbackPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -90,13 +91,17 @@ const router = createBrowserRouter([
         element: <CallbackPage />,
       },
       {
-        path: routes.myPot.base,
+        path: routes.myPot.potPage,
         element: <MyPotMainPage />,
         children: [
           { index: true, element: <MyPotStatusPage /> },
           { path: routes.myPot.calendar, element: <MyPotCalendarPage /> },
-          { path: ":taskId", element: <TaskDetailPage /> },
-        ]
+          { path: routes.myPot.detail, element: <TaskDetailPage /> },
+        ],
+      },
+      {
+        path: routes.myPot.base,
+        element: <MyPotPage />,
       },
       {
         path: routes.editPost,
