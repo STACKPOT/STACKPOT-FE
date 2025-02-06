@@ -87,12 +87,12 @@ const router = createBrowserRouter([
         element: <CallbackPage />,
       },
       {
-        path: routes.myPot.base,
+        path: routes.myPot.potPage,
         element: <MyPotMainPage />,
         children: [
           { index: true, element: <MyPotStatusPage /> },
           { path: routes.myPot.calendar, element: <MyPotCalendarPage /> },
-          { path: ":taskId", element: <TaskDetailPage /> },
+          { path: routes.myPot.detail, element: <TaskDetailPage /> },
         ]
       }
     ],

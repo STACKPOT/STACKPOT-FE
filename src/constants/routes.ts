@@ -11,8 +11,9 @@ const routes = {
   createPot: "/create-pot",
   myPot: {
     base: "/my-pot",
-    detail: "/my-pot/:taskId",
-    calendar: "/my-pot/calendar",
+    potPage: "/my-pot/:potId",
+    detail: "/my-pot/:potId/:taskId",
+    calendar: "/my-pot/:potId/calendar",
   },
   setting: "/setting",
   search: "/search",
