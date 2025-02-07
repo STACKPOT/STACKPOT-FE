@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import useGetSignIn from "apis/hooks/users/useGetSignIn";
+import { LoadingSpinnerIcon } from "@assets/svgs";
+import { container, iconStyle } from "./Callback.style";
 
 const Callback: React.FC = () => {
   const isCodeProcessed = useRef(false);
@@ -13,7 +15,11 @@ const Callback: React.FC = () => {
     }
   }, [code, mutate]);
 
-  return <main />;
+  return (
+    <main css={container}>
+      <LoadingSpinnerIcon css={iconStyle} />
+    </main>
+  );
 };
 
 export default Callback;
