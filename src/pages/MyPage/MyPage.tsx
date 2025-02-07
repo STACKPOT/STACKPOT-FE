@@ -40,18 +40,6 @@ const MyPage = () => {
           >
             끓인 팟
           </p>
-          <p
-            css={tabsTextStyle(contentType === "feed")}
-            onClick={() => setContentType("feed")}
-          >
-            피드
-          </p>
-          <p
-            css={tabsTextStyle(contentType === "pot")}
-            onClick={() => setContentType("pot")}
-          >
-            끓인 팟
-          </p>
         </div>
         <div css={listContainer(contentType)}>
           {contentType === "feed"
@@ -60,8 +48,11 @@ const MyPage = () => {
                   nickname={post.writer}
                   role={post.writerRole}
                   isLiked={false}
+                  likeCount={post.likeCount}
                   key={post.id}
-                  {...post}
+                  createdAt={post.createdAt}
+                  title={post.title}
+                  content={post.content}
                 />
               ))
             : data.completedPots.map((pot) => (
@@ -74,7 +65,6 @@ const MyPage = () => {
                   stacks={""}
                   languages={pot.potLan}
                   key={pot.potId}
-                  {...pot}
                 />
               ))}
         </div>
