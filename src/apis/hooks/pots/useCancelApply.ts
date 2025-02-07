@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query"
-import { CancelApply } from "apis/potAPI"
+import { DeletePotApplications } from "apis/potAPI"
 
 const useCancelApply = () => {
     return useMutation({
-        mutationFn: (potId: number) => CancelApply(potId),
+        mutationFn: (potId: number) => DeletePotApplications(potId),
     })
 }
 export default useCancelApply;

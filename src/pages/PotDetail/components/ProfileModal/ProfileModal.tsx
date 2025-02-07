@@ -2,10 +2,11 @@ import { ExplainModal } from "@components/index";
 import { container, profileStyle, nicknameStyle } from "./ProfileModal.style";
 import { roleImages } from "@constants/roleImage";
 import useApplyPot from "apis/hooks/pots/useApplyPot";
+import { Role } from "types/role";
 
 interface ProfileModalProps {
     type: "apply" | "member"
-    potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+    potRole: Role;
     nickname: string;
     potId?: number;
     onButtonClick?: () => void;

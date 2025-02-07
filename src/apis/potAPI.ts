@@ -1,8 +1,8 @@
 import { apiGet, authApiDelete, authApiGet, authApiPost } from "./apiUtils";
-import { GetPotsParams, PotsResponse, CreatePotParams, CreatePotResponse, PotDetailResponse, Member, PotMemberInfo, ApplyPotBody, StartPotBody, StartPotResponse } from "./types/pot";
+import { GetPotsParams, PotsResponse, PostPotParams, PostPotResponse, GetPotDetailResponse, GetPotApplicationResponse, GetPotMemberResponse, PostPotApplicationBody, PostPotMembersBody, PostPotMemersResponse } from "./types/pot";
 
-export const CreatePot = async (createPotParams: CreatePotParams) => {
-  return authApiPost<CreatePotResponse>("/pots", createPotParams);
+export const PostPot = async (postPotParams: PostPotParams) => {
+  return authApiPost<PostPotResponse>("/pots", postPotParams);
 };
 
 export const GetPots = async ({ page, size }: GetPotsParams) => {
@@ -10,25 +10,25 @@ export const GetPots = async ({ page, size }: GetPotsParams) => {
 };
 
 export const GetPotDetail = async (potId: number) => {
-  return authApiGet<PotDetailResponse>(`/pots/${potId}/details`);
+  return authApiGet<GetPotDetailResponse>(`/pots/${potId}/details`);
 };
 
-export const GetPotApplicants = async (potId: number) => {
-  return authApiGet<Member[]>(`/pots/${potId}/applications`);
+export const GetPotApplications = async (potId: number) => {
+  return authApiGet<GetPotApplicationResponse[]>(`/pots/${potId}/applications`);
 };
 
-export const GetPotMemberInformation = async (potId: number) => {
-  return authApiGet<PotMemberInfo[]>(`/pots/${potId}/members`);
+export const GetPotMembers = async (potId: number) => {
+  return authApiGet<GetPotMemberResponse[]>(`/pots/${potId}/members`);
 };
 
-export const ApplyPot = async (potId: number, body: ApplyPotBody) => {
-  return authApiPost<Member>(`pots/${potId}/applications`, body);
+export const PostPotApplications = async (potId: number, body: PostPotApplicationBody) => {
+  return authApiPost<GetPotApplicationResponse>(`pots/${potId}/applications`, body);
 };
 
-export const StartPot = async (potId: number, body: StartPotBody) => {
-  return authApiPost<StartPotResponse>(`/pots/${potId}/members`, body);
+export const PostPotMembers = async (potId: number, body: PostPotMembersBody) => {
+  return authApiPost<PostPotMemersResponse>(`/pots/${potId}/members`, body);
 };
 
-export const CancelApply = async (potId: number) => {
+export const DeletePotApplications = async (potId: number) => {
   return authApiDelete(`/pots/${potId}/applications`);
 }

@@ -1,0 +1,1 @@
+export type PotStatus = "RECRUITING" | "ONGOING" | "COMPLETED";

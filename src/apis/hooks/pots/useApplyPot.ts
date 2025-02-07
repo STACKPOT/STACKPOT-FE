@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query"
-import { ApplyPot } from "apis/potAPI"
-import { ApplyPotParams } from "apis/types/pot"
+import { PostPotApplications } from "apis/potAPI"
+import { PostPotApplicationParams } from "apis/types/pot"
 
 const useApplyPot = () => {
     return useMutation({
-        mutationFn: ({ potId, body }: ApplyPotParams) => ApplyPot(potId, body),
+        mutationFn: ({ potId, body }: PostPotApplicationParams) => PostPotApplications(potId, body),
     })
 }
 export default useApplyPot;

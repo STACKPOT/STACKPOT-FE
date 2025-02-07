@@ -1,12 +1,12 @@
 import { Badge, ExplainModal } from "@components/index";
 import { memberContainer, memberListContainer, nicknameStyle, profileStyle, stackNicknameContainer } from "./StartPotModal.style";
-import { Member } from "apis/types/pot";
+import { GetPotApplicationResponse } from "apis/types/pot";
 import { roleImages } from "@constants/roleImage";
 import useStartPot from "apis/hooks/pots/useStartPot";
 
 interface StartPotModalProps {
     potId: number;
-    selectedApplicants: Member[];
+    selectedApplicants: GetPotApplicationResponse[];
     onStartPotSuccess: () => void;
     onCancelModal: () => void;
 }

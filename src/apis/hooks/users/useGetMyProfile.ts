@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { getMyProfile } from "apis/userAPI"
+import { GetMyUser } from "apis/userAPI"
 
 const useGetMyProfile = () => {
     return useQuery({
         queryKey: ["myProfile"],
-        queryFn: () => getMyProfile(),
+        queryFn: () => GetMyUser(),
         select: (data) => data.result,
     })
 }

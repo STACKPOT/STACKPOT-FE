@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
-import { GetPotMemberInformation } from "apis/potAPI"
+import { GetPotMembers } from "apis/potAPI"
 
 const useGetPotMembers = (potId: number) => {
     return useQuery({
         queryKey: ["applicants", potId],
-        queryFn: () => GetPotMemberInformation(potId),
+        queryFn: () => GetPotMembers(potId),
         select: (data) => data.result,
     });
 };

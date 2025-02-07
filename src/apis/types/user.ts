@@ -10,11 +10,11 @@ export interface TokenServiceResponse {
   refreshToken: string;
 }
 
-export interface UserResponse {
+export interface GetUserResponse {
   id: number;
   email: string;
   nickname: string;
-  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  role: Role;
   interest: string;
   userTemperature: number;
   kakaoId: string;

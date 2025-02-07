@@ -1,23 +1,25 @@
+import { Participation } from "types/participation";
+import { PotStatus } from "types/potStatus";
 import { Role } from "types/role";
-export interface CreatePotParams {
+export interface PostPotParams {
   potName: string;
   potStartDate: string;
   potEndDate?: string;
   potDuration: string;
   potLan: string;
   potContent: string;
-  potStatus?: "RECRUITING" | "ONGOING" | "COMPLETED";
-  potModeOfOperation: "ONLINE" | "OFFLINE" | "HYBRID";
+  potStatus?: PotStatus;
+  potModeOfOperation: Participation;
   potSummary?: string;
   recruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetail[];
 }
 
 export interface RecruitmentDetail {
-  recruitmentRole: "FRONTEND" | "BACKEND" | "DESIGN" | "PLANNING";
+  recruitmentRole: Role;
   recruitmentCount: number;
 }
-export interface CreatePotResponse {
+export interface PostPotResponse {
   potId: number;
   potName: string;
   potStartDate: string;
@@ -25,15 +27,15 @@ export interface CreatePotResponse {
   potDuration: string;
   potLan: string;
   potContent: string;
-  potStatus: "RECRUITING" | "ONGOING" | "COMPLETED";
-  potModeOfOperation: "ONLINE" | "OFFLINE" | "HYBRID";
+  potStatus?: PotStatus;
+  potModeOfOperation: Participation;
   potSummary: string;
   recruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetailResponse;
 }
 export interface RecruitmentDetailResponse {
   recruitmentId: number;
-  recruitmentRole: "FRONTEND" | "BACKEND" | "DESIGN" | "PLANNING";
+  recruitmentRole: Role;
   recruitmentCount: number;
 }
 
@@ -59,59 +61,59 @@ interface Pots {
   dday: string;
 }
 
-export interface PotDetailResponse {
+export interface GetPotDetailResponse {
   potDetail: PotDetail;
-  applicants: Member[];
+  applicants: GetPotApplicationResponse[];
 }
-export interface PotDetail {
+interface PotDetail {
   userId: number;
-  userRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  userRole: Role;
   userNickname: string;
   potId: number;
   potName: string;
   potStartDate: string;
   potDuration: string;
   potLan: string;
-  potStatus: "RECRUITING" | "ONGOING" | "COMPLETED";
+  potStatus?: PotStatus;
   applied: boolean;
-  potModeOfOperation: "ONLINE" | "OFFLINE" | "HYBRID";
+  potModeOfOperation: Participation;
   potContent: string;
   recruitmentDetails: string;
   owner: boolean;
   dday: string;
 }
-export interface Member {
-  potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+export interface GetPotApplicationResponse {
+  potRole: Role;
   status: string;
   userId: number;
   userNickname: string;
 }
-export interface PotMemberInfo {
+export interface GetPotMemberResponse {
   nickname: string;
   kakaoId: string;
-  potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  potRole: Role;
   owner: boolean;
 }
-export interface ApplyPotParams {
+export interface PostPotApplicationParams {
   potId: number;
-  body: ApplyPotBody;
+  body: PostPotApplicationBody;
 }
-export interface ApplyPotBody {
-  potRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+export interface PostPotApplicationBody {
+  potRole: Role;
 }
 
-export interface StartPotParams {
+export interface PostPotMembersParams {
   potId: number;
-  body: StartPotBody;
+  body: PostPotMembersBody;
 }
-export interface StartPotBody {
+export interface PostPotMembersBody {
   applicantIds: number[];
 }
-export interface StartPotResponse {
+export interface PostPotMemersResponse {
   potMemberId: number;
   potId: number;
   userId: number;
-  roleName: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  roleName: Role;
   kakaoId: string;
   nickname: string;
   appealContent: string;
