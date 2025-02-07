@@ -2,7 +2,7 @@ import { apiGet, authApiDelete, authApiGet, authApiPost } from "./apiUtils";
 import { GetPotsParams, PotsResponse, CreatePotParams, CreatePotResponse, PotDetailResponse, Member, PotMemberInfo, ApplyPotBody, StartPotBody, StartPotResponse } from "./types/pot";
 
 export const CreatePot = async (createPotParams: CreatePotParams) => {
-  return authApiPost<CreatePotResponse>("pots", createPotParams);
+  return authApiPost<CreatePotResponse>("/pots", createPotParams);
 };
 
 export const GetPots = async ({ page, size }: GetPotsParams) => {
@@ -10,7 +10,7 @@ export const GetPots = async ({ page, size }: GetPotsParams) => {
 };
 
 export const GetPotDetail = async (potId: number) => {
-  return authApiGet<PotDetailResponse>(`pots/${potId}/details`);
+  return authApiGet<PotDetailResponse>(`/pots/${potId}/details`);
 };
 
 export const GetPotApplicants = async (potId: number) => {

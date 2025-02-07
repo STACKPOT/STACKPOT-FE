@@ -1,3 +1,4 @@
+import { Role } from "types/role";
 export interface CreatePotParams {
   potName: string;
   potStartDate: string;
@@ -35,6 +36,7 @@ export interface RecruitmentDetailResponse {
   recruitmentRole: "FRONTEND" | "BACKEND" | "DESIGN" | "PLANNING";
   recruitmentCount: number;
 }
+
 export interface GetPotsParams {
   page: number;
   size: number;
@@ -48,7 +50,7 @@ export interface PotsResponse {
 
 interface Pots {
   userId: number;
-  userRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  userRole: Role;
   userNickname: string;
   potId: number;
   potName: string;

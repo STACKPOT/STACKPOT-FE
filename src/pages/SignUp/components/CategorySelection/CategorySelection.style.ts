@@ -1,10 +1,10 @@
 import { css } from "@emotion/react"
 import theme from "@styles/theme"
 
-export const container = (type: "stack" | "interest") => css`
+export const container = (type: "role" | "interest") => css`
     display: flex;
     align-items: center;
-    gap: ${(type === "stack" && "3.6rem") || "2rem"};
+    gap: ${(type === "role" && "3.6rem") || "2rem"};
 `
 export const titleStyle = css`
     ${theme.font.caption3}
