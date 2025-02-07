@@ -1,34 +1,47 @@
 import { useState, useEffect } from "react";
 import { usePatchTodo } from "apis/hooks/myPots/usePatchTodo";
 import { GetTodos } from "apis/myPotAPI";
-import { CloseIcon, DeleteIcon, TodoCheckIcon, TodoPlusButtonIcon } from "@assets/svgs"; 
-import { buttonContainer, buttonStyle, buttonTextStyle, container, innerContainer, titleContainer, titleTextStyle, cancelIconStyle, todoContainer, eachTodoContainer, saveButtonStyle } from "./MyTodoModal.style"; 
-import { noTaskTextContainer, noneTodoTextStyle } from "./MyTodoModal.style";  
+import { CloseIcon, DeleteIcon, TodoCheckIcon, TodoPlusButtonIcon } from "@assets/svgs";
+import {
+  buttonContainer,
+  buttonStyle,
+  buttonTextStyle,
+  container,
+  innerContainer,
+  titleContainer,
+  titleTextStyle,
+  cancelIconStyle,
+  todoContainer,
+  eachTodoContainer,
+  saveButtonStyle,
+  noTaskTextContainer,
+  noneTodoTextStyle,
+} from "./MyTodoModal.style"; 
 import { cancelContainer } from "../AboutWorkModal/AboutWorkModal.style";
 import { inputFieldStyle } from "@pages/MyPot/components/TextInput/TextInput.style";
 
 interface MyTodoModalProps {
-  potId: number; 
-  onClose: () => void; 
+  potId: number;
+  onClose: () => void;
 }
 
 const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
-  const { patchTodoRequest } = usePatchTodo(); 
-  const [tasks, setTasks] = useState<{ todoId: number | null, content: string, status: string }[]>([]);  
-  const [loadingTasks, setLoadingTasks] = useState<boolean>(true); 
+  const { mutate: patchTodo } = usePatchTodo();
+  const [tasks, setTasks] = useState<{ todoId: number | null; content: string; status: string }[]>([]);
+  const [loadingTasks, setLoadingTasks] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchTodos = async () => {
       try {
         const response = await GetTodos(potId, 1, 3);
         if (response.isSuccess && response.result) {
-          const allTodos = response.result.todos?.[0]?.todos?.flatMap((todo) => ({
-            todoId: todo.todoId,
-            content: todo.content,
-            status: todo.status,
-          })) || [];
-    
-          setTasks(allTodos);
+          setTasks(
+            response.result.todos?.[0]?.todos?.map(todo => ({
+              todoId: todo.todoId,
+              content: todo.content,
+              status: todo.status,
+            })) || []
+          );
         }
       } catch (error) {
         console.error("API 호출 중 에러 발생", error);
@@ -36,46 +49,46 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
         setLoadingTasks(false);
       }
     };
-  
+
     fetchTodos();
   }, [potId]);
-  
-  
+
   const handleAddTask = () => {
     if (tasks.length >= 10) {
       alert("할 일은 최대 10개까지 추가할 수 있습니다.");
       return;
     }
-    setTasks([...tasks, { todoId: null, content: "", status: "NOT_STARTED" }]); 
+    setTasks([...tasks, { todoId: null, content: "", status: "NOT_STARTED" }]);
   };
 
   const handleDeleteTask = (index: number) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index); 
-    setTasks(updatedTasks);
+    setTasks(tasks.filter((_, i) => i !== index));
   };
 
   const handleTaskChange = (index: number, value: string) => {
-    const updatedTasks = [...tasks];
-    updatedTasks[index].content = value;
-    setTasks(updatedTasks);
+    setTasks(prev => {
+      const updatedTasks = [...prev];
+      updatedTasks[index].content = value;
+      return updatedTasks;
+    });
   };
 
-  const handleSaveTasks = async () => {
-    try {
-      const tasksToSend = tasks.map(task => ({
-        todoId: task.todoId || null,
-        content: task.content,
-        status: task.status || "NOT_STARTED",
-      }));
-
-      await patchTodoRequest({ potId, tasks: tasksToSend });
-
-      alert("할 일이 저장되었습니다!");
-      onClose();
-    } catch (error) {
-      console.error("저장 중 오류 발생", error);
-    }
+  const handleSaveTasks = () => {
+    patchTodo(
+      { potId, data: tasks },
+      {
+        onSuccess: () => {
+          alert("할 일이 저장되었습니다!");
+          onClose();
+        },
+        onError: (error) => {
+          console.error("저장 중 오류 발생", error);
+        },
+      }
+    );
   };
+
+  const isDisabled = tasks.some(task => task.content.trim() === "");
 
   if (loadingTasks) return <div>Loading...</div>;
 
@@ -121,8 +134,12 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
           )}
         </div>
 
-        <button css={saveButtonStyle}>
-          <div css={buttonTextStyle} onClick={handleSaveTasks}>작성 완료</div>
+        <button 
+          css={saveButtonStyle} 
+          onClick={handleSaveTasks} 
+          disabled={isDisabled} 
+        >
+          <div css={buttonTextStyle}>작성 완료</div>
         </button>
       </div>
     </div>  

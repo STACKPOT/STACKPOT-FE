@@ -111,4 +111,9 @@ export const saveButtonStyle = css`
   outline: none;
   cursor: pointer;
   font-family: inherit; 
+
+  &:disabled {
+    background: ${theme.color.object.alternative};
+    cursor: not-allowed;
+  }
 `;
