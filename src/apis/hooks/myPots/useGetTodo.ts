@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GetTodos } from "apis/getTodoAPI";
+import { GetTodos } from "apis/myPotAPI";
 import { GetTodoParams } from "apis/types/todo";
 
 const useGetTodo = ({ potId, page = 1, size = 3 }: GetTodoParams) => {

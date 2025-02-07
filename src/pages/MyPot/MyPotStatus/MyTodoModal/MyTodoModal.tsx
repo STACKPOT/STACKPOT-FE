@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { usePatchTodo } from "../../../../apis/hooks/todos/usePatchTodo";
-import { GetTodos } from "apis/getTodoAPI";
+import { usePatchTodo } from "apis/hooks/myPots/usePatchTodo";
+import { GetTodos } from "apis/myPotAPI";
 import { CloseIcon, DeleteIcon, TodoCheckIcon, TodoPlusButtonIcon } from "@assets/svgs"; 
 import { buttonContainer, buttonStyle, buttonTextStyle, container, innerContainer, titleContainer, titleTextStyle, cancelIconStyle, todoContainer, eachTodoContainer, saveButtonStyle } from "./MyTodoModal.style"; 
 import { noTaskTextContainer, noneTodoTextStyle } from "./MyTodoModal.style";  

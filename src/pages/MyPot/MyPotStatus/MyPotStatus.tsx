@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import useGetTodo from "apis/hooks/todos/useGetTodo"; 
+import useGetTodo from "apis/hooks/myPots/useGetTodo"; 
 import { MyPotIcon } from "@assets/svgs";
 import { boardStyle, potIconStyle, boardTextStyle, highlightStyle, containerStyle, gridContainerStyle, toDoGirdContainer } from "./MyPotStatus.style";
 import { MyPotTodoCard, AboutWorkModalWrapper, StatusBoard, Pagination, TodoStatusSection } from "../components/index";

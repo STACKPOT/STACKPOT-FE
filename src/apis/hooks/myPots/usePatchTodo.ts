@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { patchTodo } from "../../patchTodoAPI";
+import { patchTodo } from "apis/myPotAPI";
 import { ApiResponse } from "apis/types/response"; 
 import { Result } from "apis/types/todo"; 
 
