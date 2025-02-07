@@ -18,9 +18,15 @@ import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
+import {
+  MushroomImage,
+  OnionImage,
+  CarrotImage,
+  BroccoliImage,
+} from "@assets/images";
 
 interface PostCardProps {
-  role: Role
+  role: Role;
   nickname: string;
   createdAt: string;
   title: string;
@@ -47,6 +53,16 @@ const PostCard: React.FC<PostCardProps> = ({
     setIsLike(!isLike);
     setLikes((prev) => (isLike ? prev - 1 : prev + 1));
   };
+
+  const roleImageMap = {
+    FRONTEND: MushroomImage,
+    BACKEND: OnionImage,
+    PLANNING: CarrotImage,
+    DESIGN: BroccoliImage,
+  };
+
+  const profileImage = roleImageMap[role];
+
   const handleClickCard = () => {
     // todo: 게시글 페이지로 이동
     console.log("click card");
@@ -57,8 +73,6 @@ const PostCard: React.FC<PostCardProps> = ({
   const handleDelete = () => {
     // todo: 삭제하기 api
   };
-
-  const profileImage = roleImages[role];
 
   return (
     <div css={cardStyle} onClick={handleClickCard}>
