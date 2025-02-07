@@ -40,6 +40,18 @@ const MyPage = () => {
           >
             끓인 팟
           </p>
+          <p
+            css={tabsTextStyle(contentType === "feed")}
+            onClick={() => setContentType("feed")}
+          >
+            피드
+          </p>
+          <p
+            css={tabsTextStyle(contentType === "pot")}
+            onClick={() => setContentType("pot")}
+          >
+            끓인 팟
+          </p>
         </div>
         <div css={listContainer(contentType)}>
           {contentType === "feed"

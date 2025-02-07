@@ -19,6 +19,7 @@ import CallbackPage from "./Callback/Callback";
 import TaskDetailPage from "./MyPot/MyPotStatus/TaskDetail/TaskDetail";
 import WritingPage from "./WritePost/WritePost";
 
+import MyPotPage from "./MyPot/MyPot";
 
 export {
   HomePage,
@@ -41,4 +42,5 @@ export {
   CallbackPage,
   TaskDetailPage,
   WritingPage,
+  MyPotPage,
 };

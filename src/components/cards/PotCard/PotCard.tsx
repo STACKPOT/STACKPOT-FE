@@ -12,10 +12,11 @@ import {
 import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
 import { useNavigate } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
+import { Role } from "types/role";
 
 interface PotCardProps {
   id: number;
-  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  role: Role;
   nickname: string;
   dday: string;
   title: string;

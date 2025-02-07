@@ -8,9 +8,9 @@ import {
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
-  variant: "entry" | "action" | "landing";
+  variant?: "entry" | "action" | "landing";
   actionType?: "action" | "join";
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,6 +18,7 @@ const Button: React.FC<ButtonProps> = ({
   variant,
   actionType = "action",
   onClick,
+  disabled,
   ...props
 }) => {
   const buttonType: SerializedStyles = (() => {
@@ -38,6 +39,7 @@ const Button: React.FC<ButtonProps> = ({
       type="button"
       css={[buttonType, buttonStyle]}
       onClick={onClick}
+      disabled={disabled}
       {...props}
     >
       {children}

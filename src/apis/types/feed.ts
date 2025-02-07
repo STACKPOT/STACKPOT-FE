@@ -1,3 +1,5 @@
+import { Role } from "types/role";
+
 export interface FeedResponse {
   feeds: Feeds[];
   nextCursor: number;
@@ -6,7 +8,7 @@ export interface FeedResponse {
 interface Feeds {
   id: number;
   writer: string;
-  writerRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  writerRole: Role;
   title: string;
   content: string;
   likeCount: number;
