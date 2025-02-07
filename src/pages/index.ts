@@ -21,6 +21,7 @@ import TaskDetailPage from "./MyPot/MyPotStatus/TaskDetail/TaskDetail";
 import WritingPage from "./WritePost/WritePost";
 import EditFinishedPotPage from "./EditFinishedPot/EditFinishedPot";
 import UserPage from "./UserPage/UserPage";
+import CreateFinishedPot from "./CreateFinishedPot/CreateFinishedPot";
 
 import MyPotPage from "./MyPot/MyPot";
 
@@ -49,4 +50,5 @@ export {
   EditFinishedPotPage,
   UserPage,
   MyPotPage,
+  CreateFinishedPot,
 };

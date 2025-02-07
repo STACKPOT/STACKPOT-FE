@@ -16,6 +16,7 @@ const EditFinishedPotForm: React.FC<EditFinishedPotFormProps> = ({ type, onSubmi
     const [language, setLanguage] = useState<string>("");
     const [introduction, setIntroduction] = useState<string>("");
     const [recruitment, setRecruitment] = useState<{ roleName: string, roleNumber: number }[]>([]);
+    const [startDate, setStartDate] = useState<string>("");
 
     const handleSummary = () => {
         // todo: api 호출
@@ -23,10 +24,9 @@ const EditFinishedPotForm: React.FC<EditFinishedPotFormProps> = ({ type, onSubmi
     }
 
     const handleSubmit = () => {
-
         onSubmit({
             title: potName,
-            startDate: "",
+            startDate: startDate,
             recruits: recruitment,
             language: language,
             content: introduction
@@ -41,7 +41,7 @@ const EditFinishedPotForm: React.FC<EditFinishedPotFormProps> = ({ type, onSubmi
                     <PotIcon css={iconStyle} />
                 </div>
                 <Button variant="action" onClick={handleSubmit}>
-                    {type === "create" ? "수정 완료" : "다 끓였어요"}
+                    {type === "create" ? "다 끓였어요" : "수정 완료"}
                 </Button>
             </div>
             <form css={formContainer} >
