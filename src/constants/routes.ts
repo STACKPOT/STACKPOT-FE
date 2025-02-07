@@ -22,7 +22,7 @@ const routes = {
   potDetail: "/pot/:potId",
   callback: "/callback",
   editPost: "/edit-post/:postId",
-  editFinishedPot: "/edit-finished-pot/:potId",
+  editFinishedPot: "/finished-pot/edit/:potId",
   userProfile: "/user/:userId",
   createFinishedPot: "/create-finished-pot",
 } as const;
