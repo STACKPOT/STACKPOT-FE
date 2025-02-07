@@ -8,16 +8,11 @@ import {
   tabsTextStyle,
 } from "./MyPage.style";
 import { MyPageProfile } from "./components";
-import postCardsData from "mocks/postCardsData";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
-import { MushroomImage } from "@assets/images";
-import appliedPotsData from "mocks/appliedPotsData";
 import useGetMyPage from "apis/hooks/mypage/useGetMyPage";
 
 const MyPage = () => {
-  const [contentType, setContentType] = useState<"feed" | "pot">("feed");
-  const [posts, setPosts] = useState(postCardsData);
-  const [finishedPots, setFinishedPots] = useState(appliedPotsData);
+  const [contentType, setContentType] = useState<"feed" | "pot">("pot");
 
   const { data } = useGetMyPage({
     dataType: contentType,
@@ -29,12 +24,7 @@ const MyPage = () => {
 
   return (
     <main css={container}>
-      <MyPageProfile
-        profileImage={MushroomImage}
-        nickname="아아 마시는 버섯"
-        introduction="개발전공 대학생입니다"
-        temperature={65}
-      />
+      <MyPageProfile />
       <div css={dividerStyle} />
       <div css={bodyContainer}>
         <div css={tabsContainer}>
@@ -67,7 +57,7 @@ const MyPage = () => {
                   id={pot.potId}
                   title={pot.potName}
                   startDate={pot.potStartDate}
-                  period={pot.potEndDate}
+                  period={"pot.potEndDate"}
                   method={""}
                   stacks={""}
                   languages={pot.potLan}
