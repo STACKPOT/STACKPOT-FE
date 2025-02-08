@@ -12,7 +12,11 @@ export const globalStyles = css`
     box-sizing: border-box;
   }
 
-  button,
+  button {
+    border: none;
+    cursor: pointer;
+  }
+
   input,
   textarea,
   select {

@@ -19,10 +19,14 @@ import {
   MyPotMainPage,
   MyPotStatusPage,
   MyPotCalendarPage,
+  EditPostPage,
   TaskDetailPage,
   WritingPage,
+  EditFinishedPotPage,
+  UserPage,
   MyPotPage,
   CallbackPage,
+  CreateFinishedPot,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -99,6 +103,22 @@ const router = createBrowserRouter([
       {
         path: routes.myPot.base,
         element: <MyPotPage />,
+      },
+      {
+        path: routes.editPost,
+        element: <EditPostPage />
+      },
+      {
+        path: routes.editFinishedPot,
+        element: <EditFinishedPotPage />
+      },
+      {
+        path: routes.userProfile,
+        element: <UserPage />
+      },
+      {
+        path: routes.createFinishedPot,
+        element: <CreateFinishedPot />
       },
     ],
   },
