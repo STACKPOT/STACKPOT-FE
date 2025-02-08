@@ -21,3 +21,19 @@ interface Pots {
   recruitmentRoles: string[];
   dday: string;
 }
+
+export interface GetPotsApplyResponse {
+  userId: number;
+  userRole: Role;
+  userNickname: string;
+  potId: number;
+  potStatus: "RECRUITING" | "ONGOING" | "COMPLETED";
+  potName: string;
+  potStartDate: string;
+  potDuration: string;
+  potLan: string;
+  potModeOfOperation: string;
+  potContent: string;
+  recruitmentDetails: string;
+  dday: string;
+}
