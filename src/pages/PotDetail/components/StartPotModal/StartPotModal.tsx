@@ -11,9 +11,8 @@ interface StartPotModalProps {
     onCancelModal: () => void;
 }
 const StartPotModal: React.FC<StartPotModalProps> = ({ potId, selectedApplicants, onStartPotSuccess, onCancelModal }: StartPotModalProps) => {
-    const { mutate } = useStartPot();
+    const { mutate, isPending } = useStartPot();
     const handleStartPot = () => {
-        // todo: 팟 시작하기 api
         mutate(
             {
                 potId: potId,
@@ -34,6 +33,7 @@ const StartPotModal: React.FC<StartPotModalProps> = ({ potId, selectedApplicants
         <ExplainModal
             title="이 멤버들로 팟을 시작할까요?"
             buttonText="팟 시작하기"
+            disabled={isPending}
             onButtonClick={handleStartPot}
             onCancel={onCancelModal}>
             <div css={memberListContainer}>
