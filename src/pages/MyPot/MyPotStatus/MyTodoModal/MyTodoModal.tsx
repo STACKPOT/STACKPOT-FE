@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { usePatchTodo } from "apis/hooks/myPots/usePatchTodo";
+import { usePatchMyTodo } from "apis/hooks/myPots/usePatchMyTodo";
 import { GetTodos } from "apis/myPotAPI";
 import { CloseIcon, DeleteIcon, TodoCheckIcon, TodoPlusButtonIcon } from "@assets/svgs";
 import {
@@ -26,7 +26,7 @@ interface MyTodoModalProps {
 }
 
 const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
-  const { mutate: patchTodo } = usePatchTodo();
+  const { mutate: patchTodo } = usePatchMyTodo();
   const [tasks, setTasks] = useState<{ todoId: number | null; content: string; status: string }[]>([]);
   const [loadingTasks, setLoadingTasks] = useState<boolean>(true);
 

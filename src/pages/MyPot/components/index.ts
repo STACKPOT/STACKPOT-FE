@@ -11,6 +11,8 @@ import StatusBoard from "./Statusboard/StatusBoard";
 import TaskCardList from "./TaskCardList/TaskCardList";
 import TodoStatusSection from "./TodoStatusSection/TodoStatusSection";
 import MyTodoModalWrapper from "./MyTodoModalWrapper/MyTodoModalWrapper";
+import MyPotStatusHeader from "./MyPotStatusHeader/MyPotStatusHeader";
+import MyPotTodoList from "./MyPotTodoList/MyPotTodoList";
 
 export {
   TextInput,
@@ -25,5 +27,7 @@ export {
   StatusBoard,
   TaskCardList,
   TodoStatusSection,
-  MyTodoModalWrapper
+  MyTodoModalWrapper,
+  MyPotStatusHeader,
+  MyPotTodoList
 }
