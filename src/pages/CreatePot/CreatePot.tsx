@@ -1,25 +1,21 @@
 import { PotIcon } from "@assets/svgs";
 import {
   buttonContainer,
-  countInputStyle,
   dividerStyle,
   formContainer,
   headContainer,
   iconStyle,
-  inputContainer,
   inputStyle,
   labelStyle,
   languageInputStyle,
   mainContainer,
-  partButtonContainer,
-  partContainer,
   partStyle,
   textareaStyle,
   titleContainer,
   titleStyle,
 } from "./CreatePot.style";
-import { Button, CategoryButton } from "@components/index";
-import { participation, participationMap, partMap, period } from "@constants/categories";
+import { Button, CategoryButton, PartRecruitment } from "@components/index";
+import { participation, participationMap, period } from "@constants/categories";
 import { DatePicker } from "./components";
 import useCreatePot from "apis/hooks/pots/useCreatePot";
 import { Dayjs } from "dayjs";
@@ -35,8 +31,7 @@ interface CreatePotFormData {
   potContent: string;
   potStartDate: string;
   recruitmentDeadline: string;
-  partNumber: { [key: string]: number };
-  visibleInputs: { [key: string]: boolean };
+  recruitmentDetails: RecruitmentDetail[];
 }
 
 const CreatePot = () => {
@@ -51,8 +46,7 @@ const CreatePot = () => {
       potContent: "",
       potStartDate: undefined,
       recruitmentDeadline: undefined,
-      partNumber: Object.fromEntries(Object.keys(partMap).map(key => [key, 0])),
-      visibleInputs: Object.fromEntries(Object.keys(partMap).map(key => [key, false])),
+      recruitmentDetails: [],
     }
   })
   const {
@@ -60,17 +54,15 @@ const CreatePot = () => {
     handleSubmit,
     watch,
     setValue,
-    getValues,
     formState: { isValid }
   } = methods;
 
-  const [potDuration, potModeOfOperation, potStartDate, recruitmentDeadline, partNumber, visibleInputs] = watch([
+  const [potDuration, potModeOfOperation, potStartDate, recruitmentDeadline] = watch([
     "potDuration",
     "potModeOfOperation",
     "potStartDate",
     "recruitmentDeadline",
-    "partNumber",
-    "visibleInputs",])
+  ])
 
   const handleStartDate = (day: Dayjs | null) => {
     if (day) {
@@ -83,34 +75,9 @@ const CreatePot = () => {
     }
   }
 
-  const handlePartClick = (partName: string) => {
-    setValue("visibleInputs", {
-      ...getValues("visibleInputs"),
-      [partName]: visibleInputs[partName] ? false : true
-    })
-  };
-  const handlePartNumber = (partName: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue("partNumber", {
-      ...getValues("partNumber"),
-      [partName]: Number(e.target.value)
-    })
-  };
-
   const onSubmit: SubmitHandler<CreatePotFormData> = (data: CreatePotFormData) => {
     if (potDuration && potModeOfOperation && potStartDate && recruitmentDeadline) {
-      let recruits: RecruitmentDetail[] = [];
-      Object.entries(partNumber).forEach((part) => {
-        if (visibleInputs[part[0]] && part[1] > 0) {
-          recruits = [
-            ...recruits,
-            { recruitmentRole: partMap[part[0]], recruitmentCount: part[1] }]
-        }
-      })
-
-      mutate({
-        ...data,
-        recruitmentDetails: recruits,
-      })
+      mutate(data)
     }
   }
 
@@ -173,25 +140,7 @@ const CreatePot = () => {
             </div>
             <div css={partStyle}>
               모집 파트
-              <div css={partContainer}>
-                {Object.keys(partMap).map((partName) => (
-                  <div key={partName} css={partButtonContainer}>
-                    <CategoryButton
-                      style={partMap[partName]}
-                      selected={visibleInputs[partName]}
-                      onClick={() => handlePartClick(partName)}
-                    >
-                      {partName}
-                    </CategoryButton>
-                    <div css={inputContainer(visibleInputs[partName])}>
-                      <input css={countInputStyle}
-                        type="number"
-                        onChange={(e) => handlePartNumber(partName, e)} />
-                      <p>명</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <PartRecruitment onChange={(recruitment) => setValue("recruitmentDetails", recruitment)} />
             </div>
             <label css={labelStyle}>
               사용 언어

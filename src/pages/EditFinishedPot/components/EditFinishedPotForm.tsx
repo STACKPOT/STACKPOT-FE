@@ -5,17 +5,19 @@ import {
 import { Button, PartRecruitment, PotButton } from "@components/index";
 import { AppealIcon, PotIcon } from "@assets/svgs";
 import { DatePicker } from "@pages/CreatePot/components";
+import { RecruitmentDetail } from "apis/types/pot";
+import { Dayjs } from "dayjs";
 
 interface EditFinishedPotFormProps {
     type: "create" | "edit";
-    onSubmit: (data: { title: string, startDate: string, recruits: { roleName: string, roleNumber: number }[], language: string, content: string }) => void;
+    onSubmit: (data: { title: string, startDate: string, recruits: RecruitmentDetail[], language: string, content: string }) => void;
 }
 
 const EditFinishedPotForm: React.FC<EditFinishedPotFormProps> = ({ type, onSubmit }: EditFinishedPotFormProps) => {
     const [potName, setPotName] = useState<string>("");
     const [language, setLanguage] = useState<string>("");
     const [introduction, setIntroduction] = useState<string>("");
-    const [recruitment, setRecruitment] = useState<{ roleName: string, roleNumber: number }[]>([]);
+    const [recruitment, setRecruitment] = useState<RecruitmentDetail[]>([]);
     const [startDate, setStartDate] = useState<string>("");
 
     const handleSummary = () => {
@@ -23,6 +25,11 @@ const EditFinishedPotForm: React.FC<EditFinishedPotFormProps> = ({ type, onSubmi
         setIntroduction("ai 요약 내용");
     }
 
+    const handleStartDate = (day: Dayjs | null) => {
+        if (day) {
+            setStartDate(day.format('YYYY-MM-DD'))
+        }
+    }
     const handleSubmit = () => {
         onSubmit({
             title: potName,
@@ -55,7 +62,7 @@ const EditFinishedPotForm: React.FC<EditFinishedPotFormProps> = ({ type, onSubmi
                 <div css={dividerStyle} />
                 <div css={labelStyle}>
                     시작 날짜
-                    <DatePicker />
+                    <DatePicker onChange={handleStartDate} />
                 </div>
                 <div css={partStyle}>
                     팀 구성
@@ -63,7 +70,7 @@ const EditFinishedPotForm: React.FC<EditFinishedPotFormProps> = ({ type, onSubmi
                         initialRecruitment={recruitment}
                         onChange={setRecruitment} />
                 </div>
-                <label css={partStyle}>
+                <label css={labelStyle}>
                     사용 언어
                     <input css={[inputStyle, languageInputStyle]}
                         placeholder="사용 언어 작성"
