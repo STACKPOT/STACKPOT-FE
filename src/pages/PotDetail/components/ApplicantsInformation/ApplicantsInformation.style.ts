@@ -47,17 +47,8 @@ export const listContainer = css`
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 3.2rem;
     grid-column-gap: 1.6rem;
-    cursor: pointer;
 `
-export const buttonStyle = css`
-    height: 4.4rem;
-    border-radius: 8px;
-    border: none;
-    background-color: ${theme.color.point.hero};
-    color: white;
-    ${theme.font.bodyBold1};
-    cursor: pointer;    width: 20.7rem;
-`
+
 export const nicknameStyle = css`
     ${theme.font.caption1}
     color: ${theme.color.object.assistive};
@@ -70,6 +61,7 @@ export const applicantContainer = css`
     border-radius: 16px;
     border: 1px solid ${theme.color.object.alternative};
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
+    cursor: pointer;
 
     &:hover p {
         color: ${theme.color.base.darkgray};
@@ -82,7 +74,4 @@ export const profileStyle = css`
     height: 4rem;
     border: 1px solid ${theme.color.object.alternative};
     border-radius: 50%;
-`
-export const moreButtonStyle = css`
-    cursor: pointer;
 `

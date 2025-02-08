@@ -28,23 +28,3 @@ export const contentStyle = css`
     white-space: pre-line;
     word-break: keep-all;
 `
-export const modalBackgroundStyle = css`
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.40);
-`
-export const buttonStyle = css`
-    height: 4.4rem;
-    border-radius: 8px;
-    border: none;
-    background-color: ${theme.color.point.hero};
-    color: white;
-    ${theme.font.bodyBold1};
-    cursor: pointer;
-`

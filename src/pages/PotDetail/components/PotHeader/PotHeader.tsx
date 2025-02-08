@@ -58,7 +58,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
             <div css={container}>
                 <div css={titleContainer}>
                     <button css={backButtonStyle} onClick={() => navigate(-1)}>
-                        <LeftIcon css={backButtonIconStyle} />
+                        <LeftIcon css={backButtonIconStyle} type="button"/>
                     </button>
                     <h1 css={titleStyle}>{title}</h1>
                 </div>
