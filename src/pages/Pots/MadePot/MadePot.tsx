@@ -5,11 +5,12 @@ import { PotInformationCard } from "../components";
 import appliedPotsData from "mocks/appliedPotsData";
 import onGoingPotsData from "mocks/onGoingPotsData";
 import { FinishedPotCard, OnGoingPotCard } from "@components/index";
+import finishedPotsData from "mocks/finishedPotsData";
 
 const MadePotPage = () => {
   const [recruitingPots, setRecruitingPots] = useState(appliedPotsData);
   const [onGoingPots, setOnGoingPots] = useState(onGoingPotsData);
-  const [finishedPots, setFinishedPots] = useState(appliedPotsData);
+  const [finishedPots, setFinishedPots] = useState(finishedPotsData);
 
   const handleEditPot = (id: number) => {
     // todo: 팟 수정 페이지로 이동
@@ -40,7 +41,12 @@ const MadePotPage = () => {
         <Section title="끓인 나의 팟">
           <>
             {finishedPots.map((pot) => (
-              <FinishedPotCard key={pot.id} {...pot} />
+              <FinishedPotCard
+                key={pot.id}
+                {...pot}
+                isMyPage={true}
+                buttonType="edit"
+              />
             ))}
           </>
         </Section>

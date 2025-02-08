@@ -59,12 +59,14 @@ const MyPage = () => {
                 <FinishedPotCard
                   id={pot.potId}
                   title={pot.potName}
+                  myRole={pot.userPotRole}
                   startDate={pot.potStartDate}
-                  period={"pot.potEndDate"}
-                  method={""}
                   stacks={""}
                   languages={pot.potLan}
                   key={pot.potId}
+                  endDate={pot.potEndDate}
+                  memberProfiles={[]}
+                  isMyPage={true}
                 />
               ))}
         </div>

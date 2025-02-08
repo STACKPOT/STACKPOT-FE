@@ -15,9 +15,13 @@ import CreatePotPage from "./CreatePot/CreatePot";
 import MyPotMainPage from "./MyPot/MyPotMain";
 import MyPotStatusPage from "./MyPot/MyPotStatus/MyPotStatus";
 import MyPotCalendarPage from "./MyPot/MyPotCalendar/MyPotCalendar";
+import EditPostPage from "./EditPost/EditPost";
 import CallbackPage from "./Callback/Callback";
 import TaskDetailPage from "./MyPot/MyPotStatus/TaskDetail/TaskDetail";
 import WritingPage from "./WritePost/WritePost";
+import EditFinishedPotPage from "./EditFinishedPot/EditFinishedPot";
+import UserPage from "./UserPage/UserPage";
+import CreateFinishedPot from "./CreateFinishedPot/CreateFinishedPot";
 
 import MyPotPage from "./MyPot/MyPot";
 
@@ -39,8 +43,12 @@ export {
   MyPotMainPage,
   MyPotStatusPage,
   MyPotCalendarPage,
+  EditPostPage,
   CallbackPage,
   TaskDetailPage,
   WritingPage,
+  EditFinishedPotPage,
+  UserPage,
   MyPotPage,
+  CreateFinishedPot,
 };
