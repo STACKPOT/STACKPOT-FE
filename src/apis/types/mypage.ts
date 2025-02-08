@@ -1,7 +1,9 @@
+import { Role } from "types/role";
+
 export interface MyPageResponse {
   id: number;
   nickname: string;
-  role: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  role: Role;
   userTemperature: number;
   userIntroduction: string;
   completedPots: CompletedPots[];
@@ -10,7 +12,7 @@ export interface MyPageResponse {
 interface Feeds {
   id: number;
   writer: string;
-  writerRole: "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  writerRole: Role;
   title: string;
   content: string;
   likeCount: number;

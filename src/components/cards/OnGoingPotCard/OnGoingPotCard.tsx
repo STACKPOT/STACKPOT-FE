@@ -20,6 +20,7 @@ const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({
   isMyPot,
 }: OnGoingPotCardProps) => {
   const navigate = useNavigate();
+
   const handleClickPot = (id: number) => {
     navigate(`/pot/${id}`);
   };
