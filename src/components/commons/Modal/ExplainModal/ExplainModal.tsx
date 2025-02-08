@@ -15,6 +15,7 @@ interface ExplainModalProps {
   subtitle?: string;
   children: React.ReactNode;
   buttonText: string;
+  disabled?: boolean;
   onButtonClick: () => void;
   onCancel: () => void;
 }
@@ -24,6 +25,7 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
   subtitle,
   children,
   buttonText,
+  disabled,
   onButtonClick: onClick,
   onCancel,
 }: ExplainModalProps) => {
@@ -37,7 +39,7 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
             {subtitle && <p css={subtitleStyle}>{subtitle}</p>}
             {children}
           </div>
-          <button css={buttonStyle} onClick={onClick}>
+          <button css={buttonStyle} onClick={onClick} disabled={disabled}>
             {buttonText}
           </button>
         </div>

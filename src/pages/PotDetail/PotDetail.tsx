@@ -1,5 +1,4 @@
 import { bodyContainerStyle, containerStyle, contentStyle, dividerStyle, sectionContainerStyle } from "./PotDetail.style";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ApplicantsInformation, PotHeader, ProfileInformation } from "./components";
 import { PotInformation } from "@components/index";
@@ -7,21 +6,10 @@ import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 import { roleImages } from "@constants/roleImage";
 
 const PotDetail = () => {
-    const [isApplied, setIsApplied] = useState<boolean>(false);
-    const [isMyPot, setIsMyPot] = useState<boolean>(false);
     const { potId } = useParams();
     const potIdNumber = Number(potId);
 
     const { data } = useGetPotDetail(potIdNumber);
-    useEffect(() => {
-        if (data) {
-            if (data.applicants.length > 0) {
-                setIsMyPot(true);
-            }
-            setIsMyPot(data.potDetail.owner);
-            setIsApplied(data.potDetail.applied);
-        }
-    }, [data]);
 
     return (
         <>
@@ -31,12 +19,10 @@ const PotDetail = () => {
                         <div css={sectionContainerStyle}>
                             <PotHeader
                                 title={data.potDetail.potName}
-                                isMyPot={isMyPot}
-                                isApplied={isApplied}
+                                isMyPot={data.potDetail.owner}
+                                isApplied={data.potDetail.applied}
                                 potId={potIdNumber}
-                                potStatus={data.potDetail.potStatus}
-                                onApplySuccess={() => setIsApplied(true)}
-                                onCancelApplySuccess={() => setIsApplied(false)} />
+                                potStatus={data.potDetail.potStatus} />
                             <ProfileInformation
                                 nickname={data.potDetail.userNickname || ""}
                                 profileImage={roleImages[data.potDetail.userRole]}
@@ -54,7 +40,7 @@ const PotDetail = () => {
                         </div>
                         <p css={contentStyle}>{data.potDetail.potContent}</p>
                     </div>
-                    {isMyPot && data.potDetail.potStatus !== "COMPLETED" &&
+                    {data.potDetail.owner && data.potDetail.potStatus !== "COMPLETED" &&
                         <ApplicantsInformation potId={potIdNumber} />
                     }
                 </main>}

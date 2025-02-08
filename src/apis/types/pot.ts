@@ -74,7 +74,7 @@ interface PotDetail {
   potStartDate: string;
   potDuration: string;
   potLan: string;
-  potStatus?: PotStatus;
+  potStatus: PotStatus;
   applied: boolean;
   potModeOfOperation: Participation;
   potContent: string;

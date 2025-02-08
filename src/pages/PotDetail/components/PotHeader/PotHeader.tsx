@@ -7,17 +7,16 @@ import ApplyStackModal from "../ApplyStackModal/ApplyStackModal";
 import ProfileModal from "../ProfileModal/ProfileModal";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
+import { PotStatus } from "types/potStatus";
 
 interface PotHeaderProps {
     title: string;
     isMyPot: boolean;
     isApplied: boolean;
     potId: number;
-    potStatus: "RECRUITING" | "ONGOING" | "COMPLETED";
-    onApplySuccess: () => void;
-    onCancelApplySuccess: () => void;
+    potStatus: PotStatus;
 }
-const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId, potStatus, onApplySuccess, onCancelApplySuccess }: PotHeaderProps) => {
+const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId, potStatus }: PotHeaderProps) => {
     const navigate = useNavigate();
     const { mutate: cancelApply } = useCancelApply();
 
@@ -37,12 +36,11 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         cancelApply(potId,
             {
                 onSuccess: () => {
-                    setShowCancelApplyModal(false);
-                    onCancelApplySuccess();
-                    alert("지원이 취소되었습니다");
+                    window.location.reload();
                 }
             }
         )
+        setShowCancelApplyModal(false);
     }
     const handleApplyNext = (stack: string) => {
         setSelectedApplyStack(stack);
@@ -50,7 +48,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
     }
     const handleApplyConfirm = () => {
         setSelectedApplyStack(null);
-        onApplySuccess();
+        window.location.reload();
     }
 
     const { data: myProfile } = useGetMyProfile();
