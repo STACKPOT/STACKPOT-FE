@@ -30,7 +30,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         // todo: 팟 수정 페이지로 이동
     }
     const handleFinishedPotEdit = () => {
-        // todo: 끓인 팟 수정 페이지로 이동
+        navigate(`/finished-pot/edit/${potId}`);
     }
     const handleCancelApplyModalConfirm = () => {
         cancelApply(potId,
@@ -58,7 +58,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
             <div css={container}>
                 <div css={titleContainer}>
                     <button css={backButtonStyle} onClick={() => navigate(-1)}>
-                        <LeftIcon css={backButtonIconStyle} type="button"/>
+                        <LeftIcon css={backButtonIconStyle} type="button" />
                     </button>
                     <h1 css={titleStyle}>{title}</h1>
                 </div>

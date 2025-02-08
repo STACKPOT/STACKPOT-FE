@@ -3,16 +3,19 @@ import { container, profileStyle, nicknameStyle } from "./ProfileModal.style";
 import { roleImages } from "@constants/roleImage";
 import useApplyPot from "apis/hooks/pots/useApplyPot";
 import { Role } from "types/role";
+import { useNavigate } from "react-router-dom";
 
 interface ProfileModalProps {
     type: "apply" | "member"
     potRole: Role;
     nickname: string;
     potId?: number;
+    userId?: number;
     onButtonClick?: () => void;
     onCancelModal: () => void;
 }
-const ProfileModal: React.FC<ProfileModalProps> = ({ type, potRole, nickname, potId, onButtonClick, onCancelModal }: ProfileModalProps) => {
+const ProfileModal: React.FC<ProfileModalProps> = ({ type, potRole, nickname, potId, userId, onButtonClick, onCancelModal }: ProfileModalProps) => {
+    const navigate = useNavigate();
     const { mutate, isPending } = useApplyPot();
     const handleApply = () => {
         if (potId) {
@@ -28,7 +31,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ type, potRole, nickname, po
         }
     }
     const handleMemberProfile = () => {
-        // todo: 해당 멤버 페이지로 이동
+        navigate(`/user/${userId}`);
         onCancelModal();
     }
 

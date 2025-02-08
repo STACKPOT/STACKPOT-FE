@@ -66,6 +66,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
                     type="member"
                     potRole={showProfileMember.potRole}
                     nickname={showProfileMember.userNickname}
+                    userId={showProfileMember.userId}
                     onCancelModal={() => setShowProfileMember(null)} />
             }
             {showStartModal &&
