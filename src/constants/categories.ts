@@ -3,7 +3,7 @@ export const period = [
   "단기-1개월",
   "단기-2개월",
   "단기-3개월",
-  "단기-6개월 이상",
+  "장기-6개월 이상",
 ] as const;
 
 export const partMap: {

@@ -112,6 +112,11 @@ export const countInputStyle = css`
   width: 4.7rem;
   padding: 0.8rem;
   text-align: center;
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
   &:focus {
     border: 1px solid ${theme.color.point.hero};
     outline: none;
