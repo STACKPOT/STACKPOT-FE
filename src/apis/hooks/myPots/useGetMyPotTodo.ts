@@ -10,7 +10,7 @@ const defaultResult: Result = {
   totalElements: 0,
 };
 
-const useGetMyPotTodo = ({ potId, page = 1, size = 3 }: GetTodoParams) => {
+const useGetMyPotTodo = ({ potId, page, size }: GetTodoParams) => {
   return useQuery({
     queryKey: ["todos", potId, page, size],
     queryFn: async () => {
