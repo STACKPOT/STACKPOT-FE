@@ -1,5 +1,5 @@
 import { apiGet, authApiDelete, authApiGet, authApiPost } from "./apiUtils";
-import { GetPotsParams, PotsResponse, PostPotParams, PostPotResponse, GetPotDetailResponse, GetPotApplicationResponse, GetPotMemberResponse, PostPotApplicationBody, PostPotMembersBody, PostPotMemersResponse, GetPotsApplyResponse } from "./types/pot";
+import { GetPotsParams, PotsResponse, PostPotParams, PostPotResponse, GetPotDetailResponse, GetPotApplicationResponse, GetPotMemberResponse, PostPotApplicationBody, PostPotMembersBody, PostPotMemersResponse, GetPotsApplyResponse, GetPotsRecruitingResponse } from "./types/pot";
 
 export const PostPot = async (postPotParams: PostPotParams) => {
   return authApiPost<PostPotResponse>("/pots", postPotParams);
@@ -34,4 +34,8 @@ export const PostPotMembers = async (potId: number, body: PostPotMembersBody) =>
 
 export const DeletePotApplications = async (potId: number) => {
   return authApiDelete(`/pots/${potId}/applications`);
+}
+
+export const GetPotsRecruiting = async () => {
+  return authApiGet<GetPotsRecruitingResponse[]>(`/pots/recruiting`);
 }

@@ -124,3 +124,10 @@ export interface PostPotMemersResponse {
   nickname: string;
   appealContent: string;
 }
+
+export interface GetPotsRecruitingResponse {
+  potId: number;
+  potName: string;
+  members: Record<Role, number>;
+  dday: string;
+}

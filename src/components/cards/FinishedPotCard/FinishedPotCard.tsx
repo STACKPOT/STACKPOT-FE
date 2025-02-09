@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { AppealModal, PotSummaryModal } from "@pages/MyPage/components";
 import { Role } from "types/role";
+import routes from "@constants/routes";
 
 interface FinishedPotCardProps {
     id: number;
@@ -42,7 +43,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, st
     }
     const handleEditPot = (id: number) => {
         if (buttonType === "edit") {
-            navigate(`/edit-finished-pot/${id}`);
+            navigate(routes.editFinishedPot.replace(":potId", id.toString()));
         } else {
             setAppealModal(id)
         }

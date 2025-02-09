@@ -1,42 +1,26 @@
 import { useState } from "react";
-import { Section } from "./components"
+import { RecruitingMyPotCard, Section } from "./components"
 import { container } from "./MadePot.style"
-import { PotInformationCard } from "../components";
-import appliedPotsData from "mocks/appliedPotsData";
-import onGoingPotsData from "mocks/onGoingPotsData";
-import { FinishedPotCard, OnGoingPotCard } from "@components/index";
+import { FinishedPotCard } from "@components/index";
 import finishedPotsData from "mocks/finishedPotsData";
-
+import useGetPotsRecruiting from "apis/hooks/pots/useGetPotsRecruiting";
+import { Role } from "types/role";
 
 const MadePotPage = () => {
-  const [recruitingPots, setRecruitingPots] = useState(appliedPotsData);
-  const [onGoingPots, setOnGoingPots] = useState(onGoingPotsData);
   const [finishedPots, setFinishedPots] = useState(finishedPotsData);
 
-  const handleEditPot = (id: number) => {
-    // todo: 팟 수정 페이지로 이동
-  }
+  const { data: recruitingPots } = useGetPotsRecruiting();
 
   return (
     <>
       <div css={container}>
         <Section title="모집 중인 나의 팟">
           <>
-            {recruitingPots.map((pot) =>
-              <PotInformationCard
-                key={pot.id}
+            {recruitingPots && recruitingPots.map((pot) =>
+              <RecruitingMyPotCard
+                key={pot.potId}
                 {...pot}
-                type="made"
-                onButtonClick={handleEditPot} />)}
-          </>
-        </Section>
-        <Section title="진행 중인 나의 팟">
-          <>
-            {onGoingPots.map((pot) =>
-              <OnGoingPotCard
-                key={pot.id}
-                {...pot}
-                isMyPot={true} />)}
+                members={Object.keys(pot.members) as Role[]} />)}
           </>
         </Section>
         <Section title="끓인 나의 팟">
