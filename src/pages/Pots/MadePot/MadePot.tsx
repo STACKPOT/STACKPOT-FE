@@ -21,21 +21,24 @@ const MadePotPage = () => {
                 key={pot.potId}
                 {...pot}
                 members={Object.keys(pot.members) as Role[]} />)}
+
           </>
         </Section>
         <Section title="끓인 나의 팟">
           <>
-            {finishedPots.map((pot) =>
+            {finishedPots.map((pot) => (
               <FinishedPotCard
                 key={pot.id}
                 {...pot}
                 isMyPage={true}
-                buttonType="edit" />)}
+                buttonType="edit"
+              />
+            ))}
           </>
         </Section>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default MadePotPage
+export default MadePotPage;
