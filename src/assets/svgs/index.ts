@@ -29,5 +29,8 @@ export { default as PlusButtonIcon } from "./plusButton.svg?react";
 export { default as KaKaoTalkIcon } from "./kakaoTalk.svg?react";
 export { default as DeleteIcon } from "./delteIcon.svg?react";
 export { default as TodoCheckIcon } from "./todoCheckIcon.svg?react";
-export { default as TodoPlusButtonIcon } from "./todoPlusButton.svg?react";
+export { default as TodoPlusButtonIcon } from "./todoPlusButton.svg?react"
+export { default as CreateIcon } from "./create.svg?react";
+export { default as BookIcon } from "./book.svg?react";
+export { default as AppealIcon } from "./appeal.svg?react";
 export { default as LoadingSpinnerIcon } from "./loadingSpinner.svg?react";

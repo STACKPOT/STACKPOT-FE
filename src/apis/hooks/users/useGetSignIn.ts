@@ -13,9 +13,9 @@ const useGetSignIn = () => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         if (data.result.isNewUser) {
-          navigate(routes.home);
-        } else {
           navigate(routes.signUp);
+        } else {
+          navigate(routes.home);
         }
       }
     },
