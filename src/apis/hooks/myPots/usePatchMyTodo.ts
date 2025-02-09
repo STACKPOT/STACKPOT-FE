@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { patchTodo } from "apis/myPotAPI";
 import { Todo } from "apis/types/myPot"; 
 
-export const usePatchTodo = () => {
+export const usePatchMyTodo = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
