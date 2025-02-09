@@ -1,16 +1,30 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { patchMyTodoStatus } from "apis/myPotAPI";
+import { useQuery } from "@tanstack/react-query";
+import { GetTodos } from "apis/myPotAPI";
+import { GetTodoParams, Result } from "apis/types/myPot";
 
-export const usePatchMyTodoStatus = () => {
-  const queryClient = useQueryClient();
+const defaultResult: Result = {
+  totalPages: 0,
+  potName: "",
+  todos: [],
+  currentPage: 0,
+  totalElements: 0,
+};
 
-  return useMutation({
-    mutationFn: ({ potId, todoId }: { potId: number; todoId: number }) => patchMyTodoStatus(potId, todoId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
+const useGetMyPotTodo = ({ potId, page, size }: GetTodoParams) => {
+  return useQuery({
+    queryKey: ["todos", potId, page, size],
+    queryFn: async () => {
+      const response = await GetTodos(potId, page, size);
+      return response.result ?? defaultResult;
     },
-    onError: (error) => {
-      console.error("할 일 상태 변경 실패:", error);
-    },
+    select: (result) => ({
+      title: result.potName,
+      nickname: result.todos?.[0]?.userNickname ?? "",
+      taskCount: result.todos?.[0]?.todoCount ?? 0,
+      todos: result.todos,
+      totalElements: result.totalElements,
+    }),
   });
 };
+
+export default useGetMyPotTodo;
