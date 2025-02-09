@@ -11,4 +11,5 @@ export const checkBoxStyle = css`
     border-radius: 0.6rem;
     background-color: transparent;
     cursor: pointer;
+    flex-shrink: 0;
 `
