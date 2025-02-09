@@ -4,7 +4,7 @@ import { cardStyle, nicknameStyle, plusButtonStyle, profileImageStyle, statusCon
 import { PlusButtonIcon } from "@assets/svgs";
 import { MushroomImage } from "@assets/images";
 import MyTodoModalWrapper from "../MyTodoModalWrapper/MyTodoModalWrapper";
-import { Todo } from "apis/types/todo";
+import { Todo } from "apis/types/myPot";
 import { CheckBox } from "@components/index";
 
 interface MyPotTodoCardProps {
