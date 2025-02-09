@@ -4,16 +4,22 @@ import { useState } from "react"
 import { PotInformationCard } from "../components";
 import Modal from "@components/commons/Modal/Modal";
 import useGetPotsApply from "apis/hooks/pots/useGetPotApply";
+import useCancelApply from "apis/hooks/pots/useCancelApply";
 
 
 const AppliedPotPage = () => {
   const [cancelApplyPotId, setCancelApplyPotId] = useState<number | null>(null);
 
   const { data: pots } = useGetPotsApply();
+  const { mutate } = useCancelApply();
 
   const handleCancelApplyConfirm = (potId: number) => {
-    // todo: 팟 지원 취소하기 api 호출
-    setCancelApplyPotId(null);
+    mutate(potId, {
+      onSuccess: () => {
+        setCancelApplyPotId(null);
+        window.location.reload();
+      }
+    })
   }
 
   return (
