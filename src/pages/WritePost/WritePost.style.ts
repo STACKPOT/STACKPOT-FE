@@ -13,7 +13,7 @@ export const toastStyle = css`
   left: 50%;
 `;
 
-export const content = css`
+export const contentStyle = css`
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
