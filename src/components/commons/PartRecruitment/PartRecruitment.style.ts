@@ -5,7 +5,6 @@ export const partContainer = css`
   display: grid;
   grid-template-columns: repeat(2, auto);
   gap: 1.6rem 1.2rem;
-  margin-left: 4.4rem;
 `;
 
 export const partButtonContainer = css`

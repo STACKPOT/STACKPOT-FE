@@ -60,7 +60,11 @@ export const buttonStyle = css`
   background-color: ${theme.color.point.hero};
   border-radius: 1.6rem;
   border: 1px solid ${theme.color.border.normal};
-  cursor: pointer;
+  &:disabled {
+    background-color: ${theme.color.object.alternative};
+    cursor: not-allowed;
+    color: ${theme.color.interactive.inactive};
+  }
 `;
 export const textStyle = css`
   ${theme.font.caption3};
