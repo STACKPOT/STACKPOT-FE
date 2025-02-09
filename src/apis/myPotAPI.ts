@@ -11,3 +11,7 @@ export const patchTodo = async ({ potId, data }: { potId: number; data: { todoId
   : Promise<ApiResponse<Result>> => {
   return authApiPatch<Result>(`/my-pots/${potId}/todos`, data);
 };
+
+export const patchMyTodoStatus = async (potId: number, todoId: number) => {
+  return authApiPatch(`/my-pots/${potId}/todos/${todoId}`, { status: "COMPLETED" });
+};
