@@ -25,3 +25,14 @@ export interface GetTodoParams {
   page: number;
   size: number;
 }
+
+export interface TodoUpdateRequest {
+  potId: number;
+  data: TodoItem[];
+}
+
+export interface TodoItem {
+  todoId: number | null;
+  content: string;
+  status: string;
+}
