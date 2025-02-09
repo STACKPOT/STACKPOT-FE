@@ -41,6 +41,7 @@ export const inputStyle = css`
   margin-left: 4.4rem;
   padding: 1.2rem 1.6rem;
   ${theme.font.caption3}
+  font-family: "Pretendard";
   display: flex;
   flex-grow: 1;
   border-radius: 8px;
@@ -62,7 +63,6 @@ export const languageInputStyle = css`
 export const labelStyle = css`
   display: flex;
   color: ${theme.color.base.darkgray};
-  display: flex;
   align-items: center;
   ${theme.font.caption3}
 `;
@@ -97,41 +97,9 @@ export const textareaStyle = css`
   }
 `;
 
-export const inputContainer = (visible: boolean) => css`
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-left: 1.2rem;
-  opacity: ${visible ? 1 : 0};
-`;
-
-export const countInputStyle = css`
-  border: 1px solid ${theme.color.object.alternative};
-  border-radius: 32px;
-  width: 4.7rem;
-  padding: 0.8rem;
-  text-align: center;
-  &:focus {
-    border: 1px solid ${theme.color.point.hero};
-    outline: none;
-  }
-`;
-
-export const partContainer = css`
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 1.6rem 1.2rem;
-  margin-left: 3rem;
-`;
-
-export const partButtonContainer = css`
-  display: flex;
-  justify-content: space-between;
-`;
-
 export const partStyle = css`
   display: flex;
   color: ${theme.color.base.darkgray};
-  display: flex;
-  ${theme.font.caption3}
+  ${theme.font.caption3};
+  gap: 3rem;
 `;

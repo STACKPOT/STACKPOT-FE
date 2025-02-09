@@ -58,11 +58,6 @@ export const buttonContainer = css`
 export const buttonTextStyle = css`
   ${theme.font.caption2}
   color: ${theme.color.base.white};
-  font-family: inherit; 
-  border: none;
-  outline: none;
-  background-color: inherit;
-  cursor: pointer;
 `;
 
 export const eachTodoContainer = css`
@@ -107,7 +102,18 @@ export const noneTodoTextStyle = css`
 `;
 
 export const saveButtonStyle = css`
+  align-items: center;
+  width: 100%;
   background: ${theme.color.point.hero};
   padding: 1.6rem 3.2rem;
   border-radius: 24px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit; 
+
+  &:disabled {
+    background: ${theme.color.object.alternative};
+    cursor: not-allowed;
+  }
 `;

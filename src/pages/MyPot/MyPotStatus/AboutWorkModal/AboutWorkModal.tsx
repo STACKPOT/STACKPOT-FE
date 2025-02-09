@@ -7,13 +7,13 @@ import { TaskStatus } from "../../../../types/taskStatus";
 
 interface AboutWorkModalProps {
   onClose: () => void;
-  onSave: (status: TaskStatus | null) => void;
-  activeStatus: TaskStatus | null;
+  onSave: (status: TaskStatus) => void;
+  activeStatus: TaskStatus;
   title: string;
 }
 
 const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, onSave, activeStatus, title }) => {
-  const [selectedStatus, setSelectedStatus] = useState<TaskStatus | null>(activeStatus);
+  const [selectedStatus, setSelectedStatus] = useState<TaskStatus>(activeStatus);
 
   const handleSave = () => {
     onSave(selectedStatus);

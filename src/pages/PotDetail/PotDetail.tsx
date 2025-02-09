@@ -1,49 +1,50 @@
 import { bodyContainerStyle, containerStyle, contentStyle, dividerStyle, sectionContainerStyle } from "./PotDetail.style";
-import { MushroomImage } from "@assets/images";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { ApplicantsInformation, PotHeader, ProfileInformation } from "./components";
 import { PotInformation } from "@components/index";
+import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
+import { roleImages } from "@constants/roleImage";
 
 const PotDetail = () => {
-    const [isApplied, setIsApplied] = useState<boolean>(false);
-    const [isMyPot, setIsMyPot] = useState<boolean>(false);
-    const [isFinished, setIsFinished] = useState<boolean>(false);
     const { potId } = useParams();
     const potIdNumber = Number(potId);
 
+    const { data } = useGetPotDetail(potIdNumber);
+
     return (
-        <main css={containerStyle}>
-            <div css={bodyContainerStyle}>
-                <div css={sectionContainerStyle}>
-                    <PotHeader
-                        title="제목을 길게 작성할 경우에는 이렇게 돼요 두줄은 이렇게 보여요"
-                        isMyPot={isMyPot}
-                        isApplied={isApplied}
-                        isFinished={isFinished}
-                        onApplySuccess={() => setIsApplied(true)}
-                        onCancelApplySuccess={() => setIsApplied(false)} />
-                    <ProfileInformation
-                        nickname="아아 마시는 버섯"
-                        profileImage={MushroomImage}
-                        dday={5} />
-                    <div css={dividerStyle} />
-                </div>
-                <div css={sectionContainerStyle}>
-                    <PotInformation
-                        startDate="2025.2.18"
-                        period="단기/3개월"
-                        method="온라인"
-                        stacks="프론트엔드(2), 디자이너(3)"
-                        languages="React, Javascripts" />
-                    <div css={dividerStyle} />
-                </div>
-                <p css={contentStyle}>{`본문 내용입니다\n본문 내용입니다\n본문 내용입니다`}</p>
-            </div>
-            {isMyPot && !isFinished &&
-                <ApplicantsInformation />
-            }
-        </main>
+        <>
+            {data &&
+                <main css={containerStyle}>
+                    <div css={bodyContainerStyle}>
+                        <div css={sectionContainerStyle}>
+                            <PotHeader
+                                title={data.potDetail.potName}
+                                isMyPot={data.potDetail.owner}
+                                isApplied={data.potDetail.applied}
+                                potId={potIdNumber}
+                                potStatus={data.potDetail.potStatus} />
+                            <ProfileInformation
+                                nickname={data.potDetail.userNickname || ""}
+                                profileImage={roleImages[data.potDetail.userRole]}
+                                dday={data.potDetail.dday} />
+                            <div css={dividerStyle} />
+                        </div>
+                        <div css={sectionContainerStyle}>
+                            <PotInformation
+                                startDate={data.potDetail.potStartDate}
+                                period={data.potDetail.potDuration}
+                                method={data.potDetail.potModeOfOperation}
+                                stacks={data.potDetail.recruitmentDetails}
+                                languages={data.potDetail.potLan} />
+                            <div css={dividerStyle} />
+                        </div>
+                        <p css={contentStyle}>{data.potDetail.potContent}</p>
+                    </div>
+                    {data.potDetail.owner && data.potDetail.potStatus !== "COMPLETED" &&
+                        <ApplicantsInformation potId={potIdNumber} />
+                    }
+                </main>}
+        </>
     )
 }
 

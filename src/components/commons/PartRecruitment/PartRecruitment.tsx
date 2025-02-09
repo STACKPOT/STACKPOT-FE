@@ -2,10 +2,11 @@ import { partMap } from "@constants/categories";
 import { countInputStyle, inputContainer, partButtonContainer, partContainer } from "./PartRecruitment.style";
 import CategoryButton from "../Badge/CategoryButton/CategoryButton";
 import { useEffect, useState } from "react";
+import { RecruitmentDetail } from "apis/types/pot";
 
 interface PartRecruitmentProps {
-    initialRecruitment?: { roleName: string, roleNumber: number }[];
-    onChange: (recruitmentData: { roleName: string, roleNumber: number }[]) => void;
+    initialRecruitment?: RecruitmentDetail[];
+    onChange: (recruitmentData: RecruitmentDetail[]) => void;
 }
 
 const PartRecruitment: React.FC<PartRecruitmentProps> = ({ initialRecruitment, onChange }: PartRecruitmentProps) => {
@@ -38,20 +39,20 @@ const PartRecruitment: React.FC<PartRecruitmentProps> = ({ initialRecruitment, o
         initialRecruitment?.forEach(part =>
             setRecruitment((prev) => ({
                 ...prev,
-                [part.roleName]: part.roleNumber
+                [part.recruitmentRole]: part.recruitmentCount
             }))
         );
     }, [initialRecruitment]);
 
     useEffect(() => {
-        let recruitmentData: { roleName: string, roleNumber: number }[] = [];
+        let recruitmentData: RecruitmentDetail[] = [];
         Object.entries(recruitment).forEach((part) => {
             if (visibleInputs[part[0]] && part[1] > 0) {
-                recruitmentData = [...recruitmentData, { roleName: partMap[part[0]], roleNumber: part[1] }]
+                recruitmentData = [...recruitmentData, { recruitmentRole: partMap[part[0]], recruitmentCount: part[1] }]
             }
         });
         onChange(recruitmentData)
-    }, [recruitment]);
+    }, [recruitment, visibleInputs]);
 
     return (
         <div css={partContainer}>

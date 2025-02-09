@@ -2,16 +2,20 @@ import { PotIcon } from "@assets/svgs";
 import { container, descriptionStyle, titleBlueStyle, titleButtonContainer, titleContainer, titleIconStyle, titleStyle, headerContainer, listContainer, applicantContainer, profileStyle, nicknameStyle, dividerStyle } from "./ApplicantsInformation.style"
 import { Button, CheckBox } from "@components/index";
 import { useState } from "react";
-import memberListData from "mocks/memberListData";
 import ProfileModal from "../ProfileModal/ProfileModal";
 import MemberKakaoIdModal from "../MemberKakaoIdModal/MemberKakaoIdModal";
 import StartPotModal from "../StartPotModal/StartPotModal";
+import useGetPotApplicants from "apis/hooks/pots/useGetPotApplicants";
+import { roleImages } from "@constants/roleImage";
+import { GetPotApplicationResponse } from "apis/types/pot";
 
+interface ApplicantsInformationProps {
+    potId: number;
+}
 
-const ApplicantsInformation = () => {
-    const [applicants, setApplicants] = useState<{ id: number; profileImage: string; nickname: string, stack: string, kakaoId: string }[]>(memberListData);
-    const [selectedApplicants, setSelectedApplicants] = useState<typeof applicants>([]);
-    const [showProfileMember, setShowProfileMember] = useState<{ id: number; profileImage: string; nickname: string } | null>(null);
+const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
+    const [selectedApplicants, setSelectedApplicants] = useState<GetPotApplicationResponse[]>([]);
+    const [showProfileMember, setShowProfileMember] = useState<GetPotApplicationResponse | null>(null);
 
     const [showStartModal, setShowStartModal] = useState<boolean>(false);
     const [showKakaoIdModal, setShowKakaoIdModal] = useState<boolean>(false);
@@ -21,17 +25,19 @@ const ApplicantsInformation = () => {
             setShowStartModal(true);
         }
     }
-    const handleSelectApplicant = (applicant: typeof applicants[0]) => {
+    const handleSelectApplicant = (applicant: GetPotApplicationResponse) => {
         if (selectedApplicants.includes(applicant)) {
-            setSelectedApplicants((prev) => prev.filter((member) => member.id !== applicant.id))
+            setSelectedApplicants((prev) => prev.filter((member) => member.userId !== applicant.userId))
         } else {
             setSelectedApplicants((prev) => [...prev, applicant])
         }
     }
 
+    const { data: applicants } = useGetPotApplicants(potId);
+
     return (
         <>
-            {applicants.length > 0 ?
+            {applicants && applicants.length > 0 ?
                 <div css={container}>
                     <div css={dividerStyle} />
                     <div css={headerContainer}>
@@ -46,10 +52,10 @@ const ApplicantsInformation = () => {
                     </div>
                     <div css={listContainer}>
                         {applicants.map((applicant) =>
-                            <div key={applicant.id} css={applicantContainer} onClick={() => setShowProfileMember(applicant)}>
+                            <div key={applicant.userId} css={applicantContainer} onClick={() => setShowProfileMember(applicant)}>
                                 <CheckBox selected={selectedApplicants.includes(applicant)} onSelect={() => handleSelectApplicant(applicant)} />
-                                <img css={profileStyle} src={applicant.profileImage} alt="profile" />
-                                <p css={nicknameStyle}>{applicant.nickname}</p>
+                                <img css={profileStyle} src={roleImages[applicant.potRole]} alt="profile" />
+                                <p css={nicknameStyle}>{applicant.userNickname}</p>
                             </div>
                         )}
                     </div>
@@ -58,19 +64,21 @@ const ApplicantsInformation = () => {
             {showProfileMember &&
                 <ProfileModal
                     type="member"
-                    profileImage={showProfileMember.profileImage}
-                    nickname={showProfileMember.nickname}
+                    potRole={showProfileMember.potRole}
+                    nickname={showProfileMember.userNickname}
+                    userId={showProfileMember.userId}
                     onCancelModal={() => setShowProfileMember(null)} />
             }
             {showStartModal &&
                 <StartPotModal
+                    potId={potId}
                     selectedApplicants={selectedApplicants}
                     onStartPotSuccess={() => setShowKakaoIdModal(true)}
                     onCancelModal={() => setShowStartModal(false)} />
             }
             {showKakaoIdModal &&
                 <MemberKakaoIdModal
-                    members={selectedApplicants}
+                    potId={potId}
                     onModalCancel={() => setShowKakaoIdModal(false)} />
             }
         </>

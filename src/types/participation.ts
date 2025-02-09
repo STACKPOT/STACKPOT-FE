@@ -1,0 +1,1 @@
+export type Participation = "ONLINE" | "OFFLINE" | "HYBRID";
