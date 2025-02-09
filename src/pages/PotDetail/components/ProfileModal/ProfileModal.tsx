@@ -4,6 +4,7 @@ import { roleImages } from "@constants/roleImage";
 import useApplyPot from "apis/hooks/pots/useApplyPot";
 import { Role } from "types/role";
 import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface ProfileModalProps {
     type: "apply" | "member"
@@ -31,8 +32,10 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ type, potRole, nickname, po
         }
     }
     const handleMemberProfile = () => {
-        navigate(`/user/${userId}`);
-        onCancelModal();
+        if (userId) {
+            navigate(routes.userProfile.replace(":userId", userId?.toString()));
+            onCancelModal();
+        }
     }
 
     return (

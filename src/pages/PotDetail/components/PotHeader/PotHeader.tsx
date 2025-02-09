@@ -8,6 +8,7 @@ import ProfileModal from "../ProfileModal/ProfileModal";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
 import { PotStatus } from "types/potStatus";
+import routes from "@constants/routes";
 
 interface PotHeaderProps {
     title: string;
@@ -30,7 +31,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         // todo: 팟 수정 페이지로 이동
     }
     const handleFinishedPotEdit = () => {
-        navigate(`/finished-pot/edit/${potId}`);
+        navigate(routes.editFinishedPot.replace(":potId", potId.toString()));
     }
     const handleCancelApplyModalConfirm = () => {
         cancelApply(potId,
