@@ -10,6 +10,8 @@ import {
 import { MyPageProfile } from "./components";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
 import useGetMyPage from "apis/hooks/mypage/useGetMyPage";
+import { roleImages } from "@constants/roleImage";
+import { Role } from "types/role";
 
 const MyPage = () => {
   const [contentType, setContentType] = useState<"feed" | "pot">("pot");
@@ -21,6 +23,21 @@ const MyPage = () => {
   if (!data) {
     return <div>데이터가 없습니다.</div>;
   }
+
+  const mapRoleToEnum = (role: string): Role => {
+    switch (role) {
+      case "프론트엔드":
+        return "FRONTEND";
+      case "백엔드":
+        return "BACKEND";
+      case "기획":
+        return "PLANNING";
+      case "디자인":
+        return "DESIGN";
+      default:
+        return "PLANNING";
+    }
+  };
 
   return (
     <main css={container}>
@@ -55,20 +72,29 @@ const MyPage = () => {
                   content={post.content}
                 />
               ))
-            : data.completedPots.map((pot) => (
-                <FinishedPotCard
-                  id={pot.potId}
-                  title={pot.potName}
-                  myRole={pot.userPotRole}
-                  startDate={pot.potStartDate}
-                  stacks={""}
-                  languages={pot.potLan}
-                  key={pot.potId}
-                  endDate={pot.potEndDate}
-                  memberProfiles={[]}
-                  isMyPage={true}
-                />
-              ))}
+            : data.completedPots.map((pot) => {
+                const memberRoles = pot.members.split(",").map((member) => {
+                  const rawRole = member.trim().split("(")[0];
+                  return mapRoleToEnum(rawRole);
+                });
+
+                return (
+                  <FinishedPotCard
+                    id={pot.potId}
+                    title={pot.potName}
+                    myRole={pot.userPotRole}
+                    startDate={pot.potStartDate}
+                    stacks={pot.members}
+                    languages={pot.potLan}
+                    key={pot.potId}
+                    memberProfiles={memberRoles.map(
+                      (role) => roleImages[role] || ""
+                    )}
+                    isMyPage={true}
+                    endDate={pot.potEndDate}
+                  />
+                );
+              })}
         </div>
       </div>
       <FloatingButton />
