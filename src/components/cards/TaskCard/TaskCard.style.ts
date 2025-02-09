@@ -53,14 +53,14 @@ export const titleTextStyle = css`
     white-space: nowrap;
 `
 export const contentTextStyle = css`
-    ${theme.font.caption2}
+    ${theme.font.caption1}
     color: ${theme.color.object.hero};
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    min-height: calc(3.6rem);
+    min-height: calc(1.4rem * 2);
 `
 
 export const dateTextStyle = css`
