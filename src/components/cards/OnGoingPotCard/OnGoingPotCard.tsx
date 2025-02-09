@@ -31,7 +31,7 @@ const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({
     <div css={container} onClick={() => handleClickPot(id)}>
       <div css={contentContainer}>
         <p css={titleStyle}>{title}</p>
-        <MemberGroup profileImageList={memberList} />
+        <MemberGroup memberRoleList={memberList} />
       </div>
       {isMyPot && (
         <div css={buttonContainer}>

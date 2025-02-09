@@ -1,55 +1,59 @@
-import { MushroomImage, OnionImage } from "@assets/images";
+import { Role } from "types/role";
 
 const appliedPotsData: {
-    id: number;
+    potId: number;
     type: "applied" | "made";
-    title: string;
-    profileImage: string;
+    potName: string;
+    role: Role;
     nickname: string;
-    dday: number;
+    dday: string;
     startDate: string;
     period: string;
     method: string;
     stacks: string;
+    members: Role[];
     languages: string;
 }[] = [
         {
-            id: 0,
+            potId: 20,
             type: "applied",
-            title: "AI 자동화 챗봇 어플 공부할 스터디원",
-            profileImage: MushroomImage,
+            potName: "AI 자동화 챗봇 어플 공부할 스터디원",
+            role: "BACKEND",
             nickname: "치킨 먹는 브로콜리",
-            dday: 5,
+            dday: "D-5",
             startDate: "2025 .2. 18",
             period: "단기/3개월",
             method: "온라인",
             stacks: "프론트엔드(2), 디자이너(1)",
+            members: ["BACKEND", "FRONTEND", "BACKEND"],
             languages: "React, Javascripts ",
         },
         {
-            id: 1,
+            potId: 1,
             type: "applied",
-            title: "AI 자동화 챗봇 어플 공부할 스터디원1",
-            profileImage: MushroomImage,
+            potName: "AI 자동화 챗봇 어플 공부할 스터디원1",
+            role: "FRONTEND",
             nickname: "치킨 먹는 브로콜리",
-            dday: 5,
+            dday: "D-5",
             startDate: "2025 .2. 18",
             period: "단기/3개월",
             method: "온라인",
             stacks: "프론트엔드(2), 디자이너(1)",
+            members: ["BACKEND", "FRONTEND", "BACKEND"],
             languages: "React, Javascripts ",
         },
         {
-            id: 2,
+            potId: 2,
             type: "applied",
-            title: "AI 자동화 챗봇 어플 공부할 스터디원2",
-            profileImage: OnionImage,
+            potName: "AI 자동화 챗봇 어플 공부할 스터디원2",
+            role: "DESIGN",
             nickname: "치킨 먹는 브로콜리",
-            dday: 5,
+            dday: "D-5",
             startDate: "2025 .2. 18",
             period: "단기/3개월",
             method: "온라인",
             stacks: "프론트엔드(2), 디자이너(1)",
+            members: ["BACKEND", "FRONTEND", "BACKEND"],
             languages: "React, Javascripts ",
         }
     ]

@@ -3,6 +3,7 @@ import { container, elementContainer, elementContentStyle, elementTitleStyle, gr
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { AppealModal, PotSummaryModal } from "@pages/MyPage/components";
+import { Role } from "types/role";
 
 interface FinishedPotCardProps {
     id: number;
@@ -12,12 +13,12 @@ interface FinishedPotCardProps {
     endDate: string;
     stacks: string;
     languages: string;
-    memberProfiles: string[];
+    members: Role[];
     isMyPage: boolean;
     buttonType?: "edit" | "appeal";
 }
 
-const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, startDate, endDate, stacks, languages, memberProfiles, isMyPage, buttonType }: FinishedPotCardProps) => {
+const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, startDate, endDate, stacks, languages, members, isMyPage, buttonType }: FinishedPotCardProps) => {
     const navigate = useNavigate();
 
     const [appealModal, setAppealModal] = useState<number | null>(null);
@@ -56,7 +57,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({ id, title, myRole, st
                         {isMyPage && <PotButton onClick={() => handleEditPot(id)}>{buttonType === "edit" ? "팟 소개 수정" : "여기서 저는요"}</PotButton>}
                     </div>
                     <div css={profileContainer}>
-                        <MemberGroup profileImageList={memberProfiles} />
+                        <MemberGroup memberRoleList={members} />
                     </div>
                 </div>
                 <div css={gridContainer}>
