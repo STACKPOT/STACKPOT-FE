@@ -62,9 +62,9 @@ export const languageInputStyle = css`
 export const labelStyle = css`
   display: flex;
   color: ${theme.color.base.darkgray};
-  display: flex;
   align-items: center;
   ${theme.font.caption3};
+  white-space: pre;
 `;
 
 export const dividerStyle = css`
@@ -91,13 +91,12 @@ export const textareaStyle = css`
   }
 `;
 
-
 export const partStyle = css`
   display: flex;
   color: ${theme.color.base.darkgray};
-  display: flex;
   ${theme.font.caption3};
   white-space: pre;
+  gap: 4.4rem;
 `;
 export const summaryButtonContainer = css`
     display: flex;

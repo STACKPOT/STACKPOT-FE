@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   container,
   contentTitle,
-  content,
+  contentStyle,
   iconStyle,
   contentBody,
   textareaStyle,
@@ -56,7 +56,7 @@ const WritePost: React.FC = () => {
         </div>
       )}
       <div css={container}>
-        <div css={content}>
+        <div css={contentStyle}>
           <div css={contentTitle}>
             피드 작성하기
             <PotIcon css={iconStyle} />

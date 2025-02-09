@@ -8,24 +8,40 @@ import {
   tabsTextStyle,
 } from "./MyPage.style";
 import { MyPageProfile } from "./components";
-import postCardsData from "mocks/postCardsData";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
-import { MushroomImage } from "@assets/images";
-import finishedPotsData from "mocks/finishedPotsData";
+import useGetMyPage from "apis/hooks/mypage/useGetMyPage";
+import { roleImages } from "@constants/roleImage";
+import { Role } from "types/role";
 
 const MyPage = () => {
-  const [contentType, setContentType] = useState<"feed" | "pot">("feed");
-  const [posts, setPosts] = useState(postCardsData);
-  const [finishedPots, setFinishedPots] = useState(finishedPotsData);
+  const [contentType, setContentType] = useState<"feed" | "pot">("pot");
+
+  const { data } = useGetMyPage({
+    dataType: contentType,
+  });
+
+  if (!data) {
+    return <div>데이터가 없습니다.</div>;
+  }
+
+  const mapRoleToEnum = (role: string): Role => {
+    switch (role) {
+      case "프론트엔드":
+        return "FRONTEND";
+      case "백엔드":
+        return "BACKEND";
+      case "기획":
+        return "PLANNING";
+      case "디자인":
+        return "DESIGN";
+      default:
+        return "PLANNING";
+    }
+  };
 
   return (
     <main css={container}>
-      <MyPageProfile
-        profileImage={MushroomImage}
-        nickname="아아 마시는 버섯"
-        introduction="개발전공 대학생입니다"
-        temperature={65}
-      />
+      <MyPageProfile />
       <div css={dividerStyle} />
       <div css={bodyContainer}>
         <div css={tabsContainer}>
@@ -44,21 +60,41 @@ const MyPage = () => {
         </div>
         <div css={listContainer(contentType)}>
           {contentType === "feed"
-            ? posts.map((post) => (
-              <PostCard
-                role={"FRONTEND"}
-                isLiked={false}
-                key={post.id}
-                {...post}
-              />
-            ))
-            : finishedPots.map((pot) => (
-              <FinishedPotCard
-                key={pot.id}
-                {...pot}
-                isMyPage={true}
-                buttonType="appeal" />
-            ))}
+            ? data.feeds.map((post) => (
+                <PostCard
+                  nickname={post.writer}
+                  role={post.writerRole}
+                  isLiked={false}
+                  likeCount={post.likeCount}
+                  key={post.id}
+                  createdAt={post.createdAt}
+                  title={post.title}
+                  content={post.content}
+                />
+              ))
+            : data.completedPots.map((pot) => {
+                const memberRoles = pot.members.split(",").map((member) => {
+                  const rawRole = member.trim().split("(")[0];
+                  return mapRoleToEnum(rawRole);
+                });
+
+                return (
+                  <FinishedPotCard
+                    id={pot.potId}
+                    title={pot.potName}
+                    myRole={pot.userPotRole}
+                    startDate={pot.potStartDate}
+                    stacks={pot.members}
+                    languages={pot.potLan}
+                    key={pot.potId}
+                    memberProfiles={memberRoles.map(
+                      (role) => roleImages[role] || ""
+                    )}
+                    isMyPage={true}
+                    endDate={pot.potEndDate}
+                  />
+                );
+              })}
         </div>
       </div>
       <FloatingButton />

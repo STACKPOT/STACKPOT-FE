@@ -20,7 +20,7 @@ import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
 
 interface PostCardProps {
-  role: Role
+  role: Role;
   nickname: string;
   createdAt: string;
   title: string;
