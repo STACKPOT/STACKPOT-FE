@@ -50,3 +50,10 @@ export const paginationItemStyle = css`
   border: 1px solid ${theme.color.border.alternative};
   font-size: 1.3rem;
 `;
+export const feedContainer = css`
+  display: grid;
+  flex-direction: column;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 4rem;
+  margin-bottom: 4rem;
+`;

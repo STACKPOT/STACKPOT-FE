@@ -23,4 +23,12 @@ export interface Content {
   potContent: string;
   recruitmentRoles: [];
   dday: string;
+
+  feedId: number;
+  creatorRole: Role;
+  title: string;
+  content: string;
+  creatorNickname: string;
+  createdAt: string;
+  likeCount: number;
 }

@@ -1,8 +1,14 @@
-import { CategoryButton, PotCard, SearchInput } from "@components/index";
+import {
+  CategoryButton,
+  PostCard,
+  PotCard,
+  SearchInput,
+} from "@components/index";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   buttonContainer,
+  feedContainer,
   gridContainer,
   mainContainer,
   paginationItemStyle,
@@ -24,12 +30,18 @@ const SearchResult = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string | null>("팟");
   const [currentPage, setCurrentPage] = useState(1);
+
+  const type = selectedCategory === "팟" ? "pot" : "feed";
+  const size = selectedCategory === "팟" ? 6 : 3;
+
   const { data } = useGetSearch({
-    type: "pot",
+    type: type,
     keyword: query,
     page: currentPage,
-    size: 6,
+    size: size,
   });
+
+  console.log(data);
 
   useEffect(() => {
     const updatedQuery = queryParams.get("query") || "";
@@ -79,7 +91,7 @@ const SearchResult = () => {
           ))}
         </div>
       </div>
-      {selectedCategory === "팟" && (
+      {selectedCategory === "팟" ? (
         <div css={gridContainer}>
           {data?.content?.map((pot, index) => (
             <PotCard
@@ -94,7 +106,22 @@ const SearchResult = () => {
             />
           ))}
         </div>
+      ) : (
+        <div css={feedContainer}>
+          {data?.content?.map((feed, index) => (
+            <PostCard
+              key={`${feed.userId}-${index}`}
+              role={feed.creatorRole}
+              nickname={feed.creatorNickname}
+              createdAt={feed.createdAt}
+              title={feed.title}
+              content={feed.content}
+              likeCount={feed.likeCount}
+            />
+          ))}
+        </div>
       )}
+
       <Pagination
         count={data?.totalPages}
         page={currentPage}
