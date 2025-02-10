@@ -11,6 +11,7 @@ import {
   feedContainer,
   gridContainer,
   mainContainer,
+  paginationContainer,
   paginationItemStyle,
   paginationStyle,
   pointStyle,
@@ -63,6 +64,7 @@ const SearchResult = () => {
     value: number
   ) => {
     setCurrentPage(value);
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -122,18 +124,19 @@ const SearchResult = () => {
           ))}
         </div>
       )}
-
-      <Pagination
-        count={data?.totalPages}
-        page={currentPage}
-        onChange={handlePageChange}
-        color="primary"
-        shape="rounded"
-        css={paginationStyle}
-        renderItem={(item) => (
-          <PaginationItem {...item} css={paginationItemStyle} />
-        )}
-      />
+      <div css={paginationContainer}>
+        <Pagination
+          count={data?.totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+          shape="rounded"
+          css={paginationStyle}
+          renderItem={(item) => (
+            <PaginationItem {...item} css={paginationItemStyle} />
+          )}
+        />
+      </div>
     </main>
   );
 };
