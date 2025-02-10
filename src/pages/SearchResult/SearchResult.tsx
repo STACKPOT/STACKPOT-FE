@@ -21,6 +21,7 @@ import { categoryOptions } from "@constants/categories";
 import useGetSearch from "apis/hooks/searches/useGetSearch";
 import Pagination from "@mui/material/Pagination";
 import { PaginationItem } from "@mui/material";
+import { useDebounce } from "use-debounce";
 
 const SearchResult = () => {
   const location = useLocation();
@@ -30,13 +31,14 @@ const SearchResult = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string | null>("팟");
   const [currentPage, setCurrentPage] = useState(1);
+  const [debouncedQuery] = useDebounce(query, 500);
 
   const type = selectedCategory === "팟" ? "pot" : "feed";
   const size = selectedCategory === "팟" ? 6 : 3;
 
   const { data } = useGetSearch({
     type: type,
-    keyword: query,
+    keyword: debouncedQuery,
     page: currentPage,
     size: size,
   });
