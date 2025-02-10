@@ -1,5 +1,10 @@
 import { SearchIcon } from "@assets/svgs";
-import { inputStyle, buttonStyle, searchInputStyle, iconStyle } from "./SearchInput.style";
+import {
+  inputStyle,
+  buttonStyle,
+  searchInputStyle,
+  iconStyle,
+} from "./SearchInput.style";
 
 interface SearchInputProps {
   query: string;
@@ -8,6 +13,12 @@ interface SearchInputProps {
 }
 
 const SearchInput = ({ query, setQuery, onSearch }: SearchInputProps) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      onSearch();
+    }
+  };
+
   return (
     <div css={searchInputStyle}>
       <input
@@ -15,6 +26,7 @@ const SearchInput = ({ query, setQuery, onSearch }: SearchInputProps) => {
         placeholder="무엇이든 검색해 보세요"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
       <button type="button" css={buttonStyle} onClick={onSearch}>
         <SearchIcon css={iconStyle} />
