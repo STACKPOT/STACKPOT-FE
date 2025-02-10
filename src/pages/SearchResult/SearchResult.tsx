@@ -9,7 +9,8 @@ import {
   textStyle,
   topContainer,
 } from "./SearchResult.style";
-import { MushroomImage } from "@assets/images";
+import { categoryOptions } from "@constants/categories";
+import useGetSearch from "apis/hooks/searches/useGetSearch";
 
 const SearchResult = () => {
   const location = useLocation();
@@ -17,6 +18,13 @@ const SearchResult = () => {
   const initialQuery = queryParams.get("query") || "";
   const [query, setQuery] = useState(initialQuery);
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>("팟");
+  const { data } = useGetSearch({
+    type: "pot",
+    keyword: query,
+    page: 1,
+    size: 6,
+  });
 
   useEffect(() => {
     const updatedQuery = queryParams.get("query") || "";
@@ -27,6 +35,10 @@ const SearchResult = () => {
     if (query) {
       navigate(`/search-result?query=${query}`);
     }
+  };
+
+  const handleClick = (category: string) => {
+    setSelectedCategory(category);
   };
 
   return (
@@ -43,43 +55,31 @@ const SearchResult = () => {
           개의 피드와 팟 검색 결과가 발견되었어요.
         </p>
         <div css={buttonContainer}>
-          <CategoryButton content="팟" selected={false} />
-          <CategoryButton content="피드" selected={false} />
+          {categoryOptions.map((category) => (
+            <CategoryButton
+              key={category}
+              style="pot"
+              selected={selectedCategory === category}
+              onClick={() => handleClick(category)}
+            >
+              {category}
+            </CategoryButton>
+          ))}
         </div>
       </div>
       <div css={gridContainer}>
-        <PotCard
-          dday={5}
-          profileImage={MushroomImage}
-          nickname="아아 마시는 버섯"
-          title="AI 자동화 챗봇 어플 공부할 스터디원"
-          content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
-          saveCount={8}
-        />
-        <PotCard
-          dday={5}
-          profileImage={MushroomImage}
-          nickname="아아 마시는 버섯"
-          title="AI 자동화 챗봇 어플 공부할 스터디원"
-          content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
-          saveCount={8}
-        />
-        <PotCard
-          dday={5}
-          profileImage={MushroomImage}
-          nickname="아아 마시는 버섯"
-          title="AI 자동화 챗봇 어플 공부할 스터디원"
-          content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
-          saveCount={8}
-        />
-        <PotCard
-          dday={5}
-          profileImage={MushroomImage}
-          nickname="아아 마시는 버섯"
-          title="AI 자동화 챗봇 어플 공부할 스터디원"
-          content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
-          saveCount={8}
-        />
+        {data?.content?.map((pot) => (
+          <PotCard
+            key={pot.userId}
+            id={pot.userId}
+            role={pot.userRole}
+            nickname={pot.userNickname}
+            dday={pot.dday}
+            title={pot.potName}
+            content={pot.potContent}
+            categories={pot.recruitmentRoles}
+          />
+        ))}
       </div>
     </main>
   );
