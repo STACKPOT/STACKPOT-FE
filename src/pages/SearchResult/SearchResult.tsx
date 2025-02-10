@@ -76,7 +76,7 @@ const SearchResult = () => {
         />
         <p css={textStyle}>
           <span css={pointStyle}>{query}</span>에 대한 총{` `}
-          <span css={pointStyle}>57</span>
+          <span css={pointStyle}>{data?.totalElements}</span>
           개의 피드와 팟 검색 결과가 발견되었어요.
         </p>
         <div css={buttonContainer}>
