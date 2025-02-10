@@ -9,6 +9,7 @@ export interface GetSearchParams {
 
 export interface SearchResponse {
   currentPage: number;
+  totalPages: number;
   content: Content[];
   totalElements: number;
 }

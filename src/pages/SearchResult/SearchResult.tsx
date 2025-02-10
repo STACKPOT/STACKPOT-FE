@@ -5,12 +5,16 @@ import {
   buttonContainer,
   gridContainer,
   mainContainer,
+  paginationItemStyle,
+  paginationStyle,
   pointStyle,
   textStyle,
   topContainer,
 } from "./SearchResult.style";
 import { categoryOptions } from "@constants/categories";
 import useGetSearch from "apis/hooks/searches/useGetSearch";
+import Pagination from "@mui/material/Pagination";
+import { PaginationItem } from "@mui/material";
 
 const SearchResult = () => {
   const location = useLocation();
@@ -19,10 +23,11 @@ const SearchResult = () => {
   const [query, setQuery] = useState(initialQuery);
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string | null>("팟");
+  const [currentPage, setCurrentPage] = useState(1);
   const { data } = useGetSearch({
     type: "pot",
     keyword: query,
-    page: 1,
+    page: currentPage,
     size: 6,
   });
 
@@ -41,6 +46,13 @@ const SearchResult = () => {
     setSelectedCategory(category);
   };
 
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
+
   return (
     <main css={mainContainer}>
       <div css={topContainer}>
@@ -50,7 +62,7 @@ const SearchResult = () => {
           onSearch={handleSearch}
         />
         <p css={textStyle}>
-          <span css={pointStyle}>‘프론트엔드'</span>에 대한 총{` `}
+          <span css={pointStyle}>{query}</span>에 대한 총{` `}
           <span css={pointStyle}>57</span>
           개의 피드와 팟 검색 결과가 발견되었어요.
         </p>
@@ -67,20 +79,33 @@ const SearchResult = () => {
           ))}
         </div>
       </div>
-      <div css={gridContainer}>
-        {data?.content?.map((pot) => (
-          <PotCard
-            key={pot.userId}
-            id={pot.userId}
-            role={pot.userRole}
-            nickname={pot.userNickname}
-            dday={pot.dday}
-            title={pot.potName}
-            content={pot.potContent}
-            categories={pot.recruitmentRoles}
-          />
-        ))}
-      </div>
+      {selectedCategory === "팟" && (
+        <div css={gridContainer}>
+          {data?.content?.map((pot, index) => (
+            <PotCard
+              key={`${pot.userId}-${pot.potName}-${index}`}
+              id={pot.userId}
+              role={pot.userRole}
+              nickname={pot.userNickname}
+              dday={pot.dday}
+              title={pot.potName}
+              content={pot.potContent}
+              categories={pot.recruitmentRoles}
+            />
+          ))}
+        </div>
+      )}
+      <Pagination
+        count={data?.totalPages}
+        page={currentPage}
+        onChange={handlePageChange}
+        color="primary"
+        shape="rounded"
+        css={paginationStyle}
+        renderItem={(item) => (
+          <PaginationItem {...item} css={paginationItemStyle} />
+        )}
+      />
     </main>
   );
 };

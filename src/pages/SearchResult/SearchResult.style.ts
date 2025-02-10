@@ -34,5 +34,19 @@ export const buttonContainer = css`
 export const gridContainer = css`
   display: grid;
   grid-template-columns: repeat(3, 27.2rem);
-  gap: 3.2rem;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 4rem 3.2rem;
+  margin-bottom: 4rem;
+`;
+
+export const paginationStyle = css`
+  position: relative;
+  display: flex;
+  justify-content: center;
+`;
+
+export const paginationItemStyle = css`
+  border-radius: 8px;
+  border: 1px solid ${theme.color.border.alternative};
+  font-size: 1.3rem;
 `;
