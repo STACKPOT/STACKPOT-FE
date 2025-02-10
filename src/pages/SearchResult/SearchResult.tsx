@@ -57,6 +57,7 @@ const SearchResult = () => {
 
   const handleClick = (category: string) => {
     setSelectedCategory(category);
+    setCurrentPage(1);
   };
 
   const handlePageChange = (
