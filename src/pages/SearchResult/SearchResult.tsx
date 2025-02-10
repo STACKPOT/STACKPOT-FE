@@ -41,8 +41,6 @@ const SearchResult = () => {
     size: size,
   });
 
-  console.log(data);
-
   useEffect(() => {
     const updatedQuery = queryParams.get("query") || "";
     setQuery(updatedQuery);
