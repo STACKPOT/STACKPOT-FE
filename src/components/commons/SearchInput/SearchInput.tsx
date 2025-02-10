@@ -10,6 +10,7 @@ interface SearchInputProps {
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   onSearch: () => void;
+  onKeyDown: () => void;
 }
 
 const SearchInput = ({ query, setQuery, onSearch }: SearchInputProps) => {

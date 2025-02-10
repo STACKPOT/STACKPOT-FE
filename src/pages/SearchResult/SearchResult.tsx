@@ -70,6 +70,7 @@ const SearchResult = () => {
           query={query}
           setQuery={setQuery}
           onSearch={handleSearch}
+          onKeyDown={handleSearch}
         />
         <p css={textStyle}>
           <span css={pointStyle}>{query}</span>에 대한 총{` `}
