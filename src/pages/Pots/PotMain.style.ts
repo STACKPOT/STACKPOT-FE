@@ -26,11 +26,7 @@ export const tabsTextStyle = css`
   text-decoration: none;
   transition: color 0.3s ease-out;
 
-  &:hover {
-    color: ${theme.color.point.hero};
-  }
-
-  /* NavLink가 active일 때 색상 */
+  &:hover,
   &.active {
     color: ${theme.color.point.hero};
   }
