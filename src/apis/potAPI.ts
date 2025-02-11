@@ -5,8 +5,8 @@ export const PostPot = async (postPotParams: PostPotParams) => {
   return authApiPost<PostPotResponse>("/pots", postPotParams);
 };
 
-export const GetPots = async ({ page, size }: GetPotsParams) => {
-  return apiGet<PotsResponse>("pots", { page, size });
+export const GetPots = async ({ page, size ,recruitmentRole }: GetPotsParams) => {
+  return apiGet<PotsResponse>("pots", { page, size ,recruitmentRole});
 };
 
 export const GetPotDetail = async (potId: number) => {
