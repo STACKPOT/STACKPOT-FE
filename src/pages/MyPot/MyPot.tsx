@@ -7,12 +7,11 @@ import {
   description,
   iconStyle,
 } from "./MyPot.style";
-import { useState } from "react";
-import onGoingPotsData from "mocks/onGoingPotsData";
 import { OnGoingPotCard } from "@components/index";
+import useGetMyPot from "apis/hooks/myPots/useGetMyPot";
 
 const MyPot: React.FC = () => {
-  const [onGoingPots, setOnGoingPots] = useState(onGoingPotsData);
+  const { data } = useGetMyPot();
 
   return (
     <main>
@@ -28,9 +27,19 @@ const MyPot: React.FC = () => {
               내가 입장한 팟을 모았어요. 클릭한 뒤 각각의 팟에서 업무를 시작해
               보세요.
             </p>
-            {onGoingPots.map((pot) => (
-              <OnGoingPotCard isMyPot={false} {...pot} />
-            ))}
+            {data && data.length > 0 ? (
+              data.map((pot) => (
+                <OnGoingPotCard
+                  key={pot.potId}
+                  id={pot.potId}
+                  isMyPot={pot.isOwner}
+                  title={pot.potName}
+                  memberList={Object.keys(pot.members)}
+                />
+              ))
+            ) : (
+              <div>데이터가 없습니다.</div>
+            )}
           </div>
         </div>
       </div>
