@@ -1,7 +1,7 @@
 import { authApiGet } from "./apiUtils";
 import { GetSearchParams, SearchResponse } from "./types/search";
 
-export const GetSearch = async ({
+export const getSearch = async ({
   type,
   keyword,
   page,
