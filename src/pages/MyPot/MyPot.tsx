@@ -30,7 +30,9 @@ const MyPot: React.FC = () => {
               id={pot.potId}
               isMyPot={pot.isOwner}
               title={pot.potName}
-              memberList={Object.keys(pot.members)}
+              memberList={Object.entries(pot.members).flatMap(([role, count]) =>
+                Array(count).fill(role)
+              )}
             />
           ))
         ) : (
