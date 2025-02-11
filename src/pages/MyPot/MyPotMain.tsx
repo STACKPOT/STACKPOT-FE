@@ -30,7 +30,7 @@ const MyPotMainPage: React.FC = () => {
   const title = "STACKPOT";
   const location = useLocation();
 
-  const showViewId = location.pathname === routes.myPot.base;
+  const showViewId = location.pathname === `${routes.myPot.task}/${potId}`;
 
   return (
     <main css={container}>
