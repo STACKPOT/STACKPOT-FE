@@ -14,6 +14,7 @@ export const partMap: {
   디자인: "DESIGN",
   기획: "PLANNING",
 } as const;
+
 export const interests = [
   "사이드 프로젝트",
   "1인 개발",
@@ -24,8 +25,12 @@ export const interests = [
 
 export const categories = ["프론트엔드", "백엔드", "디자인", "기획"] as const;
 
-export const participationMap: { [key: string]: "ONLINE" | "OFFLINE" | "HYBRID" } = {
+export const participationMap: {
+  [key: string]: "ONLINE" | "OFFLINE" | "HYBRID";
+} = {
   온라인: "ONLINE",
   오프라인: "OFFLINE",
   혼합: "HYBRID",
-}
+};
+
+export const categoryOptions = ["팟", "피드"] as const;

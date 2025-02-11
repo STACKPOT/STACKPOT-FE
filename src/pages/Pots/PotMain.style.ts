@@ -11,28 +11,23 @@ export const container = css`
 export const selectContainer = css`
   justify-content: center;
   gap: 1.6rem;
-` 
+`;
 
 export const tabsContainer = css`
   display: flex;
   padding: 1.6rem 0;
   align-items: flex-end;
   gap: 3.2rem;
-`
+`;
 
 export const tabsTextStyle = css`
   ${theme.font.bodyBold2};
-  color: ${theme.color.interactive.inactive}; 
+  color: ${theme.color.interactive.inactive};
   text-decoration: none;
   transition: color 0.3s ease-out;
 
-  &:hover {
-    transform: scale(1.05);
-    color: ${theme.color.point.hero};
-  }
-
-  /* NavLink가 active일 때 색상 */
+  &:hover,
   &.active {
-    color: ${theme.color.point.hero};  
+    color: ${theme.color.point.hero};
   }
 `;

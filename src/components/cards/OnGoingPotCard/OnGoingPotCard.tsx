@@ -5,12 +5,14 @@ import {
   titleStyle,
 } from "./OnGoingPotCard.style";
 import { MemberGroup, PotButton } from "@components/index";
+import routes from "@constants/routes";
 import { useNavigate } from "react-router-dom";
+import { Role } from "types/role";
 
 interface OnGoingPotCardProps {
   id: number;
   title: string;
-  memberList: string[];
+  memberList: Role[];
   isMyPot: boolean;
 }
 const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({
@@ -22,7 +24,7 @@ const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({
   const navigate = useNavigate();
 
   const handleClickPot = (id: number) => {
-    navigate(`/pot/${id}`);
+    navigate(`${routes.myPot.task}/${id}`);
   };
   const handleFinishPot = (id: number) => {
     // todo: 팟 끓이기 페이지로 이동

@@ -1,21 +1,36 @@
-import { container, headerStyle, textStyle, iconStyle, tabsContainer, tabsTextStyle, viewId, viewTextStyle } from "./MyPotMain.style";
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import {
+  container,
+  headerStyle,
+  textStyle,
+  iconStyle,
+  tabsContainer,
+  tabsTextStyle,
+  viewId,
+  viewTextStyle,
+} from "./MyPotMain.style";
+import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import theme from "@styles/theme";
 import routes from "@constants/routes";
 import { KaKaoTalkIcon, PotIcon } from "@assets/svgs";
 
 const MyPotMainPage: React.FC = () => {
+  const { potId } = useParams();
+
   const tabs = [
-    { label: "업무 현황", path: routes.myPot.base },
-    { label: "캘린더", path: routes.myPot.calendar },
+    {
+      label: "업무 현황",
+      path: `${routes.myPot.task}/${potId}`,
+    },
+    {
+      label: "캘린더",
+      path: `${routes.myPot.calendar}/${potId}`,
+    },
   ];
 
-  const title = "STACKPOT"; 
+  const title = "STACKPOT";
   const location = useLocation();
 
-  const isPotPage = location.pathname === routes.myPot.base || location.pathname.startsWith(routes.myPot.base + "/") && !location.pathname.includes("calendar");
-
-  const showViewId = location.pathname === routes.myPot.base || isPotPage;
+  const showViewId = location.pathname === `${routes.myPot.task}/${potId}`;
 
   return (
     <main css={container}>
@@ -25,11 +40,7 @@ const MyPotMainPage: React.FC = () => {
       </header>
       <div css={tabsContainer}>
         {tabs.map((tab) => {
-          const isActive =
-            (tab.path === routes.myPot.base && location.pathname === tab.path) || 
-            (tab.path === routes.myPot.base && isPotPage) ||
-            (tab.path === routes.myPot.calendar && location.pathname === tab.path);
-
+          const isActive = location.pathname === tab.path;
           return (
             <NavLink
               key={tab.path}

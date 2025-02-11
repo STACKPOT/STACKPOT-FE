@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { GetTodos } from "apis/myPotAPI";
-import { GetTodoParams, Result } from "apis/types/todo";
+import { GetTodoParams, Result } from "apis/types/myPot";
 
 const defaultResult: Result = {
   totalPages: 0,

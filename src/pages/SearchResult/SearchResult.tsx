@@ -1,15 +1,28 @@
-import { CategoryButton, PotCard, SearchInput } from "@components/index";
+import {
+  CategoryButton,
+  PostCard,
+  PotCard,
+  SearchInput,
+} from "@components/index";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   buttonContainer,
+  feedContainer,
   gridContainer,
   mainContainer,
+  paginationContainer,
+  paginationItemStyle,
+  paginationStyle,
   pointStyle,
   textStyle,
   topContainer,
 } from "./SearchResult.style";
-import { MushroomImage } from "@assets/images";
+import { categoryOptions } from "@constants/categories";
+import useGetSearch from "apis/hooks/searches/useGetSearch";
+import Pagination from "@mui/material/Pagination";
+import { PaginationItem } from "@mui/material";
+import { useDebounce } from "use-debounce";
 
 const SearchResult = () => {
   const location = useLocation();
@@ -17,6 +30,19 @@ const SearchResult = () => {
   const initialQuery = queryParams.get("query") || "";
   const [query, setQuery] = useState(initialQuery);
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>("팟");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [debouncedQuery] = useDebounce(query, 500);
+
+  const type = selectedCategory === "팟" ? "pot" : "feed";
+  const size = selectedCategory === "팟" ? 6 : 3;
+
+  const { data } = useGetSearch({
+    type: type,
+    keyword: debouncedQuery,
+    page: currentPage,
+    size: size,
+  });
 
   useEffect(() => {
     const updatedQuery = queryParams.get("query") || "";
@@ -29,6 +55,19 @@ const SearchResult = () => {
     }
   };
 
+  const handleClick = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <main css={mainContainer}>
       <div css={topContainer}>
@@ -36,49 +75,67 @@ const SearchResult = () => {
           query={query}
           setQuery={setQuery}
           onSearch={handleSearch}
+          onKeyDown={handleSearch}
         />
         <p css={textStyle}>
-          <span css={pointStyle}>‘프론트엔드'</span>에 대한 총{` `}
-          <span css={pointStyle}>57</span>
+          <span css={pointStyle}>{query}</span>에 대한 총{` `}
+          <span css={pointStyle}>{data?.totalElements}</span>
           개의 피드와 팟 검색 결과가 발견되었어요.
         </p>
         <div css={buttonContainer}>
-          <CategoryButton content="팟" selected={false} />
-          <CategoryButton content="피드" selected={false} />
+          {categoryOptions.map((category) => (
+            <CategoryButton
+              key={category}
+              style="pot"
+              selected={selectedCategory === category}
+              onClick={() => handleClick(category)}
+            >
+              {category}
+            </CategoryButton>
+          ))}
         </div>
       </div>
-      <div css={gridContainer}>
-        <PotCard
-          dday={5}
-          profileImage={MushroomImage}
-          nickname="아아 마시는 버섯"
-          title="AI 자동화 챗봇 어플 공부할 스터디원"
-          content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
-          saveCount={8}
-        />
-        <PotCard
-          dday={5}
-          profileImage={MushroomImage}
-          nickname="아아 마시는 버섯"
-          title="AI 자동화 챗봇 어플 공부할 스터디원"
-          content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
-          saveCount={8}
-        />
-        <PotCard
-          dday={5}
-          profileImage={MushroomImage}
-          nickname="아아 마시는 버섯"
-          title="AI 자동화 챗봇 어플 공부할 스터디원"
-          content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
-          saveCount={8}
-        />
-        <PotCard
-          dday={5}
-          profileImage={MushroomImage}
-          nickname="아아 마시는 버섯"
-          title="AI 자동화 챗봇 어플 공부할 스터디원"
-          content="스터디의 자세한 내용은 여기에 보입니다. 최대 두 줄만 보이는 것이 좋을 것 같습니다."
-          saveCount={8}
+      {selectedCategory === "팟" ? (
+        <div css={gridContainer}>
+          {data?.content?.map((pot, index) => (
+            <PotCard
+              key={`${pot.userId}-${pot.potName}-${index}`}
+              id={pot.userId}
+              role={pot.userRole}
+              nickname={pot.userNickname}
+              dday={pot.dday}
+              title={pot.potName}
+              content={pot.potContent}
+              categories={pot.recruitmentRoles}
+            />
+          ))}
+        </div>
+      ) : (
+        <div css={feedContainer}>
+          {data?.content?.map((feed, index) => (
+            <PostCard
+              key={`${feed.userId}-${index}`}
+              role={feed.creatorRole}
+              nickname={feed.creatorNickname}
+              createdAt={feed.createdAt}
+              title={feed.title}
+              content={feed.content}
+              likeCount={feed.likeCount}
+            />
+          ))}
+        </div>
+      )}
+      <div css={paginationContainer}>
+        <Pagination
+          count={data?.totalPages}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+          shape="rounded"
+          css={paginationStyle}
+          renderItem={(item) => (
+            <PaginationItem {...item} css={paginationItemStyle} />
+          )}
         />
       </div>
     </main>

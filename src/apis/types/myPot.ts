@@ -36,3 +36,16 @@ export interface TodoItem {
   content: string;
   status: string;
 }
+
+export interface MyPotResponse {
+  map: any;
+  potId: number;
+  potName: string;
+  isOwner: boolean;
+  members: {
+    FRONTEND?: number;
+    BACKEND?: number;
+    DESIGN?: number;
+    PLANNING?: number;
+  };
+}
