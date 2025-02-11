@@ -14,6 +14,8 @@ const routes = {
     calendar: "/my-pot/calendar",
     task: "/my-pot/task",
   },
+  calendar: "calendar",
+  task: "task",
   setting: "/setting",
   search: "/search",
   searchResult: "/search-result",
