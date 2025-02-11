@@ -43,7 +43,7 @@ const MyPotStatusPage: React.FC = () => {
   };
 
   const handleTaskCardClick = () => {
-    navigate(`${routes.myPot.detail}`);
+    // navigate(`${routes.myPot.detail}`);
   };
 
   return (
