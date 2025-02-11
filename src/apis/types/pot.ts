@@ -42,7 +42,7 @@ export interface RecruitmentDetailResponse {
 export interface GetPotsParams {
   page: number;
   size: number;
-  recruitmentRole: Role | null;
+  recruitmentRole: string | null;
 }
 
 export interface PotsResponse {
