@@ -43,12 +43,12 @@ const MadePotPage = () => {
               <Skeleton css={cardStyle} />
               : finishedPots?.pages && finishedPots.pages.length > 0 ? (
                 finishedPots.pages.map((page, pageIndex) => (
-                  page.result && page.result?.body.content && page.result.body.content.length > 0 &&
-                  (page.result.body.content.map((item, itemIndex) => {
+                  page.result && page.result?.content && page.result.content.length > 0 &&
+                  (page.result.content.map((item, itemIndex) => {
                     const isLast =
                       pageIndex === finishedPots.pages.length - 1 &&
                       page.result &&
-                      itemIndex === page.result.size - 1;
+                      itemIndex === page.result.content.length - 1;
                     return (
                       <div key={item.potId} ref={isLast ? ref : null}>
                         <FinishedPotCard

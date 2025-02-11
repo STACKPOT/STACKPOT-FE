@@ -142,16 +142,11 @@ export interface GetPotsRecruitingResponse {
 }
 
 export interface GetPotsCompletedParams {
-  cursor: number|null;
+  cursor: number | null;
   size: number;
-}
-export interface GetPotsCompletedResponse {
-  cursor: number;
-  size: number;
-  body: CompletedPotsBody
 }
 
-export interface CompletedPotsBody {
+export interface GetPotsCompletedResponse {
   content: CompletedPotDetail[];
   nextCursor: number;
   hasMore: boolean;
