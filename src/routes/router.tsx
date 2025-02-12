@@ -92,33 +92,39 @@ const router = createBrowserRouter([
         element: <CallbackPage />,
       },
       {
-        path: routes.myPot.potPage,
-        element: <MyPotMainPage />,
-        children: [
-          { index: true, element: <MyPotStatusPage /> },
-          { path: routes.myPot.calendar, element: <MyPotCalendarPage /> },
-          { path: routes.myPot.detail, element: <TaskDetailPage /> },
-        ],
-      },
-      {
         path: routes.myPot.base,
         element: <MyPotPage />,
       },
       {
+        path: routes.myPot.base,
+        element: <MyPotMainPage />,
+        children: [
+          { path: `${routes.task}/:potId`, element: <MyPotStatusPage /> },
+          {
+            path: `${routes.calendar}/:potId`,
+            element: <MyPotCalendarPage />,
+          },
+          {
+            path: `${routes.task}/:potId/:taskId`,
+            element: <TaskDetailPage />,
+          },
+        ],
+      },
+      {
         path: routes.editPost,
-        element: <EditPostPage />
+        element: <EditPostPage />,
       },
       {
         path: routes.editFinishedPot,
-        element: <EditFinishedPotPage />
+        element: <EditFinishedPotPage />,
       },
       {
         path: routes.userProfile,
-        element: <UserPage />
+        element: <UserPage />,
       },
       {
         path: routes.createFinishedPot,
-        element: <CreateFinishedPot />
+        element: <CreateFinishedPot />,
       },
     ],
   },

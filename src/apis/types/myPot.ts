@@ -53,3 +53,41 @@ export interface TaskResponse {
   IN_PROGRESS?: Task[];
   CLOSED?: Task[];
 }
+
+export interface MyPotResponse {
+  map: any;
+  potId: number;
+  data: TodoItem[];
+}
+
+export interface Task {
+  taskboardId: number;
+  title: string;
+  description: string;
+  creatorNickname: string;
+  creatorRole: string;
+  category: string[];
+  status: APITaskStatus;
+  deadLine: string;
+  participants: Participant[];
+  dday: string;
+}
+
+export interface TaskResponse {
+  OPEN?: Task[];
+  IN_PROGRESS?: Task[];
+  CLOSED?: Task[];
+}
+
+export interface MyPotResponse {
+  map: any;
+  potId: number;
+  potName: string;
+  isOwner: boolean;
+  members: {
+    FRONTEND?: number;
+    BACKEND?: number;
+    DESIGN?: number;
+    PLANNING?: number;
+  };
+}

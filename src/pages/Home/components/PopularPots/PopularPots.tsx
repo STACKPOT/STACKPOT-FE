@@ -17,7 +17,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const PopularPots = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, isLoading } = useGetPots({ page: currentPage, size: 3 });
+  const { data, isLoading } = useGetPots({
+    page: currentPage,
+    size: 3,
+    recruitmentRole: null,
+  });
 
   const totalPages = data?.totalPages || 1;
 

@@ -3,7 +3,6 @@ import theme from "@styles/theme";
 
 export const container = css`
   padding: 4.8rem 0;
-  gap: 3.2rem;
   display: flex;
   flex-direction: column;
 `;
@@ -35,5 +34,21 @@ export const description = css`
 export const contentBody = css`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
+`;
+
+export const onGoningPotContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 3.6rem;
+  margin-top: 3.6rem;
+  flex-grow: 1;
+`;
+
+export const textContainer = css`
+  ${theme.font.title3};
+  color: ${theme.color.interactive.inactive};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
 `;

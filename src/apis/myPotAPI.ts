@@ -3,7 +3,7 @@ import { Result, Todo, TaskResponse } from "./types/myPot";
 
 export const getTodo = async (potId: number, page: number, size: number) => {
   const params = { page, size };
-  return authApiGet<Result>(`/my-pots/${potId}/todos`, params);  
+  return authApiGet<Result>(`/my-pots/${potId}/todos`, params);
 };
 
 export const patchTodo = async ({ potId, data }: { potId: number; data: Todo[] })  => {
