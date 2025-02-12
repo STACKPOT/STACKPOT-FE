@@ -8,7 +8,7 @@ import routes from "@constants/routes";
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("accessToken")
+    sessionStorage.getItem("accessToken")
   );
 
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
@@ -26,9 +26,9 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+    const token = sessionStorage.getItem("accessToken");
     setAccessToken(token);
-  }, [localStorage.getItem("accessToken")]);
+  }, [sessionStorage.getItem("accessToken")]);
 
   return (
     <header css={headerStyle}>

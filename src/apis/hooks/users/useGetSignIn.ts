@@ -10,8 +10,8 @@ const useGetSignIn = () => {
     onSuccess: (data) => {
       if (data.result) {
         const { accessToken, refreshToken } = data.result.tokenServiceResponse;
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
+        sessionStorage.setItem("accessToken", accessToken);
+        sessionStorage.setItem("refreshToken", refreshToken);
         if (data.result.isNewUser) {
           navigate(routes.signUp);
         } else {
