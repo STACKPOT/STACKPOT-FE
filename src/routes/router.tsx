@@ -27,6 +27,7 @@ import {
   MyPotPage,
   CallbackPage,
   CreateFinishedPot,
+  EditPotPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -125,6 +126,10 @@ const router = createBrowserRouter([
       {
         path: routes.createFinishedPot,
         element: <CreateFinishedPot />,
+      },
+      {
+        path: routes.editPot,
+        element: <EditPotPage />,
       },
     ],
   },

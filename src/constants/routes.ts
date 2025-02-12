@@ -26,6 +26,7 @@ const routes = {
   editFinishedPot: "/finished-pot/edit/:potId",
   userProfile: "/user/:userId",
   createFinishedPot: "/create-finished-pot",
+  editPot: "/pot/edit/:potId",
 } as const;
 
 export default routes;
