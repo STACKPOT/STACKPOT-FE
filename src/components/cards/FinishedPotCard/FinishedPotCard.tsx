@@ -59,7 +59,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
         if (isMyPage) {
             setSummaryModal(id);
         } else {
-            navigate(`/pot/${id}`);
+            navigate(routes.potDetail.replace(":potId", id.toString()));
         }
     }
     const handleEditPot = (id: number) => {

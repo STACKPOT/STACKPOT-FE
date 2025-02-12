@@ -11,6 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
+import { PotStatus } from "types/potStatus";
 
 interface PotInformationCardProps {
   potId: number;
@@ -18,7 +19,7 @@ interface PotInformationCardProps {
   userId: number;
   userRole: Role;
   userNickname: string;
-  potStatus: "RECRUITING" | "ONGOING" | "COMPLETED";
+  potStatus: PotStatus;
   potName: string;
   potStartDate: string;
   potDuration: string;
