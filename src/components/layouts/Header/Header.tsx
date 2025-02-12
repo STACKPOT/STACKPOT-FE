@@ -1,15 +1,17 @@
 import { Logo, ProfileIcon, SearchIcon } from "@assets/svgs";
-import { headerStyle, iconContainer, iconStyle } from "./Header.style";
+import { headerStyle, iconContainer, iconStyle, profileStyle } from "./Header.style";
 import Button from "@components/commons/Button/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
+import { roleImages } from "@constants/roleImage";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState(
     sessionStorage.getItem("accessToken")
   );
+  const [role, setRole] = useState(sessionStorage.getItem("role"));
 
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
     import.meta.env.VITE_REST_API_KEY
@@ -27,8 +29,12 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
+    const role = sessionStorage.getItem("role");
     setAccessToken(token);
-  }, [sessionStorage.getItem("accessToken")]);
+    setRole(role);
+  }, [sessionStorage.getItem("accessToken"), sessionStorage.getItem("role")]);
+
+  const profileImage = roleImages[role];
 
   return (
     <header css={headerStyle}>
@@ -44,7 +50,11 @@ const Header: React.FC = () => {
             css={iconStyle}
             onClick={handleSearchClick}
           />
-          <ProfileIcon />
+          {!role ? (
+            <ProfileIcon />
+          ) : (
+            <img css={profileStyle} src={profileImage} alt="profileImage" />
+          )}
         </div>
       )}
     </header>

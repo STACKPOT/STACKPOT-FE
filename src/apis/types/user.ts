@@ -8,6 +8,7 @@ export interface LogInResponse {
 export interface TokenServiceResponse {
   accessToken: string;
   refreshToken: string;
+  role: Role;
 }
 
 export interface GetUserResponse {

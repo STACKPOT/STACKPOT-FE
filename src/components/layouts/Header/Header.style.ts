@@ -23,3 +23,10 @@ export const iconContainer = css`
   gap: 3.2rem;
   align-items: center;
 `;
+
+export const profileStyle = css`
+  width: 3.2rem;
+  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 50%;
+  cursor: pointer;
+`;
