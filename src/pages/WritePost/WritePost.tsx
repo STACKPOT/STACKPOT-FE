@@ -16,7 +16,7 @@ import { PotIcon } from "@assets/svgs";
 import { Button, CategoryButton, Modal } from "@components/index";
 import { partMap } from "@constants/categories";
 import UploadToast from "@components/commons/Toast/UploadToast";
-import { useBlocker } from "react-router-dom";
+import { useBlocker, useNavigate } from "react-router-dom";
 import usePostFeed from "apis/hooks/feeds/usePostFeed";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { PostFeedParams } from "apis/types/feed";
@@ -25,6 +25,8 @@ const WritePost: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const methods = useForm<PostFeedParams>({
     mode: "onChange",
@@ -51,9 +53,12 @@ const WritePost: React.FC = () => {
     postFeedMutation.mutate(data, {
       onSuccess: () => {
         setShowToast(true);
-        setTimeout(() => setShowToast(false), 2000);
-        methods.reset();
-        setIsFilled(false);
+
+        setTimeout(() => {
+          setShowToast(false);
+          methods.reset();
+          navigate("/home");
+        }, 2000);
       },
       onError: () => {
         alert("피드 업로드 실패");
