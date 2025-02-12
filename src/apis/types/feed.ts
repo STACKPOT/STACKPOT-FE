@@ -13,6 +13,7 @@ interface Feeds {
   content: string;
   likeCount: number;
   createdAt: string;
+  isLiked: boolean;
 }
 
 export interface GetFeedParams {

@@ -88,7 +88,7 @@ const Feed = () => {
           <Skeleton css={cardStyle} />
         ) : data?.pages && data.pages.length > 0 ? (
           data.pages.map((page, pageIndex) => (
-            <div css={contentBody} key={pageIndex}>
+            <>
               {page.result?.feeds && page.result.feeds.length > 0 ? (
                 page.result.feeds.map((item, itemIndex) => {
                   const isLastItem =
@@ -97,12 +97,14 @@ const Feed = () => {
                   return (
                     <div key={item.id} ref={isLastItem ? ref : null}>
                       <PostCard
+                        id={item.id}
                         role={item.writerRole}
                         nickname={item.writer}
                         createdAt={item.createdAt}
                         title={item.title}
                         content={item.content}
                         likeCount={item.likeCount}
+                        isLiked={item.isLiked}
                       />
                     </div>
                   );
@@ -110,7 +112,7 @@ const Feed = () => {
               ) : (
                 <p>게시물이 없습니다.</p>
               )}
-            </div>
+            </>
           ))
         ) : (
           <p>게시물이 없습니다.</p>
