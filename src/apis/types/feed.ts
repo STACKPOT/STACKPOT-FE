@@ -6,7 +6,7 @@ export interface FeedResponse {
 }
 
 interface Feeds {
-  id: number;
+  feedId: number;
   writer: string;
   writerRole: Role;
   title: string;
