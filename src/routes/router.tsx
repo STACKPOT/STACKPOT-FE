@@ -96,10 +96,12 @@ const router = createBrowserRouter([
         element: <MyPotPage />,
       },
       {
-        path: routes.myPot.base,
+        path: `${routes.myPot.base}/:potId`,
         element: <MyPotMainPage />,
         children: [
-          { path: `${routes.task}/:potId`, element: <MyPotStatusPage /> },
+          { 
+            index: true,
+            element: <MyPotStatusPage /> },
           {
             path: `${routes.calendar}/:potId`,
             element: <MyPotCalendarPage />,
