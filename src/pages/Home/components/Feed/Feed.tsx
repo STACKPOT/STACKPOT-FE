@@ -63,6 +63,7 @@ const Feed = () => {
 
   const handleCardClick = (feedId: number) => {
     navigate(`${routes.feed}/${feedId}`);
+    window.scrollTo(0, 0);
   };
 
   return (
