@@ -21,3 +21,21 @@ export interface GetFeedParams {
   limit: number;
   cursor: number | null;
 }
+
+export interface PostFeedParams {
+  title: string;
+  content: string;
+  category: string;
+}
+
+export interface PostFeedResponse {
+  feedId: number;
+  writerId: number;
+  writer: string;
+  writerRole: Role;
+  title: string;
+  content: string;
+  likeCount: number;
+  isLiked: boolean;
+  createdAt: string;
+}
