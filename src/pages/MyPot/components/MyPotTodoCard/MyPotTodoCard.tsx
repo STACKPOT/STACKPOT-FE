@@ -13,10 +13,9 @@ interface MyPotTodoCardProps {
   isFirst: boolean;
   potId: number;
   currentPage: number;
-  onModalClose: () => void;
 }
 
-const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId, currentPage, onModalClose }) => {
+const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId, currentPage  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate: updateTodoStatus } = usePatchMyTodoStatus();
 
@@ -26,7 +25,6 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    onModalClose();  
   };
 
   const handleSelectTodo = (todoId: number) => {
@@ -50,13 +48,15 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
       <div css={statusContainer}>
         <div css={todoListContainer}>
           {(todos ?? []).map((todo) => (
-            <div css={todoContainer} key={todo.todoId}>
-              <CheckBox 
-                selected={todo.status === "COMPLETED"} 
-                onSelect={() => handleSelectTodo(todo.todoId)}
-              />
-              <p css={todoTextStyle}>{todo.content}</p>
-            </div>
+            todo.todoId !== null && (
+              <div css={todoContainer} key={todo.todoId}>
+                <CheckBox 
+                  selected={todo.status === "COMPLETED"} 
+                  onSelect={() => handleSelectTodo(todo.todoId!)}
+                />
+                <p css={todoTextStyle}>{todo.content}</p>
+              </div>
+            )
           ))}
         </div>
       </div>

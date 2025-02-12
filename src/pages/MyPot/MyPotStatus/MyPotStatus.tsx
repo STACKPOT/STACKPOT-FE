@@ -45,6 +45,7 @@ const MyPotStatusPage: React.FC = () => {
   const handleTaskCardClick = () => {
     navigate(`${routes.myPot.detail}`);
   };
+  
 
   return (
     <>
@@ -59,7 +60,7 @@ const MyPotStatusPage: React.FC = () => {
       <MyPotStatusHeader />
 
       <div css={containerStyle}>
-        <MyPotTodoList currentPage={currentPage} onModalClose={() => {}} />
+        <MyPotTodoList currentPage={currentPage} />
         <Pagination currentPage={currentPage} totalPages={totalPages} onPrev={handlePrev} onNext={handleNext} />
       </div>
 
