@@ -24,6 +24,7 @@ const MyFeedDropdown: React.FC<FeedDropdownProps> = ({
   const ref = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
+    console.log("MeatballIcon clicked!");
     setIsDropdownOpen(!isDropdownOpen);
   };
 
