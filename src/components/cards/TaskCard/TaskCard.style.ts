@@ -43,6 +43,7 @@ export const contentContainer = css`
     flex-direction: column;
     justify-content: space-between;
     gap: 1.2rem;
+    align-items: stretch; 
 `
 export const titleTextStyle = css`
     ${theme.font.bodyBold1}
@@ -50,7 +51,6 @@ export const titleTextStyle = css`
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    white-space: nowrap;
 `
 export const contentTextStyle = css`
     ${theme.font.caption1}
@@ -61,6 +61,8 @@ export const contentTextStyle = css`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     min-height: calc(1.4rem * 2);
+    white-space: nowrap;
+
 `
 
 export const dateTextStyle = css`
