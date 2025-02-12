@@ -16,7 +16,7 @@ export const cardStyle = css`
 export const titleContainer = css`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 1.2rem;
 `;
 export const profileImageStyle = css`
   width: 4rem;
@@ -25,9 +25,10 @@ export const profileImageStyle = css`
   border-radius: 50%;
 `;
 export const nicknameDdayContainer = css`
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 3rem;
+  justify-content: space-between;
 `;
 export const nicknameStyle = css`
   width: 10.3rem;
@@ -53,6 +54,9 @@ export const contentStyle = css`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
+export const contentContainer =css`
+  height: 6rem;
+`
 export const categoriesContainer = css`
   display: flex;
   gap: 1rem;

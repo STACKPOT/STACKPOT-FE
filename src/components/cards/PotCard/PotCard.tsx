@@ -2,6 +2,7 @@ import Badge from "@components/commons/Badge/Badge";
 import {
   cardStyle,
   categoriesContainer,
+  contentContainer,
   contentStyle,
   nicknameDdayContainer,
   nicknameStyle,
@@ -50,11 +51,15 @@ const PotCard: React.FC<PotCardProps> = ({
         </div>
       </div>
       <h1 css={titleStyle}>{title}</h1>
-      <p css={contentStyle}>{content}</p>
+      <div css={contentContainer}>
+        <p css={contentStyle}>{content}</p>
+      </div>
       <div css={categoriesContainer}>
-        {categories.map((category, index) => (
-          <Badge key={index} content={category} />
-        ))}
+        {categories.length === 4 ?
+          <Badge content="전체" /> :
+          categories.map((category, index) => (
+            <Badge key={index} content={category} />
+          ))}
       </div>
     </div>
   );
