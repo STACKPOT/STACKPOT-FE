@@ -42,6 +42,7 @@ export interface RecruitmentDetailResponse {
 export interface GetPotsParams {
   page: number;
   size: number;
+  recruitmentRole: string | null;
 }
 
 export interface PotsResponse {
@@ -133,7 +134,6 @@ export interface PostPotMemersResponse {
   nickname: string;
   appealContent: string;
 }
-
 export interface GetPotsRecruitingResponse {
   potId: number;
   potName: string;
