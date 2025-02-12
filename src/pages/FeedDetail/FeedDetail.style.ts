@@ -55,3 +55,10 @@ export const contentStyle = css`
   color: ${theme.color.base.darkgray};
   margin-top: 3.2rem;
 `;
+
+export const profileStyle = css`
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 50%;
+`;

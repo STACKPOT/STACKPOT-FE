@@ -22,3 +22,12 @@ export interface GetFeedParams {
   limit: number;
   cursor: number | null;
 }
+
+export interface FeedDetailResponse {
+  writerId: number;
+  writer: string;
+  writerRole: Role;
+  title: string;
+  content: string;
+  createdAt: string;
+}
