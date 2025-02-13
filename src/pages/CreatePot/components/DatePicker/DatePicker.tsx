@@ -9,10 +9,10 @@ import {
 import { Dayjs } from "dayjs";
 
 interface DatePickerProps {
+  date?: Dayjs;
   onChange: (date: Dayjs | null) => void;
 }
-const DatePicker: React.FC<DatePickerProps> = ({ onChange }: DatePickerProps) => {
-
+const DatePicker: React.FC<DatePickerProps> = ({ date, onChange }: DatePickerProps) => {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -21,6 +21,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onChange }: DatePickerProps) =>
           slots={{
             layout: StyledPickersLayout,
           }}
+          value={date}
           onChange={onChange}
         />
       </LocalizationProvider>

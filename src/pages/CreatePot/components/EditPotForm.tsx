@@ -15,7 +15,7 @@ import {
     titleStyle,
 } from "./EditPotForm.style";
 import { PotDetail, RecruitmentDetail } from "apis/types/pot";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { Participation } from "types/participation";
 import { Button, CategoryButton, PartRecruitment, PotButton } from "@components/index";
@@ -157,11 +157,11 @@ const EditPotForm: React.FC<EditPotFormProps> = ({ type, potData, onCompleted, o
                     </div>
                     <div css={labelStyle}>
                         시작 날짜
-                        <DatePicker onChange={handleStartDate} />
+                        <DatePicker date={dayjs(potStartDate)} onChange={handleStartDate} />
                     </div>
                     <div css={labelStyle}>
                         마감 날짜
-                        <DatePicker onChange={handleDeadline} />
+                        <DatePicker date={dayjs(recruitmentDeadline)} onChange={handleDeadline} />
                     </div>
                     <div css={labelStyle}>
                         예상 기간
