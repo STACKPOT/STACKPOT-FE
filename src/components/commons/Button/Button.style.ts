@@ -30,8 +30,10 @@ export const landingButtonStyle = css`
   ${theme.font.title1};
 `;
 
-export const actionButtonStyle = (actionType?: "action" | "join") => css`
+export const actionButtonStyle = (actionType?: "action" | "join" | "edit") => css`
   padding: ${actionType === "join" ? "1.6rem 3.3rem" : "1.4rem 5.8rem"};
+  padding: ${(actionType === "join" && "1.6rem 3.3rem") || (actionType === "edit" && "1.05rem 0") || "1.4rem 5.8rem"};
+  width: ${actionType === "edit" && "10.3rem"};
   border-radius: 8px;
   ${theme.font.captionBold1};
 `;

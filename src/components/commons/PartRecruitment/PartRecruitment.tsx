@@ -3,14 +3,15 @@ import { countInputStyle, inputContainer, partButtonContainer, partContainer } f
 import CategoryButton from "../Badge/CategoryButton/CategoryButton";
 import { useEffect, useState } from "react";
 import { RecruitmentDetail } from "apis/types/pot";
+import { Role } from "types/role";
 
 interface PartRecruitmentProps {
-    initialRecruitment?: RecruitmentDetail[];
+    initialRecruitment?: Record<Role, number>;
     onChange: (recruitmentData: RecruitmentDetail[]) => void;
 }
 
 const PartRecruitment: React.FC<PartRecruitmentProps> = ({ initialRecruitment, onChange }: PartRecruitmentProps) => {
-    const [recruitment, setRecruitment] = useState<{ [key: string]: number }>({});
+    const [recruitment, setRecruitment] = useState<Record<Role, number>>({} as Record<Role, number>);
     const [visibleInputs, setVisibleInputs] = useState<{
         [key: string]: boolean;
     }>({});
@@ -25,30 +26,31 @@ const PartRecruitment: React.FC<PartRecruitmentProps> = ({ initialRecruitment, o
     const handlePartNumber = (partName: string, e: React.ChangeEvent<HTMLInputElement>) => {
         setRecruitment(prev => ({
             ...prev,
-            [partName]: Number(e.target.value),
+            [partMap[partName]]: Number(e.target.value),
         }));
     };
 
     useEffect(() => {
-        const partValues = Object.keys(partMap);
+        const partValues = Object.values(partMap);
         setRecruitment(Object.fromEntries(partValues.map(key =>
-            [key, 0])) as Record<typeof partValues[number], number>);
-    }, []);
+            [key, initialRecruitment ? initialRecruitment[key] : 0])) as Record<Role, number>);
 
-    useEffect(() => {
-        initialRecruitment?.forEach(part =>
-            setRecruitment((prev) => ({
-                ...prev,
-                [part.recruitmentRole]: part.recruitmentCount
-            }))
-        );
+        if (initialRecruitment) {
+            Object.entries(initialRecruitment).forEach(part => {
+                if (part[1] > 0)
+                    setVisibleInputs(prev => ({
+                        ...prev,
+                        [part[0]]: true
+                    }))
+            })
+        }
     }, [initialRecruitment]);
 
     useEffect(() => {
         let recruitmentData: RecruitmentDetail[] = [];
         Object.entries(recruitment).forEach((part) => {
             if (visibleInputs[part[0]] && part[1] > 0) {
-                recruitmentData = [...recruitmentData, { recruitmentRole: partMap[part[0]], recruitmentCount: part[1] }]
+                recruitmentData = [...recruitmentData, { recruitmentRole: part[0] as Role, recruitmentCount: part[1] }]
             }
         });
         onChange(recruitmentData)
@@ -60,14 +62,15 @@ const PartRecruitment: React.FC<PartRecruitmentProps> = ({ initialRecruitment, o
                 <div key={partName} css={partButtonContainer}>
                     <CategoryButton
                         style={partMap[partName]}
-                        selected={visibleInputs[partName]}
-                        onClick={() => handlePartClick(partName)}
+                        selected={visibleInputs[partMap[partName]]}
+                        onClick={() => handlePartClick(partMap[partName])}
                     >
                         {partName}
                     </CategoryButton>
-                    <div css={inputContainer(visibleInputs[partName])}>
+                    <div css={inputContainer(visibleInputs[partMap[partName]])}>
                         <input
                             css={countInputStyle}
+                            value={recruitment[partMap[partName]] > 0 ? recruitment[partMap[partName]] : ""}
                             onChange={(e) => handlePartNumber(partName, e)} />
                         <p>명</p>
                     </div>

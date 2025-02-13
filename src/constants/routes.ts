@@ -26,6 +26,7 @@ const routes = {
   editFinishedPot: "/finished-pot/edit",
   userProfile: "/user",
   createFinishedPot: "/create-finished-pot",
+  editPot: "/pot/edit",
   feed: "/feed",
 } as const;
 

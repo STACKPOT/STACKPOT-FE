@@ -28,7 +28,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
     const [selectedApplyStack, setSelectedApplyStack] = useState<string | null>(null);
 
     const handleEdit = () => {
-        // todo: 팟 수정 페이지로 이동
+        navigate(`${routes.editPot}/${potId}`);
     }
     const handleFinishedPotEdit = () => {
         navigate(`${routes.editFinishedPot}/${potId}`);
