@@ -128,7 +128,7 @@ const router = createBrowserRouter([
         element: <CreateFinishedPot />,
       },
       {
-        path: routes.editPot,
+        path: `${routes.editPot}/:potId`,
         element: <EditPotPage />,
       },
     ],
