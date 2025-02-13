@@ -11,9 +11,9 @@ const useGetSignIn = () => {
       if (data.result) {
         const { accessToken, refreshToken, role } =
           data.result.tokenServiceResponse;
-        sessionStorage.setItem("accessToken", accessToken);
-        sessionStorage.setItem("refreshToken", refreshToken);
-        sessionStorage.setItem("role", role);
+          localStorage.setItem("accessToken", accessToken);
+          localStorage.setItem("refreshToken", refreshToken);
+          localStorage.setItem("role", role);
         if (data.result.isNewUser) {
           navigate(routes.signUp);
         } else {
