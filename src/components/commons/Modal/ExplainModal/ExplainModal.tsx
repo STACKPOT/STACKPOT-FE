@@ -4,6 +4,7 @@ import {
   closeButtonStyle,
   containerStyle,
   contentButtonContainerStyle,
+  deleteButtonStyle,
   modalBackgroundStyle,
   subtitleStyle,
   titleContentContainerStyle,
@@ -11,6 +12,7 @@ import {
 } from "./ExplainModal.style";
 
 interface ExplainModalProps {
+  type?: "normal" | "delete";
   title?: string;
   subtitle?: string;
   children: React.ReactNode;
@@ -21,6 +23,7 @@ interface ExplainModalProps {
 }
 
 const ExplainModal: React.FC<ExplainModalProps> = ({
+  type = "normal",
   title,
   subtitle,
   children,
@@ -39,7 +42,7 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
             {subtitle && <p css={subtitleStyle}>{subtitle}</p>}
             {children}
           </div>
-          <button css={buttonStyle} onClick={onClick} disabled={disabled}>
+          <button css={type === "delete" ? deleteButtonStyle : buttonStyle} onClick={onClick} disabled={disabled}>
             {buttonText}
           </button>
         </div>
