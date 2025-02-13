@@ -12,30 +12,28 @@ import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import theme from "@styles/theme";
 import routes from "@constants/routes";
 import { KaKaoTalkIcon, PotIcon } from "@assets/svgs";
+import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 
 const MyPotMainPage: React.FC = () => {
   const { potId } = useParams();
 
   const tabs = [
-    {
-      label: "업무 현황",
-      path: `${routes.myPot.task}/${potId}`,
-    },
-    {
-      label: "캘린더",
-      path: `${routes.myPot.calendar}/${potId}`,
-    },
+    { label: "업무 현황", path: routes.myPot.potPage.replace(":potId", potId ?? "null") }, 
+    { label: "캘린더", path: routes.myPot.calendar.replace(":potId", potId ?? "null") }, 
   ];
+  const { data } = useGetMyPotTodo({
+    potId: Number(potId),
+    page: 1,
+    size: 1,
+  });
 
-  const title = "STACKPOT";
   const location = useLocation();
-
-  const showViewId = location.pathname === `${routes.myPot.task}/${potId}`;
+  const showViewId = location.pathname === `${routes.myPot.potPage}`;
 
   return (
     <main css={container}>
       <header css={headerStyle}>
-        <div css={textStyle}>{title}</div>
+        <div css={textStyle}>{data?.title ?? null}</div>
         <PotIcon css={iconStyle} />
       </header>
       <div css={tabsContainer}>
