@@ -18,6 +18,7 @@ import { roleImages } from "@constants/roleImage";
 const PotDetail = () => {
   const { potId } = useParams();
   const potIdNumber = Number(potId);
+  console.log(potId)
 
   const { data } = useGetPotDetail(potIdNumber);
 
