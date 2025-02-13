@@ -51,7 +51,8 @@ const MyPotStatusPage: React.FC = () => {
   };
 
   const handleTaskCardClick = (taskId: number) => { 
-    navigate(`${routes.myPot}/${potId}/${taskId}`); 
+    if (!potId) return;
+    navigate(routes.myPot.detail.replace(":potId", potId).replace(":taskId", String(taskId)));
   };
 
   return (
