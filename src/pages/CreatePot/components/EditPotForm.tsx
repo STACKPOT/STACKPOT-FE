@@ -14,18 +14,20 @@ import {
     titleContainer,
     titleStyle,
 } from "./EditPotForm.style";
-import { RecruitmentDetail } from "apis/types/pot";
+import { PotDetail, RecruitmentDetail } from "apis/types/pot";
 import { Dayjs } from "dayjs";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { Participation } from "types/participation";
 import { Button, CategoryButton, PartRecruitment, PotButton } from "@components/index";
 import { participation, participationMap, period } from "@constants/categories";
 import DatePicker from "./DatePicker/DatePicker";
+import { useEffect } from "react";
+import { Role } from "types/role";
 
 interface EditPotFormProps {
     type: "create" | "edit";
     potId?: number;
-    potData?: CreatePotFormData;
+    potData?: PotDetail;
     onCompleted: (data: CreatePotFormData) => void;
     onDelete?: () => void;
 }
@@ -42,15 +44,16 @@ interface CreatePotFormData {
 
 const EditPotForm: React.FC<EditPotFormProps> = ({ type, potData, onCompleted, onDelete }: EditPotFormProps) => {
     const methods = useForm<CreatePotFormData>({
+        mode: "onChange",
         defaultValues: {
-            potName: potData?.potName,
-            potLan: potData?.potLan,
-            potDuration: potData?.potDuration,
-            potModeOfOperation: potData?.potModeOfOperation,
-            potContent: potData?.potContent,
-            potStartDate: potData?.potStartDate,
-            recruitmentDeadline: potData?.recruitmentDeadline,
-            recruitmentDetails: potData?.recruitmentDetails,
+            potName: "",
+            potLan: "",
+            potDuration: undefined,
+            potModeOfOperation: undefined,
+            potContent: "",
+            potStartDate: undefined,
+            recruitmentDeadline: undefined,
+            recruitmentDetails: undefined,
         }
     })
     const {
@@ -87,6 +90,27 @@ const EditPotForm: React.FC<EditPotFormProps> = ({ type, potData, onCompleted, o
     const handleDelete = () => {
         onDelete && onDelete();
     }
+
+    useEffect(() => {
+        if (potData) {
+            setValue("potName", potData.potName)
+            setValue("potLan", potData.potLan)
+            setValue("potDuration", potData.potDuration)
+            setValue("potModeOfOperation", participationMap[potData.potModeOfOperation])
+            setValue("potContent", potData.potContent)
+            setValue("potDuration", potData.potDuration)
+            setValue("potStartDate", potData.potStartDate.split('. ').join('-'));
+            setValue("recruitmentDeadline", potData.recruitmentDeadline.split('. ').join('-'));
+            setValue(
+                "recruitmentDetails",
+                Object.entries(potData.recruitingMembers).map((part) =>
+                ({
+                    recruitmentRole: part[0] as Role,
+                    recruitmentCount: part[1]
+                })))
+            methods.trigger();
+        }
+    }, [potData]);
 
     return (
         <FormProvider {...methods}>
@@ -156,7 +180,9 @@ const EditPotForm: React.FC<EditPotFormProps> = ({ type, potData, onCompleted, o
                     </div>
                     <div css={partStyle}>
                         모집 파트
-                        <PartRecruitment onChange={(recruitment) => setValue("recruitmentDetails", recruitment)} />
+                        <PartRecruitment
+                            initialRecruitment={potData?.recruitingMembers}
+                            onChange={(recruitment) => setValue("recruitmentDetails", recruitment)} />
                     </div>
                     <label css={labelStyle}>
                         사용 언어
