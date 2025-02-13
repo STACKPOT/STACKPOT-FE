@@ -31,7 +31,7 @@ interface EditPotFormProps {
     onCompleted: (data: CreatePotFormData) => void;
     onDelete?: () => void;
 }
-interface CreatePotFormData {
+export interface CreatePotFormData {
     potName: string;
     potLan: string;
     potDuration: string;

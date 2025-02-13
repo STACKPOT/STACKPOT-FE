@@ -7,6 +7,7 @@ import useDeletePot from "apis/hooks/pots/useDeletePot";
 import { Modal } from "@components/index";
 import { useState } from "react";
 import routes from "@constants/routes";
+import { CreatePotFormData } from "@pages/CreatePot/components/EditPotForm";
 
 const EditPot = () => {
     const navigate = useNavigate();
@@ -18,6 +19,14 @@ const EditPot = () => {
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+    const handleEdit = (data: CreatePotFormData) => {
+        editPot({
+            potId: potIdNumber,
+            body: data
+        }, {
+            onSuccess: () => navigate(`${routes.potDetail}/${potId}`)
+        })
+    }
     const handleDeletePot = () => {
         deletePot(potIdNumber, {
             onSuccess: () => {
@@ -32,7 +41,7 @@ const EditPot = () => {
                 type="edit"
                 potId={potIdNumber}
                 potData={data?.potDetail}
-                onCompleted={(data) => editPot({ potId: potIdNumber, body: data })}
+                onCompleted={handleEdit}
                 onDelete={() => setShowDeleteModal(true)} />
             {showDeleteModal &&
                 <Modal
