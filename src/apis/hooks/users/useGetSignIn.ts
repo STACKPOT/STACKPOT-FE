@@ -9,11 +9,11 @@ const useGetSignIn = () => {
     mutationFn: (code: string) => getKakaoLogIn(code),
     onSuccess: (data) => {
       if (data.result) {
-        const { accessToken, refreshToken, role } =
-          data.result.tokenServiceResponse;
-          localStorage.setItem("accessToken", accessToken);
-          localStorage.setItem("refreshToken", refreshToken);
-          localStorage.setItem("role", role);
+        const { accessToken, refreshToken } = data.result.tokenServiceResponse;
+        const role = data.result.role ?? null;
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("role", role ?? "");
         if (data.result.isNewUser) {
           navigate(routes.signUp);
         } else {

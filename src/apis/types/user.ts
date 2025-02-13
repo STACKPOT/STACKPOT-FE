@@ -3,12 +3,12 @@ import { Role } from "types/role";
 export interface LogInResponse {
   tokenServiceResponse: TokenServiceResponse;
   isNewUser: boolean;
+  role: Role | null;
 }
 
 export interface TokenServiceResponse {
   accessToken: string;
   refreshToken: string;
-  role: Role;
 }
 
 export interface GetUserResponse {
