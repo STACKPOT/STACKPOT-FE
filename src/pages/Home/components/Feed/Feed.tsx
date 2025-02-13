@@ -15,8 +15,12 @@ import { useInView } from "react-intersection-observer";
 import { LoadingSpinnerIcon } from "@assets/svgs";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 const Feed = () => {
+  const navigate = useNavigate();
+
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
   const [sort, setSort] = useState<string>("new");
@@ -57,6 +61,11 @@ const Feed = () => {
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  const handleCardClick = (feedId: number) => {
+    navigate(`${routes.feed}/${feedId}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <div css={contentHeader}>
@@ -88,14 +97,14 @@ const Feed = () => {
           <Skeleton css={cardStyle} />
         ) : data?.pages && data.pages.length > 0 ? (
           data.pages.map((page, pageIndex) => (
-            <div css={contentBody} key={pageIndex}>
+            <>
               {page.result?.feeds && page.result.feeds.length > 0 ? (
                 page.result.feeds.map((item, itemIndex) => {
                   const isLastItem =
                     pageIndex === data.pages.length - 1 &&
                     itemIndex === page.result.feeds.length - 1;
                   return (
-                    <div key={item.id} ref={isLastItem ? ref : null}>
+                    <div key={item.feedId} ref={isLastItem ? ref : null}>
                       <PostCard
                         role={item.writerRole}
                         nickname={item.writer}
@@ -103,6 +112,8 @@ const Feed = () => {
                         title={item.title}
                         content={item.content}
                         likeCount={item.likeCount}
+                        isLiked={item.isLiked}
+                        onClick={() => handleCardClick(item.feedId)}
                       />
                     </div>
                   );
@@ -110,7 +121,7 @@ const Feed = () => {
               ) : (
                 <p>게시물이 없습니다.</p>
               )}
-            </div>
+            </>
           ))
         ) : (
           <p>게시물이 없습니다.</p>
