@@ -79,6 +79,14 @@ export interface TodoItem {
   status: string;
 }
 
+export interface TaskPatch {
+  title: string;
+  deadline: string;
+  taskboardStatus: string;
+  description: string;
+  participants: number[];
+}
+
 export interface MyPotResponse {
   map: any;
   potId: number;
