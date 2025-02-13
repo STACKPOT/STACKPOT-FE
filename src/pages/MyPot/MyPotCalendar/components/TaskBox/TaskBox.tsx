@@ -29,7 +29,7 @@ const TaskBox: React.FC<TaskBoxProps> = ({ task }) => {
           <ProfileIcon />
           <p css={nickNameStyle}>{task.nickName}</p>
         </div>
-        <MemberGroup profileImageList={task.profileImageList} />
+        <MemberGroup memberRoleList={task.profileImageList} />
       </div>
       <div css={dividerStyle} />
     </div>

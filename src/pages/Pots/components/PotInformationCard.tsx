@@ -9,61 +9,67 @@ import {
   titleStyle,
 } from "./PotInformationCard.style";
 import { useNavigate } from "react-router-dom";
+import { Role } from "types/role";
+import { roleImages } from "@constants/roleImage";
+import { PotStatus } from "types/potStatus";
 
 interface PotInformationCardProps {
-  id: number;
+  potId: number;
   type: "applied" | "made";
-  title: string;
-  profileImage: string;
-  nickname: string;
+  userId: number;
+  userRole: Role;
+  userNickname: string;
+  potStatus: PotStatus;
+  potName: string;
+  potStartDate: string;
+  potDuration: string;
+  potLan: string;
+  potModeOfOperation: string;
+  potContent: string;
+  recruitmentDetails: string;
   dday: string;
-  startDate: string;
-  period: string;
-  method: string;
-  stacks: string;
-  languages: string;
   onButtonClick: (id: number) => void;
 }
 const PotInformationCard: React.FC<PotInformationCardProps> = ({
-  id,
+  potId,
   type,
-  title,
-  profileImage,
-  nickname,
+  potName,
+  userRole,
+  userNickname,
   dday,
-  startDate,
-  period,
-  method,
-  stacks,
-  languages,
-  onButtonClick,
+  potStartDate,
+  potDuration,
+  potModeOfOperation,
+  recruitmentDetails,
+  potLan,
+  onButtonClick
 }: PotInformationCardProps) => {
   const navigate = useNavigate();
   const handleClickPot = (id: number) => {
     navigate(`/pot/${id}`);
-  };
+  }
 
   return (
-    <div css={container} onClick={() => handleClickPot(id)}>
+    <div css={container} onClick={() => handleClickPot(potId)}>
       <div css={titleContainer}>
-        <h1 css={titleStyle}>{title}</h1>
-        <PotButton onClick={() => onButtonClick(id)}>
+        <h1 css={titleStyle}>{potName}</h1>
+        <PotButton onClick={() => onButtonClick(potId)}>
           {(type === "applied" && "지원 취소하기") || "팟 소개 수정"}
         </PotButton>
       </div>
       <div css={profileContainer}>
-        <img css={profileStyle} src={profileImage} alt="profile" />
-        <p css={nicknameStyle}>{nickname}</p>
+        <img css={profileStyle} src={roleImages[userRole]} alt="profile" />
+        <p css={nicknameStyle}>{userNickname}</p>
         <div css={ddayBadgeWrapper}>
           <DdayBadge days={dday} />
         </div>
       </div>
       <PotInformation
-        startDate={startDate}
-        period={period}
-        method={method}
-        stacks={stacks}
-        languages={languages}
+        startDate={potStartDate}
+        period={potDuration}
+        method={potModeOfOperation}
+        stacks={recruitmentDetails}
+        languages={potLan}
       />
     </div>
   );

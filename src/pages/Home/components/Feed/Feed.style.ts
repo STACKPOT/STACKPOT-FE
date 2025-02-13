@@ -1,14 +1,7 @@
-import { css, keyframes } from "@emotion/react";
+import { css } from "@emotion/react";
+import { spin } from "@styles/animation";
 import theme from "@styles/theme";
 
-const spin = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
 
 export const contentHeader = css`
   display: flex;

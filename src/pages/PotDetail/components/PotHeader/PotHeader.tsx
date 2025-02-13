@@ -31,7 +31,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         navigate(`${routes.editPot}/${potId}`);
     }
     const handleFinishedPotEdit = () => {
-        navigate(routes.editFinishedPot.replace(":potId", potId.toString()));
+        navigate(`${routes.editFinishedPot}/${potId}`);
     }
     const handleCancelApplyModalConfirm = () => {
         cancelApply(potId,

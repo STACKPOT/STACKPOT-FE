@@ -28,6 +28,7 @@ interface PostCardProps {
   likeCount: number;
   isLiked: boolean;
   profileImage?: string;
+  onClick: () => void;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -38,6 +39,7 @@ const PostCard: React.FC<PostCardProps> = ({
   content,
   likeCount,
   isLiked,
+  onClick,
 }: PostCardProps) => {
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
@@ -47,10 +49,7 @@ const PostCard: React.FC<PostCardProps> = ({
     setIsLike(!isLike);
     setLikes((prev) => (isLike ? prev - 1 : prev + 1));
   };
-  const handleClickCard = () => {
-    // todo: 게시글 페이지로 이동
-    console.log("click card");
-  };
+
   const handleEdit = () => {
     // todo: 수정 페이지로 이동
   };
@@ -61,7 +60,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const profileImage = roleImages[role];
 
   return (
-    <div css={cardStyle} onClick={handleClickCard}>
+    <div css={cardStyle} onClick={onClick}>
       <div css={headerContainer}>
         <div css={profileContainer}>
           <img css={profileImageStyle} src={profileImage} alt="profile" />

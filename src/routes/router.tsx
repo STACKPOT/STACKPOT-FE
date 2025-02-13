@@ -28,6 +28,7 @@ import {
   CallbackPage,
   CreateFinishedPot,
   EditPotPage,
+  FeedDetailPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
-        path: routes.potDetail,
+        path: `${routes.potDetail}/:potId`,
         element: <PotDetailPage />,
       },
       {
@@ -116,11 +117,11 @@ const router = createBrowserRouter([
         element: <EditPostPage />,
       },
       {
-        path: routes.editFinishedPot,
+        path: `${routes.editFinishedPot}/:potId`,
         element: <EditFinishedPotPage />,
       },
       {
-        path: routes.userProfile,
+        path: `${routes.userProfile}/:userId`,
         element: <UserPage />,
       },
       {
@@ -130,6 +131,10 @@ const router = createBrowserRouter([
       {
         path: `${routes.editPot}/:potId`,
         element: <EditPotPage />,
+      },
+      {
+        path: `${routes.feed}/:feedId`,
+        element: <FeedDetailPage />,
       },
     ],
   },

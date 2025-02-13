@@ -23,6 +23,7 @@ import EditFinishedPotPage from "./EditFinishedPot/EditFinishedPot";
 import UserPage from "./UserPage/UserPage";
 import CreateFinishedPot from "./CreateFinishedPot/CreateFinishedPot";
 import EditPotPage from "./EditPot/EditPot";
+import FeedDetailPage from "./FeedDetail/FeedDetail";
 
 import MyPotPage from "./MyPot/MyPot";
 
@@ -53,4 +54,5 @@ export {
   MyPotPage,
   CreateFinishedPot,
   EditPotPage,
+  FeedDetailPage,
 };
