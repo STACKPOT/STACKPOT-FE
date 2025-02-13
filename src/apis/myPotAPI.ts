@@ -1,5 +1,5 @@
 import { authApiGet, authApiPatch } from "./apiUtils";  
-import { Result, Todo, TaskResponse, MyPotResponse } from "./types/myPot"; 
+import { Result, Todo, TaskResponse, MyPotResponse, TaskDetailResponse } from "./types/myPot"; 
 
 export const getTodo = async (potId: number, page: number, size: number) => {
   const params = { page, size };
@@ -16,6 +16,10 @@ export const patchMyTodoStatus = async (potId: number, todoId: number) => {
 
 export const getTask = async (potId: number) => {
   return authApiGet<TaskResponse>(`/my-pots/${potId}/tasks`);
+};
+
+export const getTaskDetail = async (potId: number, taskId: number) => {
+  return authApiGet<TaskDetailResponse>(`/my-pots/${potId}/tasks/${taskId}`);
 };
 
 export const getMyPot = async () => {

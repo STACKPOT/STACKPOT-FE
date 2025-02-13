@@ -54,6 +54,20 @@ export interface TaskResponse {
   CLOSED?: Task[];
 }
 
+export interface TaskDetailResponse {
+  taskboardId: number;
+  creatorUserId: number;
+  creatorNickname: string;
+  creatorRole: string;
+  title: string;
+  description: string;
+  deadLine: string;
+  status: APITaskStatus;
+  potId: number;
+  participants: Participant[];
+  dday: string;
+}
+
 export interface TodoUpdateRequest {
   potId: number;
   data: TodoItem[];

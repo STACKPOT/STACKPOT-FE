@@ -51,7 +51,7 @@ const MyPotStatusPage: React.FC = () => {
   };
 
   const handleTaskCardClick = (taskId: number) => { 
-    navigate(`${routes.myPot.base}/${taskId}`); 
+    navigate(`${routes.myPot}/${potId}/${taskId}`); 
   };
 
   return (
@@ -74,7 +74,7 @@ const MyPotStatusPage: React.FC = () => {
 
       <div css={toDoGirdContainer}>
         {(["진행 전", "진행 중", "완료"] as AnotherTaskStatus[]).map((status) => {
-          const safeTaskData = taskData?.result || { OPEN: [], IN_PROGRESS: [], CLOSED: [] }; // 🔹 result에서 안전하게 가져옴
+          const safeTaskData = taskData?.result || { OPEN: [], IN_PROGRESS: [], CLOSED: [] };
 
           const filteredTasks = Object.entries(safeTaskData)
             .filter(([apiStatus]) => apiToDisplayStatus[apiStatus] === status)
