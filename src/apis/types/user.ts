@@ -30,3 +30,10 @@ export interface SignInResponse {
   id: number;
   role: Role;
 }
+
+export interface PatchUserProfileUpdateParams {
+  role: Role | undefined;
+  interest: string;
+  userIntroduction: string;
+  kakaoId: string;
+};
