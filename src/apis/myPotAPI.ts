@@ -1,5 +1,5 @@
-import { authApiGet, authApiPatch } from "./apiUtils";  
-import { Result, Todo, TaskResponse, MyPotResponse, TaskDetailResponse } from "./types/myPot"; 
+import { authApiGet, authApiPatch, authApiDelete } from "./apiUtils";  
+import { Result, Todo, TaskResponse, MyPotResponse, TaskDetailResponse, TaskPatch } from "./types/myPot"; 
 
 export const getTodo = async (potId: number, page: number, size: number) => {
   const params = { page, size };
@@ -21,6 +21,14 @@ export const getTask = async (potId: number) => {
 export const getTaskDetail = async (potId: number, taskId: number) => {
   return authApiGet<TaskDetailResponse>(`/my-pots/${potId}/tasks/${taskId}`);
 };
+
+export const deleteTask = async (potId: number, taskId: number) => {
+  return authApiDelete(`/my-pots/${potId}/tasks/${taskId}`);
+};
+
+export const patchTask = async (potId: number, taskId: number, data: TaskPatch) => {
+  return authApiPatch(`/my-pots/${potId}/tasks/${taskId}`, data);
+}
 
 export const getMyPot = async () => {
   return authApiGet<MyPotResponse[]>("/my-pots");

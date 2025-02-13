@@ -18,7 +18,6 @@ const TodoStatusSection: React.FC<TodoStatusSectionProps> = ({
   onOpenModal,
   onTaskCardClick,
 }) => {
-  console.log(tasks);
   return (
   <div css={toDoStatusContainer}>
     <div css={toDoStatusHeader}>

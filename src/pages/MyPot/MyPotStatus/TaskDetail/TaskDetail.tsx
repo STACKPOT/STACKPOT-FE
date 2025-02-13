@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   leftContainer,
@@ -23,13 +23,14 @@ import {
   dropdownWrapperStyle,
 } from "./TaskDetail.style";
 import { DdayBadge, StateBadge, MyFeedDropdown } from "@components/index";
-import { CalendarIcon, PotIcon } from "@assets/svgs"; 
+import { CalendarIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { headerStyle } from "@pages/MyPot/MyPotMain.style";
 import { statusTextStyle } from "../MyPotStatus.style";
 import routes from "@constants/routes";
-import { getTaskDetail } from "apis/myPotAPI";
-import { TaskDetailResponse, APITaskStatus } from "apis/types/myPot";
+import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
+import { useDeleteTask } from "apis/hooks/myPots/useDeleteMyTask";
+import { AboutWorkModalWrapper } from "../../components/index";
 import { MushroomImage, CarrotImage, OnionImage, BroccoliImage } from "@assets/images";
 
 const roleToImage: Record<string, string> = {
@@ -39,7 +40,7 @@ const roleToImage: Record<string, string> = {
   BACKEND: OnionImage,
 };
 
-const apiToDisplayStatus: Record<APITaskStatus, "진행 전" | "진행 중" | "완료"> = {
+const apiToDisplayStatus: Record<"OPEN" | "IN_PROGRESS" | "CLOSED", "진행 전" | "진행 중" | "완료"> = {
   OPEN: "진행 전",
   IN_PROGRESS: "진행 중",
   CLOSED: "완료",
@@ -48,36 +49,45 @@ const apiToDisplayStatus: Record<APITaskStatus, "진행 전" | "진행 중" | "�
 const TaskDetailPage: React.FC = () => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
-  const [task, setTask] = useState<TaskDetailResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchTaskDetail = async () => {
-      if (!potId || !taskId) return;
-      try {
-        const response = await getTaskDetail(Number(potId), Number(taskId));
-        setTask(response.result ?? null);
-      } catch (err) {
-        setError("데이터를 불러오는 중 오류가 발생했습니다.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    fetchTaskDetail();
-  }, [potId, taskId]);
+  const { data: task, isLoading, error } = useGetMyPotTaskDetail(Number(potId), Number(taskId));
+  const { mutate: deleteTask, isPending } = useDeleteTask();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState("업무 수정");
+  const [activeStatus, setActiveStatus] = useState<"진행 전" | "진행 중" | "완료" | null>(null);
 
   const handlePrev = () => {
-    navigate(`${routes.myPot}/${potId}`);
+    navigate(routes.myPot.potPage.replace(":potId", potId ?? "1"));
   };
 
-  if (loading) return <p>로딩 중...</p>;
-  if (error) return <p>{error}</p>;
+  const handleDeleteTask = (potId: number, taskId: number) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      deleteTask({ potId, taskId });
+      navigate(routes.myPot.potPage.replace(":potId", String(potId)));
+    }
+  };
+
+  const handleOpenModal = () => {
+    setModalTitle("업무 수정하기");
+    const convertedStatus = task?.status ? apiToDisplayStatus[task.status] : null;
+    setActiveStatus(convertedStatus);
+    setIsModalOpen(true);
+  };
+
+  if (isLoading || isPending) return <p>로딩 중...</p>;
+  if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
   if (!task) return <p>데이터를 찾을 수 없습니다.</p>;
 
   return (
     <>
+      <AboutWorkModalWrapper
+        isModalOpen={isModalOpen}
+        activeStatus={activeStatus} 
+        modalTitle={modalTitle}
+        onClose={() => setIsModalOpen(false)}
+      />
+
       <div css={titleContainer}>
         <div css={leftContainer}>
           <button onClick={handlePrev} css={prevButtonStyle}>
@@ -87,18 +97,12 @@ const TaskDetailPage: React.FC = () => {
         </div>
         <div css={rightContainer}>
           <StateBadge content={apiToDisplayStatus[task.status]} />
-          
-          <div
-            css={dropdownWrapperStyle} 
-            onClick={(event) => {
-              event.stopPropagation(); 
-            }}
-          >
+          <div css={dropdownWrapperStyle} onClick={(event) => event.stopPropagation()}>
             <MyFeedDropdown
               topMessage="수정하기"
               bottomMessage="삭제하기"
-              onTop={() => alert("수정하기 클릭됨")}
-              onBottom={() => alert("삭제하기 클릭됨")}
+              onTop={handleOpenModal}
+              onBottom={() => handleDeleteTask(Number(potId), Number(taskId))}
             />
           </div>
         </div>
@@ -132,7 +136,6 @@ const TaskDetailPage: React.FC = () => {
           </div>
         ))}
       </div>
-
     </>
   );
 };

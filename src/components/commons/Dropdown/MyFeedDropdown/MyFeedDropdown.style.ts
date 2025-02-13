@@ -5,7 +5,7 @@ export const dropdownStyle = css`
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  z-index: 1050;
+  z-index: 3000;
   background-color: white;
   border: 1px solid ${theme.color.object.alternative};
   border-radius: 1.6rem;
@@ -14,9 +14,9 @@ export const dropdownStyle = css`
   height: auto;
   display: flex;
   flex-direction: column;
-  position: fixed;
   background-color: ${theme.color.base.white};
 `;
+
 
 export const iconStyle = css`
   cursor: pointer;

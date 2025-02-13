@@ -62,7 +62,6 @@ const MyPotStatusPage: React.FC = () => {
         activeStatus={activeStatus}
         modalTitle={modalTitle}
         onClose={() => setIsModalOpen(false)}
-        onSave={() => setIsModalOpen(false)}
       />
       <MyPotStatusHeader />
 
