@@ -131,7 +131,7 @@ const Setting = () => {
             </div>
             <div css={content(false)}>
               <div css={contentHeader}>관심사</div>
-              <p css={contentBody}>관심사는 여러 개 선택할 수 있어요.</p>
+              <p css={contentBody}>가장 관심있는 분야를 선택해주세요.</p>
               <div css={categoryContainer}>
                 {interests.map((interestName) => (
                   <div key={interestName} css={categories}>
@@ -195,7 +195,7 @@ const Setting = () => {
       {isModalOpen && (
         <Modal
           title="메인 역할을 변경할까요?"
-          message={`메인 역할을 변경할 경우,\n닉네임 또한 [너무 착한 양파]에서 새로운 닉네임으로 변경됩니다.`}
+          message={`메인 역할을 변경할 경우,\n닉네임 또한 [${profile?.nickname}]에서 새로운 닉네임으로 변경됩니다.`}
           onConfirm={handleConfirmRole}
           onCancel={handleCloseRoleModal}
         />
