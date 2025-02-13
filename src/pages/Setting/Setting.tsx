@@ -18,7 +18,7 @@ import {
   categories,
 } from "./Setting.style";
 import { PotIcon } from "@assets/svgs";
-import { Button, CategoryButton, Modal, TextField } from "@components/index";
+import { Button, CategoryButton, ExplainModal, Modal, PotButton, TextField } from "@components/index";
 import { useState } from "react";
 import { interests, partMap } from "@constants/categories";
 
@@ -54,11 +54,11 @@ const Setting = () => {
     setIntroduction(e.target.value);
   };
 
-  function handleClick(category: string): void {
+  function handleClick(): void {
     setIsExplainOpen(true);
   }
 
-  function handleSave(): void {}
+  function handleSave(): void { }
 
   const handleConfirm = () => {
     if (pendingCategory) {
@@ -75,7 +75,7 @@ const Setting = () => {
 
   return (
     <main>
-      <div css={container}>
+      <form css={container}>
         <div css={titleContent}>
           <div css={title}>
             <p>개인정보 수정</p>
@@ -149,13 +149,12 @@ const Setting = () => {
           <div css={content(false)}>
             <div css={contentHeader}>
               <p>계정 탈퇴하기</p>
-              <CategoryButton
-                style="PLANNING"
-                selected={selectedCategory === "participation"}
-                onClick={handleClick}
+              <PotButton
+                type="red"
+                onClick={() => handleClick()}
               >
                 탈퇴하기
-              </CategoryButton>
+              </PotButton>
             </div>
             <p css={contentBody}>그동안 올린 글과 정보가 모두 삭제됩니다.</p>
           </div>
@@ -165,7 +164,7 @@ const Setting = () => {
             저장하기
           </Button>
         </div>
-      </div>
+      </form>
 
       {isModalOpen && (
         <Modal
@@ -174,6 +173,17 @@ const Setting = () => {
           onConfirm={handleConfirm}
           onCancel={handleClose}
         />
+      )}
+      {isExplainOpen && (
+        <ExplainModal
+          type="delete"
+          title="탈퇴하시겠습니까?"
+          buttonText="탈퇴하기"
+          subtitle={`탈퇴 후 30일 이내에는 계정을 복구할 수 있습니다.\n이후에는 모든 데이터가 영구적으로 삭제됩니다`}
+          onButtonClick={() => { }}
+          onCancel={() => setIsExplainOpen(false)}>
+          <></>
+        </ExplainModal>
       )}
     </main>
   );

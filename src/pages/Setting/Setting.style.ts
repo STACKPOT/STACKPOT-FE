@@ -71,7 +71,6 @@ export const categoryContainer = css`
 `;
 
 export const textStyle = css`
-  width: 38rem;
   height: 5.2rem;
 `;
 
@@ -92,6 +91,7 @@ export const textareaStyle = (isOverLimit: boolean) => css`
   border-radius: 1.2rem;
   ${theme.font.caption3};
   font-family: "Pretendard";
+  resize: none;
   border: 1px solid
     ${isOverLimit
       ? theme.color.feedback.negative
