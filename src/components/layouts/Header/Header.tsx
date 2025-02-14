@@ -1,5 +1,6 @@
 import { ArrowDropdownIcon, Logo, SearchIcon } from "@assets/svgs";
 import {
+  guestProfileStyle,
   headerStyle,
   iconContainer,
   iconStyle,
@@ -13,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { roleImages } from "@constants/roleImage";
 import { ProfileImage } from "@assets/images";
+import usePostLogout from "apis/hooks/users/userPostLogout";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -27,6 +29,10 @@ const Header: React.FC = () => {
 &scope=account_email
 &prompt=login`;
 
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  const { mutate } = usePostLogout();
+
   const handleClick = () => {
     window.location.href = link;
   };
@@ -37,6 +43,9 @@ const Header: React.FC = () => {
 
   const handleMenuClick = () => {
     //드롭다운 연결
+    if (refreshToken) {
+      mutate(refreshToken);
+    }
   };
 
   useEffect(() => {
@@ -63,7 +72,11 @@ const Header: React.FC = () => {
             onClick={handleSearchClick}
           />
           {role === "" ? (
-            <img css={profileStyle} src={ProfileImage} alt="profileImage" />
+            <img
+              css={guestProfileStyle}
+              src={ProfileImage}
+              alt="profileImage"
+            />
           ) : (
             <div css={profileContainer}>
               <img

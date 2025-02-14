@@ -30,6 +30,11 @@ export const profileStyle = css`
   border-radius: 50%;
 `;
 
+export const guestProfileStyle = css`
+  width: 3.2rem;
+  margin-right: 3.2rem;
+`;
+
 export const profileContainer = css`
   display: flex;
   gap: 1.2rem;
