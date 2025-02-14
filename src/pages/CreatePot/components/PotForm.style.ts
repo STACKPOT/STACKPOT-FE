@@ -31,7 +31,7 @@ export const iconStyle = css`
 export const formContainer = css`
   padding: 3.6rem 10rem;
   border: 1px solid ${theme.color.object.alternative};
-  margin: 3.2rem 0 4.8rem 0;
+  margin-top: 3.2rem;
   border-radius: 32px;
   display: flex;
   flex-direction: column;
