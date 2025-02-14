@@ -48,6 +48,7 @@ const SignUp = () => {
     watch,
     formState: { isValid },
   } = methods;
+  
   const { mutate } = usePatchSignIn();
 
   const [role, interest, kakaoId, contractsAgreed] = watch([

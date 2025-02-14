@@ -31,7 +31,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         // todo: 팟 수정 페이지로 이동
     }
     const handleFinishedPotEdit = () => {
-        navigate(routes.editFinishedPot.replace(":potId", potId.toString()));
+        navigate(`${routes.editFinishedPot}/${potId}`);
     }
     const handleCancelApplyModalConfirm = () => {
         cancelApply(potId,

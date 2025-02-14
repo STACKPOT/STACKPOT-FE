@@ -5,7 +5,6 @@ import {
   titleStyle,
 } from "./OnGoingPotCard.style";
 import { MemberGroup, PotButton } from "@components/index";
-import { roleImages } from "@constants/roleImage";
 import routes from "@constants/routes";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/role";
@@ -13,7 +12,7 @@ import { Role } from "types/role";
 interface OnGoingPotCardProps {
   id: number;
   title: string;
-  memberList: string[];
+  memberList: Role[];
   isMyPot: boolean;
 }
 const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({
@@ -31,13 +30,11 @@ const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({
     // todo: 팟 끓이기 페이지로 이동
   };
 
-  const memberImage = memberList.map((role) => roleImages[role as Role]);
-
   return (
     <div css={container} onClick={() => handleClickPot(id)}>
       <div css={contentContainer}>
         <p css={titleStyle}>{title}</p>
-        <MemberGroup profileImageList={memberImage} />
+        <MemberGroup memberRoleList={memberList} />
       </div>
       {isMyPot && (
         <div css={buttonContainer}>
