@@ -55,7 +55,9 @@ const Header: React.FC = () => {
     setRole(role);
   }, [localStorage.getItem("accessToken"), localStorage.getItem("role")]);
 
-  const roleProfileImage = roleImages[role];
+  const roleProfileImage = roleImages[role as keyof typeof roleImages];
+
+  const guestMode = role === "DEFAULT";
 
   return (
     <header css={headerStyle}>
@@ -71,26 +73,21 @@ const Header: React.FC = () => {
             css={searchIconStyle}
             onClick={handleSearchClick}
           />
-          {role === "" ? (
+
+          <div css={profileContainer}>
             <img
-              css={guestProfileStyle}
-              src={ProfileImage}
+              css={guestMode ? guestProfileStyle : profileStyle}
+              src={roleProfileImage}
               alt="profileImage"
             />
-          ) : (
-            <div css={profileContainer}>
-              <img
-                css={profileStyle}
-                src={roleProfileImage}
-                alt="profileImage"
-              />
+            {!guestMode && (
               <ArrowDropdownIcon
                 type="button"
                 css={iconStyle}
                 onClick={handleMenuClick}
               />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       )}
     </header>
