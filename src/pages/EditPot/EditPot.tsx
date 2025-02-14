@@ -1,4 +1,3 @@
-import { EditPotForm } from "@pages/CreatePot/components"
 import { mainContainer } from "./Editpot.style"
 import { useNavigate, useParams } from "react-router-dom"
 import usePatchPot from "apis/hooks/pots/usePatchPot";
@@ -7,7 +6,7 @@ import useDeletePot from "apis/hooks/pots/useDeletePot";
 import { Modal } from "@components/index";
 import { useState } from "react";
 import routes from "@constants/routes";
-import { CreatePotFormData } from "@pages/CreatePot/components/EditPotForm";
+import PotForm, { PotFormData } from "@pages/CreatePot/components/PotForm";
 
 const EditPot = () => {
     const navigate = useNavigate();
@@ -19,7 +18,7 @@ const EditPot = () => {
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    const handleEdit = (data: CreatePotFormData) => {
+    const handleEdit = (data: PotFormData) => {
         editPot({
             potId: potIdNumber,
             body: data
@@ -37,7 +36,7 @@ const EditPot = () => {
 
     return (
         <main css={mainContainer}>
-            <EditPotForm
+            <PotForm
                 type="edit"
                 potId={potIdNumber}
                 potData={data?.potDetail}

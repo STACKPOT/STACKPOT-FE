@@ -1,7 +1,7 @@
 import DatePicker from "./DatePicker/DatePicker";
-import EditPotForm from "./EditPotForm";
+import PotForm from "./PotForm";
 
 export {
     DatePicker,
-    EditPotForm,
+    PotForm,
 };

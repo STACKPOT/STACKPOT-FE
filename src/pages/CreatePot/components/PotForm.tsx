@@ -13,7 +13,7 @@ import {
     textareaStyle,
     titleContainer,
     titleStyle,
-} from "./EditPotForm.style";
+} from "./PotForm.style";
 import { PotDetail, RecruitmentDetail } from "apis/types/pot";
 import dayjs, { Dayjs } from "dayjs";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
@@ -24,14 +24,14 @@ import DatePicker from "./DatePicker/DatePicker";
 import { useEffect } from "react";
 import { Role } from "types/role";
 
-interface EditPotFormProps {
+interface PotFormProps {
     type: "create" | "edit";
     potId?: number;
     potData?: PotDetail;
-    onCompleted: (data: CreatePotFormData) => void;
+    onCompleted: (data: PotFormData) => void;
     onDelete?: () => void;
 }
-export interface CreatePotFormData {
+export interface PotFormData {
     potName: string;
     potLan: string;
     potDuration: string;
@@ -42,8 +42,8 @@ export interface CreatePotFormData {
     recruitmentDetails: RecruitmentDetail[];
 }
 
-const EditPotForm: React.FC<EditPotFormProps> = ({ type, potData, onCompleted, onDelete }: EditPotFormProps) => {
-    const methods = useForm<CreatePotFormData>({
+const PotForm: React.FC<PotFormProps> = ({ type, potData, onCompleted, onDelete }: PotFormProps) => {
+    const methods = useForm<PotFormData>({
         mode: "onChange",
         defaultValues: {
             potName: "",
@@ -82,7 +82,7 @@ const EditPotForm: React.FC<EditPotFormProps> = ({ type, potData, onCompleted, o
         }
     }
 
-    const onSubmit: SubmitHandler<CreatePotFormData> = (data: CreatePotFormData) => {
+    const onSubmit: SubmitHandler<PotFormData> = (data: PotFormData) => {
         if (potDuration && potModeOfOperation && potStartDate && recruitmentDeadline) {
             onCompleted(data)
         }
@@ -202,4 +202,4 @@ const EditPotForm: React.FC<EditPotFormProps> = ({ type, potData, onCompleted, o
         </FormProvider>
     )
 }
-export default EditPotForm;
+export default PotForm;
