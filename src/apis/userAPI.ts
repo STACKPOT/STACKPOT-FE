@@ -5,6 +5,7 @@ import {
   postSignInPayload,
   SignInResponse,
   GetUserResponse,
+  NicknameResponse,
 } from "./types/user";
 
 export const getKakaoLogIn = async (code: string) => {
@@ -14,12 +15,20 @@ export const getKakaoLogIn = async (code: string) => {
 export const GetMyUser = async () => {
   return authApiGet<GetUserResponse>("/users");
 };
-export const patchSignIn = async (data: postSignInPayload) => {
-  return authApiPatch<SignInResponse>("/users/profile", { data });
+export const patchSignIn = async ({
+  role,
+  interest,
+  kakaoId,
+}: postSignInPayload) => {
+  return authApiPatch<SignInResponse>("/users/profile", {
+    role,
+    interest,
+    kakaoId,
+  });
 };
 
 export const getNickname = async (role: Role) => {
-  return authApiGet("/users/nickname", { role });
+  return authApiGet<NicknameResponse>("/users/nickname", { role });
 };
 
 export const postNickname = async (nickname: string) => {

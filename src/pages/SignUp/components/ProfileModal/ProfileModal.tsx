@@ -16,7 +16,7 @@ import { useAuthStore } from "stores/useAuthStore";
 import { roleDescription, roleToVeggie } from "@constants/profileRole";
 
 interface ProfileModalProps {
-  role: Role | undefined;
+  role: Role;
   onModalCancel: () => void;
 }
 const ProfileModal: React.FC<ProfileModalProps> = ({
@@ -26,7 +26,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   const profileImage = roleImages[role];
   const [nickname, setNickname] = useState<string>("");
 
-  const { mutate: getNickname, isPending } = useGetNickname(role);
+  const { mutate: getNickname, isPending } = useGetNickname();
   const { mutate: postNickname } = usePostNickname();
 
   const setRole = useAuthStore((state) => state.setRole);
@@ -34,7 +34,9 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   const handleClick = () => {
     getNickname(role, {
       onSuccess: (response) => {
-        setNickname(response.result);
+        if (response.result?.nickname) {
+          setNickname(nickname);
+        }
       },
     });
   };
@@ -42,7 +44,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   const handleConfirm = () => {
     postNickname(nickname);
     if (role) {
-      setRole(role ?? "DEFAULT");
+      setRole(role);
     }
   };
 

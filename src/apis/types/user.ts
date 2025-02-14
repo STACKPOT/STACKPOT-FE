@@ -22,7 +22,7 @@ export interface GetUserResponse {
   userIntroduction: string;
 }
 export interface postSignInPayload {
-  role: Role | undefined;
+  role: Role;
   interest: string;
   kakaoId: string;
 }
@@ -30,4 +30,8 @@ export interface postSignInPayload {
 export interface SignInResponse {
   id: number;
   role: Role;
+}
+
+export interface NicknameResponse {
+  nickname: string;
 }

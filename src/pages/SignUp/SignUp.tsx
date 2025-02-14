@@ -24,7 +24,7 @@ import { Role } from "types/role";
 
 type SignInFormData = {
   kakaoId: string;
-  role: Role | undefined;
+  role: Role;
   interest: string;
 };
 
@@ -36,7 +36,7 @@ const SignUp = () => {
     mode: "onChange",
     defaultValues: {
       kakaoId: "",
-      role: undefined,
+      role: "DEFAULT" as Role,
       interest: "",
       contractsAgreed: false,
     },
@@ -109,7 +109,7 @@ const SignUp = () => {
           </Button>
         </form>
       </FormProvider>
-      {isModalOpen && (
+      {isModalOpen && responseData?.role && (
         <ProfileModal onModalCancel={handleCancel} role={responseData?.role} />
       )}
     </main>
