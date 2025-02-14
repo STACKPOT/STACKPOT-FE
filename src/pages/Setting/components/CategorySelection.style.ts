@@ -8,7 +8,7 @@ export const content = (larger: boolean) => css`
 `;
 export const contentHeader = css`
   gap: 1.6rem;
-  ${theme.font.body2};
+  ${theme.font.title1};
   color: ${theme.color.base.darkgray};
   display: flex;
   flex-direction: row;

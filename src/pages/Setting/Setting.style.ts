@@ -28,7 +28,7 @@ export const titleContent = css`
 `;
 
 export const title = css`
-  ${theme.font.body3};
+  ${theme.font.bodyBold2};
   color: ${theme.color.base.darkgray};
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ export const title = css`
 `;
 export const contentHeader = css`
   gap: 1.6rem;
-  ${theme.font.body2};
+  ${theme.font.title1};
   color: ${theme.color.base.darkgray};
   display: flex;
   flex-direction: row;
@@ -47,7 +47,7 @@ export const contentHeader = css`
 export const describe = css`
   ${theme.font.caption3};
   color: ${theme.color.object.assistive};
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.8rem;
 `;
 
 export const iconStyle = css`

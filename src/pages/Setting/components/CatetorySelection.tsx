@@ -42,8 +42,11 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
 
         return (
             <div css={content(false)} ref={ref}>
-                <div css={contentHeader}>관심사</div>
-                <p css={contentBody}>가장 관심있는 분야를 선택해주세요.</p>
+                <div css={contentHeader}>{type === "role" ? "메인 역할" : "관심사"}</div>
+                <p css={contentBody}>{type === "role" ?
+                    "역할은 하나만 선택해 주세요. 변경 시 닉네임도 바뀌게 됩니다" :
+                    "가장 관심있는 분야를 선택해주세요."}
+                </p>
                 <div css={categoryContainer}>
                     {categories.map((categoryName) => (
                         <div key={categoryName} css={categoriesStyle}>
