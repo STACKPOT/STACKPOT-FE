@@ -62,6 +62,21 @@ interface Pots {
   dday: string;
 }
 
+export interface GetPotsApplyResponse {
+  userId: number;
+  userRole: Role;
+  userNickname: string;
+  potId: number;
+  potStatus: PotStatus;
+  potName: string;
+  potStartDate: string;
+  potDuration: string;
+  potLan: string;
+  potModeOfOperation: Participation;
+  potContent: string;
+  recruitmentDetails: string;
+  dday: string;
+}
 export interface GetPotDetailResponse {
   potDetail: PotDetail;
   applicants: GetPotApplicationResponse[];
@@ -118,4 +133,31 @@ export interface PostPotMemersResponse {
   kakaoId: string;
   nickname: string;
   appealContent: string;
+}
+export interface GetPotsRecruitingResponse {
+  potId: number;
+  potName: string;
+  members: Record<Role, number>;
+  dday: string;
+}
+
+export interface GetPotsCompletedParams {
+  cursor: number | null;
+  size: number;
+}
+
+export interface GetPotsCompletedResponse {
+  content: CompletedPotDetail[];
+  nextCursor: number;
+  hasMore: boolean;
+}
+export interface CompletedPotDetail {
+  potId: number;
+  potName: string;
+  potStartDate: string;
+  potEndDate: string;
+  potLan: string;
+  members: string;
+  userPotRole: Role;
+  memberCounts: Record<Role, number>;
 }

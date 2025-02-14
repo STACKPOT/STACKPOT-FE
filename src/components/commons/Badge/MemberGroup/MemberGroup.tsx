@@ -1,23 +1,25 @@
+import { Role } from "types/role";
 import {
   groupContainer,
   profilePlusStyle,
   profileStyle,
 } from "./MemberGroup.style";
+import { roleImages } from "@constants/roleImage";
 
 interface MemberGroupProps {
-  profileImageList: string[];
+  memberRoleList: Role[]
 }
 
 const MemberGroup: React.FC<MemberGroupProps> = ({
-  profileImageList,
+  memberRoleList,
 }: MemberGroupProps) => {
   return (
     <div css={groupContainer}>
-      {profileImageList.length > 4 && (
-        <div css={profilePlusStyle}>+{profileImageList.length - 4}</div>
+      {memberRoleList.length > 4 && (
+        <div css={profilePlusStyle}>+{memberRoleList.length - 4}</div>
       )}
-      {profileImageList.slice(0, 4).map((image, index) => (
-        <img key={index} css={profileStyle} src={image} alt="profileImage" />
+      {memberRoleList.slice(0, 4).map((role, index) => (
+        <img key={index} css={profileStyle} src={roleImages[role]} alt="profileImage" />
       ))}
     </div>
   );

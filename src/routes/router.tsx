@@ -72,7 +72,7 @@ const router = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
-        path: routes.potDetail,
+        path: `${routes.potDetail}/:potId`,
         element: <PotDetailPage />,
       },
       {
@@ -116,11 +116,11 @@ const router = createBrowserRouter([
         element: <EditPostPage />,
       },
       {
-        path: routes.editFinishedPot,
+        path: `${routes.editFinishedPot}/:potId`,
         element: <EditFinishedPotPage />,
       },
       {
-        path: routes.userProfile,
+        path: `${routes.userProfile}/:userId`,
         element: <UserPage />,
       },
       {
