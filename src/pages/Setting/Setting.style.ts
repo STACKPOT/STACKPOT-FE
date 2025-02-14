@@ -6,7 +6,7 @@ export const container = css`
   width: 71.3rem;
   margin: 4.8rem auto;
   border: 1px solid ${theme.color.object.alternative};
-  border-radius: 0.8rem;
+  border-radius: 8px;
 `;
 export const detailContainer = css`
   gap: 3.2rem;
@@ -88,9 +88,8 @@ export const textareaStyle = (isOverLimit: boolean) => css`
   width: 100%;
   height: 8.9rem;
   padding: 1.2rem 1.6rem;
-  border-radius: 1.2rem;
+  border-radius: 12px;
   ${theme.font.caption3};
-  font-family: "Pretendard";
   resize: none;
   border: 1px solid
     ${isOverLimit
@@ -130,5 +129,4 @@ export const buttonStyle = css`
   border-radius: 8px;
   background-color: ${theme.color.point.hero};
   border: none;
-  cursor: pointer;
 `;

@@ -15,7 +15,7 @@ export const modalBackgroundStyle = css`
 export const containerStyle = css`
   width: 54rem;
   padding: 3.2rem;
-  border-radius: 2.4rem;
+  border-radius: 24px;
   border: 1px solid ${theme.color.object.alternative};
   background-color: ${theme.color.base.white};
   display: flex;
@@ -71,13 +71,7 @@ export const deleteButtonStyle = css`
   ${buttonStyle};
   padding: 1.7rem 12rem;
   width: auto;
-  background-clip: padding-box;
-  border: 1px solid ${theme.color.feedback.negative_transparent};
+  border-color: ${theme.color.feedback.negative};
   color: ${theme.color.feedback.negative};
   background-color: white;
-
-  &:active{
-      background-color: ${theme.color.feedback.negative_transparent};
-      color: ${theme.color.base.white};
-  }
 `;
