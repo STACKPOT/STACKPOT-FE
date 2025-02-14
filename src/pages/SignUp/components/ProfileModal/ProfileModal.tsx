@@ -12,6 +12,8 @@ import { roleImages } from "@constants/roleImage";
 import { useState } from "react";
 import useGetNickname from "apis/hooks/users/useGetNickname";
 import usePostNickname from "apis/hooks/users/usePostNickname";
+import { useAuthStore } from "stores/useAuthStore";
+import { roleDescription, roleToVeggie } from "@constants/profileRole";
 
 interface ProfileModalProps {
   role: Role | undefined;
@@ -27,6 +29,8 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   const { mutate: getNickname, isPending } = useGetNickname(role);
   const { mutate: postNickname } = usePostNickname();
 
+  const setRole = useAuthStore((state) => state.setRole);
+
   const handleClick = () => {
     getNickname(role, {
       onSuccess: (response) => {
@@ -37,20 +41,9 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
 
   const handleConfirm = () => {
     postNickname(nickname);
-  };
-
-  const roleDescription = {
-    FRONTEND: "프론트엔드는 최상단에 보이는 강한 풍미를 지닌 버섯!",
-    BACKEND: "백엔드는 껍질 속의 깊은 구조를 이해하는 양파!",
-    PLANNING: "프로덕트 전반을 이해하는 기획자인 나는, 뿌리 채소인 당근!",
-    DESIGN: "브로콜리는 풍성한 머리로 창의력을 발산하는 디자이너!",
-  };
-
-  const roleToVeggie = {
-    FRONTEND: "버섯",
-    BACKEND: "양파",
-    PLANNING: "당근",
-    DESIGN: "브로콜리",
+    if (role) {
+      setRole(role ?? "DEFAULT");
+    }
   };
 
   return (
