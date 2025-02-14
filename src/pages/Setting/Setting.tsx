@@ -4,7 +4,6 @@ import {
   contentHeader,
   iconStyle,
   contentBody,
-  categoryContainer,
   textStyle,
   textareaStyle,
   describe,
@@ -15,26 +14,23 @@ import {
   detailContainer,
   buttonContainer,
   buttonStyle,
-  categories,
 } from "./Setting.style";
 import { PotIcon } from "@assets/svgs";
-import { Button, CategoryButton, ExplainModal, Modal, PotButton, TextField } from "@components/index";
+import { Button, ExplainModal, PotButton, TextField } from "@components/index";
 import { useEffect, useState } from "react";
-import { interests, partMap } from "@constants/categories";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import usePatchUserProfileUpdate from "apis/hooks/users/usePatchUserProfileUpdate";
 import { PatchUserProfileUpdateParams } from "apis/types/user";
-import { Role } from "types/role";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
+import { CategorySelection } from "./components";
 
 const Setting = () => {
   const navigate = useNavigate();
   const { mutate } = usePatchUserProfileUpdate();
   const { data: profile } = useGetMyProfile();
-  const [pendingCategory, setPendingCategory] = useState<Role | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
 
   const methods = useForm<PatchUserProfileUpdateParams>({
@@ -55,11 +51,9 @@ const Setting = () => {
   } = methods;
 
   const [
-    selectedRole,
-    selectedInterest,
     introduction,
     kakaoId
-  ] = watch(["role", "interest", "userIntroduction", "kakaoId"]);
+  ] = watch(["userIntroduction", "kakaoId"]);
 
   useEffect(() => {
     if (profile) {
@@ -70,13 +64,6 @@ const Setting = () => {
     }
   }, [profile])
 
-  const handleSelectRole = (role: Role) => {
-    if (selectedRole && selectedRole !== role) {
-      setPendingCategory(role);
-      setIsModalOpen(true);
-    }
-  };
-
   const onSubmit: SubmitHandler<PatchUserProfileUpdateParams> = (data) => {
     mutate(data, {
       onSuccess: () => {
@@ -84,19 +71,6 @@ const Setting = () => {
       }
     });
   }
-
-  const handleConfirmRole = () => {
-    if (pendingCategory) {
-      setValue("role", pendingCategory)
-      setPendingCategory(null);
-    }
-    setIsModalOpen(false);
-  };
-
-  const handleCloseRoleModal = () => {
-    setPendingCategory(null);
-    setIsModalOpen(false);
-  };
 
   return (
     <main>
@@ -110,42 +84,8 @@ const Setting = () => {
             <p css={describe}>계정 정보를 확인하고 수정할 수 있어요.</p>
           </div>
           <div css={detailContainer}>
-            <div css={content(false)}>
-              <div css={contentHeader}>메인 역할</div>
-              <p css={contentBody}>
-                역할은 하나만 선택해 주세요. 변경 시 닉네임도 바뀌게 됩니다.
-              </p>
-              <div css={categoryContainer}>
-                {Object.keys(partMap).map((categoryName) => (
-                  <div key={categoryName} css={categories}>
-                    <CategoryButton
-                      style="pot"
-                      selected={selectedRole === partMap[categoryName]}
-                      onClick={() => handleSelectRole(partMap[categoryName])}
-                    >
-                      {categoryName}
-                    </CategoryButton>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div css={content(false)}>
-              <div css={contentHeader}>관심사</div>
-              <p css={contentBody}>가장 관심있는 분야를 선택해주세요.</p>
-              <div css={categoryContainer}>
-                {interests.map((interestName) => (
-                  <div key={interestName} css={categories}>
-                    <CategoryButton
-                      style="pot"
-                      selected={selectedInterest === interestName}
-                      onClick={() => setValue("interest", interestName)}
-                    >
-                      {interestName}
-                    </CategoryButton>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <CategorySelection type="role" profile={profile} />
+            <CategorySelection type="interest" />
             <div css={content(true)}>
               <p css={contentHeader}>카카오 아이디 수정</p>
               <div css={textStyle}>
@@ -192,14 +132,6 @@ const Setting = () => {
         </form>
       </FormProvider>
 
-      {isModalOpen && (
-        <Modal
-          title="메인 역할을 변경할까요?"
-          message={`메인 역할을 변경할 경우,\n닉네임 또한 [${profile?.nickname}]에서 새로운 닉네임으로 변경됩니다.`}
-          onConfirm={handleConfirmRole}
-          onCancel={handleCloseRoleModal}
-        />
-      )}
       {isWithdrawModalOpen && (
         <ExplainModal
           type="delete"

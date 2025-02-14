@@ -4,7 +4,7 @@ import { css } from "@emotion/react";
 export const container = css`
   padding: 4.5rem 8.2rem;
   width: 71.3rem;
-  margin: 4.8rem auto;
+  margin: 8.4rem auto;
   border: 1px solid ${theme.color.object.alternative};
   border-radius: 8px;
 `;
@@ -32,6 +32,7 @@ export const title = css`
   color: ${theme.color.base.darkgray};
   display: flex;
   align-items: center;
+  gap: 0.8rem;
 `;
 export const contentHeader = css`
   gap: 1.6rem;
@@ -61,23 +62,8 @@ export const contentBody = css`
   color: ${theme.color.object.assistive};
 `;
 
-export const categoryContainer = css`
-  margin-top: 1.6rem;
-  ${theme.font.caption3};
-  color: ${theme.color.base.black};
-  display: flex;
-  justify-content: row;
-  gap: 0.8rem;
-`;
-
 export const textStyle = css`
   height: 5.2rem;
-`;
-
-export const categories = css`
-  display: flex;
-  justify-content: row;
-  gap: 0.8rem;
 `;
 
 export const textareaWrapper = css`
@@ -93,8 +79,8 @@ export const textareaStyle = (isOverLimit: boolean) => css`
   resize: none;
   border: 1px solid
     ${isOverLimit
-      ? theme.color.feedback.negative
-      : theme.color.border.alternative};
+    ? theme.color.feedback.negative
+    : theme.color.border.alternative};
 
   &::placeholder {
     color: ${theme.color.object.hero};
@@ -103,8 +89,8 @@ export const textareaStyle = (isOverLimit: boolean) => css`
 
   &:focus {
     border-color: ${isOverLimit
-      ? theme.color.feedback.negative
-      : theme.color.point.hero};
+    ? theme.color.feedback.negative
+    : theme.color.point.hero};
     outline: none;
   }
 `;
