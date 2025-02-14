@@ -21,6 +21,7 @@ import usePatchSignIn from "apis/hooks/users/usePatchSignIn";
 import { useState } from "react";
 import { SignInResponse } from "apis/types/user";
 import { Role } from "types/role";
+import { useAuthStore } from "stores/useAuthStore";
 
 type SignInFormData = {
   kakaoId: string;
@@ -31,6 +32,7 @@ type SignInFormData = {
 const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [responseData, setResponseData] = useState<SignInResponse | null>(null);
+  const setRole = useAuthStore((state) => state.setRole);
 
   const methods = useForm({
     mode: "onChange",
@@ -62,6 +64,9 @@ const SignUp = () => {
       onSuccess: (response) => {
         setResponseData(response.result ?? null);
         setIsModalOpen(true);
+        if (response.result?.role) {
+          setRole(response.result.role ?? "DEFAULT");
+        }
       },
     });
   };

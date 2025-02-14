@@ -14,13 +14,15 @@ import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { roleImages } from "@constants/roleImage";
 import usePostLogout from "apis/hooks/users/userPostLogout";
+import { useAuthStore } from "stores/useAuthStore";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
   );
-  const [role, setRole] = useState(localStorage.getItem("role"));
+
+  const role = useAuthStore((state) => state.role);
 
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
     import.meta.env.VITE_REST_API_KEY
@@ -49,10 +51,8 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    const role = localStorage.getItem("role");
     setAccessToken(token);
-    setRole(role);
-  }, [localStorage.getItem("accessToken"), localStorage.getItem("role")]);
+  }, [localStorage.getItem("accessToken")]);
 
   const roleProfileImage = roleImages[role as keyof typeof roleImages];
 
