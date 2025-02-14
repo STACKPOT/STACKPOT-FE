@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { roleImages } from "@constants/roleImage";
-import { ProfileImage } from "@assets/images";
 import usePostLogout from "apis/hooks/users/userPostLogout";
 
 const Header: React.FC = () => {
