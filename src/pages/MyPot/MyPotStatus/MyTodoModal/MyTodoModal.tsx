@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { usePatchMyTodo } from "apis/hooks/myPots/usePatchMyTodo";
-import { getTodo } from "apis/myPotAPI";
+import { usePatchMyPotTodo } from "apis/hooks/myPots/usePatchMyPotTodo";
+import { getMyPotTodo } from "apis/myPotAPI";
 import { CloseIcon, DeleteIcon, TodoCheckIcon, TodoPlusButtonIcon } from "@assets/svgs";
 import {
   buttonContainer,
@@ -19,6 +19,7 @@ import {
 } from "./MyTodoModal.style"; 
 import { cancelContainer } from "../AboutWorkModal/AboutWorkModal.style";
 import { inputFieldStyle } from "@pages/MyPot/components/TextInput/TextInput.style";
+import { Todo } from "apis/types/myPot";
 
 interface MyTodoModalProps {
   potId: number;
@@ -26,14 +27,14 @@ interface MyTodoModalProps {
 }
 
 const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
-  const { mutate: patchTodo } = usePatchMyTodo();
-  const [tasks, setTasks] = useState<{ todoId: number | null; content: string; status: string }[]>([]);
+  const { mutate: patchTodo } = usePatchMyPotTodo();
+  const [tasks, setTasks] = useState<Todo[]>([]);
   const [loadingTasks, setLoadingTasks] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await getTodo(potId, 1, 3);
+        const response = await getMyPotTodo(potId, 1, 3);
         if (response.isSuccess && response.result) {
           setTasks(
             response.result.todos?.[0]?.todos?.map(todo => ({

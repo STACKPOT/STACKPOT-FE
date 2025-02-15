@@ -29,9 +29,11 @@ import { headerStyle } from "@pages/MyPot/MyPotMain.style";
 import { statusTextStyle } from "../MyPotStatus.style";
 import routes from "@constants/routes";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
-import { useDeleteTask } from "apis/hooks/myPots/useDeleteMyTask";
+import { useDeleteMyPotTask } from "apis/hooks/myPots/useDeleteMyPotTask";
 import { AboutWorkModalWrapper } from "../../components/index";
 import { MushroomImage, CarrotImage, OnionImage, BroccoliImage } from "@assets/images";
+import { APITaskStatus, TaskAPIPrams } from "apis/types/myPot";
+import { AnotherTaskStatus, TaskStatus } from "types/taskStatus";
 
 const roleToImage: Record<string, string> = {
   DESIGN: BroccoliImage,
@@ -40,7 +42,7 @@ const roleToImage: Record<string, string> = {
   BACKEND: OnionImage,
 };
 
-const apiToDisplayStatus: Record<"OPEN" | "IN_PROGRESS" | "CLOSED", "진행 전" | "진행 중" | "완료"> = {
+const apiToDisplayStatus: Record<APITaskStatus, AnotherTaskStatus> = {
   OPEN: "진행 전",
   IN_PROGRESS: "진행 중",
   CLOSED: "완료",
@@ -50,21 +52,21 @@ const TaskDetailPage: React.FC = () => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
 
-  const { data: task, isLoading, error } = useGetMyPotTaskDetail(Number(potId), Number(taskId));
-  const { mutate: deleteTask, isPending } = useDeleteTask();
+  const { data: task, isLoading, error } = useGetMyPotTaskDetail({potId: Number(potId), taskId: Number(taskId)});
+  const { mutate: deleteTask, isPending } = useDeleteMyPotTask();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState("업무 수정");
-  const [activeStatus, setActiveStatus] = useState<"진행 전" | "진행 중" | "완료" | null>(null);
+  const [modalTitle, setModalTitle] = useState("새로운 업무 추가");
+  const [activeStatus, setActiveStatus] = useState<TaskStatus>(null);
 
   const handlePrev = () => {
-    navigate(routes.myPot.potPage.replace(":potId", potId ?? "1"));
+    navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
   };
 
-  const handleDeleteTask = (potId: number, taskId: number) => {
+  const handleDeleteTask = ({ potId, taskId }: TaskAPIPrams) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       deleteTask({ potId, taskId });
-      navigate(routes.myPot.potPage.replace(":potId", String(potId)));
+      navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
     }
   };
 
@@ -102,7 +104,7 @@ const TaskDetailPage: React.FC = () => {
               topMessage="수정하기"
               bottomMessage="삭제하기"
               onTop={handleOpenModal}
-              onBottom={() => handleDeleteTask(Number(potId), Number(taskId))}
+              onBottom={() => handleDeleteTask({potId: Number(potId), taskId: Number(taskId)})}
             />
           </div>
         </div>

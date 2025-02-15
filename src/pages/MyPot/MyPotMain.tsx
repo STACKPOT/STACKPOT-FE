@@ -18,8 +18,8 @@ const MyPotMainPage: React.FC = () => {
   const { potId } = useParams();
 
   const tabs = [
-    { label: "업무 현황", path: routes.myPot.potPage.replace(":potId", potId ?? "null") }, 
-    { label: "캘린더", path: routes.myPot.calendar.replace(":potId", potId ?? "null") }, 
+    { label: "업무 현황", path: `${routes.myPot.base}/${routes.task}/${potId}` }, 
+    { label: "캘린더", path: `${routes.myPot.base}/${routes.calendar}/${potId}`}, 
   ];
   const { data } = useGetMyPotTodo({
     potId: Number(potId),
@@ -28,7 +28,7 @@ const MyPotMainPage: React.FC = () => {
   });
 
   const location = useLocation();
-  const showViewId = location.pathname === `${routes.myPot.potPage}`;
+  const showViewId = location.pathname === `${routes.myPot.base}/${routes.task}/${potId}`;
 
   return (
     <main css={container}>
