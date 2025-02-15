@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePatchMyTodoStatus } from "apis/hooks/myPots/usePatchMyTodoStatus"; 
+import { usePatchMyPotTodoStatus } from "apis/hooks/myPots/usePatchMyPotTodoStatus"; 
 import { cardStyle, nicknameStyle, plusButtonStyle, profileImageStyle, statusContainer, todoContainer, todoListContainer, todoTextStyle } from "./MyPotTodoCard.style";
 import { PlusButtonIcon } from "@assets/svgs";
 import { MushroomImage } from "@assets/images";
@@ -17,7 +17,7 @@ interface MyPotTodoCardProps {
 
 const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId, currentPage  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { mutate: updateTodoStatus } = usePatchMyTodoStatus();
+  const { mutate: updateTodoStatus } = usePatchMyPotTodoStatus();
 
   const handlePlusButtonClick = () => {
     setIsModalOpen(true);

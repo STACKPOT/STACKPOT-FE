@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTodo } from "apis/myPotAPI";
+import { getMyPotTodo } from "apis/myPotAPI";
 import { GetTodoParams, Result } from "apis/types/myPot";
 
 const defaultResult: Result = {
@@ -14,7 +14,7 @@ const useGetMyPotTodo = ({ potId, page, size }: GetTodoParams) => {
   return useQuery({
     queryKey: ["todos", potId, page, size],
     queryFn: async () => {
-      const response = await getTodo(potId, page, size);
+      const response = await getMyPotTodo(potId, page, size);
       return response.result ?? defaultResult;
     },
     select: (result) => ({
