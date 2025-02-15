@@ -70,13 +70,7 @@ export interface TaskDetailResponse {
 
 export interface TodoUpdateRequest {
   potId: number;
-  data: TodoItem[];
-}
-
-export interface TodoItem {
-  todoId: number | null;
-  content: string;
-  status: string;
+  data: Todo[];
 }
 
 export interface TaskPatch {
@@ -98,4 +92,9 @@ export interface MyPotResponse {
     DESIGN?: number;
     PLANNING?: number;
   };
+}
+
+export interface TaskAPIPrams {
+  potId: number;
+  taskId: number;
 }
