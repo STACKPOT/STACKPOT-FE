@@ -2,9 +2,9 @@ import { useMutation } from "@tanstack/react-query";
 import { getNickname } from "apis/userAPI";
 import { Role } from "types/role";
 
-const useGetNickname = (role: Role) => {
+const useGetNickname = () => {
   return useMutation({
-    mutationFn: () => getNickname(role),
+    mutationFn: (role: Role) => getNickname(role),
   });
 };
 

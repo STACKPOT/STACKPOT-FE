@@ -30,8 +30,8 @@ export const landingButtonStyle = css`
   ${theme.font.title1};
 `;
 
-export const actionButtonStyle = (actionType?: "action" | "join") => css`
-  padding: ${actionType === "join" ? "1.6rem 3.3rem" : "1.4rem 5.8rem"};
+export const actionButtonStyle = (actionType?: "action" | "join" | "edit") => css`
+  padding: ${(actionType === "join" && "1.6rem 3.3rem") || (actionType === "edit" && "1.2rem 2.4rem ") || "1.4rem 5.8rem"};
   border-radius: 8px;
-  ${theme.font.captionBold1};
+  ${theme.font.bodyBold1};
 `;
