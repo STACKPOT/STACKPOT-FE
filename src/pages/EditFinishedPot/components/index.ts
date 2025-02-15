@@ -1,5 +1,5 @@
-import EditFinishedPotForm from "./EditFinishedPotForm";
+import FinishedPotForm from "./FinishedPotForm";
 
 export {
-    EditFinishedPotForm,
+    FinishedPotForm,
 }

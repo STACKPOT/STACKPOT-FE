@@ -1,19 +1,19 @@
 import { useState } from "react";
 import {
     appealIconStyle, dividerStyle, formContainer, headContainer, iconStyle, inputStyle, labelStyle, languageInputStyle, mainContainer, partStyle, summaryButtonContainer, textareaStyle, titleContainer, titleStyle,
-} from "./EditFinishedPotForm.style"
+} from "./FinishedPotForm.style"
 import { Button, PartRecruitment, PotButton } from "@components/index";
 import { AppealIcon, PotIcon } from "@assets/svgs";
 import { DatePicker } from "@pages/CreatePot/components";
 import { RecruitmentDetail } from "apis/types/pot";
 import { Dayjs } from "dayjs";
 
-interface EditFinishedPotFormProps {
+interface FinishedPotFormProps {
     type: "create" | "edit";
     onSubmit: (data: { title: string, startDate: string, recruits: RecruitmentDetail[], language: string, content: string }) => void;
 }
 
-const EditFinishedPotForm: React.FC<EditFinishedPotFormProps> = ({ type, onSubmit }: EditFinishedPotFormProps) => {
+const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ type, onSubmit }: FinishedPotFormProps) => {
     const [potName, setPotName] = useState<string>("");
     const [language, setLanguage] = useState<string>("");
     const [introduction, setIntroduction] = useState<string>("");
@@ -99,4 +99,4 @@ const EditFinishedPotForm: React.FC<EditFinishedPotFormProps> = ({ type, onSubmi
         </main>
     )
 }
-export default EditFinishedPotForm;
+export default FinishedPotForm;
