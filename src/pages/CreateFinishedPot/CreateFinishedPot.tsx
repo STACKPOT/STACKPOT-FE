@@ -1,14 +1,26 @@
+import routes from "@constants/routes";
 import { FinishedPotForm } from "@pages/EditFinishedPot/components";
+import usePatchPotComplete from "apis/hooks/pots/usePatchPotComplete";
 import { PostPotParams } from "apis/types/pot";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CreateFinishedPot = () => {
+    const navigate = useNavigate();
     const { potId } = useParams();
     const potIdNumber = Number(potId);
+    const { mutate } = usePatchPotComplete();
 
     const handleUpload = (data: PostPotParams) => {
-        // todo: 팟 다 끓이기 api
-    }
+        mutate({
+            potId: potIdNumber,
+            body: data
+        }, {
+            onSuccess: () => {
+                navigate(`${routes.pot.madeByMe}`)
+            }
+        })
+    };
+
     return (
         <FinishedPotForm potId={potIdNumber} type="create" onCompleted={handleUpload} />
     )

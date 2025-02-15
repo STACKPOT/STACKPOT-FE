@@ -6,9 +6,10 @@ import { Button, PartRecruitment, PotButton } from "@components/index";
 import { AppealIcon, PotIcon } from "@assets/svgs";
 import { DatePicker } from "@pages/CreatePot/components";
 import { PostPotParams } from "apis/types/pot";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
+import { Role } from "types/role";
 
 interface FinishedPotFormProps {
     potId: number;
@@ -39,11 +40,12 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
         handleSubmit,
         watch,
         setValue,
+        formState: { isValid },
     } = methods;
 
     const handleSummary = () => {
         // todo: api 호출
-        setValue("potContent", "ai 요약 내용");
+        setValue("potSummary", "ai 요약 내용");
     }
 
     const handleStartDate = (day: Dayjs | null) => {
@@ -56,15 +58,25 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
         onCompleted(data);
     };
 
+    const [potStartDate] = watch([
+        "potStartDate",
+    ])
+
     useEffect(() => {
         if (potData) {
             setValue("potName", potData.potDetail.potName);
             setValue("potStartDate", potData.potDetail.potStartDate.split('. ').join('-'));
             setValue("potDuration", potData.potDetail.potDuration);
             setValue("potLan", potData.potDetail.potLan);
+            setValue("potContent", potData.potDetail.potContent);
             setValue("potModeOfOperation", potData.potDetail.potModeOfOperation);
-            setValue("recruitmentDeadline", "");
-            setValue("recruitmentDetails", []);
+            setValue("recruitmentDeadline", potData.potDetail.recruitmentDeadline.split('. ').join('-'));
+            setValue("recruitmentDetails",
+                Object.entries(potData.potDetail.recruitingMembers).map((part) =>
+                ({
+                    recruitmentRole: part[0] as Role,
+                    recruitmentCount: part[1]
+                })));
         }
     }, [potData]);
 
@@ -77,7 +89,7 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
                             <h2 css={titleStyle}>{type === "create" ? "나의 팟 다 끓이기" : "끓인 팟 수정하기"}</h2>
                             <PotIcon css={iconStyle} />
                         </div>
-                        <Button type="submit" variant="action" >
+                        <Button type="submit" variant="action" disabled={!isValid}>
                             {type === "create" ? "다 끓였어요" : "수정 완료"}
                         </Button>
                     </div>
@@ -91,12 +103,12 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
                         <div css={dividerStyle} />
                         <div css={labelStyle}>
                             시작 날짜
-                            <DatePicker onChange={handleStartDate} />
+                            <DatePicker date={dayjs(potStartDate)} onChange={handleStartDate} />
                         </div>
                         <div css={partStyle}>
                             팀 구성
                             <PartRecruitment
-                                initialRecruitment={potData?.potDetail.recruitmentDetails}
+                                initialRecruitment={potData?.potDetail.recruitingMembers}
                                 onChange={(data) => setValue("recruitmentDetails", data)} />
                         </div>
                         <label css={labelStyle}>
