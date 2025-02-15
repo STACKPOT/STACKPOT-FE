@@ -81,6 +81,11 @@ export interface TaskPatch {
   participants: number[];
 }
 
+export interface PatchTodoStatusParams {
+  potId: number;
+  todoId: number;
+}
+
 export interface MyPotResponse {
   map: any;
   potId: number;
