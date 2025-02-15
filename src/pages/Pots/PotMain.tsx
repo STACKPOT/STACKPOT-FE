@@ -1,6 +1,7 @@
 import { container, selectContainer, tabsContainer, tabsTextStyle } from "./PotMain.style";
 import { NavLink, Outlet } from "react-router-dom";
 import routes from "@constants/routes";
+import { FloatingButton } from "@components/index";
 
 const PotMain: React.FC = () => {
   const tabs = [
@@ -27,6 +28,7 @@ const PotMain: React.FC = () => {
         </div>
       </div>
       <Outlet />
+      <FloatingButton type="pot" />
     </main>
   );
 };

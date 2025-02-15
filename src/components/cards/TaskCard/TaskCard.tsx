@@ -88,7 +88,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             <img css={profileImageStyle} src={profileImage} />
             <p css={nicknameStyle}>{nickname}</p>
           </div>
-          <MemberGroup profileImageList={profileImageList} />
+          <MemberGroup memberRoleList={groupProfileImages} />
         </div>
       </div>
     </div>

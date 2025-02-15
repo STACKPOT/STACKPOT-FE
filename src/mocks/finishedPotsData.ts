@@ -1,4 +1,4 @@
-import { BroccoliImage, CarrotImage, MushroomImage, OnionImage } from "@assets/images";
+import { Role } from "types/role";
 
 const finishedPotsData: {
     id: number;
@@ -8,7 +8,7 @@ const finishedPotsData: {
     endDate: string;
     stacks: string;
     languages: string;
-    memberProfiles: string[];
+    members: Role[];
 }[] = [
         {
             id: 0,
@@ -18,7 +18,7 @@ const finishedPotsData: {
             endDate: "2025.2.27",
             stacks: "프론트엔드(2), 디자이너(1)",
             languages: "React, Javascripts ",
-            memberProfiles: [MushroomImage, BroccoliImage, OnionImage, MushroomImage, CarrotImage],
+            members: ["BACKEND", "DESIGN", "FRONTEND", "PLANNING", "BACKEND"],
         },
         {
             id: 1,
@@ -28,7 +28,7 @@ const finishedPotsData: {
             endDate: "2025.2.27",
             stacks: "프론트엔드(2), 디자이너(1)",
             languages: "React, Javascripts ",
-            memberProfiles: [MushroomImage, BroccoliImage, OnionImage, MushroomImage, CarrotImage],
+            members: ["BACKEND", "DESIGN", "FRONTEND", "PLANNING", "BACKEND"],
         },
         {
             id: 2,
@@ -38,7 +38,7 @@ const finishedPotsData: {
             endDate: "2025.2.27",
             stacks: "프론트엔드(2), 디자이너(1)",
             languages: "React, Javascripts ",
-            memberProfiles: [MushroomImage, BroccoliImage, OnionImage, MushroomImage, CarrotImage],
+            members: ["BACKEND", "DESIGN", "FRONTEND", "PLANNING", "BACKEND"],
         }
     ]
 

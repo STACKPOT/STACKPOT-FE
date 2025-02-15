@@ -5,7 +5,6 @@ export { default as CalendarIcon } from "./calendar.svg?react";
 export { default as Kakao } from "./kakao.svg?react";
 export { default as ArrowUpIcon } from "./arrowupIcon.svg?react";
 export { default as ArrowDownIcon } from "./arrowdownIcon.svg?react";
-export { default as ProfileIcon } from "./profile.svg?react";
 export { default as HomeIcon } from "./home.svg?react";
 export { default as MyPotIcon } from "./myPot.svg?react";
 export { default as PotIcon } from "./pot.svg?react";
@@ -29,8 +28,9 @@ export { default as PlusButtonIcon } from "./plusButton.svg?react";
 export { default as KaKaoTalkIcon } from "./kakaoTalk.svg?react";
 export { default as DeleteIcon } from "./delteIcon.svg?react";
 export { default as TodoCheckIcon } from "./todoCheckIcon.svg?react";
-export { default as TodoPlusButtonIcon } from "./todoPlusButton.svg?react"
+export { default as TodoPlusButtonIcon } from "./todoPlusButton.svg?react";
 export { default as CreateIcon } from "./create.svg?react";
 export { default as BookIcon } from "./book.svg?react";
 export { default as AppealIcon } from "./appeal.svg?react";
 export { default as LoadingSpinnerIcon } from "./loadingSpinner.svg?react";
+export { default as ArrowDropdownIcon} from "./arrowDropdown.svg?react";

@@ -3,6 +3,7 @@ import { Role } from "types/role";
 export interface LogInResponse {
   tokenServiceResponse: TokenServiceResponse;
   isNewUser: boolean;
+  role: Role | null;
 }
 
 export interface TokenServiceResponse {
@@ -21,7 +22,7 @@ export interface GetUserResponse {
   userIntroduction: string;
 }
 export interface postSignInPayload {
-  role: Role | undefined;
+  role: Role;
   interest: string;
   kakaoId: string;
 }
@@ -29,4 +30,8 @@ export interface postSignInPayload {
 export interface SignInResponse {
   id: number;
   role: Role;
+}
+
+export interface NicknameResponse {
+  nickname: string;
 }

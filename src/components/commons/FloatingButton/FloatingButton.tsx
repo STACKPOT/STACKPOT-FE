@@ -1,18 +1,30 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { iconStyle, WriteButton } from "./FloatingButton.style";
-import { PencilIcon } from "@assets/svgs";
-const FloatingButton: React.FC = () => {
-  const navigate = useNavigate();
+import { PencilIcon, PlusButtonIcon } from "@assets/svgs";
+import routes from "@constants/routes";
 
-  const handleClick = () => {
-    navigate("/writing-page");
-  };
+interface FloatingButtonProps {
+  type: "feed" | "pot";
+}
+
+const FloatingButton: React.FC<FloatingButtonProps> = ({ type = "feed" }: FloatingButtonProps) => {
+  const navigate = useNavigate();
+  const url = type === "feed" ? routes.writePost : routes.createPot;
 
   return (
-    <div css={WriteButton} onClick={handleClick}>
-      <PencilIcon css={iconStyle} />
-      피드 작성
+    <div css={WriteButton} onClick={() => navigate(url)}>
+      {type === "feed" ?
+        <>
+          <PencilIcon css={iconStyle} />
+          피드 작성
+        </>
+        :
+        <>
+          <PlusButtonIcon />
+          팟 만들기
+        </>
+      }
     </div>
   );
 };

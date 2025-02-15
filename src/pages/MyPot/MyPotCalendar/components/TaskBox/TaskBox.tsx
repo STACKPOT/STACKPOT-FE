@@ -1,5 +1,5 @@
 import { DdayBadge, MemberGroup } from "@components/index";
-import { ProfileIcon } from "@assets/svgs";
+// import { ProfileIcon } from "@assets/svgs";
 import {
   contentStyle,
   dividerStyle,
@@ -26,10 +26,10 @@ const TaskBox: React.FC<TaskBoxProps> = ({ task }) => {
       <p css={contentStyle}>{task.content}</p>
       <div css={memberContainer}>
         <div css={profileContainer}>
-          <ProfileIcon />
+          {/* <ProfileIcon /> */}
           <p css={nickNameStyle}>{task.nickName}</p>
         </div>
-        <MemberGroup profileImageList={task.profileImageList} />
+        <MemberGroup memberRoleList={task.profileImageList} />
       </div>
       <div css={dividerStyle} />
     </div>

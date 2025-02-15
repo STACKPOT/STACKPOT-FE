@@ -6,13 +6,14 @@ export interface FeedResponse {
 }
 
 interface Feeds {
-  id: number;
+  feedId: number;
   writer: string;
   writerRole: Role;
   title: string;
   content: string;
   likeCount: number;
   createdAt: string;
+  isLiked: boolean;
 }
 
 export interface GetFeedParams {
@@ -20,4 +21,13 @@ export interface GetFeedParams {
   sort: string;
   limit: number;
   cursor: number | null;
+}
+
+export interface FeedDetailResponse {
+  writerId: number;
+  writer: string;
+  writerRole: Role;
+  title: string;
+  content: string;
+  createdAt: string;
 }
