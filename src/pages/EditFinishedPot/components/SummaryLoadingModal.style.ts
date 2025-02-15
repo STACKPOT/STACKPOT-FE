@@ -28,7 +28,7 @@ export const modalStyle = css`
 `
 
 export const closeIconStyle = css`
-  margin-left: auto;
+  margin: 0.8rem 0.4rem 0.8rem auto;
   cursor: pointer;
 `
 export const messageStyle = css`
@@ -46,5 +46,6 @@ export const spinnerContainer = css`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 14.4rem;
     margin-top: 3.2rem;
 `
