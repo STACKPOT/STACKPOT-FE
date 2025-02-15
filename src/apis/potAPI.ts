@@ -36,7 +36,14 @@ export const DeletePotApplications = async (potId: number) => {
   return authApiDelete(`/pots/${potId}/applications`);
 }
 
-export const GetPotsRecruiting = async () => {
+export const PatchPot = async (potId: number, body: PostPotParams) => {
+  return authApiPatch<PostPotResponse>(`/pots/${potId}`, body);
+};
+
+export const DeletePot = async (potId: number) => {
+  return authApiDelete(`/pots/${potId}`);
+}
+  export const GetPotsRecruiting = async () => {
   return authApiGet<GetPotsRecruitingResponse[]>(`/pots/recruiting`);
 }
 

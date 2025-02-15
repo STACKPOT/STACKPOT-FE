@@ -81,7 +81,7 @@ export interface GetPotDetailResponse {
   potDetail: PotDetail;
   applicants: GetPotApplicationResponse[];
 }
-interface PotDetail {
+export interface PotDetail {
   userId: number;
   userRole: Role;
   userNickname: string;
@@ -94,7 +94,9 @@ interface PotDetail {
   applied: boolean;
   potModeOfOperation: Participation;
   potContent: string;
+  recruitmentDeadline: string;
   recruitmentDetails: string;
+  recruitingMembers: Record<Role, number>;
   owner: boolean;
   dday: string;
 }
@@ -134,6 +136,12 @@ export interface PostPotMemersResponse {
   nickname: string;
   appealContent: string;
 }
+
+export interface PatchPotParams {
+  potId: number;
+  body: PostPotParams;
+}
+
 export interface GetPotsRecruitingResponse {
   potId: number;
   potName: string;
