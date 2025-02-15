@@ -18,8 +18,10 @@ import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
+import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
 
 interface PostCardProps {
+  id: number;
   role: Role;
   nickname: string;
   createdAt: string;
@@ -32,6 +34,7 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({
+  id,
   role,
   nickname,
   createdAt,
@@ -41,13 +44,18 @@ const PostCard: React.FC<PostCardProps> = ({
   isLiked,
   onClick,
 }: PostCardProps) => {
+  const { mutate: likeFeed } = usePostFeedLike();
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
   const [isMyPost, setIsMyPost] = useState<boolean>(true);
   const handleLike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setIsLike(!isLike);
-    setLikes((prev) => (isLike ? prev - 1 : prev + 1));
+    likeFeed(id, {
+      onSuccess: () => {
+        setIsLike(!isLike);
+        setLikes((prev) => (isLike ? prev - 1 : prev + 1));
+      }
+    })
   };
 
   const handleEdit = () => {

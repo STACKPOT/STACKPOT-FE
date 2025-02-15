@@ -106,6 +106,7 @@ const Feed = () => {
                   return (
                     <div key={item.feedId} ref={isLastItem ? ref : null}>
                       <PostCard
+                        id={item.feedId}
                         role={item.writerRole}
                         nickname={item.writer}
                         createdAt={item.createdAt}
