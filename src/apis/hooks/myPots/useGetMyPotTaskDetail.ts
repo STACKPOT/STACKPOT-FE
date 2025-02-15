@@ -5,10 +5,14 @@ import { TaskAPIPrams } from "apis/types/myPot";
 const useGetMyPotTaskDetail = ({ potId, taskId }: TaskAPIPrams) => {
   return useQuery({
     queryKey: ["taskDetail", potId, taskId],
-    queryFn: () => getMyPotTaskDetail({ potId, taskId }),
-    enabled: !!potId && !!taskId,
-    select: (data) => data.result ?? null,
+    queryFn: async () => {
+      console.log(`Fetching taskDetail for potId=${potId}, taskId=${taskId}`);
+      console.error(`Fetching taskDetail for potId=${potId}, taskId=${taskId}`);
+
+      return getMyPotTaskDetail({ potId, taskId });
+    },
   });
 };
+
 
 export default useGetMyPotTaskDetail;

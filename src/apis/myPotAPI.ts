@@ -1,16 +1,25 @@
-import { authApiGet, authApiPatch, authApiDelete } from "./apiUtils";  
-import { Result, Todo, TaskResponse, MyPotResponse, TaskDetailResponse, TaskPatch, TaskAPIPrams } from "./types/myPot"; 
+import { authApiGet, authApiPatch, authApiDelete } from "./apiUtils";
+import {
+  Result,
+  TaskResponse,
+  MyPotResponse,
+  TaskDetailResponse,
+  TaskPatch,
+  TaskAPIPrams,
+  GetTodoParams,
+  TodoUpdateRequest,
+  PatchTodoStatusParams
+} from "./types/myPot";
 
-export const getMyPotTodo = async (potId: number, page: number, size: number) => {
-  const params = { page, size };
-  return authApiGet<Result>(`/my-pots/${potId}/todos`, params);
+export const getMyPotTodo = async ({ potId, page, size }: GetTodoParams) => {
+  return authApiGet<Result>(`/my-pots/${potId}/todos`, { page, size });
 };
 
-export const patchMyPotTodo = async ({ potId, data }: { potId: number; data: Todo[] })  => {
+export const patchMyPotTodo = async ({ potId, data }: TodoUpdateRequest) => {
   return authApiPatch<Result>(`/my-pots/${potId}/todos`, data);
 };
 
-export const patchMyPotTodoStatus = async (potId: number, todoId: number) => {
+export const patchMyPotTodoStatus = async ({ potId, todoId }: PatchTodoStatusParams) => {
   return authApiPatch(`/my-pots/${potId}/todos/${todoId}`, { status: "COMPLETED" });
 };
 

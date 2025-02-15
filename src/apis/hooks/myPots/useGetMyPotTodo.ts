@@ -13,10 +13,7 @@ const defaultResult: Result = {
 const useGetMyPotTodo = ({ potId, page, size }: GetTodoParams) => {
   return useQuery({
     queryKey: ["todos", potId, page, size],
-    queryFn: async () => {
-      const response = await getMyPotTodo(potId, page, size);
-      return response.result ?? defaultResult;
-    },
+    queryFn: () => getMyPotTodo({potId, page, size}).then((response) => response.result ?? defaultResult),
     select: (result) => ({
       title: result.potName,
       nickname: result.todos?.[0]?.userNickname ?? "",
