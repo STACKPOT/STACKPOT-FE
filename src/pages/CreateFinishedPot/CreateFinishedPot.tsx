@@ -1,11 +1,16 @@
 import { FinishedPotForm } from "@pages/EditFinishedPot/components";
+import { PostPotParams } from "apis/types/pot";
+import { useParams } from "react-router-dom";
 
 const CreateFinishedPot = () => {
-    const handleUpload = (data: { title: string, startDate: string, recruits: { roleName: string, roleNumber: number }[], language: string, content: string }) => {
+    const { potId } = useParams();
+    const potIdNumber = Number(potId);
+
+    const handleUpload = (data: PostPotParams) => {
         // todo: 팟 다 끓이기 api
     }
     return (
-        <FinishedPotForm type="create" onSubmit={handleUpload} />
+        <FinishedPotForm potId={potIdNumber} type="create" onCompleted={handleUpload} />
     )
 }
 export default CreateFinishedPot;

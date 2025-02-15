@@ -1,12 +1,12 @@
-import { apiGet, authApiDelete, authApiGet, authApiPost } from "./apiUtils";
+import { apiGet, authApiDelete, authApiGet, authApiPatch, authApiPost } from "./apiUtils";
 import { GetPotsParams, PotsResponse, PostPotParams, PostPotResponse, GetPotDetailResponse, GetPotApplicationResponse, GetPotMemberResponse, PostPotApplicationBody, PostPotMembersBody, PostPotMemersResponse, GetPotsApplyResponse, GetPotsRecruitingResponse, GetPotsCompletedResponse, GetPotsCompletedParams } from "./types/pot";
 
 export const PostPot = async (postPotParams: PostPotParams) => {
   return authApiPost<PostPotResponse>("/pots", postPotParams);
 };
 
-export const GetPots = async ({ page, size ,recruitmentRole }: GetPotsParams) => {
-  return apiGet<PotsResponse>("pots", { page, size ,recruitmentRole});
+export const GetPots = async ({ page, size, recruitmentRole }: GetPotsParams) => {
+  return apiGet<PotsResponse>("pots", { page, size, recruitmentRole });
 };
 
 export const GetPotsApply = async () => {
@@ -43,3 +43,7 @@ export const GetPotsRecruiting = async () => {
 export const GetPotsCompleted = async ({ cursor, size }: GetPotsCompletedParams) => {
   return authApiGet<GetPotsCompletedResponse>(`/pots/completed`, { cursor, size });
 };
+
+export const PatchPotComplete = async (potId: number, body: PostPotParams) => {
+  return authApiPatch<PostPotResponse>(`/pots/${potId}/complete`, body);
+}

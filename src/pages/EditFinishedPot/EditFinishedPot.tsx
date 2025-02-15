@@ -13,7 +13,7 @@ const EditFinishedPot = () => {
     return (
         <FinishedPotForm
             type="edit"
-            onSubmit={handleUpload} />
+            onCompleted={handleUpload} />
     )
 }
 export default EditFinishedPot;

@@ -161,3 +161,8 @@ export interface CompletedPotDetail {
   userPotRole: Role;
   memberCounts: Record<Role, number>;
 }
+
+export interface PatchPotCompleteParams {
+  potId: number;
+  body: PostPotParams;
+}

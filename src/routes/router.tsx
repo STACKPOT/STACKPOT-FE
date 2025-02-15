@@ -124,7 +124,7 @@ const router = createBrowserRouter([
         element: <UserPage />,
       },
       {
-        path: routes.createFinishedPot,
+        path: `${routes.createFinishedPot}/:potId`,
         element: <CreateFinishedPot />,
       },
       {
