@@ -6,7 +6,7 @@ import { TextInput, DateInput, StatusBadgeSelector, ExplainationInputField, Cont
 import { mainContainer, subContainer, cancelContainer, cancelIconStyle, thirdContainer, titleContainer, titleTextStyle } from "./AboutWorkModal.style";
 import { AnotherTaskStatus, TaskStatus } from "../../../../types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
-import usePatchTask from "apis/hooks/myPots/usePatchMyPotTask";
+import usePatchMyPotTask from "apis/hooks/myPots/usePatchMyPotTask";
 import { APITaskStatus, TaskPatch } from "apis/types/myPot";
 import { deleteMyPotTask } from "apis/myPotAPI";
 import routes from "@constants/routes";
@@ -27,7 +27,7 @@ const apiToDisplayStatus: Record<APITaskStatus, AnotherTaskStatus> = {
 const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, title }) => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const { data: taskDetail, isLoading } = useGetMyPotTaskDetail({ potId: Number(potId), taskId: Number(taskId) });
-  const { mutate: patchTask, isPending } = usePatchTask();
+  const { mutate: patchTask, isPending, snackbar } = usePatchMyPotTask();
   const navigate = useNavigate();
   const { register, handleSubmit, setValue, watch } = useForm();
 
@@ -35,11 +35,11 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, 
   const [selectedStatus, setSelectedStatus] = useState<TaskStatus>(activeStatus);
 
   useEffect(() => {
-    if (title === "업무 수정하기" && taskDetail) {
-      setValue("taskTitle", taskDetail.title);
-      setValue("taskDate", taskDetail.deadLine);
-      setSelectedStatus(apiToDisplayStatus[taskDetail.status]);
-      setValue("taskDescription", taskDetail.description);
+    if (title === "업무 수정하기" && taskDetail?.result) {
+      setValue("taskTitle", taskDetail.result.title);
+      setValue("taskDate", taskDetail.result.deadLine);
+      setSelectedStatus(apiToDisplayStatus[taskDetail.result.status as APITaskStatus] || "진행 전");
+      setValue("taskDescription", taskDetail.result.description);
     }
   }, [taskDetail, title, setValue]);
 
@@ -78,6 +78,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, 
   return (
     <>
       <ConfirmModalWrapper isModalOpen={isConfirmOpen} onClose={() => setIsConfirmOpen(false)} onConfirm={confirmDeleteTask} />
+      {snackbar}
       <div css={mainContainer}>
         <div css={subContainer}>
           <div css={cancelContainer}>
@@ -88,23 +89,10 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, 
               <div css={titleTextStyle}>{title}</div>
             </div>
             <form onSubmit={handleSubmit(handleSave)} css={thirdContainer}>
-              <TextInput 
-                value={watch("taskTitle", "")} 
-                {...register("taskTitle", { required: true })}
-                onChange={(e) => setValue("taskTitle", e.target.value)}
-              />
-              <DateInput 
-                value={watch("taskDate", "")} 
-                {...register("taskDate", { required: true })}
-                onChange={(e) => setValue("taskDate", e.target.value)}
-              />
+              <TextInput value={watch("taskTitle", "")} {...register("taskTitle", { required: true })} onChange={(e) => setValue("taskTitle", e.target.value)} />
+              <DateInput value={watch("taskDate", "")} {...register("taskDate", { required: true })} onChange={(e) => setValue("taskDate", e.target.value)} />
               <StatusBadgeSelector selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />
-              <ExplainationInputField 
-                value={watch("taskDescription", "")} 
-                {...register("taskDescription")}
-                onChange={(e) => setValue("taskDescription", e.target.value)}
-                placeholder="간단한 설명을 100자 이내로 작성해주세요" 
-              />
+              <ExplainationInputField value={watch("taskDescription", "")} {...register("taskDescription")} onChange={(e) => setValue("taskDescription", e.target.value)} placeholder="간단한 설명을 100자 이내로 작성해주세요" />
               <ContributorList />
               <ActionButton title={title} onSave={handleSubmit(handleSave)} onDelete={handleDeleteTask} />
             </form>

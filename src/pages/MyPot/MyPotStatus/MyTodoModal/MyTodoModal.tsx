@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { usePatchMyPotTodo } from "apis/hooks/myPots/usePatchMyPotTodo";
+import { usePatchMyPotTodo }from "apis/hooks/myPots/usePatchMyPotTodo";
 import { getMyPotTodo } from "apis/myPotAPI";
 import { CloseIcon, DeleteIcon, TodoCheckIcon, TodoPlusButtonIcon } from "@assets/svgs";
 import {
@@ -34,7 +34,7 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await getMyPotTodo(potId, 1, 3);
+        const response = await getMyPotTodo({ potId, page: 1, size: 3 });
         if (response.isSuccess && response.result) {
           setTasks(
             response.result.todos?.[0]?.todos?.map(todo => ({
