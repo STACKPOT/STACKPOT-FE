@@ -32,7 +32,7 @@ interface Participant {
 interface TaskCardProps {
   title: string;
   dday: string;
-  tag: string | string[];
+  tag: string[];
   content: string;
   date: string;
   creatorRole: string;
@@ -53,7 +53,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
   onClick,
 }: TaskCardProps) => {
   const profileImage = roleToImage[creatorRole] || "";
-  const tagList = Array.isArray(tag) ? tag : [tag];
 
   const profileImageList = participants?.map((p) => p.profileImage || roleToImage[p.role]) || [];
 
@@ -63,7 +62,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
         <div css={taskCardInnerTopContainer}>
           <div css={badgeContainer}>
             <DdayBadge days={dday} />
-            {tagList.map((t, index) => (
+            {tag.map((t, index) => (
               <Badge key={index} content={t} />
             ))}
           </div>

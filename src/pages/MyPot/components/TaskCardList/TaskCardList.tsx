@@ -1,19 +1,24 @@
 import { TaskCard } from "@components/index";
 import { MushroomImage, CarrotImage, OnionImage, BroccoliImage } from "@assets/images";
 import { Task } from "apis/types/myPot";
+import { Role } from "types/role";
 
-const categoryToKorean: Record<string, string> = {
+const categoryToKorean: Record<Role, string> = {
   FRONTEND: "프론트엔드",
-  PLAN: "기획",
-  DESIGN: "디자인",
   BACKEND: "백엔드",
+  PLANNING: "기획",
+  DESIGN: "디자인",
 };
 
-const roleToImage: Record<string, string> = {
-  DESIGN: BroccoliImage,
-  PLAN: CarrotImage,
+const roleToImage: Record<Role, string> = {
   FRONTEND: MushroomImage,
   BACKEND: OnionImage,
+  PLANNING: CarrotImage,
+  DESIGN: BroccoliImage,
+};
+
+const isRoleType = (value: string): value is Role => {
+  return ["FRONTEND", "BACKEND", "PLANNING", "DESIGN"].includes(value);
 };
 
 interface TaskCardListProps {
@@ -28,7 +33,7 @@ const TaskCardList: React.FC<TaskCardListProps> = ({ tasks, onTaskCardClick }) =
         <TaskCard
           key={idx}
           title={task.title}
-          tag={task.category?.map((cat) => categoryToKorean[cat] || "기타").join(", ")}
+          tag={task.category?.map((cat) => isRoleType(cat) ? categoryToKorean[cat] : "기타")}
           content={task.description}
           dday={task.dday}
           date={task.deadLine}
@@ -37,7 +42,7 @@ const TaskCardList: React.FC<TaskCardListProps> = ({ tasks, onTaskCardClick }) =
           onClick={() => onTaskCardClick(task.taskboardId)}
           participants={task.participants.map((p) => ({
             ...p,
-            profileImage: roleToImage[p.role] || "", 
+            profileImage: isRoleType(p.role) ? roleToImage[p.role] : "", 
           }))}
         />
       ))}
