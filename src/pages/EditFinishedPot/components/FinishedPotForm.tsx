@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
     appealIconStyle, dividerStyle, formContainer, headContainer, iconStyle, inputStyle, labelStyle, languageInputStyle, mainContainer, partStyle, summaryButtonContainer, textareaStyle, titleContainer, titleStyle,
 } from "./FinishedPotForm.style"
-import { Button, PartRecruitment, PotButton } from "@components/index";
+import { Button, Modal, PartRecruitment, PotButton } from "@components/index";
 import { AppealIcon, PotIcon } from "@assets/svgs";
 import { DatePicker } from "@pages/CreatePot/components";
 import { PostPotParams } from "apis/types/pot";
@@ -10,6 +10,8 @@ import dayjs, { Dayjs } from "dayjs";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 import { Role } from "types/role";
+import useGetPotSummary from "apis/hooks/pots/useGetPotSummary";
+import SummaryLoadingModal from "./SummaryLoadingModal";
 
 interface FinishedPotFormProps {
     potId: number;
@@ -19,6 +21,9 @@ interface FinishedPotFormProps {
 
 const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onCompleted }: FinishedPotFormProps) => {
     const { data: potData } = useGetPotDetail(potId);
+    const { data: summaryData, isFetching: isSummaryLoading, refetch: getSummary } = useGetPotSummary(potId);
+    const [showSummaryModal, setShowSummaryModal] = useState<boolean>(false);
+    const [submitData, setSubmitData] = useState<PostPotParams | null>(null);
 
     const methods = useForm<PostPotParams>({
         mode: "onChange",
@@ -44,9 +49,9 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
     } = methods;
 
     const handleSummary = () => {
-        // todo: api 호출
-        setValue("potSummary", "ai 요약 내용");
-    }
+        setShowSummaryModal(true);
+        getSummary();
+    };
 
     const handleStartDate = (day: Dayjs | null) => {
         if (day) {
@@ -80,10 +85,17 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
         }
     }, [potData]);
 
+    useEffect(() => {
+        if (!isSummaryLoading) {
+            setValue("potSummary", summaryData?.summary);
+            methods.trigger();
+        }
+    }, [summaryData]);
+
     return (
         <main css={mainContainer}>
             <FormProvider {...methods}>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit((data) => setSubmitData(data))}>
                     <div css={headContainer}>
                         <div css={titleContainer}>
                             <h2 css={titleStyle}>{type === "create" ? "나의 팟 다 끓이기" : "끓인 팟 수정하기"}</h2>
@@ -137,6 +149,14 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
                     </form>
                 </form>
             </FormProvider>
+            {isSummaryLoading && showSummaryModal &&
+                <SummaryLoadingModal onClose={() => setShowSummaryModal(false)} />}
+            {submitData &&
+                <Modal
+                    title="팟을 다 끓일까요?"
+                    message={`모든 참여자의 페이지에 이 내용이 기입될 예정이에요.\n이름과 설명은 팟 주인만 작성 가능하므로,\n모든 내용이 명확한지 꼼꼼히 확인해 주세요.`}
+                    onConfirm={() => onSubmit(submitData)}
+                    onCancel={() => setSubmitData(null)} />}
         </main>
     )
 }

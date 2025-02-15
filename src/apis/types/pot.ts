@@ -174,3 +174,7 @@ export interface PatchPotCompleteParams {
   potId: number;
   body: PostPotParams;
 }
+
+export interface GetPotSummaryResponse {
+  summary: string;
+}
