@@ -71,7 +71,7 @@ const router = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
-        path: routes.potDetail,
+        path: `${routes.potDetail}/:potId`,
         element: <PotDetailPage />,
       },
       {
@@ -96,18 +96,16 @@ const router = createBrowserRouter([
         element: <MyPotPage />,
       },
       {
-        path: `${routes.myPot.potPage}`,
+        path: routes.myPot.base,
         element: <MyPotMainPage />,
         children: [
-          { 
-            index: true,
-            element: <MyPotStatusPage /> },
+          { path: `${routes.task}/:potId`, element: <MyPotStatusPage /> },
           {
-            path: `${routes.myPot.calendar}`,
+            path: `${routes.calendar}/:potId`,
             element: <MyPotCalendarPage />,
           },
           {
-            path: `${routes.myPot.detail}`,
+            path: `${routes.task}/:potId/:taskId`,
             element: <TaskDetailPage />,
           },
         ],
@@ -117,11 +115,11 @@ const router = createBrowserRouter([
         element: <EditPostPage />,
       },
       {
-        path: routes.editFinishedPot,
+        path: `${routes.editFinishedPot}/:potId`,
         element: <EditFinishedPotPage />,
       },
       {
-        path: routes.userProfile,
+        path: `${routes.userProfile}/:userId`,
         element: <UserPage />,
       },
       {
