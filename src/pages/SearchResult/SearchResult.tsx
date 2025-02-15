@@ -114,6 +114,7 @@ const SearchResult = () => {
         <div css={feedContainer}>
           {data?.content?.map((feed, index) => (
             <PostCard
+              id={feed.feedId}
               key={`${feed.userId}-${index}`}
               role={feed.creatorRole}
               nickname={feed.creatorNickname}
@@ -121,6 +122,7 @@ const SearchResult = () => {
               title={feed.title}
               content={feed.content}
               likeCount={feed.likeCount}
+              isLiked={feed.isLiked}
             />
           ))}
         </div>

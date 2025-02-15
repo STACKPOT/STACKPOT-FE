@@ -19,6 +19,8 @@ import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDr
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
 import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface PostCardProps {
   id: number;
@@ -30,7 +32,7 @@ interface PostCardProps {
   likeCount: number;
   isLiked: boolean;
   profileImage?: string;
-  onClick: () => void;
+  isMyPost?: boolean;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -42,12 +44,18 @@ const PostCard: React.FC<PostCardProps> = ({
   content,
   likeCount,
   isLiked,
-  onClick,
+  isMyPost = false,
 }: PostCardProps) => {
   const { mutate: likeFeed } = usePostFeedLike();
+  const navigate = useNavigate();
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
-  const [isMyPost, setIsMyPost] = useState<boolean>(true);
+
+  const handleCardClick = () => {
+    navigate(`${routes.feed}/${id}`);
+    window.scrollTo(0, 0);
+  };
+
   const handleLike = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     likeFeed(id, {
@@ -68,7 +76,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const profileImage = roleImages[role];
 
   return (
-    <div css={cardStyle} onClick={onClick}>
+    <div css={cardStyle} onClick={handleCardClick}>
       <div css={headerContainer}>
         <div css={profileContainer}>
           <img css={profileImageStyle} src={profileImage} alt="profile" />

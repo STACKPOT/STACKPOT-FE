@@ -114,7 +114,6 @@ const Feed = () => {
                         content={item.content}
                         likeCount={item.likeCount}
                         isLiked={item.isLiked}
-                        onClick={() => handleCardClick(item.feedId)}
                       />
                     </div>
                   );

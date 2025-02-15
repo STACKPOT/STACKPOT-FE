@@ -31,4 +31,5 @@ export interface Content {
   creatorNickname: string;
   createdAt: string;
   likeCount: number;
+  isLiked: boolean;
 }

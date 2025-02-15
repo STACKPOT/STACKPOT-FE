@@ -62,14 +62,16 @@ const MyPage = () => {
           {contentType === "feed"
             ? data.feeds.map((post) => (
                 <PostCard
+                  id={post.feedId}
                   nickname={post.writer}
                   role={post.writerRole}
                   isLiked={false}
                   likeCount={post.likeCount}
-                  key={post.id}
+                  key={post.feedId}
                   createdAt={post.createdAt}
                   title={post.title}
                   content={post.content}
+                  isMyPost={true}
                 />
               ))
             : data.completedPots.map((pot) => {

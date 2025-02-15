@@ -10,7 +10,7 @@ export interface MyPageResponse {
   feeds: Feeds[];
 }
 interface Feeds {
-  id: number;
+  feedId: number;
   writer: string;
   writerRole: Role;
   title: string;
