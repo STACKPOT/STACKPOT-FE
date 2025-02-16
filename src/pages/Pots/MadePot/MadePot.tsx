@@ -66,7 +66,7 @@ const MadePotPage = () => {
                           stacks={item.members}
                           languages={item.potLan}
                           members={members}
-                          isMyPage={false}
+                          isProfilePage={false}
                           buttonType="edit"
                         />
                       </div>

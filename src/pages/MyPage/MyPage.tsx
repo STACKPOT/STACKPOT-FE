@@ -89,8 +89,9 @@ const MyPage = () => {
                     languages={pot.potLan}
                     key={pot.potId}
                     members={members}
-                    isMyPage={true}
+                    isProfilePage={true}
                     endDate={pot.potEndDate}
+                    buttonType="appeal"
                   />
                 );
               })}
