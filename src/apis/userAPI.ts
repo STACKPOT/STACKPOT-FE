@@ -52,6 +52,6 @@ export const postLogout = async (refreshToken: string) => {
   return authApiPost("/users/logout", { refreshToken });
 };
 
-export const deleteUser = (refreshToken: string) => {
-  return authApiDelete("/users/delete", { refreshToken });
+export const deleteUser = () => {
+  return authApiDelete("/users/delete");
 };

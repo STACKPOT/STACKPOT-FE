@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 const useDeleteUser = () => {
   const navigate = useNavigate();
   return useMutation({
-    mutationFn: (refreshToken: string) => deleteUser(refreshToken),
-    onSuccess: () => {
+    mutationFn: () => deleteUser(),
+    onSuccess: (res) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("role");
       navigate(routes.home);
+      console.log(res);
     },
   });
 };
