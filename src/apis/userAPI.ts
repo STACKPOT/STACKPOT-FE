@@ -1,5 +1,11 @@
 import { Role } from "types/role";
-import { apiGet, authApiGet, authApiPatch, authApiPost } from "./apiUtils";
+import {
+  apiGet,
+  authApiDelete,
+  authApiGet,
+  authApiPatch,
+  authApiPost,
+} from "./apiUtils";
 import {
   LogInResponse,
   postSignInPayload,
@@ -56,4 +62,8 @@ export const patchUserProfileUpdate = async (
 
 export const postLogout = async (refreshToken: string) => {
   return authApiPost("/users/logout", { refreshToken });
+};
+
+export const deleteUser = () => {
+  return authApiDelete("/users/delete");
 };
