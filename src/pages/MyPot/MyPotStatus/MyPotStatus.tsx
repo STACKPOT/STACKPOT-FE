@@ -3,10 +3,11 @@ import { containerStyle, toDoGirdContainer } from "../MyPotStatus/MyPotStatus.st
 import { AboutWorkModalWrapper, StatusBoard, TodoStatusSection, Pagination, MyPotStatusHeader, MyPotTodoList } from "../components/index";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import taskCardkData from "mocks/taskCardData";
-import { TaskStatus } from "types/taskStatus";
+import { APITaskStatus, TaskStatus } from "types/taskStatus";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { useParams } from "react-router-dom";
+import { useGetMyPotTask } from "apis/hooks/myPots/useGetMyPotTask";
+import { apiToDisplayStatus, TASK_STATUSES } from "@constants/categories";
 
 const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,6 +24,8 @@ const MyPotStatusPage: React.FC = () => {
     page: currentPage,
     size: 3,
   });
+
+  const { data: taskData } = useGetMyPotTask(potIdNumber); 
 
   const totalPages = useMemo(() => {
     return data?.totalElements ? Math.ceil(data.totalElements / 3) : 0;
@@ -42,8 +45,9 @@ const MyPotStatusPage: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleTaskCardClick = () => {
-    // navigate(`${routes.myPot.detail}`);
+  const handleTaskCardClick = (taskId: number) => { 
+    if (!potId) return;
+    navigate(`${routes.myPot.base}/${routes.task}/${potId}/${taskId}`);
   };
 
   return (
@@ -53,29 +57,36 @@ const MyPotStatusPage: React.FC = () => {
         activeStatus={activeStatus}
         modalTitle={modalTitle}
         onClose={() => setIsModalOpen(false)}
-        onSave={() => setIsModalOpen(false)}
       />
-
       <MyPotStatusHeader />
 
       <div css={containerStyle}>
-        <MyPotTodoList currentPage={currentPage} onModalClose={() => {}} />
+        <MyPotTodoList currentPage={currentPage} />
         <Pagination currentPage={currentPage} totalPages={totalPages} onPrev={handlePrev} onNext={handleNext} />
       </div>
 
       <StatusBoard onOpenModal={() => handleOpenModal(null, "새로운 업무 추가")} />
 
       <div css={toDoGirdContainer}>
-        {["진행 전", "진행 중", "완료"].map((status) => (
-          <TodoStatusSection
-            key={status}
-            status={status as "진행 전" | "진행 중" | "완료"}
-            tasks={taskCardkData.filter((task) => task.status === status)}
-            onOpenModal={() => handleOpenModal(status as "진행 전" | "진행 중" | "완료", "새로운 업무 추가")}
-            onTaskCardClick={handleTaskCardClick}
-          />
-        ))}
+        {TASK_STATUSES.map((status) => {
+          const safeTaskData = taskData?.result || { OPEN: [], IN_PROGRESS: [], CLOSED: [] };
+
+          const filteredTasks = Object.entries(safeTaskData)
+            .filter(([apiStatus]) => apiToDisplayStatus[apiStatus as APITaskStatus] === status)
+            .flatMap(([_, tasks]) => tasks);        
+
+          return (
+            <TodoStatusSection
+              key={status}
+              status={status}
+              tasks={filteredTasks}
+              onOpenModal={() => handleOpenModal(status, "새로운 업무 추가")}
+              onTaskCardClick={handleTaskCardClick}
+            />
+          );
+        })}
       </div>
+
     </>
   );
 };

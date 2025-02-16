@@ -1,3 +1,5 @@
+import { Role } from "types/role";
+
 export const participation = ["온라인", "오프라인", "혼합"] as const;
 export const period = [
   "단기-1개월",
@@ -34,3 +36,25 @@ export const participationMap: {
 };
 
 export const categoryOptions = ["팟", "피드"] as const;
+
+export const apiToDisplayStatus = {
+  OPEN: "진행 전",
+  IN_PROGRESS: "진행 중",
+  CLOSED: "완료",
+} as const;
+
+export const displayToApiStatus = {
+  "진행 전": "OPEN",
+  "진행 중": "IN_PROGRESS",
+  "완료": "CLOSED",
+} as const;
+
+export const TASK_STATUSES = ["진행 전", "진행 중", "완료"] as const;
+
+export const categoryToKorean: Record<Role, string> = {
+  FRONTEND: "프론트엔드",
+  BACKEND: "백엔드",
+  PLANNING: "기획",
+  DESIGN: "디자인",
+  DEFAULT: " "
+};

@@ -2,12 +2,14 @@ import { StateBadge } from "@components/index";
 import { PlusButtonIcon } from "@assets/svgs";
 import { toDoStatusContainer, toDoStatusHeader, plusButtonStyle } from "../../MyPotStatus/MyPotStatus.style";
 import TaskCardList from "../TaskCardList/TaskCardList";
+import { Task } from "apis/types/myPot";
+import { AnotherTaskStatus } from "types/taskStatus";
 
 interface TodoStatusSectionProps {
-  status: "진행 전" | "진행 중" | "완료";
-  tasks: any[];
+  status: AnotherTaskStatus;
+  tasks: Task[];
   onOpenModal: () => void;
-  onTaskCardClick: (taskId: string) => void;
+  onTaskCardClick: (taskId: number) => void;
 }
 
 const TodoStatusSection: React.FC<TodoStatusSectionProps> = ({
@@ -15,14 +17,15 @@ const TodoStatusSection: React.FC<TodoStatusSectionProps> = ({
   tasks,
   onOpenModal,
   onTaskCardClick,
-}) => (
+}) => {
+  return (
   <div css={toDoStatusContainer}>
     <div css={toDoStatusHeader}>
       <StateBadge content={status} />
       <PlusButtonIcon css={plusButtonStyle} onClick={onOpenModal} />
     </div>
     <TaskCardList tasks={tasks} onTaskCardClick={onTaskCardClick} />
-  </div>
-);
+  </div>);
+};
 
 export default TodoStatusSection;

@@ -14,17 +14,24 @@ import {
   profileImageStyle,
   titleTextStyle,
 } from "./TaskCard.style";
-import { MemberGroup, DdayBadge, Badge, MyFeedDropdown } from "@components/index"
+import { MemberGroup, DdayBadge, Badge, MyFeedDropdown } from "@components/index";
+import { Role } from "types/role";
+import { roleImages } from "@constants/roleImage";
+
+interface Participant {
+  role: string;
+  profileImage?: string;
+}
 
 interface TaskCardProps {
   title: string;
-  dday: number;
-  tag: string;
+  dday: string;
+  tag: string[];
   content: string;
   date: string;
-  profileImage: string;
+  creatorRole: string;
   nickname: string;
-  groupProfileImages: string[];
+  participants: Participant[];
   onClick?: () => void;
 }
 
@@ -34,21 +41,30 @@ const TaskCard: React.FC<TaskCardProps> = ({
   tag,
   content,
   date,
-  profileImage,
+  creatorRole,
   nickname,
-  groupProfileImages,
+  participants,
   onClick,
 }: TaskCardProps) => {
+  const profileImage = roleImages[creatorRole as Role] || "";
+
+  const roleList: Role[] = participants
+  .map((p) => p.role)
+  .filter((role): role is Role => ["FRONTEND", "BACKEND", "PLANNING", "DESIGN", "DEFAULT"].includes(role));
+
+
   return (
     <div css={cardStyle} onClick={onClick}>
       <div css={innerContainer}>
         <div css={taskCardInnerTopContainer}>
           <div css={badgeContainer}>
             <DdayBadge days={dday} />
-            <Badge content={tag} />
+            {tag.map((t, index) => (
+              <Badge key={index} content={t} />
+            ))}
           </div>
 
-          <div css={forDropdownStyle} onClick={(event) => {event.stopPropagation();}}>
+          <div css={forDropdownStyle} onClick={(event) => { event.stopPropagation(); }}>
             <MyFeedDropdown
               topMessage="수정하기"
               bottomMessage="삭제하기"
@@ -57,7 +73,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             />
           </div>
         </div>
-        
+
         <div css={contentContainer}>
           <p css={titleTextStyle}>{title}</p>
           <p css={contentTextStyle}>{content}</p>
@@ -69,7 +85,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             <img css={profileImageStyle} src={profileImage} />
             <p css={nicknameStyle}>{nickname}</p>
           </div>
-          <MemberGroup memberRoleList={groupProfileImages} />
+          <MemberGroup memberRoleList={roleList} />
         </div>
       </div>
     </div>

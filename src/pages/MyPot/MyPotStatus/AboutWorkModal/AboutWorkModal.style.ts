@@ -10,6 +10,7 @@ export const mainContainer = css`
   border: 1px solid ${theme.color.object.alternative};
   border-radius: 24px;
   width: 84rem;
+  z-index: 5000;
 `;
 
 export const subContainer = css`
