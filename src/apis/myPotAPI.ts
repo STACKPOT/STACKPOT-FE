@@ -5,7 +5,7 @@ import {
   MyPotResponse,
   TaskDetailResponse,
   TaskPatch,
-  TaskAPIPrams,
+  TaskAPIParams,
   GetTodoParams,
   TodoUpdateRequest,
   PatchTodoStatusParams
@@ -27,15 +27,15 @@ export const getMyPotTask = async (potId: number) => {
   return authApiGet<TaskResponse>(`/my-pots/${potId}/tasks`);
 };
 
-export const getMyPotTaskDetail = async ({ potId, taskId }: TaskAPIPrams) => {
+export const getMyPotTaskDetail = async ({ potId, taskId }: TaskAPIParams) => {
   return authApiGet<TaskDetailResponse>(`/my-pots/${potId}/tasks/${taskId}`);
 };
 
-export const deleteMyPotTask = async ({ potId, taskId }: TaskAPIPrams) => {
+export const deleteMyPotTask = async ({ potId, taskId }: TaskAPIParams) => {
   return authApiDelete(`/my-pots/${potId}/tasks/${taskId}`);
 };
 
-export const patchMyPotTask = async ({ potId, taskId }: TaskAPIPrams, data: TaskPatch) => {
+export const patchMyPotTask = async ({ potId, taskId }: TaskAPIParams, data: TaskPatch) => {
   return authApiPatch(`/my-pots/${potId}/tasks/${taskId}`, data);
 };
 

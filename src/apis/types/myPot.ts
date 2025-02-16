@@ -1,3 +1,5 @@
+import { APITaskStatus } from "types/taskStatus";
+
 export interface Todo {
   todoId: number | null;
   content: string;
@@ -26,7 +28,6 @@ export interface GetTodoParams {
   size: number;
 }
 
-export type APITaskStatus = "OPEN" | "IN_PROGRESS" | "CLOSED";
 
 export interface Participant {
   potMemberId: number;
@@ -99,7 +100,7 @@ export interface MyPotResponse {
   };
 }
 
-export interface TaskAPIPrams {
+export interface TaskAPIParams {
   potId: number;
   taskId: number;
 }

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { patchMyPotTask } from "apis/myPotAPI";
-import { TaskAPIPrams, TaskPatch } from "apis/types/myPot";
+import { TaskAPIParams, TaskPatch } from "apis/types/myPot";
 import { useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -16,7 +16,7 @@ const usePatchMyPotTask = () => {
   };
 
   const mutation = useMutation({
-    mutationFn: ({ potId, taskId, data }: TaskAPIPrams & { data: TaskPatch }) =>
+    mutationFn: ({ potId, taskId, data }: TaskAPIParams & { data: TaskPatch }) =>
       patchMyPotTask({ potId, taskId }, data),
     onSuccess: (_, { potId, taskId }) => {
       queryClient.invalidateQueries({ queryKey: ["taskDetail", potId, taskId] });
