@@ -25,6 +25,7 @@ import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { CategorySelection } from "./components";
+import useDeleteUser from "apis/hooks/users/useDeleteUser";
 
 const Setting = () => {
   const navigate = useNavigate();
@@ -41,19 +42,11 @@ const Setting = () => {
       userIntroduction: "",
       kakaoId: "",
     },
-  })
+  });
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-  } = methods;
+  const { register, handleSubmit, watch, setValue } = methods;
 
-  const [
-    introduction,
-    kakaoId
-  ] = watch(["userIntroduction", "kakaoId"]);
+  const [introduction, kakaoId] = watch(["userIntroduction", "kakaoId"]);
 
   useEffect(() => {
     if (profile) {
@@ -62,19 +55,28 @@ const Setting = () => {
       setValue("kakaoId", profile?.kakaoId);
       setValue("userIntroduction", profile?.userIntroduction);
     }
-  }, [profile])
+  }, [profile]);
 
   const onSubmit: SubmitHandler<PatchUserProfileUpdateParams> = (data) => {
     mutate(data, {
       onSuccess: () => {
         navigate(routes.myPage);
-      }
+      },
     });
-  }
+  };
+
+  const { mutate: deleteUser } = useDeleteUser();
+
+  const handleClick = () => {
+    const token = localStorage.getItem("refreshToken");
+    if (token) {
+      deleteUser(token);
+    }
+  };
 
   return (
     <main>
-      <FormProvider {...methods} >
+      <FormProvider {...methods}>
         <form css={container} onSubmit={handleSubmit(onSubmit)}>
           <div css={titleContent}>
             <div css={title}>
@@ -138,8 +140,9 @@ const Setting = () => {
           title="탈퇴하시겠습니까?"
           buttonText="탈퇴하기"
           subtitle={`탈퇴 후 30일 이내에는 계정을 복구할 수 있습니다.\n이후에는 모든 데이터가 영구적으로 삭제됩니다`}
-          onButtonClick={() => { }}
-          onCancel={() => setIsWithdrawModalOpen(false)}>
+          onButtonClick={handleClick}
+          onCancel={() => setIsWithdrawModalOpen(false)}
+        >
           <></>
         </ExplainModal>
       )}
