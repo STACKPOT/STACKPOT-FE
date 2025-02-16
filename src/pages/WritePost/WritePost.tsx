@@ -14,6 +14,7 @@ import { useBlocker, useNavigate } from "react-router-dom";
 import usePostFeed from "apis/hooks/feeds/usePostFeed";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { PostFeedParams } from "apis/types/feed";
+import routes from "@constants/routes";
 
 const WritePost: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
@@ -46,13 +47,15 @@ const WritePost: React.FC = () => {
 
   const onSubmit: SubmitHandler<PostFeedParams> = (data) => {
     postFeedMutation.mutate(data, {
-      onSuccess: () => {
-        setShowToast(true);
+      onSuccess: (response) => {
+        if (response?.result?.feedId) {
+          setShowToast(true);
 
-        setTimeout(() => {
-          setShowToast(false);
-          navigate("/home");
-        }, 2000);
+          setTimeout(() => {
+            setShowToast(false);
+            navigate(`${routes.feed.base}/${response.result?.feedId}`);
+          }, 2000);
+        }
       },
       onError: () => {
         alert("피드 업로드 실패");
