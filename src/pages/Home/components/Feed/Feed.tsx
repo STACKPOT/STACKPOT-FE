@@ -98,6 +98,7 @@ const Feed = () => {
                     <div key={item.feedId} ref={isLastItem ? ref : null}>
                       <PostCard
                         role={item.writerRole}
+                        writerId={item.writerId}
                         nickname={item.writer}
                         createdAt={item.createdAt}
                         title={item.title}

@@ -31,6 +31,7 @@ interface PostCardProps {
   isLiked: boolean;
   profileImage?: string;
   feedId: number;
+  writerId: number;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -42,6 +43,7 @@ const PostCard: React.FC<PostCardProps> = ({
   likeCount,
   isLiked,
   feedId,
+  writerId,
 }: PostCardProps) => {
   const navigate = useNavigate();
 
@@ -66,15 +68,35 @@ const PostCard: React.FC<PostCardProps> = ({
     window.scrollTo(0, 0);
   };
 
+  const handleUserClick = (writerId: number) => {
+    navigate(`${routes.myPage}/${writerId}`);
+  };
+
   const profileImage = roleImages[role];
 
   return (
     <div css={cardStyle} onClick={() => handleFeedClick(feedId)}>
       <div css={headerContainer}>
         <div css={profileContainer}>
-          <img css={profileImageStyle} src={profileImage} alt="profile" />
+          <img
+            onClick={(e) => {
+              e.stopPropagation();
+              handleUserClick(writerId);
+            }}
+            css={profileImageStyle}
+            src={profileImage}
+            alt="profile"
+          />
           <div css={nicknameDateContainer}>
-            <p css={nicknameStyle}>{nickname}</p>
+            <p
+              onClick={(e) => {
+                e.stopPropagation();
+                handleUserClick(writerId);
+              }}
+              css={nicknameStyle}
+            >
+              {nickname}
+            </p>
             <p css={dateStyle}>{createdAt}</p>
           </div>
         </div>
