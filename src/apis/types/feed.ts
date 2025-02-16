@@ -48,9 +48,9 @@ export interface PatchFeedParams {
 }
 
 export interface FeedPatch {
-  title?: string | null;
-  content?: string | null;
-  category?: string | null;
+  title: string | null;
+  content: string | null;
+  category: string | null;
 }
 export interface PatchFeedResponse {
   feedId: number;

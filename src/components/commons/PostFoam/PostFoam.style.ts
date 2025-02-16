@@ -4,7 +4,7 @@ import theme from "@styles/theme";
 export const contentBody = css`
   padding: 6rem 10rem;
   box-shadow: 0px 4px 12px rgba(13, 10, 44, 0.06);
-  border-radius: 3.2rem;
+  border-radius: 32px;
   border: 1px solid ${theme.color.border.alternative};
   display: flex;
   align-items: flex-start;
@@ -24,7 +24,6 @@ export const inputStyle = css`
   padding: 1.2rem 1.6rem;
   ${theme.font.caption3}
   display: flex;
-  flex-grow: 1;
   border-radius: 8px;
   color: ${theme.color.base.darkgray};
   border: 1px solid ${theme.color.object.alternative};
@@ -39,12 +38,11 @@ export const inputStyle = css`
 
 export const textareaStyle = css`
   ${theme.font.caption3};
-  font-family: "Pretendard";
   resize: none;
   width: 70.8rem;
   height: 34.9rem;
   border: 1px solid ${theme.color.object.alternative};
-  border-radius: 0.8rem;
+  border-radius: 8px;
   box-sizing: border-box;
   overflow: auto;
   padding: 2.4rem;
@@ -65,11 +63,9 @@ export const categoryContainer = css`
   color: ${theme.color.base.darkgray};
   gap: 3rem;
   display: flex;
-  flex-direction: row;
 `;
 
 export const categories = css`
   display: flex;
-  flex-direction: row;
   gap: 2.4rem;
 `;
