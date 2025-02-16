@@ -12,6 +12,7 @@ export const background = css`
   align-items: flex-start;
   padding-top: 7.5rem;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
 `;
 export const container = css`
   width: 54rem;

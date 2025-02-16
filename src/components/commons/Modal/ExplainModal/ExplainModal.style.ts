@@ -15,7 +15,7 @@ export const modalBackgroundStyle = css`
 export const containerStyle = css`
   width: 54rem;
   padding: 3.2rem;
-  border-radius: 2.4rem;
+  border-radius: 24px;
   border: 1px solid ${theme.color.object.alternative};
   background-color: ${theme.color.base.white};
   display: flex;
@@ -51,6 +51,7 @@ export const subtitleStyle = css`
   color: black;
   white-space: pre-wrap;
   text-align: center;
+  color: ${theme.color.object.assistive};
 `;
 export const buttonStyle = css`
   height: 5rem;
@@ -58,7 +59,7 @@ export const buttonStyle = css`
   ${theme.font.captionBold1}
   color: ${theme.color.base.white};
   background-color: ${theme.color.point.hero};
-  border-radius: 1.6rem;
+  border-radius: 16px;
   border: 1px solid ${theme.color.border.normal};
   &:disabled {
     background-color: ${theme.color.object.alternative};
@@ -66,7 +67,11 @@ export const buttonStyle = css`
     color: ${theme.color.interactive.inactive};
   }
 `;
-export const textStyle = css`
-  ${theme.font.caption3};
-  color: ${theme.color.object.assistive};
+export const deleteButtonStyle = css`
+  ${buttonStyle};
+  padding: 1.7rem 12rem;
+  width: auto;
+  border-color: ${theme.color.feedback.negative};
+  color: ${theme.color.feedback.negative};
+  background-color: white;
 `;

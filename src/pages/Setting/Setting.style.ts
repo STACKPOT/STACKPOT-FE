@@ -4,9 +4,9 @@ import { css } from "@emotion/react";
 export const container = css`
   padding: 4.5rem 8.2rem;
   width: 71.3rem;
-  margin: 4.8rem auto;
+  margin: 8.4rem auto;
   border: 1px solid ${theme.color.object.alternative};
-  border-radius: 0.8rem;
+  border-radius: 8px;
 `;
 export const detailContainer = css`
   gap: 3.2rem;
@@ -28,14 +28,15 @@ export const titleContent = css`
 `;
 
 export const title = css`
-  ${theme.font.body3};
+  ${theme.font.bodyBold2};
   color: ${theme.color.base.darkgray};
   display: flex;
   align-items: center;
+  gap: 0.8rem;
 `;
 export const contentHeader = css`
   gap: 1.6rem;
-  ${theme.font.body2};
+  ${theme.font.title1};
   color: ${theme.color.base.darkgray};
   display: flex;
   flex-direction: row;
@@ -46,7 +47,7 @@ export const contentHeader = css`
 export const describe = css`
   ${theme.font.caption3};
   color: ${theme.color.object.assistive};
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.8rem;
 `;
 
 export const iconStyle = css`
@@ -61,24 +62,8 @@ export const contentBody = css`
   color: ${theme.color.object.assistive};
 `;
 
-export const categoryContainer = css`
-  margin-top: 1.6rem;
-  ${theme.font.caption3};
-  color: ${theme.color.base.black};
-  display: flex;
-  justify-content: row;
-  gap: 0.8rem;
-`;
-
 export const textStyle = css`
-  width: 38rem;
   height: 5.2rem;
-`;
-
-export const categories = css`
-  display: flex;
-  justify-content: row;
-  gap: 0.8rem;
 `;
 
 export const textareaWrapper = css`
@@ -89,13 +74,13 @@ export const textareaStyle = (isOverLimit: boolean) => css`
   width: 100%;
   height: 8.9rem;
   padding: 1.2rem 1.6rem;
-  border-radius: 1.2rem;
+  border-radius: 12px;
   ${theme.font.caption3};
-  font-family: "Pretendard";
+  resize: none;
   border: 1px solid
     ${isOverLimit
-      ? theme.color.feedback.negative
-      : theme.color.border.alternative};
+    ? theme.color.feedback.negative
+    : theme.color.border.alternative};
 
   &::placeholder {
     color: ${theme.color.object.hero};
@@ -104,8 +89,8 @@ export const textareaStyle = (isOverLimit: boolean) => css`
 
   &:focus {
     border-color: ${isOverLimit
-      ? theme.color.feedback.negative
-      : theme.color.point.hero};
+    ? theme.color.feedback.negative
+    : theme.color.point.hero};
     outline: none;
   }
 `;
@@ -130,5 +115,4 @@ export const buttonStyle = css`
   border-radius: 8px;
   background-color: ${theme.color.point.hero};
   border: none;
-  cursor: pointer;
 `;

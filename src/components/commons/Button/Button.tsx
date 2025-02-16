@@ -9,7 +9,7 @@ import {
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   variant?: "entry" | "action" | "landing";
-  actionType?: "action" | "join";
+  actionType?: "action" | "join" | "edit";
   onClick?: () => void;
 }
 

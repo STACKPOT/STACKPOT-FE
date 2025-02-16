@@ -32,6 +32,13 @@ export interface SignInResponse {
   role: Role;
 }
 
+export interface PatchUserProfileUpdateParams {
+  role: Role | undefined;
+  interest: string;
+  userIntroduction: string;
+  kakaoId: string;
+};
+
 export interface NicknameResponse {
   nickname: string;
 }
