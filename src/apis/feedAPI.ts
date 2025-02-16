@@ -5,7 +5,6 @@ import {
   FeedResponse,
   GetFeedDetailResponse,
   GetFeedParams,
-  PatchFeedParams,
   PatchFeedResponse,
   PostFeedParams,
   PostFeedResponse,

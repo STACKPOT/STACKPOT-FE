@@ -18,7 +18,6 @@ import { PotIcon } from "@assets/svgs";
 import {
   Button,
   CategoryButton,
-  Modal,
   PotButton,
   UploadToast,
 } from "@components/index";
@@ -77,7 +76,7 @@ const EditPost = () => {
       },
       {
         onSuccess: () => {
-          navigate(`/home`);
+          navigate(`${routes.feed}/${feedId}`);
         },
       }
     );
