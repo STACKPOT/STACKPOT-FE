@@ -73,11 +73,12 @@ const MyPage = () => {
                 />
               ))
             : data.completedPots.map((pot) => {
-                const memberRoles = pot.members.split(",").map((member) => {
-                  const rawRole = member.trim().split("(")[0];
-                  return mapRoleToEnum(rawRole);
+                let members = [] as Role[];
+                Object.entries(pot.memberCounts).forEach((part) => {
+                  for (let i = 0; i < part[1]; i++) {
+                    members.push(part[0] as Role)
+                  }
                 });
-
                 return (
                   <FinishedPotCard
                     id={pot.potId}
@@ -87,9 +88,7 @@ const MyPage = () => {
                     stacks={pot.members}
                     languages={pot.potLan}
                     key={pot.potId}
-                    memberProfiles={memberRoles.map(
-                      (role) => roleImages[role] || ""
-                    )}
+                    members={members}
                     isMyPage={true}
                     endDate={pot.potEndDate}
                   />
