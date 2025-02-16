@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { EditFinishedPotForm } from "./components";
+import { FinishedPotForm } from "./components";
 
 const EditFinishedPot = () => {
     const { potId } = useParams();
@@ -11,9 +11,9 @@ const EditFinishedPot = () => {
     }
 
     return (
-        <EditFinishedPotForm
+        <FinishedPotForm
             type="edit"
-            onSubmit={handleUpload} />
+            onCompleted={handleUpload} />
     )
 }
 export default EditFinishedPot;

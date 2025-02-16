@@ -101,6 +101,7 @@ export interface PotDetail {
   dday: string;
 }
 export interface GetPotApplicationResponse {
+  applicationId: number;
   potRole: Role;
   status: string;
   userId: number;
@@ -168,4 +169,13 @@ export interface CompletedPotDetail {
   members: string;
   userPotRole: Role;
   memberCounts: Record<Role, number>;
+}
+
+export interface PatchPotCompleteParams {
+  potId: number;
+  body: PostPotParams;
+}
+
+export interface GetPotSummaryResponse {
+  summary: string;
 }

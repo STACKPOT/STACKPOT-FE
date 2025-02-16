@@ -51,8 +51,8 @@ const PotForm: React.FC<PotFormProps> = ({ type, potData, onCompleted, onDelete 
             potDuration: undefined,
             potModeOfOperation: undefined,
             potContent: "",
-            potStartDate: undefined,
-            recruitmentDeadline: undefined,
+            potStartDate: dayjs().format('YYYY-MM-DD'),
+            recruitmentDeadline: dayjs().format('YYYY-MM-DD'),
             recruitmentDetails: undefined,
         }
     })

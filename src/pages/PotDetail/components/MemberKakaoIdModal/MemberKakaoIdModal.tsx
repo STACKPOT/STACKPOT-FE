@@ -26,7 +26,7 @@ const MemberKakaoIdModal: React.FC<MemberKakaoIdModalProps> = ({ potId, onModalC
                     <h1 css={titleStyle}>팀원 카카오톡 아이디를 알려드립니다.</h1>
                     <p css={descriptionStyle}>팀장인 <span css={descriptionBlueStyle}>{ownerNickname}</span>은 업무별 현황 페이지 상단에서 확인 가능합니다.</p>
                     <div css={membersContainer}>
-                        {members && members.map((member) =>
+                        {members && members.filter((member)=>!member.owner).map((member) =>
                             <div css={memberContainer}>
                                 <img css={profileStyle} src={roleImages[member.potRole]} alt="profile" />
                                 <div css={nicknameIdContainer}>

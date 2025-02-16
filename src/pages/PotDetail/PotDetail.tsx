@@ -53,7 +53,7 @@ const PotDetail = () => {
             </div>
             <p css={contentStyle}>{data.potDetail.potContent}</p>
           </div>
-          {data.potDetail.owner && data.potDetail.potStatus !== "COMPLETED" && (
+          {data.potDetail.owner && data.potDetail.potStatus === "RECRUITING" && (
             <ApplicantsInformation potId={potIdNumber} />
           )}
         </main>

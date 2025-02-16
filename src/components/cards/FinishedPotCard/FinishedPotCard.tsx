@@ -60,11 +60,13 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
       setSummaryModal(id);
     } else {
       navigate(`${routes.pot.base}/${id}`);
+      window.scrollTo(0, 0);
     }
   };
   const handleEditPot = (id: number) => {
     if (buttonType === "edit") {
       navigate(`${routes.editFinishedPot}/${id}`);
+      window.scrollTo(0, 0);
     } else {
       setAppealModal(id);
     }

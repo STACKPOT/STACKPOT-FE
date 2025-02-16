@@ -17,7 +17,7 @@ const StartPotModal: React.FC<StartPotModalProps> = ({ potId, selectedApplicants
             {
                 potId: potId,
                 body: {
-                    applicantIds: selectedApplicants.map((applicant) => applicant.userId)
+                    applicantIds: selectedApplicants.map((applicant) => applicant.applicationId)
                 },
             },
             {

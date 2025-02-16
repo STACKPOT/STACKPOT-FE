@@ -25,9 +25,11 @@ const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({
 
   const handleClickPot = (id: number) => {
     navigate(`${routes.myPot.task}/${id}`);
+    window.scrollTo(0, 0);
   };
   const handleFinishPot = (id: number) => {
-    // todo: 팟 끓이기 페이지로 이동
+    navigate(`${routes.createFinishedPot}/${id}`);
+    window.scrollTo(0, 0);
   };
 
   return (

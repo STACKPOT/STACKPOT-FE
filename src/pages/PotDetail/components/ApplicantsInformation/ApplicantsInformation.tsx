@@ -32,6 +32,10 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
             setSelectedApplicants((prev) => [...prev, applicant])
         }
     }
+    const handleStartPotSuccess = () => {
+        window.location.reload();
+        setShowKakaoIdModal(true);
+    }
 
     const { data: applicants } = useGetPotApplicants(potId);
 
@@ -73,7 +77,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
                 <StartPotModal
                     potId={potId}
                     selectedApplicants={selectedApplicants}
-                    onStartPotSuccess={() => setShowKakaoIdModal(true)}
+                    onStartPotSuccess={handleStartPotSuccess}
                     onCancelModal={() => setShowStartModal(false)} />
             }
             {showKakaoIdModal &&
