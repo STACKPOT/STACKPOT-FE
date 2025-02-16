@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { spin } from "@styles/animation";
 import theme from "@styles/theme";
 
 export const background = css`
@@ -32,20 +33,22 @@ export const closeIconStyle = css`
   cursor: pointer;
 `
 export const messageStyle = css`
-    ${theme.font.title1};
-    color: ${theme.color.base.black};
-    text-align: center;
-    white-space: pre-wrap;
-    margin-top: 1.2rem;
+  ${theme.font.title1};
+  color: ${theme.color.base.black};
+  text-align: center;
+  white-space: pre-wrap;
+  margin-top: 1.2rem;
 `
 export const messageHightlightStyle = css`
-    ${theme.font.title1};
-    color: ${theme.color.point.hero};
+  ${theme.font.title1};
+  color: ${theme.color.point.hero};
 `
 export const spinnerContainer = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 14.4rem;
-    margin-top: 3.2rem;
+  display: flex;
+  align-items: center;
+  flex: 1 0 auto;
+  margin-top: 3.2rem;
+`
+export const spinnerStyle = css`
+  animation: ${spin} 1s linear infinite;
 `
