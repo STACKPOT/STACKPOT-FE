@@ -19,7 +19,7 @@ interface AboutWorkModalProps {
   activeStatus: TaskStatus;
   title: string;
 }
-
+ 
 const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, title }) => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
