@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   cardStyle,
   profileContainer,
@@ -50,30 +50,41 @@ const PostCard: React.FC<PostCardProps> = ({
   const navigate = useNavigate();
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken")
+  );
 
   const handleCardClick = () => {
     navigate(`${routes.feed}/${id}`);
     window.scrollTo(0, 0);
   };
 
-  const handleLike = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
-    likeFeed(id, {
-      onSuccess: () => {
-        setIsLike(!isLike);
-        setLikes((prev) => (isLike ? prev - 1 : prev + 1));
-      }
-    })
+    if (accessToken) {
+      likeFeed(id, {
+        onSuccess: () => {
+          setIsLike(!isLike);
+          setLikes((prev) => (isLike ? prev - 1 : prev + 1));
+        }
+      })
+    }
   };
 
   const handleEdit = () => {
-    // todo: 수정 페이지로 이동
+    navigate(`${routes.editPost}/${id}`);
+    window.scrollTo(0, 0);
   };
   const handleDelete = () => {
     // todo: 삭제하기 api
   };
 
   const profileImage = roleImages[role];
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    setAccessToken(token);
+  }, [localStorage.getItem("accessToken")])
 
   return (
     <div css={cardStyle} onClick={handleCardClick}>
@@ -103,8 +114,8 @@ const PostCard: React.FC<PostCardProps> = ({
       </div>
       <h1 css={titleStyle}>{title}</h1>
       <p css={contentStyle}>{content}</p>
-      <div css={likeContainer} onClick={handleLike}>
-        <LikeIcon css={likeIconStyle(isLike)} />
+      <div css={likeContainer} >
+        <LikeIcon type="button" css={likeIconStyle(isLike, accessToken !== null)} onClick={handleLike} />
         <p css={likeTextStyle}>{likes}</p>
       </div>
     </div>
