@@ -37,6 +37,9 @@ export const nicknameStyle = css`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 export const titleStyle = css`
   ${theme.font.bodyBold1};
@@ -54,9 +57,9 @@ export const contentStyle = css`
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
-export const contentContainer =css`
+export const contentContainer = css`
   height: 6rem;
-`
+`;
 export const categoriesContainer = css`
   display: flex;
   gap: 1rem;

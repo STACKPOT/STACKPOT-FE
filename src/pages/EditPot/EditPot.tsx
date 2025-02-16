@@ -23,7 +23,7 @@ const EditPot = () => {
             potId: potIdNumber,
             body: data
         }, {
-            onSuccess: () => navigate(`${routes.potDetail}/${potId}`)
+            onSuccess: () => navigate(`${routes.pot.base}/${potId}`)
         })
     }
     const handleDeletePot = () => {

@@ -63,7 +63,8 @@ const PopularPots = () => {
               : data?.pots.map((pot) => (
                   <SwiperSlide key={pot.userId}>
                     <PotCard
-                      id={pot.userId}
+                      userId={pot.userId}
+                      potId={pot.potId}
                       role={pot.userRole}
                       nickname={pot.userNickname}
                       dday={pot.dday}
