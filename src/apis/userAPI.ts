@@ -1,5 +1,11 @@
 import { Role } from "types/role";
-import { apiGet, authApiGet, authApiPatch, authApiPost } from "./apiUtils";
+import {
+  apiGet,
+  authApiDelete,
+  authApiGet,
+  authApiPatch,
+  authApiPost,
+} from "./apiUtils";
 import {
   LogInResponse,
   postSignInPayload,
@@ -36,10 +42,16 @@ export const postNickname = async (nickname: string) => {
   return authApiPost("/users/nickname/save", undefined, { nickname });
 };
 
-export const patchUserProfileUpdate = async (data: PatchUserProfileUpdateParams) => {
+export const patchUserProfileUpdate = async (
+  data: PatchUserProfileUpdateParams
+) => {
   return authApiPatch("/users/profile/update", data);
-}
+};
 
 export const postLogout = async (refreshToken: string) => {
   return authApiPost("/users/logout", { refreshToken });
+};
+
+export const deleteUser = () => {
+  return authApiDelete("/users/delete");
 };
