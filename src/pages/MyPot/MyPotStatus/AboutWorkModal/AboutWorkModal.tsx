@@ -4,13 +4,15 @@ import { useForm } from "react-hook-form";
 import { CloseIcon } from "@assets/svgs";
 import { TextInput, DateInput, StatusBadgeSelector, ExplainationInputField, ContributorList, ActionButton } from "../../components/index";
 import { mainContainer, subContainer, cancelContainer, cancelIconStyle, thirdContainer, titleContainer, titleTextStyle } from "./AboutWorkModal.style";
-import { AnotherTaskStatus, TaskStatus } from "../../../../types/taskStatus";
+import { TaskStatus } from "../../../../types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import usePatchMyPotTask from "apis/hooks/myPots/usePatchMyPotTask";
-import { APITaskStatus, TaskPatch } from "apis/types/myPot";
+import { TaskPatch } from "apis/types/myPot";
 import { deleteMyPotTask } from "apis/myPotAPI";
 import routes from "@constants/routes";
 import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
+import { APITaskStatus } from "../../../../types/taskStatus";
+import { apiToDisplayStatus, displayToApiStatus } from "@constants/categories";
 
 interface AboutWorkModalProps {
   onClose: () => void;
@@ -18,21 +20,21 @@ interface AboutWorkModalProps {
   title: string;
 }
 
-const apiToDisplayStatus: Record<APITaskStatus, AnotherTaskStatus> = {
-  OPEN: "진행 전",
-  IN_PROGRESS: "진행 중",
-  CLOSED: "완료",
-};
-
 const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, title }) => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
-  const { data: taskDetail, isLoading } = useGetMyPotTaskDetail({ potId: Number(potId), taskId: Number(taskId) });
-  const { mutate: patchTask, isPending, snackbar } = usePatchMyPotTask();
   const navigate = useNavigate();
   const { register, handleSubmit, setValue, watch } = useForm();
-
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState<TaskStatus>(activeStatus);
+
+  const potIdNumber = Number(potId);
+  const taskIdNumber = taskId !== undefined && !isNaN(Number(taskId)) ? Number(taskId) : null;
+
+  const { data: taskDetail, isLoading } = title === "업무 수정하기" && taskIdNumber !== null
+    ? useGetMyPotTaskDetail({ potId: potIdNumber, taskId: taskIdNumber })
+    : { data: null, isLoading: false };
+
+  const { mutate: patchTask } = usePatchMyPotTask();
 
   useEffect(() => {
     if (title === "업무 수정하기" && taskDetail?.result) {
@@ -48,37 +50,36 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, 
   };
 
   const confirmDeleteTask = () => {
-    deleteMyPotTask({ potId: Number(potId), taskId: Number(taskId) });
-    setIsConfirmOpen(false);
-    navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
+    if (potIdNumber && taskIdNumber) {
+      deleteMyPotTask({ potId: potIdNumber, taskId: taskIdNumber });
+      setIsConfirmOpen(false);
+      navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
+    }
   };
 
   const handleSave = (data: any) => {
-    if (title === "업무 수정하기") {
-      const displayToApiStatus: Record<AnotherTaskStatus, APITaskStatus> = {
-        "진행 전": "OPEN",
-        "진행 중": "IN_PROGRESS",
-        "완료": "CLOSED",
-      };
+    if (title === "업무 수정하기" && potIdNumber && taskIdNumber) {
       const formattedDeadline = data.taskDate.replace(/\./g, "").split(" ").join("-");
       const updatedTask: TaskPatch = {
         title: data.taskTitle,
         deadline: formattedDeadline,
         taskboardStatus: selectedStatus ? displayToApiStatus[selectedStatus] : "OPEN",
         description: data.taskDescription,
-        participants: [1],
+        participants: [10], // 임시
       };
-      patchTask({ potId: Number(potId), taskId: Number(taskId), data: updatedTask });
+
+      patchTask({ potId: potIdNumber, taskId: taskIdNumber, data: updatedTask });
+    } else {
+      console.warn("PATCH 요청이 실행되지 않음: '업무 수정하기'가 아니거나 taskId 없음");
     }
     onClose();
   };
 
-  if (isLoading || isPending) return <p>로딩 중...</p>;
+  if (isLoading) return <p>로딩 중...</p>;
 
   return (
     <>
       <ConfirmModalWrapper isModalOpen={isConfirmOpen} onClose={() => setIsConfirmOpen(false)} onConfirm={confirmDeleteTask} />
-      {snackbar}
       <div css={mainContainer}>
         <div css={subContainer}>
           <div css={cancelContainer}>
