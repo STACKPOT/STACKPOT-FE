@@ -10,21 +10,17 @@ import {
   textareaStyle,
   categoryContainer,
   categories,
-} from "./postFoam.style";
+} from "./PostFoam.style";
 import { CategoryButton } from "@components/index";
 import { partMap } from "@constants/categories";
 
-interface PostFormBodyProps {
+interface PostFormProps {
   register: UseFormRegister<any>;
   watch: UseFormWatch<any>;
   setValue: UseFormSetValue<any>;
 }
 
-const PostFormBody: React.FC<PostFormBodyProps> = ({
-  register,
-  watch,
-  setValue,
-}) => {
+const PostForm: React.FC<PostFormProps> = ({ register, watch, setValue }) => {
   return (
     <div css={contentBody}>
       <input
@@ -58,4 +54,4 @@ const PostFormBody: React.FC<PostFormBodyProps> = ({
   );
 };
 
-export default PostFormBody;
+export default PostForm;

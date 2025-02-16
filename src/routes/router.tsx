@@ -74,7 +74,7 @@ const router = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
-        path: `${routes.potDetail}/:potId`,
+        path: `${routes.pot.base}/:potId`,
         element: <PotDetailPage />,
       },
       {

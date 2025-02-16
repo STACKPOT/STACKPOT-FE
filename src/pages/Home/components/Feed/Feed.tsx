@@ -15,12 +15,8 @@ import { useInView } from "react-intersection-observer";
 import { LoadingSpinnerIcon } from "@assets/svgs";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { useNavigate } from "react-router-dom";
-import routes from "@constants/routes";
 
 const Feed = () => {
-  const navigate = useNavigate();
-
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [category, setCategory] = useState<string | null>(null);
   const [sort, setSort] = useState<string>("new");
@@ -60,11 +56,6 @@ const Feed = () => {
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
-
-  const handleCardClick = (feedId: number) => {
-    navigate(`${routes.feed}/${feedId}`);
-    window.scrollTo(0, 0);
-  };
 
   return (
     <>
@@ -107,13 +98,14 @@ const Feed = () => {
                     <div key={item.feedId} ref={isLastItem ? ref : null}>
                       <PostCard
                         role={item.writerRole}
+                        writerId={item.writerId}
                         nickname={item.writer}
                         createdAt={item.createdAt}
                         title={item.title}
                         content={item.content}
                         likeCount={item.likeCount}
                         isLiked={item.isLiked}
-                        onClick={() => handleCardClick(item.feedId)}
+                        feedId={item.feedId}
                       />
                     </div>
                   );

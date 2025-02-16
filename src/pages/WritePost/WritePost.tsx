@@ -4,23 +4,16 @@ import {
   contentTitle,
   contentStyle,
   iconStyle,
-  contentBody,
-  textareaStyle,
-  categoryContainer,
-  categories,
   buttonContainer,
-  inputStyle,
   toastStyle,
 } from "./WritePost.style";
 import { PotIcon } from "@assets/svgs";
-import { Button, CategoryButton, Modal } from "@components/index";
-import { partMap } from "@constants/categories";
+import { Button, Modal, PostForm } from "@components/index";
 import UploadToast from "@components/commons/Toast/UploadToast";
 import { useBlocker, useNavigate } from "react-router-dom";
 import usePostFeed from "apis/hooks/feeds/usePostFeed";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { PostFeedParams } from "apis/types/feed";
-import PostFormBody from "@components/commons/PostFoam/postFoam";
 
 const WritePost: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
@@ -51,8 +44,6 @@ const WritePost: React.FC = () => {
     return isFilled && currentLocation.pathname !== nextLocation.pathname;
   });
 
-  const selectedCategory = watch("category");
-
   const onSubmit: SubmitHandler<PostFeedParams> = (data) => {
     postFeedMutation.mutate(data, {
       onSuccess: () => {
@@ -67,11 +58,6 @@ const WritePost: React.FC = () => {
         alert("피드 업로드 실패");
       },
     });
-  };
-
-  const handleCategoryClick = (selectedCategory: string) => {
-    const category = partMap[selectedCategory] || "ALL";
-    setValue("category", category);
   };
 
   return (
@@ -94,11 +80,7 @@ const WritePost: React.FC = () => {
               </div>
             </div>
 
-            <PostFormBody
-              register={register}
-              watch={watch}
-              setValue={setValue}
-            />
+            <PostForm register={register} watch={watch} setValue={setValue} />
           </form>
         </FormProvider>
       </div>

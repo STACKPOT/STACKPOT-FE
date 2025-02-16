@@ -8,6 +8,7 @@ export interface FeedResponse {
 interface Feeds {
   feedId: number;
   writer: string;
+  writerId: number;
   writerRole: Role;
   title: string;
   content: string;

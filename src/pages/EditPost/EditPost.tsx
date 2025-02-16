@@ -3,30 +3,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import {
   buttonContainer,
-  categories,
-  categoryContainer,
   container,
   contentContainer,
-  contentBody,
   contentTitle,
   iconStyle,
-  inputStyle,
-  textareaStyle,
   toastStyle,
 } from "./EditPost.style";
 import { PotIcon } from "@assets/svgs";
-import {
-  Button,
-  CategoryButton,
-  PotButton,
-  UploadToast,
-} from "@components/index";
-import { partMap } from "@constants/categories";
+import { Button, PotButton, UploadToast, PostForm } from "@components/index";
 import { FeedPatch } from "apis/types/feed";
 import usePatchFeed from "apis/hooks/feeds/usePatchFeed";
 import useGetFeedDetails from "apis/hooks/feeds/useGetFeedDetails";
 import routes from "@constants/routes";
-import PostFormBody from "@components/commons/PostFoam/postFoam";
 
 const EditPost = () => {
   const { feedId } = useParams();
@@ -105,11 +93,7 @@ const EditPost = () => {
                 </Button>
               </div>
             </div>
-            <PostFormBody
-              register={register}
-              watch={watch}
-              setValue={setValue}
-            />
+            <PostForm register={register} watch={watch} setValue={setValue} />
           </form>
         </FormProvider>
       </div>
