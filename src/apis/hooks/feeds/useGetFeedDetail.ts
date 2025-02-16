@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getFeedDetail } from "apis/feedAPI";
+import { getFeedDetails } from "apis/feedAPI";
 
-const useGetFeedDetail = (feedId: number) => {
+const useGetFeedDetails = (feedId: number) => {
   return useQuery({
     queryKey: ["feedDetail", feedId],
-    queryFn: () => getFeedDetail(feedId),
+    queryFn: () => getFeedDetails(feedId),
     select: (data) => data.result,
   });
 };
 
-export default useGetFeedDetail;
+export default useGetFeedDetails;

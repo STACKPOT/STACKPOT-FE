@@ -57,8 +57,9 @@ const PostCard: React.FC<PostCardProps> = ({
   };
 
   const handleEdit = () => {
-    // todo: 수정 페이지로 이동
+    navigate(`${routes.feed.edit}/${feedId}`);
   };
+
   const handleDelete = () => {
     // todo: 삭제하기 api
   };

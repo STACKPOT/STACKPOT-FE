@@ -31,7 +31,9 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <div css={styles.container}>
       <div css={styles.header} onClick={toggleDropdown}>
-        <span css={styles.headerText}>글 순서</span>
+        <span css={styles.headerText}>
+          {selectedOption ? selectedOption.label : "최신순"}
+        </span>
         {isOpen ? (
           <ArrowUpIcon css={styles.icon} />
         ) : (

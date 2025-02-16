@@ -15,7 +15,7 @@ import {
   appealContentStyle,
 } from "./PotSummaryModal.style";
 import { useEffect } from "react";
-import useGetFinishedModal from "apis/hooks/mypage/useGetFinishedModal";
+import useGetFinishedModal from "apis/hooks/users/useGetFinishedModal";
 
 interface PotSummaryModalProps {
   potId: number;

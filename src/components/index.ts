@@ -27,6 +27,7 @@ import SideBarProfileModal from "./layouts/SideBarProfileModal/SideBarProfileMod
 import InformationPopper from "./commons/InformationPopper/InformationPopper";
 import OnGoingPotCard from "./cards/OnGoingPotCard/OnGoingPotCard";
 import PartRecruitment from "./commons/PartRecruitment/PartRecruitment";
+import PostForm from "./commons/PostFoam/PostFoam";
 
 export {
   Modal,
@@ -58,4 +59,5 @@ export {
   InformationPopper,
   OnGoingPotCard,
   PartRecruitment,
+  PostForm,
 };

@@ -11,7 +11,7 @@ import {
 import TemperatureBar from "@components/commons/TemperatureBar/TemperatureBar";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import useGetMyPage from "apis/hooks/mypage/useGetMyPage";
+import useGetMyPage from "apis/hooks/users/useGetMyPage";
 import { roleImages } from "@constants/roleImage";
 
 const MyPageProfile: React.FC = () => {
