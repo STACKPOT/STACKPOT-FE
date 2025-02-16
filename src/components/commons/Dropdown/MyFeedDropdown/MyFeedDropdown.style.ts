@@ -8,7 +8,7 @@ export const dropdownStyle = css`
   z-index: 3000;
   background-color: white;
   border: 1px solid ${theme.color.object.alternative};
-  border-radius: 1.6rem;
+  border-radius: 16px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   width: 16rem;
   height: auto;
