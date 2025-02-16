@@ -12,6 +12,7 @@ import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 import { Role } from "types/role";
 import useGetPotSummary from "apis/hooks/pots/useGetPotSummary";
 import SummaryLoadingModal from "./SummaryLoadingModal";
+import { participationMap } from "@constants/categories";
 
 interface FinishedPotFormProps {
     potId: number;
@@ -74,7 +75,7 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
             setValue("potDuration", potData.potDetail.potDuration);
             setValue("potLan", potData.potDetail.potLan);
             setValue("potContent", potData.potDetail.potContent);
-            setValue("potModeOfOperation", potData.potDetail.potModeOfOperation);
+            setValue("potModeOfOperation", participationMap[potData.potDetail.potModeOfOperation]);
             setValue("recruitmentDeadline", potData.potDetail.recruitmentDeadline.split('. ').join('-'));
             setValue("recruitmentDetails",
                 Object.entries(potData.potDetail.recruitingMembers).map((part) =>

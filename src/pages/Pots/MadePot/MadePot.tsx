@@ -60,7 +60,7 @@ const MadePotPage = () => {
                           stacks={item.members}
                           languages={item.potLan}
                           members={Object.keys(item.memberCounts) as Role[]}
-                          isMyPage={true}
+                          isMyPage={false}
                           buttonType="edit"
                         />
                       </div>
