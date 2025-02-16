@@ -18,6 +18,8 @@ import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface PostCardProps {
   role: Role;
@@ -28,7 +30,8 @@ interface PostCardProps {
   likeCount: number;
   isLiked: boolean;
   profileImage?: string;
-  onClick: () => void;
+  feedId: number;
+  writerId: number;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -39,8 +42,11 @@ const PostCard: React.FC<PostCardProps> = ({
   content,
   likeCount,
   isLiked,
-  onClick,
+  feedId,
+  writerId,
 }: PostCardProps) => {
+  const navigate = useNavigate();
+
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
   const [isMyPost, setIsMyPost] = useState<boolean>(true);
@@ -57,15 +63,40 @@ const PostCard: React.FC<PostCardProps> = ({
     // todo: 삭제하기 api
   };
 
+  const handleFeedClick = (feedId: number) => {
+    navigate(`${routes.feed}/${feedId}`);
+    window.scrollTo(0, 0);
+  };
+
+  const handleUserClick = (writerId: number) => {
+    navigate(`${routes.myPage}/${writerId}`);
+  };
+
   const profileImage = roleImages[role];
 
   return (
-    <div css={cardStyle} onClick={onClick}>
+    <div css={cardStyle} onClick={() => handleFeedClick(feedId)}>
       <div css={headerContainer}>
         <div css={profileContainer}>
-          <img css={profileImageStyle} src={profileImage} alt="profile" />
+          <img
+            onClick={(e) => {
+              e.stopPropagation();
+              handleUserClick(writerId);
+            }}
+            css={profileImageStyle}
+            src={profileImage}
+            alt="profile"
+          />
           <div css={nicknameDateContainer}>
-            <p css={nicknameStyle}>{nickname}</p>
+            <p
+              onClick={(e) => {
+                e.stopPropagation();
+                handleUserClick(writerId);
+              }}
+              css={nicknameStyle}
+            >
+              {nickname}
+            </p>
             <p css={dateStyle}>{createdAt}</p>
           </div>
         </div>

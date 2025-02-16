@@ -20,7 +20,6 @@ const routes = {
   search: "/search",
   searchResult: "/search-result",
   signUp: "/sign-up",
-  potDetail: "/pot",
   callback: "/callback",
   editPost: "/edit-post/:postId",
   editFinishedPot: "/finished-pot/edit",

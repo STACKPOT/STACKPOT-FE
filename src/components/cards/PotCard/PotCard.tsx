@@ -14,9 +14,11 @@ import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
 import { useNavigate } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
+import routes from "@constants/routes";
 
 interface PotCardProps {
-  id: number;
+  userId: number;
+  potId: number;
   role: Role;
   nickname: string;
   dday: string;
@@ -26,7 +28,8 @@ interface PotCardProps {
 }
 
 const PotCard: React.FC<PotCardProps> = ({
-  id,
+  userId,
+  potId,
   role,
   nickname,
   dday,
@@ -35,18 +38,39 @@ const PotCard: React.FC<PotCardProps> = ({
   categories,
 }: PotCardProps) => {
   const navigate = useNavigate();
-  const handleClickCard = () => {
-    navigate(`/pot/${id}`);
+
+  const handleCardClick = () => {
+    navigate(`${routes.pot.base}/${potId}`);
+  };
+
+  const handleUserClick = () => {
+    navigate(`${routes.myPage}/${userId}`);
   };
 
   const profileImage = roleImages[role];
 
   return (
-    <div css={cardStyle} onClick={handleClickCard}>
+    <div css={cardStyle} onClick={handleCardClick}>
       <div css={titleContainer}>
-        <img css={profileImageStyle} src={profileImage} alt="profile" />
+        <img
+          css={profileImageStyle}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleUserClick();
+          }}
+          src={profileImage}
+          alt="profile"
+        />
         <div css={nicknameDdayContainer}>
-          <p css={nicknameStyle}>{nickname}</p>
+          <p
+            onClick={(e) => {
+              e.stopPropagation();
+              handleUserClick();
+            }}
+            css={nicknameStyle}
+          >
+            {nickname}
+          </p>
           <DdayBadge days={dday} />
         </div>
       </div>
@@ -55,11 +79,13 @@ const PotCard: React.FC<PotCardProps> = ({
         <p css={contentStyle}>{content}</p>
       </div>
       <div css={categoriesContainer}>
-        {categories.length === 4 ?
-          <Badge content="전체" /> :
+        {categories.length === 4 ? (
+          <Badge content="전체" />
+        ) : (
           categories.map((category, index) => (
             <Badge key={index} content={category} />
-          ))}
+          ))
+        )}
       </div>
     </div>
   );
