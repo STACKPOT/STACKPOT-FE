@@ -25,9 +25,11 @@ const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({
 
   const handleClickPot = (id: number) => {
     navigate(`${routes.myPot.task}/${id}`);
+    window.scrollTo(0, 0);
   };
   const handleFinishPot = (id: number) => {
     navigate(`${routes.createFinishedPot}/${id}`);
+    window.scrollTo(0, 0);
   };
 
   return (

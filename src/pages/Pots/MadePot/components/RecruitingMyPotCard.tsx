@@ -15,6 +15,7 @@ const RecruitingMyPotCard: React.FC<RecruitingMyPotCardProps> = ({ potId, potNam
     const navigate = useNavigate();
     const handleCardClick = () => {
         navigate(`${routes.pot.base}/${potId}`)
+        window.scrollTo(0, 0);
     }
 
     return (
