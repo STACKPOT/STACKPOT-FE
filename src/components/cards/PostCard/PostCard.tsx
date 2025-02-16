@@ -20,6 +20,7 @@ import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
+import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
 
 interface PostCardProps {
   role: Role;
@@ -45,15 +46,26 @@ const PostCard: React.FC<PostCardProps> = ({
   feedId,
   writerId,
 }: PostCardProps) => {
+  const { mutate: likeFeed } = usePostFeedLike();
+
   const navigate = useNavigate();
 
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
   const [isMyPost, setIsMyPost] = useState<boolean>(true);
-  const handleLike = (e: React.MouseEvent<HTMLDivElement>) => {
+
+  const accessToken = localStorage.getItem("accessToken");
+
+  const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
-    setIsLike(!isLike);
-    setLikes((prev) => (isLike ? prev - 1 : prev + 1));
+    if (accessToken) {
+      likeFeed(feedId, {
+        onSuccess: () => {
+          setIsLike(!isLike);
+          setLikes((prev) => (isLike ? prev - 1 : prev + 1));
+        },
+      });
+    }
   };
 
   const handleEdit = () => {
@@ -119,8 +131,12 @@ const PostCard: React.FC<PostCardProps> = ({
       </div>
       <h1 css={titleStyle}>{title}</h1>
       <p css={contentStyle}>{content}</p>
-      <div css={likeContainer} onClick={handleLike}>
-        <LikeIcon css={likeIconStyle(isLike)} />
+      <div css={likeContainer}>
+        <LikeIcon
+          type="button"
+          css={likeIconStyle(isLike, accessToken !== null)}
+          onClick={handleLike}
+        />
         <p css={likeTextStyle}>{likes}</p>
       </div>
     </div>

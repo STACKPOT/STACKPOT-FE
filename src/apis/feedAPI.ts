@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { apiGet, authApiGet, authApiPatch, authApiPost } from "./apiUtils";
+import { apiGet, authApiGet, authApiPost, authApiPatch } from "./apiUtils";
 import {
   FeedPatch,
   FeedResponse,
@@ -16,7 +16,7 @@ export const getFeeds = async ({
   limit,
   cursor,
 }: GetFeedParams) => {
-  return apiGet<FeedResponse>("/feeds", { category, sort, limit, cursor });
+  return authApiGet<FeedResponse>("/feeds", { category, sort, limit, cursor });
 };
 
 export const postFeed = async ({
@@ -33,4 +33,8 @@ export const patchFeed = async (feedId: number, body: FeedPatch) => {
 
 export const getFeedDetails = async (feedId: number) => {
   return authApiGet<GetFeedDetailResponse>(`/feeds/${feedId}/detail`);
+};
+
+export const postFeedLike = async (feedId: number) => {
+  return authApiPost<Record<string, string>>(`/feeds/${feedId}/like`);
 };

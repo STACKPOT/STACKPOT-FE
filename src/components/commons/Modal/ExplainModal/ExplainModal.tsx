@@ -15,7 +15,7 @@ interface ExplainModalProps {
   type?: "normal" | "delete";
   title?: string;
   subtitle?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   buttonText: string;
   disabled?: boolean;
   onButtonClick: () => void;

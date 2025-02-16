@@ -62,8 +62,8 @@ const MyPage = () => {
                   createdAt={post.createdAt}
                   title={post.title}
                   content={post.content}
-                  onClick={() => handleCardClick(post.feedId)}
                   feedId={post.feedId}
+                  writerId={post.writerId}
                 />
               ))
             : data.completedPots.map((pot) => {

@@ -42,6 +42,7 @@ export interface MyPageResponse {
   feeds: Feeds[];
 }
 interface Feeds {
+  writerId: number;
   feedId: number;
   writer: string;
   writerRole: Role;
