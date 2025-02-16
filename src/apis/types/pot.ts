@@ -101,6 +101,7 @@ export interface PotDetail {
   dday: string;
 }
 export interface GetPotApplicationResponse {
+  applicationId: number;
   potRole: Role;
   status: string;
   userId: number;
