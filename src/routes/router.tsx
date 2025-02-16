@@ -28,6 +28,7 @@ import {
   CallbackPage,
   CreateFinishedPot,
 } from "@pages/index";
+import EditPost from "@pages/EditPost/EditPost";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
         element: <SettingPage />,
       },
       {
-        path: routes.myPage,
+        path: routes.myPage.base,
         element: <MyPage />,
       },
       {
@@ -111,7 +112,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: routes.editPost,
+        path: `${routes.editPost}/:feedId`,
         element: <EditPostPage />,
       },
       {

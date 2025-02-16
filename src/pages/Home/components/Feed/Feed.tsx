@@ -95,7 +95,7 @@ const Feed = () => {
                     pageIndex === data.pages.length - 1 &&
                     itemIndex === page.result.feeds.length - 1;
                   return (
-                    <div key={item.id} ref={isLastItem ? ref : null}>
+                    <div key={item.feedId} ref={isLastItem ? ref : null}>
                       <PostCard
                         role={item.writerRole}
                         nickname={item.writer}

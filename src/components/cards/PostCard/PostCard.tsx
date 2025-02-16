@@ -18,6 +18,8 @@ import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface PostCardProps {
   role: Role;
@@ -28,6 +30,8 @@ interface PostCardProps {
   likeCount: number;
   isLiked: boolean;
   profileImage?: string;
+  feedId: number;
+  onClick: () => void;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -38,6 +42,8 @@ const PostCard: React.FC<PostCardProps> = ({
   content,
   likeCount,
   isLiked,
+  feedId,
+  onClick,
 }: PostCardProps) => {
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
@@ -47,13 +53,17 @@ const PostCard: React.FC<PostCardProps> = ({
     setIsLike(!isLike);
     setLikes((prev) => (isLike ? prev - 1 : prev + 1));
   };
-  const handleClickCard = () => {
-    // todo: 게시글 페이지로 이동
-    console.log("click card");
-  };
+
+  const navigate = useNavigate();
+
   const handleEdit = () => {
-    // todo: 수정 페이지로 이동
+    if (!feedId) {
+      console.error("feedId is undefined, cannot navigate");
+      return;
+    }
+    navigate(`${routes.editPost}/${feedId}`);
   };
+
   const handleDelete = () => {
     // todo: 삭제하기 api
   };
@@ -61,7 +71,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const profileImage = roleImages[role];
 
   return (
-    <div css={cardStyle} onClick={handleClickCard}>
+    <div css={cardStyle} onClick={onClick}>
       <div css={headerContainer}>
         <div css={profileContainer}>
           <img css={profileImageStyle} src={profileImage} alt="profile" />

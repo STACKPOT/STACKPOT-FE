@@ -1,6 +1,6 @@
 const routes = {
   main: "/",
-  myPage: "/my-page",
+  myPage: { base: "/my-page", edit: "/my-page/:feedId" },
   home: "/home",
   writePost: "/writing-page",
   pot: {

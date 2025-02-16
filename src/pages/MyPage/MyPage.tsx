@@ -9,7 +9,7 @@ import {
 } from "./MyPage.style";
 import { MyPageProfile } from "./components";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
-import useGetMyPage from "apis/hooks/mypage/useGetMyPage";
+import useGetMyPage from "apis/hooks/users/useGetMyPage";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
 
@@ -66,10 +66,14 @@ const MyPage = () => {
                   role={post.writerRole}
                   isLiked={false}
                   likeCount={post.likeCount}
-                  key={post.id}
+                  key={post.feedId}
                   createdAt={post.createdAt}
                   title={post.title}
                   content={post.content}
+                  onClick={function (): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                  feedId={post.feedId}
                 />
               ))
             : data.completedPots.map((pot) => {
