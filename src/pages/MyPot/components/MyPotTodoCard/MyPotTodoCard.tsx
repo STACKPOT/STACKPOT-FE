@@ -28,14 +28,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
   };
 
   const handleSelectTodo = (todoId: number) => {
-    updateTodoStatus(
-      { potId, todoId },
-      {
-        onSuccess: () => {
-          console.log(`할 일 ${todoId} 완료`);
-        },
-      }
-    );
+    updateTodoStatus({ potId, todoId },);
   };
 
   return (

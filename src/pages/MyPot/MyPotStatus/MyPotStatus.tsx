@@ -3,10 +3,11 @@ import { containerStyle, toDoGirdContainer } from "../MyPotStatus/MyPotStatus.st
 import { AboutWorkModalWrapper, StatusBoard, TodoStatusSection, Pagination, MyPotStatusHeader, MyPotTodoList } from "../components/index";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import { AnotherTaskStatus, TaskStatus } from "types/taskStatus";
+import { APITaskStatus, TaskStatus } from "types/taskStatus";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { useParams } from "react-router-dom";
 import { useGetMyPotTask } from "apis/hooks/myPots/useGetMyPotTask";
+import { apiToDisplayStatus, TASK_STATUSES } from "@constants/categories";
 
 const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,12 +26,6 @@ const MyPotStatusPage: React.FC = () => {
   });
 
   const { data: taskData } = useGetMyPotTask(potIdNumber); 
-
-  const apiToDisplayStatus: Record<string, AnotherTaskStatus> = {
-    OPEN: "진행 전",
-    IN_PROGRESS: "진행 중",
-    CLOSED: "완료",
-  };
 
   const totalPages = useMemo(() => {
     return data?.totalElements ? Math.ceil(data.totalElements / 3) : 0;
@@ -73,11 +68,11 @@ const MyPotStatusPage: React.FC = () => {
       <StatusBoard onOpenModal={() => handleOpenModal(null, "새로운 업무 추가")} />
 
       <div css={toDoGirdContainer}>
-        {(["진행 전", "진행 중", "완료"] as AnotherTaskStatus[]).map((status) => {
+        {TASK_STATUSES.map((status) => {
           const safeTaskData = taskData?.result || { OPEN: [], IN_PROGRESS: [], CLOSED: [] };
 
           const filteredTasks = Object.entries(safeTaskData)
-            .filter(([apiStatus]) => apiToDisplayStatus[apiStatus] === status)
+            .filter(([apiStatus]) => apiToDisplayStatus[apiStatus as APITaskStatus] === status)
             .flatMap(([_, tasks]) => tasks);        
 
           return (

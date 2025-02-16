@@ -1,4 +1,4 @@
-import { mainContainer, buttonContainer, cancelIconStyle, getNoButtonStyle, getYesButtonStyle, cancelContainer, explainContentStyle, innerContainer, warningTitleStyle } from "./ConfirmModal.style";
+import { mainContainer, buttonContainer, cancelIconStyle, getButtonStyle, cancelContainer, explainContentStyle, innerContainer, warningTitleStyle } from "./ConfirmModal.style";
 import { CloseIcon } from "@assets/svgs";
 
 interface ConfirmModalProps {
@@ -17,8 +17,8 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ onConfirm, onClose }) => {
         <div css={warningTitleStyle}>업무 내용을 삭제하시겠습니까?</div>
         <div css={explainContentStyle}>삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?</div>
         <div css={buttonContainer}>
-          <div css={getNoButtonStyle("아니오")} onClick={onClose}>아니오</div>
-          <div css={getYesButtonStyle("예")} onClick={onConfirm}>예</div>
+          <button css={getButtonStyle("아니오")} onClick={onClose}>아니오</button>
+          <button css={getButtonStyle("예")} onClick={onConfirm}>예</button>
         </div>
       </div>
     </div>

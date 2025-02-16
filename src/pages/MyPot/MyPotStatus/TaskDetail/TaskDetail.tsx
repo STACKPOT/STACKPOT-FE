@@ -31,22 +31,11 @@ import routes from "@constants/routes";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
 import { AboutWorkModalWrapper } from "../../components/index";
-import { MushroomImage, CarrotImage, OnionImage, BroccoliImage } from "@assets/images";
-import { APITaskStatus, TaskAPIPrams } from "apis/types/myPot";
-import { AnotherTaskStatus, TaskStatus } from "types/taskStatus";
-
-const roleToImage: Record<string, string> = {
-  DESIGN: BroccoliImage,
-  PLAN: CarrotImage,
-  FRONTEND: MushroomImage,
-  BACKEND: OnionImage,
-};
-
-const apiToDisplayStatus: Record<APITaskStatus, AnotherTaskStatus> = {
-  OPEN: "진행 전",
-  IN_PROGRESS: "진행 중",
-  CLOSED: "완료",
-};
+import { TaskAPIParams } from "apis/types/myPot";
+import { TaskStatus } from "types/taskStatus";
+import { Role } from "types/role";
+import { roleImages } from "@constants/roleImage";
+import { apiToDisplayStatus } from "@constants/categories";
 
 const TaskDetailPage: React.FC = () => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
@@ -63,7 +52,7 @@ const TaskDetailPage: React.FC = () => {
     navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
   };
 
-  const handleDeleteTask = ({ potId, taskId }: TaskAPIPrams) => {
+  const handleDeleteTask = ({ potId, taskId }: TaskAPIParams) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       deleteTask({ potId, taskId });
       navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
@@ -110,7 +99,7 @@ const TaskDetailPage: React.FC = () => {
         </div>
       </div>
       <div css={profileContainer}>
-        <img css={profileImgStyle} src={roleToImage[task.result.creatorRole] ?? ""} alt={task.result.creatorNickname} />
+        <img css={profileImgStyle} src={roleImages[task.result.creatorRole as Role] ?? ""} alt={task.result.creatorNickname} />
         <span css={nicknameStyle}>{task.result.creatorNickname}</span>
         <DdayBadge days={task.result.dday} />
       </div>
@@ -132,7 +121,6 @@ const TaskDetailPage: React.FC = () => {
         {task.result.participants.map((participant, index) => (
           <div css={contributorCard} key={index}>
             <div css={contributorInner}>
-              <img src={roleToImage[participant.role] ?? ""} alt={participant.nickName} css={profileImgStyle} />
               <span css={contributorNicknameStyle}>{participant.nickName}</span>
             </div>
           </div>

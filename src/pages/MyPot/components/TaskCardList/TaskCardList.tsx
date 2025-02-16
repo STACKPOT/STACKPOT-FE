@@ -1,21 +1,9 @@
 import { TaskCard } from "@components/index";
-import { MushroomImage, CarrotImage, OnionImage, BroccoliImage } from "@assets/images";
+import { roleImages } from "@constants/roleImage";
 import { Task } from "apis/types/myPot";
 import { Role } from "types/role";
+import { categoryToKorean } from "@constants/categories";
 
-const categoryToKorean: Record<Role, string> = {
-  FRONTEND: "프론트엔드",
-  BACKEND: "백엔드",
-  PLANNING: "기획",
-  DESIGN: "디자인",
-};
-
-const roleToImage: Record<Role, string> = {
-  FRONTEND: MushroomImage,
-  BACKEND: OnionImage,
-  PLANNING: CarrotImage,
-  DESIGN: BroccoliImage,
-};
 
 const isRoleType = (value: string): value is Role => {
   return ["FRONTEND", "BACKEND", "PLANNING", "DESIGN"].includes(value);
@@ -42,7 +30,7 @@ const TaskCardList: React.FC<TaskCardListProps> = ({ tasks, onTaskCardClick }) =
           onClick={() => onTaskCardClick(task.taskboardId)}
           participants={task.participants.map((p) => ({
             ...p,
-            profileImage: isRoleType(p.role) ? roleToImage[p.role] : "", 
+            profileImage: isRoleType(p.role) ? roleImages[p.role] : "", 
           }))}
         />
       ))}

@@ -15,14 +15,8 @@ import {
   titleTextStyle,
 } from "./TaskCard.style";
 import { MemberGroup, DdayBadge, Badge, MyFeedDropdown } from "@components/index";
-import { MushroomImage, CarrotImage, OnionImage, BroccoliImage } from "@assets/images";
-
-const roleToImage: Record<string, string> = {
-  DESIGN: BroccoliImage,
-  PLAN: CarrotImage,
-  FRONTEND: MushroomImage,
-  BACKEND: OnionImage,
-};
+import { Role } from "types/role";
+import { roleImages } from "@constants/roleImage";
 
 interface Participant {
   role: string;
@@ -52,9 +46,12 @@ const TaskCard: React.FC<TaskCardProps> = ({
   participants,
   onClick,
 }: TaskCardProps) => {
-  const profileImage = roleToImage[creatorRole] || "";
+  const profileImage = roleImages[creatorRole as Role] || "";
 
-  const profileImageList = participants?.map((p) => p.profileImage || roleToImage[p.role]) || [];
+  const roleList: Role[] = participants
+  .map((p) => p.role)
+  .filter((role): role is Role => ["FRONTEND", "BACKEND", "PLANNING", "DESIGN", "DEFAULT"].includes(role));
+
 
   return (
     <div css={cardStyle} onClick={onClick}>
@@ -88,7 +85,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
             <img css={profileImageStyle} src={profileImage} />
             <p css={nicknameStyle}>{nickname}</p>
           </div>
-          <MemberGroup memberRoleList={groupProfileImages} />
+          <MemberGroup memberRoleList={roleList} />
         </div>
       </div>
     </div>
