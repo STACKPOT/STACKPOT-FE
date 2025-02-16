@@ -26,22 +26,8 @@ const MyPage = () => {
     return <div>데이터가 없습니다.</div>;
   }
 
-  const mapRoleToEnum = (role: string): Role => {
-    switch (role) {
-      case "프론트엔드":
-        return "FRONTEND";
-      case "백엔드":
-        return "BACKEND";
-      case "기획":
-        return "PLANNING";
-      case "디자인":
-        return "DESIGN";
-      default:
-        return "PLANNING";
-    }
-  };
   const handleCardClick = (feedId: number) => {
-    navigate(`${routes.feed}/${feedId}`);
+    navigate(`${routes.feed.base}/${feedId}`);
     window.scrollTo(0, 0);
   };
 
@@ -92,7 +78,7 @@ const MyPage = () => {
                     key={pot.potId}
                     isMyPage={true}
                     endDate={pot.potEndDate}
-                    members={[]}
+                    members={Object.keys(pot.memberCounts) as Role[]}
                   />
                 );
               })}

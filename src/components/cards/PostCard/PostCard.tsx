@@ -57,11 +57,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const navigate = useNavigate();
 
   const handleEdit = () => {
-    if (!feedId) {
-      console.error("feedId is undefined, cannot navigate");
-      return;
-    }
-    navigate(`${routes.editPost}/${feedId}`);
+    navigate(`${routes.feed.edit}/${feedId}`);
   };
 
   const handleDelete = () => {

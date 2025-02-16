@@ -20,11 +20,11 @@ import { useBlocker, useNavigate } from "react-router-dom";
 import usePostFeed from "apis/hooks/feeds/usePostFeed";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { PostFeedParams } from "apis/types/feed";
+import PostFormBody from "@components/commons/PostFoam/postFoam";
 
 const WritePost: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -41,13 +41,17 @@ const WritePost: React.FC = () => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { isValid },
   } = methods;
+
   const postFeedMutation = usePostFeed();
 
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
     return isFilled && currentLocation.pathname !== nextLocation.pathname;
   });
+
+  const selectedCategory = watch("category");
 
   const onSubmit: SubmitHandler<PostFeedParams> = (data) => {
     postFeedMutation.mutate(data, {
@@ -67,7 +71,6 @@ const WritePost: React.FC = () => {
 
   const handleCategoryClick = (selectedCategory: string) => {
     const category = partMap[selectedCategory] || "ALL";
-    setSelectedCategory(category);
     setValue("category", category);
   };
 
@@ -91,34 +94,11 @@ const WritePost: React.FC = () => {
               </div>
             </div>
 
-            <div css={contentBody}>
-              <input
-                css={inputStyle}
-                placeholder="메인 제목 작성"
-                {...register("title", { required: true })}
-              />
-              <textarea
-                css={textareaStyle}
-                placeholder="나의 열정을 이야기해봐요"
-                {...register("content", { required: true })}
-              />
-              <div css={categoryContainer}>
-                카테고리
-                <div css={categories}>
-                  {Object.keys(partMap).map((partName) => (
-                    <div key={partName} css={categories}>
-                      <CategoryButton
-                        style={partMap[partName]}
-                        selected={selectedCategory === partMap[partName]}
-                        onClick={() => handleCategoryClick(partName)}
-                      >
-                        {partName}
-                      </CategoryButton>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <PostFormBody
+              register={register}
+              watch={watch}
+              setValue={setValue}
+            />
           </form>
         </FormProvider>
       </div>

@@ -90,7 +90,7 @@ export interface GetFinishedModalParams {
 }
 
 export interface PatchUserProfileUpdateParams {
-  role: Role | undefined;
+  role: Role;
   interest: string;
   userIntroduction: string;
   kakaoId: string;

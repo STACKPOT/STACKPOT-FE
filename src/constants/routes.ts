@@ -1,6 +1,6 @@
 const routes = {
   main: "/",
-  myPage: { base: "/my-page", edit: "/my-page/:feedId" },
+  myPage: "/my-page",
   home: "/home",
   writePost: "/writing-page",
   pot: {
@@ -22,12 +22,11 @@ const routes = {
   signUp: "/sign-up",
   potDetail: "/pot",
   callback: "/callback",
-  editPost: "/edit-post/:postId",
   editFinishedPot: "/finished-pot/edit",
   userProfile: "/user",
   createFinishedPot: "/create-finished-pot",
   editPot: "/pot/edit",
-  feed: "/feed",
+  feed: { base: "/feed", edit: "/feed/edit" },
 } as const;
 
 export default routes;

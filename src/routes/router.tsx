@@ -58,7 +58,7 @@ const router = createBrowserRouter([
         element: <SettingPage />,
       },
       {
-        path: routes.myPage.base,
+        path: routes.myPage,
         element: <MyPage />,
       },
       {
@@ -114,7 +114,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: `${routes.editPost}/:feedId`,
+        path: `${routes.feed.edit}/:feedId`,
         element: <EditPostPage />,
       },
       {
@@ -134,7 +134,7 @@ const router = createBrowserRouter([
         element: <EditPotPage />,
       },
       {
-        path: `${routes.feed}/:feedId`,
+        path: `${routes.feed.base}/:feedId`,
         element: <FeedDetailPage />,
       },
     ],
