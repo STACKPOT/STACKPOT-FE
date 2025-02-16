@@ -1,15 +1,19 @@
+import React, { forwardRef } from "react";
 import { explainationInputFieldStyle, textareaContainer } from "./ExplainationInputField.style";
 
-interface ExplainationInputFieldProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  placeholder: string;
-}
+interface ExplainationInputFieldProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-const ExplainationInputField: React.FC<ExplainationInputFieldProps> = ({ value, onChange, placeholder }) => (
+const ExplainationInputField = forwardRef<HTMLTextAreaElement, ExplainationInputFieldProps>(({ value, onChange, placeholder, ...props }, ref) => (
   <div css={explainationInputFieldStyle}>
-    <textarea value={value} onChange={onChange} placeholder={placeholder} css={textareaContainer} />
+    <textarea
+      ref={ref}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      css={textareaContainer}
+      {...props}
+    />
   </div>
-);
+));
 
 export default ExplainationInputField;
