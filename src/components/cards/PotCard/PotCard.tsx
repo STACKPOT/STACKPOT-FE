@@ -14,6 +14,7 @@ import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
 import { useNavigate } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
+import routes from "@constants/routes";
 
 interface PotCardProps {
   userId: number;
@@ -39,7 +40,11 @@ const PotCard: React.FC<PotCardProps> = ({
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/pot/${potId}`);
+    navigate(`${routes.pot.base}/${potId}`);
+  };
+
+  const handleUserClick = () => {
+    navigate(`${routes.myPage}/${userId}`);
   };
 
   const profileImage = roleImages[role];
@@ -47,9 +52,25 @@ const PotCard: React.FC<PotCardProps> = ({
   return (
     <div css={cardStyle} onClick={handleCardClick}>
       <div css={titleContainer}>
-        <img css={profileImageStyle} src={profileImage} alt="profile" />
+        <img
+          css={profileImageStyle}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleUserClick();
+          }}
+          src={profileImage}
+          alt="profile"
+        />
         <div css={nicknameDdayContainer}>
-          <p css={nicknameStyle}>{nickname}</p>
+          <p
+            onClick={(e) => {
+              e.stopPropagation();
+              handleUserClick();
+            }}
+            css={nicknameStyle}
+          >
+            {nickname}
+          </p>
           <DdayBadge days={dday} />
         </div>
       </div>
