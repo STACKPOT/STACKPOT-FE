@@ -56,7 +56,6 @@ const WritePost: React.FC = () => {
 
         setTimeout(() => {
           setShowToast(false);
-          methods.reset();
           navigate("/home");
         }, 2000);
       },
