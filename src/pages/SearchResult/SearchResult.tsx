@@ -99,8 +99,9 @@ const SearchResult = () => {
         <div css={gridContainer}>
           {data?.content?.map((pot, index) => (
             <PotCard
+              potId={pot.potId}
+              userId={pot.userId}
               key={`${pot.userId}-${pot.potName}-${index}`}
-              id={pot.userId}
               role={pot.userRole}
               nickname={pot.userNickname}
               dday={pot.dday}
@@ -114,7 +115,6 @@ const SearchResult = () => {
         <div css={feedContainer}>
           {data?.content?.map((feed, index) => (
             <PostCard
-              id={feed.feedId}
               key={`${feed.userId}-${index}`}
               role={feed.creatorRole}
               nickname={feed.creatorNickname}
@@ -123,6 +123,8 @@ const SearchResult = () => {
               content={feed.content}
               likeCount={feed.likeCount}
               isLiked={feed.isLiked}
+              feedId={feed.feedId}
+              writerId={feed.userId}
             />
           ))}
         </div>

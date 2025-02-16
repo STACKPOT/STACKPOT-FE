@@ -23,7 +23,6 @@ import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 
 interface PostCardProps {
-  id: number;
   role: Role;
   nickname: string;
   createdAt: string;
@@ -33,10 +32,11 @@ interface PostCardProps {
   isLiked: boolean;
   profileImage?: string;
   isMyPost?: boolean;
+  feedId: number;
+  writerId: number;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
-  id,
   role,
   nickname,
   createdAt,
@@ -45,6 +45,8 @@ const PostCard: React.FC<PostCardProps> = ({
   likeCount,
   isLiked,
   isMyPost = false,
+  feedId,
+  writerId,
 }: PostCardProps) => {
   const { mutate: likeFeed } = usePostFeedLike();
   const navigate = useNavigate();
@@ -54,15 +56,10 @@ const PostCard: React.FC<PostCardProps> = ({
     localStorage.getItem("accessToken")
   );
 
-  const handleCardClick = () => {
-    navigate(`${routes.feed}/${id}`);
-    window.scrollTo(0, 0);
-  };
-
   const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
     if (accessToken) {
-      likeFeed(id, {
+      likeFeed(feedId, {
         onSuccess: () => {
           setIsLike(!isLike);
           setLikes((prev) => (isLike ? prev - 1 : prev + 1));
@@ -72,11 +69,20 @@ const PostCard: React.FC<PostCardProps> = ({
   };
 
   const handleEdit = () => {
-    navigate(`${routes.editPost}/${id}`);
+    navigate(`${routes.editPost}/${feedId}`);
     window.scrollTo(0, 0);
   };
   const handleDelete = () => {
     // todo: 삭제하기 api
+  };
+
+  const handleFeedClick = (feedId: number) => {
+    navigate(`${routes.feed}/${feedId}`);
+    window.scrollTo(0, 0);
+  };
+
+  const handleUserClick = (writerId: number) => {
+    navigate(`${routes.myPage}/${writerId}`);
   };
 
   const profileImage = roleImages[role];
@@ -87,12 +93,28 @@ const PostCard: React.FC<PostCardProps> = ({
   }, [localStorage.getItem("accessToken")])
 
   return (
-    <div css={cardStyle} onClick={handleCardClick}>
+    <div css={cardStyle} onClick={() => handleFeedClick(feedId)}>
       <div css={headerContainer}>
         <div css={profileContainer}>
-          <img css={profileImageStyle} src={profileImage} alt="profile" />
+          <img
+            onClick={(e) => {
+              e.stopPropagation();
+              handleUserClick(writerId);
+            }}
+            css={profileImageStyle}
+            src={profileImage}
+            alt="profile"
+          />
           <div css={nicknameDateContainer}>
-            <p css={nicknameStyle}>{nickname}</p>
+            <p
+              onClick={(e) => {
+                e.stopPropagation();
+                handleUserClick(writerId);
+              }}
+              css={nicknameStyle}
+            >
+              {nickname}
+            </p>
             <p css={dateStyle}>{createdAt}</p>
           </div>
         </div>
