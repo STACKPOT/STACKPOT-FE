@@ -35,7 +35,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
     getNickname(role, {
       onSuccess: (response) => {
         if (response.result?.nickname) {
-          setNickname(nickname);
+          setNickname(response.result.nickname);
         }
       },
     });
