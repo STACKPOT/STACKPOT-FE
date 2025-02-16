@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   cardStyle,
   profileContainer,
@@ -18,6 +18,7 @@ import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
+import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 
@@ -30,6 +31,7 @@ interface PostCardProps {
   likeCount: number;
   isLiked: boolean;
   profileImage?: string;
+  isMyPost?: boolean;
   feedId: number;
   writerId: number;
 }
@@ -42,22 +44,31 @@ const PostCard: React.FC<PostCardProps> = ({
   content,
   likeCount,
   isLiked,
+  isMyPost = false,
   feedId,
   writerId,
 }: PostCardProps) => {
+  const { mutate: likeFeed } = usePostFeedLike();
   const navigate = useNavigate();
-
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
-  const [isMyPost, setIsMyPost] = useState<boolean>(true);
-  const handleLike = (e: React.MouseEvent<HTMLDivElement>) => {
+  const accessToken = localStorage.getItem("accessToken");
+
+  const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
-    setIsLike(!isLike);
-    setLikes((prev) => (isLike ? prev - 1 : prev + 1));
+    if (accessToken) {
+      likeFeed(feedId, {
+        onSuccess: () => {
+          setIsLike(!isLike);
+          setLikes((prev) => (isLike ? prev - 1 : prev + 1));
+        }
+      })
+    }
   };
 
   const handleEdit = () => {
-    // todo: 수정 페이지로 이동
+    navigate(`${routes.editPost}/${feedId}`);
+    window.scrollTo(0, 0);
   };
   const handleDelete = () => {
     // todo: 삭제하기 api
@@ -118,8 +129,8 @@ const PostCard: React.FC<PostCardProps> = ({
       </div>
       <h1 css={titleStyle}>{title}</h1>
       <p css={contentStyle}>{content}</p>
-      <div css={likeContainer} onClick={handleLike}>
-        <LikeIcon css={likeIconStyle(isLike)} />
+      <div css={likeContainer} >
+        <LikeIcon type="button" css={likeIconStyle(isLike, accessToken !== null)} onClick={handleLike} />
         <p css={likeTextStyle}>{likes}</p>
       </div>
     </div>
