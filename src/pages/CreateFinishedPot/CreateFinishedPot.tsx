@@ -1,7 +1,7 @@
 import routes from "@constants/routes";
 import { FinishedPotForm } from "@pages/EditFinishedPot/components";
 import usePatchPotComplete from "apis/hooks/pots/usePatchPotComplete";
-import { PostPotParams } from "apis/types/pot";
+import { PatchPotCompleteBody } from "apis/types/pot";
 import { useNavigate, useParams } from "react-router-dom";
 
 const CreateFinishedPot = () => {
@@ -10,7 +10,7 @@ const CreateFinishedPot = () => {
     const potIdNumber = Number(potId);
     const { mutate } = usePatchPotComplete();
 
-    const handleUpload = (data: PostPotParams) => {
+    const handleUpload = (data: PatchPotCompleteBody) => {
         mutate({
             potId: potIdNumber,
             body: data

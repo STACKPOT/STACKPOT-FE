@@ -1,43 +1,36 @@
 import { useEffect, useState } from "react";
 import {
-    appealIconStyle, dividerStyle, formContainer, headContainer, iconStyle, inputStyle, labelStyle, languageInputStyle, mainContainer, partStyle, summaryButtonContainer, textareaStyle, titleContainer, titleStyle,
+    appealIconStyle, dividerStyle, formContainer, headContainer, iconStyle, inputStyle, labelStyle, languageInputStyle, mainContainer, summaryButtonContainer, textareaStyle, titleContainer, titleStyle,
 } from "./FinishedPotForm.style"
-import { Button, Modal, PartRecruitment, PotButton } from "@components/index";
+import { Button, Modal, PotButton } from "@components/index";
 import { AppealIcon, PotIcon } from "@assets/svgs";
 import { DatePicker } from "@pages/CreatePot/components";
-import { PostPotParams } from "apis/types/pot";
+import { PatchPotCompleteBody } from "apis/types/pot";
 import dayjs, { Dayjs } from "dayjs";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
-import { Role } from "types/role";
 import useGetPotSummary from "apis/hooks/pots/useGetPotSummary";
 import SummaryLoadingModal from "./SummaryLoadingModal";
-import { participationMap } from "@constants/categories";
 
 interface FinishedPotFormProps {
     potId: number;
     type: "create" | "edit";
-    onCompleted: (data: PostPotParams) => void;
+    onCompleted: (data: PatchPotCompleteBody) => void;
 }
 
 const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onCompleted }: FinishedPotFormProps) => {
     const { data: potData } = useGetPotDetail(potId);
     const { data: summaryData, isFetching: isSummaryLoading, refetch: getSummary } = useGetPotSummary(potId);
     const [showSummaryModal, setShowSummaryModal] = useState<boolean>(false);
-    const [submitData, setSubmitData] = useState<PostPotParams | null>(null);
+    const [submitData, setSubmitData] = useState<PatchPotCompleteBody | null>(null);
 
-    const methods = useForm<PostPotParams>({
+    const methods = useForm<PatchPotCompleteBody>({
         mode: "onChange",
         defaultValues: {
             potName: "",
             potStartDate: "",
-            potDuration: "",
             potLan: "",
-            potContent: "",
-            potModeOfOperation: undefined,
             potSummary: "",
-            recruitmentDeadline: "",
-            recruitmentDetails: [],
         }
     });
 
@@ -60,7 +53,7 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
         }
     }
 
-    const onSubmit: SubmitHandler<PostPotParams> = (data) => {
+    const onSubmit: SubmitHandler<PatchPotCompleteBody> = (data) => {
         onCompleted(data);
     };
 
@@ -72,22 +65,12 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
         if (potData) {
             setValue("potName", potData.potDetail.potName);
             setValue("potStartDate", potData.potDetail.potStartDate.split('. ').join('-'));
-            setValue("potDuration", potData.potDetail.potDuration);
             setValue("potLan", potData.potDetail.potLan);
-            setValue("potContent", potData.potDetail.potContent);
-            setValue("potModeOfOperation", participationMap[potData.potDetail.potModeOfOperation]);
-            setValue("recruitmentDeadline", potData.potDetail.recruitmentDeadline.split('. ').join('-'));
-            setValue("recruitmentDetails",
-                Object.entries(potData.potDetail.recruitingMembers).map((part) =>
-                ({
-                    recruitmentRole: part[0] as Role,
-                    recruitmentCount: part[1]
-                })));
         }
     }, [potData]);
 
     useEffect(() => {
-        if (!isSummaryLoading) {
+        if (!isSummaryLoading && summaryData) {
             setValue("potSummary", summaryData?.summary);
             methods.trigger();
         }
@@ -117,12 +100,6 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({ potId, type, onComple
                         <div css={labelStyle}>
                             시작 날짜
                             <DatePicker date={dayjs(potStartDate)} onChange={handleStartDate} />
-                        </div>
-                        <div css={partStyle}>
-                            팀 구성
-                            <PartRecruitment
-                                initialRecruitment={potData?.potDetail.recruitingMembers}
-                                onChange={(data) => setValue("recruitmentDetails", data)} />
                         </div>
                         <label css={labelStyle}>
                             사용 언어

@@ -173,9 +173,16 @@ export interface CompletedPotDetail {
 
 export interface PatchPotCompleteParams {
   potId: number;
-  body: PostPotParams;
+  body: PatchPotCompleteBody;
 }
 
 export interface GetPotSummaryResponse {
   summary: string;
+}
+
+export interface PatchPotCompleteBody {
+  potName: string;
+  potStartDate: string;
+  potLan: string;
+  potSummary: string;
 }

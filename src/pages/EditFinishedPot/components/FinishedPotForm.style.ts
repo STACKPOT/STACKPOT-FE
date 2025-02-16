@@ -91,13 +91,6 @@ export const textareaStyle = css`
   }
 `;
 
-export const partStyle = css`
-  display: flex;
-  color: ${theme.color.base.darkgray};
-  ${theme.font.caption3};
-  white-space: pre;
-  gap: 4.4rem;
-`;
 export const summaryButtonContainer = css`
   display: flex;
   justify-content: space-between;
