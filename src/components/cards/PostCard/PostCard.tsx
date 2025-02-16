@@ -52,9 +52,7 @@ const PostCard: React.FC<PostCardProps> = ({
   const navigate = useNavigate();
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
-  const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("accessToken")
-  );
+  const accessToken = localStorage.getItem("accessToken");
 
   const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
@@ -86,11 +84,6 @@ const PostCard: React.FC<PostCardProps> = ({
   };
 
   const profileImage = roleImages[role];
-
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    setAccessToken(token);
-  }, [localStorage.getItem("accessToken")])
 
   return (
     <div css={cardStyle} onClick={() => handleFeedClick(feedId)}>
