@@ -9,6 +9,8 @@ import {
   GetMyPageParams,
   GetFinishedModalParams,
   FinishedModalResponse,
+  NicknameResponse,
+  PatchUserProfileUpdateParams,
 } from "./types/user";
 
 export const getKakaoLogIn = async (code: string) => {
@@ -18,12 +20,20 @@ export const getKakaoLogIn = async (code: string) => {
 export const GetMyUser = async () => {
   return authApiGet<GetUserResponse>("/users");
 };
-export const patchSignIn = async (data: postSignInPayload) => {
-  return authApiPatch<SignInResponse>("/users/profile", { data });
+export const patchSignIn = async ({
+  role,
+  interest,
+  kakaoId,
+}: postSignInPayload) => {
+  return authApiPatch<SignInResponse>("/users/profile", {
+    role,
+    interest,
+    kakaoId,
+  });
 };
 
 export const getNickname = async (role: Role) => {
-  return authApiGet("/users/nickname", { role });
+  return authApiGet<NicknameResponse>("/users/nickname", { role });
 };
 
 export const postNickname = async (nickname: string) => {
@@ -36,4 +46,14 @@ export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
 
 export const GetFinishedModal = async ({ potId }: GetFinishedModalParams) => {
   return authApiGet<FinishedModalResponse>(`/my-pots/${potId}/details`);
+};
+
+export const patchUserProfileUpdate = async (
+  data: PatchUserProfileUpdateParams
+) => {
+  return authApiPatch("/users/profile/update", data);
+};
+
+export const postLogout = async (refreshToken: string) => {
+  return authApiPost("/users/logout", { refreshToken });
 };

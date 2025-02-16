@@ -33,7 +33,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ type, potRole, nickname, po
     }
     const handleMemberProfile = () => {
         if (userId) {
-            navigate(routes.userProfile.replace(":userId", userId?.toString()));
+            navigate(`${routes.userProfile}/${userId}`);
             onCancelModal();
         }
     }

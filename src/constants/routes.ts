@@ -20,12 +20,14 @@ const routes = {
   search: "/search",
   searchResult: "/search-result",
   signUp: "/sign-up",
-  potDetail: "/pot/:potId",
+  potDetail: "/pot",
   callback: "/callback",
   editPost: "/edit-post/:postId",
-  editFinishedPot: "/finished-pot/edit/:potId",
-  userProfile: "/user/:userId",
+  editFinishedPot: "/finished-pot/edit",
+  userProfile: "/user",
   createFinishedPot: "/create-finished-pot",
+  editPot: "/pot/edit",
+  feed: "/feed",
 } as const;
 
 export default routes;
