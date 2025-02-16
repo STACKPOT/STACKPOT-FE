@@ -7,7 +7,7 @@ import { APITaskStatus, TaskStatus } from "types/taskStatus";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { useParams } from "react-router-dom";
 import { useGetMyPotTask } from "apis/hooks/myPots/useGetMyPotTask";
-import { apiToDisplayStatus, TASK_STATUSES } from "@constants/categories";
+import { apiToDisplayStatus, taskStatues } from "@constants/categories";
 
 const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -68,13 +68,11 @@ const MyPotStatusPage: React.FC = () => {
       <StatusBoard onOpenModal={() => handleOpenModal(null, "새로운 업무 추가")} />
 
       <div css={toDoGirdContainer}>
-        {TASK_STATUSES.map((status) => {
-          const safeTaskData = taskData?.result || { OPEN: [], IN_PROGRESS: [], CLOSED: [] };
-
-          const filteredTasks = Object.entries(safeTaskData)
-            .filter(([apiStatus]) => apiToDisplayStatus[apiStatus as APITaskStatus] === status)
-            .flatMap(([_, tasks]) => tasks);        
-
+        {taskStatues.map((status) => {
+          const filteredTasks = Object.values(taskData?.result || { OPEN: [], IN_PROGRESS: [], CLOSED: [] })
+            .flat()
+            .filter((task) => apiToDisplayStatus[task.status as APITaskStatus] === status);
+        
           return (
             <TodoStatusSection
               key={status}
@@ -86,6 +84,7 @@ const MyPotStatusPage: React.FC = () => {
           );
         })}
       </div>
+
 
     </>
   );

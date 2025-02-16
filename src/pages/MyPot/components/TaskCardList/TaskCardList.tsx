@@ -2,12 +2,11 @@ import { TaskCard } from "@components/index";
 import { roleImages } from "@constants/roleImage";
 import { Task } from "apis/types/myPot";
 import { Role } from "types/role";
-import { categoryToKorean } from "@constants/categories";
+import { partMap } from "@constants/categories";
 
-
-const isRoleType = (value: string): value is Role => {
-  return ["FRONTEND", "BACKEND", "PLANNING", "DESIGN"].includes(value);
-};
+const reversePartMap = Object.fromEntries(
+  Object.entries(partMap).map(([k, v]) => [v, k])
+) as Record<Role, string>;
 
 interface TaskCardListProps {
   tasks: Task[];
@@ -21,7 +20,7 @@ const TaskCardList: React.FC<TaskCardListProps> = ({ tasks, onTaskCardClick }) =
         <TaskCard
           key={idx}
           title={task.title}
-          tag={task.category?.map((cat) => isRoleType(cat) ? categoryToKorean[cat] : "기타")}
+          tag={task.category?.map((cat) => reversePartMap[cat as Role] ?? "기타")}
           content={task.description}
           dday={task.dday}
           date={task.deadLine}
@@ -30,8 +29,8 @@ const TaskCardList: React.FC<TaskCardListProps> = ({ tasks, onTaskCardClick }) =
           onClick={() => onTaskCardClick(task.taskboardId)}
           participants={task.participants.map((p) => ({
             ...p,
-            profileImage: isRoleType(p.role) ? roleImages[p.role] : "", 
-          }))}
+            profileImage: roleImages[p.role as Role] || "", 
+          }))} 
         />
       ))}
     </>

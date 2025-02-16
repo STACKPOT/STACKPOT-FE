@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { CloseIcon } from "@assets/svgs";
@@ -19,13 +19,12 @@ interface AboutWorkModalProps {
   activeStatus: TaskStatus;
   title: string;
 }
- 
+
 const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, title }) => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
   const { register, handleSubmit, setValue, watch } = useForm();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState<TaskStatus>(activeStatus);
 
   const potIdNumber = Number(potId);
   const taskIdNumber = taskId !== undefined && !isNaN(Number(taskId)) ? Number(taskId) : null;
@@ -36,14 +35,12 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, 
 
   const { mutate: patchTask } = usePatchMyPotTask();
 
-  useEffect(() => {
-    if (title === "업무 수정하기" && taskDetail?.result) {
-      setValue("taskTitle", taskDetail.result.title);
-      setValue("taskDate", taskDetail.result.deadLine);
-      setSelectedStatus(apiToDisplayStatus[taskDetail.result.status as APITaskStatus] || "진행 전");
-      setValue("taskDescription", taskDetail.result.description);
-    }
-  }, [taskDetail, title, setValue]);
+  const convertedStatus = apiToDisplayStatus[taskDetail?.result?.status as APITaskStatus] || "진행 전";
+  const [selectedStatus, setSelectedStatus] = useState<TaskStatus>(activeStatus || convertedStatus);
+
+  const taskTitle = watch("taskTitle", taskDetail?.result?.title || "");
+  const taskDate = watch("taskDate", taskDetail?.result?.deadLine || "");
+  const taskDescription = watch("taskDescription", taskDetail?.result?.description || "");
 
   const handleDeleteTask = () => {
     setIsConfirmOpen(true);
@@ -90,10 +87,10 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, 
               <div css={titleTextStyle}>{title}</div>
             </div>
             <form onSubmit={handleSubmit(handleSave)} css={thirdContainer}>
-              <TextInput value={watch("taskTitle", "")} {...register("taskTitle", { required: true })} onChange={(e) => setValue("taskTitle", e.target.value)} />
-              <DateInput value={watch("taskDate", "")} {...register("taskDate", { required: true })} onChange={(e) => setValue("taskDate", e.target.value)} />
+              <TextInput value={taskTitle} {...register("taskTitle", { required: true })} onChange={(e) => setValue("taskTitle", e.target.value)} />
+              <DateInput value={taskDate} {...register("taskDate", { required: true })} onChange={(e) => setValue("taskDate", e.target.value)} />
               <StatusBadgeSelector selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />
-              <ExplainationInputField value={watch("taskDescription", "")} {...register("taskDescription")} onChange={(e) => setValue("taskDescription", e.target.value)} placeholder="간단한 설명을 100자 이내로 작성해주세요" />
+              <ExplainationInputField value={taskDescription} {...register("taskDescription")} onChange={(e) => setValue("taskDescription", e.target.value)} placeholder="간단한 설명을 100자 이내로 작성해주세요" />
               <ContributorList />
               <ActionButton title={title} onSave={handleSubmit(handleSave)} onDelete={handleDeleteTask} />
             </form>

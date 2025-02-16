@@ -1,5 +1,5 @@
+import { Modal } from "@components/index";
 import { blurOverlayStyle } from "../../MyPotStatus/MyPotStatus.style";
-import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { modalOverlayStyle } from "./ConfirmModalWrapper.style";
 
 interface ConfirmModalWrapperProps {
@@ -14,7 +14,7 @@ const ConfirmModalWrapper: React.FC<ConfirmModalWrapperProps> = ({ onClose, onCo
       {isModalOpen && <div css={blurOverlayStyle} />}
       {isModalOpen && (
         <div css={modalOverlayStyle}>
-          <ConfirmModal onClose={onClose} onConfirm={onConfirm} />
+          <Modal title={"업무 내용을 삭제하시겠습니까?"} message={"삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"} onCancel={onClose} onConfirm={onConfirm} />
         </div>
       )}
     </>

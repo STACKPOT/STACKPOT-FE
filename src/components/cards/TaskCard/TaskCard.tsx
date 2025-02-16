@@ -48,10 +48,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
 }: TaskCardProps) => {
   const profileImage = roleImages[creatorRole as Role] || "";
 
-  const roleList: Role[] = participants
-  .map((p) => p.role)
-  .filter((role): role is Role => ["FRONTEND", "BACKEND", "PLANNING", "DESIGN", "DEFAULT"].includes(role));
-
+  const roleList = participants.map((p) => p.role) as Role[];
 
   return (
     <div css={cardStyle} onClick={onClick}>
