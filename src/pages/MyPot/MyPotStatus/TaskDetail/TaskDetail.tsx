@@ -29,13 +29,13 @@ import { headerStyle } from "@pages/MyPot/MyPotMain.style";
 import { statusTextStyle } from "../MyPotStatus.style";
 import routes from "@constants/routes";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
-import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
-import { AboutWorkModalWrapper } from "../../components/index";
-import { TaskAPIParams } from "apis/types/myPot";
+import { useDeleteMyPotTask } from "apis/hooks/myPots/useDeleteMyPotTask";
+import { AboutWorkModalWrapper, Loading } from "../../components/index";
 import { TaskStatus } from "types/taskStatus";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
-import { apiToDisplayStatus } from "@constants/categories";
+import { displayStatus, WorkModal } from "@constants/categories";
+import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
 
 const TaskDetailPage: React.FC = () => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
@@ -45,37 +45,44 @@ const TaskDetailPage: React.FC = () => {
   const { mutate: deleteTask, isPending } = useDeleteMyPotTask();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState("새로운 업무 추가");
+  const [modalTitle, setModalTitle] = useState<string>(WorkModal[0]);
   const [activeStatus, setActiveStatus] = useState<TaskStatus | null>(null);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const handlePrev = () => {
     navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
   };
 
-  const handleDeleteTask = ({ potId, taskId }: TaskAPIParams) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteTask({ potId, taskId });
+  const confirmDeleteTask = () => {
+      deleteTask({ potId: Number(potId), taskId: Number(taskId) });
+      setIsConfirmOpen(false);
       navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
-    }
+  };
+  
+  const handleDeleteTask = () => {
+    setIsConfirmOpen(true);
   };
 
   const handleOpenModal = () => {
-    setModalTitle("업무 수정하기");
-    const convertedStatus = task?.result?.status ? apiToDisplayStatus[task.result.status] : null;
+    setModalTitle(WorkModal[1]);
+    const convertedStatus = task?.result?.status ? displayStatus[task.result.status] : null;
     setActiveStatus(convertedStatus);
     setIsModalOpen(true);
   };
 
-  if (isLoading || isPending) return <p>로딩 중...</p>;
+  if (isLoading || isPending) return <Loading />;
   if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
   if (!task?.result) return <p>데이터를 찾을 수 없습니다.</p>;
 
   return (
     <>
+      <ConfirmModalWrapper isModalOpen={isConfirmOpen} onClose={() => setIsConfirmOpen(false)} onConfirm={confirmDeleteTask} />
+      
       <AboutWorkModalWrapper
         isModalOpen={isModalOpen}
         activeStatus={activeStatus}
         modalTitle={modalTitle}
+        taskId={Number(taskId)}
         onClose={() => setIsModalOpen(false)}
       />
 
@@ -87,13 +94,13 @@ const TaskDetailPage: React.FC = () => {
           <div css={titleStyle}>{task.result.title}</div>
         </div>
         <div css={rightContainer}>
-          <StateBadge content={apiToDisplayStatus[task.result.status]} />
+          <StateBadge content={displayStatus[task.result.status]} />
           <div css={dropdownWrapperStyle} onClick={(event) => event.stopPropagation()}>
             <MyFeedDropdown
               topMessage="수정하기"
               bottomMessage="삭제하기"
               onTop={handleOpenModal}
-              onBottom={() => handleDeleteTask({ potId: Number(potId), taskId: Number(taskId) })}
+              onBottom={handleDeleteTask}
             />
           </div>
         </div>
