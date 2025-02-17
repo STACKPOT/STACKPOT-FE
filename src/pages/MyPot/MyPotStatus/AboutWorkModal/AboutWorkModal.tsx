@@ -80,7 +80,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, 
               queryClient.invalidateQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
             }
             else {
-              queryClient.invalidateQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
+              queryClient.invalidateQueries({ queryKey: ["myPotTasks", potId] });
             }
           }
         }
