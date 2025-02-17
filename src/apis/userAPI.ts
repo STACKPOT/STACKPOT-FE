@@ -11,6 +11,10 @@ import {
   postSignInPayload,
   SignInResponse,
   GetUserResponse,
+  MyPageResponse,
+  GetMyPageParams,
+  GetFinishedModalParams,
+  FinishedModalResponse,
   NicknameResponse,
   PatchUserProfileUpdateParams,
   GetUsersMyPagesParams,
@@ -41,6 +45,14 @@ export const getNickname = async (role: Role) => {
 
 export const postNickname = async (nickname: string) => {
   return authApiPost("/users/nickname/save", undefined, { nickname });
+};
+
+export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
+  return authApiGet<MyPageResponse>("/users/mypages", { dataType });
+};
+
+export const GetFinishedModal = async ({ potId }: GetFinishedModalParams) => {
+  return authApiGet<FinishedModalResponse>(`/my-pots/${potId}/details`);
 };
 
 export const patchUserProfileUpdate = async (

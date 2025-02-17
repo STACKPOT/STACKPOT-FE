@@ -9,12 +9,14 @@ import {
 } from "./MyPage.style";
 import { MyPageProfile } from "./components";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
-import useGetMyPage from "apis/hooks/mypage/useGetMyPage";
-import { roleImages } from "@constants/roleImage";
+import useGetMyPage from "apis/hooks/users/useGetMyPage";
 import { Role } from "types/role";
+import routes from "@constants/routes";
+import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
   const [contentType, setContentType] = useState<"feed" | "pot">("pot");
+  const navigate = useNavigate();
 
   const { data } = useGetMyPage({
     dataType: contentType,
@@ -23,21 +25,6 @@ const MyPage = () => {
   if (!data) {
     return <div>데이터가 없습니다.</div>;
   }
-
-  const mapRoleToEnum = (role: string): Role => {
-    switch (role) {
-      case "프론트엔드":
-        return "FRONTEND";
-      case "백엔드":
-        return "BACKEND";
-      case "기획":
-        return "PLANNING";
-      case "디자인":
-        return "DESIGN";
-      default:
-        return "PLANNING";
-    }
-  };
 
   return (
     <main css={container}>
@@ -62,7 +49,6 @@ const MyPage = () => {
           {contentType === "feed"
             ? data.feeds.map((post) => (
                 <PostCard
-                  id={post.feedId}
                   nickname={post.writer}
                   role={post.writerRole}
                   isLiked={false}
@@ -71,15 +57,11 @@ const MyPage = () => {
                   createdAt={post.createdAt}
                   title={post.title}
                   content={post.content}
-                  isMyPost={true}
+                  feedId={post.feedId}
+                  writerId={post.writerId}
                 />
               ))
             : data.completedPots.map((pot) => {
-                const memberRoles = pot.members.split(",").map((member) => {
-                  const rawRole = member.trim().split("(")[0];
-                  return mapRoleToEnum(rawRole);
-                });
-
                 return (
                   <FinishedPotCard
                     id={pot.potId}
@@ -89,17 +71,15 @@ const MyPage = () => {
                     stacks={pot.members}
                     languages={pot.potLan}
                     key={pot.potId}
-                    memberProfiles={memberRoles.map(
-                      (role) => roleImages[role] || ""
-                    )}
                     isMyPage={true}
                     endDate={pot.potEndDate}
+                    members={Object.keys(pot.memberCounts) as Role[]}
                   />
                 );
               })}
         </div>
       </div>
-      <FloatingButton />
+      <FloatingButton type={"feed"} />
     </main>
   );
 };

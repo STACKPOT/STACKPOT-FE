@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   cardStyle,
   profileContainer,
@@ -18,9 +18,9 @@ import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
-import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
+import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
 
 interface PostCardProps {
   role: Role;
@@ -31,7 +31,6 @@ interface PostCardProps {
   likeCount: number;
   isLiked: boolean;
   profileImage?: string;
-  isMyPost?: boolean;
   feedId: number;
   writerId: number;
 }
@@ -44,14 +43,17 @@ const PostCard: React.FC<PostCardProps> = ({
   content,
   likeCount,
   isLiked,
-  isMyPost = false,
   feedId,
   writerId,
 }: PostCardProps) => {
   const { mutate: likeFeed } = usePostFeedLike();
+
   const navigate = useNavigate();
+
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
+  const [isMyPost, setIsMyPost] = useState<boolean>(true);
+
   const accessToken = localStorage.getItem("accessToken");
 
   const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -61,21 +63,21 @@ const PostCard: React.FC<PostCardProps> = ({
         onSuccess: () => {
           setIsLike(!isLike);
           setLikes((prev) => (isLike ? prev - 1 : prev + 1));
-        }
-      })
+        },
+      });
     }
   };
 
   const handleEdit = () => {
-    navigate(`${routes.editPost}/${feedId}`);
-    window.scrollTo(0, 0);
+    navigate(`${routes.feed.edit}/${feedId}`);
   };
+
   const handleDelete = () => {
     // todo: 삭제하기 api
   };
 
   const handleFeedClick = (feedId: number) => {
-    navigate(`${routes.feed}/${feedId}`);
+    navigate(`${routes.feed.base}/${feedId}`);
     window.scrollTo(0, 0);
   };
 
@@ -129,8 +131,12 @@ const PostCard: React.FC<PostCardProps> = ({
       </div>
       <h1 css={titleStyle}>{title}</h1>
       <p css={contentStyle}>{content}</p>
-      <div css={likeContainer} >
-        <LikeIcon type="button" css={likeIconStyle(isLike, accessToken !== null)} onClick={handleLike} />
+      <div css={likeContainer}>
+        <LikeIcon
+          type="button"
+          css={likeIconStyle(isLike, accessToken !== null)}
+          onClick={handleLike}
+        />
         <p css={likeTextStyle}>{likes}</p>
       </div>
     </div>

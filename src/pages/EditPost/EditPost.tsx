@@ -1,95 +1,103 @@
-import { useState } from "react";
-import { useBlocker } from "react-router-dom";
-import { buttonContainer, categories, categoryContainer, container, contentContainer, contentBody, contentTitle, iconStyle, inputStyle, textareaStyle, toastStyle } from "./EditPost.style";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+import {
+  buttonContainer,
+  container,
+  contentContainer,
+  contentTitle,
+  iconStyle,
+  toastStyle,
+} from "./EditPost.style";
 import { PotIcon } from "@assets/svgs";
-import { Button, CategoryButton, Modal, PotButton, UploadToast } from "@components/index";
-import { partMap } from "@constants/categories";
+import { Button, PotButton, UploadToast, PostForm } from "@components/index";
+import { FeedPatch } from "apis/types/feed";
+import usePatchFeed from "apis/hooks/feeds/usePatchFeed";
+import useGetFeedDetails from "apis/hooks/feeds/useGetFeedDetails";
+import routes from "@constants/routes";
 
 const EditPost = () => {
-    const [title, setTitle] = useState<string>("원래 제목입니당");
-    const [content, setContent] = useState<string>("원래 내용입니다.");
-    const [selectedPart, setSelectedPart] = useState<string | null>("프론트엔드");
+  const { feedId } = useParams();
+  const navigate = useNavigate();
 
-    const [isFilled, setIsFilled] = useState(false);
+  const feedIdNumber = feedId ? ~~feedId : 0;
 
-    const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-        return isFilled && currentLocation.pathname !== nextLocation.pathname;
-    });
+  const { data } = useGetFeedDetails({ feedId: feedIdNumber });
+  const { mutate: editFeed } = usePatchFeed();
 
-    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value);
-        setIsFilled(true);
+  const [showToast, setShowToast] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const methods = useForm<FeedPatch>({
+    defaultValues: {
+      title: "",
+      content: "",
+      category: "",
+    },
+  });
+
+  useEffect(() => {
+    if (data) {
+      methods.reset({
+        title: data.title,
+        content: data.content,
+        category: data.writerRole,
+      });
     }
-    const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setContent(e.target.value);
-        setIsFilled(true);
-    }
+  }, [data, methods]);
 
-    const handleUploading = () => {
-        // todo: 게시물 수정 api
-    };
+  const {
+    handleSubmit,
+    register,
+    watch,
+    setValue,
+    formState: { isValid },
+  } = methods;
 
-    const handlePartClick = (partName: string) => {
-        setSelectedPart((prev) => (prev === partName ? null : partName));
-        setIsFilled(true);
-    };
+  const onSubmit: SubmitHandler<FeedPatch> = (formData) => {
+    if (!feedIdNumber) return;
 
-    return (
-        <main>
-            <div css={container}>
-                <div css={contentContainer}>
-                    <div css={contentTitle}>
-                        게시물 수정하기
-                        <PotIcon css={iconStyle} />
-                        <div css={buttonContainer}>
-                            <PotButton onClick={() => { }} type="red">삭제하기</PotButton>
-                            <Button variant="action" onClick={handleUploading}>
-                                수정 완료
-                            </Button>
-                        </div>
-                    </div>
-
-                    <div css={contentBody}>
-                        <input
-                            css={inputStyle}
-                            placeholder="메인 제목 작성"
-                            value={title}
-                            onChange={handleTitleChange}
-                        />
-                        <textarea
-                            css={textareaStyle}
-                            placeholder="나의 열정을 이야기해봐요"
-                            value={content}
-                            onChange={handleContentChange}
-                        />
-                        <div css={categoryContainer}>
-                            카테고리
-                            <div css={categories}>
-                                {Object.keys(partMap).map((partName) => (
-                                    <div key={partName} css={categories}>
-                                        <CategoryButton
-                                            style={partMap[partName]}
-                                            selected={selectedPart === partName}
-                                            onClick={() => handlePartClick(partName)}
-                                        >
-                                            {partName}
-                                        </CategoryButton>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {blocker.state === "blocked" && (
-                <Modal
-                    title="페이지를 나가시겠어요?"
-                    message="입력한 내용을 처음부터 시작해야 해요."
-                    onConfirm={blocker.proceed}
-                    onCancel={blocker.reset}
-                />
-            )}
-        </main>
+    editFeed(
+      {
+        feedId: feedIdNumber,
+        body: formData,
+      },
+      {
+        onSuccess: () => {
+          navigate(`${routes.feed.base}/${feedId}`);
+        },
+      }
     );
-}
+  };
+
+  return (
+    <main>
+      {showToast && (
+        <div css={toastStyle}>
+          <UploadToast />
+        </div>
+      )}
+      <div css={container}>
+        <FormProvider {...methods}>
+          <form css={contentContainer} onSubmit={handleSubmit(onSubmit)}>
+            <div css={contentTitle}>
+              게시물 수정하기
+              <PotIcon css={iconStyle} />
+              <div css={buttonContainer}>
+                <PotButton onClick={() => setShowDeleteModal(true)} type="red">
+                  삭제하기
+                </PotButton>
+                <Button variant="action" type="submit" disabled={!isValid}>
+                  수정 완료
+                </Button>
+              </div>
+            </div>
+            <PostForm register={register} watch={watch} setValue={setValue} />
+          </form>
+        </FormProvider>
+      </div>
+    </main>
+  );
+};
+
 export default EditPost;
