@@ -20,6 +20,16 @@ import PopularPots from "./components/PopularPots/PopularPots";
 import Feed from "./components/Feed/Feed";
 
 const Home: React.FC = () => {
+  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
+    import.meta.env.VITE_REST_API_KEY
+  }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
+&scope=account_email
+&prompt=login`;
+
+  const handleClick = () => {
+    window.location.href = link;
+  };
+
   return (
     <>
       <div css={bannerStyle}>
@@ -31,7 +41,7 @@ const Home: React.FC = () => {
           <p css={bannerSubtitleStyle}>
             지금 바로 나와 함께할 팀원을 찾아볼까요?
           </p>
-          <Button css={buttonStyle}>
+          <Button css={buttonStyle} onClick={handleClick}>
             팟 만들러 가기
             <RightIcon css={buttonIconStyle} />
           </Button>
