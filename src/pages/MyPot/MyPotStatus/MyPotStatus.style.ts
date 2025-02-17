@@ -147,7 +147,6 @@ export const modalOverlayStyle = css`
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
-  padding-top: 13rem; 
+  align-items: center; 
   z-index: 1000;
 `;
