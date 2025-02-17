@@ -17,14 +17,16 @@ const MyPotStatusPage: React.FC = () => {
 
   const { potId } = useParams<{ potId: string }>();
   const navigate = useNavigate();
+  
+  const potIdNumber = Number(potId);
 
   const { data } = useGetMyPotTodo({
-    potId: Number(potId),
+    potId: potIdNumber,
     page: currentPage,
     size: 3,
   });
 
-  const { data: taskData } = useGetMyPotTask({ potId: Number(potId) }); 
+  const { data: taskData } = useGetMyPotTask({ potId: potIdNumber }); 
 
   const totalPages = useMemo(() => {
     return data?.totalElements ? Math.ceil(data.totalElements / 3) : 0;
