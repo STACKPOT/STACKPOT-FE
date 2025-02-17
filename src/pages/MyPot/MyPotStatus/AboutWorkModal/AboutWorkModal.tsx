@@ -13,6 +13,7 @@ import routes from "@constants/routes";
 import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
 import { APITaskStatus } from "../../../../types/taskStatus";
 import { displayStatus, WorkModal } from "@constants/categories";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface AboutWorkModalProps {
   onClose: () => void;
@@ -26,6 +27,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, 
   const navigate = useNavigate();
   const { register, handleSubmit, setValue, watch } = useForm();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const queryClient = useQueryClient();
 
   const reverseDisplayStatus = Object.fromEntries(
     Object.entries(displayStatus).map(([key, value]) => [value, key])
@@ -70,7 +72,19 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({ onClose, activeStatus, 
         participants: [10], // 임시
       };
   
-      patchTask({ potId: potIdNumber, taskId: taskIdSource, data: updatedTask });
+      patchTask(
+        { potId: potIdNumber, taskId: taskIdSource, data: updatedTask },
+        {
+          onSuccess: () => {
+            if ( taskIdNumber != null ) {
+              queryClient.invalidateQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
+            }
+            else {
+              queryClient.invalidateQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
+            }
+          }
+        }
+      );
     } else {
       console.warn("PATCH 요청이 실행되지 않음: '업무 수정하기'가 아니거나 taskId 없음");
     }
