@@ -41,7 +41,9 @@ export const authApiDelete = async <T>(
   url: string,
   params?: any
 ): Promise<ApiResponse<T>> => {
-  const response = await tokenInstance.delete<ApiResponse<T>>(url, { params });
+  const response = await tokenInstance.delete<ApiResponse<T>>(url, {
+    params,
+  });
   return response.data;
 };
 

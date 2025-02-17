@@ -62,7 +62,8 @@ const AllPotPage: React.FC = () => {
           data.pots.map((pot, index) => (
             <PotCard
               key={index}
-              id={pot.userId}
+              userId={pot.userId}
+              potId={pot.potId}
               role={pot.userRole}
               nickname={pot.userNickname}
               dday={pot.dday}

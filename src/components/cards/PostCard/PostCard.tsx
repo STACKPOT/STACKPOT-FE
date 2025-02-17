@@ -18,6 +18,9 @@ import { LikeIcon } from "@assets/svgs";
 import MyFeedDropdown from "@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
+import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
 
 interface PostCardProps {
   role: Role;
@@ -28,7 +31,8 @@ interface PostCardProps {
   likeCount: number;
   isLiked: boolean;
   profileImage?: string;
-  onClick: () => void;
+  feedId: number;
+  writerId: number;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -39,33 +43,73 @@ const PostCard: React.FC<PostCardProps> = ({
   content,
   likeCount,
   isLiked,
-  onClick,
+  feedId,
+  writerId,
 }: PostCardProps) => {
+  const { mutate: likeFeed } = usePostFeedLike();
+
+  const navigate = useNavigate();
+
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
   const [isMyPost, setIsMyPost] = useState<boolean>(true);
-  const handleLike = (e: React.MouseEvent<HTMLDivElement>) => {
+
+  const accessToken = localStorage.getItem("accessToken");
+
+  const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
-    setIsLike(!isLike);
-    setLikes((prev) => (isLike ? prev - 1 : prev + 1));
+    if (accessToken) {
+      likeFeed(feedId, {
+        onSuccess: () => {
+          setIsLike(!isLike);
+          setLikes((prev) => (isLike ? prev - 1 : prev + 1));
+        },
+      });
+    }
   };
 
   const handleEdit = () => {
-    // todo: 수정 페이지로 이동
+    navigate(`${routes.feed.edit}/${feedId}`);
   };
+
   const handleDelete = () => {
     // todo: 삭제하기 api
+  };
+
+  const handleFeedClick = (feedId: number) => {
+    navigate(`${routes.feed.base}/${feedId}`);
+    window.scrollTo(0, 0);
+  };
+
+  const handleUserClick = (writerId: number) => {
+    navigate(`${routes.myPage}/${writerId}`);
   };
 
   const profileImage = roleImages[role];
 
   return (
-    <div css={cardStyle} onClick={onClick}>
+    <div css={cardStyle} onClick={() => handleFeedClick(feedId)}>
       <div css={headerContainer}>
         <div css={profileContainer}>
-          <img css={profileImageStyle} src={profileImage} alt="profile" />
+          <img
+            onClick={(e) => {
+              e.stopPropagation();
+              handleUserClick(writerId);
+            }}
+            css={profileImageStyle}
+            src={profileImage}
+            alt="profile"
+          />
           <div css={nicknameDateContainer}>
-            <p css={nicknameStyle}>{nickname}</p>
+            <p
+              onClick={(e) => {
+                e.stopPropagation();
+                handleUserClick(writerId);
+              }}
+              css={nicknameStyle}
+            >
+              {nickname}
+            </p>
             <p css={dateStyle}>{createdAt}</p>
           </div>
         </div>
@@ -87,8 +131,12 @@ const PostCard: React.FC<PostCardProps> = ({
       </div>
       <h1 css={titleStyle}>{title}</h1>
       <p css={contentStyle}>{content}</p>
-      <div css={likeContainer} onClick={handleLike}>
-        <LikeIcon css={likeIconStyle(isLike)} />
+      <div css={likeContainer}>
+        <LikeIcon
+          type="button"
+          css={likeIconStyle(isLike, accessToken !== null)}
+          onClick={handleLike}
+        />
         <p css={likeTextStyle}>{likes}</p>
       </div>
     </div>

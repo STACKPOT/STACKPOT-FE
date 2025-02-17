@@ -30,6 +30,7 @@ import {
   EditPotPage,
   FeedDetailPage,
 } from "@pages/index";
+import EditPost from "@pages/EditPost/EditPost";
 
 const router = createBrowserRouter([
   {
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
         element: <SignUpPage />,
       },
       {
-        path: `${routes.potDetail}/:potId`,
+        path: `${routes.pot.base}/:potId`,
         element: <PotDetailPage />,
       },
       {
@@ -113,7 +114,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: routes.editPost,
+        path: `${routes.feed.edit}/:feedId`,
         element: <EditPostPage />,
       },
       {
@@ -133,7 +134,7 @@ const router = createBrowserRouter([
         element: <EditPotPage />,
       },
       {
-        path: `${routes.feed}/:feedId`,
+        path: `${routes.feed.base}/:feedId`,
         element: <FeedDetailPage />,
       },
     ],

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { GetFinishedModal } from "apis/finishedmodalAPI";
-import { GetFinishedModalParams } from "apis/types/finishedmodal";
+import { GetFinishedModal } from "apis/userAPI";
+import { GetFinishedModalParams } from "apis/types/mypage";
 
 const useGetFinishedModal = ({ potId }: GetFinishedModalParams) => {
   return useQuery({
