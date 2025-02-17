@@ -21,7 +21,6 @@ const EditPost = () => {
   const navigate = useNavigate();
 
   const feedIdNumber = feedId ? ~~feedId : 0;
-  console.log(feedIdNumber);
 
   const { data } = useGetFeedDetails({ feedId: feedIdNumber });
   const { mutate: editFeed } = usePatchFeed();
