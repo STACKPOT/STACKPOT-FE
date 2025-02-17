@@ -7,25 +7,24 @@ import { APITaskStatus, TaskStatus } from "types/taskStatus";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { useParams } from "react-router-dom";
 import { useGetMyPotTask } from "apis/hooks/myPots/useGetMyPotTask";
-import { apiToDisplayStatus, taskStatues } from "@constants/categories";
+import { displayStatus, WorkModal } from "@constants/categories";
 
 const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeStatus, setActiveStatus] = useState<TaskStatus>(null);
-  const [modalTitle, setModalTitle] = useState("새로운 업무 추가");
+  const [modalTitle, setModalTitle] = useState<string>(WorkModal[0]);
 
   const { potId } = useParams<{ potId: string }>();
-  const potIdNumber = Number(potId) || 0;
   const navigate = useNavigate();
 
   const { data } = useGetMyPotTodo({
-    potId: potIdNumber,
+    potId: Number(potId),
     page: currentPage,
     size: 3,
   });
 
-  const { data: taskData } = useGetMyPotTask(potIdNumber); 
+  const { data: taskData } = useGetMyPotTask({ potId: Number(potId) }); 
 
   const totalPages = useMemo(() => {
     return data?.totalElements ? Math.ceil(data.totalElements / 3) : 0;
@@ -56,6 +55,7 @@ const MyPotStatusPage: React.FC = () => {
         isModalOpen={isModalOpen}
         activeStatus={activeStatus}
         modalTitle={modalTitle}
+        taskId={null}
         onClose={() => setIsModalOpen(false)}
       />
       <MyPotStatusHeader />
@@ -65,27 +65,25 @@ const MyPotStatusPage: React.FC = () => {
         <Pagination currentPage={currentPage} totalPages={totalPages} onPrev={handlePrev} onNext={handleNext} />
       </div>
 
-      <StatusBoard onOpenModal={() => handleOpenModal(null, "새로운 업무 추가")} />
+      <StatusBoard onOpenModal={() => handleOpenModal(null, WorkModal[0])} />
 
       <div css={toDoGirdContainer}>
-        {taskStatues.map((status) => {
-          const filteredTasks = Object.values(taskData?.result || { OPEN: [], IN_PROGRESS: [], CLOSED: [] })
-            .flat()
-            .filter((task) => apiToDisplayStatus[task.status as APITaskStatus] === status);
-        
-          return (
-            <TodoStatusSection
-              key={status}
-              status={status}
-              tasks={filteredTasks}
-              onOpenModal={() => handleOpenModal(status, "새로운 업무 추가")}
-              onTaskCardClick={handleTaskCardClick}
-            />
-          );
-        })}
+      {Object.values(displayStatus).map((status) => {
+        const filteredTasks = Object.values(taskData?.result || { OPEN: [], IN_PROGRESS: [], CLOSED: [] })
+          .flat()
+          .filter((task) => displayStatus[task.status as APITaskStatus] === status);
+
+        return (
+          <TodoStatusSection
+            key={status}
+            status={status}
+            tasks={filteredTasks}
+            onOpenModal={() => handleOpenModal(status, WorkModal[0])}
+            onTaskCardClick={handleTaskCardClick}
+          />
+        );
+      })}
       </div>
-
-
     </>
   );
 };

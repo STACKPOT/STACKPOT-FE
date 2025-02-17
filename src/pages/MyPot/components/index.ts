@@ -13,6 +13,7 @@ import TodoStatusSection from "./TodoStatusSection/TodoStatusSection";
 import MyTodoModalWrapper from "./MyTodoModalWrapper/MyTodoModalWrapper";
 import MyPotStatusHeader from "./MyPotStatusHeader/MyPotStatusHeader";
 import MyPotTodoList from "./MyPotTodoList/MyPotTodoList";
+import Loading from "./Loading/Loading";
 
 export {
   TextInput,
@@ -29,5 +30,6 @@ export {
   TodoStatusSection,
   MyTodoModalWrapper,
   MyPotStatusHeader,
-  MyPotTodoList
+  MyPotTodoList,
+  Loading
 }

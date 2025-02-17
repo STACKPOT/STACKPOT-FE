@@ -18,6 +18,7 @@ const TaskCardList: React.FC<TaskCardListProps> = ({ tasks, onTaskCardClick }) =
     <>
       {tasks.map((task, idx) => (
         <TaskCard
+          taskId={task.taskboardId}
           key={idx}
           title={task.title}
           tag={task.category?.map((cat) => reversePartMap[cat as Role] ?? "기타")}
