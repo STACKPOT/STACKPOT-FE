@@ -77,7 +77,7 @@ const PostCard: React.FC<PostCardProps> = ({
   };
 
   const handleFeedClick = (feedId: number) => {
-    navigate(`${routes.feed}/${feedId}`);
+    navigate(`${routes.feed.base}/${feedId}`);
     window.scrollTo(0, 0);
   };
 

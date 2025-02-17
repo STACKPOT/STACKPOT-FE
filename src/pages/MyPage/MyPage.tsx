@@ -26,11 +26,6 @@ const MyPage = () => {
     return <div>데이터가 없습니다.</div>;
   }
 
-  const handleCardClick = (feedId: number) => {
-    navigate(`${routes.feed.base}/${feedId}`);
-    window.scrollTo(0, 0);
-  };
-
   return (
     <main css={container}>
       <MyPageProfile />
