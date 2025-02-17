@@ -17,7 +17,7 @@ interface ProfileModalProps {
 }
 const ProfileModal: React.FC<ProfileModalProps> = ({ type, potRole, nickname, potId, userId, onButtonClick, onCancelModal }: ProfileModalProps) => {
     const navigate = useNavigate();
-    const { mutate, isPending } = useApplyPot();
+    const { mutate, isPending } = useApplyPot(potId ?? 0);
     const handleApply = () => {
         if (potId) {
             mutate(

@@ -16,11 +16,10 @@ interface PotHeaderProps {
     isApplied: boolean;
     potId: number;
     potStatus: PotStatus;
-    onRefetch: () => void;
 }
-const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId, potStatus, onRefetch }: PotHeaderProps) => {
+const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId, potStatus }: PotHeaderProps) => {
     const navigate = useNavigate();
-    const { mutate: cancelApply } = useCancelApply();
+    const { mutate: cancelApply } = useCancelApply(potId);
 
     const [showCancelApplyModal, setShowCancelApplyModal] = useState<boolean>(false);
     const [showApplyStackModal, setShowApplyStackModal] = useState<boolean>(false);
@@ -35,22 +34,12 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         navigate(`${routes.editFinishedPot}/${potId}`);
     }
     const handleCancelApplyModalConfirm = () => {
-        cancelApply(potId,
-            {
-                onSuccess: () => {
-                    onRefetch()
-                }
-            }
-        )
+        cancelApply(potId);
         setShowCancelApplyModal(false);
     }
     const handleApplyNext = (stack: string) => {
         setSelectedApplyStack(stack);
         setShowApplyModal(true);
-    }
-    const handleApplyConfirm = () => {
-        setSelectedApplyStack(null);
-        onRefetch();
     }
 
     const { data: myProfile } = useGetMyProfile();
@@ -92,7 +81,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
                     potRole={myProfile.role}
                     nickname={myProfile.nickname}
                     potId={potId}
-                    onButtonClick={handleApplyConfirm}
+                    onButtonClick={() => setSelectedApplyStack(null)}
                     onCancelModal={() => setShowApplyModal(false)} />
             }
         </>

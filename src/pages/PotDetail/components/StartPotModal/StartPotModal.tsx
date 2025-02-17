@@ -11,7 +11,7 @@ interface StartPotModalProps {
     onCancelModal: () => void;
 }
 const StartPotModal: React.FC<StartPotModalProps> = ({ potId, selectedApplicants, onStartPotSuccess, onCancelModal }: StartPotModalProps) => {
-    const { mutate, isPending } = useStartPot();
+    const { mutate, isPending } = useStartPot(potId);
     const handleStartPot = () => {
         mutate(
             {
