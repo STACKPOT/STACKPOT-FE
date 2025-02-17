@@ -115,29 +115,3 @@ export interface GetUsersMyPagesResponse {
   completedPots: CompletedPots[];
   feeds: Feeds[];
 }
-interface Feeds {
-  feedId: number;
-  writer: string;
-  writerRole: Role;
-  title: string;
-  content: string;
-  likeCount: number;
-  createdAt: string;
-}
-
-interface CompletedPots {
-  potId: number;
-  potName: string;
-  potStartDate: string;
-  potEndDate: string;
-  potLan: string;
-  members: string;
-  userPotRole: string;
-  myBadges: MyBadges[];
-  memberCounts: number;
-}
-
-interface MyBadges {
-  badgeId: number;
-  badgeName: string;
-}

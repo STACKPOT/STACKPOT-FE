@@ -11,12 +11,9 @@ import { MyPageProfile } from "./components";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
 import useGetMyPage from "apis/hooks/users/useGetMyPage";
 import { Role } from "types/role";
-import routes from "@constants/routes";
-import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
   const [contentType, setContentType] = useState<"feed" | "pot">("pot");
-  const navigate = useNavigate();
 
   const { data } = useGetMyPage({
     dataType: contentType,

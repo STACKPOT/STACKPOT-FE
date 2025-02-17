@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { GetUsersMyPagesParams } from "apis/types/user";
-import { getMembersMyPages } from "apis/userAPI";
+import { getUsersMyPages } from "apis/userAPI";
 
-const useGetMembersMyPages = ({ userId, dataType }: GetUsersMyPagesParams) => {
+const useGetUsersMyPages = ({ userId, dataType }: GetUsersMyPagesParams) => {
   return useQuery({
-    queryKey: ["mypage", dataType],
-    queryFn: () => getMembersMyPages({ userId, dataType }),
+    queryKey: ["mypage", userId, dataType],
+    queryFn: () => getUsersMyPages({ userId, dataType }),
     select: (data) => data.result,
   });
 };
 
-export default useGetMembersMyPages;
+export default useGetUsersMyPages;
