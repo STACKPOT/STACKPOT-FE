@@ -21,12 +21,11 @@ const routes = {
   searchResult: "/search-result",
   signUp: "/sign-up",
   callback: "/callback",
-  editPost: "/edit-post/:postId",
   editFinishedPot: "/finished-pot/edit",
   userProfile: "/user",
   createFinishedPot: "/create-finished-pot",
   editPot: "/pot/edit",
-  feed: "/feed",
+  feed: { base: "/feed", edit: "/feed/edit" },
 } as const;
 
 export default routes;

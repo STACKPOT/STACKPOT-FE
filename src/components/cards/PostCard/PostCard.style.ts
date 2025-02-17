@@ -73,21 +73,23 @@ export const likeContainer = css`
   padding: 0.2rem 0;
   align-items: center;
   gap: 0.8rem;
-  cursor: pointer;
-`;
+`
 export const likeTextStyle = css`
   ${theme.font.label3}
   color: ${theme.color.interactive.inactive};
-`;
-export const likeIconStyle = (isLike: boolean) => css`
+`
+export const likeIconStyle = (isLike: boolean, isAuth: boolean) => css`
   width: 2.2rem;
   height: 2.2rem;
   fill: ${isLike
     ? theme.color.feedback.negative
     : theme.color.interactive.inactive};
-`;
+  cursor: ${isAuth && "pointer"};
+`
+
 export const likeIconfilledStyle = css`
   width: 2.2rem;
   height: 2.2rem;
   fill: ${theme.color.feedback.negative};
+  cursor: pointer;
 `;

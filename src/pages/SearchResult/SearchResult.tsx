@@ -99,8 +99,9 @@ const SearchResult = () => {
         <div css={gridContainer}>
           {data?.content?.map((pot, index) => (
             <PotCard
+              potId={pot.potId}
+              userId={pot.userId}
               key={`${pot.userId}-${pot.potName}-${index}`}
-              id={pot.userId}
               role={pot.userRole}
               nickname={pot.userNickname}
               dday={pot.dday}
@@ -121,6 +122,9 @@ const SearchResult = () => {
               title={feed.title}
               content={feed.content}
               likeCount={feed.likeCount}
+              isLiked={feed.isLiked}
+              feedId={feed.feedId}
+              writerId={feed.userId}
             />
           ))}
         </div>

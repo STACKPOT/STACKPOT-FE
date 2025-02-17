@@ -14,7 +14,6 @@ export const dropdownStyle = css`
   height: auto;
   display: flex;
   flex-direction: column;
-  position: fixed;
   background-color: ${theme.color.base.white};
 `;
 
@@ -36,5 +35,6 @@ export const containerStyle = (edit: boolean) => css`
 `;
 
 export const bodyStyle = css`
+  position: relative;
   height: 2.8rem;
 `;
