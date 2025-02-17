@@ -8,7 +8,8 @@ import {
   TaskAPIParams,
   GetTodoParams,
   TodoUpdateRequest,
-  PatchTodoStatusParams
+  PatchTodoStatusParams,
+  GetTaskParams
 } from "./types/myPot";
 
 export const getMyPotTodo = async ({ potId, page, size }: GetTodoParams) => {
@@ -23,7 +24,7 @@ export const patchMyPotTodoStatus = async ({ potId, todoId }: PatchTodoStatusPar
   return authApiPatch(`/my-pots/${potId}/todos/${todoId}`, { status: "COMPLETED" });
 };
 
-export const getMyPotTask = async (potId: number) => {
+export const getMyPotTask = async ({ potId }: GetTaskParams) => {
   return authApiGet<TaskResponse>(`/my-pots/${potId}/tasks`);
 };
 
