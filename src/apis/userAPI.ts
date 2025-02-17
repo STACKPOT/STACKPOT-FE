@@ -17,6 +17,7 @@ import {
   FinishedModalResponse,
   NicknameResponse,
   PatchUserProfileUpdateParams,
+  PatchFinishedPotParams,
 } from "./types/user";
 
 export const getKakaoLogIn = async (code: string) => {
@@ -66,4 +67,11 @@ export const postLogout = async (refreshToken: string) => {
 
 export const deleteUser = () => {
   return authApiDelete("/users/delete");
+};
+
+export const patchFinishedPot = async ({
+  potId,
+  body,
+}: PatchFinishedPotParams) => {
+  return authApiPatch(`/users/${potId}`, { body });
 };
