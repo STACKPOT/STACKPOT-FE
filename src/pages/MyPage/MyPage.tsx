@@ -13,7 +13,7 @@ import useGetMyPage from "apis/hooks/users/useGetMyPage";
 import { Role } from "types/role";
 
 const MyPage = () => {
-  const [contentType, setContentType] = useState<"feed" | "pot">("pot");
+  const [contentType, setContentType] = useState<"feed" | "pot">("feed");
 
   const { data } = useGetMyPage({
     dataType: contentType,
@@ -71,6 +71,7 @@ const MyPage = () => {
                     isMyPage={true}
                     endDate={pot.potEndDate}
                     members={Object.keys(pot.memberCounts) as Role[]}
+                    isUserPage={false}
                   />
                 );
               })}
