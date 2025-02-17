@@ -21,6 +21,7 @@ export interface GetUserResponse {
   kakaoId: string;
   userIntroduction: string;
 }
+
 export interface postSignInPayload {
   role: Role;
   interest: string;
@@ -102,7 +103,7 @@ export interface NicknameResponse {
 }
 
 export interface GetUsersMyPagesParams {
-  userId: string;
+  userId: number;
   dataType: string | null;
 }
 
@@ -114,4 +115,8 @@ export interface GetUsersMyPagesResponse {
   userIntroduction: string;
   completedPots: CompletedPots[];
   feeds: Feeds[];
+}
+
+export interface GetUsersInfoParams {
+  userId: number;
 }

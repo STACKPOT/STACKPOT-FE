@@ -8,7 +8,6 @@ import {
   tabsTextStyle,
 } from "./UserPage.style";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
-import { MushroomImage } from "@assets/images";
 import { UserPageProfile } from "./components";
 import useGetUsersMypages from "apis/hooks/users/useGetUsersMyPages";
 import { Role } from "types/role";
@@ -22,8 +21,10 @@ const UserPage = () => {
     return <div>유효한 유저 ID가 필요합니다.</div>;
   }
 
+  const UserId = Number(userId);
+
   const { data } = useGetUsersMypages({
-    userId,
+    userId: UserId,
     dataType: contentType,
   });
 
@@ -33,12 +34,7 @@ const UserPage = () => {
 
   return (
     <main css={container}>
-      <UserPageProfile
-        profileImage={MushroomImage}
-        nickname="아아 마시는 버섯"
-        introduction="개발전공 대학생입니다"
-        temperature={65}
-      />
+      <UserPageProfile />
       <div css={dividerStyle} />
       <div css={bodyContainer}>
         <div css={tabsContainer}>
@@ -83,6 +79,7 @@ const UserPage = () => {
                   isMyPage={false}
                   endDate={pot.potEndDate}
                   members={Object.keys(pot.memberCounts) as Role[]}
+                  isUserPage={true}
                 />
               ))}
         </div>

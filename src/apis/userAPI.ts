@@ -19,6 +19,7 @@ import {
   PatchUserProfileUpdateParams,
   GetUsersMyPagesParams,
   GetUsersMyPagesResponse,
+  GetUsersInfoParams,
 } from "./types/user";
 
 export const getKakaoLogIn = async (code: string) => {
@@ -77,4 +78,8 @@ export const getUsersMyPages = async ({
   return authApiGet<GetUsersMyPagesResponse>(`/users/${userId}/mypages`, {
     dataType,
   });
+};
+
+export const getUsersInfo = async ({ userId }: GetUsersInfoParams) => {
+  return authApiGet<GetUserResponse>(`/users/${userId}`);
 };
