@@ -19,7 +19,7 @@ import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
 import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDeleteMyPotTaskCard } from "apis/hooks/myPots/useDeleteMyPotTask";
+import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
 import { useState } from "react";
 import routes from "@constants/routes";
 import { TaskStatus } from "types/taskStatus";
@@ -58,7 +58,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
   onClick,
 }: TaskCardProps) => {
   const { potId } = useParams<{ potId: string; }>();
-  const { mutate: deleteTask, isPending } = useDeleteMyPotTaskCard();
+  const { mutate: deleteTask, isPending } = useDeleteMyPotTask();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("새로운 업무 추가");
   const [activeStatus, setActiveStatus] = useState<TaskStatus | null>(null);
