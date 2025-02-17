@@ -104,3 +104,7 @@ export interface TaskAPIParams {
   potId: number;
   taskId: number;
 }
+
+export interface GetTaskParams {
+  potId: number;
+}

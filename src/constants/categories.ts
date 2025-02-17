@@ -35,16 +35,12 @@ export const participationMap: {
 
 export const categoryOptions = ["팟", "피드"] as const;
 
-export const apiToDisplayStatus = {
+export const displayStatus = {
   OPEN: "진행 전",
   IN_PROGRESS: "진행 중",
   CLOSED: "완료",
 } as const;
 
-export const displayToApiStatus = {
-  "진행 전": "OPEN",
-  "진행 중": "IN_PROGRESS",
-  "완료": "CLOSED",
-} as const;
+export const taskStatue = ["진행 전", "진행 중", "완료"] as const;
 
-export const taskStatues = ["진행 전", "진행 중", "완료"] as const;
+export const WorkModal = ["새로운 업무 추가", "업무 수정하기"] as const;
