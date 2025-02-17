@@ -37,8 +37,49 @@ export interface PatchUserProfileUpdateParams {
   interest: string;
   userIntroduction: string;
   kakaoId: string;
-};
+}
 
 export interface NicknameResponse {
   nickname: string;
+}
+
+export interface GetUsersMyPagesParams {
+  userId: string;
+  dataType: string | null;
+}
+
+export interface GetUsersMyPagesResponse {
+  id: number;
+  nickname: string;
+  role: Role;
+  userTemperature: number;
+  userIntroduction: string;
+  completedPots: CompletedPots[];
+  feeds: Feeds[];
+}
+interface Feeds {
+  feedId: number;
+  writer: string;
+  writerRole: Role;
+  title: string;
+  content: string;
+  likeCount: number;
+  createdAt: string;
+}
+
+interface CompletedPots {
+  potId: number;
+  potName: string;
+  potStartDate: string;
+  potEndDate: string;
+  potLan: string;
+  members: string;
+  userPotRole: string;
+  myBadges: MyBadges[];
+  memberCounts: number;
+}
+
+interface MyBadges {
+  badgeId: number;
+  badgeName: string;
 }

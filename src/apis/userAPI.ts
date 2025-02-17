@@ -13,6 +13,7 @@ import {
   GetUserResponse,
   NicknameResponse,
   PatchUserProfileUpdateParams,
+  GetUsersMyPagesParams,
 } from "./types/user";
 
 export const getKakaoLogIn = async (code: string) => {
@@ -54,4 +55,11 @@ export const postLogout = async (refreshToken: string) => {
 
 export const deleteUser = () => {
   return authApiDelete("/users/delete");
+};
+
+export const getMembersMyPages = async ({
+  userId,
+  dataType,
+}: GetUsersMyPagesParams) => {
+  return authApiGet(`/users/${userId}/mypages`, { dataType });
 };
