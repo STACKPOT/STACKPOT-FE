@@ -19,7 +19,7 @@ interface PotHeaderProps {
 }
 const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId, potStatus }: PotHeaderProps) => {
     const navigate = useNavigate();
-    const { mutate: cancelApply } = useCancelApply(potId);
+    const { mutate: cancelApply } = useCancelApply();
 
     const [showCancelApplyModal, setShowCancelApplyModal] = useState<boolean>(false);
     const [showApplyStackModal, setShowApplyStackModal] = useState<boolean>(false);
