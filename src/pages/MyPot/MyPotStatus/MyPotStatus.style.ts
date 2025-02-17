@@ -12,7 +12,7 @@ export const boardStyle = css`
 `;
 
 export const potIconStyle = css`
-  color: ${theme.color.base.white};
+  color: ${theme.color.point.hero};
 `;
 
 export const boardTextStyle = css`
