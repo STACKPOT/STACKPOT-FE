@@ -1,3 +1,4 @@
+import { displayStatus } from "@constants/categories";
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 import { AnotherTaskStatus } from "types/taskStatus";
@@ -34,7 +35,7 @@ export const selectedBadgeStyle = (color: string) => css`
 
 
 export const statusStyles: Record<AnotherTaskStatus, string> = {
-  "진행 전": theme.color.feedback.negative_transparent,
-  "진행 중": theme.color.feedback.positive_transparent,
-  "완료": theme.color.feedback.positive_blue_transparent,
+  [displayStatus.OPEN]: theme.color.feedback.negative_transparent,
+  [displayStatus.IN_PROGRESS]: theme.color.feedback.positive_transparent,
+  [displayStatus.CLOSED]: theme.color.feedback.positive_blue_transparent,
 };
