@@ -20,6 +20,7 @@ const usePatchMyPotTask = () => {
       patchMyPotTask({ potId, taskId }, data),
     onSuccess: (_, { potId, taskId }) => {
       queryClient.invalidateQueries({ queryKey: ["taskDetail", potId, taskId] });
+      queryClient.invalidateQueries({ queryKey: ["myPotTasks", potId] });
       setMessage("업무가 성공적으로 수정되었습니다.");
       setSeverity("success");
       setOpen(true);
