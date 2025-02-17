@@ -16,8 +16,9 @@ interface PotHeaderProps {
     isApplied: boolean;
     potId: number;
     potStatus: PotStatus;
+    onRefetch: () => void;
 }
-const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId, potStatus }: PotHeaderProps) => {
+const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId, potStatus, onRefetch }: PotHeaderProps) => {
     const navigate = useNavigate();
     const { mutate: cancelApply } = useCancelApply();
 
@@ -37,7 +38,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         cancelApply(potId,
             {
                 onSuccess: () => {
-                    window.location.reload();
+                    onRefetch()
                 }
             }
         )
@@ -49,7 +50,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
     }
     const handleApplyConfirm = () => {
         setSelectedApplyStack(null);
-        window.location.reload();
+        onRefetch();
     }
 
     const { data: myProfile } = useGetMyProfile();

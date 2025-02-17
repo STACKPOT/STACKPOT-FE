@@ -11,9 +11,10 @@ import { GetPotApplicationResponse } from "apis/types/pot";
 
 interface ApplicantsInformationProps {
     potId: number;
+    onRefetch: () => void;
 }
 
-const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
+const ApplicantsInformation = ({ potId, onRefetch }: ApplicantsInformationProps) => {
     const [selectedApplicants, setSelectedApplicants] = useState<GetPotApplicationResponse[]>([]);
     const [showProfileMember, setShowProfileMember] = useState<GetPotApplicationResponse | null>(null);
 
@@ -33,7 +34,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
         }
     }
     const handleStartPotSuccess = () => {
-        window.location.reload();
+        onRefetch();
         setShowKakaoIdModal(true);
     }
 

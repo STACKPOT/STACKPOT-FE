@@ -19,7 +19,7 @@ const PotDetail = () => {
   const { potId } = useParams();
   const potIdNumber = Number(potId);
 
-  const { data } = useGetPotDetail(potIdNumber);
+  const { data, refetch } = useGetPotDetail(potIdNumber);
 
   return (
     <>
@@ -33,6 +33,7 @@ const PotDetail = () => {
                 isApplied={data.potDetail.applied}
                 potId={potIdNumber}
                 potStatus={data.potDetail.potStatus}
+                onRefetch={refetch}
               />
               <ProfileInformation
                 nickname={data.potDetail.userNickname || ""}
@@ -54,7 +55,7 @@ const PotDetail = () => {
             <p css={contentStyle}>{data.potDetail.potContent}</p>
           </div>
           {data.potDetail.owner && data.potDetail.potStatus === "RECRUITING" && (
-            <ApplicantsInformation potId={potIdNumber} />
+            <ApplicantsInformation potId={potIdNumber} onRefetch={refetch} />
           )}
         </main>
       )}
