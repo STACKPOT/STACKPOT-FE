@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const role = useAuthStore((state) => state.role);
   const roleProfileImage = roleImages[role as keyof typeof roleImages];
@@ -59,56 +59,52 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
     };
 
-    if (isDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isDropdownOpen]);
+  }, [ref]);
 
   return (
-    <header css={headerStyle(isHomePage)}>
-      <Logo css={logoStyle(isHomePage)} />
-      {!accessToken ? (
-        <Button variant="entry" onClick={handleClick}>
-          로그인/회원가입
-        </Button>
-      ) : (
-        <div css={iconContainer}>
-          <SearchIcon
-            type="button"
-            css={searchIconStyle(isHomePage)}
-            onClick={handleSearchClick}
-          />
-
-          <div css={profileContainer}>
-            <img
-              css={guestMode ? guestProfileStyle : profileStyle}
-              src={roleProfileImage}
-              alt="profileImage"
+    <div ref={ref}>
+      <header css={headerStyle(isHomePage)}>
+        <Logo css={logoStyle(isHomePage)} />
+        {!accessToken ? (
+          <Button variant="entry" onClick={handleClick}>
+            로그인/회원가입
+          </Button>
+        ) : (
+          <div css={iconContainer}>
+            <SearchIcon
+              type="button"
+              css={searchIconStyle(isHomePage)}
+              onClick={handleSearchClick}
             />
-            {!guestMode && (
-              <ArrowDropdownIcon
-                type="button"
-                css={iconStyle(isHomePage)}
-                onClick={handleMenuClick}
+
+            <div css={profileContainer}>
+              <img
+                css={guestMode ? guestProfileStyle : profileStyle}
+                src={roleProfileImage}
+                alt="profileImage"
               />
-            )}
-            {isDropdownOpen && <ProfileDropdown />}
+              {!guestMode && (
+                <ArrowDropdownIcon
+                  type="button"
+                  css={iconStyle(isHomePage)}
+                  onClick={handleMenuClick}
+                />
+              )}
+              {isDropdownOpen && <ProfileDropdown />}
+            </div>
           </div>
-        </div>
-      )}
-    </header>
+        )}
+      </header>
+    </div>
   );
 };
 
