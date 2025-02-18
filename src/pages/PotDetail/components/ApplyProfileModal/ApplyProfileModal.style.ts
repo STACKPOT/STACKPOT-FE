@@ -31,7 +31,6 @@ export const titleStyle = css`
   color: ${theme.color.base.darkgray};
   white-space: pre-wrap;
   text-align: center;
-  padding-top: 1.6rem;
   margin-top: 1.6rem;
 `;
 

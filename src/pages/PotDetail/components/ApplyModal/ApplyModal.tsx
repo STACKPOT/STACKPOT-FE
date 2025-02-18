@@ -41,8 +41,8 @@ const ApplyModal: React.FC<ApplyModalProps> = ({ potId, onApplySuccess, onModalC
                 {Object.keys(partMap).map((part) =>
                     <CategoryButton
                         style={partMap[part]}
-                        onClick={() => setSelectedRole(part as Role)}
-                        selected={selectedRole === part}>{part}</CategoryButton>
+                        onClick={() => setSelectedRole(partMap[part] as Role)}
+                        selected={selectedRole === partMap[part]}>{part}</CategoryButton>
                 )}
             </div>
         </ExplainModal>
