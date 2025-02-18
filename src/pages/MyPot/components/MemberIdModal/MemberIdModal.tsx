@@ -1,7 +1,7 @@
 import { CloseIcon } from "@assets/svgs";
 import { cancelContainer, cancelIconStyle, contentTextStyle, gridContainer, highlightStyle, innerContainer, mainContainer, memberSetStyle, nicknameIdContainer, nickNameTextStyle, profileImageStyle, subContainer, titleTextStyle } from "./MemberIdModal.style";
 import { useParams } from "react-router-dom";
-import { useGetMyPotaMembers } from "apis/hooks/myPots/useGetMyPotMemeber";
+import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemeber";
 import { MushroomImage } from "@assets/images";
 import { kakaoIdStyle } from "@pages/PotDetail/components/MemberKakaoIdModal/MemberKakaoIdModal.style";
 
@@ -12,7 +12,7 @@ interface MemberIdModalProps {
 const MemberIdModal: React.FC<MemberIdModalProps> = ({ onClose }) => {
   const { potId } = useParams<{ potId: string }>();
   const potIdNumber = Number(potId);
-  const { data } = useGetMyPotaMembers({ potId: potIdNumber });
+  const { data } = useGetMyPotMembers({ potId: potIdNumber });
 
   return (
     <div css={mainContainer}>
