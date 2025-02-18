@@ -10,6 +10,7 @@ export { default as MushroomImage } from "./mushroom.webp";
 export { default as MyPotImage } from "./landingMyPot.webp";
 export { default as BannerImage } from "./banner.webp";
 export { default as NotFoundImage } from "./404.webp";
+export { default as ProfileImage } from "./profile.webp";
 export { default as FeedImage } from "./landingFeed.webp";
 export { default as PotImage } from "./landingPot.webp";
 export { default as MyPageImage } from "./landingMyPage.webp";
