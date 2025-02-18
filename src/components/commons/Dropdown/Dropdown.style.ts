@@ -53,8 +53,7 @@ export const option = css`
     border-bottom: 0.1rem solid ${theme.color.object.alternative};
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: ${theme.color.point.hero};
     background-color: ${theme.color.object.faded};
   }

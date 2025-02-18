@@ -42,8 +42,7 @@ export const containerStyle = (edit: boolean) => css`
     background-color: ${theme.color.object.alternative};
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: ${edit ? theme.color.point.hero : theme.color.feedback.negative};
     background-color: ${theme.color.object.faded};
     text-decoration: ${edit ? "none" : "underline"};
