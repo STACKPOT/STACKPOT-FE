@@ -15,6 +15,7 @@ import { KaKaoTalkIcon } from "@assets/svgs";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { prevButtonStyle } from "./MyPotStatus/TaskDetail/TaskDetail.style";
 import { ArrowLeftIcon } from "@mui/x-date-pickers"
+import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
 
 const MyPotMainPage: React.FC = () => {
   const { potId } = useParams();
@@ -26,13 +27,15 @@ const MyPotMainPage: React.FC = () => {
     { label: "캘린더", path: `${routes.myPot.base}/${routes.calendar}/${potId}` },
   ];
 
+  const potIdNumber = Number(potId);
+
+  const { data: check } = useGetMyPotOwner({ potId: potIdNumber });
+  
   const { data } = useGetMyPotTodo({
-    potId: Number(potId),
+    potId: potIdNumber,
     page: 1,
     size: 1,
   });
-
-  const showViewId = location.pathname.includes(`${routes.myPot.base}/${routes.task}`);
 
   const handlePrev = () => {
     navigate(`${routes.myPot.base}`);
@@ -64,7 +67,7 @@ const MyPotMainPage: React.FC = () => {
           );
         })}
 
-        {showViewId && (
+        {check && (
           <div css={viewId}>
             <KaKaoTalkIcon />
             <p css={viewTextStyle}>아이디 보기</p>

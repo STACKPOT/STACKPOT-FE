@@ -40,6 +40,10 @@ export const patchMyPotTask = async ({ potId, taskId }: TaskAPIParams, data: Tas
   return authApiPatch(`/my-pots/${potId}/tasks/${taskId}`, data);
 };
 
+export const getMyPotOwner = async ({ potId }: GetTaskParams) => {
+  return authApiGet(`/my-pots/${potId}/isOwner`);
+}
+
 export const getMyPot = async () => {
   return authApiGet<MyPotResponse[]>("/my-pots");
 };
