@@ -99,7 +99,9 @@ const Header: React.FC = () => {
                   onClick={handleMenuClick}
                 />
               )}
-              {isDropdownOpen && <ProfileDropdown />}
+              {isDropdownOpen && (
+                <ProfileDropdown onClose={() => setIsDropdownOpen(false)} />
+              )}
             </div>
           </div>
         )}
