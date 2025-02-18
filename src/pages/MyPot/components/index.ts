@@ -14,6 +14,7 @@ import MyTodoModalWrapper from "./MyTodoModalWrapper/MyTodoModalWrapper";
 import MyPotStatusHeader from "./MyPotStatusHeader/MyPotStatusHeader";
 import MyPotTodoList from "./MyPotTodoList/MyPotTodoList";
 import Loading from "./Loading/Loading";
+import MemberIdModalWrapper from "./MemberIdModalWrapper/MemberIdModalWrapper";
 
 export {
   TextInput,
@@ -31,5 +32,6 @@ export {
   MyTodoModalWrapper,
   MyPotStatusHeader,
   MyPotTodoList,
-  Loading
+  Loading,
+  MemberIdModalWrapper
 }

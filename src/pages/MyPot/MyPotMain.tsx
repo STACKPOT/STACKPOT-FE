@@ -16,11 +16,19 @@ import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { prevButtonStyle } from "./MyPotStatus/TaskDetail/TaskDetail.style";
 import { ArrowLeftIcon } from "@mui/x-date-pickers"
 import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
+import { MemberIdModalWrapper } from "./components/index";
+import { useState } from "react";
 
 const MyPotMainPage: React.FC = () => {
   const { potId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  }
 
   const tabs = [
     { label: "업무 현황", path: `${routes.myPot.base}/${routes.task}/${potId}` },
@@ -42,40 +50,44 @@ const MyPotMainPage: React.FC = () => {
   };
 
   return (
-    <main css={container}>
-      <header css={headerStyle}>
-        <button onClick={handlePrev} css={prevButtonStyle}>
-          <ArrowLeftIcon css={iconStyle} />
-        </button>
-        <div css={textStyle}>{data?.title ?? null}</div>
-      </header>
-      <div css={tabsContainer}>
-        {tabs.map((tab) => {
-          const isActive = location.pathname.includes(tab.path);
-          return (
-            <NavLink
-              key={tab.path}
-              to={tab.path}
-              css={tabsTextStyle}
-              style={{
-                color: isActive ? theme.color.point.hero : theme.color.interactive.inactive,
-                textDecoration: "none",
-              }}
-            >
-              {tab.label}
-            </NavLink>
-          );
-        })}
+    <>
+      <MemberIdModalWrapper isModalOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
 
-        {(check?.result ?? false) && (
-          <div css={viewId}>
-            <KaKaoTalkIcon />
-            <p css={viewTextStyle}>아이디 보기</p>
-          </div>
-        )}
-      </div>
-      <Outlet />
-    </main>
+      <main css={container}>
+        <header css={headerStyle}>
+          <button onClick={handlePrev} css={prevButtonStyle}>
+            <ArrowLeftIcon css={iconStyle} />
+          </button>
+          <div css={textStyle}>{data?.title ?? null}</div>
+        </header>
+        <div css={tabsContainer}>
+          {tabs.map((tab) => {
+            const isActive = location.pathname.includes(tab.path);
+            return (
+              <NavLink
+                key={tab.path}
+                to={tab.path}
+                css={tabsTextStyle}
+                style={{
+                  color: isActive ? theme.color.point.hero : theme.color.interactive.inactive,
+                  textDecoration: "none",
+                }}
+              >
+                {tab.label}
+              </NavLink>
+            );
+          })}
+
+          {(check?.result ?? false) && (
+            <div css={viewId} onClick={handleOpenModal}>
+              <KaKaoTalkIcon />
+              <p css={viewTextStyle}>아이디 보기</p>
+            </div>
+          )}
+        </div>
+        <Outlet />
+      </main>
+    </>
   );
 };
 

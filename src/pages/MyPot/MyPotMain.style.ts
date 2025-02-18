@@ -50,6 +50,7 @@ export const viewId = css `
   gap: 0.4rem;
   border-radius: 4px;
   background: #FEE500;
+  cursor: pointer;
 `
 
 export const viewTextStyle = css`
