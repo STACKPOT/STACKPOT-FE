@@ -3,7 +3,7 @@ import { backButtonIconStyle, backButtonStyle, container, titleContainer, titleS
 import { Modal, PotButton } from "@components/index";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import ApplyStackModal from "../ApplyStackModal/ApplyStackModal";
+import ApplyModal from "../ApplyModal/ApplyModal";
 import ProfileModal from "../ProfileModal/ProfileModal";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
@@ -71,7 +71,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
                     onCancel={() => setShowCancelApplyModal(false)} />
             }
             {showApplyStackModal &&
-                <ApplyStackModal
+                <ApplyModal
                     onClickNext={(stack) => handleApplyNext(stack)}
                     onModalCancel={() => setShowApplyStackModal(false)} />
             }

@@ -1,13 +1,13 @@
 import { CategoryButton, ExplainModal } from "@components/index";
-import { container } from "./ApplyStackModal.style";
+import { container } from "./ApplyModal.style";
 import { useState } from "react";
 import { partMap } from "@constants/categories";
 
-interface ApplyStackModalProps {
+interface ApplyModalProps {
     onClickNext: (stack: string) => void;
     onModalCancel: () => void;
 }
-const ApplyStackModal: React.FC<ApplyStackModalProps> = ({ onClickNext, onModalCancel }: ApplyStackModalProps) => {
+const ApplyModal: React.FC<ApplyModalProps> = ({ onClickNext, onModalCancel }: ApplyModalProps) => {
     const [selectedStack, setSelectedStack] = useState("");
 
     const handleNext = () => {
@@ -31,4 +31,4 @@ const ApplyStackModal: React.FC<ApplyStackModalProps> = ({ onClickNext, onModalC
         </ExplainModal>
     )
 }
-export default ApplyStackModal;
+export default ApplyModal;

@@ -1,5 +1,5 @@
 import ApplicantsInformation from "./ApplicantsInformation/ApplicantsInformation";
-import ApplyStackModal from "./ApplyStackModal/ApplyStackModal";
+import ApplyModal from "./ApplyModal/ApplyModal";
 import MemberKakaoIdModal from "./MemberKakaoIdModal/MemberKakaoIdModal";
 import PotHeader from "./PotHeader/PotHeader";
 import ProfileInformation from "./ProfileInformation/ProfileInformation";
@@ -8,7 +8,7 @@ import StartPotModal from "./StartPotModal/StartPotModal";
 
 export {
     ApplicantsInformation,
-    ApplyStackModal,
+    ApplyModal,
     MemberKakaoIdModal,
     PotHeader,
     ProfileInformation,
