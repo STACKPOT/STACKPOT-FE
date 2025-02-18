@@ -18,16 +18,10 @@ import {
   titleStyle,
 } from "./Landing.style";
 import { Button } from "@components/index";
-import {
-  TaskImgage,
-  BroccoliImage,
-  CarrotImage,
-  OnionImage,
-  MushroomImage,
-  MyPotImage,
-} from "@assets/images";
+import { MyPotImage } from "@assets/images";
 import routes from "@constants/routes";
 import { useNavigate } from "react-router-dom";
+import { profileImages, sloganText } from "@constants/landing";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -42,14 +36,14 @@ const Landing = () => {
         <div css={bgStyle} />
       </div>
       <div css={sloganContainer}>
-        <p css={titleStyle}>사이드 프로젝트,</p>
+        <p css={titleStyle}>{sloganText[0]}</p>
         <div css={LogoContainer}>
-          <p>이제는</p>
+          <p>{sloganText[1]}</p>
           <Logo css={logoStyle} />
-          <p>에서</p>
+          <p>{sloganText[2]}</p>
         </div>
       </div>
-      <p css={subTitleStyle}>더욱 효율적으로 하는 사이드 프로젝트</p>
+      <p css={subTitleStyle}>{sloganText[3]}</p>
       <Button variant="landing" onClick={handleClick}>
         팟 만들러 가기
       </Button>
@@ -61,26 +55,13 @@ const Landing = () => {
       <div css={bottomContainer}>
         <div css={sloganContainer}>
           <div css={profileTextContainer}>
-            <p>내가 가장</p>
+            <p>{sloganText[4]}</p>
             <div css={profileContainer}>
-              <img
-                src={CarrotImage}
-                css={profileImageStyle}
-                alt="CarrotImage"
-              />
-              <img src={OnionImage} css={profileImageStyle} alt="OnionImage" />
-              <img
-                src={BroccoliImage}
-                css={profileImageStyle}
-                alt="BroccoliImage"
-              />
-              <img
-                src={MushroomImage}
-                css={profileImageStyle}
-                alt="MushroomImage"
-              />
+              {profileImages.map(({ src, alt }, index) => (
+                <img key={index} src={src} alt={alt} css={profileImageStyle} />
+              ))}
             </div>
-            <p>다울 수 있는</p>
+            <p>{sloganText[5]}</p>
           </div>
           <Logo css={logoStyle} />
         </div>
