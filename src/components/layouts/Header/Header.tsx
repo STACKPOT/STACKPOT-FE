@@ -9,30 +9,31 @@ import {
   searchIconStyle,
 } from "./Header.style";
 import Button from "@components/commons/Button/Button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { roleImages } from "@constants/roleImage";
-import usePostLogout from "apis/hooks/users/userPostLogout";
 import { useAuthStore } from "stores/useAuthStore";
+import ProfileDropdown from "@components/commons/Dropdown/ProfileDropdown/ProfileDropdown";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const role = useAuthStore((state) => state.role);
+  const roleProfileImage = roleImages[role as keyof typeof roleImages];
+  const guestMode = role === "DEFAULT";
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
   );
-
-  const role = useAuthStore((state) => state.role);
 
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
     import.meta.env.VITE_REST_API_KEY
   }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
 &scope=account_email
 &prompt=login`;
-
-  const refreshToken = localStorage.getItem("refreshToken");
-
-  const { mutate } = usePostLogout();
 
   const handleClick = () => {
     window.location.href = link;
@@ -43,10 +44,7 @@ const Header: React.FC = () => {
   };
 
   const handleMenuClick = () => {
-    //드롭다운 연결
-    if (refreshToken) {
-      mutate(refreshToken);
-    }
+    setIsDropdownOpen((prev) => !prev);
   };
 
   useEffect(() => {
@@ -54,9 +52,24 @@ const Header: React.FC = () => {
     setAccessToken(token);
   }, [localStorage.getItem("accessToken")]);
 
-  const roleProfileImage = roleImages[role as keyof typeof roleImages];
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
 
-  const guestMode = role === "DEFAULT";
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   return (
     <header css={headerStyle}>
@@ -86,6 +99,7 @@ const Header: React.FC = () => {
                 onClick={handleMenuClick}
               />
             )}
+            {isDropdownOpen && <ProfileDropdown />}
           </div>
         </div>
       )}

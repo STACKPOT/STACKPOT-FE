@@ -3,35 +3,44 @@ import theme from "@styles/theme";
 
 export const dropdownStyle = css`
   position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  z-index: 1050;
-  background-color: white;
+  top: calc(100% + 21px);
+  right: 0;
   border: 1px solid ${theme.color.object.alternative};
-  border-radius: 1.6rem;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
   width: 16rem;
-  height: auto;
   display: flex;
   flex-direction: column;
   background-color: ${theme.color.base.white};
 `;
 
-export const iconStyle = css`
-  cursor: pointer;
-`;
-
 export const containerStyle = (edit: boolean) => css`
-  border-bottom: ${edit
-    ? `1px solid ${theme.color.object.alternative}`
-    : "none"};
   color: ${theme.color.object.assistive};
+  text-decoration: none;
   ${theme.font.caption3};
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   padding: 1rem;
+  position: relative;
+
+  &:first-child {
+    border-radius: 16px 16px 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 16px 16px;
+  }
+
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: ${theme.color.object.alternative};
+  }
 
   &:hover,
   &:focus {
@@ -42,6 +51,5 @@ export const containerStyle = (edit: boolean) => css`
 `;
 
 export const bodyStyle = css`
-  position: relative;
   height: 2.8rem;
 `;
