@@ -30,7 +30,6 @@ import {
   EditPotPage,
   FeedDetailPage,
 } from "@pages/index";
-import EditPost from "@pages/EditPost/EditPost";
 
 const router = createBrowserRouter([
   {
