@@ -110,7 +110,7 @@ const Landing = () => {
             alt="TaskBoardImage"
           />
           <p css={imageContentStyle}>
-            TODO를 <span css={spanStyle}>쉽게 작성</span>하고 팀원들의{" "}
+            TODO를 <span css={spanStyle}>쉽게 작성</span>하고 팀원들의
             <span css={spanStyle}>업무 진행도</span>를 확인해요
           </p>
         </div>
@@ -121,8 +121,8 @@ const Landing = () => {
             alt="FinishedPotImage"
           />
           <p css={imageContentStyle}>
-            TODO를 <span css={spanStyle}>쉽게 작성</span>하고 팀원들의{" "}
-            <span css={spanStyle}>업무 진행도</span>를 확인해요
+            정리하기 번거로운 프로젝트는
+            <span css={spanStyle}>AI로 내용을 요약</span>해 보세요
           </p>
         </div>
       </div>
