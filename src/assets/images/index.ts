@@ -17,3 +17,7 @@ export { default as MyPageImage } from "./landingMyPage.webp";
 export { default as PotDetailImage } from "./landingPotDetail.webp";
 export { default as FinishedPotImage } from "./landingFinishedPot.webp";
 export { default as TaskBoardImage } from "./landingTaskBoard.webp";
+export { default as TaskCardImage } from "./landingTaskCard.webp";
+export { default as AISummaryImage } from "./landingAISummary.webp";
+export { default as ModalImage } from "./landingModal.webp";
+export { default as UserProfileImage } from "./landingProfile.webp";
