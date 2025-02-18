@@ -3,12 +3,12 @@ import { backButtonIconStyle, backButtonStyle, container, titleContainer, titleS
 import { Modal, PotButton } from "@components/index";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import ApplyStackModal from "../ApplyStackModal/ApplyStackModal";
-import ProfileModal from "../ProfileModal/ProfileModal";
-import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
+import ApplyModal from "../ApplyModal/ApplyModal";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
 import { PotStatus } from "types/potStatus";
 import routes from "@constants/routes";
+import { PostPotApplicationResponse } from "apis/types/pot";
+import ApplyProfileModal from "../ApplyProfileModal/ApplyProfileModal";
 
 interface PotHeaderProps {
     title: string;
@@ -22,10 +22,8 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
     const { mutate: cancelApply } = useCancelApply();
 
     const [showCancelApplyModal, setShowCancelApplyModal] = useState<boolean>(false);
-    const [showApplyStackModal, setShowApplyStackModal] = useState<boolean>(false);
     const [showApplyModal, setShowApplyModal] = useState<boolean>(false);
-
-    const [selectedApplyStack, setSelectedApplyStack] = useState<string | null>(null);
+    const [showApplyProfileModal, setShowApplyProfileModal] = useState<PostPotApplicationResponse | null>(null);
 
     const handleEdit = () => {
         navigate(`${routes.editPot}/${potId}`);
@@ -37,12 +35,9 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         cancelApply(potId);
         setShowCancelApplyModal(false);
     }
-    const handleApplyNext = (stack: string) => {
-        setSelectedApplyStack(stack);
-        setShowApplyModal(true);
+    const handleApplyCompleted = (applyData: PostPotApplicationResponse) => {
+        setShowApplyProfileModal(applyData);
     }
-
-    const { data: myProfile } = useGetMyProfile();
 
     return (
         <>
@@ -57,7 +52,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
                     onClick={(potStatus === "COMPLETED" && isMyPot && handleFinishedPotEdit) ||
                         (isMyPot && handleEdit) ||
                         (isApplied && (() => setShowCancelApplyModal(true))) ||
-                        (() => setShowApplyStackModal(true))}>
+                        (() => setShowApplyModal(true))}>
                     {(potStatus === "COMPLETED" && isMyPot && "팟 소개 수정") ||
                         (isMyPot && "수정") ||
                         (isApplied && "지원 취소하기") ||
@@ -70,19 +65,17 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
                     onConfirm={handleCancelApplyModalConfirm}
                     onCancel={() => setShowCancelApplyModal(false)} />
             }
-            {showApplyStackModal &&
-                <ApplyStackModal
-                    onClickNext={(stack) => handleApplyNext(stack)}
-                    onModalCancel={() => setShowApplyStackModal(false)} />
-            }
-            {showApplyModal && selectedApplyStack && myProfile &&
-                <ProfileModal
-                    type="apply"
-                    potRole={myProfile.role}
-                    nickname={myProfile.nickname}
+            {showApplyModal &&
+                <ApplyModal
                     potId={potId}
-                    onButtonClick={() => setSelectedApplyStack(null)}
-                    onCancelModal={() => setShowApplyModal(false)} />
+                    onApplySuccess={(applyData) => handleApplyCompleted(applyData)}
+                    onModalCancel={() => setShowApplyModal(false)} />
+            }
+            {showApplyProfileModal &&
+                <ApplyProfileModal
+                    potRole={showApplyProfileModal.potRole}
+                    useNickname={showApplyProfileModal.userNickname}
+                    onCancel={() => setShowApplyProfileModal(null)} />
             }
         </>
     )

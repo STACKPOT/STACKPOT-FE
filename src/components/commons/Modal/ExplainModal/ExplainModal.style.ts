@@ -25,18 +25,18 @@ export const closeButtonStyle = css`
   margin-left: auto;
   cursor: pointer;
 `;
-export const contentButtonContainerStyle = css`
+export const contentButtonContainerStyle = (type: "normal" | "delete" | "profile") => css`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
+  gap: ${type === "profile" ? "2rem" : "3.2rem"};
   align-items: center;
 `;
-export const titleContentContainerStyle = css`
+export const titleContentContainerStyle = (type: "normal" | "delete" | "profile") => css`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
+  gap: ${type === "profile" ? "2.4rem" : "0.8rem"};
 `;
 export const titleStyle = css`
   ${theme.font.title1}
@@ -53,9 +53,9 @@ export const subtitleStyle = css`
   text-align: center;
   color: ${theme.color.object.assistive};
 `;
-export const buttonStyle = css`
+export const buttonStyle = (type: "normal" | "profile") => css`
   height: 5rem;
-  width: 42.9rem;
+  width: ${type === "profile" ? "39.9rem" : "42.9rem"};
   ${theme.font.captionBold1}
   color: ${theme.color.base.white};
   background-color: ${theme.color.point.hero};
@@ -68,7 +68,7 @@ export const buttonStyle = css`
   }
 `;
 export const deleteButtonStyle = css`
-  ${buttonStyle};
+  ${buttonStyle("normal")};
   padding: 1.7rem 12rem;
   width: auto;
   border-color: ${theme.color.feedback.negative};

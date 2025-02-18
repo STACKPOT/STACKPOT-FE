@@ -11,6 +11,7 @@ import {
   createTheme,
 } from "@mui/material/styles";
 import routes from "@constants/routes";
+import { SnackbarProvider } from "providers";
 
 const muiTheme = createTheme();
 
@@ -33,17 +34,19 @@ function App() {
   );
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <MUIThemeProvider theme={muiTheme}>
-        <ThemeProvider theme={theme}>
-          <Global styles={globalStyles} />
-          <Header />
-          {isSidebarVisible && <SideBar />}
-          <Outlet />
-          <Footer />
-        </ThemeProvider>
-      </MUIThemeProvider>
-    </QueryClientProvider>
+    <SnackbarProvider>
+      <QueryClientProvider client={queryClient}>
+        <MUIThemeProvider theme={muiTheme}>
+          <ThemeProvider theme={theme}>
+            <Global styles={globalStyles} />
+            <Header />
+            {isSidebarVisible && <SideBar />}
+            <Outlet />
+            <Footer />
+          </ThemeProvider>
+        </MUIThemeProvider>
+      </QueryClientProvider>
+    </SnackbarProvider>
   );
 }
 
