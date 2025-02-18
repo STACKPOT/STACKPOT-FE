@@ -18,7 +18,7 @@ import {
   titleStyle,
 } from "./Landing.style";
 import { Button } from "@components/index";
-import { MyPotImage } from "@assets/images";
+import { MyPotImage, TaskImage } from "@assets/images";
 import routes from "@constants/routes";
 import { useNavigate } from "react-router-dom";
 import { profileImages, sloganText } from "@constants/landing";
@@ -47,7 +47,7 @@ const Landing = () => {
       <Button variant="landing" onClick={handleClick}>
         팟 만들러 가기
       </Button>
-      <img src={TaskImgage} alt="taskImage" css={TaskImgageStyle} />
+      <img src={TaskImage} alt="taskImage" css={TaskImgageStyle} />
       <div css={iconContainer}>
         <ExpandMoreIcon />
         <p>스크롤을 내려 어떤 서비스인지 알아볼까요?</p>
