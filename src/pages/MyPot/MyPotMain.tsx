@@ -30,7 +30,7 @@ const MyPotMainPage: React.FC = () => {
   const potIdNumber = Number(potId);
 
   const { data: check } = useGetMyPotOwner({ potId: potIdNumber });
-  
+
   const { data } = useGetMyPotTodo({
     potId: potIdNumber,
     page: 1,
@@ -67,7 +67,7 @@ const MyPotMainPage: React.FC = () => {
           );
         })}
 
-        {check && (
+        {(check?.result ?? false) && (
           <div css={viewId}>
             <KaKaoTalkIcon />
             <p css={viewTextStyle}>아이디 보기</p>
