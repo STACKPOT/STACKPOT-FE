@@ -1,6 +1,11 @@
 import { useEffect } from "react";
-import { RecruitingMyPotCard, Section } from "./components"
-import { cardStyle, container, spinIconContainer, spinIconStyle } from "./MadePot.style"
+import { RecruitingMyPotCard, Section } from "./components";
+import {
+  cardStyle,
+  container,
+  spinIconContainer,
+  spinIconStyle,
+} from "./MadePot.style";
 import { FinishedPotCard } from "@components/index";
 import useGetPotsRecruiting from "apis/hooks/pots/useGetPotsRecruiting";
 import { Role } from "types/role";
@@ -11,11 +16,16 @@ import Skeleton from "react-loading-skeleton";
 
 const MadePotPage = () => {
   const { data: recruitingPots } = useGetPotsRecruiting();
-  const { data: finishedPots, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useGetPotsCompleted({
-      cursor: null,
-      size: 10
-    });
+  const {
+    data: finishedPots,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+  } = useGetPotsCompleted({
+    cursor: null,
+    size: 10,
+  });
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -29,22 +39,27 @@ const MadePotPage = () => {
       <div css={container}>
         <Section title="모집 중인 나의 팟">
           <>
-            {recruitingPots && recruitingPots.map((pot) =>
-              <RecruitingMyPotCard
-                key={pot.potId}
-                {...pot}
-                members={Object.keys(pot.members) as Role[]} />)}
-
+            {recruitingPots &&
+              recruitingPots.map((pot) => (
+                <RecruitingMyPotCard
+                  key={pot.potId}
+                  {...pot}
+                  members={Object.keys(pot.members) as Role[]}
+                />
+              ))}
           </>
         </Section>
         <Section title="끓인 나의 팟">
           <>
-            {isLoading ?
+            {isLoading ? (
               <Skeleton css={cardStyle} />
-              : finishedPots?.pages && finishedPots.pages.length > 0 ? (
-                finishedPots.pages.map((page, pageIndex) => (
-                  page.result && page.result?.content && page.result.content.length > 0 &&
-                  (page.result.content.map((item, itemIndex) => {
+            ) : finishedPots?.pages && finishedPots.pages.length > 0 ? (
+              finishedPots.pages.map(
+                (page, pageIndex) =>
+                  page.result &&
+                  page.result?.content &&
+                  page.result.content.length > 0 &&
+                  page.result.content.map((item, itemIndex) => {
                     const isLast =
                       pageIndex === finishedPots.pages.length - 1 &&
                       page.result &&
@@ -52,7 +67,7 @@ const MadePotPage = () => {
                     const members = [] as Role[];
                     Object.entries(item.memberCounts).forEach((part) => {
                       for (let i = 0; i < part[1]; i++) {
-                        members.push(part[0] as Role)
+                        members.push(part[0] as Role);
                       }
                     });
                     return (
@@ -68,14 +83,15 @@ const MadePotPage = () => {
                           members={members}
                           isProfilePage={false}
                           buttonType="edit"
+                          isUserPage={false}
                         />
                       </div>
-                    )
-                  }))
-                ))
-              ) : (
-                <div>팟이 없습니다</div>
-              )}
+                    );
+                  })
+              )
+            ) : (
+              <div>팟이 없습니다</div>
+            )}
             {isFetchingNextPage && (
               <div css={spinIconContainer}>
                 <LoadingSpinnerIcon css={spinIconStyle} />
