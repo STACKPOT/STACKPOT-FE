@@ -1,20 +1,21 @@
 import { blurOverlayStyle, modalOverlayStyle } from "../../MyPotStatus/MyPotStatus.style";
 import AboutWorkModal from "../../MyPotStatus/AboutWorkModal/AboutWorkModal";
+import { TaskStatus } from "types/taskStatus";
 
 interface AboutWorkModalWrapperProps {
   isModalOpen: boolean;
-  activeStatus: "진행 전" | "진행 중" | "완료" | null;
+  activeStatus: TaskStatus;
   modalTitle: string;
+  taskId: number | null;
   onClose: () => void;
-  onSave: (newStatus: "진행 전" | "진행 중" | "완료" | null) => void;
 }
 
 const AboutWorkModalWrapper: React.FC<AboutWorkModalWrapperProps> = ({
   isModalOpen,
   activeStatus,
   modalTitle,
+  taskId,
   onClose,
-  onSave,
 }) => {
   return (
     <>
@@ -24,8 +25,8 @@ const AboutWorkModalWrapper: React.FC<AboutWorkModalWrapperProps> = ({
           <AboutWorkModal
             onClose={onClose}
             activeStatus={activeStatus}
-            onSave={onSave}
             title={modalTitle}
+            taskId={taskId}
           />
         </div>
       )}

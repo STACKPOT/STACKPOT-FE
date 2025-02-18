@@ -1,5 +1,7 @@
+import { displayStatus } from "@constants/categories";
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
+import { AnotherTaskStatus } from "types/taskStatus";
 
 export const badgeContainer = css`
   display: flex;
@@ -32,3 +34,8 @@ export const selectedBadgeStyle = (color: string) => css`
 `;
 
 
+export const statusStyles: Record<AnotherTaskStatus, string> = {
+  [displayStatus.OPEN]: theme.color.feedback.negative_transparent,
+  [displayStatus.IN_PROGRESS]: theme.color.feedback.positive_transparent,
+  [displayStatus.CLOSED]: theme.color.feedback.positive_blue_transparent,
+};

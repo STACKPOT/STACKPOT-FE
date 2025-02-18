@@ -49,6 +49,12 @@ const MadePotPage = () => {
                       pageIndex === finishedPots.pages.length - 1 &&
                       page.result &&
                       itemIndex === page.result.content.length - 1;
+                    const members = [] as Role[];
+                    Object.entries(item.memberCounts).forEach((part) => {
+                      for (let i = 0; i < part[1]; i++) {
+                        members.push(part[0] as Role)
+                      }
+                    });
                     return (
                       <div key={item.potId} ref={isLast ? ref : null}>
                         <FinishedPotCard
@@ -59,8 +65,8 @@ const MadePotPage = () => {
                           endDate={item.potEndDate}
                           stacks={item.members}
                           languages={item.potLan}
-                          members={Object.keys(item.memberCounts) as Role[]}
-                          isMyPage={true}
+                          members={members}
+                          isProfilePage={false}
                           buttonType="edit"
                         />
                       </div>

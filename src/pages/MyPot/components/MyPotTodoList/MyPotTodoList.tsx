@@ -2,13 +2,13 @@ import { useParams } from "react-router-dom";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { MyPotTodoCard } from "../index";
 import { gridContainerStyle } from "../../MyPotStatus/MyPotStatus.style";
+import { User } from "apis/types/myPot";
 
 interface MyPotTodoListProps {
   currentPage: number;
-  onModalClose: () => void;
 }
 
-const MyPotTodoList: React.FC<MyPotTodoListProps> = ({ currentPage, onModalClose }) => {
+const MyPotTodoList: React.FC<MyPotTodoListProps> = ({ currentPage }) => {
   const { potId } = useParams<{ potId: string }>();
   const potIdNumber = Number(potId) || 0;
 
@@ -16,7 +16,7 @@ const MyPotTodoList: React.FC<MyPotTodoListProps> = ({ currentPage, onModalClose
 
   return (
     <div css={gridContainerStyle}>
-      {data?.todos.map((todoData, index) => (
+      {data?.todos.map((todoData: User, index: number) => (
         <MyPotTodoCard
           key={index}
           nickname={todoData.userNickname}
@@ -24,7 +24,6 @@ const MyPotTodoList: React.FC<MyPotTodoListProps> = ({ currentPage, onModalClose
           isFirst={index === 0}
           potId={potIdNumber}
           currentPage={currentPage}
-          onModalClose={onModalClose}
         />
       ))}
     </div>

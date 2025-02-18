@@ -1,37 +1,68 @@
-import { PotIcon } from "@assets/svgs";
-import { FloatingButton } from "@components/index";
+import { PotIcon, RightIcon } from "@assets/svgs";
+import { Button, FloatingButton } from "@components/index";
 import {
   container,
   content,
   contentTitle,
   iconStyle,
   bannerStyle,
+  bannerTitleStyle,
+  spanStyle,
+  bannerSubtitleStyle,
+  buttonStyle,
+  buttonIconStyle,
+  bannerContainer,
 } from "./Home.style";
 
 import "swiper/swiper-bundle.css";
 import "swiper";
-import { BannerImage } from "@assets/images";
 import PopularPots from "./components/PopularPots/PopularPots";
 import Feed from "./components/Feed/Feed";
 
 const Home: React.FC = () => {
+  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
+    import.meta.env.VITE_REST_API_KEY
+  }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
+&scope=account_email
+&prompt=login`;
+
+  const handleClick = () => {
+    window.location.href = link;
+  };
+
   return (
-    <main>
-      <img css={bannerStyle} src={BannerImage} alt="Banner" />
-      <div css={container}>
-        <div css={content}>
-          <div css={contentTitle}>
-            <p>실시간 인기 팟</p>
-            <PotIcon css={iconStyle} />
-          </div>
-          <PopularPots />
-        </div>
-        <div css={content}>
-          <Feed />
+    <>
+      <div css={bannerStyle}>
+        <div css={bannerContainer}>
+          <p css={bannerTitleStyle}>
+            <span css={spanStyle}>사이드 프로젝트</span>와
+            <span css={spanStyle}>기록</span>을 동시에 해 보세요
+          </p>
+          <p css={bannerSubtitleStyle}>
+            지금 바로 나와 함께할 팀원을 찾아볼까요?
+          </p>
+          <Button css={buttonStyle} onClick={handleClick}>
+            팟 만들러 가기
+            <RightIcon css={buttonIconStyle} />
+          </Button>
         </div>
       </div>
-      <FloatingButton />
-    </main>
+      <main>
+        <div css={container}>
+          <div css={content}>
+            <div css={contentTitle}>
+              <p>실시간 인기 팟</p>
+              <PotIcon css={iconStyle} />
+            </div>
+            <PopularPots />
+          </div>
+          <div css={content}>
+            <Feed />
+          </div>
+        </div>
+        <FloatingButton type="feed" />
+      </main>
+    </>
   );
 };
 

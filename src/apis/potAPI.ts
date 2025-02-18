@@ -20,6 +20,8 @@ import {
   GetPotsRecruitingResponse,
   GetPotsCompletedResponse,
   GetPotsCompletedParams,
+  GetPotSummaryResponse,
+  PatchPotCompleteBody,
   AppealPotPatch,
 } from "./types/pot";
 
@@ -98,4 +100,15 @@ export const PatchAppealPot = async (
   body: AppealPotPatch
 ) => {
   return authApiPatch(`/pots/${potId}/members/${memberId}/appeal`, body);
+};
+
+export const PatchPotComplete = async (
+  potId: number,
+  body: PatchPotCompleteBody
+) => {
+  return authApiPatch<PostPotResponse>(`/pots/${potId}/complete`, body);
+};
+
+export const GetPotSummary = async (potId: number) => {
+  return authApiGet<GetPotSummaryResponse>(`/pots/${potId}/summary`);
 };

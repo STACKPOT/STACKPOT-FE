@@ -14,7 +14,8 @@ interface RecruitingMyPotCardProps {
 const RecruitingMyPotCard: React.FC<RecruitingMyPotCardProps> = ({ potId, potName, members, dday }: RecruitingMyPotCardProps) => {
     const navigate = useNavigate();
     const handleCardClick = () => {
-        navigate(`${routes.potDetail}/${potId}`)
+        navigate(`${routes.pot.base}/${potId}`)
+        window.scrollTo(0, 0);
     }
 
     return (

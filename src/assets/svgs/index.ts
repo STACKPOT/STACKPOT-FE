@@ -34,3 +34,4 @@ export { default as BookIcon } from "./book.svg?react";
 export { default as AppealIcon } from "./appeal.svg?react";
 export { default as LoadingSpinnerIcon } from "./loadingSpinner.svg?react";
 export { default as ArrowDropdownIcon} from "./arrowDropdown.svg?react";
+export { default as RightIcon} from "./right.svg?react";

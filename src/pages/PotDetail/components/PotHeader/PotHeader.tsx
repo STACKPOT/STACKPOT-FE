@@ -34,22 +34,12 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
         navigate(`${routes.editFinishedPot}/${potId}`);
     }
     const handleCancelApplyModalConfirm = () => {
-        cancelApply(potId,
-            {
-                onSuccess: () => {
-                    window.location.reload();
-                }
-            }
-        )
+        cancelApply(potId);
         setShowCancelApplyModal(false);
     }
     const handleApplyNext = (stack: string) => {
         setSelectedApplyStack(stack);
         setShowApplyModal(true);
-    }
-    const handleApplyConfirm = () => {
-        setSelectedApplyStack(null);
-        window.location.reload();
     }
 
     const { data: myProfile } = useGetMyProfile();
@@ -91,7 +81,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({ title, isMyPot, isApplied, potId,
                     potRole={myProfile.role}
                     nickname={myProfile.nickname}
                     potId={potId}
-                    onButtonClick={handleApplyConfirm}
+                    onButtonClick={() => setSelectedApplyStack(null)}
                     onCancelModal={() => setShowApplyModal(false)} />
             }
         </>

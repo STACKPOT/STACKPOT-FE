@@ -30,7 +30,6 @@ import {
   EditPotPage,
   FeedDetailPage,
 } from "@pages/index";
-import EditPost from "@pages/EditPost/EditPost";
 
 const router = createBrowserRouter([
   {
@@ -126,7 +125,7 @@ const router = createBrowserRouter([
         element: <UserPage />,
       },
       {
-        path: routes.createFinishedPot,
+        path: `${routes.createFinishedPot}/:potId`,
         element: <CreateFinishedPot />,
       },
       {

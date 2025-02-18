@@ -3,7 +3,7 @@ import { saveButtonStyle, buttonTextStyle, buttonContainer, deleteButtonStyle, a
 interface ActionButtonProps {
     title: string;
     onSave: () => void;
-    onDelete?: () => void;
+    onDelete: () => void;
   }
   
   const ActionButton: React.FC<ActionButtonProps> = ({ title, onSave, onDelete }) => (
