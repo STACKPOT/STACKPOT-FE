@@ -61,7 +61,7 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
       {children}
       <Snackbar
         open={snackbar.open}
-        autoHideDuration={6000}
+        autoHideDuration={2000}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
@@ -71,11 +71,9 @@ export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
           sx={{ fontSize: "1.5rem" }}
           action={
             <IconButton
-              size="large"
               aria-label="close"
               color="inherit"
               onClick={handleClose}
-              sx={{ fontSize: "2rem" }}
             >
               <CloseIcon fontSize="inherit" />
             </IconButton>
