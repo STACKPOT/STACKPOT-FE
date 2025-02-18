@@ -1,17 +1,25 @@
-import { PotIcon } from "@assets/svgs";
-import { contributorButtonOuterContainer, contributorButtonStyle, contributorButtonInnerContainer, nicknameStyle } from "./ContributorList.style";
+import { contributorButtonOuterContainer, contributorButtonStyle, contributorButtonInnerContainer, nicknameStyle, profileImageStyle } from "./ContributorList.style";
+import { useParams } from "react-router-dom";
+import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemeber";
+import { MushroomImage } from "@assets/images";
 
-const ContributorList: React.FC = () => (
-  <div css={contributorButtonOuterContainer}>
-    {Array.from({ length: 8 }, (_, index) => (
-      <div key={index} css={contributorButtonStyle(false)}>
-        <div css={contributorButtonInnerContainer}>
-          <PotIcon />
-          <div css={nicknameStyle}>너무 착한 브로콜리</div>
+const ContributorList: React.FC = () => {
+  const { potId } = useParams<{ potId: string }>();
+  const potIdNumber = Number(potId);
+  const { data } = useGetMyPotMembers({ potId: potIdNumber });
+
+  return(
+    <div css={contributorButtonOuterContainer}>
+      {data?.result?.slice(1).map((member) => (
+        <div key={member.potMemberId} css={contributorButtonStyle(false)}>
+          <div css={contributorButtonInnerContainer}>
+            <img src={MushroomImage} alt="프로필 이미지" css={profileImageStyle} />
+            <div css={nicknameStyle}>{member.nickname}</div>
+          </div>
         </div>
-      </div>
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  );
+}
 
 export default ContributorList;
