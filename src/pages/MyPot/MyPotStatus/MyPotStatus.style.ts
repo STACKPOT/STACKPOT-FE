@@ -15,6 +15,10 @@ export const potIconStyle = css`
   color: ${theme.color.point.hero};
 `;
 
+export const iconStyle = css`
+  color: ${theme.color.base.white};
+`;
+
 export const boardTextStyle = css`
   ${theme.font.title1};
   color: ${theme.color.base.white};
