@@ -1,5 +1,5 @@
 import TextInput from "./TextInput/TextInput";
-import StatusBadgeSelector from "./StateBadgeSelect.tsx/StateBadgeSelect";
+import StatusBadgeSelector from "./StateBadgeSelect/StateBadgeSelect";
 import ExplainationInputField from "./ExplainationInputField/ExplainationInputField";
 import DateInput from "./DateInput/DateInput";
 import ContributorList from "./ContributorList/ContributorList";
@@ -13,6 +13,7 @@ import TodoStatusSection from "./TodoStatusSection/TodoStatusSection";
 import MyTodoModalWrapper from "./MyTodoModalWrapper/MyTodoModalWrapper";
 import MyPotStatusHeader from "./MyPotStatusHeader/MyPotStatusHeader";
 import MyPotTodoList from "./MyPotTodoList/MyPotTodoList";
+import Loading from "./Loading/Loading";
 
 export {
   TextInput,
@@ -29,5 +30,6 @@ export {
   TodoStatusSection,
   MyTodoModalWrapper,
   MyPotStatusHeader,
-  MyPotTodoList
+  MyPotTodoList,
+  Loading
 }

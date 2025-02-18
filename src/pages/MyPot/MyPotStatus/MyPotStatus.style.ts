@@ -12,7 +12,7 @@ export const boardStyle = css`
 `;
 
 export const potIconStyle = css`
-  color: ${theme.color.base.white};
+  color: ${theme.color.point.hero};
 `;
 
 export const boardTextStyle = css`
@@ -148,5 +148,5 @@ export const modalOverlayStyle = css`
   display: flex;
   justify-content: center;
   align-items: center; 
-  z-index: 1000;
+  z-index: 5000;
 `;

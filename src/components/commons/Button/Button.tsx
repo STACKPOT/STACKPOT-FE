@@ -7,7 +7,7 @@ import {
 } from "./Button.style";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children: React.ReactNode;
   variant?: "entry" | "action" | "landing";
   actionType?: "action" | "join" | "edit";
   onClick?: () => void;

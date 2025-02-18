@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { patchTodo } from "apis/myPotAPI";
+import { patchMyPotTodo } from "apis/myPotAPI";
 import { Todo } from "apis/types/myPot"; 
 
-export const usePatchMyTodo = () => {
+export const usePatchMyPotTodo = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ potId, data }: { potId: number; data: Todo[] }) => patchTodo({ potId, data }),
+    mutationFn: ({ potId, data }: { potId: number; data: Todo[] }) => patchMyPotTodo({ potId, data }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { usePatchMyTodoStatus } from "apis/hooks/myPots/usePatchMyTodoStatus"; 
+import { usePatchMyPotTodoStatus } from "apis/hooks/myPots/usePatchMyPotTodoStatus"; 
 import { cardStyle, nicknameStyle, plusButtonStyle, profileImageStyle, statusContainer, todoContainer, todoListContainer, todoTextStyle } from "./MyPotTodoCard.style";
 import { PlusButtonIcon } from "@assets/svgs";
 import { MushroomImage } from "@assets/images";
@@ -13,12 +13,11 @@ interface MyPotTodoCardProps {
   isFirst: boolean;
   potId: number;
   currentPage: number;
-  onModalClose: () => void;
 }
 
-const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId, currentPage, onModalClose }) => {
+const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId, currentPage  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { mutate: updateTodoStatus } = usePatchMyTodoStatus();
+  const { mutate: updateTodoStatus } = usePatchMyPotTodoStatus();
 
   const handlePlusButtonClick = () => {
     setIsModalOpen(true);
@@ -26,18 +25,10 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    onModalClose();  
   };
 
   const handleSelectTodo = (todoId: number) => {
-    updateTodoStatus(
-      { potId, todoId },
-      {
-        onSuccess: () => {
-          console.log(`할 일 ${todoId} 완료`);
-        },
-      }
-    );
+    updateTodoStatus({ potId, todoId },);
   };
 
   return (
@@ -50,13 +41,15 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
       <div css={statusContainer}>
         <div css={todoListContainer}>
           {(todos ?? []).map((todo) => (
-            <div css={todoContainer} key={todo.todoId}>
-              <CheckBox 
-                selected={todo.status === "COMPLETED"} 
-                onSelect={() => handleSelectTodo(todo.todoId)}
-              />
-              <p css={todoTextStyle}>{todo.content}</p>
-            </div>
+            todo.todoId !== null && (
+              <div css={todoContainer} key={todo.todoId}>
+                <CheckBox 
+                  selected={todo.status === "COMPLETED"} 
+                  onSelect={() => handleSelectTodo(todo.todoId!)}
+                />
+                <p css={todoTextStyle}>{todo.content}</p>
+              </div>
+            )
           ))}
         </div>
       </div>

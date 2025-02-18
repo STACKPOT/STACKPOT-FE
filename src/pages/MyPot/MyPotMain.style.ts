@@ -23,8 +23,10 @@ export const textStyle = css`
 `
 
 export const iconStyle = css`
-  color: ${theme.color.point.hero}
+  width: 2.4rem;
+  height: 2.4rem;
 `
+
 
 export const tabsContainer = css`
   display: flex;
@@ -39,7 +41,6 @@ export const tabsTextStyle = css`
   &:hover {
     transform: scale(1.05);
   }
-
 `
 
 export const viewId = css `
