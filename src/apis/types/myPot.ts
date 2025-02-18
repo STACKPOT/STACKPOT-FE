@@ -108,3 +108,15 @@ export interface TaskAPIParams {
 export interface GetTaskParams {
   potId: number;
 }
+
+export interface GetTasksMonthParams {
+  potId: number;
+  year: number;
+  month: number;
+}
+
+export interface GetTasksMonthResponse {
+  taskId: number;
+  deadLine: string;
+  participating: boolean
+}

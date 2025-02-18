@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
-import { Datepicker, setOptions, localeKo } from "@mobiscroll/react";
+import { Datepicker, setOptions, localeKo, MbscDatepickerPageChangeEvent } from "@mobiscroll/react";
 import {
   calendarStyle,
   container,
@@ -17,23 +17,25 @@ import {
 import { TaskBox } from "./components";
 import { taskData } from "mocks/taskData";
 import { PotIcon } from "@assets/svgs";
+import useGetTasksMonth from "apis/hooks/myPots/useGetTasksMonth";
+import { useParams } from "react-router-dom";
 setOptions({
   locale: localeKo,
   themeVariant: "light",
 });
 
 const MyPotCalendar = () => {
-  const [date, setDate] = useState<Date | null>(null);
+  const { potId } = useParams();
+  const potIdNumber = Number(potId);
 
-  const myMarked = [
-    { date: "2025-02-04" },
-    { date: "2025-01-02T00:00", color: "#46c4f3" },
-    { date: "2025-01-02T00:00", color: "#46c4f3" },
-    { date: "2025-01-06T00:00", color: "#7e56bd" },
-    { date: "2025-01-11T00:00", color: "#7e56bd" },
-    { date: "2025-01-19T00:00", color: "#89d7c9" },
-    { date: "2025-01-28T00:00", color: "#ea4986" },
-  ];
+  const [date, setDate] = useState<Date | null>(null);
+  const [month, setMonth] = useState<Date>(new Date());
+
+  const { data: monthTasks } = useGetTasksMonth({
+    potId: potIdNumber,
+    year: month.getFullYear(),
+    month: month.getMonth() + 1,
+  })
 
   const getDayOfWeek = (date: Date | null) => {
     if (!date) return "";
@@ -49,6 +51,12 @@ const MyPotCalendar = () => {
     return days[date.getDay()];
   };
 
+  const handleMonthChange = (e: MbscDatepickerPageChangeEvent) => {
+    if (e.month) {
+      setMonth(e.month);
+    }
+  }
+
   return (
     <main css={mainContainer}>
       <div css={titleContainer}>
@@ -59,20 +67,25 @@ const MyPotCalendar = () => {
         <div css={calendarStyle}>
           <Datepicker
             display="inline"
-            marked={myMarked}
+            marked={
+              monthTasks?.filter((task) => task.participating).map((task) =>
+                ({ date: task.deadLine })
+              )
+            }
             value={date}
-            onChange={(e) => setDate(e.value)}
+            onChange={(e) => setDate(e.value as Date)}
+            onPageChange={handleMonthChange}
           />
         </div>
         <div css={taskContainer}>
           <p css={dateStyle}>
             {date
               ? `${date.getFullYear()}. ${String(date.getMonth() + 1).padStart(
-                  2,
-                  "0"
-                )}. ${String(date.getDate()).padStart(2, "0")} (${getDayOfWeek(
-                  date
-                )})`
+                2,
+                "0"
+              )}. ${String(date.getDate()).padStart(2, "0")} (${getDayOfWeek(
+                date
+              )})`
               : ""}
           </p>
           <div css={dividerStyle} />
