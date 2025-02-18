@@ -41,15 +41,29 @@ export const dropdown = css`
   z-index: 10;
 `;
 
-export const option = (isSelected: boolean) => css`
+export const option = css`
   padding: 1.2rem 0;
   text-align: center;
   cursor: pointer;
-  border-bottom: 0.1rem solid ${theme.color.object.alternative};
-  color: ${isSelected ? theme.color.point.hero : theme.color.point.gray};
+  color: ${theme.color.object.assistive};
   ${theme.font.caption3};
+  position: relative;
+
+  &:not(:last-child) {
+    border-bottom: 0.1rem solid ${theme.color.object.alternative};
+  }
+
+  &:hover {
+    color: ${theme.color.point.hero};
+    background-color: ${theme.color.object.faded};
+  }
+
+  &:first-of-type {
+    border-radius: 1.6rem 1.6rem 0 0;
+  }
 
   &:last-of-type {
+    border-radius: 0 0 1.6rem 1.6rem;
     border-bottom: none;
   }
 `;

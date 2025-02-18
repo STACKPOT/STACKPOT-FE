@@ -19,6 +19,7 @@ const theme = {
       alternative: "#D4D4D4", // gray-200
       hero: "#919191", // gray-400
       assistive: "#767676", // gray-500
+      faded: "#F8F9FA", // gray-50
     },
     border: {
       normal: "#70737C33", // transparent-100
