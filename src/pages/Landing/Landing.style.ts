@@ -106,11 +106,6 @@ export const myPotImageStyle = css`
   width: 81.4rem;
 `;
 
-export const feedImageStyle = css`
-  width: 81.1rem;
-  height: 44rem;
-`;
-
 export const potImageStyle = css`
   width: 80.9rem;
   height: 43.9rem;
