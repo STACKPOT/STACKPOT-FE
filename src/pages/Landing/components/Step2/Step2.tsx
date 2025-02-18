@@ -1,14 +1,19 @@
 import { PotImage } from "@assets/images";
+import { useInView } from "react-intersection-observer";
 import {
   contentContainer,
   imageContainer,
   imageSubtitle,
   imageTitle,
-  potImageStyle,
   spanStyle,
 } from "@pages/Landing/Landing.style";
+import { potImageStyle } from "./Step2.style";
 
-const Step2 = () => {
+const Step2: React.FC = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
   return (
     <div css={imageContainer}>
       <div css={contentContainer}>
@@ -22,7 +27,12 @@ const Step2 = () => {
           지원자를 골라 더욱 효율적으로 <br /> 프로젝트를 시작할 수 있어요.
         </p>
       </div>
-      <img src={PotImage} alt="PotImage" css={potImageStyle} />
+      <img
+        ref={ref}
+        src={PotImage}
+        alt="PotImage"
+        css={potImageStyle(inView)}
+      />
     </div>
   );
 };

@@ -106,11 +106,6 @@ export const myPotImageStyle = css`
   width: 81.4rem;
 `;
 
-export const potImageStyle = css`
-  width: 80.9rem;
-  height: 43.9rem;
-`;
-
 export const imageContainer = css`
   display: flex;
   gap: 9rem;
@@ -145,8 +140,8 @@ export const horizontalImageContainer = css`
 `;
 
 export const horizontalImageStyle = css`
-  width: 53.5rem;
-  height: 52.6rem;
+  width: 58.3rem;
+  height: 57.4rem;
   margin-bottom: 4.8rem;
 `;
 

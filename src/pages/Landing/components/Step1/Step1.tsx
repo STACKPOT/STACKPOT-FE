@@ -1,3 +1,4 @@
+import { useInView } from "react-intersection-observer";
 import { feedImageStyle } from "./Step1.style";
 import {
   contentContainer,
@@ -9,9 +10,19 @@ import {
 import { FeedImage } from "@assets/images";
 
 const Step1: React.FC = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
+
   return (
     <div css={imageContainer}>
-      <img src={FeedImage} alt="FeedImage" css={feedImageStyle} />
+      <img
+        ref={ref}
+        src={FeedImage}
+        alt="FeedImage"
+        css={feedImageStyle(inView)}
+      />
       <div css={contentContainer}>
         <p css={imageTitle}>
           피드를 보며 <span css={spanStyle}>IT 정보</span>를<br />
