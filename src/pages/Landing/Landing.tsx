@@ -5,8 +5,6 @@ import {
   bottomContainer,
   buttonStyle,
   contentContainer,
-  contentStyle,
-  feedImageContainer,
   feedImageStyle,
   horizontalImageContainer,
   horizontalImageStyle,
@@ -26,9 +24,7 @@ import {
   sloganContainer,
   spanStyle,
   subTitleStyle,
-  taskBoardImageStyle,
   TaskImgageStyle,
-  thirdPartImageStyle,
   titleStyle,
 } from "./Landing.style";
 import { Button } from "@components/index";
