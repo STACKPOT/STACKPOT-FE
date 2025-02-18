@@ -11,6 +11,7 @@ import { MyPageProfile } from "./components";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
 import useGetMyPage from "apis/hooks/users/useGetMyPage";
 import { Role } from "types/role";
+import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
   const [contentType, setContentType] = useState<"feed" | "pot">("feed");
@@ -59,6 +60,12 @@ const MyPage = () => {
                 />
               ))
             : data.completedPots.map((pot) => {
+                let members = [] as Role[];
+                Object.entries(pot.memberCounts).forEach((part) => {
+                  for (let i = 0; i < part[1]; i++) {
+                    members.push(part[0] as Role);
+                  }
+                });
                 return (
                   <FinishedPotCard
                     id={pot.potId}
@@ -68,9 +75,10 @@ const MyPage = () => {
                     stacks={pot.members}
                     languages={pot.potLan}
                     key={pot.potId}
-                    isMyPage={true}
+                    members={members}
+                    isProfilePage={true}
                     endDate={pot.potEndDate}
-                    members={Object.keys(pot.memberCounts) as Role[]}
+                    buttonType="appeal"
                     isUserPage={false}
                   />
                 );

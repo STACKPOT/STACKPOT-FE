@@ -76,10 +76,10 @@ const UserPage = () => {
                   stacks={pot.members}
                   languages={pot.potLan}
                   key={pot.potId}
-                  isMyPage={false}
                   endDate={pot.potEndDate}
                   members={Object.keys(pot.memberCounts) as Role[]}
                   isUserPage={true}
+                  isProfilePage={false}
                 />
               ))}
         </div>

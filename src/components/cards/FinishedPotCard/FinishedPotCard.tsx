@@ -26,9 +26,9 @@ interface FinishedPotCardProps {
   stacks: string;
   languages: string;
   members: Role[];
-  isMyPage: boolean;
+  isProfilePage: boolean;
   isUserPage: boolean;
-  buttonType?: "edit" | "appeal";
+  buttonType?: "edit" | "appeal" | "none";
 }
 
 const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
@@ -40,9 +40,9 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
   stacks,
   languages,
   members,
-  isMyPage,
+  isProfilePage: isMyPage,
   isUserPage,
-  buttonType,
+  buttonType = "none",
 }: FinishedPotCardProps) => {
   const navigate = useNavigate();
 
@@ -62,12 +62,14 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
       setSummaryModal(id);
     } else {
       navigate(`${routes.pot.base}/${id}`);
+      window.scrollTo(0, 0);
     }
   };
 
   const handleEditPot = (id: number) => {
     if (buttonType === "edit") {
       navigate(`${routes.editFinishedPot}/${id}`);
+      window.scrollTo(0, 0);
     } else {
       setAppealModal(id);
     }
@@ -79,7 +81,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
         <div css={titleProfileContainer}>
           <div css={titleContainer}>
             <h1 css={titleStyle}>{title}</h1>
-            {isMyPage && (
+            {buttonType !== "none" && (
               <PotButton onClick={() => handleEditPot(id)}>
                 {buttonType === "edit" ? "팟 소개 수정" : "여기서 저는요"}
               </PotButton>

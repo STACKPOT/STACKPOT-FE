@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const mainContainer = css`
-  margin-top: 4.8rem;
+  margin: 4.8rem auto;
 `;
 
 export const headContainer = css`
@@ -29,7 +29,7 @@ export const iconStyle = css`
 export const formContainer = css`
   padding: 3.6rem 10rem;
   border: 1px solid ${theme.color.object.alternative};
-  margin: 3.2rem 0 4.8rem 0;
+  margin-top: 3.2rem;
   border-radius: 32px;
   display: flex;
   flex-direction: column;
@@ -91,19 +91,12 @@ export const textareaStyle = css`
   }
 `;
 
-export const partStyle = css`
-  display: flex;
-  color: ${theme.color.base.darkgray};
-  ${theme.font.caption3};
-  white-space: pre;
-  gap: 4.4rem;
-`;
 export const summaryButtonContainer = css`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 export const appealIconStyle = css`
-    width: 1.4rem;
-    height: 1.4rem;
+  width: 1.4rem;
+  height: 1.4rem;
 `

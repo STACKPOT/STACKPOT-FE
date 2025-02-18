@@ -2,54 +2,60 @@ import {
   container,
   headerStyle,
   textStyle,
-  iconStyle,
   tabsContainer,
   tabsTextStyle,
   viewId,
   viewTextStyle,
+  iconStyle
 } from "./MyPotMain.style";
-import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import theme from "@styles/theme";
 import routes from "@constants/routes";
-import { KaKaoTalkIcon, PotIcon } from "@assets/svgs";
+import { KaKaoTalkIcon } from "@assets/svgs";
+import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
+import { prevButtonStyle } from "./MyPotStatus/TaskDetail/TaskDetail.style";
+import { ArrowLeftIcon } from "@mui/x-date-pickers"
 
 const MyPotMainPage: React.FC = () => {
   const { potId } = useParams();
-
-  const tabs = [
-    {
-      label: "업무 현황",
-      path: `${routes.myPot.task}/${potId}`,
-    },
-    {
-      label: "캘린더",
-      path: `${routes.myPot.calendar}/${potId}`,
-    },
-  ];
-
-  const title = "STACKPOT";
+  const navigate = useNavigate();
   const location = useLocation();
 
-  const showViewId = location.pathname === `${routes.myPot.task}/${potId}`;
+  const tabs = [
+    { label: "업무 현황", path: `${routes.myPot.base}/${routes.task}/${potId}` },
+    { label: "캘린더", path: `${routes.myPot.base}/${routes.calendar}/${potId}` },
+  ];
+
+  const { data } = useGetMyPotTodo({
+    potId: Number(potId),
+    page: 1,
+    size: 1,
+  });
+
+  const showViewId = location.pathname.includes(`${routes.myPot.base}/${routes.task}`);
+
+  const handlePrev = () => {
+    navigate(`${routes.myPot.base}`);
+  };
 
   return (
     <main css={container}>
       <header css={headerStyle}>
-        <div css={textStyle}>{title}</div>
-        <PotIcon css={iconStyle} />
+        <button onClick={handlePrev} css={prevButtonStyle}>
+          <ArrowLeftIcon css={iconStyle} />
+        </button>
+        <div css={textStyle}>{data?.title ?? null}</div>
       </header>
       <div css={tabsContainer}>
         {tabs.map((tab) => {
-          const isActive = location.pathname === tab.path;
+          const isActive = location.pathname.includes(tab.path);
           return (
             <NavLink
               key={tab.path}
               to={tab.path}
               css={tabsTextStyle}
               style={{
-                color: isActive
-                  ? theme.color.point.hero
-                  : theme.color.interactive.inactive,
+                color: isActive ? theme.color.point.hero : theme.color.interactive.inactive,
                 textDecoration: "none",
               }}
             >

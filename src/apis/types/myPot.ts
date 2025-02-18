@@ -1,5 +1,7 @@
+import { APITaskStatus } from "types/taskStatus";
+
 export interface Todo {
-  todoId: number;
+  todoId: number | null;
   content: string;
   status: string;
 }
@@ -26,15 +28,63 @@ export interface GetTodoParams {
   size: number;
 }
 
-export interface TodoUpdateRequest {
-  potId: number;
-  data: TodoItem[];
+
+export interface Participant {
+  potMemberId: number;
+  userId: number;
+  nickName: string;
+  role: string;
 }
 
-export interface TodoItem {
-  todoId: number | null;
-  content: string;
-  status: string;
+export interface Task {
+  taskboardId: number;
+  title: string;
+  description: string;
+  creatorNickname: string;
+  creatorRole: string;
+  category: string[];
+  status: APITaskStatus;
+  deadLine: string;
+  participants: Participant[];
+  dday: string;
+}
+
+export interface TaskResponse {
+  OPEN?: Task[];
+  IN_PROGRESS?: Task[];
+  CLOSED?: Task[];
+}
+
+export interface TaskDetailResponse {
+  taskboardId: number;
+  creatorUserId: number;
+  creatorNickname: string;
+  creatorRole: string;
+  title: string;
+  description: string;
+  deadLine: string;
+  status: APITaskStatus;
+  potId: number;
+  participants: Participant[];
+  dday: string;
+}
+
+export interface TodoUpdateRequest {
+  potId: number;
+  data: Todo[];
+}
+
+export interface TaskPatch {
+  title: string;
+  deadline: string;
+  taskboardStatus: string;
+  description: string;
+  participants: number[];
+}
+
+export interface PatchTodoStatusParams {
+  potId: number;
+  todoId: number;
 }
 
 export interface MyPotResponse {
@@ -48,4 +98,13 @@ export interface MyPotResponse {
     DESIGN?: number;
     PLANNING?: number;
   };
+}
+
+export interface TaskAPIParams {
+  potId: number;
+  taskId: number;
+}
+
+export interface GetTaskParams {
+  potId: number;
 }
