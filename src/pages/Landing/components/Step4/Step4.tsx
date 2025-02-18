@@ -20,7 +20,7 @@ const Step4 = () => {
   });
 
   return (
-    <div css={horizontalImageContainer}>
+    <div css={horizontalImageContainer} ref={ref}>
       <div>
         <div css={imageContainer}>
           <img
@@ -28,12 +28,7 @@ const Step4 = () => {
             css={horizontalImageStyle}
             alt="PotDetailImage"
           />
-          <img
-            ref={ref}
-            src={ModalImage}
-            alt="ModalImage"
-            css={modalStyle(inView)}
-          />
+          <img src={ModalImage} alt="ModalImage" css={modalStyle(inView)} />
         </div>
         <p css={imageContentStyle}>
           지원에 바로 이용하며, <br />
@@ -44,7 +39,6 @@ const Step4 = () => {
         <div css={imageContainer}>
           <img src={MyPageImage} css={horizontalImageStyle} alt="MyPageImage" />
           <img
-            ref={ref}
             src={UserProfileImage}
             css={profileImageStyle(inView)}
             alt="ProfileImage"

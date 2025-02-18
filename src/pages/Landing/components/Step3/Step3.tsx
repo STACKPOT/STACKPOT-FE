@@ -19,7 +19,7 @@ const Step3: React.FC = () => {
     threshold: 0.5,
   });
   return (
-    <div css={horizontalImageContainer}>
+    <div css={horizontalImageContainer} ref={ref}>
       <div>
         <div css={imageContainer}>
           <img
@@ -28,7 +28,6 @@ const Step3: React.FC = () => {
             alt="TaskBoardImage"
           />
           <img
-            ref={ref}
             src={TaskCardImage}
             css={TaskCardStyle(inView)}
             alt="TaskBoardImage"
@@ -47,7 +46,6 @@ const Step3: React.FC = () => {
             alt="FinishedPotImage"
           />
           <img
-            ref={ref}
             src={AISummaryImage}
             css={AISummaryStyle(inView)}
             alt="AISummaryImage"
