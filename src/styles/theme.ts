@@ -12,6 +12,7 @@ const theme = {
       yellow: "#FFFFF1", // ivory-200
       neon: "#00E5FF", // neon-100
       gray: "#393940", // gray-600
+      darkblue: "#012B53", //blue-500
     },
     object: {
       normal: "#F3F3F3", // gray-100

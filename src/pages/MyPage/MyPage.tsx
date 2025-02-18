@@ -11,7 +11,6 @@ import { MyPageProfile } from "./components";
 import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
 import useGetMyPage from "apis/hooks/users/useGetMyPage";
 import { Role } from "types/role";
-import routes from "@constants/routes";
 import { useNavigate } from "react-router-dom";
 
 const MyPage = () => {
@@ -48,35 +47,42 @@ const MyPage = () => {
         <div css={listContainer(contentType)}>
           {contentType === "feed"
             ? data.feeds.map((post) => (
-                <PostCard
-                  nickname={post.writer}
-                  role={post.writerRole}
-                  isLiked={false}
-                  likeCount={post.likeCount}
-                  key={post.feedId}
-                  createdAt={post.createdAt}
-                  title={post.title}
-                  content={post.content}
-                  feedId={post.feedId}
-                  writerId={post.writerId}
-                />
-              ))
+              <PostCard
+                nickname={post.writer}
+                role={post.writerRole}
+                isLiked={false}
+                likeCount={post.likeCount}
+                key={post.feedId}
+                createdAt={post.createdAt}
+                title={post.title}
+                content={post.content}
+                feedId={post.feedId}
+                writerId={post.writerId}
+              />
+            ))
             : data.completedPots.map((pot) => {
-                return (
-                  <FinishedPotCard
-                    id={pot.potId}
-                    title={pot.potName}
-                    myRole={pot.userPotRole}
-                    startDate={pot.potStartDate}
-                    stacks={pot.members}
-                    languages={pot.potLan}
-                    key={pot.potId}
-                    isMyPage={true}
-                    endDate={pot.potEndDate}
-                    members={Object.keys(pot.memberCounts) as Role[]}
-                  />
-                );
-              })}
+              let members = [] as Role[];
+              Object.entries(pot.memberCounts).forEach((part) => {
+                for (let i = 0; i < part[1]; i++) {
+                  members.push(part[0] as Role)
+                }
+              });
+              return (
+                <FinishedPotCard
+                  id={pot.potId}
+                  title={pot.potName}
+                  myRole={pot.userPotRole}
+                  startDate={pot.potStartDate}
+                  stacks={pot.members}
+                  languages={pot.potLan}
+                  key={pot.potId}
+                  members={members}
+                  isProfilePage={true}
+                  endDate={pot.potEndDate}
+                  buttonType="appeal"
+                />
+              );
+            })}
         </div>
       </div>
       <FloatingButton type={"feed"} />

@@ -36,7 +36,7 @@ const UserPage = () => {
                             <FinishedPotCard
                                 key={pot.id}
                                 {...pot}
-                                isMyPage={false} />
+                                isProfilePage={true} />
                         )
                     }
                 </div>

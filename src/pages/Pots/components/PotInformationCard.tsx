@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
 import { PotStatus } from "types/potStatus";
+import routes from "@constants/routes";
 
 interface PotInformationCardProps {
   potId: number;
@@ -46,7 +47,8 @@ const PotInformationCard: React.FC<PotInformationCardProps> = ({
 }: PotInformationCardProps) => {
   const navigate = useNavigate();
   const handleClickPot = (id: number) => {
-    navigate(`/pot/${id}`);
+    navigate(`${routes.pot.base}/${id}`);
+    window.scrollTo(0, 0);
   }
 
   return (

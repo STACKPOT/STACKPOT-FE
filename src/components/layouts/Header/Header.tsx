@@ -4,13 +4,14 @@ import {
   headerStyle,
   iconContainer,
   iconStyle,
+  logoStyle,
   profileContainer,
   profileStyle,
   searchIconStyle,
 } from "./Header.style";
 import Button from "@components/commons/Button/Button";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { roleImages } from "@constants/roleImage";
 import { useAuthStore } from "stores/useAuthStore";
@@ -18,6 +19,8 @@ import ProfileDropdown from "@components/commons/Dropdown/ProfileDropdown/Profil
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const role = useAuthStore((state) => state.role);
@@ -47,6 +50,8 @@ const Header: React.FC = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
+  const isHomePage = location.pathname === routes.home;
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     setAccessToken(token);
@@ -72,8 +77,8 @@ const Header: React.FC = () => {
   }, [isDropdownOpen]);
 
   return (
-    <header css={headerStyle}>
-      <Logo />
+    <header css={headerStyle(isHomePage)}>
+      <Logo css={logoStyle(isHomePage)} />
       {!accessToken ? (
         <Button variant="entry" onClick={handleClick}>
           로그인/회원가입
@@ -82,7 +87,7 @@ const Header: React.FC = () => {
         <div css={iconContainer}>
           <SearchIcon
             type="button"
-            css={searchIconStyle}
+            css={searchIconStyle(isHomePage)}
             onClick={handleSearchClick}
           />
 
@@ -95,7 +100,7 @@ const Header: React.FC = () => {
             {!guestMode && (
               <ArrowDropdownIcon
                 type="button"
-                css={iconStyle}
+                css={iconStyle(isHomePage)}
                 onClick={handleMenuClick}
               />
             )}

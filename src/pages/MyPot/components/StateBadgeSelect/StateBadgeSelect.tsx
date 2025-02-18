@@ -1,21 +1,16 @@
-import { TaskStatus } from "../../../../types/taskStatus";
+import { AnotherTaskStatus } from "../../../../types/taskStatus";
 import { firstSectionContainer } from "../TextInput/TextInput.style";
-import { badgeContainer, badgeStyle, selectedBadgeStyle } from "./StateBadgeSelect.style";
+import { badgeContainer, badgeStyle, selectedBadgeStyle, statusStyles } from "./StateBadgeSelect.style";
 import { labelTextStyle } from "@pages/MyPot/MyPotStatus/AboutWorkModal/AboutWorkModal.style";
 import theme from "@styles/theme";
 
 interface StatusBadgeSelectorProps {
-  selectedStatus: TaskStatus | null;
-  setSelectedStatus: (status: TaskStatus) => void;
+  selectedStatus: AnotherTaskStatus | null;
+  setSelectedStatus: (status: AnotherTaskStatus) => void;
 }
 
 const StatusBadgeSelector: React.FC<StatusBadgeSelectorProps> = ({ selectedStatus, setSelectedStatus }) => {
-  const getBadgeStyle = (status: TaskStatus) => {
-    const statusStyles: Record<TaskStatus, string> = {
-      "진행 전": theme.color.feedback.negative_transparent,
-      "진행 중": theme.color.feedback.positive_transparent,
-      "완료": theme.color.feedback.positive_blue_transparent,
-    };
+  const getBadgeStyle = (status: AnotherTaskStatus) => {
 
     const isSelected = selectedStatus === status;
     const badgeColor = statusStyles[status] || theme.color.object.alternative;
