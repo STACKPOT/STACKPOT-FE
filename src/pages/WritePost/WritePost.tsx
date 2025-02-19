@@ -49,32 +49,11 @@ const WritePost: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<PostFeedParams> = (data) => {
-    postFeedMutation.mutate(data, {
-      onSuccess: (response) => {
-        if (response?.result?.feedId) {
-          setShowToast(true);
-
-          setTimeout(() => {
-            setShowToast(false);
-            navigate(`${routes.feed.base}/${response.result?.feedId}`);
-          }, 2000);
-        }
-      },
-      onError: (error) => {
-        setErrorMessage(
-          "피드 업로드 실패: " + (error?.message || "알 수 없는 오류")
-        );
-      },
-    });
+    postFeedMutation.mutate(data);
   };
 
   return (
     <main>
-      {showToast && (
-        <div css={toastStyle}>
-          <UploadToast />
-        </div>
-      )}
       <div css={container}>
         <FormProvider {...methods}>
           <form css={contentStyle} onSubmit={handleSubmit(onSubmit)}>
