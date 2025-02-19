@@ -1,40 +1,32 @@
-import { PotIcon } from "@assets/svgs";
 import {
   buttonContainer,
   dividerStyle,
   formContainer,
-  headButtonContainer,
-  headContainer,
-  iconStyle,
   inputStyle,
   labelStyle,
   languageInputStyle,
   partStyle,
   textareaStyle,
-  titleContainer,
-  titleStyle,
 } from "./PotForm.style";
 import { PotDetail, RecruitmentDetail } from "apis/types/pot";
 import dayjs, { Dayjs } from "dayjs";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { Participation } from "types/participation";
 import {
-  Button,
   CategoryButton,
   PartRecruitment,
-  PotButton,
 } from "@components/index";
 import { participation, participationMap, period } from "@constants/categories";
 import DatePicker from "./DatePicker/DatePicker";
 import { useEffect } from "react";
 import { Role } from "types/role";
+import FormHeader from "./FormHeader/FormHeader";
 
 interface PotFormProps {
   type: "create" | "edit";
   potId?: number;
   potData?: PotDetail;
   onCompleted: (data: PotFormData) => void;
-  onDelete?: () => void;
 }
 export interface PotFormData {
   potName: string;
@@ -49,9 +41,9 @@ export interface PotFormData {
 
 const PotForm: React.FC<PotFormProps> = ({
   type,
+  potId,
   potData,
   onCompleted,
-  onDelete,
 }: PotFormProps) => {
   const methods = useForm<PotFormData>({
     mode: "onChange",
@@ -103,9 +95,6 @@ const PotForm: React.FC<PotFormProps> = ({
       onCompleted(data);
     }
   };
-  const handleDelete = () => {
-    onDelete?.();
-  };
 
   useEffect(() => {
     if (potData) {
@@ -137,33 +126,7 @@ const PotForm: React.FC<PotFormProps> = ({
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div css={headContainer}>
-          <div css={titleContainer}>
-            <h2 css={titleStyle}>
-              {type === "create" ? "나의 팟 만들기" : "나의 팟 수정하기"}
-            </h2>
-            <PotIcon css={iconStyle} />
-          </div>
-          {type === "create" ? (
-            <Button variant="action" type="submit" disabled={!isValid}>
-              팟 만들기
-            </Button>
-          ) : (
-            <div css={headButtonContainer}>
-              <Button
-                type="submit"
-                variant="action"
-                actionType="edit"
-                disabled={!isValid}
-              >
-                수정 완료
-              </Button>
-              <PotButton type="red" onClick={handleDelete}>
-                삭제하기
-              </PotButton>
-            </div>
-          )}
-        </div>
+        <FormHeader potId={potId} type={type} potName={potData?.potName} />
         <div css={formContainer}>
           <label css={labelStyle}>
             팟 네임
