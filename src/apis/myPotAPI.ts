@@ -11,7 +11,8 @@ import {
   PatchTodoStatusParams,
   GetTaskParams,
   MyPotMember,
-  PostTask
+  PostTask,
+  PatchStatus
 } from "./types/myPot";
 
 export const getMyPotTodo = async ({ potId, page, size }: GetTodoParams) => {
@@ -52,6 +53,10 @@ export const getMyPotMembers = async ({ potId }: GetTaskParams ) => {
 
 export const postMyPotTask = async ({ potId, data }: { potId: number; data: PostTask }) => {
   return authApiPost(`/my-pots/${potId}/tasks`, data);
+}
+
+export const patchMyPotStatus = async({ potId, taskId }: TaskAPIParams, data: PatchStatus) => {
+  return authApiPatch(`/my-pots/${potId}/tasks/${taskId}/status?status=${data.status}`);
 }
 
 export const getMyPot = async () => {
