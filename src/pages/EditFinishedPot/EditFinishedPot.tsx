@@ -19,7 +19,7 @@ const EditFinishedPot = () => {
       },
       {
         onSuccess: () => {
-          navigate(`${routes.pot.base}/${potId}`);
+          navigate(`${routes.pot.base}`);
         },
       }
     );
