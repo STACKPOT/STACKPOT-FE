@@ -21,7 +21,10 @@ import {
   iconStyle,
   prevButtonStyle,
   dropdownWrapperStyle,
+  profileImageStyle,
+  arrowIconStyle
 } from "./TaskDetail.style";
+import { container} from "../../MyPotMain.style"
 import { DdayBadge, StateBadge, MyFeedDropdown } from "@components/index";
 import { CalendarIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
@@ -36,7 +39,7 @@ import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
 import { displayStatus, WorkModal } from "@constants/categories";
 import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
-import ChangeStatusModalWrapper from "@pages/MyPot/components/ChangeStatusModal/ChangeStatusModalWrapper";
+import ChangeStatusModalWrapper from "@pages/MyPot/components/ChangeStatusModal/ChangeStatusModalWrapper/ChangeStatusModalWrapper";
 import { usePatchMyPotStatus } from "apis/hooks/myPots/usePatchMyPotStatus";
 import { AnotherTaskStatus } from "../../../../types/taskStatus";
 
@@ -104,7 +107,7 @@ const TaskDetailPage: React.FC = () => {
   if (!task?.result) return <p>데이터를 찾을 수 없습니다.</p>;
 
   return (
-    <>
+    <main css={container}>
       <ConfirmModalWrapper
         isModalOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
@@ -129,7 +132,7 @@ const TaskDetailPage: React.FC = () => {
       <div css={titleContainer}>
         <div css={leftContainer}>
           <button onClick={handlePrev} css={prevButtonStyle}>
-            <ArrowLeftIcon css={iconStyle} />
+            <ArrowLeftIcon css={arrowIconStyle} />
           </button>
           <div css={titleStyle}>{task.result.title}</div>
         </div>
@@ -174,12 +177,13 @@ const TaskDetailPage: React.FC = () => {
         {task.result.participants.map((participant, index) => (
           <div css={contributorCard} key={index}>
             <div css={contributorInner}>
+              <img src={roleImages[participant.role as Role]} css={profileImageStyle} alt="프로필"/>
               <span css={contributorNicknameStyle}>{participant.nickName}</span>
             </div>
           </div>
         ))}
       </div>
-    </>
+    </main>
   );
 };
 
