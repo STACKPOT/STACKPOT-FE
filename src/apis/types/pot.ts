@@ -99,6 +99,7 @@ export interface PotDetail {
   recruitingMembers: Record<Role, number>;
   owner: boolean;
   dday: string;
+  potSummary: string;
 }
 export interface GetPotApplicationResponse {
   applicationId: number;
