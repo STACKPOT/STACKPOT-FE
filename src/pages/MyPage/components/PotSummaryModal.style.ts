@@ -68,7 +68,7 @@ export const bodyTitleStyle = css`
     color: ${theme.color.point.hero};
 `
 export const contentStyle = css`
-    height: 15.6rem;
+    height: 11.3rem;
     width: 100%;
     overflow-y: auto;
     ${theme.font.caption3};
@@ -80,6 +80,5 @@ export const contentStyle = css`
 `
 export const appealContentStyle = css`
     ${contentStyle};
-    height: 21.8rem;
-    margin-bottom: 2.7rem;
+    height: 24.3rem;
 `

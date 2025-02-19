@@ -70,7 +70,7 @@ export const bodyTitleStyle = css`
     color: ${theme.color.point.hero};
 `
 export const introductionContentStyle = css`
-    height: 15.6rem;
+    height: 11.3rem;
     width: 100%;
     overflow-y: auto;
     ${theme.font.caption3};
