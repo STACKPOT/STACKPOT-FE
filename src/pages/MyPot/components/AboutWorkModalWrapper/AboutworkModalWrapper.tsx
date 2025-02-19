@@ -1,5 +1,6 @@
-import { blurOverlayStyle, modalOverlayStyle } from "../../MyPotStatus/MyPotStatus.style";
+import React from "react";
 import AboutWorkModal from "../../MyPotStatus/AboutWorkModal/AboutWorkModal";
+import { aboutWorkModalOverlayStyle } from "./AboutWorkModalWrapper.style";
 import { TaskStatus } from "types/taskStatus";
 
 interface AboutWorkModalWrapperProps {
@@ -17,20 +18,17 @@ const AboutWorkModalWrapper: React.FC<AboutWorkModalWrapperProps> = ({
   taskId,
   onClose,
 }) => {
+  if (!isModalOpen) return null;
+
   return (
-    <>
-      {isModalOpen && <div css={blurOverlayStyle} />}
-      {isModalOpen && (
-        <div css={modalOverlayStyle}>
-          <AboutWorkModal
-            onClose={onClose}
-            activeStatus={activeStatus}
-            title={modalTitle}
-            taskId={taskId}
-          />
-        </div>
-      )}
-    </>
+    <div css={aboutWorkModalOverlayStyle}>
+      <AboutWorkModal
+        onClose={onClose}
+        activeStatus={activeStatus}
+        title={modalTitle}
+        taskId={taskId}
+      />
+    </div>
   );
 };
 
