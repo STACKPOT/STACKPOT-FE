@@ -2,7 +2,6 @@ import { css } from "@emotion/react";
 
 const commonStyle = (inView: boolean) => css`
   position: absolute;
-  left: 50%;
   transform: translateX(-50%) ${inView ? "scale(1)" : "scale(0.4)"};
   opacity: ${inView ? 1 : 0};
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
@@ -18,6 +17,7 @@ export const modalStyle = (inView: boolean) => css`
   width: 40.4rem;
   height: 25.4rem;
   top: 3.3rem;
+  left: 50%;
 `;
 
 export const profileImageStyle = (inView: boolean) => css`
@@ -25,4 +25,5 @@ export const profileImageStyle = (inView: boolean) => css`
   width: 56.6rem;
   height: 12.1rem;
   top: 4.8rem;
+  left: 40%;
 `;

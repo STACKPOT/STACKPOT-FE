@@ -1,3 +1,4 @@
+import { Role } from "types/role";
 import { APITaskStatus } from "types/taskStatus";
 
 export interface Todo {
@@ -109,6 +110,35 @@ export interface GetTaskParams {
   potId: number;
 }
 
+export interface GetTasksMonthParams {
+  potId: number;
+  year: number;
+  month: number;
+}
+
+export interface GetTasksMonthResponse {
+  taskId: number;
+  deadLine: string;
+  participating: boolean
+}
+
+export interface GetTasksCalendarParams {
+  potId: number;
+  date: string
+}
+
+export interface GetTasksCalendarResponse {
+  taskboardId: number;
+  title: string;
+  description: string;
+  creatorNickname: string;
+  creatorRole: Role;
+  category: Role[];
+  status: APITaskStatus;
+  deadLine: string;
+  participants: Participant[];
+  dday: string;
+}
 export interface MyPotMember {
   potMemberId: number;
   nickname: string;

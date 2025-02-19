@@ -1,39 +1,44 @@
 import { useState } from "react";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
-import { Datepicker, setOptions, localeKo } from "@mobiscroll/react";
+import { Datepicker, setOptions, localeKo, MbscDatepickerPageChangeEvent } from "@mobiscroll/react";
 import {
   calendarStyle,
   container,
   dateStyle,
   dividerStyle,
-  iconStyle,
   mainContainer,
   noticeStyle,
   taskContainer,
   taskContainerStyle,
-  titleContainer,
-  titleStyle,
 } from "./MyPotCalendar.style";
 import { TaskBox } from "./components";
-import { taskData } from "mocks/taskData";
-import { PotIcon } from "@assets/svgs";
+import useGetTasksMonth from "apis/hooks/myPots/useGetTasksMonth";
+import { useParams } from "react-router-dom";
+import useGetTasksCalendar from "apis/hooks/myPots/useGetTasksCalendar";
 setOptions({
   locale: localeKo,
   themeVariant: "light",
+  theme: "ios"
 });
+import { formatDate } from "@utils/dateUtils";
+import theme from "@styles/theme";
 
 const MyPotCalendar = () => {
-  const [date, setDate] = useState<Date | null>(null);
+  const { potId } = useParams();
+  const potIdNumber = Number(potId);
 
-  const myMarked = [
-    { date: "2025-02-04" },
-    { date: "2025-01-02T00:00", color: "#46c4f3" },
-    { date: "2025-01-02T00:00", color: "#46c4f3" },
-    { date: "2025-01-06T00:00", color: "#7e56bd" },
-    { date: "2025-01-11T00:00", color: "#7e56bd" },
-    { date: "2025-01-19T00:00", color: "#89d7c9" },
-    { date: "2025-01-28T00:00", color: "#ea4986" },
-  ];
+  const [date, setDate] = useState<Date | null>(null);
+  const [month, setMonth] = useState<Date>(new Date());
+
+  const { data: monthTasks } = useGetTasksMonth({
+    potId: potIdNumber,
+    year: month.getFullYear(),
+    month: month.getMonth() + 1,
+  })
+  const { data: dayTasks } = useGetTasksCalendar({
+    potId: potIdNumber,
+    date: formatDate(date ?? new Date())
+  })
 
   const getDayOfWeek = (date: Date | null) => {
     if (!date) return "";
@@ -49,38 +54,52 @@ const MyPotCalendar = () => {
     return days[date.getDay()];
   };
 
+  const handleMonthChange = (e: MbscDatepickerPageChangeEvent) => {
+    if (e.month) {
+      setMonth(e.month);
+    }
+  }
+
   return (
     <main css={mainContainer}>
-      <div css={titleContainer}>
-        <p css={titleStyle}>캘린더</p>
-        <PotIcon css={iconStyle} />
-      </div>
       <div css={container}>
         <div css={calendarStyle}>
           <Datepicker
             display="inline"
-            marked={myMarked}
+            marked={
+              monthTasks?.filter((task) => task.participating).map((task) => {
+                const taskDate = new Date(task.deadLine.split('. ').join('-'));
+                return {
+                  date: task.deadLine,
+                  color: taskDate.getDate() === date?.getDate()
+                    ? theme.color.point.alternative
+                    : theme.color.object.alternative,
+                };
+              })
+            }
             value={date}
-            onChange={(e) => setDate(e.value)}
+            onChange={(e) => setDate(e.value as Date)}
+            onPageChange={handleMonthChange}
+            showOuterDays={false}
           />
         </div>
         <div css={taskContainer}>
           <p css={dateStyle}>
             {date
               ? `${date.getFullYear()}. ${String(date.getMonth() + 1).padStart(
-                  2,
-                  "0"
-                )}. ${String(date.getDate()).padStart(2, "0")} (${getDayOfWeek(
-                  date
-                )})`
+                2,
+                "0"
+              )}. ${String(date.getDate()).padStart(2, "0")} (${getDayOfWeek(
+                date
+              )})`
               : ""}
           </p>
           <div css={dividerStyle} />
           <div css={taskContainerStyle}>
-            {taskData.length === 0 ? (
-              <p css={noticeStyle}>일정이 없습니다</p>
+            {dayTasks && dayTasks.length > 0 ? (
+              dayTasks.map((task) => <TaskBox potId={potIdNumber} task={task} key={task.taskboardId} />)
             ) : (
-              taskData.map((task) => <TaskBox task={task} key={task.id} />)
+              <p css={noticeStyle}>일정이 없습니다</p>
             )}
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import {
   buttonContainer,
@@ -14,11 +14,9 @@ import { Button, PotButton, UploadToast, PostForm } from "@components/index";
 import { FeedPatch } from "apis/types/feed";
 import usePatchFeed from "apis/hooks/feeds/usePatchFeed";
 import useGetFeedDetails from "apis/hooks/feeds/useGetFeedDetails";
-import routes from "@constants/routes";
 
 const EditPost = () => {
   const { feedId } = useParams();
-  const navigate = useNavigate();
 
   const feedIdNumber = feedId ? ~~feedId : 0;
 
@@ -55,19 +53,12 @@ const EditPost = () => {
   } = methods;
 
   const onSubmit: SubmitHandler<FeedPatch> = (formData) => {
-    if (!feedIdNumber) return;
-
-    editFeed(
-      {
+    if (feedIdNumber) {
+      editFeed({
         feedId: feedIdNumber,
         body: formData,
-      },
-      {
-        onSuccess: () => {
-          navigate(`${routes.feed.base}/${feedId}`);
-        },
-      }
-    );
+      });
+    }
   };
 
   return (

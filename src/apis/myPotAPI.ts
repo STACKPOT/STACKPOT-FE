@@ -10,6 +10,10 @@ import {
   TodoUpdateRequest,
   PatchTodoStatusParams,
   GetTaskParams,
+  GetTasksMonthParams,
+  GetTasksMonthResponse,
+  GetTasksCalendarResponse,
+  GetTasksCalendarParams,
   MyPotMember
 } from "./types/myPot";
 
@@ -51,4 +55,12 @@ export const getMyPotMembers = async ({ potId }: GetTaskParams ) => {
 
 export const getMyPot = async () => {
   return authApiGet<MyPotResponse[]>("/my-pots");
+};
+
+export const getTasksMonth = async ({ potId, year, month }: GetTasksMonthParams) => {
+  return authApiGet<GetTasksMonthResponse[]>(`/my-pots/${potId}/tasks/month`, { year, month });
+};
+
+export const getTasksCalendar = async ({ potId, date }: GetTasksCalendarParams) => {
+  return authApiGet<GetTasksCalendarResponse[]>(`/my-pots/${potId}/tasks/calendar`, { date });
 };
