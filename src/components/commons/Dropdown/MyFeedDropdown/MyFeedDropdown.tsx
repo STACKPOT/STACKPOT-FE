@@ -46,10 +46,10 @@ const MyFeedDropdown: React.FC<FeedDropdownProps> = ({
         <MeatballIcon css={iconStyle} onClick={toggleDropdown} />
         {isDropdownOpen && (
           <div css={dropdownStyle}>
-            <div css={containerStyle(true)} onClick={onTop}>
+            <div css={containerStyle(true)} onClick={() => { onTop(); setIsDropdownOpen(false); }}>
               {topMessage}
             </div>
-            <div css={containerStyle(false)} onClick={onBottom}>
+            <div css={containerStyle(false)} onClick={() => { onBottom(); setIsDropdownOpen(false); }}>
               {bottomMessage}
             </div>
           </div>
