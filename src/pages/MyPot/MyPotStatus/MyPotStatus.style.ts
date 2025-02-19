@@ -29,6 +29,7 @@ export const highlightStyle = css`
 `;
 
 export const containerStyle = css`
+  width: 100%;
   padding: 3.2rem 4.8rem;
   display: flex;
   flex-direction: column;
