@@ -79,10 +79,10 @@ const MyPotMainPage: React.FC = () => {
           })}
 
           {(check?.result ?? false) && (
-            <div css={viewId} onClick={handleOpenModal}>
+            <button css={viewId} onClick={handleOpenModal} type="button">
               <KaKaoTalkIcon />
               <p css={viewTextStyle}>아이디 보기</p>
-            </div>
+            </button>
           )}
         </div>
         <Outlet />
