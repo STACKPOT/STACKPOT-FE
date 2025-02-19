@@ -45,19 +45,16 @@ export const buttonStyle = css`
   background: ${theme.color.point.alternative};
 
   &.max-tasks {
-    background-color: ${theme.color.object.alternative}; 
+    background-color: ${theme.color.object.alternative};
   }
 `;
 
 export const buttonContainer = css`
+  ${theme.font.caption2}
+  color: ${theme.color.base.white};
   display: flex;
   align-items: center;
   gap: 1rem;
-`;
-
-export const buttonTextStyle = css`
-  ${theme.font.caption2}
-  color: ${theme.color.base.white};
 `;
 
 export const eachTodoContainer = css`
@@ -97,11 +94,13 @@ export const noTaskTextContainer = css`
 
 export const noneTodoTextStyle = css`
   ${theme.font.caption3};
-  color: #989BA2;
+  color: #989ba2;
   width: 100%;
 `;
 
 export const saveButtonStyle = css`
+  ${theme.font.caption2}
+  color: ${theme.color.base.white};
   align-items: center;
   width: 100%;
   background: ${theme.color.point.hero};
@@ -110,7 +109,7 @@ export const saveButtonStyle = css`
   border: none;
   outline: none;
   cursor: pointer;
-  font-family: inherit; 
+  font-family: inherit;
 
   &:disabled {
     background: ${theme.color.object.alternative};

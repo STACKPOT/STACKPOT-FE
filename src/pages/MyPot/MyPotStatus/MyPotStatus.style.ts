@@ -69,29 +69,28 @@ export const paginationButton = css`
 export const paginationTextStyle = css`
   ${theme.font.body2};
   color: ${theme.color.object.assistive};
-`
+`;
 
 export const statusBoardContainer = css`
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
 export const statusBoardStyle = css`
   gap: 1.6rem;
   display: flex;
   align-items: center;
-`
+`;
 
 export const statusTextStyle = css`
   ${theme.font.bodyBold2};
   color: ${theme.color.base.darkgray};
-`
+`;
 
 export const buttonStyle = css`
   padding: 1.2rem 2.4rem;
-  align-item: center;
   border-radius: 8px;
   border: 0.1rem solid ${theme.color.point.alternative};
   background: ${theme.color.base.white};
@@ -105,31 +104,31 @@ export const buttonStyle = css`
     background: ${theme.color.point.alternative};
     color: ${theme.color.base.white};
   }
-`
+`;
 
 export const plusButtonStyle = css`
   all: unset;
   cursor: pointer;
-`
+`;
 
 export const toDoGirdContainer = css`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, calc((100% - 2 * 2.4rem) / 3));
   gap: 2.4rem;
-`
+`;
 
 export const toDoStatusContainer = css`
   display: flex;
-  flex-direction: column; 
-  gap: 2.4rem; 
+  flex-direction: column;
+  gap: 2.4rem;
 `;
 
 export const toDoStatusHeader = css`
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
-  width: 100%; 
+  width: 100%;
 `;
 export const blurOverlayStyle = css`
   position: fixed;
@@ -137,9 +136,8 @@ export const blurOverlayStyle = css`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.40);;
-  z-index: 999;
-  pointer-events: none; 
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
 `;
 
 export const modalOverlayStyle = css`
@@ -151,6 +149,5 @@ export const modalOverlayStyle = css`
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
-  align-items: center; 
-  z-index: 5000;
+  align-items: center;
 `;
