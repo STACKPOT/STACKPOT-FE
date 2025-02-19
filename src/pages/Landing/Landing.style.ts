@@ -149,3 +149,7 @@ export const imageContentStyle = css`
   ${imageSubtitle}
   text-align: center;
 `;
+
+export const rightIconStyle = css`
+  margin-left: 1.6rem;
+`;
