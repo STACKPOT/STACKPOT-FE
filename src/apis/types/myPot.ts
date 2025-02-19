@@ -116,3 +116,11 @@ export interface MyPotMember {
   potRole: string;
   owner: boolean;
 }
+
+export interface PostTask {
+  title: string;
+  deadline: string;
+  taskboardStatus: APITaskStatus;
+  description: string;
+  participants: number[];
+}
