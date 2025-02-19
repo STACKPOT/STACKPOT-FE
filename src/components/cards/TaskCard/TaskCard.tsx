@@ -108,12 +108,12 @@ const TaskCard: React.FC<TaskCardProps> = ({
           <div css={taskCardInnerTopContainer}>
             <div css={badgeContainer}>
               <DdayBadge days={dday} />
-              {tag.slice(0, 2).map((t, index) => (
-                <Badge key={index} content={t} />
-              ))}
-              {tag.length > 2 && <Badge content="..." />}
+              {tag.length >= 4 ? (
+                <Badge content="전체" />
+              ) : (
+                tag.map((t, index) => <Badge key={index} content={t} />)
+              )}
             </div>
-            
             <div css={forDropdownStyle} onClick={(event) => { event.stopPropagation(); }}>
               <MyFeedDropdown
                 topMessage="수정하기"
