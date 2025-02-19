@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   leftContainer,
@@ -46,6 +46,10 @@ import { AnotherTaskStatus } from "../../../../types/taskStatus";
 const TaskDetailPage: React.FC = () => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const potIdNumber = Number(potId);
   const taskIdNumber = Number(taskId);
@@ -137,9 +141,7 @@ const TaskDetailPage: React.FC = () => {
           <div css={titleStyle}>{task.result.title}</div>
         </div>
         <div css={rightContainer}>
-          <button type="button" onClick={handleOpenChangingModal}>
-            <StateBadge content={displayStatus[task.result.status]} />
-          </button>
+            <StateBadge content={displayStatus[task.result.status]} onClick={handleOpenChangingModal}/>
           <div css={dropdownWrapperStyle} onClick={(event) => event.stopPropagation()}>
             <MyFeedDropdown
               topMessage="수정하기"
