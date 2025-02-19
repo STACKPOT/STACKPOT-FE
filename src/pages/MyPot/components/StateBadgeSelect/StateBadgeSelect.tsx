@@ -24,9 +24,9 @@ const StatusBadgeSelector: React.FC<StatusBadgeSelectorProps> = ({ selectedStatu
     <div css={firstSectionContainer}>
         <div css={labelTextStyle}>업무 상태</div>
         <div css={badgeContainer}>
-          <button css={getBadgeStyle("진행 전")} onClick={() => setSelectedStatus("진행 전")}>진행 전</button>
-          <button css={getBadgeStyle("진행 중")} onClick={() => setSelectedStatus("진행 중")}>진행 중</button>
-          <button css={getBadgeStyle("완료")} onClick={() => setSelectedStatus("완료")}>완료</button>
+          <button type="button" css={getBadgeStyle("진행 전")} onClick={() => setSelectedStatus("진행 전")}>진행 전</button>
+          <button type="button" css={getBadgeStyle("진행 중")} onClick={() => setSelectedStatus("진행 중")}>진행 중</button>
+          <button type="button" css={getBadgeStyle("완료")} onClick={() => setSelectedStatus("완료")}>완료</button>
         </div>
     </div>
   );

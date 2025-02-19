@@ -5,7 +5,7 @@ export const saveButtonStyle = css`
   display: flex;
   width: 42.9rem;
   height: 5rem;
-  padding: 0.6rem 0rem;
+  padding: 0.6rem 0;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
@@ -13,6 +13,11 @@ export const saveButtonStyle = css`
   background: ${theme.color.point.hero};
   color: ${theme.color.point.ivory};
   cursor: pointer;
+  &:disabled {
+    background: ${theme.color.object.alternative};
+    color: ${theme.color.base.white};
+    cursor: default;
+  }
 `;
 
 export const buttonTextStyle = css`
@@ -34,7 +39,7 @@ export const anotherSaveButtonStyle = css`
   display: flex;
   width: 19.4rem;
   height: 5rem;
-  padding 0.6rem 2.4rem;
+  padding: 0.6rem 2.4rem;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
@@ -42,13 +47,18 @@ export const anotherSaveButtonStyle = css`
   background: ${theme.color.point.hero};
   color: ${theme.color.point.ivory};
   cursor: pointer;
+  &:disabled {
+    background: ${theme.color.object.alternative};
+    color: ${theme.color.base.white};
+    cursor: default;
+  }
 `;
 
 export const deleteButtonStyle = css`
   display: flex;
   width: 19.4rem;
   height: 5rem;
-  padding 0.6rem 2.4rem;
+  padding: 0.6rem 2.4rem;
   justify-content: center;
   align-items: center;
   border-radius: 16px;
@@ -56,4 +66,9 @@ export const deleteButtonStyle = css`
   background: ${theme.color.base.white};
   color: ${theme.color.feedback.negative};
   cursor: pointer;
+  &:disabled {
+    border: 1px solid ${theme.color.object.alternative};
+    color: ${theme.color.base.black};
+    cursor: default;
+  }
 `;
