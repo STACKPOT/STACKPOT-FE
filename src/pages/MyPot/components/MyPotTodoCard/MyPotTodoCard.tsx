@@ -2,23 +2,25 @@ import { useState } from "react";
 import { usePatchMyPotTodoStatus } from "apis/hooks/myPots/usePatchMyPotTodoStatus"; 
 import { cardStyle, nicknameStyle, plusButtonStyle, profileImageStyle, statusContainer, todoContainer, todoListContainer, todoTextStyle } from "./MyPotTodoCard.style";
 import { PlusButtonIcon } from "@assets/svgs";
-import { MushroomImage } from "@assets/images";
 import MyTodoModalWrapper from "../MyTodoModalWrapper/MyTodoModalWrapper";
 import { Todo } from "apis/types/myPot";
 import { CheckBox } from "@components/index";
+import { Role } from "types/role";
+import { roleImages } from "@constants/roleImage";
 
 interface MyPotTodoCardProps {
   nickname: string;
+  userRole: Role;
   todos: Todo[] | null;
   isFirst: boolean;
   potId: number;
   currentPage: number;
 }
 
-const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId, currentPage  }) => {
+const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, todos, isFirst, potId, currentPage  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate: updateTodoStatus } = usePatchMyPotTodoStatus();
-
+  console.log(userRole);
   const handlePlusButtonClick = () => {
     setIsModalOpen(true);
   };
@@ -33,7 +35,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
 
   return (
     <div css={cardStyle}>
-      <img css={profileImageStyle} src={MushroomImage} />
+      <img css={profileImageStyle} src={roleImages[userRole] || roleImages.DEFAULT} alt="프로필"/>
       <div css={nicknameStyle}>
         <p>{nickname}</p>
         {isFirst && currentPage === 1 && <PlusButtonIcon css={plusButtonStyle} onClick={handlePlusButtonClick} />} 

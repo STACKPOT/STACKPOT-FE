@@ -17,6 +17,7 @@ const useGetMyPotTodo = ({ potId, page, size }: GetTodoParams) => {
     select: (result) => ({
       title: result.potName,
       nickname: result.todos?.[0]?.userNickname ?? "",
+      userRole: result.todos?.[0]?.userRole ?? "DEFAULT",
       taskCount: result.todos?.[0]?.todoCount ?? 0,
       todos: result.todos,
       totalElements: result.totalElements,
