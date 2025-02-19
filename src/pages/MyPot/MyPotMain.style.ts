@@ -25,8 +25,8 @@ export const textStyle = css`
 export const iconStyle = css`
   width: 2.4rem;
   height: 2.4rem;
+  color: #262626;
 `
-
 
 export const tabsContainer = css`
   display: flex;
