@@ -4,8 +4,8 @@ import { PatchAppealPotParam } from "apis/types/pot";
 
 const usePatchAppealPot = () => {
   return useMutation({
-    mutationFn: ({ potId, memberId, body }: PatchAppealPotParam) =>
-      PatchAppealPot(potId, memberId, body),
+    mutationFn: ({ potId, body }: PatchAppealPotParam) =>
+      PatchAppealPot(potId, body),
   });
 };
 

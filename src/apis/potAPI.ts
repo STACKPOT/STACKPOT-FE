@@ -94,12 +94,8 @@ export const GetPotsCompleted = async ({
   });
 };
 
-export const PatchAppealPot = async (
-  potId: number,
-  memberId: number,
-  body: AppealPotPatch
-) => {
-  return authApiPatch(`/pots/${potId}/members/${memberId}/appeal`, body);
+export const PatchAppealPot = async (potId: number, body: AppealPotPatch) => {
+  return authApiPatch(`/pots/${potId}/members/appeal`, body);
 };
 
 export const PatchPotComplete = async (

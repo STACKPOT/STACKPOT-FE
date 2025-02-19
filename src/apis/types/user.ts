@@ -120,33 +120,3 @@ export interface GetUsersMyPagesResponse {
 export interface GetUsersInfoParams {
   userId: number;
 }
-
-export interface PatchFinishedPotParams {
-  potId: number;
-  body: PatchFinishedPotBody;
-}
-export interface PatchFinishedPotBody {
-  potName: string;
-  potStartDate: string;
-  potLan: string;
-  potSummary: string;
-}
-export interface PatchFinishedPotResponse {
-  potId: number;
-  potName: string;
-  potStartDate: string;
-  potEndDate: string;
-  potDuration: string;
-  potLan: string;
-  potContent: string;
-  potStatus: string;
-  potModeOfOperation: string;
-  potSummary: string;
-  recruitmentDeadline: string;
-  recruitmentDetails: RecruitmentDetails;
-}
-
-export interface RecruitmentDetails {
-  recruitmentRole: Role;
-  recruitmentCount: number;
-}

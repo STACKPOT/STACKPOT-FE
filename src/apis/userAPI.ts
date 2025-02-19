@@ -20,8 +20,8 @@ import {
   GetUsersMyPagesParams,
   GetUsersMyPagesResponse,
   GetUsersInfoParams,
-  PatchFinishedPotParams,
 } from "./types/user";
+import { PatchPotCompleteBody, PostPotResponse } from "./types/pot";
 
 export const getKakaoLogIn = async (code: string) => {
   return apiGet<LogInResponse>("/users/oauth/kakao", { code });
@@ -85,9 +85,9 @@ export const getUsersInfo = async ({ userId }: GetUsersInfoParams) => {
   return authApiGet<GetUserResponse>(`/users/${userId}`);
 };
 
-export const patchFinishedPot = async ({
-  potId,
-  body,
-}: PatchFinishedPotParams) => {
-  return authApiPatch(`/users/${potId}`, { body });
+export const patchFinishedPot = async (
+  potId: number,
+  body: PatchPotCompleteBody
+) => {
+  return authApiPatch<PostPotResponse>(`/users/${potId}`, body);
 };

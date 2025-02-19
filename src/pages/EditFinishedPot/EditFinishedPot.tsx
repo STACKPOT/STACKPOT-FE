@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { FinishedPotForm } from "./components";
 import routes from "@constants/routes";
-import { PatchFinishedPotBody } from "apis/types/user";
+import { PatchPotCompleteBody } from "apis/types/pot";
 import usePatchFinishedPot from "apis/hooks/users/usePatchFinishedPot";
+import { useState } from "react";
 
 const EditFinishedPot = () => {
   const { potId } = useParams();
@@ -10,7 +11,8 @@ const EditFinishedPot = () => {
   const { mutate } = usePatchFinishedPot();
 
   const navigate = useNavigate();
-  const handleUpload = (data: PatchFinishedPotBody) => {
+
+  const handleUpload = (data: PatchPotCompleteBody) => {
     mutate(
       {
         potId: potIdNumber,
@@ -32,4 +34,5 @@ const EditFinishedPot = () => {
     />
   );
 };
+
 export default EditFinishedPot;

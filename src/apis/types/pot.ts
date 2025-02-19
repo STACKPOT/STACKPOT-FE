@@ -174,7 +174,6 @@ export interface CompletedPotDetail {
 
 export interface PatchAppealPotParam {
   potId: number;
-  memberId: number;
   body: AppealPotPatch;
 }
 
