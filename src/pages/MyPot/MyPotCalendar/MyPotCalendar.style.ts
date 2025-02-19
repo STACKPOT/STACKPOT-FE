@@ -24,24 +24,25 @@ export const calendarStyle = css`
   width: 53.6rem;
   border: 1px solid ${theme.color.object.alternative};
   box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
+  color: ${theme.color.base.darkgray};
 
   .mbsc-ios.mbsc-datepicker-inline {
     border-color: white;
   }
-  .mbsc-ios .mbsc-calendar-day-text{
+  .mbsc-calendar-day-text{
     ${theme.font.body3};
     color: ${theme.color.object.assistive};
     margin: 0.4rem 0;
   }
   .mbsc-hover .mbsc-ios .mbsc-calendar-day-text{
     ${theme.font.body3};
-    background: transparent !important;
+    background: transparent;
     color: ${theme.color.object.assistive};
     border-color: transparent;
   }
   .mbsc-selected .mbsc-ios .mbsc-calendar-day-text{
     ${theme.font.body3};
-    background: ${theme.color.point.alternative} !important;
+    background: ${theme.color.point.alternative};
     color: white;
     border-color: transparent;
   }
@@ -50,7 +51,6 @@ export const calendarStyle = css`
   }
   .mbsc-calendar-title {
     ${theme.font.title1};
-    color: ${theme.color.base.darkgray};
   }
   .mbsc-button-icon{
     color: ${theme.color.base.darkgray};
