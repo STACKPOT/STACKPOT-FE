@@ -32,8 +32,15 @@ export const contributorButtonInnerContainer = css`
   display: flex;
   align-items: center;
   gap: 1.2rem;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const nicknameStyle = css`
   ${theme.font.captionBold1};
 `;
+
+export const profileImageStyle = css`
+  width: 1.6rem;
+  height: 1.6rem;
+`

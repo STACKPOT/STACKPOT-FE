@@ -45,6 +45,7 @@ export const guestProfileStyle = css`
 `;
 
 export const profileContainer = css`
+  position: relative;
   display: flex;
   gap: 1.2rem;
   align-items: center;

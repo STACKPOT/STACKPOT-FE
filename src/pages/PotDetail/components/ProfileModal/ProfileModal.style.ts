@@ -5,7 +5,7 @@ export const container = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.6rem;
 `
 export const profileStyle = css`
     width: 6.4rem;

@@ -10,8 +10,7 @@ export const background = css`
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding-top: 7.8rem;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 10;
 `;

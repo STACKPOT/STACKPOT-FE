@@ -27,6 +27,7 @@ interface FinishedPotCardProps {
   languages: string;
   members: Role[];
   isProfilePage: boolean;
+  isUserPage: boolean;
   buttonType?: "edit" | "appeal" | "none";
 }
 
@@ -40,6 +41,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
   languages,
   members,
   isProfilePage: isMyPage,
+  isUserPage,
   buttonType = "none",
 }: FinishedPotCardProps) => {
   const navigate = useNavigate();
@@ -56,13 +58,14 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
   ];
 
   const handleClickPot = (id: number) => {
-    if (isMyPage) {
+    if (isMyPage || isUserPage) {
       setSummaryModal(id);
     } else {
       navigate(`${routes.pot.base}/${id}`);
       window.scrollTo(0, 0);
     }
   };
+
   const handleEditPot = (id: number) => {
     if (buttonType === "edit") {
       navigate(`${routes.editFinishedPot}/${id}`);

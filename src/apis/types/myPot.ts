@@ -139,3 +139,10 @@ export interface GetTasksCalendarResponse {
   participants: Participant[];
   dday: string;
 }
+export interface MyPotMember {
+  potMemberId: number;
+  nickname: string;
+  kakaoId?: string;
+  potRole: string;
+  owner: boolean;
+}

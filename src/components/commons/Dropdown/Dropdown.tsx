@@ -45,7 +45,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           {options.map((option) => (
             <div
               key={option.key}
-              css={styles.option(option.key === selectedOption.key)}
+              css={styles.option}
               onClick={() => selectOption(option)}
             >
               {option.label}
