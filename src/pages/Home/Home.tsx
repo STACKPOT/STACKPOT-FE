@@ -16,10 +16,9 @@ import {
 
 import "swiper/swiper-bundle.css";
 import "swiper";
-import PopularPots from "./components/PopularPots/PopularPots";
-import Feed from "./components/Feed/Feed";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
+import { Feed, PopularPots } from "./components";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
