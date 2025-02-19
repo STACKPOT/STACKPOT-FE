@@ -5,7 +5,6 @@ export const container = css`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 17.5rem;
 `;
 export const titleContainer = css`
   display: flex;
@@ -29,4 +28,5 @@ export const titleStyle = css`
   ${theme.font.bodyBold3}
   color: ${theme.color.base.darkgray};
   word-break: break-all;
+  margin-right: 1.6rem;
 `;
