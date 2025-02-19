@@ -18,8 +18,11 @@ import "swiper/swiper-bundle.css";
 import "swiper";
 import PopularPots from "./components/PopularPots/PopularPots";
 import Feed from "./components/Feed/Feed";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
     import.meta.env.VITE_REST_API_KEY
   }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
@@ -27,7 +30,12 @@ const Home: React.FC = () => {
 &prompt=login`;
 
   const handleClick = () => {
-    window.location.href = link;
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      navigate(routes.createPot);
+    } else {
+      window.location.href = link;
+    }
   };
 
   return (
