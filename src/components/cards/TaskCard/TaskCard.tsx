@@ -108,9 +108,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
           <div css={taskCardInnerTopContainer}>
             <div css={badgeContainer}>
               <DdayBadge days={dday} />
-              {tag.map((t, index) => (
+              {tag.slice(0, 2).map((t, index) => (
                 <Badge key={index} content={t} />
               ))}
+              {tag.length > 2 && <Badge content="..." />}
             </div>
             
             <div css={forDropdownStyle} onClick={(event) => { event.stopPropagation(); }}>
