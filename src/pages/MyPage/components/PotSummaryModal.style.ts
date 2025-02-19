@@ -80,5 +80,7 @@ export const contentStyle = css`
 `
 export const appealContentStyle = css`
     ${contentStyle};
-    height: 24.3rem;
+    height: auto;
+    min-height: 7.5rem;
+    max-height: 24.3rem;
 `
