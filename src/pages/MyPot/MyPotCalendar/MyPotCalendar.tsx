@@ -97,7 +97,7 @@ const MyPotCalendar = () => {
           <div css={dividerStyle} />
           <div css={taskContainerStyle}>
             {dayTasks && dayTasks.length > 0 ? (
-              dayTasks.map((task) => <TaskBox task={task} key={task.taskboardId} />)
+              dayTasks.map((task) => <TaskBox potId={potIdNumber} task={task} key={task.taskboardId} />)
             ) : (
               <p css={noticeStyle}>일정이 없습니다</p>
             )}

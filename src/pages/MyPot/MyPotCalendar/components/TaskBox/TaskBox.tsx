@@ -13,15 +13,23 @@ import {
 import { GetTasksCalendarResponse } from "apis/types/myPot";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface TaskBoxProps {
+  potId: number;
   task: GetTasksCalendarResponse;
 }
 
-const TaskBox: React.FC<TaskBoxProps> = ({ task }) => {
+const TaskBox: React.FC<TaskBoxProps> = ({ potId, task }) => {
+  const navigate = useNavigate();
+  const handleTaskClick = () => {
+    navigate(`${routes.myPot.base}/${routes.task}/${potId}/${task.taskboardId}`);
+    window.scrollTo(0, 0);
+  }
 
   return (
-    <div css={taskBoxStyle}>
+    <div css={taskBoxStyle} onClick={handleTaskClick}>
       <div css={taskTitleContainer}>
         <DdayBadge days={task.dday} />
         <p css={taskTitleStyle}>{task.title}</p>

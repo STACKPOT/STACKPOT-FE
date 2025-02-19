@@ -6,6 +6,7 @@ export const taskBoxStyle = css`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  cursor: pointer;
 `;
 export const taskTitleContainer = css`
   display: flex;
