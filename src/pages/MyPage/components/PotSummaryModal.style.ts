@@ -17,7 +17,6 @@ export const backgroundStyle = css`
 `;
 export const modalStyle = css`
     width: 65.2rem;
-    height: 66.5rem;
     display: flex;
     flex-direction: column;
     padding: 3.2rem;
@@ -44,6 +43,8 @@ export const titleContainer = css`
 export const titleStyle = css`
     ${theme.font.title1};
     color: ${theme.color.point.hero};
+    text-align: center;
+    word-wrap: break-word;
 `
 export const dateContainer = css`
     display: flex;
@@ -80,4 +81,5 @@ export const contentStyle = css`
 export const appealContentStyle = css`
     ${contentStyle};
     height: 21.8rem;
+    margin-bottom: 2.7rem;
 `
