@@ -12,7 +12,7 @@ import {
 } from "./ExplainModal.style";
 
 interface ExplainModalProps {
-  type?: "normal" | "delete";
+  type?: "normal" | "delete" | "profile";
   title?: string;
   subtitle?: string;
   children?: React.ReactNode;
@@ -36,13 +36,13 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
     <div css={modalBackgroundStyle}>
       <div css={containerStyle}>
         <CloseIcon type="button" css={closeButtonStyle} onClick={onCancel} />
-        <div css={contentButtonContainerStyle}>
-          <div css={titleContentContainerStyle}>
+        <div css={contentButtonContainerStyle(type)}>
+          <div css={titleContentContainerStyle(type)}>
             {title && <p css={titleStyle}>{title}</p>}
             {subtitle && <p css={subtitleStyle}>{subtitle}</p>}
             {children}
           </div>
-          <button css={type === "delete" ? deleteButtonStyle : buttonStyle} onClick={onClick} disabled={disabled}>
+          <button css={type === "delete" ? deleteButtonStyle : buttonStyle(type)} onClick={onClick} disabled={disabled}>
             {buttonText}
           </button>
         </div>

@@ -9,7 +9,8 @@ import {
   GetTodoParams,
   TodoUpdateRequest,
   PatchTodoStatusParams,
-  GetTaskParams
+  GetTaskParams,
+  MyPotMember
 } from "./types/myPot";
 
 export const getMyPotTodo = async ({ potId, page, size }: GetTodoParams) => {
@@ -39,6 +40,14 @@ export const deleteMyPotTask = async ({ potId, taskId }: TaskAPIParams) => {
 export const patchMyPotTask = async ({ potId, taskId }: TaskAPIParams, data: TaskPatch) => {
   return authApiPatch(`/my-pots/${potId}/tasks/${taskId}`, data);
 };
+
+export const getMyPotOwner = async ({ potId }: GetTaskParams) => {
+  return authApiGet(`/my-pots/${potId}/isOwner`);
+}
+
+export const getMyPotMembers = async ({ potId }: GetTaskParams ) => {
+  return authApiGet<MyPotMember[]>(`/pots/${potId}/members`);
+}
 
 export const getMyPot = async () => {
   return authApiGet<MyPotResponse[]>("/my-pots");

@@ -108,3 +108,11 @@ export interface TaskAPIParams {
 export interface GetTaskParams {
   potId: number;
 }
+
+export interface MyPotMember {
+  potMemberId: number;
+  nickname: string;
+  kakaoId?: string;
+  potRole: string;
+  owner: boolean;
+}

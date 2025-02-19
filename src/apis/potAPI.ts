@@ -22,6 +22,7 @@ import {
   GetPotsCompletedParams,
   GetPotSummaryResponse,
   PatchPotCompleteBody,
+  PostPotApplicationResponse,
   AppealPotPatch,
 } from "./types/pot";
 
@@ -56,7 +57,7 @@ export const PostPotApplications = async (
   potId: number,
   body: PostPotApplicationBody
 ) => {
-  return authApiPost<GetPotApplicationResponse>(
+  return authApiPost<PostPotApplicationResponse>(
     `pots/${potId}/applications`,
     body
   );

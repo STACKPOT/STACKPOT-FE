@@ -6,6 +6,7 @@ export const mainContainer = css`
   flex-direction: column;
   align-items: center;
   padding-top: 20rem;
+  width: 100%;
 `;
 
 export const sloganContainer = css`
@@ -101,6 +102,50 @@ export const buttonStyle = css`
   margin: 3.2rem 0 4.8rem 0;
 `;
 
-export const MyPotImageStyle = css`
+export const myPotImageStyle = css`
   width: 81.4rem;
+`;
+
+export const imageContainer = css`
+  display: flex;
+  gap: 9rem;
+  padding: 17rem 0;
+`;
+
+export const spanStyle = css`
+  color: ${theme.color.point.hero};
+`;
+
+export const imageTitle = css`
+  ${theme.font.display3}
+  color: ${theme.color.base.darkgray};
+`;
+
+export const imageSubtitle = css`
+  ${theme.font.body2};
+  color: black;
+`;
+
+export const contentContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  justify-content: center;
+`;
+
+export const horizontalImageContainer = css`
+  display: flex;
+  gap: 10rem;
+  padding: 15rem 0;
+`;
+
+export const horizontalImageStyle = css`
+  width: 58.3rem;
+  height: 57.4rem;
+  margin-bottom: 4.8rem;
+`;
+
+export const imageContentStyle = css`
+  ${imageSubtitle}
+  text-align: center;
 `;
