@@ -10,7 +10,7 @@ const ContributorList: React.FC = () => {
 
   return(
     <div css={contributorButtonOuterContainer}>
-      {data?.result?.slice(1).map((member) => (
+      {data?.result?.map((member) => (
         <div key={member.potMemberId} css={contributorButtonStyle(false)}>
           <div css={contributorButtonInnerContainer}>
             <img src={MushroomImage} alt="프로필 이미지" css={profileImageStyle} />
