@@ -5,25 +5,16 @@ import {
   contentStyle,
   iconStyle,
   buttonContainer,
-  toastStyle,
 } from "./WritePost.style";
 import { PotIcon } from "@assets/svgs";
 import { Button, Modal, PostForm } from "@components/index";
-import UploadToast from "@components/commons/Toast/UploadToast";
-import { useBlocker, useNavigate } from "react-router-dom";
+import { useBlocker } from "react-router-dom";
 import usePostFeed from "apis/hooks/feeds/usePostFeed";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { PostFeedParams } from "apis/types/feed";
-import routes from "@constants/routes";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
 
 const WritePost: React.FC = () => {
-  const [showToast, setShowToast] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const navigate = useNavigate();
 
   const methods = useForm<PostFeedParams>({
     mode: "onChange",
@@ -80,22 +71,6 @@ const WritePost: React.FC = () => {
           onCancel={blocker.reset}
         />
       )}
-
-      <Snackbar
-        open={Boolean(errorMessage)}
-        autoHideDuration={3000}
-        onClose={() => setErrorMessage(null)}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert
-          severity="error"
-          onClose={() => setErrorMessage(null)}
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          {errorMessage}
-        </Alert>
-      </Snackbar>
     </main>
   );
 };
