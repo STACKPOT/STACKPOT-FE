@@ -87,11 +87,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
           </div>
           <div css={listContainer}>
             {applicants.map((applicant) => (
-              <div
-                key={applicant.userId}
-                css={applicantContainer}
-                onClick={() => setShowProfileMember(applicant)}
-              >
+              <div key={applicant.userId} css={applicantContainer}>
                 <CheckBox
                   selected={selectedApplicants.includes(applicant)}
                   onSelect={() => handleSelectApplicant(applicant)}
@@ -99,9 +95,15 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
                 <img
                   css={profileStyle}
                   src={roleImages[applicant.potRole]}
+                  onClick={() => setShowProfileMember(applicant)}
                   alt="profile"
                 />
-                <p css={nicknameStyle}>{applicant.userNickname}</p>
+                <p
+                  css={nicknameStyle}
+                  onClick={() => setShowProfileMember(applicant)}
+                >
+                  {applicant.userNickname}
+                </p>
               </div>
             ))}
           </div>
