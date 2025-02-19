@@ -106,11 +106,11 @@ const router = createBrowserRouter([
             path: `${routes.calendar}/:potId`,
             element: <MyPotCalendarPage />,
           },
-          {
-            path: `${routes.task}/:potId/:taskId`,
-            element: <TaskDetailPage />,
-          },
         ],
+      },
+      {
+        path: `${routes.myPot.base}/${routes.task}/:potId/:taskId`,
+        element: <TaskDetailPage />,
       },
       {
         path: `${routes.feed.edit}/:feedId`,
