@@ -1,20 +1,19 @@
+import { NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   container,
   headerStyle,
   textStyle,
   tabsContainer,
-  tabsTextStyle,
+  navLinkStyle,
   viewId,
   viewTextStyle,
-  iconStyle
+  iconStyle,
 } from "./MyPotMain.style";
-import { NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
-import theme from "@styles/theme";
 import routes from "@constants/routes";
 import { KaKaoTalkIcon } from "@assets/svgs";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { prevButtonStyle } from "./MyPotStatus/TaskDetail/TaskDetail.style";
-import { ArrowLeftIcon } from "@mui/x-date-pickers"
+import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
 import { MemberIdModalWrapper } from "./components/index";
 import { useState } from "react";
@@ -28,7 +27,7 @@ const MyPotMainPage: React.FC = () => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
-  }
+  };
 
   const tabs = [
     { label: "업무 현황", path: `${routes.myPot.base}/${routes.task}/${potId}` },
@@ -52,7 +51,6 @@ const MyPotMainPage: React.FC = () => {
   return (
     <>
       <MemberIdModalWrapper isModalOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
-
       <main css={container}>
         <header css={headerStyle}>
           <button onClick={handlePrev} css={prevButtonStyle}>
@@ -64,20 +62,11 @@ const MyPotMainPage: React.FC = () => {
           {tabs.map((tab) => {
             const isActive = location.pathname.includes(tab.path);
             return (
-              <NavLink
-                key={tab.path}
-                to={tab.path}
-                css={tabsTextStyle}
-                style={{
-                  color: isActive ? theme.color.point.hero : theme.color.interactive.inactive,
-                  textDecoration: "none",
-                }}
-              >
+              <NavLink key={tab.path} to={tab.path} css={[navLinkStyle(isActive)]}>
                 {tab.label}
               </NavLink>
             );
           })}
-
           {(check?.result ?? false) && (
             <button css={viewId} onClick={handleOpenModal} type="button">
               <KaKaoTalkIcon />
