@@ -15,14 +15,15 @@ import {
   titleStyle,
 } from "./MyPotCalendar.style";
 import { TaskBox } from "./components";
-import { taskData } from "mocks/taskData";
 import { PotIcon } from "@assets/svgs";
 import useGetTasksMonth from "apis/hooks/myPots/useGetTasksMonth";
 import { useParams } from "react-router-dom";
+import useGetTasksCalendar from "apis/hooks/myPots/useGetTasksCalendar";
 setOptions({
   locale: localeKo,
   themeVariant: "light",
 });
+import { formatDate } from "@utils/dateUtils";
 
 const MyPotCalendar = () => {
   const { potId } = useParams();
@@ -35,6 +36,10 @@ const MyPotCalendar = () => {
     potId: potIdNumber,
     year: month.getFullYear(),
     month: month.getMonth() + 1,
+  })
+  const { data: dayTasks } = useGetTasksCalendar({
+    potId: potIdNumber,
+    date: formatDate(date ?? new Date())
   })
 
   const getDayOfWeek = (date: Date | null) => {
@@ -90,10 +95,10 @@ const MyPotCalendar = () => {
           </p>
           <div css={dividerStyle} />
           <div css={taskContainerStyle}>
-            {taskData.length === 0 ? (
-              <p css={noticeStyle}>일정이 없습니다</p>
+            {dayTasks && dayTasks.length > 0 ? (
+              dayTasks.map((task) => <TaskBox task={task} key={task.taskboardId} />)
             ) : (
-              taskData.map((task) => <TaskBox task={task} key={task.id} />)
+              <p css={noticeStyle}>일정이 없습니다</p>
             )}
           </div>
         </div>

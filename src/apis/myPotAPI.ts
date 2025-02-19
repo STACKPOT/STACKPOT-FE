@@ -12,6 +12,8 @@ import {
   GetTaskParams,
   GetTasksMonthParams,
   GetTasksMonthResponse,
+  GetTasksCalendarResponse,
+  GetTasksCalendarParams,
 } from "./types/myPot";
 
 export const getMyPotTodo = async ({ potId, page, size }: GetTodoParams) => {
@@ -48,4 +50,8 @@ export const getMyPot = async () => {
 
 export const getTasksMonth = async ({ potId, year, month }: GetTasksMonthParams) => {
   return authApiGet<GetTasksMonthResponse[]>(`/my-pots/${potId}/tasks/month`, { year, month });
+};
+
+export const getTasksCalendar = async ({ potId, date }: GetTasksCalendarParams) => {
+  return authApiGet<GetTasksCalendarResponse[]>(`/my-pots/${potId}/tasks/calendar`, { date });
 };

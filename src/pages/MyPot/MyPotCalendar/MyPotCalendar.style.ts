@@ -27,6 +27,9 @@ export const titleContainer = css`
 export const taskContainerStyle = css`
   height: 46.4rem;
   overflow-y: auto;
+  ::-webkit-scrollbar{
+    display: none;
+  }
 `;
 
 export const titleStyle = css`
@@ -34,7 +37,7 @@ export const titleStyle = css`
   gap: 7.4rem;
 `;
 
-//
+
 export const calendarStyle = css`
   padding: 6.5rem 5rem;
   border-radius: 24px;
