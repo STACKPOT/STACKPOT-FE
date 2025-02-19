@@ -124,3 +124,7 @@ export interface PostTask {
   description: string;
   participants: number[];
 }
+
+export interface PatchStatus {
+  status: string;
+}
