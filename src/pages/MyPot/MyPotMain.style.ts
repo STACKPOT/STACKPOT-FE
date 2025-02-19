@@ -25,7 +25,7 @@ export const textStyle = css`
 export const iconStyle = css`
   width: 2.4rem;
   height: 2.4rem;
-  color: #262626;
+  color: ${theme.color.object.assistive};
 `;
 
 export const tabsContainer = css`
@@ -41,7 +41,7 @@ export const navLinkStyle = (isActive: boolean) => css`
   transition: color 0.3s ease-out;
   ${theme.font.bodyBold2};
   &:hover {
-    color: ${theme.color.point.hero}; /* hover 시 원하는 색상으로 변경 */
+    color: ${theme.color.point.hero};
   }
 `;
 
