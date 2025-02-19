@@ -6,24 +6,22 @@ import {
   container,
   dateStyle,
   dividerStyle,
-  iconStyle,
   mainContainer,
   noticeStyle,
   taskContainer,
   taskContainerStyle,
-  titleContainer,
-  titleStyle,
 } from "./MyPotCalendar.style";
 import { TaskBox } from "./components";
-import { PotIcon } from "@assets/svgs";
 import useGetTasksMonth from "apis/hooks/myPots/useGetTasksMonth";
 import { useParams } from "react-router-dom";
 import useGetTasksCalendar from "apis/hooks/myPots/useGetTasksCalendar";
 setOptions({
   locale: localeKo,
   themeVariant: "light",
+  theme: "ios"
 });
 import { formatDate } from "@utils/dateUtils";
+import theme from "@styles/theme";
 
 const MyPotCalendar = () => {
   const { potId } = useParams();
@@ -64,22 +62,25 @@ const MyPotCalendar = () => {
 
   return (
     <main css={mainContainer}>
-      <div css={titleContainer}>
-        <p css={titleStyle}>캘린더</p>
-        <PotIcon css={iconStyle} />
-      </div>
       <div css={container}>
         <div css={calendarStyle}>
           <Datepicker
             display="inline"
             marked={
-              monthTasks?.filter((task) => task.participating).map((task) =>
-                ({ date: task.deadLine })
-              )
+              monthTasks?.filter((task) => task.participating).map((task) => {
+                const taskDate = new Date(task.deadLine.split('. ').join('-'));
+                return {
+                  date: task.deadLine,
+                  color: taskDate.getDate() === date?.getDate()
+                    ? theme.color.point.alternative
+                    : theme.color.object.alternative,
+                };
+              })
             }
             value={date}
             onChange={(e) => setDate(e.value as Date)}
             onPageChange={handleMonthChange}
+            showOuterDays={false}
           />
         </div>
         <div css={taskContainer}>
