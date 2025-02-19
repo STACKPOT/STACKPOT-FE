@@ -4,8 +4,7 @@ import theme from "@styles/theme";
 export const mainContainer = css`
   display: flex;
   width: 73.5rem;
-  height: 41.7rem;
-  padding: 3.2rem;
+  padding: 3.2rem 3.2rem 6rem;
   flex-direction: column;
   align-items: center;
   position: absolute;
@@ -85,7 +84,7 @@ export const nicknameIdContainer = css`
 export const gridContainer = css`
   display: grid;
   grid-template-columns: repeat(3, 22rem);
-  gap: 3.2rem 0.8rem;
+  gap: 3.2rem 0;
   justify-content: flex-start;
   width: fit-content;
 `;
