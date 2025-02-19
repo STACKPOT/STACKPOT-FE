@@ -148,5 +148,5 @@ export const profileImageStyle = css`
 export const arrowIconStyle = css`
   width: 2.4rem;
   height: 2.4rem;
-  color: #262626;
+  color: ${theme.color.object.assistive};
 `
