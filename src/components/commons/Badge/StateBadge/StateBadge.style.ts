@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 import { AnotherTaskStatus } from "types/taskStatus";
 
-export const badgeStyle = (content: AnotherTaskStatus) => css`
+export const badgeStyle = (content: AnotherTaskStatus, clickable: boolean = false) => css`
   display: flex;
   padding: 1.2rem 2.4rem;
   border-radius: 8px;
@@ -16,10 +16,5 @@ export const badgeStyle = (content: AnotherTaskStatus) => css`
   };
   color: ${theme.color.point.navy};
   ${theme.font.captionBold1};
-
-  &:active,
-  &:focus {
-    outline: none;
-    box-shadow: none;
-  }
+  cursor: ${clickable ? "pointer" : "default"};
 `;
