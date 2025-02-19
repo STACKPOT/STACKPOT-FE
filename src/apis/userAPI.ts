@@ -54,7 +54,7 @@ export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
   return authApiGet<MyPageResponse>("/users/mypages", { dataType });
 };
 
-export const GetFinishedModal = async ({ potId }: GetFinishedModalParams) => {
+export const GetFinishedModal = async (potId: number) => {
   return authApiGet<FinishedModalResponse>(`/my-pots/${potId}/details`);
 };
 

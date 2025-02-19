@@ -26,7 +26,7 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({
   potId,
   onCancel,
 }: PotSummaryModalProps) => {
-  const { data } = useGetFinishedModal({ potId });
+  const { data } = useGetFinishedModal(potId);
 
   useEffect(() => {
     // 모달 외부 스크롤 방지

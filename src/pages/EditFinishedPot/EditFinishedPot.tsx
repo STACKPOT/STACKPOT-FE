@@ -3,7 +3,6 @@ import { FinishedPotForm } from "./components";
 import routes from "@constants/routes";
 import { PatchPotCompleteBody } from "apis/types/pot";
 import usePatchFinishedPot from "apis/hooks/users/usePatchFinishedPot";
-import { useState } from "react";
 
 const EditFinishedPot = () => {
   const { potId } = useParams();
