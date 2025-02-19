@@ -5,25 +5,16 @@ import {
   contentStyle,
   iconStyle,
   buttonContainer,
-  toastStyle,
 } from "./WritePost.style";
 import { PotIcon } from "@assets/svgs";
 import { Button, Modal, PostForm } from "@components/index";
-import UploadToast from "@components/commons/Toast/UploadToast";
-import { useBlocker, useNavigate } from "react-router-dom";
+import { useBlocker } from "react-router-dom";
 import usePostFeed from "apis/hooks/feeds/usePostFeed";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { PostFeedParams } from "apis/types/feed";
-import routes from "@constants/routes";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
 
 const WritePost: React.FC = () => {
-  const [showToast, setShowToast] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const navigate = useNavigate();
 
   const methods = useForm<PostFeedParams>({
     mode: "onChange",
@@ -49,32 +40,11 @@ const WritePost: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<PostFeedParams> = (data) => {
-    postFeedMutation.mutate(data, {
-      onSuccess: (response) => {
-        if (response?.result?.feedId) {
-          setShowToast(true);
-
-          setTimeout(() => {
-            setShowToast(false);
-            navigate(`${routes.feed.base}/${response.result?.feedId}`);
-          }, 2000);
-        }
-      },
-      onError: (error) => {
-        setErrorMessage(
-          "피드 업로드 실패: " + (error?.message || "알 수 없는 오류")
-        );
-      },
-    });
+    postFeedMutation.mutate(data);
   };
 
   return (
     <main>
-      {showToast && (
-        <div css={toastStyle}>
-          <UploadToast />
-        </div>
-      )}
       <div css={container}>
         <FormProvider {...methods}>
           <form css={contentStyle} onSubmit={handleSubmit(onSubmit)}>
@@ -101,22 +71,6 @@ const WritePost: React.FC = () => {
           onCancel={blocker.reset}
         />
       )}
-
-      <Snackbar
-        open={Boolean(errorMessage)}
-        autoHideDuration={3000}
-        onClose={() => setErrorMessage(null)}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert
-          severity="error"
-          onClose={() => setErrorMessage(null)}
-          variant="filled"
-          sx={{ width: "100%" }}
-        >
-          {errorMessage}
-        </Alert>
-      </Snackbar>
     </main>
   );
 };

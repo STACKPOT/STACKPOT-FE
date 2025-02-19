@@ -25,11 +25,12 @@ export const useSnackbar = (): SnackbarContextType => {
   return context;
 };
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  }
-);
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 interface SnackbarProviderProps {
   children: ReactNode;
@@ -38,50 +39,54 @@ interface SnackbarProviderProps {
 export const SnackbarProvider: React.FC<SnackbarProviderProps> = ({
   children,
 }) => {
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: "",
-    severity: "success" as "success" | "info" | "warning" | "error",
-  });
+  const [snackbarList, setSnackbarList] = useState<
+    {
+      key: number;
+      message: string;
+      severity: "success" | "info" | "warning" | "error";
+    }[]
+  >([]);
 
   const showSnackbar = ({ message, severity = "success" }: SnackbarOptions) => {
-    setSnackbar({ open: true, message, severity });
+    setSnackbarList((prev) => [
+      ...prev,
+      { key: Date.now(), message, severity },
+    ]);
   };
 
-  const handleClose = (
-    event?: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") return;
-    setSnackbar((prev) => ({ ...prev, open: false }));
+  const handleClose = (key: number) => {
+    setSnackbarList((prev) => prev.filter((snackbar) => snackbar.key !== key));
   };
 
   return (
     <SnackbarContext.Provider value={{ showSnackbar }}>
       {children}
-      <Snackbar
-        open={snackbar.open}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={snackbar.severity}
-          sx={{ fontSize: "1.5rem" }}
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
+      {snackbarList.map(({ key, message, severity }) => (
+        <Snackbar
+          key={key}
+          open={true}
+          autoHideDuration={2000}
+          onClose={() => handleClose(key)}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={() => handleClose(key)}
+            severity={severity}
+            sx={{ fontSize: "1.5rem" }}
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                onClick={() => handleClose(key)}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            {message}
+          </Alert>
+        </Snackbar>
+      ))}
     </SnackbarContext.Provider>
   );
 };
