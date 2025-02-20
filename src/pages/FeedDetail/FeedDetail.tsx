@@ -16,6 +16,7 @@ import {
 import useGetFeedDetail from "apis/hooks/feeds/useGetFeedDetail";
 import { useNavigate, useParams } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
+import routes from "@constants/routes";
 
 const FeedDetail = () => {
   const { feedId } = useParams();
@@ -32,6 +33,11 @@ const FeedDetail = () => {
     navigate(-1);
   };
 
+  const handleUserClick = () => {
+    const userId = data?.writerId;
+    navigate(`${routes.userProfile}/${userId}`);
+  };
+
   return (
     <main css={mainContainer}>
       <div css={headerContainer}>
@@ -40,9 +46,16 @@ const FeedDetail = () => {
           <h1 css={titleStyle}>{data?.title}</h1>
         </div>
         <div css={profileContainer}>
-          <img css={profileStyle} src={profileImage} alt="profileImage" />
+          <img
+            css={profileStyle}
+            src={profileImage}
+            alt="profileImage"
+            onClick={handleUserClick}
+          />
           <div css={informationContainer}>
-            <p css={nicknameStyle}>{data?.writer}</p>
+            <p css={nicknameStyle} onClick={handleUserClick}>
+              {data?.writer}
+            </p>
             <p css={dateStyle}>{data?.createdAt}</p>
           </div>
         </div>

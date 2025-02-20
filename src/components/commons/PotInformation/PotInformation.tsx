@@ -24,7 +24,7 @@ const PotInformation: React.FC<PotInformationProps> = ({
 }: PotInformationProps) => {
   const elementList: { title: string; content: string }[] = [
     { title: "모집 마감", content: recruitmentDeadline },
-    { title: "시작 날짜", content: startDate },
+    { title: "팟 시작일", content: startDate },
     { title: "진행 방식", content: method },
     { title: "예상 기간", content: period },
     { title: "모집 파트", content: stacks },

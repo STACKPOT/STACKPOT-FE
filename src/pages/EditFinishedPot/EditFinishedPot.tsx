@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FinishedPotForm } from "./components";
 import { PatchPotCompleteBody } from "apis/types/pot";
 import usePatchFinishedPot from "apis/hooks/users/usePatchFinishedPot";

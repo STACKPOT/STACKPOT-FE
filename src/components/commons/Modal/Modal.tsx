@@ -36,7 +36,7 @@ const Modal: React.FC<ModalProps> = ({
           >
             아니요
           </button>
-          <button css={button(theme.color.point.hero)} onClick={onConfirm}>
+          <button css={button(theme.color.point.hero)} onClick={onConfirm} type="button">
             네
           </button>
         </div>
