@@ -22,6 +22,7 @@ const MyPotTodoList: React.FC<MyPotTodoListProps> = ({ currentPage }) => {
           key={index}
           nickname={todoData.userNickname}
           userRole={todoData.userRole as Role}
+          userId={todoData.userId}
           todos={todoData.todos}
           isFirst={index === 0}
           potId={potIdNumber}

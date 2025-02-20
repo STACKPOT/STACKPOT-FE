@@ -7,20 +7,24 @@ import { Todo } from "apis/types/myPot";
 import { CheckBox } from "@components/index";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface MyPotTodoCardProps {
   nickname: string;
   userRole: Role;
+  userId: number;
   todos: Todo[] | null;
   isFirst: boolean;
   potId: number;
   currentPage: number;
 }
 
-const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, todos, isFirst, potId, currentPage  }) => {
+const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, userId, todos, isFirst, potId, currentPage  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate: updateTodoStatus } = usePatchMyPotTodoStatus();
-  console.log(userRole);
+  const navigate = useNavigate();
+
   const handlePlusButtonClick = () => {
     setIsModalOpen(true);
   };
@@ -30,13 +34,18 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, todos
   };
 
   const handleSelectTodo = (todoId: number) => {
+    if (!isFirst || currentPage !== 1) return;
     updateTodoStatus({ potId, todoId },);
   };
 
+  const handleUserPageNaivgate = () => {
+    navigate(`${routes.userProfile}/${userId}`);
+  }
+
   return (
     <div css={cardStyle}>
-      <img css={profileImageStyle} src={roleImages[userRole] || roleImages.DEFAULT} alt="프로필"/>
-      <div css={nicknameStyle}>
+      <img css={profileImageStyle} src={roleImages[userRole] || roleImages.DEFAULT} alt="프로필" onClick={handleUserPageNaivgate}/>
+      <div css={nicknameStyle} onClick={handleUserPageNaivgate}>
         <p>{nickname}</p>
         {isFirst && currentPage === 1 && <PlusButtonIcon css={plusButtonStyle} onClick={handlePlusButtonClick} />} 
       </div>
@@ -48,6 +57,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, todos
                 <CheckBox 
                   selected={todo.status === "COMPLETED"} 
                   onSelect={() => handleSelectTodo(todo.todoId!)}
+                  disabled={!isFirst || currentPage !== 1} 
                 />
                 <p css={todoTextStyle}>{todo.content}</p>
               </div>
