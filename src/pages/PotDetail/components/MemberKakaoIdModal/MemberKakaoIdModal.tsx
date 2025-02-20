@@ -3,20 +3,19 @@ import { closeIconStyle, container, descriptionBlueStyle, descriptionStyle, kaka
 import useGetPotMembers from "apis/hooks/pots/useGetPotMembers";
 import { roleImages } from "@constants/roleImage";
 import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface MemberKakaoIdModalProps {
     potId: number;
-    onModalCancel: () => void;
 }
-const MemberKakaoIdModal: React.FC<MemberKakaoIdModalProps> = ({ potId, onModalCancel }: MemberKakaoIdModalProps) => {
+const MemberKakaoIdModal: React.FC<MemberKakaoIdModalProps> = ({ potId }: MemberKakaoIdModalProps) => {
+    const navigate = useNavigate();
     const { data: members } = useGetPotMembers(potId);
     const [ownerNickname, setOwnerNickname] = useState<string>("팀장");
 
     const handleCancelModal = () => {
-        onModalCancel();
-        const queryClient = useQueryClient();
-        queryClient.invalidateQueries({ queryKey: ["potDetail"] })
+        navigate(`${routes.myPot.task}/${potId}`);
     }
 
     useEffect(() => {
