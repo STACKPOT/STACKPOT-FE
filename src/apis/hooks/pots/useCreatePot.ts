@@ -1,3 +1,4 @@
+import routes from "@constants/routes";
 import { useMutation } from "@tanstack/react-query";
 import { PostPot } from "apis/potAPI";
 import { PostPotParams } from "apis/types/pot";
@@ -11,7 +12,7 @@ const useCreatePot = () => {
   return useMutation({
     mutationFn: (params: PostPotParams) => PostPot(params),
     onSuccess: (response) => {
-      navigate(`/pot/${response.result?.potId}`);
+      navigate(`${routes.pot.base}/${response.result?.potId}`);
       showSnackbar({
         message: "팟이 성공적으로 업로드되었습니다!",
         severity: "success",
