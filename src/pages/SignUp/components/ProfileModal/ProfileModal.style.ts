@@ -22,20 +22,29 @@ export const contentStyle = css`
 
 export const inputContianer = css`
   display: flex;
-  gap: 1.6rem;
-  width: 100%;
+  gap: 1.2rem;
+  width: 42.1rem;
+  margin-top: 2.4rem;
 `;
 
-export const inputStyle = css`
-  padding: 1rem 1.4rem;
-  border-radius: 8px;
+export const inputStyle = (hasValue: boolean) => css`
+  padding: 1rem 1.3rem;
+  border-radius: 7px;
   display: flex;
   flex-grow: 1;
+  outline: none;
+  color: ${theme.color.point.hero};
+  border: 1px solid ${hasValue
+    ? theme.color.point.hero
+    : theme.color.interactive.inactive};
+  ${theme.font.caption2};
+  &::placeholder{
+    color: ${theme.color.interactive.inactive};
+  }
 `;
 
 export const buttonStyle = css`
-  padding: 1.6rem 2rem;
+  padding: 1.6rem;
   border-radius: 8px;
-  cursor: pointer;
   ${theme.font.caption1};
 `;

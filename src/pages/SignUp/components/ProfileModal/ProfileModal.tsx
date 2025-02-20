@@ -66,7 +66,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
           <input
             readOnly
             placeholder="닉네임 생성하기를 눌러 주세요"
-            css={inputStyle}
+            css={inputStyle(nickname.length > 0)}
             value={nickname}
           />
           <Button css={buttonStyle} onClick={handleClick} disabled={isPending}>
