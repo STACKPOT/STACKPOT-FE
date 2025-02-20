@@ -10,8 +10,8 @@ export const usePatchMyPotStatus = () => {
   return useMutation({
     mutationFn: ({ potId, taskId, data }: TaskAPIParams & { data: PatchStatus }) =>
       patchMyPotStatus({ potId, taskId }, data),
-    onSuccess: (_, variables) => { 
-      queryClient.invalidateQueries({ queryKey: ["taskDetail", variables.potId, variables.taskId] });
+    onSuccess: () => { 
+      queryClient.invalidateQueries({ queryKey: ["taskDetail"] });
       showSnackbar({
         message: "업무 상태가 수정되었습니다.",
         severity: "success",
