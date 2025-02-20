@@ -5,6 +5,7 @@ import { changeButtonStyle, changebuttonTextStyle, innerContainer, mainContainer
 import { badgeContainer, badgeStyle, selectedBadgeStyle, statusStyles } from "../StateBadgeSelect/StateBadgeSelect.style";
 import theme from "@styles/theme";
 import { AnotherTaskStatus } from "../../../../types/taskStatus";
+import { taskStatue } from "../../../../constants/categories";
 
 interface ChangeStatusModalProps {
   onClose: () => void;
@@ -36,15 +37,11 @@ const ChangeStatusModal: React.FC<ChangeStatusModalProps> = ({ onClose, onConfir
       <div css={innerContainer}>
         <h1 css={titleTextStyle}>상태값을 변경할까요?</h1>
         <div css={badgeContainer}>
-          <button type="button" css={getBadgeStyle("진행 전")} onClick={() => setSelectedStatus("진행 전")}> 
-            진행 전
-          </button>
-          <button type="button" css={getBadgeStyle("진행 중")} onClick={() => setSelectedStatus("진행 중")}>
-            진행 중
-          </button>
-          <button type="button" css={getBadgeStyle("완료")} onClick={() => setSelectedStatus("완료")}>
-            완료
-          </button>
+          {taskStatue.map((status) => (
+            <button key={status} type="button" css={getBadgeStyle(status)} onClick={() => setSelectedStatus(status)}>
+              {status}
+            </button>
+          ))}
         </div>
         <button type="button" css={changeButtonStyle} onClick={handleConfirm}>
           <p css={changebuttonTextStyle}>변경하기</p>
