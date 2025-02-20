@@ -80,7 +80,7 @@ export interface TaskPatch {
   deadline: string;
   taskboardStatus: string;
   description: string;
-  participants: number[];
+  participants: number[] | null;
 }
 
 export interface PatchTodoStatusParams {
@@ -152,7 +152,7 @@ export interface PostTask {
   deadline: string;
   taskboardStatus: APITaskStatus;
   description: string;
-  participants: number[];
+  participants: number[] | null;
 }
 
 export interface PatchStatus {
