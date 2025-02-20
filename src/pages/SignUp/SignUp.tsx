@@ -36,7 +36,7 @@ const SignUp = () => {
     mode: "onChange",
     defaultValues: {
       kakaoId: "",
-      role: "DEFAULT" as Role,
+      role: "UNKNOWN" as Role,
       interest: "",
       contractsAgreed: false,
     },

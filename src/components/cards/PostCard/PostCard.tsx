@@ -21,9 +21,7 @@ import { Role } from "types/role";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
-import { DeleteFeed } from "apis/feedAPI";
 import useDeleteFeed from "apis/hooks/feeds/useDeleteFeed";
-import useGetMyPage from "apis/hooks/users/useGetMyPage";
 
 interface PostCardProps {
   role: Role;
@@ -53,8 +51,6 @@ const PostCard: React.FC<PostCardProps> = ({
 }: PostCardProps) => {
   const { mutate: likeFeed } = usePostFeedLike();
 
-  const { refetch } = useGetMyPage({ dataType: "feed" });
-
   const navigate = useNavigate();
 
   const [isLike, setIsLike] = useState<boolean>(isLiked);
@@ -82,12 +78,7 @@ const PostCard: React.FC<PostCardProps> = ({
 
   const handleDelete = () => {
     if (feedId) {
-      deleteFeed(feedId, {
-        onSuccess: () => {
-          refetch();
-          window.scrollTo(0, 0);
-        },
-      });
+      deleteFeed(feedId);
     }
   };
 

@@ -44,12 +44,14 @@ const PotDetail = () => {
             </div>
             <div css={sectionContainerStyle}>
               <PotInformation
-                startDate={data.potDetail.potStartDate}
-                period={data.potDetail.potDuration}
-                method={data.potDetail.potModeOfOperation}
-                stacks={data.potDetail.recruitmentDetails}
-                languages={data.potDetail.potLan}
-                recruitmentDeadline={data.potDetail.recruitmentDeadline}
+                elementList={[
+                  { title: "모집 마감", content: data.potDetail.recruitmentDeadline },
+                  { title: "시작 날짜", content: data.potDetail.potStartDate },
+                  { title: "진행 방식", content: data.potDetail.potModeOfOperation },
+                  { title: "예상 기간", content: data.potDetail.potDuration },
+                  { title: "모집 파트", content: data.potDetail.recruitmentDetails },
+                  { title: "사용 언어", content: data.potDetail.potLan },
+                ]}
               />
               <div css={dividerStyle} />
             </div>

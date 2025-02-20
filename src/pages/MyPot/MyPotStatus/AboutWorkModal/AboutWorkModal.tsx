@@ -22,7 +22,6 @@ import {
 } from "./AboutWorkModal.style";
 import { TaskStatus } from "../../../../types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
-import usePatchMyPotTask from "apis/hooks/myPots/usePatchMyPotTask";
 import { TaskPatch } from "apis/types/myPot";
 import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
 import { APITaskStatus } from "../../../../types/taskStatus";
@@ -30,6 +29,7 @@ import { displayStatus, WorkModal } from "@constants/categories";
 import { useQueryClient } from "@tanstack/react-query";
 import { usePostMyPotTask } from "apis/hooks/myPots/usePostMyPotTask";
 import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
+import usePatchMyPotTask from "apis/hooks/myPots/usePatchMyPotTask";
 
 interface FormValues {
   taskTitle: string;
@@ -149,7 +149,10 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
           ? reverseDisplayStatus[selectedStatus]
           : "OPEN",
         description: data.taskDescription,
-        participants: data.selectedParticipants.length > 0 ? data.selectedParticipants : null,
+        participants:
+          data.selectedParticipants.length > 0
+            ? data.selectedParticipants
+            : null,
       };
       patchTask(
         { potId: potIdNumber, taskId: taskIdSource, data: updatedTask },
@@ -168,9 +171,9 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
           },
         }
       );
-    } 
+    }
   };
-  
+
   const handleSavePost = (data: FormValues) => {
     const newTask = {
       title: data.taskTitle,
@@ -179,11 +182,12 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
         ? reverseDisplayStatus[selectedStatus]
         : "OPEN",
       description: data.taskDescription,
-      participants: data.selectedParticipants.length > 0 ? data.selectedParticipants : null,
+      participants:
+        data.selectedParticipants.length > 0 ? data.selectedParticipants : null,
     };
     postTask({ potId: potIdNumber, data: newTask });
     onClose();
-  };  
+  };
 
   if (isLoading) return <Loading />;
 

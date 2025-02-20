@@ -14,23 +14,21 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { roleImages } from "@constants/roleImage";
-import { useAuthStore } from "stores/useAuthStore";
 import ProfileDropdown from "@components/commons/Dropdown/ProfileDropdown/ProfileDropdown";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const ref = useRef<HTMLDivElement>(null);
 
-  const role = useAuthStore((state) => state.role);
-  const roleProfileImage = roleImages[role as keyof typeof roleImages];
-  const guestMode = role === "DEFAULT";
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
   );
+  const [role, setRole] = useState(localStorage.getItem("role"));
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [roleProfileImage, setRoleProfileImage] = useState<string>("");
+
+  const guestMode = role === "UNKNOWN";
 
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
     import.meta.env.VITE_REST_API_KEY
@@ -60,6 +58,13 @@ const Header: React.FC = () => {
     const token = localStorage.getItem("accessToken");
     setAccessToken(token);
   }, [localStorage.getItem("accessToken")]);
+
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    setRole(role);
+    const profileImage = roleImages[role as keyof typeof roleImages] || "";
+    setRoleProfileImage(profileImage);
+  }, [localStorage.getItem("role")]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

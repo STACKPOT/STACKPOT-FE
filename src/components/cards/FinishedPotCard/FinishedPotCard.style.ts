@@ -25,34 +25,6 @@ export const profileContainer = css`
   display: flex;
 `;
 export const titleStyle = css`
-  ${theme.font.title1};
-  color: ${theme.color.base.darkgray};
-`;
-
-export const gridContainer = css`
-  display: grid;
-  grid-template-columns: 30rem 30rem;
-  column-gap: 13rem;
-  row-gap: 1.8rem;
-`;
-export const elementContainer = css`
-  display: flex;
-  gap: 2.4rem;
-`;
-export const teamElementContainer = css`
-  display: flex;
-  gap: 4rem;
-`;
-export const elementTitleStyle = css`
-  ${theme.font.body1}
-  white-space: nowrap;
-
-  color: ${theme.color.interactive.inactive};
-`;
-export const elementContentStyle = css`
-  ${theme.font.body1};
-  color: ${theme.color.base.darkgray};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
+    ${theme.font.title1};
+    color: ${theme.color.base.darkgray};
+`

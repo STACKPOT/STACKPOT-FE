@@ -31,7 +31,6 @@ const AppliedPotPage = () => {
       {pots && pots.map((pot) =>
         <PotInformationCard
           key={pot.potId}
-          type="applied"
           {...pot}
           onButtonClick={() => setCancelApplyPotId(pot.potId)} />)}
       {cancelApplyPotId !== null &&
