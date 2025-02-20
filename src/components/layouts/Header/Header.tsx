@@ -52,6 +52,10 @@ const Header: React.FC = () => {
 
   const isHomePage = location.pathname === routes.home;
 
+  const handleLogoClick = () => {
+    navigate(routes.home);
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     setAccessToken(token);
@@ -73,7 +77,7 @@ const Header: React.FC = () => {
   return (
     <div ref={ref}>
       <header css={headerStyle(isHomePage)}>
-        <Logo css={logoStyle(isHomePage)} />
+        <Logo css={logoStyle(isHomePage)} onClick={handleLogoClick} />
         {!accessToken ? (
           <Button variant="entry" onClick={handleClick}>
             로그인/회원가입

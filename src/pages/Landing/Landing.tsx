@@ -1,4 +1,10 @@
-import { ExpandMoreIcon, Logo } from "@assets/svgs";
+import {
+  ArrowRightIcon,
+  ChevronRightIcon,
+  ExpandMoreIcon,
+  Logo,
+  RightIcon,
+} from "@assets/svgs";
 import {
   bgContainer,
   bgStyle,
@@ -12,6 +18,7 @@ import {
   profileContainer,
   profileImageStyle,
   profileTextContainer,
+  rightIconStyle,
   sloganContainer,
   subTitleStyle,
   TaskImgageStyle,
@@ -32,6 +39,10 @@ const Landing = () => {
 
   const handleClick = () => {
     navigate(routes.home);
+  };
+
+  const handleButtonClick = () => {
+    window.open(import.meta.env.VITE_DESCRIPTION_URL);
   };
 
   return (
@@ -74,8 +85,9 @@ const Landing = () => {
           </div>
           <Logo css={logoStyle} />
         </div>
-        <Button variant="landing" onClick={handleClick} css={buttonStyle}>
-          팟 만들러 가기
+        <Button variant="landing" onClick={handleButtonClick} css={buttonStyle}>
+          더 알아보기
+          <ChevronRightIcon css={rightIconStyle} />
         </Button>
         <img src={MyPotImage} css={myPotImageStyle} alt="MyPotImage" />
       </div>

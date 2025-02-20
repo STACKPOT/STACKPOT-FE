@@ -12,7 +12,6 @@ import {
   modalStyle,
   titleContainer,
   titleStyle,
-  appealContentStyle,
 } from "./PotSummaryModal.style";
 import { useEffect } from "react";
 import useGetFinishedModal from "apis/hooks/users/useGetFinishedModal";
@@ -26,7 +25,7 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({
   potId,
   onCancel,
 }: PotSummaryModalProps) => {
-  const { data } = useGetFinishedModal({ potId });
+  const { data } = useGetFinishedModal(potId);
 
   useEffect(() => {
     // 모달 외부 스크롤 방지
@@ -74,7 +73,7 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({
             <CreateIcon />
             <p css={bodyTitleStyle}>여기서 저는요</p>
           </div>
-          <p css={appealContentStyle}>{appealContent}</p>
+          <p css={contentStyle}>{appealContent}</p>
         </div>
       </div>
     </div>

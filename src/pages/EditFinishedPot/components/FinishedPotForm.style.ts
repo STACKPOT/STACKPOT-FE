@@ -73,7 +73,6 @@ export const dividerStyle = css`
   background-color: ${theme.color.object.alternative};
 `;
 
-
 export const textareaStyle = css`
   padding: 2.4rem;
   height: 40.6rem;
@@ -95,8 +94,8 @@ export const summaryButtonContainer = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
+`;
 export const appealIconStyle = css`
   width: 1.4rem;
   height: 1.4rem;
-`
+`;

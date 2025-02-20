@@ -1,6 +1,15 @@
 import { useState } from "react";
-import { usePatchMyPotTodoStatus } from "apis/hooks/myPots/usePatchMyPotTodoStatus"; 
-import { cardStyle, nicknameStyle, plusButtonStyle, profileImageStyle, statusContainer, todoContainer, todoListContainer, todoTextStyle } from "./MyPotTodoCard.style";
+import { usePatchMyPotTodoStatus } from "apis/hooks/myPots/usePatchMyPotTodoStatus";
+import {
+  cardStyle,
+  nicknameStyle,
+  plusButtonStyle,
+  profileImageStyle,
+  statusContainer,
+  todoContainer,
+  todoListContainer,
+  todoTextStyle,
+} from "./MyPotTodoCard.style";
 import { PlusButtonIcon } from "@assets/svgs";
 import { MushroomImage } from "@assets/images";
 import MyTodoModalWrapper from "../MyTodoModalWrapper/MyTodoModalWrapper";
@@ -15,7 +24,13 @@ interface MyPotTodoCardProps {
   currentPage: number;
 }
 
-const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst, potId, currentPage  }) => {
+const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({
+  nickname,
+  todos,
+  isFirst,
+  potId,
+  currentPage,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate: updateTodoStatus } = usePatchMyPotTodoStatus();
 
@@ -28,33 +43,43 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, todos, isFirst,
   };
 
   const handleSelectTodo = (todoId: number) => {
-    updateTodoStatus({ potId, todoId },);
+    updateTodoStatus({ potId, todoId });
   };
 
   return (
     <div css={cardStyle}>
-      <img css={profileImageStyle} src={MushroomImage} />
+      <img css={profileImageStyle} src={MushroomImage} alt="profileImage" />
       <div css={nicknameStyle}>
         <p>{nickname}</p>
-        {isFirst && currentPage === 1 && <PlusButtonIcon css={plusButtonStyle} onClick={handlePlusButtonClick} />} 
+        {isFirst && currentPage === 1 && (
+          <PlusButtonIcon
+            css={plusButtonStyle}
+            onClick={handlePlusButtonClick}
+          />
+        )}
       </div>
       <div css={statusContainer}>
         <div css={todoListContainer}>
-          {(todos ?? []).map((todo) => (
-            todo.todoId !== null && (
-              <div css={todoContainer} key={todo.todoId}>
-                <CheckBox 
-                  selected={todo.status === "COMPLETED"} 
-                  onSelect={() => handleSelectTodo(todo.todoId!)}
-                />
-                <p css={todoTextStyle}>{todo.content}</p>
-              </div>
-            )
-          ))}
+          {(todos ?? []).map(
+            (todo) =>
+              todo.todoId !== null && (
+                <div css={todoContainer} key={todo.todoId}>
+                  <CheckBox
+                    selected={todo.status === "COMPLETED"}
+                    onSelect={() => handleSelectTodo(todo.todoId!)}
+                  />
+                  <p css={todoTextStyle}>{todo.content}</p>
+                </div>
+              )
+          )}
         </div>
       </div>
 
-      <MyTodoModalWrapper potId={potId} isModalOpen={isModalOpen} onClose={handleCloseModal} />
+      <MyTodoModalWrapper
+        potId={potId}
+        isModalOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };

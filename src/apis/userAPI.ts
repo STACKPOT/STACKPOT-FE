@@ -21,6 +21,7 @@ import {
   GetUsersMyPagesResponse,
   GetUsersInfoParams,
 } from "./types/user";
+import { PatchPotCompleteBody, PostPotResponse } from "./types/pot";
 
 export const getKakaoLogIn = async (code: string) => {
   return apiGet<LogInResponse>("/users/oauth/kakao", { code });
@@ -53,7 +54,7 @@ export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
   return authApiGet<MyPageResponse>("/users/mypages", { dataType });
 };
 
-export const GetFinishedModal = async ({ potId }: GetFinishedModalParams) => {
+export const GetFinishedModal = async (potId: number) => {
   return authApiGet<FinishedModalResponse>(`/my-pots/${potId}/details`);
 };
 
@@ -82,4 +83,11 @@ export const getUsersMyPages = async ({
 
 export const getUsersInfo = async ({ userId }: GetUsersInfoParams) => {
   return authApiGet<GetUserResponse>(`/users/${userId}`);
+};
+
+export const patchFinishedPot = async (
+  potId: number,
+  body: PatchPotCompleteBody
+) => {
+  return authApiPatch<PostPotResponse>(`/users/${potId}`, body);
 };

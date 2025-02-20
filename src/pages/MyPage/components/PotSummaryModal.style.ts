@@ -17,7 +17,6 @@ export const backgroundStyle = css`
 `;
 export const modalStyle = css`
     width: 65.2rem;
-    height: 66.5rem;
     display: flex;
     flex-direction: column;
     padding: 3.2rem;
@@ -44,6 +43,8 @@ export const titleContainer = css`
 export const titleStyle = css`
     ${theme.font.title1};
     color: ${theme.color.point.hero};
+    text-align: center;
+    word-wrap: break-word;
 `
 export const dateContainer = css`
     display: flex;
@@ -67,7 +68,7 @@ export const bodyTitleStyle = css`
     color: ${theme.color.point.hero};
 `
 export const contentStyle = css`
-    height: 15.6rem;
+    height: 11.3rem;
     width: 100%;
     overflow-y: auto;
     ${theme.font.caption3};
@@ -76,8 +77,4 @@ export const contentStyle = css`
     ::-webkit-scrollbar {
         display: none;
     }
-`
-export const appealContentStyle = css`
-    ${contentStyle};
-    height: 21.8rem;
 `
