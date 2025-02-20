@@ -19,10 +19,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
 import routes from "@constants/routes";
 import { PotButton } from "@components/index";
+import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 
 const FeedDetail = () => {
   const { feedId } = useParams();
   const numericFeedId = Number(feedId);
+  const { data: user } = useGetMyProfile();
+
   const { data } = useGetFeedDetail(numericFeedId);
 
   const navigate = useNavigate();
@@ -52,7 +55,9 @@ const FeedDetail = () => {
             <LeftIcon type="button" onClick={handleClick} css={iconStyle} />
             <h1 css={titleStyle}>{data?.title}</h1>
           </div>
-          <PotButton onClick={handleEdit}>수정</PotButton>
+          {user?.id === data?.writerId && (
+            <PotButton onClick={handleEdit}>수정</PotButton>
+          )}{" "}
         </div>
         <div css={profileContainer}>
           <img
