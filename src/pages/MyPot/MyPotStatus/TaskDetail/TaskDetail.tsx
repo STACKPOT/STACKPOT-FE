@@ -97,7 +97,7 @@ const TaskDetailPage: React.FC = () => {
     ) as Record<AnotherTaskStatus, APITaskStatus>;
 
     const patchValue = reverseDisplayStatus[newStatus] as string;
-    console.log(potIdNumber, taskIdNumber, patchValue);
+
     patchStatus({
       potId: potIdNumber,
       taskId: taskIdNumber,
