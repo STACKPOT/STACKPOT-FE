@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { GetFinishedModal } from "apis/userAPI";
-import { GetFinishedModalParams } from "apis/types/user";
 
-const useGetFinishedModal = ({ potId }: GetFinishedModalParams) => {
+const useGetFinishedModal = (potId: number) => {
   return useQuery({
     queryKey: ["mypage", potId],
-    queryFn: () => GetFinishedModal({ potId }),
+    queryFn: () => GetFinishedModal(potId),
     select: (data) => data.result,
   });
 };

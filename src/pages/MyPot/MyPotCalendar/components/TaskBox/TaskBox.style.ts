@@ -6,11 +6,11 @@ export const taskBoxStyle = css`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  cursor: pointer;
 `;
 export const taskTitleContainer = css`
   display: flex;
   gap: 1.2rem;
-  align-items: center;
 `;
 
 export const taskTitleStyle = css`
@@ -32,6 +32,7 @@ export const contentStyle = css`
 export const memberContainer = css`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const profileContainer = css`
@@ -40,6 +41,12 @@ export const profileContainer = css`
   align-items: center;
 `;
 
+export const profileStyle = css`
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 50%;
+`
 export const nickNameStyle = css`
   ${theme.font.caption1}
   color: ${theme.color.object.assistive}

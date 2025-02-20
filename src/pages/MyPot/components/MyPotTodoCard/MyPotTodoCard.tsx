@@ -1,6 +1,15 @@
 import { useState } from "react";
-import { usePatchMyPotTodoStatus } from "apis/hooks/myPots/usePatchMyPotTodoStatus"; 
-import { cardStyle, nicknameStyle, plusButtonStyle, profileImageStyle, statusContainer, todoContainer, todoListContainer, todoTextStyle } from "./MyPotTodoCard.style";
+import { usePatchMyPotTodoStatus } from "apis/hooks/myPots/usePatchMyPotTodoStatus";
+import {
+  cardStyle,
+  nicknameStyle,
+  plusButtonStyle,
+  profileImageStyle,
+  statusContainer,
+  todoContainer,
+  todoListContainer,
+  todoTextStyle,
+} from "./MyPotTodoCard.style";
 import { PlusButtonIcon } from "@assets/svgs";
 import MyTodoModalWrapper from "../MyTodoModalWrapper/MyTodoModalWrapper";
 import { Todo } from "apis/types/myPot";
@@ -47,7 +56,12 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, userI
       <img css={profileImageStyle} src={roleImages[userRole] || roleImages.DEFAULT} alt="프로필" onClick={handleProfileClick}/>
       <div css={nicknameStyle} onClick={handleProfileClick}>
         <p>{nickname}</p>
-        {isFirst && currentPage === 1 && <PlusButtonIcon css={plusButtonStyle} onClick={handlePlusButtonClick} />} 
+        {isFirst && currentPage === 1 && (
+          <PlusButtonIcon
+            css={plusButtonStyle}
+            onClick={handlePlusButtonClick}
+          />
+        )}
       </div>
       <div css={statusContainer}>
         <div css={todoListContainer}>
@@ -66,7 +80,11 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, userI
         </div>
       </div>
 
-      <MyTodoModalWrapper potId={potId} isModalOpen={isModalOpen} onClose={handleCloseModal} />
+      <MyTodoModalWrapper
+        potId={potId}
+        isModalOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };
