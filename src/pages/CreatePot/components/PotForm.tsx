@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { Role } from "types/role";
 import FormHeader from "./FormHeader/FormHeader";
 import FormBody from "./FormBody/FormBody";
+import { useSnackbar } from "providers";
 
 interface PotFormProps {
   type: "create" | "edit";
@@ -32,6 +33,7 @@ const PotForm: React.FC<PotFormProps> = ({
   potData,
   onCompleted,
 }: PotFormProps) => {
+  const { showSnackbar } = useSnackbar();
   const methods = useForm<PotFormData>({
     mode: "onChange",
     defaultValues: {
@@ -70,6 +72,11 @@ const PotForm: React.FC<PotFormProps> = ({
       recruitmentDeadline
     ) {
       onCompleted(data);
+    } else {
+      showSnackbar({
+        message: "모든 항목을 입력해주세요",
+        severity: "error"
+      })
     }
   };
 
