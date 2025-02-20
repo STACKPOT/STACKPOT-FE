@@ -18,8 +18,16 @@ export const taskContainerStyle = css`
   }
 `;
 
+export const calendarDateStyle = css`
+  ${theme.font.body3};
+  color: ${theme.color.object.assistive};
+  height: 3.4rem;
+  margin: 0.4rem;
+  border-color: transparent;
+`;
+
 export const calendarStyle = css`
-  padding: 7.2rem 6rem;
+  padding: 7.2rem 5rem;
   border-radius: 24px;
   width: 53.6rem;
   border: 1px solid ${theme.color.object.alternative};
@@ -30,21 +38,25 @@ export const calendarStyle = css`
     border-color: white;
   }
   .mbsc-calendar-day-text{
-    ${theme.font.body3};
-    color: ${theme.color.object.assistive};
-    margin: 0.4rem 0;
+    ${calendarDateStyle};
   }
   .mbsc-hover .mbsc-ios .mbsc-calendar-day-text{
-    ${theme.font.body3};
+    ${calendarDateStyle};
     background: transparent;
-    color: ${theme.color.object.assistive};
-    border-color: transparent;
   }
   .mbsc-selected .mbsc-ios .mbsc-calendar-day-text{
-    ${theme.font.body3};
+    ${calendarDateStyle};
     background: ${theme.color.point.alternative};
     color: white;
-    border-color: transparent;
+  }
+  .mbsc-calendar-marks {
+    bottom: -0.4rem;
+  }
+  .mbsc-calendar-cell {
+    padding-bottom: 1.7rem;
+  }
+  .mbsc-calendar-week-days {
+    margin-bottom: 1.4rem;
   }
   .mbsc-calendar-week-day {
     ${theme.font.bodyBold1};
@@ -58,8 +70,22 @@ export const calendarStyle = css`
   .mbsc-calendar-header {
     padding-bottom: 5.4rem;
   }
+  .mbsc-calendar-controls {
+    min-height: 0;
+  }
   .mbsc-calendar-slide {
     padding: 0;
+  }
+  .mbsc-calendar-button {
+    padding: 0 0.8rem;
+    height: auto;
+  }
+  .mbsc-ios.mbsc-calendar-button.mbsc-button {
+    color: ${theme.color.base.darkgray};
+    cursor: auto;
+  }
+  .mbsc-hover.mbsc-ios.mbsc-calendar-button.mbsc-button{
+    opacity: 1;
   }
 `;
 

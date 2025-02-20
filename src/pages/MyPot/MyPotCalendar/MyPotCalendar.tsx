@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "@mobiscroll/react/dist/css/mobiscroll.min.css";
 import { Datepicker, setOptions, localeKo, MbscDatepickerPageChangeEvent } from "@mobiscroll/react";
 import {
@@ -29,6 +29,7 @@ const MyPotCalendar = () => {
 
   const [date, setDate] = useState<Date | null>(null);
   const [month, setMonth] = useState<Date>(new Date());
+  const [days, setDays] = useState<string[]>([]);
 
   const { data: monthTasks } = useGetTasksMonth({
     potId: potIdNumber,
@@ -60,6 +61,10 @@ const MyPotCalendar = () => {
     }
   }
 
+  useEffect(() => {
+    setDays([...new Set(monthTasks?.map(task => task.deadLine))]);
+  }, [monthTasks])
+
   return (
     <main css={mainContainer}>
       <div css={container}>
@@ -67,20 +72,23 @@ const MyPotCalendar = () => {
           <Datepicker
             display="inline"
             marked={
-              monthTasks?.filter((task) => task.participating).map((task) => {
-                const taskDate = new Date(task.deadLine.split('. ').join('-'));
+              days.map((day) => {
+                const hasParticipating = monthTasks?.some(task =>
+                  task.deadLine === day &&
+                  task.participating === true);
                 return {
-                  date: task.deadLine,
-                  color: taskDate.getDate() === date?.getDate()
+                  date: day,
+                  color: hasParticipating
                     ? theme.color.point.alternative
                     : theme.color.object.alternative,
-                };
+                }
               })
             }
             value={date}
             onChange={(e) => setDate(e.value as Date)}
             onPageChange={handleMonthChange}
             showOuterDays={false}
+            firstDay={1}
           />
         </div>
         <div css={taskContainer}>

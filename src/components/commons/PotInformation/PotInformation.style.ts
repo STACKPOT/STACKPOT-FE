@@ -3,7 +3,7 @@ import theme from "@styles/theme";
 
 export const gridContainer = css`
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 30rem 30rem;
   column-gap: 17rem;
   row-gap: 1.8rem;
 `;
@@ -21,5 +21,7 @@ export const elementTitleStyle = css`
 export const elementContentStyle = css`
   ${theme.font.body1};
   color: ${theme.color.base.darkgray};
-  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
