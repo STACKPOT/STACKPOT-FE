@@ -60,7 +60,7 @@ const Landing = () => {
       </div>
       <p css={subTitleStyle}>{sloganText[3]}</p>
       <Button variant="landing" onClick={handleClick}>
-        팟 만들러 가기
+        STACKPOT 바로가기
       </Button>
       <img src={TaskImage} alt="taskImage" css={TaskImgageStyle} />
       <div css={iconContainer}>
