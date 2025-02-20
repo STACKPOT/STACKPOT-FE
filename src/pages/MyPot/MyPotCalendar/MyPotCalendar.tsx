@@ -67,11 +67,10 @@ const MyPotCalendar = () => {
           <Datepicker
             display="inline"
             marked={
-              monthTasks?.filter((task) => task.participating).map((task) => {
-                const taskDate = new Date(task.deadLine.split('. ').join('-'));
+              monthTasks?.map((task) => {
                 return {
                   date: task.deadLine,
-                  color: taskDate.getDate() === date?.getDate()
+                  color: task.participating
                     ? theme.color.point.alternative
                     : theme.color.object.alternative,
                 };
