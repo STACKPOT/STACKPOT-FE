@@ -13,7 +13,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({ type = "feed" }: Floati
   const url = type === "feed" ? routes.writePost : routes.createPot;
 
   return (
-    <div css={WriteButton} onClick={() => navigate(url)}>
+    <div css={WriteButton(type)} onClick={() => navigate(url)}>
       {type === "feed" ?
         <>
           <PencilIcon css={iconStyle} />
