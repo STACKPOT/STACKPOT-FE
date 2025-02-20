@@ -12,11 +12,13 @@ import {
   profileStyle,
   titleContainer,
   titleStyle,
+  titleWrapper,
 } from "./FeedDetail.style";
 import useGetFeedDetail from "apis/hooks/feeds/useGetFeedDetail";
 import { useNavigate, useParams } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
 import routes from "@constants/routes";
+import { PotButton } from "@components/index";
 
 const FeedDetail = () => {
   const { feedId } = useParams();
@@ -38,12 +40,19 @@ const FeedDetail = () => {
     navigate(`${routes.userProfile}/${userId}`);
   };
 
+  const handleEdit = () => {
+    navigate(`${routes.feed.edit}/${feedId}`);
+  };
+
   return (
     <main css={mainContainer}>
       <div css={headerContainer}>
         <div css={titleContainer}>
-          <LeftIcon type="button" onClick={handleClick} css={iconStyle} />
-          <h1 css={titleStyle}>{data?.title}</h1>
+          <div css={titleWrapper}>
+            <LeftIcon type="button" onClick={handleClick} css={iconStyle} />
+            <h1 css={titleStyle}>{data?.title}</h1>
+          </div>
+          <PotButton onClick={handleEdit}>수정</PotButton>
         </div>
         <div css={profileContainer}>
           <img
