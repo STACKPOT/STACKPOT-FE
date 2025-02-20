@@ -62,19 +62,20 @@ const PotHeader: React.FC<PotHeaderProps> = ({
           </button>
           <h1 css={titleStyle}>{title}</h1>
         </div>
-        <PotButton
-          onClick={
-            (potStatus === "COMPLETED" && isMyPot && handleFinishedPotEdit) ||
-            (isMyPot && handleEdit) ||
-            (isApplied && (() => setShowCancelApplyModal(true))) ||
-            (() => setShowApplyModal(true))
-          }
-        >
-          {(potStatus === "COMPLETED" && isMyPot && "팟 소개 수정") ||
-            (isMyPot && "수정") ||
-            (isApplied && "지원 취소하기") ||
-            "이 팟에 지원하기"}
-        </PotButton>
+        {potStatus !== "ONGOING" && !(potStatus === "COMPLETED" && !isMyPot) &&
+          <PotButton
+            onClick={
+              (potStatus === "COMPLETED" && isMyPot && handleFinishedPotEdit) ||
+              (isMyPot && handleEdit) ||
+              (isApplied && (() => setShowCancelApplyModal(true))) ||
+              (() => setShowApplyModal(true))
+            }
+          >
+            {(potStatus === "COMPLETED" && isMyPot && "팟 소개 수정") ||
+              (isMyPot && "수정") ||
+              (isApplied && "지원 취소하기") ||
+              "이 팟에 지원하기"}
+          </PotButton>}
       </div>
       {showCancelApplyModal && (
         <Modal

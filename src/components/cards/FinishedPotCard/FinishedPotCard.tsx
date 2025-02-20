@@ -1,12 +1,7 @@
-import { MemberGroup, PotButton } from "@components/index";
+import { MemberGroup, PotButton, PotInformation } from "@components/index";
 import {
   container,
-  elementContainer,
-  elementContentStyle,
-  elementTitleStyle,
-  gridContainer,
   profileContainer,
-  teamElementContainer,
   titleContainer,
   titleProfileContainer,
   titleStyle,
@@ -51,14 +46,6 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
   const [appealModal, setAppealModal] = useState<number | null>(null);
   const [summaryModal, setSummaryModal] = useState<number | null>(null);
   const { mutate } = usePatchAppealPot();
-
-  const elementList: { title: string; content: string }[] = [
-    { title: "나의 역할", content: myRole },
-    { title: "시작 날짜", content: startDate },
-    { title: "사용 언어", content: languages },
-    { title: "종료 날짜", content: endDate },
-    { title: "팀 구성", content: stacks },
-  ];
 
   const handleClickPot = (id: number) => {
     if (isMyPage || isUserPage) {
@@ -107,21 +94,14 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
             <MemberGroup memberRoleList={members} />
           </div>
         </div>
-        <div css={gridContainer}>
-          {elementList.map((element) => (
-            <div
-              css={
-                element.title !== "팀 구성"
-                  ? elementContainer
-                  : teamElementContainer
-              }
-              key={element.title}
-            >
-              <p css={elementTitleStyle}>{element.title}</p>
-              <p css={elementContentStyle}>{element.content}</p>
-            </div>
-          ))}
-        </div>
+        <PotInformation
+          elementList={[
+            { title: "나의 역할", content: myRole },
+            { title: "시작 날짜", content: startDate },
+            { title: "사용 언어", content: languages },
+            { title: "종료 날짜", content: endDate },
+            { title: "팀 구성", content: stacks },
+          ]} />
       </div>
       {appealModal !== null && (
         <AppealModal

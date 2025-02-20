@@ -127,10 +127,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
         />
       )}
       {showKakaoIdModal && (
-        <MemberKakaoIdModal
-          potId={potId}
-          onModalCancel={() => setShowKakaoIdModal(false)}
-        />
+        <MemberKakaoIdModal potId={potId} />
       )}
     </>
   );

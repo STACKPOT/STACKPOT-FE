@@ -16,7 +16,6 @@ import routes from "@constants/routes";
 
 interface PotInformationCardProps {
   potId: number;
-  type: "applied" | "made";
   userId: number;
   userRole: Role;
   userNickname: string;
@@ -33,10 +32,10 @@ interface PotInformationCardProps {
 }
 const PotInformationCard: React.FC<PotInformationCardProps> = ({
   potId,
-  type,
   potName,
   userRole,
   userNickname,
+  potStatus,
   dday,
   potStartDate,
   potDuration,
@@ -55,9 +54,10 @@ const PotInformationCard: React.FC<PotInformationCardProps> = ({
     <div css={container} onClick={() => handleClickPot(potId)}>
       <div css={titleContainer}>
         <h1 css={titleStyle}>{potName}</h1>
-        <PotButton onClick={() => onButtonClick(potId)}>
-          {(type === "applied" && "지원 취소하기") || "팟 소개 수정"}
-        </PotButton>
+        {potStatus === "RECRUITING" &&
+          <PotButton onClick={() => onButtonClick(potId)}>
+            지원 취소하기
+          </PotButton>}
       </div>
       <div css={profileContainer}>
         <img css={profileStyle} src={roleImages[userRole]} alt="profile" />
@@ -67,11 +67,13 @@ const PotInformationCard: React.FC<PotInformationCardProps> = ({
         </div>
       </div>
       <PotInformation
-        startDate={potStartDate}
-        period={potDuration}
-        method={potModeOfOperation}
-        stacks={recruitmentDetails}
-        languages={potLan}
+        elementList={[
+          { title: "팟 시작일", content: potStartDate },
+          { title: "진행 방식", content: potModeOfOperation },
+          { title: "사용 언어", content: potLan },
+          { title: "예상 기간", content: potDuration },
+          { title: "모집 파트", content: recruitmentDetails },
+        ]}
       />
     </div>
   );

@@ -6,31 +6,12 @@ import {
 } from "./PotInformation.style";
 
 interface PotInformationProps {
-  startDate: string;
-  period: string;
-  method: string;
-  stacks: string;
-  languages: string;
-  recruitmentDeadline: string;
+  elementList: { title: string; content: string }[],
 }
 
 const PotInformation: React.FC<PotInformationProps> = ({
-  startDate,
-  period,
-  method,
-  stacks,
-  languages,
-  recruitmentDeadline,
+  elementList
 }: PotInformationProps) => {
-  const elementList: { title: string; content: string }[] = [
-    { title: "모집 마감", content: recruitmentDeadline },
-    { title: "팟 시작일", content: startDate },
-    { title: "진행 방식", content: method },
-    { title: "예상 기간", content: period },
-    { title: "모집 파트", content: stacks },
-    { title: "사용 언어", content: languages },
-  ];
-
   return (
     <div css={gridContainer}>
       {elementList.map((element, index) => (
