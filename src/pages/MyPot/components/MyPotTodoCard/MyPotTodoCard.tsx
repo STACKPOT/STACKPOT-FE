@@ -53,7 +53,7 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, userI
 
   return (
     <div css={cardStyle}>
-      <img css={profileImageStyle} src={roleImages[userRole] || roleImages.DEFAULT} alt="프로필" onClick={handleProfileClick}/>
+      <img css={profileImageStyle} src={roleImages[userRole] || roleImages.UNKNOWN} alt="프로필" onClick={handleProfileClick}/>
       <div css={nicknameStyle}>
         <p onClick={handleProfileClick}>{nickname}</p>
         {isFirst && currentPage === 1 && (

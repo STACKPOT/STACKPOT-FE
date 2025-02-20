@@ -12,5 +12,5 @@ export const roleImages: Record<Role, string> = {
   BACKEND: OnionImage,
   PLANNING: CarrotImage,
   DESIGN: BroccoliImage,
-  DEFAULT: ProfileImage,
+  UNKNOWN: ProfileImage,
 } as const;
