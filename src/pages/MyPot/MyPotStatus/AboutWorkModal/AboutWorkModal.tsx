@@ -112,9 +112,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
             onClose();
             navigate(`${routes.myPot.base}/${routes.task}/${potIdNumber}`);
           },
-          onError: (error) => {
-            console.error("삭제 실패:", error);
-          },
+
         }
       );
     }
@@ -135,14 +133,16 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
         deadline: data.taskDate,
         taskboardStatus: selectedStatus ? reverseDisplayStatus[selectedStatus] : "OPEN",
         description: data.taskDescription,
-        participants: data.selectedParticipants,
+        participants: data.selectedParticipants.length > 0 ? data.selectedParticipants : null,
       };
       patchTask(
         { potId: potIdNumber, taskId: taskIdSource, data: updatedTask },
         {
           onSuccess: () => {
             if (taskIdNumber != null) {
-              queryClient.invalidateQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
+              queryClient.invalidateQueries({
+                queryKey: ["taskDetail", potIdNumber, taskIdNumber],
+              });
             } else {
               queryClient.invalidateQueries({ queryKey: ["myPotTasks", potIdNumber] });
             }
@@ -154,18 +154,18 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
       console.warn("PATCH 요청이 실행되지 않음: '업무 수정하기'가 아니거나 taskId 없음");
     }
   };
-
+  
   const handleSavePost = (data: FormValues) => {
     const newTask = {
       title: data.taskTitle,
       deadline: data.taskDate,
       taskboardStatus: selectedStatus ? reverseDisplayStatus[selectedStatus] : "OPEN",
       description: data.taskDescription,
-      participants: data.selectedParticipants,
+      participants: data.selectedParticipants.length > 0 ? data.selectedParticipants : null,
     };
     postTask({ potId: potIdNumber, data: newTask });
     onClose();
-  };
+  };  
 
   if (isLoading) return <Loading />;
 
