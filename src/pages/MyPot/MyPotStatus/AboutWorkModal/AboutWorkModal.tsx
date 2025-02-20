@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useForm, useWatch } from "react-hook-form";
 import { CloseIcon } from "@assets/svgs";
 import {
@@ -24,7 +24,6 @@ import { TaskStatus } from "../../../../types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import usePatchMyPotTask from "apis/hooks/myPots/usePatchMyPotTask";
 import { TaskPatch } from "apis/types/myPot";
-import routes from "@constants/routes";
 import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
 import { APITaskStatus } from "../../../../types/taskStatus";
 import { displayStatus, WorkModal } from "@constants/categories";
@@ -56,7 +55,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
     potId: string;
     taskId: string;
   }>();
-  const navigate = useNavigate();
+
   const potIdNumber = Number(potId);
   const taskIdNumber =
     paramTaskId !== undefined && !isNaN(Number(paramTaskId))
@@ -124,7 +123,6 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
           onSuccess: () => {
             setIsConfirmOpen(false);
             onClose();
-            // navigate(`${routes.myPot.base}/${routes.task}/${potIdNumber}`);
           },
 
         }
