@@ -3,7 +3,7 @@ import { firstSectionContainer } from "../TextInput/TextInput.style";
 import { badgeContainer, badgeStyle, selectedBadgeStyle, statusStyles } from "./StateBadgeSelect.style";
 import { labelTextStyle } from "@pages/MyPot/MyPotStatus/AboutWorkModal/AboutWorkModal.style";
 import theme from "@styles/theme";
-import { taskStatue } from "@constants/categories"; // taskStatue = ["진행 전", "진행 중", "완료"] as const
+import { taskStatue } from "@constants/categories";
 
 interface StatusBadgeSelectorProps {
   selectedStatus: AnotherTaskStatus | null;
