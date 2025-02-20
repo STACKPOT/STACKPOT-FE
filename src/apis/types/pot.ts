@@ -99,6 +99,7 @@ export interface PotDetail {
   recruitingMembers: Record<Role, number>;
   owner: boolean;
   dday: string;
+  potSummary: string;
 }
 export interface GetPotApplicationResponse {
   applicationId: number;
@@ -108,6 +109,7 @@ export interface GetPotApplicationResponse {
   userNickname: string;
 }
 export interface GetPotMemberResponse {
+  potMemberId: number;
   nickname: string;
   kakaoId: string;
   potRole: Role;
@@ -176,6 +178,15 @@ export interface CompletedPotDetail {
   members: string;
   userPotRole: Role;
   memberCounts: Record<Role, number>;
+}
+
+export interface PatchAppealPotParam {
+  potId: number;
+  body: AppealPotPatch;
+}
+
+export interface AppealPotPatch {
+  appealContent: string;
 }
 
 export interface PatchPotCompleteParams {

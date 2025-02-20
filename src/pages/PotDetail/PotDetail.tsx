@@ -48,6 +48,7 @@ const PotDetail = () => {
                 method={data.potDetail.potModeOfOperation}
                 stacks={data.potDetail.recruitmentDetails}
                 languages={data.potDetail.potLan}
+                recruitmentDeadline={data.potDetail.recruitmentDeadline}
               />
               <div css={dividerStyle} />
             </div>

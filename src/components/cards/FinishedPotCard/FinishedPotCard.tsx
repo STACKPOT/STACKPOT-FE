@@ -16,6 +16,8 @@ import { useState } from "react";
 import { AppealModal, PotSummaryModal } from "@pages/MyPage/components";
 import { Role } from "types/role";
 import routes from "@constants/routes";
+import { AppealPotPatch } from "apis/types/pot";
+import usePatchAppealPot from "apis/hooks/pots/usePatchAppealPot";
 
 interface FinishedPotCardProps {
   id: number;
@@ -48,6 +50,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
 
   const [appealModal, setAppealModal] = useState<number | null>(null);
   const [summaryModal, setSummaryModal] = useState<number | null>(null);
+  const { mutate } = usePatchAppealPot();
 
   const elementList: { title: string; content: string }[] = [
     { title: "나의 역할", content: myRole },
@@ -73,6 +76,19 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
     } else {
       setAppealModal(id);
     }
+  };
+  const handleCompleted = (potId: number, data: AppealPotPatch) => {
+    mutate(
+      {
+        potId,
+        body: data,
+      },
+      {
+        onSuccess: () => {
+          setAppealModal(null);
+        },
+      }
+    );
   };
 
   return (
@@ -111,6 +127,7 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
         <AppealModal
           potId={appealModal}
           onCancel={() => setAppealModal(null)}
+          onCompleted={(data) => handleCompleted(appealModal, data)}
         />
       )}
       {summaryModal !== null && (

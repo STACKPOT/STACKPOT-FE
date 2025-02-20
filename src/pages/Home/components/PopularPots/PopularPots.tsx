@@ -23,7 +23,7 @@ const PopularPots = () => {
     recruitmentRole: null,
   });
 
-  const totalPages = data?.totalPages || 1;
+  const totalPages = 3;
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
