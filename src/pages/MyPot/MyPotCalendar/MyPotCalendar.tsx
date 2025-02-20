@@ -80,6 +80,7 @@ const MyPotCalendar = () => {
             onChange={(e) => setDate(e.value as Date)}
             onPageChange={handleMonthChange}
             showOuterDays={false}
+            firstDay={1}
           />
         </div>
         <div css={taskContainer}>
