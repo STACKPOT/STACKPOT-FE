@@ -22,7 +22,6 @@ export const contributorButtonStyle = (isSelected: boolean) => css`
   transition: background 0.3s, color 0.3s;
   color: ${isSelected ? theme.color.base.white : theme.color.point.alternative};
 
-  &:hover,
   &:active {
     background: ${theme.color.point.alternative};
     color: ${theme.color.base.white};
