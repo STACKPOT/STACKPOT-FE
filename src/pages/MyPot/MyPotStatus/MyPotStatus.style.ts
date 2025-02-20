@@ -150,5 +150,5 @@ export const modalOverlayStyle = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 5;
+  z-index: 15;
 `;
