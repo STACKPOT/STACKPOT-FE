@@ -57,6 +57,7 @@ const MyPage = () => {
                   content={post.content}
                   feedId={post.feedId}
                   writerId={post.writerId}
+                  isMyPost={true}
                 />
               ))
             : data.completedPots.map((pot) => {

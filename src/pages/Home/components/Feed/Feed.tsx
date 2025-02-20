@@ -106,6 +106,7 @@ const Feed = () => {
                         likeCount={item.likeCount}
                         isLiked={item.isLiked}
                         feedId={item.feedId}
+                        isMyPost={false}
                       />
                     </div>
                   );

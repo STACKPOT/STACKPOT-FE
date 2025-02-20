@@ -33,6 +33,7 @@ interface PostCardProps {
   profileImage?: string;
   feedId: number;
   writerId: number;
+  isMyPost: boolean;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -45,6 +46,7 @@ const PostCard: React.FC<PostCardProps> = ({
   isLiked,
   feedId,
   writerId,
+  isMyPost,
 }: PostCardProps) => {
   const { mutate: likeFeed } = usePostFeedLike();
 
@@ -52,7 +54,6 @@ const PostCard: React.FC<PostCardProps> = ({
 
   const [isLike, setIsLike] = useState<boolean>(isLiked);
   const [likes, setLikes] = useState<number>(likeCount);
-  const [isMyPost, setIsMyPost] = useState<boolean>(true);
 
   const accessToken = localStorage.getItem("accessToken");
 
