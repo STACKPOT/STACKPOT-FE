@@ -13,7 +13,6 @@ export const mainContainer = css`
   border: 1px solid ${theme.color.object.alternative};
   background: ${theme.color.base.white};
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
-  z-index: 10;
 `
 
 export const cancelContainer = css`
