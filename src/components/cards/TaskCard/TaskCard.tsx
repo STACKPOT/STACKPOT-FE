@@ -18,14 +18,14 @@ import { MemberGroup, DdayBadge, Badge, MyFeedDropdown } from "@components/index
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
 import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
 import { useState } from "react";
-import routes from "@constants/routes";
 import { TaskStatus } from "types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import { displayStatus } from "@constants/categories";
 import { AboutWorkModalWrapper, Loading } from "@pages/MyPot/components";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Participant {
   role: string;
@@ -57,23 +57,34 @@ const TaskCard: React.FC<TaskCardProps> = ({
   participants,
   onClick,
 }: TaskCardProps) => {
+
   const { potId } = useParams<{ potId: string; }>();
+  const potIdNumber = Number(potId);
+
   const { mutate: deleteTask, isPending } = useDeleteMyPotTask();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("새로운 업무 추가");
   const [activeStatus, setActiveStatus] = useState<TaskStatus | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: task, isLoading, error } = useGetMyPotTaskDetail({ potId: Number(potId), taskId: Number(taskId) });
+  const { data: task, isLoading, error } = useGetMyPotTaskDetail({ potId: potIdNumber, taskId: Number(taskId) });
+  const queryClient = useQueryClient();
 
-  const navigate = useNavigate();
   const profileImage = roleImages[creatorRole as Role] || "";
 
   const roleList = participants.map((p) => p.role) as Role[];
 
+
   const confirmDeleteTask = () => {
-    deleteTask({ potId: Number(potId), taskId: taskId });
+    deleteTask(
+      { potId: potIdNumber, taskId: taskId },
+      {
+        onSuccess: () => {
+          queryClient.removeQueries({ queryKey: ["taskDetail", potIdNumber, Number(taskId)] });
+          queryClient.invalidateQueries({queryKey: ["myPotTasks", potIdNumber]});
+        }
+      }
+    );
     setIsConfirmOpen(false);
-    navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
   };
 
   const handleDeleteTask = () => {

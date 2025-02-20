@@ -24,13 +24,13 @@ import { TaskStatus } from "../../../../types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import usePatchMyPotTask from "apis/hooks/myPots/usePatchMyPotTask";
 import { TaskPatch } from "apis/types/myPot";
-import { deleteMyPotTask } from "apis/myPotAPI";
 import routes from "@constants/routes";
 import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
 import { APITaskStatus } from "../../../../types/taskStatus";
 import { displayStatus, WorkModal } from "@constants/categories";
 import { useQueryClient } from "@tanstack/react-query";
 import { usePostMyPotTask } from "apis/hooks/myPots/usePostMyPotTask";
+import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
 
 interface FormValues {
   taskTitle: string;
@@ -86,6 +86,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   const queryClient = useQueryClient();
   const { mutate: patchTask } = usePatchMyPotTask();
   const { mutate: postTask } = usePostMyPotTask();
+  const { mutate: deleteTaskMutate } = useDeleteMyPotTask();
 
   const reverseDisplayStatus = Object.fromEntries(
     Object.entries(displayStatus).map(([key, value]) => [value, key])
@@ -104,10 +105,24 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
 
   const confirmDeleteTask = () => {
     if (potIdNumber && taskIdSource) {
-      deleteMyPotTask({ potId: potIdNumber, taskId: taskIdSource });
-      setIsConfirmOpen(false);
-      navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
+      queryClient.cancelQueries({ queryKey: ["taskDetail", potIdNumber, taskIdSource] });
+      deleteTaskMutate(
+        { potId: potIdNumber, taskId: taskIdSource },
+        {
+          onSuccess: () => {
+            queryClient.removeQueries({ queryKey: ["taskDetail", potIdNumber, taskIdSource] });
+            queryClient.invalidateQueries({queryKey: ["myPotTasks", potIdNumber]});
+            setIsConfirmOpen(false);
+            onClose();
+            navigate(`${routes.myPot.base}/${routes.task}/${potIdNumber}`);
+          },
+          onError: (error) => {
+            console.error("삭제 실패:", error);
+          },
+        }
+      );
     }
+    navigate(`${routes.myPot.base}/${routes.task}/${potIdNumber}`);
   };
 
   const updateSelectedParticipants = (memberId: number) => {
