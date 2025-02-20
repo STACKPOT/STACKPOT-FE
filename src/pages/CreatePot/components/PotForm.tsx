@@ -72,10 +72,16 @@ const PotForm: React.FC<PotFormProps> = ({
       recruitmentDeadline
     ) {
       onCompleted(data);
-    } else {
+    }
+    else if (new Date(recruitmentDeadline) <= new Date(potStartDate)) {
       showSnackbar({
         message: "모든 항목을 입력해주세요",
-        severity: "error"
+        severity: "warning"
+      })
+    } else {
+      showSnackbar({
+        message: "모집 마감 날짜가 팟 시작일 날짜 보다 이후일 수 없습니다.",
+        severity: "warning"
       })
     }
   };

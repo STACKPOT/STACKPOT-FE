@@ -52,6 +52,7 @@ const FormBody = forwardRef<HTMLDivElement>(
             css={inputStyle}
             placeholder="메인 제목 작성"
             {...register("potName", { required: true })}
+            maxLength={255}
           />
         </label>
         <div css={dividerStyle} />
@@ -119,11 +120,12 @@ const FormBody = forwardRef<HTMLDivElement>(
             css={[inputStyle, languageInputStyle]}
             placeholder="사용 언어 작성"
             {...register("potLan", { required: true })}
+            maxLength={255}
           />
         </label>
         <textarea
           css={textareaStyle}
-          placeholder="어떤 팟을 끓이고 싶으세요? 간단하게 소개해 보세요."
+          placeholder="나만의 팟을 만들어 볼까요?"
           {...register("potContent", { required: true })}
         />
       </div>
