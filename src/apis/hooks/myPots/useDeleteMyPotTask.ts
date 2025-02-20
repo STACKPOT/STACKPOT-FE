@@ -1,9 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteMyPotTask } from "apis/myPotAPI";
 import { TaskAPIParams } from "apis/types/myPot";
+import { useSnackbar } from "providers";
 
 export const useDeleteMyPotTask = () => {
   const queryClient = useQueryClient();
+  const { showSnackbar } = useSnackbar();
 
   return useMutation({
     mutationFn: ({ potId, taskId }: TaskAPIParams) => deleteMyPotTask({ potId, taskId }),
@@ -24,9 +26,17 @@ export const useDeleteMyPotTask = () => {
         const newData = { ...oldData, result: updatedResult };            
         return newData;
       });
+
+      showSnackbar({
+        message: "업무가 삭제되었습니다.",
+        severity: "success",
+      });
     },
-    onError: (error) => {
-      console.error("❌ 삭제 실패:", error);
+    onError: () => {
+      showSnackbar({
+        message: "업무 삭제에 실패했습니다.",
+        severity: "error",
+      });
     },
   });
 };

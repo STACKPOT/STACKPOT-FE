@@ -1,18 +1,27 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"; 
 import { patchMyPotStatus } from "apis/myPotAPI"; 
 import { PatchStatus, TaskAPIParams } from "apis/types/myPot";  
+import { useSnackbar } from "providers";
 
 export const usePatchMyPotStatus = () => { 
   const queryClient = useQueryClient(); 
+  const { showSnackbar } = useSnackbar();
 
   return useMutation({
     mutationFn: ({ potId, taskId, data }: TaskAPIParams & { data: PatchStatus }) =>
       patchMyPotStatus({ potId, taskId }, data),
     onSuccess: (_, variables) => { 
       queryClient.invalidateQueries({ queryKey: ["taskDetail", variables.potId, variables.taskId] });
+      showSnackbar({
+        message: "업무 상태가 수정되었습니다.",
+        severity: "success",
+      });
     }, 
-    onError: (error) => { 
-      console.error("할 일 업데이트 실패:", error); 
+    onError: () => { 
+      showSnackbar({
+        message: "업무 상태 수정에 실패했습니다.",
+        severity: "error",
+      });
     }, 
   }); 
 };
