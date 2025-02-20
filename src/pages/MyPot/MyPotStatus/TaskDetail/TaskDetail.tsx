@@ -106,6 +106,10 @@ const TaskDetailPage: React.FC = () => {
     setIsChangingModalOpen(false);
   };
 
+  const handleUserPageNavigate = (userId: number) => {
+    navigate(`${routes.userProfile}/${userId}`);
+  }
+
   if (isLoading || isDeletePending || isStatusPending) return <Loading />;
   if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
   if (!task?.result) return <p>데이터를 찾을 수 없습니다.</p>;
@@ -177,7 +181,7 @@ const TaskDetailPage: React.FC = () => {
       </div>
       <div css={contributorContainer}>
         {task.result.participants.map((participant, index) => (
-          <div css={contributorCard} key={index}>
+          <div css={contributorCard} key={index} onClick={()=>{handleUserPageNavigate(participant.userId)}}>
             <div css={contributorInner}>
               <img src={roleImages[participant.role as Role]} css={profileImageStyle} alt="프로필"/>
               <span css={contributorNicknameStyle}>{participant.nickName}</span>
