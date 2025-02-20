@@ -52,7 +52,7 @@ const PotForm: React.FC<PotFormProps> = ({
     handleSubmit,
     watch,
     setValue,
-    formState: { isValid },
+    trigger,
   } = methods;
 
   const [potDuration, potModeOfOperation, potStartDate, recruitmentDeadline] =
@@ -63,18 +63,15 @@ const PotForm: React.FC<PotFormProps> = ({
       "recruitmentDeadline",
     ]);
 
-  const onSubmit: SubmitHandler<PotFormData> = (data: PotFormData) => {
-    if (
-      !(isValid &&
-        potDuration &&
-        potModeOfOperation &&
-        potStartDate &&
-        recruitmentDeadline)
-    ) {
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const isFormValid = await trigger();
+    if (!isFormValid || !potDuration || !potModeOfOperation || !potStartDate || !recruitmentDeadline) {
       showSnackbar({
-        message: "모든 항목을 입력해주세요",
+        message: "비어있는 항목이 있습니다. 확인해주세요",
         severity: "warning"
-      })
+      });
     }
     else if (new Date(recruitmentDeadline) > new Date(potStartDate)) {
       showSnackbar({
@@ -82,7 +79,7 @@ const PotForm: React.FC<PotFormProps> = ({
         severity: "warning"
       })
     } else {
-      onCompleted(data);
+      handleSubmit(onCompleted)();
     }
   };
 
@@ -116,7 +113,7 @@ const PotForm: React.FC<PotFormProps> = ({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleFormSubmit}>
         <FormHeader potId={potId} type={type} potName={potData?.potName} />
         <FormBody />
       </form>
