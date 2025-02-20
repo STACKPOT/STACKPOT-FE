@@ -24,7 +24,6 @@ const ChangeStatusModal: React.FC<ChangeStatusModalProps> = ({ onClose, onConfir
 
   const handleConfirm = () => {
     if (selectedStatus) {
-      console.log(selectedStatus);
       onConfirm(selectedStatus);
     }
   };
