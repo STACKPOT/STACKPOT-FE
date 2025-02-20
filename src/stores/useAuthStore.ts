@@ -9,7 +9,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
   role: localStorage.getItem("role") || null,
   setRole: (role) => {
     if (role !== localStorage.getItem("role")) {
-      localStorage.setItem("role", role || "DEFAULT");
+      localStorage.setItem("role", role || "UNKNOWN");
       set({ role });
     }
   },
