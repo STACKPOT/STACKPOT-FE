@@ -44,7 +44,7 @@ const PotCard: React.FC<PotCardProps> = ({
   };
 
   const handleUserClick = () => {
-    navigate(`${routes.myPage}/${userId}`);
+    navigate(`${routes.userProfile}/${userId}`);
   };
 
   const profileImage = roleImages[role];

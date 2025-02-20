@@ -40,9 +40,10 @@ export const messageStyle = css`
   white-space: pre-line;
 `;
 export const footer = css`
+  margin-top: 1.6rem;
   display: flex;
   justify-content: center;
-  gap: 1.6rem;
+  gap: 3.2rem;
 `;
 
 export const button = (backgroundColor: string) => css`

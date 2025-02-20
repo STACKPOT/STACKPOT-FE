@@ -5,7 +5,7 @@ import {
   dividerStyle,
   sectionContainerStyle,
 } from "./PotDetail.style";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ApplicantsInformation,
   PotHeader,
@@ -14,6 +14,7 @@ import {
 import { PotInformation } from "@components/index";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 import { roleImages } from "@constants/roleImage";
+import routes from "@constants/routes";
 
 const PotDetail = () => {
   const { potId } = useParams();
@@ -54,9 +55,10 @@ const PotDetail = () => {
             </div>
             <p css={contentStyle}>{data.potDetail.potContent}</p>
           </div>
-          {data.potDetail.owner && data.potDetail.potStatus === "RECRUITING" && (
-            <ApplicantsInformation potId={potIdNumber} />
-          )}
+          {data.potDetail.owner &&
+            data.potDetail.potStatus === "RECRUITING" && (
+              <ApplicantsInformation potId={potIdNumber} />
+            )}
         </main>
       )}
     </>

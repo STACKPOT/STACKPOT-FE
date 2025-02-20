@@ -24,7 +24,6 @@ export const rightContainer = css`
   gap: 1rem;
   flex-shrink: 0; 
   position: relative;
-  z-index: 2000;
 `;
 
 export const titleStyle = css`
@@ -137,5 +136,4 @@ export const dropdownWrapperStyle = css`
   position: relative;
   right: 0;
   top: 100%;
-  z-index: 1000;
 `;

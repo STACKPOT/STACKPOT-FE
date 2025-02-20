@@ -26,7 +26,8 @@ const PostForm: React.FC<PostFormProps> = ({ register, watch, setValue }) => {
       <input
         css={inputStyle}
         placeholder="메인 제목 작성"
-        {...register("title", { required: true })}
+        {...register("title", { maxLength: 50, required: true })}
+        maxLength={50}
       />
 
       <textarea

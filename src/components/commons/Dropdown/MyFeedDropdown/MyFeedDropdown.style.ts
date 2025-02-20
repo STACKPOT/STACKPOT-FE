@@ -5,7 +5,6 @@ export const dropdownStyle = css`
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  z-index: 3000;
   background-color: white;
   border: 1px solid ${theme.color.object.alternative};
   border-radius: 16px;

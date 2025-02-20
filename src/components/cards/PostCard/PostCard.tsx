@@ -81,8 +81,8 @@ const PostCard: React.FC<PostCardProps> = ({
     window.scrollTo(0, 0);
   };
 
-  const handleUserClick = (writerId: number) => {
-    navigate(`${routes.myPage}/${writerId}`);
+  const handleUserClick = (userId: number) => {
+    navigate(`${routes.userProfile}/${userId}`);
   };
 
   const profileImage = roleImages[role];
