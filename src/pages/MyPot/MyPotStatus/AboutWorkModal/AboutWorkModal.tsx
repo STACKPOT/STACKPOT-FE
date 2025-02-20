@@ -55,10 +55,9 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   const { potId, taskId: paramTaskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
   const potIdNumber = Number(potId);
-  const taskIdNumber =
-    paramTaskId !== undefined && !isNaN(Number(paramTaskId)) ? Number(paramTaskId) : null;
+  const taskIdNumber = paramTaskId !== undefined && !isNaN(Number(paramTaskId)) ? Number(paramTaskId) : null;
   const taskIdSource = taskId ?? taskIdNumber;
-
+  
   const { data: taskDetail, isLoading } =
     title === WorkModal[1] && taskIdSource !== null
       ? useGetMyPotTaskDetail({ potId: potIdNumber, taskId: taskIdSource })
@@ -105,13 +104,10 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
 
   const confirmDeleteTask = () => {
     if (potIdNumber && taskIdSource) {
-      queryClient.cancelQueries({ queryKey: ["taskDetail", potIdNumber, taskIdSource] });
       deleteTaskMutate(
         { potId: potIdNumber, taskId: taskIdSource },
         {
           onSuccess: () => {
-            queryClient.removeQueries({ queryKey: ["taskDetail", potIdNumber, taskIdSource] });
-            queryClient.invalidateQueries({queryKey: ["myPotTasks", potIdNumber]});
             setIsConfirmOpen(false);
             onClose();
             navigate(`${routes.myPot.base}/${routes.task}/${potIdNumber}`);
@@ -122,7 +118,6 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
         }
       );
     }
-    navigate(`${routes.myPot.base}/${routes.task}/${potIdNumber}`);
   };
 
   const updateSelectedParticipants = (memberId: number) => {
@@ -147,9 +142,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
         {
           onSuccess: () => {
             if (taskIdNumber != null) {
-              queryClient.invalidateQueries({
-                queryKey: ["taskDetail", potIdNumber, taskIdNumber],
-              });
+              queryClient.invalidateQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
             } else {
               queryClient.invalidateQueries({ queryKey: ["myPotTasks", potIdNumber] });
             }

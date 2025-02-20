@@ -42,13 +42,11 @@ import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/Con
 import ChangeStatusModalWrapper from "@pages/MyPot/components/ChangeStatusModal/ChangeStatusModalWrapper/ChangeStatusModalWrapper";
 import { usePatchMyPotStatus } from "apis/hooks/myPots/usePatchMyPotStatus";
 import { AnotherTaskStatus } from "../../../../types/taskStatus";
-import { useQueryClient } from "@tanstack/react-query";
 
 const TaskDetailPage: React.FC = () => {
   
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -75,15 +73,11 @@ const TaskDetailPage: React.FC = () => {
   };
 
   const confirmDeleteTask = () => {
-    queryClient.cancelQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
-
     deleteTask(
       { potId: potIdNumber, taskId: taskIdNumber },
       {
         onSuccess: () => {
           setIsConfirmOpen(false);
-          queryClient.removeQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
-          queryClient.invalidateQueries({queryKey: ["myPotTasks", potIdNumber]});
           navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
         },
       }

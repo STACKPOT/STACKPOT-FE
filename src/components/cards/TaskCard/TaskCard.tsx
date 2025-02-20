@@ -25,7 +25,6 @@ import { TaskStatus } from "types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import { displayStatus } from "@constants/categories";
 import { AboutWorkModalWrapper, Loading } from "@pages/MyPot/components";
-import { useQueryClient } from "@tanstack/react-query";
 
 interface Participant {
   role: string;
@@ -67,7 +66,6 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const [activeStatus, setActiveStatus] = useState<TaskStatus | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: task, isLoading, error } = useGetMyPotTaskDetail({ potId: potIdNumber, taskId: Number(taskId) });
-  const queryClient = useQueryClient();
 
   const profileImage = roleImages[creatorRole as Role] || "";
 
@@ -75,15 +73,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
 
 
   const confirmDeleteTask = () => {
-    deleteTask(
-      { potId: potIdNumber, taskId: taskId },
-      {
-        onSuccess: () => {
-          queryClient.removeQueries({ queryKey: ["taskDetail", potIdNumber, Number(taskId)] });
-          queryClient.invalidateQueries({queryKey: ["myPotTasks", potIdNumber]});
-        }
-      }
-    );
+    deleteTask({ potId: potIdNumber, taskId: taskId });
     setIsConfirmOpen(false);
   };
 
