@@ -4,8 +4,8 @@ import ExplainationInputField from "./ExplainationInputField/ExplainationInputFi
 import DateInput from "./DateInput/DateInput";
 import ContributorList from "./ContributorList/ContributorList";
 import ActionButton from "./ActionButton/ActionButton";
-import MyPotTodoCard from "./MyPotTodoCard/MyPotTodoCard"
-import AboutWorkModalWrapper from "./AboutWorkModalWrapper/AboutworkModalWrapper";
+import MyPotTodoCard from "./MyPotTodoCard/MyPotTodoCard";
+import AboutWorkModalWrapper from "./AboutWorkModalWrapper/AboutWorkModalWrapper";
 import Pagination from "./Pagination/Pagination";
 import StatusBoard from "./Statusboard/StatusBoard";
 import TaskCardList from "./TaskCardList/TaskCardList";
@@ -33,5 +33,5 @@ export {
   MyPotStatusHeader,
   MyPotTodoList,
   Loading,
-  MemberIdModalWrapper
-}
+  MemberIdModalWrapper,
+};
