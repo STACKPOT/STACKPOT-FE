@@ -80,11 +80,11 @@ const FormBody = forwardRef<HTMLDivElement>(
           </div>
         </div>
         <div css={labelStyle}>
-          시작 날짜
+          팟 시작일
           <DatePicker date={dayjs(potStartDate)} onChange={handleStartDate} />
         </div>
         <div css={labelStyle}>
-          마감 날짜
+          모집 마감
           <DatePicker
             date={dayjs(recruitmentDeadline)}
             onChange={handleDeadline}
