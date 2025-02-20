@@ -25,7 +25,7 @@ const Header: React.FC = () => {
 
   const role = useAuthStore((state) => state.role);
   const roleProfileImage = roleImages[role as keyof typeof roleImages];
-  const guestMode = role === "DEFAULT";
+  const guestMode = role === "UNKNOWN";
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [accessToken, setAccessToken] = useState(

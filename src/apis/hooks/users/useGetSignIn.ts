@@ -16,8 +16,8 @@ const useGetSignIn = () => {
         const role = data.result.role ?? null;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
-        localStorage.setItem("role", role ?? "DEFAULT");
-        setRole(role ?? "DEFAULT");
+        localStorage.setItem("role", role ?? "UNKNOWN");
+        setRole(role ?? "UNKNOWN");
         if (data.result.isNewUser) {
           navigate(routes.signUp);
         } else {
