@@ -14,7 +14,6 @@ export const useDeleteMyPotTask = () => {
     mutationFn: ({ potId, taskId }: TaskAPIParams) =>
       deleteMyPotTask({ potId, taskId }),
     onSuccess: (_, { potId }) => {
-      console.log(potId, "potId");
       navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
       queryClient.invalidateQueries({ queryKey: ["myPotTasks", potId] });
       showSnackbar({

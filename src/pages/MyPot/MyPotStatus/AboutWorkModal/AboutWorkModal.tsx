@@ -124,7 +124,6 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
             setIsConfirmOpen(false);
             onClose();
           },
-
         }
       );
     }
@@ -169,11 +168,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
           },
         }
       );
-    } else {
-      console.warn(
-        "PATCH 요청이 실행되지 않음: '업무 수정하기'가 아니거나 taskId 없음"
-      );
-    }
+    } 
   };
   
   const handleSavePost = (data: FormValues) => {
