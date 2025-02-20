@@ -16,7 +16,6 @@ import routes from "@constants/routes";
 
 interface PotInformationCardProps {
   potId: number;
-  type: "applied" | "made";
   userId: number;
   userRole: Role;
   userNickname: string;
@@ -33,10 +32,10 @@ interface PotInformationCardProps {
 }
 const PotInformationCard: React.FC<PotInformationCardProps> = ({
   potId,
-  type,
   potName,
   userRole,
   userNickname,
+  potStatus,
   dday,
   potStartDate,
   potDuration,
@@ -55,9 +54,10 @@ const PotInformationCard: React.FC<PotInformationCardProps> = ({
     <div css={container} onClick={() => handleClickPot(potId)}>
       <div css={titleContainer}>
         <h1 css={titleStyle}>{potName}</h1>
-        <PotButton onClick={() => onButtonClick(potId)}>
-          {(type === "applied" && "지원 취소하기") || "팟 소개 수정"}
-        </PotButton>
+        {potStatus === "RECRUITING" &&
+          <PotButton onClick={() => onButtonClick(potId)}>
+            지원 취소하기
+          </PotButton>}
       </div>
       <div css={profileContainer}>
         <img css={profileStyle} src={roleImages[userRole]} alt="profile" />
