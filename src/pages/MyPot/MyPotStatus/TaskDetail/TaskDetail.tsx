@@ -42,10 +42,13 @@ import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/Con
 import ChangeStatusModalWrapper from "@pages/MyPot/components/ChangeStatusModal/ChangeStatusModalWrapper/ChangeStatusModalWrapper";
 import { usePatchMyPotStatus } from "apis/hooks/myPots/usePatchMyPotStatus";
 import { AnotherTaskStatus } from "../../../../types/taskStatus";
+import { useQueryClient } from "@tanstack/react-query";
 
 const TaskDetailPage: React.FC = () => {
+  
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -72,10 +75,21 @@ const TaskDetailPage: React.FC = () => {
   };
 
   const confirmDeleteTask = () => {
-    deleteTask({ potId: potIdNumber, taskId: taskIdNumber });
-    setIsConfirmOpen(false);
-    navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
+    queryClient.cancelQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
+
+    deleteTask(
+      { potId: potIdNumber, taskId: taskIdNumber },
+      {
+        onSuccess: () => {
+          setIsConfirmOpen(false);
+          queryClient.removeQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
+          queryClient.invalidateQueries({queryKey: ["myPotTasks", potIdNumber]});
+          navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
+        },
+      }
+    );
   };
+
   const handleDeleteTask = () => {
     setIsConfirmOpen(true);
   };
@@ -106,7 +120,7 @@ const TaskDetailPage: React.FC = () => {
     setIsChangingModalOpen(false);
   };
 
-  const handleUserPageNavigate = (userId: number) => {
+  const handleProfileClick = (userId: number) => {
     navigate(`${routes.userProfile}/${userId}`);
   }
 
@@ -181,7 +195,7 @@ const TaskDetailPage: React.FC = () => {
       </div>
       <div css={contributorContainer}>
         {task.result.participants.map((participant, index) => (
-          <div css={contributorCard} key={index} onClick={()=>{handleUserPageNavigate(participant.userId)}}>
+          <div css={contributorCard} key={index} onClick={()=>{handleProfileClick(participant.userId)}}>
             <div css={contributorInner}>
               <img src={roleImages[participant.role as Role]} css={profileImageStyle} alt="프로필"/>
               <span css={contributorNicknameStyle}>{participant.nickName}</span>

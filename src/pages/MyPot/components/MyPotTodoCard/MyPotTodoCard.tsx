@@ -38,14 +38,14 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, userI
     updateTodoStatus({ potId, todoId },);
   };
 
-  const handleUserPageNaivgate = () => {
+  const handleProfileClick = () => {
     navigate(`${routes.userProfile}/${userId}`);
   }
 
   return (
     <div css={cardStyle}>
-      <img css={profileImageStyle} src={roleImages[userRole] || roleImages.DEFAULT} alt="프로필" onClick={handleUserPageNaivgate}/>
-      <div css={nicknameStyle} onClick={handleUserPageNaivgate}>
+      <img css={profileImageStyle} src={roleImages[userRole] || roleImages.DEFAULT} alt="프로필" onClick={handleProfileClick}/>
+      <div css={nicknameStyle} onClick={handleProfileClick}>
         <p>{nickname}</p>
         {isFirst && currentPage === 1 && <PlusButtonIcon css={plusButtonStyle} onClick={handlePlusButtonClick} />} 
       </div>
