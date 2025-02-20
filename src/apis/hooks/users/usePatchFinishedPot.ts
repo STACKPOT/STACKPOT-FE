@@ -14,7 +14,7 @@ const usePatchFinishedPot = () => {
       patchFinishedPot(potId, body),
 
     onSuccess: () => {
-      navigate(`${routes.pot.base}`);
+      navigate(`${routes.pot.madeByMe}`);
       showSnackbar({
         message: "작성한 내용이 저장되었습니다.",
         severity: "success",

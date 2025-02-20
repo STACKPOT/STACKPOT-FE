@@ -65,6 +65,7 @@ const UserPage = () => {
                   content={post.content}
                   feedId={post.feedId}
                   writerId={post.writerId}
+                  isMyPost={false}
                 />
               ))
             : data.completedPots.map((pot) => (

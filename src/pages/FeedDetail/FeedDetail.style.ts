@@ -14,6 +14,13 @@ export const headerContainer = css`
 export const titleContainer = css`
   display: flex;
   gap: 1rem;
+  justify-content: space-between;
+`;
+
+export const titleWrapper = css`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 `;
 
 export const iconStyle = css`

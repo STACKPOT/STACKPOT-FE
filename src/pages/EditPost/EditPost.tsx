@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 import {
   buttonContainer,
@@ -14,14 +14,18 @@ import { Button, PotButton, UploadToast, PostForm } from "@components/index";
 import { FeedPatch } from "apis/types/feed";
 import usePatchFeed from "apis/hooks/feeds/usePatchFeed";
 import useGetFeedDetails from "apis/hooks/feeds/useGetFeedDetails";
+import useDeleteFeed from "apis/hooks/feeds/useDeleteFeed";
+import routes from "@constants/routes";
 
 const EditPost = () => {
   const { feedId } = useParams();
 
   const feedIdNumber = feedId ? ~~feedId : 0;
+  const navigate = useNavigate();
 
   const { data } = useGetFeedDetails({ feedId: feedIdNumber });
   const { mutate: editFeed } = usePatchFeed();
+  const { mutate: deleteFeed } = useDeleteFeed();
 
   const [showToast, setShowToast] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -61,6 +65,16 @@ const EditPost = () => {
     }
   };
 
+  const handleDelete = () => {
+    if (feedIdNumber) {
+      deleteFeed(feedIdNumber, {
+        onSuccess: () => {
+          navigate(`${routes.home}`);
+        },
+      });
+    }
+  };
+
   return (
     <main>
       {showToast && (
@@ -75,7 +89,7 @@ const EditPost = () => {
               게시물 수정하기
               <PotIcon css={iconStyle} />
               <div css={buttonContainer}>
-                <PotButton onClick={() => setShowDeleteModal(true)} type="red">
+                <PotButton onClick={handleDelete} type="red">
                   삭제하기
                 </PotButton>
                 <Button variant="action" type="submit" disabled={!isValid}>

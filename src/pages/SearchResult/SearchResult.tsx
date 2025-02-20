@@ -125,6 +125,7 @@ const SearchResult = () => {
               isLiked={feed.isLiked}
               feedId={feed.feedId}
               writerId={feed.userId}
+              isMyPost={false}
             />
           ))}
         </div>
