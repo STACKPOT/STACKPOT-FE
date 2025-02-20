@@ -49,7 +49,7 @@ tokenInstance.interceptors.response.use(
         window.location.href = routes.home;
       }
     } else {
-      window.location.href = "/404";
+      // window.location.href = "/404";
     }
     return Promise.reject(error);
   }
