@@ -1,1 +1,1 @@
-export type Role = "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN" | "DEFAULT";
+export type Role = "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN" | "UNKNOWN";
