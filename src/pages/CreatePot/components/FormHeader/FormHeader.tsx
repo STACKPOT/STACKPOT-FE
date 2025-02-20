@@ -1,7 +1,6 @@
 import { PotIcon } from "@assets/svgs";
 import { headButtonContainer, headContainer, iconStyle, titleContainer, titleStyle } from "./FormHeader.style";
 import { Button, Modal, PotButton } from "@components/index";
-import { useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useDeletePot from "apis/hooks/pots/useDeletePot";
 import routes from "@constants/routes";
@@ -15,7 +14,6 @@ interface FormHeaderProps {
 const FormHeader = ({ type, potId, potName }: FormHeaderProps) => {
   const navigate = useNavigate();
   const { mutate: deletePot } = useDeletePot();
-  const { formState: { isValid } } = useFormContext();
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -38,7 +36,7 @@ const FormHeader = ({ type, potId, potName }: FormHeaderProps) => {
         <PotIcon css={iconStyle} />
       </div>
       {type === "create" ? (
-        <Button variant="action" type="submit" disabled={!isValid}>
+        <Button variant="action" type="submit" >
           팟 만들기
         </Button>
       ) : (
@@ -47,7 +45,6 @@ const FormHeader = ({ type, potId, potName }: FormHeaderProps) => {
             type="submit"
             variant="action"
             actionType="edit"
-            disabled={!isValid}
           >
             수정 완료
           </Button>
