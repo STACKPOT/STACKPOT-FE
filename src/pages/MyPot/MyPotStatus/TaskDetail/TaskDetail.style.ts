@@ -21,7 +21,7 @@ export const leftContainer = css`
 export const rightContainer = css`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 4rem;
   flex-shrink: 0; 
   position: relative;
 `;
@@ -137,3 +137,14 @@ export const dropdownWrapperStyle = css`
   right: 0;
   top: 100%;
 `;
+
+export const profileImageStyle = css`
+  width: 3.8rem;
+  height: 3.8rem;
+`
+
+export const arrowIconStyle = css`
+  width: 2.4rem;
+  height: 2.4rem;
+  color: ${theme.color.object.assistive};
+`

@@ -20,7 +20,7 @@ export const contributorButtonStyle = (isSelected: boolean) => css`
   box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
   cursor: pointer;
   transition: background 0.3s, color 0.3s;
-  color: ${theme.color.point.alternative};
+  color: ${isSelected ? theme.color.base.white : theme.color.point.alternative};
 
   &:hover {
     background: ${theme.color.point.alternative};

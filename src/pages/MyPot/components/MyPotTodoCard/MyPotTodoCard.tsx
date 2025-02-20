@@ -11,28 +11,28 @@ import {
   todoTextStyle,
 } from "./MyPotTodoCard.style";
 import { PlusButtonIcon } from "@assets/svgs";
-import { MushroomImage } from "@assets/images";
 import MyTodoModalWrapper from "../MyTodoModalWrapper/MyTodoModalWrapper";
 import { Todo } from "apis/types/myPot";
 import { CheckBox } from "@components/index";
+import { Role } from "types/role";
+import { roleImages } from "@constants/roleImage";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface MyPotTodoCardProps {
   nickname: string;
+  userRole: Role;
+  userId: number;
   todos: Todo[] | null;
   isFirst: boolean;
   potId: number;
   currentPage: number;
 }
 
-const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({
-  nickname,
-  todos,
-  isFirst,
-  potId,
-  currentPage,
-}) => {
+const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({ nickname, userRole, userId, todos, isFirst, potId, currentPage  }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { mutate: updateTodoStatus } = usePatchMyPotTodoStatus();
+  const navigate = useNavigate();
 
   const handlePlusButtonClick = () => {
     setIsModalOpen(true);
@@ -43,14 +43,19 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({
   };
 
   const handleSelectTodo = (todoId: number) => {
-    updateTodoStatus({ potId, todoId });
+    if (!isFirst || currentPage !== 1) return;
+    updateTodoStatus({ potId, todoId },);
   };
+
+  const handleProfileClick = () => {
+    navigate(`${routes.userProfile}/${userId}`);
+  }
 
   return (
     <div css={cardStyle}>
-      <img css={profileImageStyle} src={MushroomImage} alt="profileImage" />
+      <img css={profileImageStyle} src={roleImages[userRole] || roleImages.DEFAULT} alt="프로필" onClick={handleProfileClick}/>
       <div css={nicknameStyle}>
-        <p>{nickname}</p>
+        <p onClick={handleProfileClick}>{nickname}</p>
         {isFirst && currentPage === 1 && (
           <PlusButtonIcon
             css={plusButtonStyle}
@@ -60,18 +65,18 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({
       </div>
       <div css={statusContainer}>
         <div css={todoListContainer}>
-          {(todos ?? []).map(
-            (todo) =>
-              todo.todoId !== null && (
-                <div css={todoContainer} key={todo.todoId}>
-                  <CheckBox
-                    selected={todo.status === "COMPLETED"}
-                    onSelect={() => handleSelectTodo(todo.todoId!)}
-                  />
-                  <p css={todoTextStyle}>{todo.content}</p>
-                </div>
-              )
-          )}
+          {(todos ?? []).map((todo) => (
+            todo.todoId !== null && (
+              <div css={todoContainer} key={todo.todoId}>
+                <CheckBox 
+                  selected={todo.status === "COMPLETED"} 
+                  onSelect={() => handleSelectTodo(todo.todoId!)}
+                  disabled={!isFirst || currentPage !== 1} 
+                />
+                <p css={todoTextStyle}>{todo.content}</p>
+              </div>
+            )
+          ))}
         </div>
       </div>
 

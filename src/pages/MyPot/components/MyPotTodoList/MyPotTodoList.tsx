@@ -3,6 +3,7 @@ import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { MyPotTodoCard } from "../index";
 import { gridContainerStyle } from "../../MyPotStatus/MyPotStatus.style";
 import { User } from "apis/types/myPot";
+import { Role } from "types/role";
 
 interface MyPotTodoListProps {
   currentPage: number;
@@ -20,6 +21,8 @@ const MyPotTodoList: React.FC<MyPotTodoListProps> = ({ currentPage }) => {
         <MyPotTodoCard
           key={index}
           nickname={todoData.userNickname}
+          userRole={todoData.userRole as Role}
+          userId={todoData.userId}
           todos={todoData.todos}
           isFirst={index === 0}
           potId={potIdNumber}

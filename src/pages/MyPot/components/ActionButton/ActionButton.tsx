@@ -1,32 +1,38 @@
-import { saveButtonStyle, buttonTextStyle, buttonContainer, deleteButtonStyle, anotherSaveButtonStyle } from "./ActionButton.style";
+import React from "react";
+import { buttonContainer } from "./ActionButton.style";
+import { Button } from "@components/index";
+import { saveButtonStyle, anotherSaveButtonStyle, deleteButtonStyle } from "./ActionButton.style";
+import { WorkModal } from "@constants/categories";
 
 interface ActionButtonProps {
-    title: string;
-    onSave: () => void;
-    onDelete: () => void;
+  title: string;
+  onSavePatch: () => void;
+  onSavePost: () => void;
+  onDelete: () => void;
+  disabled?: boolean;
+}
+
+const ActionButton: React.FC<ActionButtonProps> = ({ title, onSavePatch, onSavePost, onDelete, disabled }) => {
+  if (title === WorkModal[0]) {
+    return (
+      <Button onClick={onSavePost} disabled={!disabled} css={saveButtonStyle}>
+        저장하기
+      </Button>
+    );
   }
-  
-  const ActionButton: React.FC<ActionButtonProps> = ({ title, onSave, onDelete }) => (
-    <>
-      {title === "새로운 업무 추가" && (
-        <div css={saveButtonStyle} onClick={onSave}>
-          <button css={buttonTextStyle}>저장하기</button>
-        </div>
-      )}
-      {title === "업무 수정하기" && (
-        <div css={buttonContainer}>
-          {onDelete && (
-            <div css={deleteButtonStyle} onClick={onDelete}>
-              <button css={buttonTextStyle}>삭제하기</button>
-            </div>
-          )}
-          <div css={anotherSaveButtonStyle} onClick={onSave}>
-            <button css={buttonTextStyle}>저장하기</button>
-          </div>
-        </div>
-      )}
-    </>
-  );
-  
-  export default ActionButton;
-  
+  if (title === WorkModal[1]) {
+    return (
+      <div css={buttonContainer}>
+        <Button onClick={onDelete} css={deleteButtonStyle}>
+          삭제하기
+        </Button>
+        <Button onClick={onSavePatch} disabled={!disabled} css={anotherSaveButtonStyle}>
+          저장하기
+        </Button>
+      </div>
+    );
+  }
+  return null;
+};
+
+export default ActionButton;

@@ -83,7 +83,7 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
         </div>
 
         <div css={titleContainer}>
-          <p css={titleTextStyle}>{data?.title ?? "나의 할 일"}</p>
+          <p css={titleTextStyle}>{"나의 할 일"}</p>
           <div
             css={buttonStyle}
             className={localTasks.length >= 10 ? "max-tasks" : ""}

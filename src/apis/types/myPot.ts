@@ -80,7 +80,7 @@ export interface TaskPatch {
   deadline: string;
   taskboardStatus: string;
   description: string;
-  participants: number[];
+  participants: number[] | null;
 }
 
 export interface PatchTodoStatusParams {
@@ -145,4 +145,16 @@ export interface MyPotMember {
   kakaoId?: string;
   potRole: string;
   owner: boolean;
+}
+
+export interface PostTask {
+  title: string;
+  deadline: string;
+  taskboardStatus: APITaskStatus;
+  description: string;
+  participants: number[] | null;
+}
+
+export interface PatchStatus {
+  status: string;
 }

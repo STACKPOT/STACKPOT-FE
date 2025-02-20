@@ -11,6 +11,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "entry" | "action" | "landing";
   actionType?: "action" | "join" | "edit";
   onClick?: () => void;
+  customStyle?: SerializedStyles;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -19,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   actionType = "action",
   onClick,
   disabled,
+  customStyle,
   ...props
 }) => {
   const buttonType: SerializedStyles = (() => {
@@ -37,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type="button"
-      css={[buttonType, buttonStyle]}
+      css={[buttonType, customStyle, buttonStyle]}
       onClick={onClick}
       disabled={disabled}
       {...props}

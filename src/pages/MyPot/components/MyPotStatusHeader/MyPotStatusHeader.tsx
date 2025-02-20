@@ -7,7 +7,7 @@ const MyPotStatusHeader = () => {
   const { potId } = useParams<{ potId: string }>();
   const potIdNumber = Number(potId) || 0;
 
-  const { data } = useGetMyPotTodo({ potId: potIdNumber, page: 1, size: 3 });
+  const { data } = useGetMyPotTodo({ potId: potIdNumber, page: 1, size: 1 });
 
   return (
     <div css={boardStyle}>
