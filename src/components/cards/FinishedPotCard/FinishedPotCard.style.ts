@@ -28,26 +28,3 @@ export const titleStyle = css`
     ${theme.font.title1};
     color: ${theme.color.base.darkgray};
 `
-
-export const gridContainer = css`
-    display: grid;
-    grid-template-columns: max-content max-content;
-    column-gap: 17rem;
-    row-gap: 1.8rem;
-`
-export const elementContainer = css`
-    display: flex;
-    gap: 2.4rem;
-`
-export const teamElementContainer = css`
-    display: flex;
-    gap: 4rem;
-`
-export const elementTitleStyle = css`
-    ${theme.font.body1}
-    color: ${theme.color.interactive.inactive};
-`
-export const elementContentStyle = css`
-    ${theme.font.body1};
-    color: ${theme.color.base.darkgray};
-`

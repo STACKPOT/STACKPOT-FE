@@ -67,11 +67,13 @@ const PotInformationCard: React.FC<PotInformationCardProps> = ({
         </div>
       </div>
       <PotInformation
-        startDate={potStartDate}
-        period={potDuration}
-        method={potModeOfOperation}
-        stacks={recruitmentDetails}
-        languages={potLan}
+        elementList={[
+          { title: "팟 시작일", content: potStartDate },
+          { title: "진행 방식", content: potModeOfOperation },
+          { title: "사용 언어", content: potLan },
+          { title: "예상 기간", content: potDuration },
+          { title: "모집 파트", content: recruitmentDetails },
+        ]}
       />
     </div>
   );

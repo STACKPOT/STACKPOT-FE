@@ -15,6 +15,7 @@ export const elementTitleStyle = css`
   ${theme.font.body1}
   color: ${theme.color.interactive.inactive};
   white-space: nowrap;
+  width: 6.7rem;
 `;
 
 export const elementContentStyle = css`
