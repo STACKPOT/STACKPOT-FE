@@ -1,7 +1,8 @@
 import React from "react";
-import { buttonContainer } from "./CustomButton/CustomButton.style";
-import CustomButton from "./CustomButton/CustomButton";
-import { saveButtonStyle, anotherSaveButtonStyle, deleteButtonStyle } from "./CustomButton/CustomButton.style";
+import { buttonContainer } from "./ActionButton.style";
+import { Button } from "@components/index";
+import { saveButtonStyle, anotherSaveButtonStyle, deleteButtonStyle } from "./ActionButton.style";
+import { WorkModal } from "@constants/categories";
 
 interface ActionButtonProps {
   title: string;
@@ -12,31 +13,22 @@ interface ActionButtonProps {
 }
 
 const ActionButton: React.FC<ActionButtonProps> = ({ title, onSavePatch, onSavePost, onDelete, disabled }) => {
-  if (title === "새로운 업무 추가") {
+  if (title === WorkModal[0]) {
     return (
-      <CustomButton
-        text="저장하기"
-        onClick={onSavePost}
-        disabled={disabled}
-        customStyle={saveButtonStyle}
-      />
+      <Button onClick={onSavePost} disabled={!disabled} css={saveButtonStyle}>
+        저장하기
+      </Button>
     );
   }
-  if (title === "업무 수정하기") {
+  if (title === WorkModal[1]) {
     return (
       <div css={buttonContainer}>
-        <CustomButton
-          text="삭제하기"
-          onClick={onDelete}
-          disabled={disabled}
-          customStyle={deleteButtonStyle}
-        />
-        <CustomButton
-          text="저장하기"
-          onClick={onSavePatch}
-          disabled={disabled}
-          customStyle={anotherSaveButtonStyle}
-        />
+        <Button onClick={onDelete} css={deleteButtonStyle}>
+          삭제하기
+        </Button>
+        <Button onClick={onSavePatch} disabled={!disabled} css={anotherSaveButtonStyle}>
+          저장하기
+        </Button>
       </div>
     );
   }
