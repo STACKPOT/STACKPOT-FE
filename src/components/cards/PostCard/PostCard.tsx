@@ -53,7 +53,7 @@ const PostCard: React.FC<PostCardProps> = ({
 }: PostCardProps) => {
   const { mutate: likeFeed } = usePostFeedLike();
 
-  const { refetch } = useGetMyPage({ dataType: "feed" });
+  // const { refetch } = useGetMyPage({ dataType: "feed" });
 
   const navigate = useNavigate();
 
@@ -82,12 +82,7 @@ const PostCard: React.FC<PostCardProps> = ({
 
   const handleDelete = () => {
     if (feedId) {
-      deleteFeed(feedId, {
-        onSuccess: () => {
-          refetch();
-          window.scrollTo(0, 0);
-        },
-      });
+      deleteFeed(feedId);
     }
   };
 
