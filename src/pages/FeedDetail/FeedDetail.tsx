@@ -28,7 +28,7 @@ const FeedDetail = () => {
   const { data: user } = useGetMyProfile();
 
   const { data } = useGetFeedDetail(numericFeedId);
-  console.log("content: ", data?.content);
+
   const navigate = useNavigate();
 
   const profileImage = data?.writerRole
