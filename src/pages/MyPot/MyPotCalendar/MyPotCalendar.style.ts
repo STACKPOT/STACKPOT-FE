@@ -27,7 +27,7 @@ export const calendarDateStyle = css`
 `;
 
 export const calendarStyle = css`
-  padding: 7.2rem 5rem;
+  padding: 3.2rem 5rem;
   border-radius: 24px;
   width: 53.6rem;
   border: 1px solid ${theme.color.object.alternative};
