@@ -17,8 +17,10 @@ export const usePatchMyPotTodo = () => {
         severity: "success",
       });
     },
-    onError: (error) => {
-      console.error("할 일 업데이트 실패:", error);
-    },
+    onError: () => {
+      showSnackbar({
+        message: "할 일 변경에 실패했습니다.",
+        severity: "error",
+      });    },
   });
 };

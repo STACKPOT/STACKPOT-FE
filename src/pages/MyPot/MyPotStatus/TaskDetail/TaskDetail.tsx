@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   leftContainer,
@@ -22,9 +22,9 @@ import {
   prevButtonStyle,
   dropdownWrapperStyle,
   profileImageStyle,
-  arrowIconStyle,
+  arrowIconStyle
 } from "./TaskDetail.style";
-import { container } from "../../MyPotMain.style";
+import { container} from "../../MyPotMain.style"
 import { DdayBadge, StateBadge, MyFeedDropdown } from "@components/index";
 import { CalendarIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
@@ -44,26 +44,23 @@ import { usePatchMyPotStatus } from "apis/hooks/myPots/usePatchMyPotStatus";
 import { AnotherTaskStatus } from "../../../../types/taskStatus";
 
 const TaskDetailPage: React.FC = () => {
+  
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
 
-  window.scrollTo(0, 0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const potIdNumber = Number(potId);
   const taskIdNumber = Number(taskId);
 
-  const {
-    data: task,
-    isLoading,
-    error,
-  } = useGetMyPotTaskDetail({
+  const { data: task, isLoading, error } = useGetMyPotTaskDetail({
     potId: potIdNumber,
     taskId: taskIdNumber,
   });
-  const { mutate: deleteTask, isPending: isDeletePending } =
-    useDeleteMyPotTask();
-  const { mutate: patchStatus, isPending: isStatusPending } =
-    usePatchMyPotStatus();
+  const { mutate: deleteTask, isPending: isDeletePending } = useDeleteMyPotTask();
+  const { mutate: patchStatus, isPending: isStatusPending } = usePatchMyPotStatus();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChangingModalOpen, setIsChangingModalOpen] = useState(false);
@@ -81,6 +78,7 @@ const TaskDetailPage: React.FC = () => {
       {
         onSuccess: () => {
           setIsConfirmOpen(false);
+          navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
         },
       }
     );
@@ -92,9 +90,7 @@ const TaskDetailPage: React.FC = () => {
 
   const handleOpenModal = () => {
     setModalTitle(WorkModal[1]);
-    const convertedStatus = task?.result?.status
-      ? displayStatus[task.result.status]
-      : null;
+    const convertedStatus = task?.result?.status ? displayStatus[task.result.status] : null;
     setActiveStatus(convertedStatus);
     setIsModalOpen(true);
   };
@@ -120,7 +116,7 @@ const TaskDetailPage: React.FC = () => {
 
   const handleProfileClick = (userId: number) => {
     navigate(`${routes.userProfile}/${userId}`);
-  };
+  }
 
   if (isLoading || isDeletePending || isStatusPending) return <Loading />;
   if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
@@ -157,14 +153,8 @@ const TaskDetailPage: React.FC = () => {
           <div css={titleStyle}>{task.result.title}</div>
         </div>
         <div css={rightContainer}>
-          <StateBadge
-            content={displayStatus[task.result.status]}
-            onClick={handleOpenChangingModal}
-          />
-          <div
-            css={dropdownWrapperStyle}
-            onClick={(event) => event.stopPropagation()}
-          >
+            <StateBadge content={displayStatus[task.result.status]} onClick={handleOpenChangingModal}/>
+          <div css={dropdownWrapperStyle} onClick={(event) => event.stopPropagation()}>
             <MyFeedDropdown
               topMessage="수정하기"
               bottomMessage="삭제하기"
@@ -199,19 +189,9 @@ const TaskDetailPage: React.FC = () => {
       </div>
       <div css={contributorContainer}>
         {task.result.participants.map((participant, index) => (
-          <div
-            css={contributorCard}
-            key={index}
-            onClick={() => {
-              handleProfileClick(participant.userId);
-            }}
-          >
+          <div css={contributorCard} key={index} onClick={()=>{handleProfileClick(participant.userId)}}>
             <div css={contributorInner}>
-              <img
-                src={roleImages[participant.role as Role]}
-                css={profileImageStyle}
-                alt="프로필"
-              />
+              <img src={roleImages[participant.role as Role]} css={profileImageStyle} alt="프로필"/>
               <span css={contributorNicknameStyle}>{participant.nickName}</span>
             </div>
           </div>

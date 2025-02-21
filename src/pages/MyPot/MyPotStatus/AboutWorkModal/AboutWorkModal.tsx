@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm, useWatch } from "react-hook-form";
 import { CloseIcon } from "@assets/svgs";
 import {
@@ -22,14 +22,16 @@ import {
 } from "./AboutWorkModal.style";
 import { TaskStatus } from "../../../../types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
+import usePatchMyPotTask from "apis/hooks/myPots/usePatchMyPotTask";
 import { TaskPatch } from "apis/types/myPot";
+import routes from "@constants/routes";
 import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
 import { APITaskStatus } from "../../../../types/taskStatus";
 import { displayStatus, WorkModal } from "@constants/categories";
 import { useQueryClient } from "@tanstack/react-query";
 import { usePostMyPotTask } from "apis/hooks/myPots/usePostMyPotTask";
 import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
-import usePatchMyPotTask from "apis/hooks/myPots/usePatchMyPotTask";
+import { useSnackbar } from "providers";
 
 interface FormValues {
   taskTitle: string;
@@ -51,18 +53,13 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   taskId,
   title,
 }) => {
-  const { potId, taskId: paramTaskId } = useParams<{
-    potId: string;
-    taskId: string;
-  }>();
-
+  const { potId, taskId: paramTaskId } = useParams<{ potId: string; taskId: string }>();
+  const navigate = useNavigate();
   const potIdNumber = Number(potId);
-  const taskIdNumber =
-    paramTaskId !== undefined && !isNaN(Number(paramTaskId))
-      ? Number(paramTaskId)
-      : null;
+  const taskIdNumber = paramTaskId !== undefined && !isNaN(Number(paramTaskId)) ? Number(paramTaskId) : null;
   const taskIdSource = taskId ?? taskIdNumber;
-
+    const { showSnackbar } = useSnackbar();
+  
   const { data: taskDetail, isLoading } =
     title === WorkModal[1] && taskIdSource !== null
       ? useGetMyPotTaskDetail({ potId: potIdNumber, taskId: taskIdSource })
@@ -82,15 +79,10 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   const taskTitleValue = useWatch({ control, name: "taskTitle" });
   const taskDateValue = useWatch({ control, name: "taskDate" });
   const taskDescriptionValue = useWatch({ control, name: "taskDescription" });
-  const selectedParticipants = useWatch({
-    control,
-    name: "selectedParticipants",
-  });
+  const selectedParticipants = useWatch({ control, name: "selectedParticipants" });
 
   const isTaskDateDirectInput = /^(\d{4})-(\d{2})-(\d{2})$/.test(taskDateValue);
-  const isFormComplete = Boolean(
-    taskTitleValue && isTaskDateDirectInput && taskDescriptionValue
-  );
+  const isFormComplete = Boolean(taskTitleValue && isTaskDateDirectInput && taskDescriptionValue);
 
   const queryClient = useQueryClient();
   const { mutate: patchTask } = usePatchMyPotTask();
@@ -99,10 +91,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
 
   const reverseDisplayStatus = Object.fromEntries(
     Object.entries(displayStatus).map(([key, value]) => [value, key])
-  ) as Record<
-    (typeof displayStatus)[keyof typeof displayStatus],
-    keyof typeof displayStatus
-  >;
+  ) as Record<(typeof displayStatus)[keyof typeof displayStatus], keyof typeof displayStatus>;
   const convertedStatus =
     displayStatus[taskDetail?.result?.status as APITaskStatus] || "진행 전";
   const [selectedStatus, setSelectedStatus] = useState<TaskStatus>(
@@ -123,6 +112,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
           onSuccess: () => {
             setIsConfirmOpen(false);
             onClose();
+            navigate(`${routes.myPot.base}/${routes.task}/${potIdNumber}`);
           },
         }
       );
@@ -134,10 +124,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
     const newValue = current.includes(memberId)
       ? current.filter((id) => id !== memberId)
       : [...current, memberId];
-    setValue("selectedParticipants", newValue, {
-      shouldDirty: true,
-      shouldValidate: true,
-    });
+    setValue("selectedParticipants", newValue, { shouldDirty: true, shouldValidate: true });
   };
 
   const handleSavePatch = (data: FormValues) => {
@@ -145,27 +132,18 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
       const updatedTask: TaskPatch = {
         title: data.taskTitle,
         deadline: data.taskDate,
-        taskboardStatus: selectedStatus
-          ? reverseDisplayStatus[selectedStatus]
-          : "OPEN",
+        taskboardStatus: selectedStatus ? reverseDisplayStatus[selectedStatus] : "OPEN",
         description: data.taskDescription,
-        participants:
-          data.selectedParticipants.length > 0
-            ? data.selectedParticipants
-            : null,
+        participants: data.selectedParticipants,
       };
       patchTask(
         { potId: potIdNumber, taskId: taskIdSource, data: updatedTask },
         {
           onSuccess: () => {
             if (taskIdNumber != null) {
-              queryClient.invalidateQueries({
-                queryKey: ["taskDetail"],
-              });
+              queryClient.invalidateQueries({ queryKey: ["taskDetail", potIdNumber, taskIdNumber] });
             } else {
-              queryClient.invalidateQueries({
-                queryKey: ["myPotTasks", potIdNumber],
-              });
+              queryClient.invalidateQueries({ queryKey: ["myPotTasks", potIdNumber] });
             }
             onClose();
           },
@@ -178,15 +156,24 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
     const newTask = {
       title: data.taskTitle,
       deadline: data.taskDate,
-      taskboardStatus: selectedStatus
-        ? reverseDisplayStatus[selectedStatus]
-        : "OPEN",
+      taskboardStatus: selectedStatus ? reverseDisplayStatus[selectedStatus] : "OPEN",
       description: data.taskDescription,
-      participants:
-        data.selectedParticipants.length > 0 ? data.selectedParticipants : null,
+      participants: data.selectedParticipants,
     };
     postTask({ potId: potIdNumber, data: newTask });
     onClose();
+  };
+
+  const handleTaskTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value.length > 20) {
+      showSnackbar({
+        message: "제목은 최대 20자까지 가능합니다.",
+        severity: "error",
+      });
+      return;
+    }
+    setValue("taskTitle", value);
   };
 
   if (isLoading) return <Loading />;
@@ -219,10 +206,14 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
             >
               <input type="hidden" {...register("selectedParticipants")} />
               <TextInput
-                value={taskTitleValue}
-                {...register("taskTitle", { required: true })}
-                onChange={(e) => setValue("taskTitle", e.target.value)}
-              />
+  value={taskTitleValue}
+  {...register("taskTitle", {
+    required: true,
+    maxLength: { value: 20, message: "최대 20글자까지 입력 가능합니다" },
+  })}
+  onChange={handleTaskTitleChange}
+  maxLength={20}
+/>
               <DateInput
                 onChange={(date) =>
                   setValue("taskDate", date ? date.format("YYYY-MM-DD") : "")
