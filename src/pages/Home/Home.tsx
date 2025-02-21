@@ -43,7 +43,7 @@ const Home: React.FC = () => {
         <div css={bannerContainer}>
           <p css={bannerTitleStyle}>
             <span css={spanStyle}>사이드 프로젝트</span>와
-            <span css={spanStyle}>기록</span>을 동시에 해 보세요
+            <span css={spanStyle}> 기록</span>을 동시에 해 보세요
           </p>
           <p css={bannerSubtitleStyle}>
             지금 바로 나와 함께할 팀원을 찾아볼까요?
