@@ -1,5 +1,5 @@
 import axios from "axios";
-import { postReissue } from "./tokenAPI";
+import { postReissue } from "../tokenAPI";
 import routes from "@constants/routes";
 
 const baseURL = import.meta.env.VITE_BASE_URL;

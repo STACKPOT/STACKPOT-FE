@@ -4,7 +4,7 @@ import {
   authApiGet,
   authApiPatch,
   authApiPost,
-} from "./apiUtils";
+} from "./axios/apiUtils";
 import {
   GetPotsParams,
   PotsResponse,
