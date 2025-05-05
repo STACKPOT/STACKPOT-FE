@@ -10,7 +10,7 @@ import {
   textareaStyle,
   categoryContainer,
   categories,
-} from "./PostFoam.style";
+} from "./PostForm.style";
 import { CategoryButton } from "@components/index";
 import { partMap } from "@constants/categories";
 
