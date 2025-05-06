@@ -1,7 +1,7 @@
 import { PotIcon } from "@assets/svgs"
 import { container, potIconStyle, titleContainer, titleStyle } from "./AppliedPot.style"
 import { useState } from "react"
-import { PotInformationCard } from "../components";
+import { PotInformationCard } from "./components";
 import Modal from "@components/commons/Modal/Modal";
 import useGetPotsApply from "apis/hooks/pots/useGetPotApply";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
