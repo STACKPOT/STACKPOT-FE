@@ -16,7 +16,7 @@ import {
   MadePotPage,
   SignUpPage,
   CreatePotPage,
-  MyPotMainPage,
+  MyPotDetailMainPage,
   MyPotStatusPage,
   MyPotCalendarPage,
   EditPostPage,
@@ -24,7 +24,7 @@ import {
   WritingPage,
   EditFinishedPotPage,
   UserPage,
-  MyPotPage,
+  MyPotsPage,
   CallbackPage,
   CreateFinishedPot,
   EditPotPage,
@@ -95,11 +95,11 @@ const router = createBrowserRouter([
       },
       {
         path: routes.myPot.base,
-        element: <MyPotPage />,
+        element: <MyPotsPage />,
       },
       {
         path: routes.myPot.base,
-        element: <MyPotMainPage />,
+        element: <MyPotDetailMainPage />,
         children: [
           { path: `${routes.task}/:potId`, element: <MyPotStatusPage /> },
           {
