@@ -25,7 +25,7 @@ export const feedWriteText = css`
 
 export const feedWriteButton = css`
 	padding: 11px 16px;
-	background-color: ${theme.color.object.hero};
+	background-color: ${theme.color.point.hero};
 	color: white;
 	border-radius: 20px;
 	font-weight: 500;
@@ -74,4 +74,26 @@ export const profileStyle = css`
 	width: 50px;
 	border: 1px solid ${theme.color.object.alternative};
 	border-radius: 50%;
+`;
+
+export const emptyFeedFallbackStyle = css`
+	text-align: center;
+	height: 960px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	align-self: stretch;
+
+	div {
+		font-size: 20px;
+		align-items: center;
+	}
+
+	p {
+		${theme.font.title1};
+		margin-top: 8px;
+		color: ${theme.color.object.hero};
+	}
 `;

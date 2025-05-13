@@ -72,9 +72,9 @@ export const likeContainer = css`
 	align-items: center;
 	gap: 0.8rem;
 `;
-export const likeTextStyle = css`
+export const textStyle = css`
 	${theme.font.label3}
-	color: ${theme.color.interactive.inactive};
+	color: ${theme.color.object.hero};
 `;
 export const likeIconStyle = (isLike: boolean, isAuth: boolean) => css`
 	width: 2.2rem;
@@ -91,12 +91,6 @@ export const saveIconStyle = (isSave: boolean, isAuth: boolean) => css`
 export const commentIconStyle = (isComment: boolean, isAuth: boolean) => css`
 	width: 2.2rem;
 	height: 2.2rem;
-	fill: ${isComment ? '#6D7882' : theme.color.interactive.inactive};
+	fill: ${isComment ? theme.color.object.hero : theme.color.interactive.inactive};
 	cursor: ${isAuth && 'pointer'};
-`;
-export const likeIconfilledStyle = css`
-	width: 2.2rem;
-	height: 2.2rem;
-	fill: ${theme.color.feedback.negative};
-	cursor: pointer;
 `;

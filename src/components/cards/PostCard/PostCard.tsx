@@ -10,11 +10,11 @@ import {
 	likeContainer,
 	likeIconStyle,
 	nicknameDateContainer,
-	likeTextStyle,
 	moreIconStyle,
 	headerContainer,
 	saveIconStyle,
 	commentIconStyle,
+	textStyle,
 } from './PostCard.style';
 import { LikeIcon } from '@assets/svgs';
 import MyFeedDropdown from '@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown';
@@ -23,9 +23,9 @@ import { Role } from 'types/role';
 import { useNavigate } from 'react-router-dom';
 import routes from '@constants/routes';
 import usePostFeedLike from 'apis/hooks/feeds/usePostFeedLike';
-import useDeleteFeed from 'apis/hooks/feeds/useDeleteFeed';
 import usePostFeedComment from 'apis/hooks/feeds/usePostFeedComment';
 import usePostFeedSave from 'apis/hooks/feeds/usePostFeedSave';
+import useDeleteFeed from 'apis/hooks/feeds/useDeleteFeed';
 
 interface PostCardProps {
 	role: Role;
@@ -91,32 +91,32 @@ const PostCard: React.FC<PostCardProps> = ({
 	};
 	const handleSave = (e: React.MouseEvent<SVGSVGElement>) => {
 		e.stopPropagation();
-		setIsSave((prev) => !prev);
-		setSaves((prev) => (isSave ? prev - 1 : prev + 1));
-		// if (accessToken) {
-		// 	saveFeed(feedId, {
-		// 		onSuccess: () => {
-		// 			setIsSave((prev) => !prev);
-		// 			setSaves((prev) => (isSave ? prev - 1 : prev + 1));
-		// 		},
-		// 	});
-		// }
+		if (accessToken) {
+			setIsSave((prev) => !prev);
+			setSaves((prev) => (isSave ? prev - 1 : prev + 1));
+			// saveFeed(feedId, {
+			// 	onSuccess: () => {
+			// 		setIsSave((prev) => !prev);
+			// 		setSaves((prev) => (isSave ? prev - 1 : prev + 1));
+			// 	},
+			// });
+		}
 	};
 	const handleComment = (e: React.MouseEvent<SVGSVGElement>) => {
 		e.stopPropagation();
-		setIsComment((prev) => !prev);
-		setComments((prev) => (isComment ? prev - 1 : prev + 1));
-		// if (accessToken) {
-		// 	commentFeed(feedId, {
-		// 		onSuccess: () => {
-		// 			setIsComment((prev) => !prev);
-		// 			setComments((prev) => (isComment ? prev - 1 : prev + 1));
-		// 		},
-		// 	});
-		// }
+		if (accessToken) {
+			setIsComment((prev) => !prev);
+			setComments((prev) => (isComment ? prev - 1 : prev + 1));
+			// commentFeed(feedId, {
+			// 	onSuccess: () => {
+			// 		setIsComment((prev) => !prev);
+			// 		setComments((prev) => (isComment ? prev - 1 : prev + 1));
+			// 	},
+			// });
+		}
 	};
 	const handleEdit = () => {
-		navigate(`${routes.feed.edit}/${feedId}`);
+		if (accessToken) navigate(`${routes.feed.edit}/${feedId}`);
 	};
 
 	const handleDelete = () => {
@@ -126,12 +126,16 @@ const PostCard: React.FC<PostCardProps> = ({
 	};
 
 	const handleFeedClick = (feedId: number) => {
-		navigate(`${routes.feed.base}/${feedId}`);
-		window.scrollTo(0, 0);
+		if (accessToken) {
+			navigate(`${routes.feed.base}/${feedId}`);
+			window.scrollTo(0, 0);
+		}
 	};
 
 	const handleUserClick = (userId: number) => {
-		navigate(`${routes.userProfile}/${userId}`);
+		if (accessToken) {
+			navigate(`${routes.userProfile}/${userId}`);
+		}
 	};
 
 	const profileImage = roleImages[role];
@@ -175,17 +179,14 @@ const PostCard: React.FC<PostCardProps> = ({
 			<p css={contentStyle}>{content}</p>
 			<div css={likeContainer}>
 				<LikeIcon type="button" css={likeIconStyle(isLike, accessToken !== null)} onClick={handleLike} />
-				<p css={likeTextStyle}>{likes}</p>
+				<p css={textStyle}>{likes}</p>
 				<LikeIcon type="button" css={saveIconStyle(isSave, accessToken !== null)} onClick={handleSave} />
-				<p css={likeTextStyle}>{saves}</p>
+				<p css={textStyle}>{saves}</p>
 				<LikeIcon type="button" css={commentIconStyle(isComment, accessToken !== null)} onClick={handleComment} />
-				<p css={likeTextStyle}>{comments}</p>
+				<p css={textStyle}>{comments}</p>
 			</div>
 		</div>
 	);
 };
 
 export default PostCard;
-function saveFeed(feedId: number, arg1: { onSuccess: () => void }) {
-	throw new Error('Function not implemented.');
-}

@@ -10,8 +10,9 @@ import {
 	feedWriteText,
 	feedWriteButton,
 	profileStyle,
+	emptyFeedFallbackStyle,
 } from './Feed.style';
-import { contentTitle, subTitleStyle } from '@pages/Home/Home.style';
+import { contentTitle } from '@pages/Home/Home.style';
 import { useState, useEffect } from 'react';
 import { categories, searchPartMap } from '@constants/categories';
 import useGetFeeds from 'apis/hooks/feeds/useGetFeeds';
@@ -24,11 +25,24 @@ import { roleImages } from '@constants/roleImage';
 
 const categoryText: { [key: string]: string } = {
 	ALL: '모든',
-	FRONTEND: '프론트엔드',
-	BACKEND: '백엔드',
-	DESIGN: '디자인',
 	PLANNING: '기획',
+	DESIGN: '디자인',
+	BACKEND: '백엔드',
+	FRONTEND: '프론트엔드',
 };
+
+const EmptyFeedFallback = ({ onWrite }: { onWrite: () => void }) => (
+	<div css={emptyFeedFallbackStyle}>
+		<div>🥲</div>
+		<p>
+			피드가 비어 있어요.
+			<br />첫 글을 써 볼까요?
+		</p>
+		<button onClick={onWrite} css={feedWriteButton}>
+			피드 작성
+		</button>
+	</div>
+);
 
 const Feed = () => {
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -81,6 +95,15 @@ const Feed = () => {
 	return (
 		<>
 			<div css={contentHeader}>
+				<div css={feedWriteContainer}>
+					<div css={feedWriteText}>
+						<img src={roleProfileImage} alt="profileImage" css={profileStyle} />
+						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
+					</div>
+					<button onClick={hanldeWriteFeed} css={feedWriteButton}>
+						피드 작성
+					</button>
+				</div>
 				<div css={contentTitle}>
 					<p css={{ color: '#2098F3' }}>{categoryText[category ?? 'ALL']}</p>
 					<p> 피드를 탐색해볼까요?</p>
@@ -97,15 +120,6 @@ const Feed = () => {
 						</div>
 					))}
 				</div>
-				<div css={feedWriteContainer}>
-					<div css={feedWriteText}>
-						<img src={roleProfileImage} alt="profileImage" css={profileStyle} />
-						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
-					</div>
-					<button onClick={hanldeWriteFeed} css={feedWriteButton}>
-						피드 작성
-					</button>
-				</div>
 			</div>
 			<div css={contentBody}>
 				{isLoading ? (
@@ -115,7 +129,7 @@ const Feed = () => {
 						<>
 							{page.result?.feeds && page.result.feeds.length > 0 ? (
 								page.result.feeds.map((item, itemIndex) => {
-									const isLastItem = pageIndex === data.pages.length - 1 && itemIndex === page.result.feeds.length - 1;
+									const isLastItem = pageIndex === data.pages.length - 1 && itemIndex === (page.result?.feeds?.length ?? 0) - 1;
 									return (
 										<div key={item.feedId} ref={isLastItem ? ref : null}>
 											<PostCard
@@ -138,12 +152,12 @@ const Feed = () => {
 									);
 								})
 							) : (
-								<p>게시물이 없습니다.</p>
+								<EmptyFeedFallback onWrite={hanldeWriteFeed} />
 							)}
 						</>
 					))
 				) : (
-					<p>게시물이 없습니다.</p>
+					<EmptyFeedFallback onWrite={hanldeWriteFeed} />
 				)}
 				{isFetchingNextPage && (
 					<div css={iconContainer}>

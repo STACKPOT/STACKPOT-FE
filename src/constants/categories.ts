@@ -5,10 +5,10 @@ export const searchPartMap: {
 	[key: string]: 'ALL' | 'FRONTEND' | 'BACKEND' | 'DESIGN' | 'PLANNING';
 } = {
 	전체보기: 'ALL',
-	프론트엔드: 'FRONTEND',
-	백엔드: 'BACKEND',
-	디자인: 'DESIGN',
 	기획: 'PLANNING',
+	디자인: 'DESIGN',
+	백엔드: 'BACKEND',
+	프론트엔드: 'FRONTEND',
 } as const;
 
 export const partMap: {
