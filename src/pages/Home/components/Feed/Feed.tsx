@@ -1,18 +1,40 @@
 import { CategoryButton, Dropdown, PostCard } from '@components/index';
-import { buttonContainer, cardStyle, contentBody, contentHeader, iconContainer, iconStyle } from './Feed.style';
+import {
+	buttonContainer,
+	cardStyle,
+	contentBody,
+	contentHeader,
+	iconContainer,
+	iconStyle,
+	feedWriteContainer,
+	feedWriteText,
+	feedWriteButton,
+	profileStyle,
+} from './Feed.style';
 import { contentTitle, subTitleStyle } from '@pages/Home/Home.style';
 import { useState, useEffect } from 'react';
-import { categories, partMap } from '@constants/categories';
+import { categories, searchPartMap } from '@constants/categories';
 import useGetFeeds from 'apis/hooks/feeds/useGetFeeds';
 import { useInView } from 'react-intersection-observer';
 import { LoadingSpinnerIcon } from '@assets/svgs';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import routes from '@constants/routes';
+import { roleImages } from '@constants/roleImage';
+
+const categoryText: { [key: string]: string } = {
+	ALL: '모든',
+	FRONTEND: '프론트엔드',
+	BACKEND: '백엔드',
+	DESIGN: '디자인',
+	PLANNING: '기획',
+};
 
 const Feed = () => {
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const [category, setCategory] = useState<string | null>(null);
 	const [sort, setSort] = useState<string>('new');
+	const [roleProfileImage, setRoleProfileImage] = useState<string>('');
 
 	const handleCategoryClick = (category: string, partName: string) => {
 		if (selectedCategory === partName) {
@@ -33,6 +55,9 @@ const Feed = () => {
 	const handleChange = (key: string) => {
 		setSort(key);
 	};
+	const hanldeWriteFeed = () => {
+		window.location.href = routes.writePost;
+	};
 
 	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useGetFeeds({
 		category: category || 'ALL',
@@ -42,7 +67,11 @@ const Feed = () => {
 	});
 
 	const { ref, inView } = useInView();
-
+	useEffect(() => {
+		const role = localStorage.getItem('role');
+		const profileImage = roleImages[role as keyof typeof roleImages] || '';
+		setRoleProfileImage(profileImage);
+	}, [localStorage.getItem('role')]);
 	useEffect(() => {
 		if (inView && hasNextPage && !isFetchingNextPage) {
 			fetchNextPage();
@@ -53,21 +82,30 @@ const Feed = () => {
 		<>
 			<div css={contentHeader}>
 				<div css={contentTitle}>
-					<p>피드</p>
-				</div>
-				<div css={buttonContainer}>
-					{Object.keys(partMap).map((partName) => (
-						<div key={partName} css={categories}>
-							<CategoryButton style="pot" selected={selectedCategory === partName} onClick={() => handleCategoryClick(partMap[partName], partName)}>
-								{partName}
-							</CategoryButton>
-						</div>
-					))}
+					<p css={{ color: '#2098F3' }}>{categoryText[category ?? 'ALL']}</p>
+					<p> 피드를 탐색해볼까요?</p>
 					<div css={{ marginLeft: 'auto' }}>
 						<Dropdown options={options} handleChange={handleChange} />
 					</div>
 				</div>
-				<p css={subTitleStyle}>원하는 직군을 선택하고 필요한 글을 읽어 보세요!</p>
+				<div css={buttonContainer}>
+					{Object.keys(searchPartMap).map((partName) => (
+						<div key={partName} css={categories}>
+							<CategoryButton style="pot" selected={selectedCategory === partName} onClick={() => handleCategoryClick(searchPartMap[partName], partName)}>
+								{partName}
+							</CategoryButton>
+						</div>
+					))}
+				</div>
+				<div css={feedWriteContainer}>
+					<div css={feedWriteText}>
+						<img src={roleProfileImage} alt="profileImage" css={profileStyle} />
+						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
+					</div>
+					<button onClick={hanldeWriteFeed} css={feedWriteButton}>
+						피드 작성
+					</button>
+				</div>
 			</div>
 			<div css={contentBody}>
 				{isLoading ? (
