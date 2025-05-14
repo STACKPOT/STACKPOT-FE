@@ -17,8 +17,10 @@ import useGetMyPage from 'apis/hooks/users/useGetMyPage';
 import { Role } from 'types/role';
 import { roleImages } from '@constants/roleImage';
 import routes from '@constants/routes';
+import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
+	const navigate = useNavigate();
 	const [contentType, setContentType] = useState<'feed' | 'pot'>('feed');
 	const [roleProfileImage, setRoleProfileImage] = useState<string>('');
 
@@ -27,18 +29,15 @@ const MyPage = () => {
 		const profileImage = roleImages[role as keyof typeof roleImages] || '';
 		setRoleProfileImage(profileImage);
 	}, [localStorage.getItem('role')]);
-	const { data } = useGetMyPage({
-		dataType: contentType,
-	});
 
+	const { data } = useGetMyPage({ dataType: contentType });
+
+	const hanldeWriteFeed = () => {
+		navigate(routes.writePost);
+	};
 	if (!data) {
 		return <div>데이터가 없습니다.</div>;
 	}
-	// console.log(data.feeds);
-
-	const hanldeWriteFeed = () => {
-		window.location.href = routes.writePost;
-	};
 
 	return (
 		<main css={container}>

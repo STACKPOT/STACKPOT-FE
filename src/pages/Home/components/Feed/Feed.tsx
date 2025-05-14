@@ -23,7 +23,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import routes from '@constants/routes';
 import { roleImages } from '@constants/roleImage';
 import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
-import { set } from 'react-hook-form';
+
 import { useNavigate } from 'react-router-dom';
 
 const categoryText: { [key: string]: string } = {

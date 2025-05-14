@@ -1,11 +1,9 @@
 import routes from '@constants/routes';
 import { useMutation } from '@tanstack/react-query';
 import { postLogout } from 'apis/userAPI';
-import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'providers';
 
 const usePostLogout = () => {
-	const navigate = useNavigate();
 	const { showSnackbar } = useSnackbar();
 
 	return useMutation({
@@ -15,8 +13,7 @@ const usePostLogout = () => {
 			localStorage.removeItem('refreshToken');
 			localStorage.removeItem('role');
 
-			navigate(routes.home);
-			window.location.reload();
+			window.location.href = routes.home;
 			showSnackbar({
 				message: '로그아웃이 완료됐습니다.',
 				severity: 'success',
