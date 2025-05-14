@@ -15,6 +15,7 @@ const usePostLogout = () => {
 			localStorage.removeItem('refreshToken');
 			localStorage.removeItem('role');
 
+			navigate(routes.home);
 			window.location.reload();
 			showSnackbar({
 				message: '로그아웃이 완료됐습니다.',

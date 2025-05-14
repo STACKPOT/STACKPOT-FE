@@ -24,6 +24,7 @@ import routes from '@constants/routes';
 import { roleImages } from '@constants/roleImage';
 import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
 import { set } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 const categoryText: { [key: string]: string } = {
 	ALL: '모든',
@@ -53,6 +54,7 @@ const EmptyFeedFallback = ({ onWrite }: { onWrite: () => void }) => (
 );
 
 const Feed = () => {
+	const navigate = useNavigate();
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const [category, setCategory] = useState<string | null>(null);
 	const [sort, setSort] = useState<string>('new');
@@ -74,7 +76,17 @@ const Feed = () => {
 		setSort(key);
 	};
 	const hanldeWriteFeed = () => {
-		window.location.href = routes.writePost;
+		const token = localStorage.getItem('accessToken');
+		if (token) {
+			navigate(routes.writePost);
+		} else {
+			const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY}&redirect_uri=${
+				import.meta.env.VITE_REDIRECT_URI
+			}&response_type=code
+&scope=account_email
+&prompt=login`;
+			window.location.href = link;
+		}
 	};
 
 	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useGetFeeds({
@@ -132,13 +144,13 @@ const Feed = () => {
 					<Skeleton css={cardStyle} />
 				) : data?.pages && data.pages.length > 0 ? (
 					data.pages.map((page, pageIndex) => (
-						<>
+						<div key={`page-${pageIndex}`}>
 							{page.result?.feeds && page.result.feeds.length > 0 ? (
 								page.result.feeds.map((item, itemIndex) => {
 									const isLastItem = pageIndex === data.pages.length - 1 && itemIndex === (page.result?.feeds?.length ?? 0) - 1;
 									const isMyPost = user?.id === item.writerId;
 									return (
-										<div key={item.feedId} ref={isLastItem ? ref : null}>
+										<div key={`feed-${item.feedId}`} ref={isLastItem ? ref : null}>
 											<PostCard
 												role={item.writerRole}
 												writerId={item.writerId}
@@ -161,7 +173,7 @@ const Feed = () => {
 							) : (
 								<EmptyFeedFallback onWrite={hanldeWriteFeed} />
 							)}
-						</>
+						</div>
 					))
 				) : (
 					<EmptyFeedFallback onWrite={hanldeWriteFeed} />
