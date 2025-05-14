@@ -26,6 +26,7 @@ import usePostFeedLike from 'apis/hooks/feeds/usePostFeedLike';
 import usePostFeedComment from 'apis/hooks/feeds/usePostFeedComment';
 import usePostFeedSave from 'apis/hooks/feeds/usePostFeedSave';
 import useDeleteFeed from 'apis/hooks/feeds/useDeleteFeed';
+import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
 
 interface PostCardProps {
 	role: Role;
@@ -61,10 +62,6 @@ const PostCard: React.FC<PostCardProps> = ({
 	writerId,
 	isMyPost,
 }: PostCardProps) => {
-	const { mutate: likeFeed } = usePostFeedLike();
-	const { mutate: saveFeed } = usePostFeedSave();
-	const { mutate: commentFeed } = usePostFeedComment();
-
 	const navigate = useNavigate();
 
 	const [isLike, setIsLike] = useState<boolean>(isLiked);
@@ -74,8 +71,12 @@ const PostCard: React.FC<PostCardProps> = ({
 	const [isComment, setIsComment] = useState<boolean>(isCommented);
 	const [comments, setComments] = useState<number>(commentCount ?? 0);
 
-	const { mutate: deleteFeed } = useDeleteFeed();
+	const profileImage = roleImages[role];
 
+	const { mutate: likeFeed } = usePostFeedLike();
+	const { mutate: saveFeed } = usePostFeedSave();
+	const { mutate: commentFeed } = usePostFeedComment();
+	const { mutate: deleteFeed } = useDeleteFeed();
 	const accessToken = localStorage.getItem('accessToken');
 
 	const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -115,39 +116,40 @@ const PostCard: React.FC<PostCardProps> = ({
 			// });
 		}
 	};
+
 	const handleEdit = () => {
-		if (accessToken) navigate(`${routes.feed.edit}/${feedId}`);
+		if (isMyPost) {
+			navigate(`${routes.feed.edit}/${feedId}`);
+		}
 	};
 
 	const handleDelete = () => {
-		if (feedId) {
+		if (isMyPost) {
 			deleteFeed(feedId);
 		}
 	};
 
-	const handleFeedClick = (feedId: number) => {
+	const handleFeedClick = () => {
 		if (accessToken) {
 			navigate(`${routes.feed.base}/${feedId}`);
 			window.scrollTo(0, 0);
 		}
 	};
 
-	const handleUserClick = (userId: number) => {
+	const handleUserClick = (e: React.MouseEvent<HTMLElement>, userId: number) => {
+		e.stopPropagation();
 		if (accessToken) {
 			navigate(`${routes.userProfile}/${userId}`);
 		}
 	};
 
-	const profileImage = roleImages[role];
-
 	return (
-		<div css={cardStyle} onClick={() => handleFeedClick(feedId)}>
+		<div css={cardStyle} onClick={handleFeedClick}>
 			<div css={headerContainer}>
 				<div css={profileContainer}>
 					<img
 						onClick={(e) => {
-							e.stopPropagation();
-							handleUserClick(writerId);
+							handleUserClick(e, writerId);
 						}}
 						css={profileImageStyle}
 						src={profileImage}
@@ -156,8 +158,7 @@ const PostCard: React.FC<PostCardProps> = ({
 					<div css={nicknameDateContainer}>
 						<p
 							onClick={(e) => {
-								e.stopPropagation();
-								handleUserClick(writerId);
+								handleUserClick(e, writerId);
 							}}
 							css={nicknameStyle}>
 							{nickname}
@@ -179,11 +180,11 @@ const PostCard: React.FC<PostCardProps> = ({
 			<p css={contentStyle}>{content}</p>
 			<div css={likeContainer}>
 				<LikeIcon type="button" css={likeIconStyle(isLike, accessToken !== null)} onClick={handleLike} />
-				<p css={textStyle}>{likes}</p>
+				<p css={textStyle}>{likes >= 100 ? '99+' : likes}</p>
 				<LikeIcon type="button" css={saveIconStyle(isSave, accessToken !== null)} onClick={handleSave} />
-				<p css={textStyle}>{saves}</p>
+				<p css={textStyle}>{saves >= 100 ? '99+' : saves}</p>
 				<LikeIcon type="button" css={commentIconStyle(isComment, accessToken !== null)} onClick={handleComment} />
-				<p css={textStyle}>{comments}</p>
+				<p css={textStyle}>{comments >= 100 ? '99+' : comments}</p>
 			</div>
 		</div>
 	);

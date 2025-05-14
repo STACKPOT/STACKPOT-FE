@@ -13,7 +13,7 @@ import {
 	emptyFeedFallbackStyle,
 } from './Feed.style';
 import { contentTitle } from '@pages/Home/Home.style';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { categories, searchPartMap } from '@constants/categories';
 import useGetFeeds from 'apis/hooks/feeds/useGetFeeds';
 import { useInView } from 'react-intersection-observer';
@@ -22,6 +22,8 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import routes from '@constants/routes';
 import { roleImages } from '@constants/roleImage';
+import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
+import { set } from 'react-hook-form';
 
 const categoryText: { [key: string]: string } = {
 	ALL: '모든',
@@ -30,6 +32,12 @@ const categoryText: { [key: string]: string } = {
 	BACKEND: '백엔드',
 	FRONTEND: '프론트엔드',
 };
+
+const options = [
+	{ label: '최신 순', key: 'new' },
+	{ label: '인기 순', key: 'popular' },
+	{ label: '오래된 순', key: 'old' },
+];
 
 const EmptyFeedFallback = ({ onWrite }: { onWrite: () => void }) => (
 	<div css={emptyFeedFallbackStyle}>
@@ -50,6 +58,8 @@ const Feed = () => {
 	const [sort, setSort] = useState<string>('new');
 	const [roleProfileImage, setRoleProfileImage] = useState<string>('');
 
+	const { data: user } = useGetMyProfile(!!localStorage.getItem('accessToken'));
+
 	const handleCategoryClick = (category: string, partName: string) => {
 		if (selectedCategory === partName) {
 			setSelectedCategory(null);
@@ -59,12 +69,6 @@ const Feed = () => {
 			setCategory(category);
 		}
 	};
-
-	const options = [
-		{ label: '최신 순', key: 'new' },
-		{ label: '인기 순', key: 'popular' },
-		{ label: '오래된 순', key: 'old' },
-	];
 
 	const handleChange = (key: string) => {
 		setSort(key);
@@ -81,11 +85,13 @@ const Feed = () => {
 	});
 
 	const { ref, inView } = useInView();
+
 	useEffect(() => {
 		const role = localStorage.getItem('role');
 		const profileImage = roleImages[role as keyof typeof roleImages] || '';
 		setRoleProfileImage(profileImage);
 	}, [localStorage.getItem('role')]);
+
 	useEffect(() => {
 		if (inView && hasNextPage && !isFetchingNextPage) {
 			fetchNextPage();
@@ -130,6 +136,7 @@ const Feed = () => {
 							{page.result?.feeds && page.result.feeds.length > 0 ? (
 								page.result.feeds.map((item, itemIndex) => {
 									const isLastItem = pageIndex === data.pages.length - 1 && itemIndex === (page.result?.feeds?.length ?? 0) - 1;
+									const isMyPost = user?.id === item.writerId;
 									return (
 										<div key={item.feedId} ref={isLastItem ? ref : null}>
 											<PostCard
@@ -146,7 +153,7 @@ const Feed = () => {
 												isSaved={item.isSaved}
 												isCommented={item.isCommented}
 												feedId={item.feedId}
-												isMyPost={false}
+												isMyPost={isMyPost}
 											/>
 										</div>
 									);
