@@ -17,14 +17,14 @@ import {
 import { MemberGroup, DdayBadge, Badge, MyFeedDropdown } from "@components/index";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
-import ConfirmModalWrapper from "@pages/MyPot/components/ConfirmModalWrapper/ConfirmModalWrapper";
+import ConfirmModalWrapper from "@pages/MyPotDetail/components/ConfirmModalWrapper/ConfirmModalWrapper";
 import { useParams } from "react-router-dom";
 import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
 import { useState } from "react";
 import { TaskStatus } from "types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import { displayStatus } from "@constants/categories";
-import { AboutWorkModalWrapper, Loading } from "@pages/MyPot/components";
+import { AboutWorkModalWrapper, Loading } from "@pages/MyPotDetail/components";
 
 interface Participant {
   role: string;

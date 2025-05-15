@@ -1,6 +1,6 @@
 import { partMap } from "@constants/categories";
 import { countInputStyle, inputContainer, partButtonContainer, partContainer } from "./PartRecruitment.style";
-import CategoryButton from "../Badge/CategoryButton/CategoryButton";
+import CategoryButton from "../Button/CategoryButton/CategoryButton";
 import { useEffect, useState } from "react";
 import { RecruitmentDetail } from "apis/types/pot";
 import { Role } from "types/role";

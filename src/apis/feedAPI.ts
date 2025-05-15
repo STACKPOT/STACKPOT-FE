@@ -5,7 +5,7 @@ import {
   authApiPost,
   authApiPatch,
   authApiDelete,
-} from "./apiUtils";
+} from "./axios/apiUtils";
 import {
   FeedPatch,
   FeedResponse,

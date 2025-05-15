@@ -1,4 +1,4 @@
-import { authApiGet } from "./apiUtils";
+import { authApiGet } from "./axios/apiUtils";
 import { GetSearchParams, SearchResponse } from "./types/search";
 
 export const getSearch = async ({
