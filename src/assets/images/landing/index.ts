@@ -1,0 +1,12 @@
+export { default as TaskImage } from './landingTask.webp';
+export { default as MyPotImage } from './landingMyPot.webp';
+export { default as FeedImage } from './landingFeed.webp';
+export { default as PotImage } from './landingPot.webp';
+export { default as MyPageImage } from './landingMyPage.webp';
+export { default as PotDetailImage } from './landingPotDetail.webp';
+export { default as FinishedPotImage } from './landingFinishedPot.webp';
+export { default as TaskBoardImage } from './landingTaskBoard.webp';
+export { default as TaskCardImage } from './landingTaskCard.webp';
+export { default as AISummaryImage } from './landingAISummary.webp';
+export { default as ModalImage } from './landingModal.webp';
+export { default as UserProfileImage } from './landingProfile.webp';
