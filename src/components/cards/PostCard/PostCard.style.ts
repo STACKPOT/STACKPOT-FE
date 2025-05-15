@@ -65,32 +65,23 @@ export const contentStyle = css`
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 `;
-export const likeContainer = css`
+export const iconContainer = css`
 	display: flex;
 	margin-left: auto;
 	padding: 0.2rem 0;
 	align-items: center;
-	gap: 0.8rem;
+	gap: 2.2rem;
 `;
+
+export const IconStyle = (isAuth: boolean) => css`
+	width: 2.2rem;
+	height: 2.2rem;
+	cursor: ${isAuth ? 'pointer' : 'default'};
+`;
+
 export const textStyle = css`
 	${theme.font.label3}
 	color: ${theme.color.object.hero};
-`;
-export const likeIconStyle = (isLike: boolean, isAuth: boolean) => css`
-	width: 2.2rem;
-	height: 2.2rem;
-	fill: ${isLike ? theme.color.feedback.negative : theme.color.interactive.inactive};
-	cursor: ${isAuth && 'pointer'};
-`;
-export const saveIconStyle = (isSave: boolean, isAuth: boolean) => css`
-	width: 2.2rem;
-	height: 2.2rem;
-	fill: ${isSave ? '#774F00' : theme.color.interactive.inactive};
-	cursor: ${isAuth && 'pointer'};
-`;
-export const commentIconStyle = (isComment: boolean, isAuth: boolean) => css`
-	width: 2.2rem;
-	height: 2.2rem;
-	fill: ${isComment ? theme.color.object.hero : theme.color.interactive.inactive};
-	cursor: ${isAuth && 'pointer'};
+	width: 1.5rem;
+	text-align: right;
 `;

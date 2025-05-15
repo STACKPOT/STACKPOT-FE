@@ -7,16 +7,15 @@ import {
 	titleStyle,
 	contentStyle,
 	dateStyle,
-	likeContainer,
-	likeIconStyle,
+	iconContainer,
 	nicknameDateContainer,
 	moreIconStyle,
 	headerContainer,
-	saveIconStyle,
-	commentIconStyle,
 	textStyle,
+	IconStyle,
 } from './PostCard.style';
-import { LikeIcon } from '@assets/svgs';
+import { SaveIcon, FillSaveIcon, LikeIcon, FillLikeIcon, CommentIcon } from '@assets/svgs';
+
 import MyFeedDropdown from '@components/commons/Dropdown/MyFeedDropdown/MyFeedDropdown';
 import { roleImages } from '@constants/roleImage';
 import { Role } from 'types/role';
@@ -26,7 +25,6 @@ import usePostFeedLike from 'apis/hooks/feeds/usePostFeedLike';
 import usePostFeedComment from 'apis/hooks/feeds/usePostFeedComment';
 import usePostFeedSave from 'apis/hooks/feeds/usePostFeedSave';
 import useDeleteFeed from 'apis/hooks/feeds/useDeleteFeed';
-import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
 
 interface PostCardProps {
 	role: Role;
@@ -39,7 +37,6 @@ interface PostCardProps {
 	commentCount: number;
 	isLiked: boolean;
 	isSaved: boolean;
-	isCommented: boolean;
 	profileImage?: string;
 	feedId: number;
 	writerId: number;
@@ -53,11 +50,10 @@ const PostCard: React.FC<PostCardProps> = ({
 	title,
 	content,
 	likeCount,
-	saveCount,
-	commentCount,
+	saveCount = 99,
+	commentCount = 99,
 	isLiked,
 	isSaved,
-	isCommented,
 	feedId,
 	writerId,
 	isMyPost,
@@ -68,9 +64,8 @@ const PostCard: React.FC<PostCardProps> = ({
 	const [likes, setLikes] = useState<number>(likeCount);
 	const [isSave, setIsSave] = useState<boolean>(isSaved);
 	const [saves, setSaves] = useState<number>(saveCount ?? 0);
-	const [isComment, setIsComment] = useState<boolean>(isCommented);
-	const [comments, setComments] = useState<number>(commentCount ?? 0);
-
+	const CurrentLikeIcon = isLike ? FillLikeIcon : LikeIcon;
+	const CurrentSaveIcon = isSave ? FillSaveIcon : SaveIcon;
 	const profileImage = roleImages[role];
 
 	const { mutate: likeFeed } = usePostFeedLike();
@@ -106,12 +101,8 @@ const PostCard: React.FC<PostCardProps> = ({
 	const handleComment = (e: React.MouseEvent<SVGSVGElement>) => {
 		e.stopPropagation();
 		if (accessToken) {
-			setIsComment((prev) => !prev);
-			setComments((prev) => (isComment ? prev - 1 : prev + 1));
 			// commentFeed(feedId, {
 			// 	onSuccess: () => {
-			// 		setIsComment((prev) => !prev);
-			// 		setComments((prev) => (isComment ? prev - 1 : prev + 1));
 			// 	},
 			// });
 		}
@@ -178,13 +169,19 @@ const PostCard: React.FC<PostCardProps> = ({
 			</div>
 			<h1 css={titleStyle}>{title}</h1>
 			<p css={contentStyle}>{content}</p>
-			<div css={likeContainer}>
-				<LikeIcon type="button" css={likeIconStyle(isLike, accessToken !== null)} onClick={handleLike} />
-				<p css={textStyle}>{likes >= 100 ? '99+' : likes}</p>
-				<LikeIcon type="button" css={saveIconStyle(isSave, accessToken !== null)} onClick={handleSave} />
-				<p css={textStyle}>{saves >= 100 ? '99+' : saves}</p>
-				<LikeIcon type="button" css={commentIconStyle(isComment, accessToken !== null)} onClick={handleComment} />
-				<p css={textStyle}>{comments >= 100 ? '99+' : comments}</p>
+			<div css={iconContainer}>
+				<div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+					<CurrentLikeIcon type="button" css={IconStyle(accessToken !== null)} onClick={handleLike} />
+					<p css={textStyle}>{likes >= 100 ? '99+' : likes}</p>
+				</div>
+				<div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+					<CurrentSaveIcon type="button" css={IconStyle(accessToken !== null)} onClick={handleSave} />
+					<p css={textStyle}>{saves >= 100 ? '99+' : saves}</p>
+				</div>
+				<div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+					<CommentIcon type="button" css={IconStyle(accessToken !== null)} onClick={handleComment} />
+					<p css={textStyle}>{commentCount >= 100 ? '99+' : commentCount}</p>
+				</div>
 			</div>
 		</div>
 	);
