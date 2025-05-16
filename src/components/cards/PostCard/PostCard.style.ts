@@ -85,3 +85,9 @@ export const textStyle = css`
 	width: 1.5rem;
 	text-align: right;
 `;
+
+export const iconGroup = css`
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+`;

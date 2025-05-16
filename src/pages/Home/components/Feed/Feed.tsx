@@ -25,6 +25,7 @@ import { roleImages } from '@constants/roleImage';
 import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
 
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from 'stores/useAuthStore';
 
 const categoryText: { [key: string]: string } = {
 	ALL: '모든',
@@ -58,9 +59,11 @@ const Feed = () => {
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const [category, setCategory] = useState<string | null>(null);
 	const [sort, setSort] = useState<string>('new');
-	const [roleProfileImage, setRoleProfileImage] = useState<string>('');
 
 	const { data: user } = useGetMyProfile(!!localStorage.getItem('accessToken'));
+
+	const role = useAuthStore((state) => state.role);
+	const profileImage = roleImages[(role as keyof typeof roleImages) || 'UNKNOWN'];
 
 	const handleCategoryClick = (category: string, partName: string) => {
 		if (selectedCategory === partName) {
@@ -99,12 +102,6 @@ const Feed = () => {
 	const { ref, inView } = useInView();
 
 	useEffect(() => {
-		const role = localStorage.getItem('role');
-		const profileImage = roleImages[role as keyof typeof roleImages] || '';
-		setRoleProfileImage(profileImage);
-	}, [localStorage.getItem('role')]);
-
-	useEffect(() => {
 		if (inView && hasNextPage && !isFetchingNextPage) {
 			fetchNextPage();
 		}
@@ -113,14 +110,12 @@ const Feed = () => {
 	return (
 		<>
 			<div css={contentHeader}>
-				<div css={feedWriteContainer}>
+				<div css={feedWriteContainer} onClick={hanldeWriteFeed}>
 					<div css={feedWriteText}>
-						<img src={roleProfileImage} alt="profileImage" css={profileStyle} />
+						<img src={profileImage} alt="profileImage" css={profileStyle} />
 						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
 					</div>
-					<button onClick={hanldeWriteFeed} css={feedWriteButton}>
-						피드 작성
-					</button>
+					<button css={feedWriteButton}>피드 작성</button>
 				</div>
 				<div css={contentTitle}>
 					<p css={{ color: '#2098F3' }}>{categoryText[category ?? 'ALL']}</p>
@@ -163,7 +158,6 @@ const Feed = () => {
 												commentCount={item.commentCount}
 												isLiked={item.isLiked}
 												isSaved={item.isSaved}
-												isCommented={item.isCommented}
 												feedId={item.feedId}
 												isMyPost={isMyPost}
 											/>

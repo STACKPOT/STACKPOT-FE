@@ -18,17 +18,14 @@ import { Role } from 'types/role';
 import { roleImages } from '@constants/roleImage';
 import routes from '@constants/routes';
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from 'stores/useAuthStore';
 
 const MyPage = () => {
 	const navigate = useNavigate();
 	const [contentType, setContentType] = useState<'feed' | 'pot'>('feed');
-	const [roleProfileImage, setRoleProfileImage] = useState<string>('');
 
-	useEffect(() => {
-		const role = localStorage.getItem('role');
-		const profileImage = roleImages[role as keyof typeof roleImages] || '';
-		setRoleProfileImage(profileImage);
-	}, [localStorage.getItem('role')]);
+	const role = useAuthStore((state) => state.role);
+	const profileImage = roleImages[role as keyof typeof roleImages] || '';
 
 	const { data } = useGetMyPage({ dataType: contentType });
 
@@ -53,13 +50,11 @@ const MyPage = () => {
 					</p>
 				</div>
 				<div css={feedWriteContainer}>
-					<div css={feedWriteText}>
-						<img src={roleProfileImage} alt="profileImage" css={feedWriteProfileStyle} />
+					<div css={feedWriteText} onClick={hanldeWriteFeed}>
+						<img src={profileImage} alt="profileImage" css={feedWriteProfileStyle} />
 						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
 					</div>
-					<button onClick={hanldeWriteFeed} css={feedWriteButton}>
-						피드 작성
-					</button>
+					<button css={feedWriteButton}>피드 작성</button>
 				</div>
 				<div css={listContainer(contentType)}>
 					{contentType === 'feed'
@@ -78,7 +73,6 @@ const MyPage = () => {
 									saveCount={post.saveCount}
 									commentCount={post.commentCount}
 									isSaved={post.isSaved}
-									isCommented={post.isCommented}
 									isMyPost={true}
 								/>
 						  ))

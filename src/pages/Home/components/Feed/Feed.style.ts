@@ -12,6 +12,14 @@ export const feedWriteContainer = css`
 	background-color: #fff;
 	cursor: pointer;
 	margin-bottom: 32px;
+
+	&:hover {
+		background-color: ${theme.color.object.normal};
+
+		& p {
+			color: ${theme.color.object.hero};
+		}
+	}
 `;
 
 export const feedWriteText = css`
@@ -20,6 +28,7 @@ export const feedWriteText = css`
 	gap: 1rem;
 	font-size: 1.6rem;
 	color: ${theme.color.point.alternative};
+
 	font-weight: 500;
 `;
 

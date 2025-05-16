@@ -13,6 +13,7 @@ import {
 	headerContainer,
 	textStyle,
 	IconStyle,
+	iconGroup,
 } from './PostCard.style';
 import { SaveIcon, FillSaveIcon, LikeIcon, FillLikeIcon, CommentIcon } from '@assets/svgs';
 
@@ -50,8 +51,8 @@ const PostCard: React.FC<PostCardProps> = ({
 	title,
 	content,
 	likeCount,
-	saveCount = 99,
-	commentCount = 99,
+	saveCount,
+	commentCount,
 	isLiked,
 	isSaved,
 	feedId,
@@ -170,15 +171,15 @@ const PostCard: React.FC<PostCardProps> = ({
 			<h1 css={titleStyle}>{title}</h1>
 			<p css={contentStyle}>{content}</p>
 			<div css={iconContainer}>
-				<div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+				<div css={iconGroup}>
 					<CurrentLikeIcon type="button" css={IconStyle(accessToken !== null)} onClick={handleLike} />
 					<p css={textStyle}>{likes >= 100 ? '99+' : likes}</p>
 				</div>
-				<div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+				<div css={iconGroup}>
 					<CurrentSaveIcon type="button" css={IconStyle(accessToken !== null)} onClick={handleSave} />
 					<p css={textStyle}>{saves >= 100 ? '99+' : saves}</p>
 				</div>
-				<div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+				<div css={iconGroup}>
 					<CommentIcon type="button" css={IconStyle(accessToken !== null)} onClick={handleComment} />
 					<p css={textStyle}>{commentCount >= 100 ? '99+' : commentCount}</p>
 				</div>
