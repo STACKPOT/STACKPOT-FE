@@ -1,5 +1,5 @@
-import { PotIcon, RightIcon } from '@assets/svgs';
-import { Button, FloatingButton } from '@components/index';
+import { FireIcon, RightIcon } from '@assets/svgs';
+import { Button } from '@components/index';
 import {
 	container,
 	content,
@@ -56,7 +56,7 @@ const Home: React.FC = () => {
 					<div css={content}>
 						<div css={contentTitle}>
 							<p>실시간 인기 팟</p>
-							<PotIcon css={iconStyle} />
+							<FireIcon css={iconStyle} />
 						</div>
 						<PopularPots />
 					</div>

@@ -69,9 +69,9 @@ export const contentTitle = css`
 `;
 
 export const iconStyle = css`
-	color: ${theme.color.point.hero};
-	width: 2.4rem;
-	height: 2.2rem;
+	width: 31px;
+	height: 31px;
+	flex-shrink: 0;
 `;
 
 export const subTitleStyle = css`
