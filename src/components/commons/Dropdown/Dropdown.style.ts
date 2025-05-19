@@ -3,26 +3,30 @@ import theme from '@styles/theme';
 
 export const container = css`
 	position: relative;
-	width: 13.04rem;
-	height: 4.8rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 `;
 
 export const header = css`
-	border: 0.1rem solid ${theme.color.object.alternative};
-	border-radius: 2rem;
-	background: ${theme.color.base.white};
-	width: 100%;
-	height: 4.8rem;
 	display: flex;
+	padding: 8px 17px;
+	width: 125px;
+	gap: 31px;
+
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-	box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+
+	border: 1px solid ${theme.color.object.alternative};
+	border-radius: 8px;
+	background: ${theme.color.base.white};
 `;
 
 export const headerText = css`
-	color: ${theme.color.point.navy};
-	${theme.font.caption3};
+	width: 40px;
+	color: ${theme.color.base.black};
+	${theme.font.body2};
 `;
 
 export const icon = css`
@@ -34,8 +38,8 @@ export const dropdown = css`
 	position: absolute;
 	top: 5.2rem;
 	width: 100%;
-	border: 0.1rem solid ${theme.color.object.alternative};
-	border-radius: 1.6rem;
+	padding: 8px 0px;
+	border-radius: 8px;
 	background: ${theme.color.base.white};
 	box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
 	z-index: 10;
@@ -43,27 +47,15 @@ export const dropdown = css`
 
 export const option = css`
 	padding: 1.2rem 0;
-	text-align: center;
+	text-align: left;
 	cursor: pointer;
-	color: ${theme.color.object.assistive};
-	${theme.font.caption3};
+	color: ${theme.color.base.black};
+	${theme.font.body2};
 	position: relative;
-
-	&:not(:last-child) {
-		border-bottom: 0.1rem solid ${theme.color.object.alternative};
-	}
+	padding: 8px 14px;
 
 	&:hover {
 		color: ${theme.color.point.hero};
-		background-color: ${theme.color.object.faded};
-	}
-
-	&:first-of-type {
-		border-radius: 1.6rem 1.6rem 0 0;
-	}
-
-	&:last-of-type {
-		border-radius: 0 0 1.6rem 1.6rem;
-		border-bottom: none;
+		background-color: ${theme.color.point.normal};
 	}
 `;
