@@ -5,7 +5,7 @@ import {
   authApiGet,
   authApiPatch,
   authApiPost,
-} from "./apiUtils";
+} from "./axios/apiUtils";
 import {
   LogInResponse,
   postSignInPayload,

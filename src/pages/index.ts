@@ -7,17 +7,17 @@ import SettingPage from "./Setting/Setting";
 import SearchResultPage from "./SearchResult/SearchResult";
 import PotDetailPage from "./PotDetail/PotDetail";
 import PotMain from "./Pots/PotMain";
-import AllPotPage from "./Pots/AllPot/AllPotPage";
-import AppliedPotPage from "./Pots/AppliedPot/AppliedPot";
-import MadePotPage from "./Pots/MadePot/MadePot";
+import AllPotPage from "./Pots/pages/AllPot/AllPotPage";
+import AppliedPotPage from "./Pots/pages/AppliedPot/AppliedPot";
+import MadePotPage from "./Pots/pages/MadePot/MadePot"; 
 import SignUpPage from "./SignUp/SignUp";
 import CreatePotPage from "./CreatePot/CreatePot";
-import MyPotMainPage from "./MyPot/MyPotMain";
-import MyPotStatusPage from "./MyPot/MyPotStatus/MyPotStatus";
-import MyPotCalendarPage from "./MyPot/MyPotCalendar/MyPotCalendar";
+import MyPotDetailMainPage from "./MyPotDetail/MyPotDetail";
+import MyPotStatusPage from "./MyPotDetail/pages/MyPotStatus/MyPotStatus";
+import MyPotCalendarPage from "./MyPotDetail/pages/MyPotCalendar/MyPotCalendar";
 import EditPostPage from "./EditPost/EditPost";
 import CallbackPage from "./Callback/Callback";
-import TaskDetailPage from "./MyPot/MyPotStatus/TaskDetail/TaskDetail";
+import TaskDetailPage from "./TaskDetail/TaskDetail";
 import WritingPage from "./WritePost/WritePost";
 import EditFinishedPotPage from "./EditFinishedPot/EditFinishedPot";
 import UserPage from "./UserPage/UserPage";
@@ -25,7 +25,7 @@ import CreateFinishedPot from "./CreateFinishedPot/CreateFinishedPot";
 import EditPotPage from "./EditPot/EditPot";
 import FeedDetailPage from "./FeedDetail/FeedDetail";
 
-import MyPotPage from "./MyPot/MyPot";
+import MyPotsPage from "./MyPots/MyPots";
 
 export {
   HomePage,
@@ -42,7 +42,7 @@ export {
   MadePotPage,
   SignUpPage,
   CreatePotPage,
-  MyPotMainPage,
+  MyPotDetailMainPage,
   MyPotStatusPage,
   MyPotCalendarPage,
   EditPostPage,
@@ -51,7 +51,7 @@ export {
   WritingPage,
   EditFinishedPotPage,
   UserPage,
-  MyPotPage,
+  MyPotsPage,
   CreateFinishedPot,
   EditPotPage,
   FeedDetailPage,

@@ -1,6 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { apiGet, authApiGet, authApiPost, authApiPatch, authApiDelete } from './apiUtils';
-import { FeedPatch, FeedResponse, GetFeedDetailResponse, GetFeedParams, PatchFeedResponse, PostFeedParams, PostFeedResponse } from './types/feed';
+import { authApiGet, authApiPost, authApiPatch, authApiDelete } from './axios/apiUtils';
+import { GetFeedParams, FeedResponse, PostFeedParams, PostFeedResponse, FeedPatch, PatchFeedResponse, GetFeedDetailResponse } from './types/feed';
 
 export const getFeeds = async ({ category, sort, limit, cursor }: GetFeedParams) => {
 	return authApiGet<FeedResponse>('/feeds', { category, sort, limit, cursor });

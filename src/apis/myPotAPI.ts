@@ -1,4 +1,4 @@
-import { authApiGet, authApiPatch, authApiDelete, authApiPost } from "./apiUtils";
+import { authApiGet, authApiPatch, authApiDelete, authApiPost } from "./axios/apiUtils";
 import {
   Result,
   TaskResponse,
