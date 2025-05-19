@@ -1,5 +1,5 @@
 import { PotIcon, RightIcon } from "@assets/svgs";
-import { Button, FloatingButton } from "@components/index";
+import { Button, CtaCard, FloatingButton } from "@components/index";
 import {
   container,
   content,
@@ -63,6 +63,7 @@ const Home: React.FC = () => {
             </div>
             <PopularPots />
           </div>
+          <CtaCard type="feed" />
           <div css={content}>
             <Feed />
           </div>

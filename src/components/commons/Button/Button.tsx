@@ -3,7 +3,7 @@ import {
   actionButtonStyle,
   buttonStyle,
   landingButtonStyle,
-  entryButtonStyle,
+  ctaButtonStyle,
 } from "./Button.style";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
   const buttonType: SerializedStyles = (() => {
     switch (variant) {
       case "entry":
-        return entryButtonStyle;
+        return ctaButtonStyle;
       case "action":
         return actionButtonStyle(actionType);
       case "landing":
@@ -39,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type="button"
-      css={[buttonType, customStyle, buttonStyle]}
+      css={[buttonStyle, buttonType, customStyle]}
       onClick={onClick}
       disabled={disabled}
       {...props}
