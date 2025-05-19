@@ -111,6 +111,13 @@ const Feed = () => {
 	return (
 		<>
 			<div css={contentHeader}>
+				<div css={feedWriteContainer} onClick={hanldeWriteFeed}>
+					<div css={feedWriteText}>
+						<img src={profileImage} alt="profileImage" css={profileStyle} />
+						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
+					</div>
+					<button css={feedWriteButton}>피드 작성</button>
+				</div>
 				<div css={contentTitle}>
 					<p css={{ color: theme.color.point.hero }}>{categoryText[category ?? 'ALL']}</p>
 					<p> 피드를 탐색해 볼까요?</p>
@@ -126,13 +133,6 @@ const Feed = () => {
 							</CategoryButton>
 						</div>
 					))}
-				</div>
-				<div css={feedWriteContainer} onClick={hanldeWriteFeed}>
-					<div css={feedWriteText}>
-						<img src={profileImage} alt="profileImage" css={profileStyle} />
-						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
-					</div>
-					<button css={feedWriteButton}>피드 작성</button>
 				</div>
 			</div>
 			<div css={contentBody}>
