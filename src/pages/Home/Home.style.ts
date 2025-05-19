@@ -60,7 +60,7 @@ export const content = css`
 	gap: 3.2rem;
 `;
 export const contentTitle = css`
-	${theme.font.bodyBold2};
+	${theme.font.title3};
 	color: ${theme.color.base.darkgray};
 	display: flex;
 	justify-content: row;

@@ -26,6 +26,7 @@ import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
 
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from 'stores/useAuthStore';
+import theme from '@styles/theme';
 
 const categoryText: { [key: string]: string } = {
 	ALL: '모든',
@@ -111,15 +112,15 @@ const Feed = () => {
 		<>
 			<div css={contentHeader}>
 				<div css={contentTitle}>
-					<p css={{ color: '#2098F3' }}>{categoryText[category ?? 'ALL']}</p>
-					<p> 피드를 탐색해볼까요?</p>
+					<p css={{ color: theme.color.point.hero }}>{categoryText[category ?? 'ALL']}</p>
+					<p> 피드를 탐색해 볼까요?</p>
 					<div css={{ marginLeft: 'auto' }}>
 						<Dropdown options={options} handleChange={handleChange} />
 					</div>
 				</div>
 				<div css={buttonContainer}>
 					{Object.keys(searchPartMap).map((partName) => (
-						<div key={partName} css={categories}>
+						<div key={partName}>
 							<CategoryButton style="pot" selected={selectedCategory === partName} onClick={() => handleCategoryClick(searchPartMap[partName], partName)}>
 								{partName}
 							</CategoryButton>

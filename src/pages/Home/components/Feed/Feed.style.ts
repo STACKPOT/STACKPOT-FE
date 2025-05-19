@@ -52,7 +52,7 @@ export const contentHeader = css`
 export const buttonContainer = css`
 	display: flex;
 	flex-direction: row;
-	gap: 1.3rem;
+	gap: 8px;
 	align-items: center;
 	justify-content: left;
 `;
