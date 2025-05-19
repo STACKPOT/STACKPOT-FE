@@ -25,6 +25,7 @@ export const profileImageStyle = css`
 	height: 5rem;
 	border: 1px solid ${theme.color.object.alternative};
 	border-radius: 50%;
+	background-color: ${theme.color.base.white};
 `;
 export const nicknameDateContainer = css`
 	display: flex;
@@ -33,7 +34,7 @@ export const nicknameDateContainer = css`
 `;
 export const nicknameStyle = css`
 	${theme.font.bodyBold1}
-	color:${theme.color.object.assistive};
+	color:${theme.color.base.black};
 	&:hover {
 		text-decoration: underline;
 	}
@@ -47,24 +48,26 @@ export const moreIconStyle = css`
 `;
 
 export const dateStyle = css`
-	color: ${theme.color.interactive.inactive};
+	color: ${theme.color.object.hero};
 	${theme.font.caption2}
 `;
 
 export const titleStyle = css`
-	color: ${theme.color.base.darkgray};
+	color: ${theme.color.base.black};
 	${theme.font.title1}
 `;
+
 export const contentStyle = css`
 	height: 6rem;
 	${theme.font.caption3}
-	color: ${theme.color.object.assistive};
+	color: ${theme.color.object.hero};
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 `;
+
 export const iconContainer = css`
 	display: flex;
 	margin-left: auto;

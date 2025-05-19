@@ -37,11 +37,19 @@ export const feedWriteContainer = css`
 	justify-content: space-between;
 	align-items: center;
 	padding: 22px 37px;
-	border: 1px solid ${theme.color.object.alternative};
+	border: 1px solid ${theme.color.accent.blueBg};
 	border-radius: 8px;
 	background-color: #fff;
 	cursor: pointer;
 	margin-bottom: 32px;
+
+	&:hover {
+		background-color: ${theme.color.point.normal};
+
+		& p {
+			color: ${theme.color.object.hero};
+		}
+	}
 `;
 
 export const feedWriteText = css`
@@ -50,13 +58,14 @@ export const feedWriteText = css`
 	gap: 1rem;
 	font-size: 1.6rem;
 	color: ${theme.color.point.alternative};
+
 	font-weight: 500;
 `;
 
 export const feedWriteButton = css`
 	padding: 11px 16px;
 	background-color: ${theme.color.point.hero};
-	color: white;
+	color: ${theme.color.base.white};
 	border-radius: 20px;
 	font-weight: 500;
 	font-size: 1.4rem;
@@ -68,4 +77,5 @@ export const feedWriteProfileStyle = css`
 	width: 50px;
 	border: 1px solid ${theme.color.object.alternative};
 	border-radius: 50%;
+	background-color: ${theme.color.point.ivory};
 `;

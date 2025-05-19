@@ -13,7 +13,7 @@ import {
 	emptyFeedFallbackStyle,
 } from './Feed.style';
 import { contentTitle } from '@pages/Home/Home.style';
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect } from 'react';
 import { categories, searchPartMap } from '@constants/categories';
 import useGetFeeds from 'apis/hooks/feeds/useGetFeeds';
 import { useInView } from 'react-intersection-observer';
@@ -110,13 +110,6 @@ const Feed = () => {
 	return (
 		<>
 			<div css={contentHeader}>
-				<div css={feedWriteContainer} onClick={hanldeWriteFeed}>
-					<div css={feedWriteText}>
-						<img src={profileImage} alt="profileImage" css={profileStyle} />
-						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
-					</div>
-					<button css={feedWriteButton}>피드 작성</button>
-				</div>
 				<div css={contentTitle}>
 					<p css={{ color: '#2098F3' }}>{categoryText[category ?? 'ALL']}</p>
 					<p> 피드를 탐색해볼까요?</p>
@@ -132,6 +125,13 @@ const Feed = () => {
 							</CategoryButton>
 						</div>
 					))}
+				</div>
+				<div css={feedWriteContainer} onClick={hanldeWriteFeed}>
+					<div css={feedWriteText}>
+						<img src={profileImage} alt="profileImage" css={profileStyle} />
+						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
+					</div>
+					<button css={feedWriteButton}>피드 작성</button>
 				</div>
 			</div>
 			<div css={contentBody}>
