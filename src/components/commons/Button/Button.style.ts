@@ -16,11 +16,16 @@ export const buttonStyle = css`
   }
 `;
 
-export const entryButtonStyle = css`
-  padding: 1.2rem 2.4rem;
+export const ctaButtonStyle = css`
+  padding: 1.1rem 1.6rem;
   background-color: ${theme.color.point.hero};
   border-radius: 32px;
-  ${theme.font.captionBold1};
+  ${theme.font.caption2};
+  transition: background-color 0.2s ease-out;
+  &:hover{
+    color: ${theme.color.point.alternative};
+    background-color: ${theme.color.accent.blueBg};
+  }
 `;
 
 export const landingButtonStyle = css`
