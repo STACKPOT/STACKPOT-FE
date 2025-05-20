@@ -1,5 +1,5 @@
-import { css } from '@emotion/react';
-import theme from '@styles/theme';
+import { css } from "@emotion/react";
+import theme from "@styles/theme";
 
 export const container = css`
 	position: relative;
@@ -12,9 +12,8 @@ export const header = css`
 	display: flex;
 	padding: 8px 17px;
 	width: 125px;
-	gap: 31px;
 
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	cursor: pointer;
 
@@ -24,7 +23,7 @@ export const header = css`
 `;
 
 export const headerText = css`
-	width: 40px;
+	
 	color: ${theme.color.base.black};
 	${theme.font.body2};
 `;
