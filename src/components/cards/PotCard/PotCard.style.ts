@@ -2,21 +2,21 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const cardStyle = css`
-  width: 27.2rem;
-  height: 23.9rem;
-  padding: 1.6rem;
-  border-radius: 2.4rem;
+  width: 30rem;
+  height: 22.1rem;
+  padding: 2.8rem 1.6rem;
+  border-radius: 24px;
   box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  border: 0.1rem solid ${theme.color.object.alternative};
+  border: 1px solid ${theme.color.object.alternative};
   cursor: pointer;
 `;
-export const titleContainer = css`
+export const cardHeader = css`
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  justify-content: space-between;
+  align-items: center;
 `;
 export const profileImageStyle = css`
   width: 4rem;
@@ -24,16 +24,17 @@ export const profileImageStyle = css`
   border: 1px solid ${theme.color.object.alternative};
   border-radius: 50%;
 `;
-export const nicknameDdayContainer = css`
-  width: 100%;
+
+export const profileContainer = css`
   display: flex;
+  gap: 1.2rem;
   align-items: center;
-  justify-content: space-between;
 `;
+
 export const nicknameStyle = css`
   width: 10.3rem;
-  ${theme.font.caption2}
-  color: ${theme.color.object.assistive};
+  ${theme.font.bodyBold2}
+  color: ${theme.color.point.gray};
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -41,13 +42,27 @@ export const nicknameStyle = css`
     text-decoration: underline;
   }
 `;
+
+export const titleContainer = css`
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+`;
+
 export const titleStyle = css`
-  ${theme.font.bodyBold1};
-  color: ${theme.color.base.darkgray};
+  ${theme.font.bodyBold2};
+  color: ${theme.color.point.gray};
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 `;
+
+export const contentContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+`;
+
 export const contentStyle = css`
   ${theme.font.caption2}
   color: ${theme.color.object.hero};
@@ -56,11 +71,22 @@ export const contentStyle = css`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  height: 4.7rem;
 `;
-export const contentContainer = css`
-  height: 6rem;
-`;
+
 export const categoriesContainer = css`
   display: flex;
   gap: 1rem;
+`;
+
+export const buttonStyle = css`
+  background-color: transparent;
+`;
+
+export const buttonContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  ${theme.font.caption1}
+  color: ${theme.color.object.hero}
 `;
