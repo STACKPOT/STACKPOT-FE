@@ -1,16 +1,16 @@
 import Badge from "@components/commons/Badge/Badge";
 import {
+  cardHeader,
   cardStyle,
   categoriesContainer,
   contentContainer,
   contentStyle,
-  nicknameDdayContainer,
   nicknameStyle,
+  profileContainer,
   profileImageStyle,
   titleContainer,
   titleStyle,
 } from "./PotCard.style";
-import DdayBadge from "@components/commons/Badge/DdayBadge/DdayBadge";
 import { useNavigate } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
@@ -51,17 +51,17 @@ const PotCard: React.FC<PotCardProps> = ({
 
   return (
     <div css={cardStyle} onClick={handleCardClick}>
-      <div css={titleContainer}>
-        <img
-          css={profileImageStyle}
-          onClick={(e) => {
-            e.stopPropagation();
-            handleUserClick();
-          }}
-          src={profileImage}
-          alt="profile"
-        />
-        <div css={nicknameDdayContainer}>
+      <div css={cardHeader}>
+        <div css={profileContainer}>
+          <img
+            css={profileImageStyle}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleUserClick();
+            }}
+            src={profileImage}
+            alt="profile"
+          />
           <p
             onClick={(e) => {
               e.stopPropagation();
@@ -71,21 +71,21 @@ const PotCard: React.FC<PotCardProps> = ({
           >
             {nickname}
           </p>
-          <DdayBadge days={dday} />
         </div>
       </div>
-      <h1 css={titleStyle}>{title}</h1>
       <div css={contentContainer}>
-        <p css={contentStyle}>{content}</p>
-      </div>
-      <div css={categoriesContainer}>
-        {categories.length === 4 ? (
-          <Badge content="전체" />
-        ) : (
-          categories.map((category, index) => (
+        <div css={titleContainer}>
+          <Badge content={dday} />
+          <h3 css={titleStyle}>{title}</h3>
+        </div>
+        <div css={contentContainer}>
+          <p css={contentStyle}>{content}</p>
+        </div>
+        <div css={categoriesContainer}>
+          {categories.map((category, index) => (
             <Badge key={index} content={category} />
-          ))
-        )}
+          ))}
+        </div>
       </div>
     </div>
   );
