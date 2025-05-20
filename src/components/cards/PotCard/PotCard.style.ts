@@ -78,3 +78,15 @@ export const categoriesContainer = css`
   display: flex;
   gap: 1rem;
 `;
+
+export const buttonStyle = css`
+  background-color: transparent;
+`;
+
+export const buttonContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  ${theme.font.caption1}
+  color: ${theme.color.object.hero}
+`;

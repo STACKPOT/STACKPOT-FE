@@ -1,5 +1,7 @@
 import Badge from "@components/commons/Badge/Badge";
 import {
+  buttonContainer,
+  buttonStyle,
   cardHeader,
   cardStyle,
   categoriesContainer,
@@ -15,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
 import routes from "@constants/routes";
+import { SaveIcon } from "@assets/svgs";
 
 interface PotCardProps {
   userId: number;
@@ -47,6 +50,10 @@ const PotCard: React.FC<PotCardProps> = ({
     navigate(`${routes.userProfile}/${userId}`);
   };
 
+  const handleSave = () => {
+    //TODO: API 연결
+  };
+
   const profileImage = roleImages[role];
 
   return (
@@ -71,6 +78,18 @@ const PotCard: React.FC<PotCardProps> = ({
           >
             {nickname}
           </p>
+        </div>
+        <div css={buttonContainer}>
+          <button
+            css={buttonStyle}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleSave();
+            }}
+          >
+            <SaveIcon />
+          </button>
+          <p>99+</p>
         </div>
       </div>
       <div css={contentContainer}>
