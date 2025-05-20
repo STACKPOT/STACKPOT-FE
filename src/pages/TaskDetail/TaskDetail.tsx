@@ -24,7 +24,7 @@ import {
   profileImageStyle,
   arrowIconStyle
 } from "./TaskDetail.style";
-import { container} from "../MyPotDetail/MyPotDetail.style"
+import { container } from "../MyPotDetail/MyPotDetail.style"
 import { DdayBadge, StateBadge, MyFeedDropdown } from "@components/index";
 import { CalendarIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
@@ -44,7 +44,7 @@ import { ChangeStatusModalWrapper } from "./components";
 import ConfirmModalWrapper from "@pages/MyPotDetail/components/ConfirmModalWrapper/ConfirmModalWrapper";
 
 const TaskDetailPage: React.FC = () => {
-  
+
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
 
@@ -153,7 +153,7 @@ const TaskDetailPage: React.FC = () => {
           <div css={titleStyle}>{task.result.title}</div>
         </div>
         <div css={rightContainer}>
-            <StateBadge content={displayStatus[task.result.status]} onClick={handleOpenChangingModal}/>
+          <StateBadge content={displayStatus[task.result.status]} onClick={handleOpenChangingModal} />
           <div css={dropdownWrapperStyle} onClick={(event) => event.stopPropagation()}>
             <MyFeedDropdown
               topMessage="수정하기"
@@ -189,9 +189,9 @@ const TaskDetailPage: React.FC = () => {
       </div>
       <div css={contributorContainer}>
         {task.result.participants.map((participant, index) => (
-          <div css={contributorCard} key={index} onClick={()=>{handleProfileClick(participant.userId)}}>
+          <div css={contributorCard} key={index} onClick={() => { handleProfileClick(participant.userId) }}>
             <div css={contributorInner}>
-              <img src={roleImages[participant.role as Role]} css={profileImageStyle} alt="프로필"/>
+              <img src={roleImages[participant.role as Role]} css={profileImageStyle} alt="프로필" />
               <span css={contributorNicknameStyle}>{participant.nickName}</span>
             </div>
           </div>

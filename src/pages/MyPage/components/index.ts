@@ -1,9 +1,5 @@
-import MyPageProfile from "./MyPageProfile";
-import AppealModal from "./AppealModal";
-import PotSummaryModal from "./PotSummaryModal";
+import MyPageProfile from './MyPageProfile/MyPageProfile';
+import AppealModal from './AppealModal/AppealModal';
+import PotSummaryModal from './PotSummaryModal/PotSummaryModal';
 
-export {
-    MyPageProfile,
-    AppealModal,
-    PotSummaryModal,
-}
+export { MyPageProfile, AppealModal, PotSummaryModal };
