@@ -69,21 +69,27 @@ const SideBar: React.FC = () => {
   return (
     <div css={mainContainer(top)}>
       <div css={container}>
-        {menuItems.map(({ to, icon, activeIcon, label }, index) => (
-          <NavLink
-            key={index}
-            to={to}
-            style={({ isActive }) => getNavLinkStyle(isActive)}
-            css={menuItemStyle}
-          >
-            {({ isActive }) => (
-              <>
-                {isActive ? activeIcon : icon}
-                <p css={labelStyle}>{label}</p>
-              </>
-            )}
-          </NavLink>
-        ))}
+        {menuItems.map(({ to, icon, activeIcon, label }, index) => {
+          const accessToken = localStorage.getItem("accessToken");
+          const isPrivateRoute = to === routes.myPot.base || to === routes.chat;
+          const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY}&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code&scope=account_email&prompt=login`;
+
+          return (
+            <NavLink
+              key={index}
+              to={!accessToken && isPrivateRoute ? link : to}
+              style={({ isActive }) => getNavLinkStyle(isActive)}
+              css={menuItemStyle}
+            >
+              {({ isActive }) => (
+                <>
+                  {isActive ? activeIcon : icon}
+                  <p css={labelStyle}>{label}</p>
+                </>
+              )}
+            </NavLink>
+          );
+        })}
       </div>
     </div>
   );
