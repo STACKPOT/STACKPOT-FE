@@ -29,6 +29,7 @@ import {
   CreateFinishedPot,
   EditPotPage,
   FeedDetailPage,
+  ChatPage
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: `${routes.pot.base}/:potId`,
         element: <PotDetailPage />,
+      },
+      {
+        path: routes.chat,
+        element: <ChatPage />,
       },
       {
         path: "/*",

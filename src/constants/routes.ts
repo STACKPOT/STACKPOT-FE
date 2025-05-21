@@ -26,6 +26,7 @@ const routes = {
   createFinishedPot: "/create-finished-pot",
   editPot: "/pot/edit",
   feed: { base: "/feed", edit: "/feed/edit" },
+  chat: "/chat",
 } as const;
 
 export default routes;
