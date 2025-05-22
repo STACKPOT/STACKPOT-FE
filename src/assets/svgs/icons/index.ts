@@ -20,3 +20,4 @@ export { default as HomeFilledIcon } from "./homeFilled.svg?react";
 export { default as LogoFilledIcon } from "./logoFilled.svg?react";
 export { default as MyPotFilledIcon } from "./myPotFilled.svg?react";
 export { default as ChatFilledIcon } from "./chatFilled.svg?react";
+export { default as SelectChat } from "./selectChat.svg?react";
