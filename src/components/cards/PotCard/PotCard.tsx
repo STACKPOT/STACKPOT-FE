@@ -41,13 +41,18 @@ const PotCard: React.FC<PotCardProps> = ({
   categories,
 }: PotCardProps) => {
   const navigate = useNavigate();
+  const isLoggedIn = Boolean(localStorage.getItem("accessToken"));
 
   const handleCardClick = () => {
-    navigate(`${routes.pot.base}/${potId}`);
+    if (isLoggedIn) {
+      navigate(`${routes.pot.base}/${potId}`);
+    }
   };
 
   const handleUserClick = () => {
-    navigate(`${routes.userProfile}/${userId}`);
+    if (isLoggedIn) {
+      navigate(`${routes.userProfile}/${userId}`);
+    }
   };
 
   const handleSave = () => {
