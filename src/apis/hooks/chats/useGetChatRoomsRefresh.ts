@@ -5,6 +5,7 @@ const useGetChatRoomsRefresh = () => {
   return useQuery({
     queryKey: ["chatRoomsRefresh"],
     queryFn: () => getChatRoomsRefresh(),
+    refetchInterval: 3000,
   });
 };
 

@@ -38,32 +38,7 @@ import { Role } from 'types/role';
 import useGetChatRooms from "apis/hooks/chats/useGetChatRooms";
 import { ChatRoom } from "apis/types/chat";
 
-// const chatRooms = [
-//   {
-//     chatRoomId: 1,
-//     chatRoomName: "스택팟 사이드 프로젝트 A스택팟 사이드 프로젝트 A스택팟 사이드 프로젝트 A스택팟 사이드 프로젝트 A스택팟 사이드 프로젝트 A스택팟 사이드 프로젝트 A스택팟 사이드 프로젝트 A",
-//     thumbnailUrl: "https://via.placeholder.com/32",
-//     lastChatTime: "2025-05-31T19:35:00",
-//     lastChat: "첫 대화를 시작해 보세요!",
-//     unReadMessageCount: 4,
-//   },
-//   {
-//     chatRoomId: 2,
-//     chatRoomName: "스택팟 사이드 프로젝트 B",
-//     thumbnailUrl: "https://via.placeholder.com/32",
-//     lastChatTime: "2025-05-31T19:35:00",
-//     lastChat: "팀 회의가 곧 시작돼요.",
-//     unReadMessageCount: 0,
-//   },
-//   {
-//     chatRoomId: 3,
-//     chatRoomName: "스택팟 사이드 프로젝트 C",
-//     thumbnailUrl: "https://via.placeholder.com/32",
-//     lastChatTime: "2025-05-31T19:35:00",
-//     lastChat: "마감일이 다가오고 있어요!",
-//     unReadMessageCount: 0,
-//   },
-// ];
+
 
 const messages = [
   {
@@ -176,13 +151,24 @@ const formatTime = (isoString: string) => {
 
 const ChatPage = () => {
   const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
+  const [thumbnailMap, setThumbnailMap] = useState<Record<number, string>>({});
   const { data } = useGetChatRooms();
   const chatRooms = (data?.result ?? []) as ChatRoom[];
-  console.log("Chat Rooms:", chatRooms);
   const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
 
   const handleCoverClick = () => {
-    alert("커버 추가 기능은 아직 구현되지 않았습니다.");
+    if (!selectedRoomId) return;
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.onchange = (event: Event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file && selectedRoomId !== null) {
+        const imageUrl = URL.createObjectURL(file);
+        setThumbnailMap(prev => ({ ...prev, [selectedRoomId]: imageUrl }));
+      }
+    };
+    input.click();
   };
 
   return (
@@ -200,8 +186,18 @@ const ChatPage = () => {
                 }
               >
                 <div css={chatRoomContentStyle}>
+
                   <div css={chatRoomIconTextWrapperStyle}>
-                    <MyPotFilledIcon />
+                    {/* <MyPotFilledIcon /> */}
+                    <img
+                      src={thumbnailMap[room.chatRoomId] || room.thumbnailUrl}
+                      style={{
+                        width: 32,
+                        height: 32,
+                        borderRadius: '50%',
+                        objectFit: 'cover',
+                      }}
+                    />
                     <div css={chatRoomInfoStyle}>
                       <div css={chatRoomNameTimeWrapperStyle}>
                         <span css={chatRoomNameStyle}>{room.chatRoomName}</span>

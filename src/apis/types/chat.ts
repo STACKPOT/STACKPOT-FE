@@ -41,3 +41,14 @@ interface ChatMessages {
   fileUrl: string;
   createdAt: string;
 }
+
+export interface PatchChatRoomThumnailParams {
+  chatRoomId: number;
+  file: File;
+}
+export interface PatchChatRoomResponse {
+  isSuccess: boolean;
+  code: string;
+  result: {};
+  message: string;
+}
