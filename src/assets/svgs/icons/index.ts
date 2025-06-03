@@ -19,3 +19,4 @@ export { default as PotIcon } from './pot.svg?react';
 export { default as SearchIcon } from './search.svg?react';
 export { default as SetUpIcon } from './setUp.svg?react';
 export { default as MeatballIcon } from './meatball.svg?react';
+export { default as SaveIcon } from "./save.svg?react";
