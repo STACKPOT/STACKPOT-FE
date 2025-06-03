@@ -260,3 +260,20 @@ export const unreadBadgeStyle = css`
   align-items: center;
   gap: 10px;
 `;
+
+export const dateDividerStyle = css`
+  ${theme.font.body2}
+  color: ${theme.color.object.hero};
+  margin: 1.6rem 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 0.1rem;
+    background-color: ${theme.color.object.assistive};
+  }
+`;

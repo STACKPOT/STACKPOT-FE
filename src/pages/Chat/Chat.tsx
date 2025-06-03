@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   pageWrapperStyle,
   chatWrapperStyle,
@@ -31,132 +31,45 @@ import {
   chatRoomContentStyle,
   chatRoomIconTextWrapperStyle,
   chatRoomTextStyle,
+  dateDividerStyle,
 } from "./Chat.style";
 import { ImageIcon, MyPotFilledIcon, SelectChatIcon, WorkGroupIcon } from '@assets/svgs';
 import { roleImages } from '@constants/roleImage';
-import { Role } from 'types/role';
 import useGetChatRooms from "apis/hooks/chats/useGetChatRooms";
-import { ChatRoom } from "apis/types/chat";
+import useGetChatMessages from "apis/hooks/chats/useGetChatMessages";
+import { ChatMessages, ChatRoom } from "apis/types/chat";
+import { formatCreatedAt, formatTime } from "@utils/dateUtils";
+import { format, parseISO } from "date-fns";
 
 
-
-const messages = [
-  {
-    chatId: "1",
-    userName: "나",
-    message: "여러분! 오늘 디코 회의 있는 거 아시죠? 안되시는 분 있나용?",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:28:00",
-  },
-  {
-    chatId: "2",
-    userName: "너무 착한 알파",
-    message: "아 기대돼 신난다",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:29:00",
-  },
-  {
-    chatId: "3",
-    userName: "너무 착한 알파",
-    message: "회의 끝나고 뭐 먹지?",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:30:00",
-  },
-  {
-    chatId: "4",
-    userName: "나",
-    message: "인정 재밌겠다",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:31:00",
-  },
-  {
-    chatId: "5",
-    userName: "너무 착한 알파",
-    message: "오늘 회사 회식이라.. ㅠㅠ 업무 카드로 진행상황 브리핑 해도 괜찮을까요?",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:32:00",
-  },
-  {
-    chatId: "6",
-    userName: "나",
-    message: "넵 올리시고 나서 말씀 해주세요!",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:33:00",
-  },
-  {
-    chatId: "7",
-    userName: "너무 착한 알파",
-    message: "감사합니당! 🙇‍♀️",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:34:00",
-  },
-  {
-    chatId: "8",
-    userName: "나",
-    message: "그럼 일단 오늘 안건은... 진행 방식부터 정리하죠!",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:35:00",
-  },
-  {
-    chatId: "9",
-    userName: "너무 착한 알파",
-    message: "넵 제가 적어둘게요~",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:36:00",
-  },
-  {
-    chatId: "10",
-    userName: "나",
-    message: "화면 구성은 알파님 맡아주시고, 나는 상태 관리 쪽 볼게요.",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:37:00",
-  },
-  {
-    chatId: "11",
-    userName: "너무 착한 알파",
-    message: "오키! 구조는 어제 정리한 대로 가면 될 듯!",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:38:00",
-  },
-  {
-    chatId: "12",
-    userName: "나",
-    message: "넵! 그럼 진행해볼게요~",
-    fileUrl: "",
-    createdAt: "2025-05-31T13:39:00",
-  }
-];
-
-// Function to format lastChatTime conditionally
-const formatTime = (isoString: string) => {
-  const date = new Date(isoString);
-  const now = new Date();
-
-  const isToday = date.toDateString() === now.toDateString();
-
-  if (isToday) {
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? '오후' : '오전';
-    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-    return `${ampm} ${formattedHours}:${formattedMinutes}`;
-  }
-
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  return `${month}월 ${day}일`;
-};
 
 const ChatPage = () => {
   const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
   const [thumbnailMap, setThumbnailMap] = useState<Record<number, string>>({});
   const { data } = useGetChatRooms();
   const chatRooms = (data?.result ?? []) as ChatRoom[];
+
+  const {
+    data: messagesData,
+    refetch,
+  } = useGetChatMessages({
+    chatRoomId: selectedRoomId ?? 0,
+    cursor: null,
+    size: 20,
+    direction: null,
+  });
   const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
 
+  const messageListRef = useRef<HTMLDivElement | null>(null);
 
+  const handleRoomClick = (room: ChatRoom) => {
+    const nextRoomId = selectedRoomId === room.chatRoomId ? null : room.chatRoomId;
+    setSelectedRoomId(nextRoomId);
+
+    if (nextRoomId !== null) {
+      refetch(); // Trigger refetch of chat messages
+    }
+  }
 
   const handleCoverClick = () => {
     if (!selectedRoomId) return;
@@ -173,6 +86,12 @@ const ChatPage = () => {
     input.click();
   };
 
+  useEffect(() => {
+    if (messageListRef.current && messagesData?.pages) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  }, [messagesData, selectedRoomId]);
+
   return (
     <div css={pageWrapperStyle}>
       <div css={chatWrapperStyle}>
@@ -183,9 +102,7 @@ const ChatPage = () => {
               <div
                 key={room.chatRoomId}
                 css={chatRoomItemStyle(selectedRoomId === room.chatRoomId)}
-                onClick={() =>
-                  setSelectedRoomId((prev) => (prev === room.chatRoomId ? null : room.chatRoomId))
-                }
+                onClick={() => handleRoomClick(room)}
               >
                 <div css={chatRoomContentStyle}>
 
@@ -229,10 +146,19 @@ const ChatPage = () => {
           </div>
 
           {selectedRoom ? (
-            <div css={messageListStyle}>
-              {messages.map((msg) => (
-                <MessageBubble key={msg.chatId} message={msg} isMine={msg.userName === "나"} />
-              ))}
+            <div css={messageListStyle} ref={messageListRef}>
+              {groupMessagesByDate(messagesData?.pages.flatMap((page) => page.result?.chats ?? []) ?? []).map(
+                ([date, chats]) => (
+                  <div key={date}>
+                    <div css={dateDividerStyle}>
+                      {format(new Date(date), "yyyy년 M월 d일")}
+                    </div>
+                    {chats.map((chat) => (
+                      <MessageBubble key={chat.chatId} message={chat} isMine={chat.userName === "나"} />
+                    ))}
+                  </div>
+                )
+              )}
             </div>
           ) : (
             <div css={chatPlaceholderStyle}>
@@ -253,34 +179,33 @@ const ChatPage = () => {
 
 export default ChatPage;
 
+const groupMessagesByDate = (messages: ChatMessages[]) => {
+  const groups: { [date: string]: ChatMessages[] } = {};
+
+  messages.forEach((message) => {
+    const dateKey = format(parseISO(message.createdAt), "yyyy-MM-dd");
+    if (!groups[dateKey]) {
+      groups[dateKey] = [];
+    }
+    groups[dateKey].push(message);
+  });
+
+  return Object.entries(groups).sort(([a], [b]) => new Date(a).getTime() - new Date(b).getTime());
+};
+
 const MessageBubble = ({
   message,
   isMine,
 }: {
-  message: {
-    chatId: string;
-    userName: string;
-    message: string;
-    fileUrl: string;
-    createdAt: string;
-  };
+  message: ChatMessages;
   isMine: boolean;
 }) => {
-  // Format createdAt to "오후 1:28" format
-  const formatCreatedAt = (isoString: string) => {
-    const date = new Date(isoString);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const ampm = hours >= 12 ? '오후' : '오전';
-    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-    return `${ampm} ${formattedHours}:${formattedMinutes}`;
-  };
+
 
   return (
     <div css={messageWrapperStyle(isMine)}>
       {!isMine && (
-        <img src={roleImages.BACKEND} alt="profile" css={profileImageStyle} />
+        <img src={roleImages[message.role]} alt="profile" css={profileImageStyle} />
       )}
       <div>
         {!isMine && (
@@ -294,4 +219,3 @@ const MessageBubble = ({
     </div>
   );
 };
-

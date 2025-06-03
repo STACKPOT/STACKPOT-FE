@@ -1,3 +1,5 @@
+import { Role } from "types/role";
+
 export interface ChatRoomResponse {
   isSuccess: boolean;
   code: string;
@@ -25,18 +27,19 @@ export interface GetChatMessagesParams {
   chatRoomId: number;
   cursor: number | null;
   size: number;
-  direction: "prev" | "next";
+  direction: "prev" | "next" | null;
 }
 
 export interface ChatMessagesResponse {
-  feeds: ChatMessages[];
+  chats: ChatMessages[];
   prevCursor: number;
   nextCursor: number;
 }
 
-interface ChatMessages {
+export interface ChatMessages {
   chatId: number;
   userName: string;
+  role: Role;
   message: string;
   fileUrl: string;
   createdAt: string;
