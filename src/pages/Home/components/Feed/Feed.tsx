@@ -6,22 +6,18 @@ import {
 	contentHeader,
 	iconContainer,
 	iconStyle,
-	feedWriteContainer,
-	feedWriteText,
 	feedWriteButton,
-	profileStyle,
 	emptyFeedFallbackStyle,
 } from './Feed.style';
 import { contentTitle } from '@pages/Home/Home.style';
 import { useState, useEffect } from 'react';
-import { categories, searchPartMap } from '@constants/categories';
+import { searchPartMap } from '@constants/categories';
 import useGetFeeds from 'apis/hooks/feeds/useGetFeeds';
 import { useInView } from 'react-intersection-observer';
 import { LoadingSpinnerIcon } from '@assets/svgs';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import routes from '@constants/routes';
-import { roleImages } from '@constants/roleImage';
 import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
 
 import { useNavigate } from 'react-router-dom';
@@ -64,7 +60,6 @@ const Feed = () => {
 	const { data: user } = useGetMyProfile(!!localStorage.getItem('accessToken'));
 
 	const role = useAuthStore((state) => state.role);
-	const profileImage = roleImages[(role as keyof typeof roleImages) || 'UNKNOWN'];
 
 	const handleCategoryClick = (category: string, partName: string) => {
 		if (selectedCategory === partName) {
@@ -84,9 +79,8 @@ const Feed = () => {
 		if (token) {
 			navigate(routes.writePost);
 		} else {
-			const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY}&redirect_uri=${
-				import.meta.env.VITE_REDIRECT_URI
-			}&response_type=code
+			const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY}&redirect_uri=${import.meta.env.VITE_REDIRECT_URI
+				}&response_type=code
 &scope=account_email
 &prompt=login`;
 			window.location.href = link;
@@ -111,13 +105,6 @@ const Feed = () => {
 	return (
 		<>
 			<div css={contentHeader}>
-				<div css={feedWriteContainer} onClick={hanldeWriteFeed}>
-					<div css={feedWriteText}>
-						<img src={profileImage} alt="profileImage" css={profileStyle} />
-						<p>오늘 작업하다가 무슨 일이 있었냐면...</p>
-					</div>
-					<button css={feedWriteButton}>피드 작성</button>
-				</div>
 				<div css={contentTitle}>
 					<p css={{ color: theme.color.point.hero }}>{categoryText[category ?? 'ALL']}</p>
 					<p> 피드를 탐색해 볼까요?</p>
