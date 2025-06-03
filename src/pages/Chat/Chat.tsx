@@ -156,6 +156,8 @@ const ChatPage = () => {
   const chatRooms = (data?.result ?? []) as ChatRoom[];
   const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
 
+
+
   const handleCoverClick = () => {
     if (!selectedRoomId) return;
     const input = document.createElement("input");
@@ -292,3 +294,4 @@ const MessageBubble = ({
     </div>
   );
 };
+

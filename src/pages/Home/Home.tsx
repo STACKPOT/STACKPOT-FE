@@ -1,41 +1,43 @@
 import { PotIcon, RightIcon } from "@assets/svgs";
 import { Button, CtaCard, FloatingButton } from "@components/index";
-import {
-  container,
-  content,
-  contentTitle,
-  iconStyle,
-  bannerStyle,
-  bannerTitleStyle,
-  spanStyle,
-  bannerSubtitleStyle,
-  buttonStyle,
-  buttonIconStyle,
-  bannerContainer,
-} from "./Home.style";
 
-import "swiper/swiper-bundle.css";
-import "swiper";
-import { useNavigate } from "react-router-dom";
-import routes from "@constants/routes";
-import { Feed, PopularPots } from "./components";
+import {
+	container,
+	content,
+	contentTitle,
+	iconStyle,
+	bannerStyle,
+	bannerTitleStyle,
+	spanStyle,
+	bannerSubtitleStyle,
+	buttonStyle,
+	buttonIconStyle,
+	bannerContainer,
+} from './Home.style';
+
+import 'swiper/swiper-bundle.css';
+import 'swiper';
+import { useNavigate } from 'react-router-dom';
+import routes from '@constants/routes';
+import { Feed, PopularPots } from './components';
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
-  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
-    import.meta.env.VITE_REST_API_KEY
-  }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
+	const navigate = useNavigate();
+	const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY}&redirect_uri=${
+		import.meta.env.VITE_REDIRECT_URI
+	}&response_type=code
 &scope=account_email
 &prompt=login`;
 
-  const handleClick = () => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      navigate(routes.createPot);
-    } else {
-      window.location.href = link;
-    }
-  };
+	const handleClick = () => {
+		const token = localStorage.getItem('accessToken');
+		if (token) {
+			navigate(routes.createPot);
+		} else {
+			window.location.href = link;
+		}
+	};
+
 
   return (
     <>

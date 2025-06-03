@@ -1,20 +1,13 @@
-import { useState } from "react";
-import {
-  bodyContainer,
-  container,
-  dividerStyle,
-  listContainer,
-  tabsContainer,
-  tabsTextStyle,
-} from "./UserPage.style";
-import { FinishedPotCard, FloatingButton, PostCard } from "@components/index";
-import { UserPageProfile } from "./components";
-import useGetUsersMypages from "apis/hooks/users/useGetUsersMyPages";
-import { Role } from "types/role";
-import { useParams } from "react-router-dom";
+import { useState } from 'react';
+import { bodyContainer, container, dividerStyle, listContainer, tabsContainer, tabsTextStyle } from './UserPage.style';
+import { FinishedPotCard, FloatingButton, PostCard } from '@components/index';
+import { UserPageProfile } from './components';
+import useGetUsersMypages from 'apis/hooks/users/useGetUsersMyPages';
+import { Role } from 'types/role';
+import { useParams } from 'react-router-dom';
 
 const UserPage = () => {
-  const [contentType, setContentType] = useState<"feed" | "pot">("feed");
+  const [contentType, setContentType] = useState<'feed' | 'pot'>('feed');
   const { userId } = useParams<{ userId: string }>();
 
   if (!userId) {
@@ -38,54 +31,51 @@ const UserPage = () => {
       <div css={dividerStyle} />
       <div css={bodyContainer}>
         <div css={tabsContainer}>
-          <p
-            css={tabsTextStyle(contentType === "feed")}
-            onClick={() => setContentType("feed")}
-          >
+          <p css={tabsTextStyle(contentType === 'feed')} onClick={() => setContentType('feed')}>
             피드
           </p>
-          <p
-            css={tabsTextStyle(contentType === "pot")}
-            onClick={() => setContentType("pot")}
-          >
+          <p css={tabsTextStyle(contentType === 'pot')} onClick={() => setContentType('pot')}>
             끓인 팟
           </p>
         </div>
         <div css={listContainer(contentType)}>
-          {contentType === "feed"
+          {contentType === 'feed'
             ? data.feeds.map((post) => (
-                <PostCard
-                  nickname={post.writer}
-                  role={post.writerRole}
-                  isLiked={false}
-                  likeCount={post.likeCount}
-                  key={post.feedId}
-                  createdAt={post.createdAt}
-                  title={post.title}
-                  content={post.content}
-                  feedId={post.feedId}
-                  writerId={post.writerId}
-                  isMyPost={false}
-                />
-              ))
+              <PostCard
+                nickname={post.writer}
+                role={post.writerRole}
+                isLiked={false}
+                likeCount={post.likeCount}
+                key={post.feedId}
+                createdAt={post.createdAt}
+                title={post.title}
+                content={post.content}
+                feedId={post.feedId}
+                writerId={post.writerId}
+                saveCount={post.saveCount}
+                commentCount={post.commentCount}
+                isSaved={post.isSaved}
+                isMyPost={false}
+              />
+            ))
             : data.completedPots.map((pot) => (
-                <FinishedPotCard
-                  id={pot.potId}
-                  title={pot.potName}
-                  myRole={pot.userPotRole}
-                  startDate={pot.potStartDate}
-                  stacks={pot.members}
-                  languages={pot.potLan}
-                  key={pot.potId}
-                  endDate={pot.potEndDate}
-                  members={Object.keys(pot.memberCounts) as Role[]}
-                  isUserPage={true}
-                  isProfilePage={false}
-                />
-              ))}
+              <FinishedPotCard
+                id={pot.potId}
+                title={pot.potName}
+                myRole={pot.userPotRole}
+                startDate={pot.potStartDate}
+                stacks={pot.members}
+                languages={pot.potLan}
+                key={pot.potId}
+                endDate={pot.potEndDate}
+                members={Object.keys(pot.memberCounts) as Role[]}
+                isUserPage={true}
+                isProfilePage={false}
+              />
+            ))}
         </div>
       </div>
-      <FloatingButton type={"feed"} />
+      <FloatingButton type={'feed'} />
     </main>
   );
 };
