@@ -4,7 +4,7 @@ import theme from '@styles/theme';
 
 
 export const feedWriteButton = css`
-	padding: 11px 16px;
+	padding: 1.1rem 1.6rem;
 	background-color: ${theme.color.point.hero};
 	color: ${theme.color.base.white};
 	border-radius: 20px;
@@ -23,7 +23,7 @@ export const contentHeader = css`
 export const buttonContainer = css`
 	display: flex;
 	flex-direction: row;
-	gap: 8px;
+	gap: 0.8rem;
 	align-items: center;
 	justify-content: left;
 `;
@@ -54,22 +54,22 @@ export const iconContainer = css`
 
 export const emptyFeedFallbackStyle = css`
 	text-align: center;
-	height: 960px;
+	height: 96rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 16px;
+	gap: 1.6rem;
 	align-self: stretch;
 
 	div {
-		font-size: 20px;
+		font-size: 2rem;
 		align-items: center;
 	}
 
 	p {
 		${theme.font.title1};
-		margin-top: 8px;
+		margin-top: 0.8rem;
 		color: ${theme.color.object.hero};
 	}
 `;

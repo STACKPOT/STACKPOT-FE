@@ -14,11 +14,11 @@ export const mainContainer = (top: number) => css`
 
 export const container = css`
   width: 8.6rem;
-  padding: 48px 21px;
+  padding: 4.8rem 2.1rem;
   border: none;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 4.8rem;
   align-items: center;
   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
   border-radius: 24px;
@@ -26,8 +26,8 @@ export const container = css`
 `;
 
 export const iconStyle = css`
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
 `;
 
 export const potIconStyle = css`
@@ -48,14 +48,14 @@ export const getNavLinkStyle = (isActive: boolean): CSSProperties => ({
 });
 
 export const menuItemStyle = css`
-  width: 44px;
-  height: 45px;
+  width: 4.4rem;
+  height: 4.5rem;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 0.4rem;
 
   &:hover {
     background-color: ${theme.color.point.normal};

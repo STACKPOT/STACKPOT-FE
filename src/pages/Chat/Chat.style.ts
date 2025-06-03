@@ -3,7 +3,7 @@ import theme from "@styles/theme";
 
 export const chatRoomIconTextWrapperStyle = css`
   display: flex;
-  gap: 16px;
+  gap: 1.6rem;
   align-items: center;
 `;
 
@@ -19,14 +19,14 @@ export const pageWrapperStyle = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 84px 0;
+  padding: 8.4rem 0;
 `;
 
 export const chatWrapperStyle = css`
   display: flex;
   width: 90%;
-  max-width: 1100px;
-  height: 830px;
+  max-width: 110rem;
+  height: 83rem;
   // border: 1px solid ${theme.color.object.alternative};
   border-radius: 8px;
   overflow: hidden;
@@ -34,14 +34,14 @@ export const chatWrapperStyle = css`
 `;
 
 export const sidebarStyle = css`
-  width: 386px;
+  width: 38.6rem;
 `;
 
 export const chatRoomTitleStyle = css`
   ${theme.font.title1}
   display: flex;
-  height: 74px;
-  padding: 16px 38px;
+  height: 7.4rem;
+  padding: 1.6rem 3.8rem;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
