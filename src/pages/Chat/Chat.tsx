@@ -52,6 +52,9 @@ const ChatPage = () => {
   const {
     data: messagesData,
     refetch,
+    fetchPreviousPage,
+    hasPreviousPage,
+    isFetchingPreviousPage,
   } = useGetChatMessages({
     chatRoomId: selectedRoomId ?? 0,
     cursor: null,
@@ -83,6 +86,7 @@ const ChatPage = () => {
         setThumbnailMap(prev => ({ ...prev, [selectedRoomId]: imageUrl }));
       }
     };
+    // 추후 모달 추가
     input.click();
   };
 
@@ -91,6 +95,20 @@ const ChatPage = () => {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
   }, [messagesData, selectedRoomId]);
+
+  useEffect(() => {
+    const list = messageListRef.current;
+    if (!list) return;
+
+    const handleScroll = () => {
+      if (list.scrollTop === 0 && hasPreviousPage && !isFetchingPreviousPage) {
+        fetchPreviousPage();
+      }
+    };
+
+    list.addEventListener("scroll", handleScroll);
+    return () => list.removeEventListener("scroll", handleScroll);
+  }, [hasPreviousPage, isFetchingPreviousPage, fetchPreviousPage]);
 
   return (
     <div css={pageWrapperStyle}>
