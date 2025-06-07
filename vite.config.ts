@@ -4,6 +4,7 @@ import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  base: '/STACKPOT-FE/',
   plugins: [
     react({
       jsxImportSource: "@emotion/react",
