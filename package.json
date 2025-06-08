@@ -14,14 +14,17 @@
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
     "@mobiscroll/react": "npm:@mobiscroll/react-next-trial@5.33.0",
-    "@mui/icons-material": "5",
+    "@mui/icons-material": "^6.4.11",
     "@mui/material": "^6.4.0",
     "@mui/system": "^6.4.0",
     "@mui/x-date-pickers": "^7.24.0",
+    "@stomp/stompjs": "^7.1.1",
     "@tanstack/react-query": "^5.65.1",
     "@types/react": "^19.0.7",
+    "@types/sockjs-client": "^1.5.4",
     "axios": "^1.7.9",
     "dayjs": "^1.11.13",
+    "net": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.2",
@@ -29,6 +32,8 @@
     "react-loading-skeleton": "^3.5.0",
     "react-router-dom": "^7.1.1",
     "react-toastify": "^11.0.3",
+    "socket.io-client": "^4.8.1",
+    "sockjs-client": "^1.6.1",
     "swiper": "^11.2.1",
     "use-debounce": "^10.0.4",
     "zustand": "^5.0.3"
@@ -37,20 +42,26 @@
     "@biomejs/biome": "1.9.4",
     "@emotion/babel-plugin": "^11.13.5",
     "@eslint/js": "^9.17.0",
+    "@types/date-fns": "^2.6.3",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",
     "@types/react-dom": "19.0.3",
     "@types/swiper": "^6.0.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "biome": "^0.3.3",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "msw": "^2.8.7",
     "typescript": "5.7.3",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.11",
     "vite-plugin-svgr": "^4.3.0",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
