@@ -42,7 +42,7 @@ const CommentWriter: React.FC<CommentWriterProps> = ({
         onChange={handleInputChange} />
       <div css={submitButtonContainer}>
         <button css={recommentCancelStyle} onClick={handleCancel}>취소</button>
-        <Button variant="action" actionType="edit" onClick={onSubmit}>댓글 작성</Button>
+        <Button variant="action" onClick={onSubmit}>댓글 작성</Button>
       </div>
     </div>
   )

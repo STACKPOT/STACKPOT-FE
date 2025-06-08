@@ -76,15 +76,16 @@ const Comment: React.FC<CommentProps> = ({
               </div>
               <p css={dateStyle}>{date}</p>
             </div>
-            <div css={meatballIconStyle}
-              onClick={(e) => { e.stopPropagation(); }}>
-              <MyFeedDropdown
-                topMessage="수정하기"
-                bottomMessage="삭제하기"
-                onTop={handleEdit}
-                onBottom={() => { }}
-              />
-            </div>
+            {isMyComment &&
+              <div css={meatballIconStyle}
+                onClick={(e) => { e.stopPropagation(); }}>
+                <MyFeedDropdown
+                  topMessage="수정하기"
+                  bottomMessage="삭제하기"
+                  onTop={handleEdit}
+                  onBottom={() => { }}
+                />
+              </div>}
           </div>
           <p css={contentStyle}>{content}</p>
           <button css={openRecommentContainer} onClick={handleOpenRecomment}>
@@ -113,7 +114,7 @@ const Comment: React.FC<CommentProps> = ({
           </div>
           <div css={submitButtonContainer}>
             <button css={recommentCancelStyle} onClick={handleEdit}>취소</button>
-            <Button variant="action" actionType="edit">댓글 작성</Button>
+            <Button variant="action" >댓글 작성</Button>
           </div>
         </>
       }

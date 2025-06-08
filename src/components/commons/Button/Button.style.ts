@@ -36,7 +36,7 @@ export const landingButtonStyle = css`
 `;
 
 export const actionButtonStyle = (actionType?: "action" | "join" | "edit") => css`
-  padding: ${(actionType === "join" && "1.6rem 3.3rem") || (actionType === "edit" && "1.2rem 2.4rem ") || "1.4rem 5.8rem"};
+  padding: ${(actionType === "join" && "1.6rem 3.3rem") || (actionType === "edit" && "1.2rem 2.4rem ") || "1.4rem 1.9rem"};
   border-radius: 8px;
-  ${theme.font.bodyBold1};
+  ${theme.font.caption3};
 `;
