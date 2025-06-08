@@ -9,6 +9,7 @@ interface CommentProps {
   isMyComment: boolean;
   isRecomment: boolean;
   isWriter: boolean;
+  isDeleted: boolean;
 }
 export const commentData: CommentProps[] = [
   {
@@ -20,6 +21,7 @@ export const commentData: CommentProps[] = [
     isMyComment: false,
     isRecomment: false,
     isWriter: false,
+    isDeleted: false,
   },
   {
     userId: 1,
@@ -30,6 +32,7 @@ export const commentData: CommentProps[] = [
     isMyComment: true,
     isRecomment: true,
     isWriter: false,
+    isDeleted: false,
   },
   {
     userId: 1,
@@ -40,5 +43,6 @@ export const commentData: CommentProps[] = [
     isMyComment: true,
     isRecomment: false,
     isWriter: true,
+    isDeleted: true,
   }
 ]

@@ -93,7 +93,7 @@ export const editCommentContainer = css`
   border-radius: 8px;
   background-color: white;
 `
-export const editCommentTextAreaStyle =css`
+export const editCommentTextAreaStyle = css`
   border: none;
   ${theme.font.body3};
   resize: none;
@@ -104,4 +104,16 @@ export const editCommentTextAreaStyle =css`
   &::-webkit-scrollbar{
     display: none;
   }
+`
+export const deletedComment = css`
+  height: 10rem;
+  padding: 0 3.2rem;
+  display: flex;
+  align-items: center;
+  background-color: ${theme.color.object.normal};
+  border-radius: 8px;
+`
+export const deletedCommentText = css`
+  ${theme.font.body3};
+  color: ${theme.color.point.gray};
 `

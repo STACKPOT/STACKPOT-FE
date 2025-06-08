@@ -1,5 +1,5 @@
 import { PlusButtonIcon } from "@assets/svgs";
-import { container, contentStyle, dateStyle, editCommentContainer, editCommentTextAreaStyle, meatballIconStyle, nicknameContainer, nicknameStyle, openRecommentContainer, openRecommentIconStyle, openRecommentTextStyle, profileContainer, profileImageStyle, profileTextContainer, recommentCancelStyle, recommentContainer, submitButtonContainer, textAreaStyle } from "./Comment.style";
+import { container, contentStyle, dateStyle, deletedComment, deletedCommentText, editCommentContainer, editCommentTextAreaStyle, meatballIconStyle, nicknameContainer, nicknameStyle, openRecommentContainer, openRecommentIconStyle, openRecommentTextStyle, profileContainer, profileImageStyle, profileTextContainer, recommentCancelStyle, recommentContainer, submitButtonContainer, textAreaStyle } from "./Comment.style";
 import Button from "../Button/Button";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
@@ -17,6 +17,7 @@ interface CommentProps {
   content: string;
   isMyComment: boolean;
   isRecomment: boolean;
+  isDeleted: boolean;
 }
 
 const Comment: React.FC<CommentProps> = ({
@@ -27,6 +28,7 @@ const Comment: React.FC<CommentProps> = ({
   content,
   isMyComment,
   isRecomment,
+  isDeleted,
 }: CommentProps) => {
   const navigate = useNavigate();
   const [openRecomment, setOpenRecomment] = useState(false);
@@ -66,56 +68,64 @@ const Comment: React.FC<CommentProps> = ({
 
   return (
     <div css={container(isRecomment)}>
-      {!isEditing ?
-        <>
-          <div css={profileContainer}>
-            <img css={profileImageStyle} src={roleImages[role]} />
-            <div css={profileTextContainer}>
-              <div css={nicknameContainer}>
-                <a css={nicknameStyle(isMyComment)} onClick={handleNicknameClick}>{nickname}</a>
-              </div>
-              <p css={dateStyle}>{date}</p>
-            </div>
-            {isMyComment &&
-              <div css={meatballIconStyle}
-                onClick={(e) => { e.stopPropagation(); }}>
-                <MyFeedDropdown
-                  topMessage="수정하기"
-                  bottomMessage="삭제하기"
-                  onTop={handleEdit}
-                  onBottom={() => { }}
-                />
-              </div>}
-          </div>
-          <p css={contentStyle}>{content}</p>
-          <button css={openRecommentContainer} onClick={handleOpenRecomment}>
-            <PlusButtonIcon css={openRecommentIconStyle} />
-            <p css={openRecommentTextStyle}>답글 달기</p>
-          </button>
-          {openRecomment &&
-            <CommentWriter
-              onSubmit={() => { }}
-              onCancel={handleOpenRecomment}
-              textAreaCustomStyle={textAreaStyle} />}
-        </>
+      {isDeleted ?
+        <div css={deletedComment}>
+          <p css={deletedCommentText}>삭제된 댓글입니다.</p>
+        </div>
         :
         <>
-          <div css={editCommentContainer}>
-            <div css={profileContainer}>
-              <img css={profileImageStyle} src={roleImages[role]} />
-              <p css={nicknameStyle(isMyComment)}>{nickname}</p>
-            </div>
-            <textarea
-              css={editCommentTextAreaStyle}
-              ref={editRef}
-              value={editValue}
-              onChange={(e) => handleEditInputChange(e)}
-            />
-          </div>
-          <div css={submitButtonContainer}>
-            <button css={recommentCancelStyle} onClick={handleEdit}>취소</button>
-            <Button variant="action" >댓글 작성</Button>
-          </div>
+          {!isEditing ?
+            <>
+              <div css={profileContainer}>
+                <img css={profileImageStyle} src={roleImages[role]} />
+                <div css={profileTextContainer}>
+                  <div css={nicknameContainer}>
+                    <a css={nicknameStyle(isMyComment)} onClick={handleNicknameClick}>{nickname}</a>
+                  </div>
+                  <p css={dateStyle}>{date}</p>
+                </div>
+                {isMyComment &&
+                  <div css={meatballIconStyle}
+                    onClick={(e) => { e.stopPropagation(); }}>
+                    <MyFeedDropdown
+                      topMessage="수정하기"
+                      bottomMessage="삭제하기"
+                      onTop={handleEdit}
+                      onBottom={() => { }}
+                    />
+                  </div>}
+              </div>
+              <p css={contentStyle}>{content}</p>
+              <button css={openRecommentContainer} onClick={handleOpenRecomment}>
+                <PlusButtonIcon css={openRecommentIconStyle} />
+                <p css={openRecommentTextStyle}>답글 달기</p>
+              </button>
+              {openRecomment &&
+                <CommentWriter
+                  onSubmit={() => { }}
+                  onCancel={handleOpenRecomment}
+                  textAreaCustomStyle={textAreaStyle} />}
+            </>
+            :
+            <>
+              <div css={editCommentContainer}>
+                <div css={profileContainer}>
+                  <img css={profileImageStyle} src={roleImages[role]} />
+                  <p css={nicknameStyle(isMyComment)}>{nickname}</p>
+                </div>
+                <textarea
+                  css={editCommentTextAreaStyle}
+                  ref={editRef}
+                  value={editValue}
+                  onChange={(e) => handleEditInputChange(e)}
+                />
+              </div>
+              <div css={submitButtonContainer}>
+                <button css={recommentCancelStyle} onClick={handleEdit}>취소</button>
+                <Button variant="action" >댓글 작성</Button>
+              </div>
+            </>
+          }
         </>
       }
     </div>
