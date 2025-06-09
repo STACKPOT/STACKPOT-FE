@@ -8,6 +8,7 @@ import routes from "@constants/routes";
 import React, { useEffect, useRef, useState } from "react";
 import MyFeedDropdown from "../Dropdown/MyFeedDropdown/MyFeedDropdown";
 import CommentWriter from "./CommentWriter";
+import Badge from "../Badge/Badge";
 
 interface CommentProps {
   userId: number;
@@ -18,6 +19,7 @@ interface CommentProps {
   isMyComment: boolean;
   isRecomment: boolean;
   isDeleted: boolean;
+  isWriter: boolean;
 }
 
 const Comment: React.FC<CommentProps> = ({
@@ -29,6 +31,7 @@ const Comment: React.FC<CommentProps> = ({
   isMyComment,
   isRecomment,
   isDeleted,
+  isWriter,
 }: CommentProps) => {
   const navigate = useNavigate();
   const [openRecomment, setOpenRecomment] = useState(false);
@@ -43,6 +46,10 @@ const Comment: React.FC<CommentProps> = ({
   const handleOpenRecomment = () => {
     setOpenRecomment(!openRecomment)
   }
+  const handleSubmitRecomment = (recomment: string) => {
+    // api 호출
+    setOpenRecomment(false);
+  }
   const handleEdit = () => {
     setIsEditing(!isEditing);
     if (!isEditing) {
@@ -55,6 +62,13 @@ const Comment: React.FC<CommentProps> = ({
       editRef.current.style.height = "0px";
       editRef.current.style.height = editRef.current.scrollHeight + "px";
     }
+  }
+  const handleSubmitEdit = () => {
+    // 댓글 수정 api 호출
+    setIsEditing(false);
+  }
+  const handleDelete = () => {
+    // 삭제 api 호출
   }
 
   useEffect(() => {
@@ -81,6 +95,7 @@ const Comment: React.FC<CommentProps> = ({
                 <div css={profileTextContainer}>
                   <div css={nicknameContainer}>
                     <a css={nicknameStyle(isMyComment)} onClick={handleNicknameClick}>{nickname}</a>
+                    {isWriter && <Badge content="작성자" color="blue" />}
                   </div>
                   <p css={dateStyle}>{date}</p>
                 </div>
@@ -91,7 +106,7 @@ const Comment: React.FC<CommentProps> = ({
                       topMessage="수정하기"
                       bottomMessage="삭제하기"
                       onTop={handleEdit}
-                      onBottom={() => { }}
+                      onBottom={handleDelete}
                     />
                   </div>}
               </div>
@@ -102,7 +117,7 @@ const Comment: React.FC<CommentProps> = ({
               </button>
               {openRecomment &&
                 <CommentWriter
-                  onSubmit={() => { }}
+                  onSubmit={handleSubmitRecomment}
                   onCancel={handleOpenRecomment}
                   textAreaCustomStyle={textAreaStyle} />}
             </>
@@ -122,7 +137,7 @@ const Comment: React.FC<CommentProps> = ({
               </div>
               <div css={submitButtonContainer}>
                 <button css={recommentCancelStyle} onClick={handleEdit}>취소</button>
-                <Button variant="action" >댓글 작성</Button>
+                <Button variant="action" onClick={handleSubmitEdit}>댓글 작성</Button>
               </div>
             </>
           }

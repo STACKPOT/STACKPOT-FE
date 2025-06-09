@@ -31,7 +31,7 @@ export const commentData: CommentProps[] = [
     content: "정말 개발자가 되고 싶은 마음을 다시 일깨워주는 글이였습니다. 감사합니다!",
     isMyComment: true,
     isRecomment: true,
-    isWriter: false,
+    isWriter: true,
     isDeleted: false,
   },
   {

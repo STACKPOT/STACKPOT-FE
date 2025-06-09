@@ -4,7 +4,7 @@ import { container, recommentCancelStyle, submitButtonContainer, textAreaStyle }
 import { useRef, useState } from "react";
 
 interface CommentWriterProps {
-  onSubmit: () => void;
+  onSubmit: (content: string) => void;
   onCancel: () => void;
   textAreaCustomStyle?: SerializedStyles;
 }
@@ -23,6 +23,12 @@ const CommentWriter: React.FC<CommentWriterProps> = ({
       textRef.current.style.height = textRef.current.scrollHeight + "px";
     }
   }
+
+  const handleSubmit = () => {
+    onSubmit(content);
+    setContent("");
+  }
+
   const handleCancel = () => {
     setContent("");
     if (textRef.current) {
@@ -42,7 +48,7 @@ const CommentWriter: React.FC<CommentWriterProps> = ({
         onChange={handleInputChange} />
       <div css={submitButtonContainer}>
         <button css={recommentCancelStyle} onClick={handleCancel}>취소</button>
-        <Button variant="action" onClick={onSubmit}>댓글 작성</Button>
+        <Button variant="action" onClick={handleSubmit}>댓글 작성</Button>
       </div>
     </div>
   )

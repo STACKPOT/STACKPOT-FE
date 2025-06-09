@@ -4,12 +4,15 @@ import CommentWriter from "./CommentWriter"
 import Comment from "./Comment"
 
 interface CommentSectionProps {
-
 }
 const CommentSection: React.FC<CommentSectionProps> = ({ }: CommentSectionProps) => {
+  const handleSubmitComment = ()=>{
+    // 댓글 작성 api 호출
+  }
+
   return (
     <div css={container}>
-      <p css={commentCountStyle}>{`${3}개의 댓글`}</p>
+      <p css={commentCountStyle}>{`${commentData.length}개의 댓글`}</p>
       <CommentWriter
         onSubmit={() => { }}
         onCancel={() => { }} />
