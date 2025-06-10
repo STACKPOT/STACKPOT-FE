@@ -7,6 +7,13 @@ export const chatRoomIconTextWrapperStyle = css`
   align-items: center;
 `;
 
+export const chatRoomIconImgStyle = css`
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+`;
+
 export const chatRoomContentStyle = css`
   display: flex;
   justify-content: space-between;

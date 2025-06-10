@@ -16,6 +16,7 @@ const useGetChatMessages = ({ chatRoomId, cursor, direction, size = 20 }: GetCha
       const prev = lastPage.result?.prevCursor;
       return prev ? { cursor: prev, direction: "prev" } : undefined;
     },
+
     initialPageParam: null,
     enabled: chatRoomId !== 0,
   });

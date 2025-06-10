@@ -32,28 +32,35 @@ import {
   chatRoomIconTextWrapperStyle,
   chatRoomTextStyle,
   dateDividerStyle,
+  chatRoomIconImgStyle,
 } from "./Chat.style";
-import { ImageIcon, MyPotFilledIcon, SelectChatIcon, WorkGroupIcon } from '@assets/svgs';
+import { DefaultChatIcon, ImageIcon, SelectChatIcon, WavingHandIcon, WorkGroupIcon } from '@assets/svgs';
 import { roleImages } from '@constants/roleImage';
 import useGetChatRooms from "apis/hooks/chats/useGetChatRooms";
 import useGetChatMessages from "apis/hooks/chats/useGetChatMessages";
 import { ChatMessages, ChatRoom } from "apis/types/chat";
 import { formatCreatedAt, formatTime } from "@utils/dateUtils";
 import { format, parseISO } from "date-fns";
+import usePatchChatRoomThumbnails from "apis/hooks/chats/usePatchChatRoomThumbnails";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 
 
 const ChatPage = () => {
   const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
-  const [thumbnailMap, setThumbnailMap] = useState<Record<number, string>>({});
   const { data } = useGetChatRooms();
+  const { mutate: patchChatRoomThumbnails } = usePatchChatRoomThumbnails();
   const chatRooms = (data?.result ?? []) as ChatRoom[];
+
+  const messageListRef = useRef<HTMLDivElement | null>(null);
+  const topSentinelRef = useRef<HTMLDivElement | null>(null);
 
   const {
     data: messagesData,
-    refetch,
     fetchPreviousPage,
     hasPreviousPage,
+    refetch,
     isFetchingPreviousPage,
   } = useGetChatMessages({
     chatRoomId: selectedRoomId ?? 0,
@@ -61,9 +68,8 @@ const ChatPage = () => {
     size: 20,
     direction: null,
   });
+  const allChats = messagesData?.pages.flatMap((page) => page.result?.chats ?? []) ?? [];
   const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
-
-  const messageListRef = useRef<HTMLDivElement | null>(null);
 
   const handleRoomClick = (room: ChatRoom) => {
     const nextRoomId = selectedRoomId === room.chatRoomId ? null : room.chatRoomId;
@@ -82,8 +88,7 @@ const ChatPage = () => {
     input.onchange = (event: Event) => {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file && selectedRoomId !== null) {
-        const imageUrl = URL.createObjectURL(file);
-        setThumbnailMap(prev => ({ ...prev, [selectedRoomId]: imageUrl }));
+        patchChatRoomThumbnails({ chatRoomId: selectedRoomId, file })
       }
     };
     // 추후 모달 추가
@@ -123,18 +128,11 @@ const ChatPage = () => {
                 onClick={() => handleRoomClick(room)}
               >
                 <div css={chatRoomContentStyle}>
-
                   <div css={chatRoomIconTextWrapperStyle}>
-                    {/* <MyPotFilledIcon /> */}
-                    <img
-                      src={thumbnailMap[room.chatRoomId] || room.thumbnailUrl}
-                      style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: '50%',
-                        objectFit: 'cover',
-                      }}
-                    />
+                    {room.thumbnailUrl ? <img css={chatRoomIconImgStyle}
+                      src={room.thumbnailUrl}
+                      alt={`채팅방 ${room.chatRoomName} 썸네일`}
+                    /> : <DefaultChatIcon css={chatRoomIconImgStyle} />}
                     <div css={chatRoomInfoStyle}>
                       <div css={chatRoomNameTimeWrapperStyle}>
                         <span css={chatRoomNameStyle}>{room.chatRoomName}</span>
@@ -163,25 +161,29 @@ const ChatPage = () => {
             </div>
           </div>
 
-          {selectedRoom ? (
-            <div css={messageListStyle} ref={messageListRef}>
-              {groupMessagesByDate(messagesData?.pages.flatMap((page) => page.result?.chats ?? []) ?? []).map(
-                ([date, chats]) => (
-                  <div key={date}>
-                    <div css={dateDividerStyle}>
-                      {format(new Date(date), "yyyy년 M월 d일")}
-                    </div>
-                    {chats.map((chat) => (
-                      <MessageBubble key={chat.chatId} message={chat} isMine={chat.userName === "나"} />
-                    ))}
-                  </div>
-                )
-              )}
-            </div>
-          ) : (
+          {!selectedRoom ? (
             <div css={chatPlaceholderStyle}>
               <SelectChatIcon />
               <div css={emptyMessageStyle}>채팅할 팟을 선택해 주세요.</div>
+            </div>
+          ) : allChats.length === 0 ? (
+            <div css={chatPlaceholderStyle}>
+              <WavingHandIcon />
+              <div css={emptyMessageStyle}>첫 대화를 시작해보세요!</div>
+            </div>
+          ) : (
+            <div css={messageListStyle} ref={messageListRef}>
+              <div ref={topSentinelRef} />
+              {groupMessagesByDate(allChats).map(([date, chats]) => (
+                <div key={date}>
+                  <div css={dateDividerStyle}>
+                    {format(new Date(date), "yyyy년 M월 d일")}
+                  </div>
+                  {chats.map((chat) => (
+                    <MessageBubble key={chat.chatId} message={chat} isMine={chat.userName === "나"} />
+                  ))}
+                </div>
+              ))}
             </div>
           )}
 
@@ -218,12 +220,15 @@ const MessageBubble = ({
   message: ChatMessages;
   isMine: boolean;
 }) => {
-
-
+  const navigate = useNavigate();
+  const handleProfileClick = () => {
+    console.log(message.userId);
+    navigate(`${routes.userProfile}/${message.userId}`);
+  }
   return (
     <div css={messageWrapperStyle(isMine)}>
       {!isMine && (
-        <img src={roleImages[message.role]} alt="profile" css={profileImageStyle} />
+        <img src={roleImages[message.role]} alt="profile" css={profileImageStyle} onClick={handleProfileClick} />
       )}
       <div>
         {!isMine && (

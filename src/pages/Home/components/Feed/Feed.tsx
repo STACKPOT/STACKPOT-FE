@@ -93,7 +93,7 @@ const Feed = () => {
 		limit: 10,
 		cursor: null,
 	});
-
+	console.log(data);
 	const { ref, inView } = useInView();
 
 	useEffect(() => {
