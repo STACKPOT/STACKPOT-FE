@@ -21,9 +21,9 @@ const chatRooms = [
   {
     chatRoomId: 3,
     chatRoomName: "스택팟 사이드 프로젝트 C",
-    thumbnailUrl: "https://picsum.photos/id/1013/32/32",
-    lastChatTime: "2025-05-31T19:45:00",
-    lastChat: "마감일이 다가오고 있어요!",
+    thumbnailUrl: null,
+    lastChatTime: null,
+    lastChat: null,
     unReadMessageCount: 0,
   },
 ];
@@ -59,11 +59,11 @@ export const handlers = [
     const direction = url.searchParams.get("direction");
     const size = Number(url.searchParams.get("size")) || 20;
 
-    let sortedChats = [...mockChats];
+    const sortedChats = [...mockChats];
     if (direction === "prev") {
-      sortedChats.sort((a, b) => Number(b.chatId) - Number(a.chatId));
+      sortedChats.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     } else {
-      sortedChats.sort((a, b) => Number(a.chatId) - Number(b.chatId));
+      sortedChats.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
     }
 
     let startIndex = 0;

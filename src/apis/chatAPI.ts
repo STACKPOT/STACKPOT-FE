@@ -13,14 +13,13 @@ export const getChatMessages = async ({ chatRoomId, cursor, size = 20, direction
   return authApiGet<ChatMessagesResponse>("/chat", { chatRoomId, cursor, size, direction });
 };
 
-export const patchChatRoomJoin = async ( chatRoomId: number ) => {
-  return authApiPatch("/chat-rooms/thumbnails", {chatRoomId});
+export const patchChatRoomJoin = async (chatRoomId: number) => {
+  return authApiPatch("/chat-rooms/thumbnails", { chatRoomId });
 };
 
-export const patchChatRoomThumbnail = async ({ chatRoomId, file} : PatchChatRoomThumnailParams ) => {
+export const patchChatRoomThumbnail = async ({ chatRoomId, file }: PatchChatRoomThumnailParams) => {
   const formData = new FormData();
-  formData.append("chatRoomId", chatRoomId.toString());
   formData.append("file", file);
 
-  return authApiPatch("/chat-rooms/thumbnails", formData);
+  return authApiPatch(`/chat-rooms/${chatRoomId}/thumbnails`, formData);
 };

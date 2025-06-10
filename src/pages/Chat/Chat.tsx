@@ -32,25 +32,32 @@ import {
   chatRoomIconTextWrapperStyle,
   chatRoomTextStyle,
   dateDividerStyle,
+  chatRoomIconImgStyle,
 } from "./Chat.style";
-import { ImageIcon, MyPotFilledIcon, SelectChatIcon, WorkGroupIcon } from '@assets/svgs';
+import { DefaultChatIcon, ImageIcon, SelectChatIcon, WorkGroupIcon } from '@assets/svgs';
 import { roleImages } from '@constants/roleImage';
 import useGetChatRooms from "apis/hooks/chats/useGetChatRooms";
 import useGetChatMessages from "apis/hooks/chats/useGetChatMessages";
 import { ChatMessages, ChatRoom } from "apis/types/chat";
 import { formatCreatedAt, formatTime } from "@utils/dateUtils";
 import { format, parseISO } from "date-fns";
+import usePatchChatRoomThumbnails from "apis/hooks/chats/usePatchChatRoomThumbnails";
 
 
 
 const ChatPage = () => {
   const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
-  const [thumbnailMap, setThumbnailMap] = useState<Record<number, string>>({});
   const { data } = useGetChatRooms();
+  const { mutate: patchChatRoomThumbnails } = usePatchChatRoomThumbnails();
   const chatRooms = (data?.result ?? []) as ChatRoom[];
+
+  const messageListRef = useRef<HTMLDivElement | null>(null);
+  const topSentinelRef = useRef<HTMLDivElement | null>(null);
 
   const {
     data: messagesData,
+    fetchPreviousPage,
+    hasPreviousPage,
     refetch,
   } = useGetChatMessages({
     chatRoomId: selectedRoomId ?? 0,
@@ -58,9 +65,8 @@ const ChatPage = () => {
     size: 20,
     direction: null,
   });
-  const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
 
-  const messageListRef = useRef<HTMLDivElement | null>(null);
+  const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
 
   const handleRoomClick = (room: ChatRoom) => {
     const nextRoomId = selectedRoomId === room.chatRoomId ? null : room.chatRoomId;
@@ -79,8 +85,7 @@ const ChatPage = () => {
     input.onchange = (event: Event) => {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file && selectedRoomId !== null) {
-        const imageUrl = URL.createObjectURL(file);
-        setThumbnailMap(prev => ({ ...prev, [selectedRoomId]: imageUrl }));
+        patchChatRoomThumbnails({ chatRoomId: selectedRoomId, file })
       }
     };
     input.click();
@@ -91,6 +96,28 @@ const ChatPage = () => {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
   }, [messagesData, selectedRoomId]);
+
+  useEffect(() => {
+    if (!topSentinelRef.current || !hasPreviousPage) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchPreviousPage();
+        }
+      },
+      {
+        root: messageListRef.current,
+        threshold: 0,
+      }
+    );
+
+    observer.observe(topSentinelRef.current);
+
+    return () => {
+      if (topSentinelRef.current) observer.unobserve(topSentinelRef.current);
+    };
+  }, [fetchPreviousPage, hasPreviousPage]);
 
   return (
     <div css={pageWrapperStyle}>
@@ -105,18 +132,11 @@ const ChatPage = () => {
                 onClick={() => handleRoomClick(room)}
               >
                 <div css={chatRoomContentStyle}>
-
                   <div css={chatRoomIconTextWrapperStyle}>
-                    {/* <MyPotFilledIcon /> */}
-                    <img
-                      src={thumbnailMap[room.chatRoomId] || room.thumbnailUrl}
-                      style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: '50%',
-                        objectFit: 'cover',
-                      }}
-                    />
+                    {room.thumbnailUrl ? <img css={chatRoomIconImgStyle}
+                      src={room.thumbnailUrl}
+                      alt={`채팅방 ${room.chatRoomName} 썸네일`}
+                    /> : <DefaultChatIcon css={chatRoomIconImgStyle} />}
                     <div css={chatRoomInfoStyle}>
                       <div css={chatRoomNameTimeWrapperStyle}>
                         <span css={chatRoomNameStyle}>{room.chatRoomName}</span>
@@ -147,6 +167,7 @@ const ChatPage = () => {
 
           {selectedRoom ? (
             <div css={messageListStyle} ref={messageListRef}>
+              <div ref={topSentinelRef} />
               {groupMessagesByDate(messagesData?.pages.flatMap((page) => page.result?.chats ?? []) ?? []).map(
                 ([date, chats]) => (
                   <div key={date}>

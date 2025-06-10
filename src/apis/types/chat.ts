@@ -52,6 +52,6 @@ export interface PatchChatRoomThumnailParams {
 export interface PatchChatRoomResponse {
   isSuccess: boolean;
   code: string;
-  result: {};
+  result: any;
   message: string;
 }
