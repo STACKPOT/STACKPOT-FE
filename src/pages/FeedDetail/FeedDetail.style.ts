@@ -2,34 +2,36 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const mainContainer = css`
-  padding: 4.8rem 0;
-`;
-
-export const headerContainer = css`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
+  padding: 8.4rem 0;
+  gap: 4.8rem;
+`;
+
+export const sectionContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
 `;
 
 export const titleContainer = css`
   display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-`;
-
-export const titleWrapper = css`
-  display: flex;
-  gap: 1rem;
+  gap: 1.6rem;
   align-items: center;
 `;
 
 export const iconStyle = css`
-  margin: 0.8rem;
+  height: 4rem;
+  width: 4rem;
 `;
 
 export const titleStyle = css`
-  ${theme.font.bodyBold3};
-  color: ${theme.color.base.darkgray};
+  ${theme.font.display1};
+  color: ${theme.color.point.gray};
+`;
+
+export const editButtonStyle = css`
+  margin-left: auto;
 `;
 
 export const profileContainer = css`
@@ -38,18 +40,21 @@ export const profileContainer = css`
 `;
 
 export const informationContainer = css`
-  ${theme.font.bodyBold3};
-  color: ${theme.color.base.darkgray};
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: center;
 `;
 
 export const nicknameStyle = css`
-  ${theme.font.body1};
-  color: ${theme.color.object.assistive};
+  ${theme.font.caption3};
+  color: ${theme.color.base.black};
+  cursor: pointer;
 `;
 
 export const dateStyle = css`
   ${theme.font.caption2};
-  color: ${theme.color.interactive.inactive};
+  color: ${theme.color.object.hero};
 `;
 
 export const dividerStyle = css`
@@ -58,9 +63,13 @@ export const dividerStyle = css`
 `;
 
 export const contentStyle = css`
-  ${theme.font.body2};
-  color: ${theme.color.base.darkgray};
-  margin-top: 3.2rem;
+  ${theme.font.body3};
+  color: ${theme.color.point.gray};
+`;
+
+export const postButtonsContainer = css`
+  display: flex;
+  gap: 1.6rem;
 `;
 
 export const profileStyle = css`
