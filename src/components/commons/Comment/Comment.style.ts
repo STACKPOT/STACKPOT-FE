@@ -1,10 +1,10 @@
 import { css } from "@emotion/react"
 import theme from "@styles/theme"
 
-export const container = (isRecomment: boolean) => css`
+export const container = (isRecomment: boolean, isDeleted: boolean) => css`
   display: flex;
   flex-direction: column;
-  padding: ${isRecomment ? "3.2rem 3.2rem" : "3.2rem 0"};
+  padding: ${(isDeleted && "0 0") || (isRecomment && "3.2rem 3.2rem") || "3.2rem 0"};
   gap: 1.6rem;
   background-color: ${isRecomment ? theme.color.point.normal : "transparent"};
   border-radius: ${isRecomment && "8px"};

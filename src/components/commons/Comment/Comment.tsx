@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 import MyFeedDropdown from "../Dropdown/MyFeedDropdown/MyFeedDropdown";
 import CommentWriter from "./CommentWriter";
 import Badge from "../Badge/Badge";
+import Modal from "../Modal/Modal";
 
 interface CommentProps {
   userId: number;
@@ -37,6 +38,7 @@ const Comment: React.FC<CommentProps> = ({
   const [openRecomment, setOpenRecomment] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(content);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const editRef = useRef<HTMLTextAreaElement>(null);
 
@@ -68,7 +70,8 @@ const Comment: React.FC<CommentProps> = ({
     setIsEditing(false);
   }
   const handleDelete = () => {
-    // 삭제 api 호출
+    // 댓글 삭제 api
+    setIsDeleteModalOpen(false);
   }
 
   useEffect(() => {
@@ -81,7 +84,7 @@ const Comment: React.FC<CommentProps> = ({
   }, [isEditing])
 
   return (
-    <div css={container(isRecomment)}>
+    <div css={container(isRecomment, isDeleted)}>
       {isDeleted ?
         <div css={deletedComment}>
           <p css={deletedCommentText}>삭제된 댓글입니다.</p>
@@ -106,7 +109,7 @@ const Comment: React.FC<CommentProps> = ({
                       topMessage="수정하기"
                       bottomMessage="삭제하기"
                       onTop={handleEdit}
-                      onBottom={handleDelete}
+                      onBottom={() => setIsDeleteModalOpen(true)}
                     />
                   </div>}
               </div>
@@ -143,6 +146,12 @@ const Comment: React.FC<CommentProps> = ({
           }
         </>
       }
+      {isDeleteModalOpen &&
+        <Modal
+          title="댓글을 삭제하시겠습니까?"
+          message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
+          onConfirm={handleDelete}
+          onCancel={() => setIsDeleteModalOpen(false)} />}
     </div>
   )
 }
