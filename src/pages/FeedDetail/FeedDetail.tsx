@@ -4,7 +4,7 @@ import {
   contentStyle,
   dateStyle,
   dividerStyle,
-  headerContainer,
+  sectionContainer,
   iconStyle,
   informationContainer,
   mainContainer,
@@ -13,13 +13,14 @@ import {
   profileStyle,
   titleContainer,
   titleStyle,
-  titleWrapper,
+  postButtonsContainer,
+  editButtonStyle,
 } from "./FeedDetail.style";
 import useGetFeedDetail from "apis/hooks/feeds/useGetFeedDetail";
 import { useNavigate, useParams } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
 import routes from "@constants/routes";
-import { PotButton } from "@components/index";
+import { Button, CommentSection, PostButton } from "@components/index";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 
 const FeedDetail = () => {
@@ -50,14 +51,16 @@ const FeedDetail = () => {
 
   return (
     <main css={mainContainer}>
-      <div css={headerContainer}>
+      <div css={sectionContainer}>
         <div css={titleContainer}>
-          <div css={titleWrapper}>
-            <LeftIcon type="button" onClick={handleClick} css={iconStyle} />
-            <h1 css={titleStyle}>{data?.title}</h1>
-          </div>
+          <LeftIcon type="button" onClick={handleClick} css={iconStyle} />
+          <h1 css={titleStyle}>{data?.title}</h1>
           {user?.id === data?.writerId && (
-            <PotButton onClick={handleEdit}>수정</PotButton>
+            <Button
+              variant="action"
+              actionType="alt"
+              onClick={handleEdit}
+              css={editButtonStyle}>수정</Button>
           )}{" "}
         </div>
         <div css={profileContainer}>
@@ -68,22 +71,29 @@ const FeedDetail = () => {
             onClick={handleUserClick}
           />
           <div css={informationContainer}>
-            <p css={nicknameStyle} onClick={handleUserClick}>
+            <a css={nicknameStyle} onClick={handleUserClick}>
               {data?.writer}
-            </p>
+            </a>
             <p css={dateStyle}>{data?.createdAt}</p>
           </div>
         </div>
         <div css={dividerStyle} />
       </div>
-      <div css={contentStyle}>
-        {data?.content.split('\n').map((line, index) => (
-          <React.Fragment key={index}>
-            {line}
-            <br />
-          </React.Fragment>
-        ))}
+      <div css={sectionContainer}>
+        <div css={contentStyle}>
+          {data?.content.split('\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
+        </div>
+        <div css={postButtonsContainer}>
+          <PostButton postType="like" initialState={false} />
+          <PostButton postType="save" initialState={false} />
+        </div>
       </div>
+      <CommentSection />
     </main>
   );
 };
