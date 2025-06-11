@@ -28,6 +28,7 @@ import PostForm from "./commons/PostForm/PostForm";
 import Comment from "./commons/Comment/Comment";
 import CommentSection from "./commons/Comment/CommentSection";
 import CtaCard from "./cards/CtaCard/CtaCard";
+import PostButton from "./commons/Button/PostButton/PostButton";
 
 export {
   Modal,
@@ -60,4 +61,5 @@ export {
   Comment,
   CommentSection,
   CtaCard,
+  PostButton,
 };

@@ -9,7 +9,7 @@ import {
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variant?: "entry" | "action" | "landing";
-  actionType?: "action" | "join" | "edit";
+  actionType?: "basic" | "neg" | "alt";
   onClick?: () => void;
   customStyle?: SerializedStyles;
 }
@@ -17,7 +17,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<ButtonProps> = ({
   children,
   variant,
-  actionType = "action",
+  actionType = "basic",
   onClick,
   disabled,
   customStyle,

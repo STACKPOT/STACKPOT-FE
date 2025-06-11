@@ -16,6 +16,24 @@ export const buttonStyle = css`
   }
 `;
 
+export const negButtonStyle = css`
+  color: ${theme.color.status.negative};
+  border: 1px solid ${theme.color.accent.redBg};
+  background-color: white;
+  &:hover {
+    background-color: ${theme.color.accent.redBg};
+  }
+`;
+
+export const altButtonStlye = css`
+  color: ${theme.color.point.gray};
+  border: 1px solid ${theme.color.object.assistive};
+  background-color: white;
+  &:hover {
+    background-color: ${theme.color.object.normal};
+  }
+`;
+
 export const ctaButtonStyle = css`
   padding: 1.1rem 1.6rem;
   background-color: ${theme.color.point.hero};
@@ -35,8 +53,9 @@ export const landingButtonStyle = css`
   ${theme.font.title1};
 `;
 
-export const actionButtonStyle = (actionType?: "action" | "join" | "edit") => css`
-  padding: ${(actionType === "join" && "1.6rem 3.3rem") || (actionType === "edit" && "1.2rem 2.4rem ") || "1.4rem 1.9rem"};
+export const actionButtonStyle = (actionType?: "basic" | "neg" | "alt") => css`
+  padding: 1.4rem 1.9rem;
   border-radius: 8px;
   ${theme.font.caption3};
+  ${(actionType === "neg" && negButtonStyle) || (actionType === "alt" && altButtonStlye)};
 `;
