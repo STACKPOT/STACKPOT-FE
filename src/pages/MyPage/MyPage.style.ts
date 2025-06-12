@@ -22,11 +22,11 @@ export const tabsContainer = css`
 	justify-content: center;
 `;
 export const tabsTextStyle = (selected: boolean) => css`
-	${theme.font.bodyBold2};
-	color: ${selected ? theme.color.point.hero : theme.color.interactive.inactive};
+	${theme.font.title2};
+	color: ${selected ? theme.color.point.hero : theme.color.object.hero};
 	cursor: pointer;
 `;
-export const listContainer = (type: 'feed' | 'pot') => css`
+export const listContainer = (type: 'feed' | 'pot' | 'introduction') => css`
 	display: flex;
 	flex-direction: column;
 	gap: ${type === 'feed' ? '3.2rem' : '4.8rem'};
