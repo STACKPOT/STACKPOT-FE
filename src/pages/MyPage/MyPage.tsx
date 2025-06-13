@@ -17,7 +17,6 @@ import MyPageContent from './components/MyPageContent/MyPageContent';
 const MyPage = () => {
 	const [contentType, setContentType] = useState<'feed' | 'pot' | 'introduction'>('feed');
 	const { data } = useGetMyPage({ dataType: contentType });
-	console.log(data);
 	if (!data) {
 		return <div>데이터가 없습니다.</div>;
 	}

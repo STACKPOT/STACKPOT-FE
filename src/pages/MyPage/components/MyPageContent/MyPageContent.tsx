@@ -7,7 +7,14 @@ import {
   introductionTitleStyle,
   introductionBodyStyle,
   introductionEditButton,
+  feedHeaderContainer,
+  feedCategoryButtonGroup,
+  feedCategoryButton,
+  feedSearchBox,
+  feedCategoryAddButton,
 } from "./MyPageContent.style";
+import { AddIcon, SearchBlueIcon } from "@assets/svgs";
+import { useState } from "react";
 
 type FeedPost = {
   writer: string;
@@ -35,28 +42,57 @@ type Pot = {
   memberCounts: Record<string, number>;
 };
 
-const FeedContent = ({ posts }: { posts: FeedPost[] }) => (
-  <>
-    {posts.map((post) => (
-      <PostCard
-        nickname={post.writer}
-        role={post.writerRole}
-        isLiked={post.isLiked}
-        likeCount={post.likeCount}
-        key={post.feedId}
-        createdAt={post.createdAt}
-        title={post.title}
-        content={post.content}
-        feedId={post.feedId}
-        writerId={post.writerId}
-        saveCount={post.saveCount}
-        commentCount={post.commentCount}
-        isSaved={post.isSaved}
-        isMyPost={true}
-      />
-    ))}
-  </>
-);
+const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const mockSeries = [
+    { label: "전체보기" },
+    { label: "시리즈1" },
+    { label: "개발 공부" },
+    { label: "동아리 프로젝트" },
+    { label: "면접 후기" },
+  ];
+
+  return (
+    <>
+      <div css={feedHeaderContainer}>
+        <div css={feedCategoryButtonGroup}>
+          <button css={feedCategoryAddButton}><AddIcon /></button>
+          {mockSeries.map(({ label }, index) => (
+            <button
+              key={label}
+              css={feedCategoryButton(selectedIndex === index)}
+              onClick={() => setSelectedIndex(index)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <div css={feedSearchBox}>
+          <input placeholder="검색어를 입력해주세요." />
+          <span role="img" aria-label="search"><SearchBlueIcon /></span>
+        </div>
+      </div>
+      {posts.map((post) => (
+        <PostCard
+          nickname={post.writer}
+          role={post.writerRole}
+          isLiked={post.isLiked}
+          likeCount={post.likeCount}
+          key={post.feedId}
+          createdAt={post.createdAt}
+          title={post.title}
+          content={post.content}
+          feedId={post.feedId}
+          writerId={post.writerId}
+          saveCount={post.saveCount}
+          commentCount={post.commentCount}
+          isSaved={post.isSaved}
+          isMyPost={true}
+        />
+      ))}
+    </>
+  );
+};
 
 const PotContent = ({ pots }: { pots: Pot[] }) => (
   <>

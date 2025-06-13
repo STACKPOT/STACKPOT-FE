@@ -38,7 +38,7 @@ const MyPageProfile: React.FC = () => {
           <h1 css={nicknameStyle}>{nickname} <Badge content={categoryText[role]} /></h1>
           <SetUpIcon type="button" css={setUpIconStyle} onClick={handleSetUp} />
         </div>
-        <p css={introductionStyle}>{userIntroduction}</p>
+        <div css={introductionStyle}>{userIntroduction}</div>
         <TemperatureBar temperature={userTemperature} />
       </div>
     </div>
