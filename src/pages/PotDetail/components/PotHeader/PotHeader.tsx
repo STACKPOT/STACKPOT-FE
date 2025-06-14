@@ -1,12 +1,15 @@
 import { LeftIcon } from "@assets/svgs";
 import {
-  backButtonIconStyle,
+  buttonWrapperStyle,
   backButtonStyle,
   container,
   titleContainer,
   titleStyle,
+  profileContainer,
+  profileStyle,
+  nicknameStyle,
 } from "./PotHeader.style";
-import { Modal, PotButton } from "@components/index";
+import { Button, DdayBadge, Modal } from "@components/index";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ApplyModal from "../ApplyModal/ApplyModal";
@@ -15,6 +18,7 @@ import { PotStatus } from "types/potStatus";
 import routes from "@constants/routes";
 import { PostPotApplicationResponse } from "apis/types/pot";
 import ApplyProfileModal from "../ApplyProfileModal/ApplyProfileModal";
+import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 
 interface PotHeaderProps {
   title: string;
@@ -22,6 +26,9 @@ interface PotHeaderProps {
   isApplied: boolean;
   potId: number;
   potStatus: PotStatus;
+  nickname: string;
+  profileImage: string;
+  dday: string;
 }
 const PotHeader: React.FC<PotHeaderProps> = ({
   title,
@@ -29,9 +36,18 @@ const PotHeader: React.FC<PotHeaderProps> = ({
   isApplied,
   potId,
   potStatus,
+  nickname,
+  profileImage,
+  dday,
 }: PotHeaderProps) => {
   const navigate = useNavigate();
   const { mutate: cancelApply } = useCancelApply();
+
+  const { data } = useGetPotDetail(potId);
+  const handleUserClick = () => {
+    const userId = data?.potDetail.userId;
+    navigate(`${routes.userProfile}/${userId}`);
+  };
 
   const [showCancelApplyModal, setShowCancelApplyModal] =
     useState<boolean>(false);
@@ -42,9 +58,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({
   const handleEdit = () => {
     navigate(`${routes.editPot}/${potId}`);
   };
-  const handleFinishedPotEdit = () => {
-    navigate(`${routes.editFinishedPot}/${potId}`);
-  };
+
   const handleCancelApplyModalConfirm = () => {
     cancelApply(potId);
     setShowCancelApplyModal(false);
@@ -57,25 +71,49 @@ const PotHeader: React.FC<PotHeaderProps> = ({
     <>
       <div css={container}>
         <div css={titleContainer}>
-          <button css={backButtonStyle} onClick={() => navigate(-1)}>
-            <LeftIcon css={backButtonIconStyle} type="button" />
-          </button>
+          <LeftIcon css={backButtonStyle} type="button" onClick={() => navigate(-1)} />
           <h1 css={titleStyle}>{title}</h1>
-        </div>
-        {potStatus !== "ONGOING" && !(potStatus === "COMPLETED" && !isMyPot) &&
-          <PotButton
-            onClick={
-              (potStatus === "COMPLETED" && isMyPot && handleFinishedPotEdit) ||
-              (isMyPot && handleEdit) ||
-              (isApplied && (() => setShowCancelApplyModal(true))) ||
-              (() => setShowApplyModal(true))
+          <div css={buttonWrapperStyle}>
+            {isMyPot ?
+              <Button
+                variant="action"
+                actionType="edit"
+                onClick={handleEdit}>
+                수정
+              </Button>
+              :
+              potStatus === "RECRUITING" &&
+              (isApplied ?
+                <Button
+                  variant="action"
+                  actionType="action"
+                  onClick={() => setShowCancelApplyModal(true)}>
+                  지원 취소하기
+                </Button>
+                :
+                <Button
+                  variant="action"
+                  actionType="action"
+                  onClick={() => setShowApplyModal(true)}>
+                  지원하기
+                </Button>
+              )
             }
-          >
-            {(potStatus === "COMPLETED" && isMyPot && "팟 소개 수정") ||
-              (isMyPot && "수정") ||
-              (isApplied && "지원 취소하기") ||
-              "이 팟에 지원하기"}
-          </PotButton>}
+          </div>
+
+        </div>
+        <div css={profileContainer}>
+          <img
+            css={profileStyle}
+            src={profileImage}
+            alt="profile"
+            onClick={handleUserClick}
+          />
+          <a css={nicknameStyle} onClick={handleUserClick}>
+            {nickname}
+          </a>
+          <DdayBadge days={dday} />
+        </div>
       </div>
       {showCancelApplyModal && (
         <Modal
