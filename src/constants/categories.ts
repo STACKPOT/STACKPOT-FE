@@ -20,6 +20,15 @@ export const partMap: {
 	기획: 'PLANNING',
 } as const;
 
+export const partNameMap: {
+	[key: string]: '프론트엔드' | '백엔드' | '디자인' | '기획';
+} = {
+	FRONTEND: '프론트엔드',
+	BACKEND: '백엔드',
+	DESIGN: '디자인',
+	PLANNING: '기획',
+} as const;
+
 export const interests = ['사이드 프로젝트', '1인 개발', '공모전', '창업', '네트워킹 행사'] as const;
 
 export const categories = ['프론트엔드', '백엔드', '디자인', '기획'] as const;

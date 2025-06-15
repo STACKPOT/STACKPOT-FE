@@ -1,4 +1,4 @@
-import { CategoryButton, ExplainModal } from "@components/index";
+import { ExplainModal, RoleCard } from "@components/index";
 import { container } from "./ApplyModal.style";
 import { useState } from "react";
 import { partMap } from "@constants/categories";
@@ -39,10 +39,11 @@ const ApplyModal: React.FC<ApplyModalProps> = ({ potId, onApplySuccess, onModalC
             onCancel={onModalCancel}>
             <div css={container}>
                 {Object.keys(partMap).map((part) =>
-                    <CategoryButton
-                        style={partMap[part]}
-                        onClick={() => setSelectedRole(partMap[part] as Role)}
-                        selected={selectedRole === partMap[part]}>{part}</CategoryButton>
+                    <RoleCard
+                        role={partMap[part]}
+                        type="applicant"
+                        selected={selectedRole === partMap[part]}
+                        onClick={() => setSelectedRole(partMap[part] as Role)} />
                 )}
             </div>
         </ExplainModal>

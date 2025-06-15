@@ -31,3 +31,5 @@ export { default as DateRangeIcon } from './dateRange.svg?react';
 export { default as FlagIcon } from './flag.svg?react';
 export { default as SupervisedUserCircle } from './supervisedUserCircle.svg?react';
 export { default as WebTrafficIcon } from './webTraffic.svg?react';
+export { default as CircleCheck } from './circleCheck.svg?react';
+export { default as FillCircleCheck } from './fillCircleCheck.svg?react';
