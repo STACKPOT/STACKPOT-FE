@@ -42,8 +42,9 @@ const PotDetail = () => {
               potLan={data.potDetail.potLan}
             />
             <p css={contentStyle}>{data.potDetail.potContent}</p>
+            <div css={dividerStyle} />
+
           </div>
-          <div css={dividerStyle} />
           {data.potDetail.owner &&
             data.potDetail.potStatus === "RECRUITING" && (
               <ApplicantsInformation potId={potIdNumber} />
