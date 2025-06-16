@@ -6,13 +6,32 @@ export const buttonStyle = css`
   cursor: pointer;
   color: white;
   background-color: ${theme.color.point.hero};
+  transition: all 0.3s ease-out;
   &:hover {
-    background-color: ${theme.color.point.assistive};
+    background-color: ${theme.color.point.alternative};
   }
   &:disabled {
     background-color: ${theme.color.object.alternative};
     cursor: not-allowed;
     color: ${theme.color.interactive.inactive};
+  }
+`;
+
+export const negButtonStyle = css`
+  color: ${theme.color.status.negative};
+  border: 1px solid ${theme.color.accent.redBg};
+  background-color: white;
+  &:hover {
+    background-color: ${theme.color.accent.redBg};
+  }
+`;
+
+export const altButtonStlye = css`
+  color: ${theme.color.point.gray};
+  border: 1px solid ${theme.color.object.assistive};
+  background-color: white;
+  &:hover {
+    background-color: ${theme.color.object.normal};
   }
 `;
 
@@ -35,8 +54,19 @@ export const landingButtonStyle = css`
   ${theme.font.title1};
 `;
 
-export const actionButtonStyle = (actionType?: "action" | "join" | "edit") => css`
-  padding: ${(actionType === "join" && "1.6rem 3.3rem") || (actionType === "edit" && "1.2rem 2.4rem ") || "1.4rem 5.8rem"};
+export const actionButtonStyle = (actionType?: "basic" | "neg" | "alt") => css`
+  padding: 1.4rem 1.9rem;
   border-radius: 8px;
-  ${theme.font.bodyBold1};
+  ${theme.font.caption3};
+  ${(actionType === "neg" && negButtonStyle) || (actionType === "alt" && altButtonStlye)};
+  &:disabled{
+    background-color: ${theme.color.object.alternative};
+    color: ${theme.color.object.hero};
+  }
+`;
+
+export const fullButtonStyle = (actionType?: "basic" | "neg" | "alt") => css`
+  ${actionButtonStyle(actionType)};
+  padding: 1.7rem 0;
+  ${theme.font.title1};
 `;
