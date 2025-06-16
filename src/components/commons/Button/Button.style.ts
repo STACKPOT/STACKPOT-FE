@@ -6,8 +6,9 @@ export const buttonStyle = css`
   cursor: pointer;
   color: white;
   background-color: ${theme.color.point.hero};
+  transition: all 0.3s ease-out;
   &:hover {
-    background-color: ${theme.color.point.assistive};
+    background-color: ${theme.color.point.alternative};
   }
   &:disabled {
     background-color: ${theme.color.object.alternative};
@@ -58,4 +59,14 @@ export const actionButtonStyle = (actionType?: "basic" | "neg" | "alt") => css`
   border-radius: 8px;
   ${theme.font.caption3};
   ${(actionType === "neg" && negButtonStyle) || (actionType === "alt" && altButtonStlye)};
+  &:disabled{
+    background-color: ${theme.color.object.alternative};
+    color: ${theme.color.object.hero};
+  }
+`;
+
+export const fullButtonStyle = (actionType?: "basic" | "neg" | "alt") => css`
+  ${actionButtonStyle(actionType)};
+  padding: 1.7rem 0;
+  ${theme.font.title1};
 `;
