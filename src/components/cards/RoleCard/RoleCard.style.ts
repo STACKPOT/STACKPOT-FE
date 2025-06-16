@@ -14,11 +14,6 @@ export const container = css`
   box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.04);
   cursor: pointer;
   transition: all 0.3s ease-out;
-
-  &::selection{
-    background-color: ${theme.color.point.hero};
-  border-color: ${theme.color.point.hero};
-  }
 `;
 
 export const selectedContainerStyle = css`
