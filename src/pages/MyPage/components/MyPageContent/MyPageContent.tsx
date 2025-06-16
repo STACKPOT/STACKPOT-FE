@@ -6,15 +6,16 @@ import {
   introductionContentStyle,
   introductionTitleStyle,
   introductionBodyStyle,
-  introductionEditButton,
+  introductionButton,
   feedHeaderContainer,
   feedCategoryButtonGroup,
   feedCategoryButton,
   feedSearchBox,
   feedCategoryAddButton,
+  introductionWrapper,
 } from "./MyPageContent.style";
 import { AddIcon, SearchBlueIcon } from "@assets/svgs";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 type FeedPost = {
   writer: string;
@@ -137,31 +138,71 @@ const EmptyFeedFallback = ({ onWrite }: { onWrite: () => void }) => (
 );
 
 const IntroductionContent = ({ introduction }: { introduction: { title: string, body: string } }) => {
-  console.log(introduction);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editTitle, setEditTitle] = useState(introduction?.title ?? "");
+  const [editBody, setEditBody] = useState(introduction?.body ?? "");
 
   const handleWriteIntroduction = () => {
     console.log("소개 작성");
-  }
+  };
 
   const handleEditIntroduction = () => {
-    console.log("소개 편집");
+    setIsEditing(true);
+  };
+
+  const handleSaveIntroduction = () => {
+    console.log("저장할 제목:", editTitle);
+    console.log("저장할 내용:", editBody);
+    setIsEditing(false);
   };
 
   if (!introduction) {
-    return (
-      <EmptyFeedFallback onWrite={handleWriteIntroduction} />
-    );
+    return <EmptyFeedFallback onWrite={handleWriteIntroduction} />;
   }
 
   return (
     <div css={introductionContentStyle}>
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <button onClick={handleEditIntroduction} css={introductionEditButton}>
-          편집하기
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1rem" }}>
+        <button
+          onClick={isEditing ? handleSaveIntroduction : handleEditIntroduction}
+          css={introductionButton}
+        >
+          {isEditing ? "저장하기" : "편집하기"}
         </button>
       </div>
-      <h2 css={introductionTitleStyle}>{introduction.title}</h2>
-      <p css={introductionBodyStyle}>{introduction.body}</p>
+
+      {isEditing ? (
+        <div css={introductionWrapper(isEditing)}>
+          <textarea css={introductionTitleStyle}
+            value={editTitle}
+            onChange={(e) => setEditTitle(e.target.value)}
+          />
+          <textarea css={introductionBodyStyle}
+            value={editBody}
+            onChange={(e) => setEditBody(e.target.value)}
+          />
+        </div>
+      ) : (
+        <div css={introductionWrapper(isEditing)}>
+          <p css={introductionTitleStyle}>
+            {editTitle.split('\n').map((line, i) => (
+              <Fragment key={i}>
+                {line}
+                <br />
+              </Fragment>
+            ))}
+          </p>
+
+          <p css={introductionBodyStyle}>
+            {editBody.split('\n').map((line, i) => (
+              <Fragment key={i}>
+                {line}
+                <br />
+              </Fragment>
+            ))}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

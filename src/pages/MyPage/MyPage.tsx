@@ -37,7 +37,7 @@ const MyPage = () => {
 						소개
 					</p>
 				</div>
-				<CtaCard type="feed" />
+				{contentType !== 'introduction' && <CtaCard type="feed" />}
 				<div css={listContainer(contentType)}>
 					<MyPageContent contentType={contentType} data={data} />
 				</div>

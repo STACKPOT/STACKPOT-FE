@@ -27,8 +27,6 @@ export const introductionWriteButton = css`
 	background-color: ${theme.color.point.hero};
 	color: ${theme.color.base.white};
 	border-radius: 32px;
-	font-weight: 500;
-	font-size: 1.4rem;
 	border: none;
 	cursor: pointer;
   margin-top: 4.8rem;
@@ -37,27 +35,48 @@ export const introductionWriteButton = css`
 export const introductionContentStyle = css`
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
-  max-width: 888px;
   margin: 4rem auto 0;
-  padding: 0 2rem;
+`;
+
+export const introductionWrapper = (isEditing: boolean) => css`
+  display: flex;
+  height: 90.4rem;
+  padding: 5.4rem 2.4rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 3.2rem;
+  border: ${isEditing ? `1px solid ${theme.color.object.assistive}` : ''};
+  border-radius: 8px;
 `;
 
 export const introductionTitleStyle = css`
   ${theme.font.display1}
+  width: 110rem;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  border: none;
+  outline: none;
+  resize: none;
 `;
 
 export const introductionBodyStyle = css`
   ${theme.font.body3}
+  width: 110rem;
+  height: 50.4rem;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  border: none;
+  outline: none;
+  resize: none;
 `;
 
-export const introductionEditButton = css`
+export const introductionButton = css`
   display: flex;
   padding: 1.4rem 1.9rem;
   border-radius: 8px;
   background-color: ${theme.color.point.hero};
 	color: ${theme.color.base.white};
-
 `;
 
 export const feedHeaderContainer = css`
