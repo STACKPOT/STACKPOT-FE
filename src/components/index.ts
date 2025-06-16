@@ -27,6 +27,7 @@ import PartRecruitment from "./commons/PartRecruitment/PartRecruitment";
 import PostForm from "./commons/PostForm/PostForm";
 import CtaCard from "./cards/CtaCard/CtaCard";
 import RoleCard from "./cards/RoleCard/RoleCard";
+import MemberCard from "./cards/MemberCard/MemberCard";
 
 export {
   Modal,
@@ -58,4 +59,5 @@ export {
   PostForm,
   CtaCard,
   RoleCard,
+  MemberCard,
 };

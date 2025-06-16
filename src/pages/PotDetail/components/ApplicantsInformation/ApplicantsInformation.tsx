@@ -3,24 +3,19 @@ import {
   container,
   descriptionStyle,
   titleBlueStyle,
-  titleButtonContainer,
   titleContainer,
   titleIconStyle,
   titleStyle,
   headerContainer,
   listContainer,
-  applicantContainer,
-  profileStyle,
-  nicknameStyle,
-  dividerStyle,
+  startPotButtonStyle,
 } from "./ApplicantsInformation.style";
-import { Button, CheckBox } from "@components/index";
+import { Button, MemberCard } from "@components/index";
 import { useState } from "react";
 import ProfileModal from "../ProfileModal/ProfileModal";
 import MemberKakaoIdModal from "../MemberKakaoIdModal/MemberKakaoIdModal";
 import StartPotModal from "../StartPotModal/StartPotModal";
 import useGetPotApplicants from "apis/hooks/pots/useGetPotApplicants";
-import { roleImages } from "@constants/roleImage";
 import { GetPotApplicationResponse } from "apis/types/pot";
 import { useSnackbar } from "providers";
 
@@ -66,47 +61,35 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
     <>
       {applicants && applicants.length > 0 ? (
         <div css={container}>
-          <div css={dividerStyle} />
           <div css={headerContainer}>
-            <div css={titleButtonContainer}>
-              <div css={titleContainer}>
-                <h1 css={titleStyle}>
-                  나의 팟 지원자가 총{" "}
-                  <span css={titleBlueStyle}>{applicants.length}</span>명 있어요
-                </h1>
-                <PotIcon css={titleIconStyle} />
-              </div>
-              <Button variant="action" onClick={handleStartPot}>
-                팟 시작하기
-              </Button>
+            <div css={titleContainer}>
+              <h1 css={titleStyle}>
+                나의 팟 지원자가 총{" "}
+                <span css={titleBlueStyle}>{applicants.length}</span>명 있어요
+              </h1>
+              <PotIcon css={titleIconStyle} />
             </div>
             <p css={descriptionStyle}>
-              함께하고 싶은 지원자를 체크하고, 팟 시작하기를 누르면 팟이
-              시작돼요.{" "}
+              {"함께하고 싶은 지원자를 체크하고, 팟 시작하기를 누르면 팟이 시작돼요.\n프로필 사진을 누르면 지원자 프로필을 확인할 수 있어요."}
             </p>
           </div>
           <div css={listContainer}>
             {applicants.map((applicant) => (
-              <div key={applicant.userId} css={applicantContainer}>
-                <CheckBox
-                  selected={selectedApplicants.includes(applicant)}
-                  onSelect={() => handleSelectApplicant(applicant)}
-                />
-                <img
-                  css={profileStyle}
-                  src={roleImages[applicant.potRole]}
-                  onClick={() => setShowProfileMember(applicant)}
-                  alt="profile"
-                />
-                <p
-                  css={nicknameStyle}
-                  onClick={() => setShowProfileMember(applicant)}
-                >
-                  {applicant.userNickname}
-                </p>
-              </div>
+              <MemberCard
+                userId={applicant.userId}
+                nickname={applicant.userNickname}
+                role={applicant.potRole}
+                type="selection"
+                selected={selectedApplicants.includes(applicant)}
+                onClick={() => handleSelectApplicant(applicant)}
+                onProfileClick={() => setShowProfileMember(applicant)} />
             ))}
           </div>
+          <Button
+            customStyle={startPotButtonStyle}
+            onClick={handleStartPot}>
+            팟 시작하기
+          </Button>
         </div>
       ) : null}
       {showProfileMember && (
