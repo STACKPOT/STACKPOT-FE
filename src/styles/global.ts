@@ -25,7 +25,7 @@ export const globalStyles = css`
 
   main {
     min-height: calc(100vh - 58px);
-    width: 908px;
+    width: 1100px;
     margin: 0 auto;
   }
 `;
