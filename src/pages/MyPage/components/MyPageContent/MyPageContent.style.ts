@@ -63,12 +63,7 @@ export const introductionTitleStyle = css`
 export const introductionBodyStyle = css`
   ${theme.font.body3}
   width: 110rem;
-  height: 50.4rem;
-  white-space: pre-wrap;
-  word-break: keep-all;
-  border: none;
-  outline: none;
-  resize: none;
+  min-height: 50rem;
 `;
 
 export const introductionButton = css`

@@ -15,7 +15,8 @@ import {
   introductionWrapper,
 } from "./MyPageContent.style";
 import { AddIcon, SearchBlueIcon } from "@assets/svgs";
-import { Fragment, useState } from "react";
+import { useState } from "react";
+import MDEditor from '@uiw/react-md-editor';
 
 type FeedPost = {
   writer: string;
@@ -173,34 +174,27 @@ const IntroductionContent = ({ introduction }: { introduction: { title: string, 
 
       {isEditing ? (
         <div css={introductionWrapper(isEditing)}>
-          <textarea css={introductionTitleStyle}
+          <textarea
+            css={introductionTitleStyle}
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
+            placeholder="제목을 입력하세요"
           />
-          <textarea css={introductionBodyStyle}
-            value={editBody}
-            onChange={(e) => setEditBody(e.target.value)}
-          />
+          <div >
+            <MDEditor
+              value={editBody}
+              onChange={(val = '') => setEditBody(val)}
+              height={400}
+              css={introductionBodyStyle}
+            />
+          </div>
         </div>
       ) : (
         <div css={introductionWrapper(isEditing)}>
           <p css={introductionTitleStyle}>
-            {editTitle.split('\n').map((line, i) => (
-              <Fragment key={i}>
-                {line}
-                <br />
-              </Fragment>
-            ))}
+            {editTitle}
           </p>
-
-          <p css={introductionBodyStyle}>
-            {editBody.split('\n').map((line, i) => (
-              <Fragment key={i}>
-                {line}
-                <br />
-              </Fragment>
-            ))}
-          </p>
+          <MDEditor.Markdown source={editBody} css={introductionBodyStyle} />
         </div>
       )}
     </div>
