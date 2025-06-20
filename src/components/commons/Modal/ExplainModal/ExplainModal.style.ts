@@ -11,6 +11,7 @@ export const modalBackgroundStyle = css`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index:1000;
 `;
 export const containerStyle = css`
   width: 54rem;
