@@ -11,7 +11,7 @@ import {
 } from './Feed.style';
 import { contentTitle } from '@pages/Home/Home.style';
 import { useState, useEffect } from 'react';
-import { searchPartMap } from '@constants/categories';
+import { categoryText, searchPartMap } from '@constants/categories';
 import useGetFeeds from 'apis/hooks/feeds/useGetFeeds';
 import { useInView } from 'react-intersection-observer';
 import { LoadingSpinnerIcon } from '@assets/svgs';
@@ -24,13 +24,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from 'stores/useAuthStore';
 import theme from '@styles/theme';
 
-const categoryText: { [key: string]: string } = {
-	ALL: '모든',
-	PLANNING: '기획',
-	DESIGN: '디자인',
-	BACKEND: '백엔드',
-	FRONTEND: '프론트엔드',
-};
+
 
 const options = [
 	{ label: '최신 순', key: 'new' },
@@ -74,7 +68,7 @@ const Feed = () => {
 	const handleChange = (key: string) => {
 		setSort(key);
 	};
-	const hanldeWriteFeed = () => {
+	const handleWriteFeed = () => {
 		const token = localStorage.getItem('accessToken');
 		if (token) {
 			navigate(routes.writePost);
@@ -153,12 +147,12 @@ const Feed = () => {
 									);
 								})
 							) : (
-								<EmptyFeedFallback onWrite={hanldeWriteFeed} />
+								<EmptyFeedFallback onWrite={handleWriteFeed} />
 							)}
 						</div>
 					))
 				) : (
-					<EmptyFeedFallback onWrite={hanldeWriteFeed} />
+					<EmptyFeedFallback onWrite={handleWriteFeed} />
 				)}
 				{isFetchingNextPage && (
 					<div css={iconContainer}>

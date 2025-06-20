@@ -14,8 +14,8 @@ export const titleContainer = css`
     gap: 0.8rem;
 `
 export const titleStyle = css`
-    ${theme.font.caption1};
-    color: ${theme.color.base.darkgray};
+    ${theme.font.captionBold1};
+    color: ${theme.color.point.gray};
 `
 export const valueContainer = css`
     width: 7.6rem;
@@ -24,8 +24,8 @@ export const valueContainer = css`
     align-items: center;
 `
 export const valueStyle = css`
+    ${theme.font.captionBold1};
     width: 5.6rem;
-    ${theme.font.body1};
     color: ${theme.color.point.hero};
     text-align: center;
 `
