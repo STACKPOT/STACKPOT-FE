@@ -46,6 +46,13 @@ type Pot = {
 
 const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const mockSeries = [
     { label: "전체보기" },
     { label: "시리즈1" },
@@ -70,11 +77,15 @@ const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
           ))}
         </div>
         <div css={feedSearchBox}>
-          <input placeholder="검색어를 입력해주세요." />
+          <input
+            placeholder="검색어를 입력해주세요."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <span role="img" aria-label="search"><SearchBlueIcon /></span>
         </div>
       </div>
-      {posts.map((post) => (
+      {filteredPosts.map((post) => (
         <PostCard
           nickname={post.writer}
           role={post.writerRole}
