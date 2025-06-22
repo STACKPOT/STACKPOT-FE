@@ -36,7 +36,7 @@ const theme = {
       greenFg: "#228738",
       pinkFg: "#D65C66",
       purpleFg: "#602D95",
-      yellowFg: "#D65C66",
+      yellowFg: "#774F00",
       redFg: "#8A240F",
     },
     border: {
