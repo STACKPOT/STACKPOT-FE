@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import useGetMyPage from "apis/hooks/users/useGetMyPage";
 import { roleImages } from "@constants/roleImage";
+import { categoryText } from "@constants/categories";
+import { Badge } from "@components/index";
 
 const MyPageProfile: React.FC = () => {
   const navigate = useNavigate();
@@ -33,10 +35,10 @@ const MyPageProfile: React.FC = () => {
       <img css={profileStyle} src={profileImage} alt="프로필 이미지" />
       <div css={contentContainer}>
         <div css={nicknameContainer}>
-          <h1 css={nicknameStyle}>{nickname}</h1>
+          <h1 css={nicknameStyle}>{nickname} <Badge content={categoryText[role]} /></h1>
           <SetUpIcon type="button" css={setUpIconStyle} onClick={handleSetUp} />
         </div>
-        <p css={introductionStyle}>{userIntroduction}</p>
+        <div css={introductionStyle}>{userIntroduction}</div>
         <TemperatureBar temperature={userTemperature} />
       </div>
     </div>

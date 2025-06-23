@@ -33,3 +33,5 @@ export { default as SupervisedUserCircle } from './supervisedUserCircle.svg?reac
 export { default as WebTrafficIcon } from './webTraffic.svg?react';
 export { default as CircleCheck } from './circleCheck.svg?react';
 export { default as FillCircleCheck } from './fillCircleCheck.svg?react';
+export { default as AddIcon } from './add.svg?react';
+export { default as SearchBlueIcon } from "./searchBlue.svg?react";

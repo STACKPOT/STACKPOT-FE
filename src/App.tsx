@@ -12,6 +12,8 @@ import {
 } from "@mui/material/styles";
 import routes from "@constants/routes";
 import { SnackbarProvider } from "providers";
+import '@uiw/react-md-editor/markdown-editor.css';
+import '@uiw/react-markdown-preview/markdown.css';
 
 const muiTheme = createTheme();
 

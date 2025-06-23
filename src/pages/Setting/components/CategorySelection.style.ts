@@ -4,37 +4,26 @@ import theme from "@styles/theme";
 export const content = (larger: boolean) => css`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   gap: ${larger ? "0.8rem" : ""};
 `;
+
 export const contentHeader = css`
-  gap: 1.6rem;
-  ${theme.font.title1};
-  color: ${theme.color.base.darkgray};
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const contentBody = css`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  ${theme.font.caption3};
-  color: ${theme.color.object.assistive};
-`;
-
-export const categoryContainer = css`
-  margin-top: 1.6rem;
   ${theme.font.caption3};
   color: ${theme.color.base.black};
   display: flex;
-  justify-content: row;
-  gap: 0.8rem;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 4.8rem;
 `;
 
-export const categoriesStyle = css`
+
+export const categoryContainer = css`
+  ${theme.font.caption2};
+  color: ${theme.color.base.black};
   display: flex;
-  justify-content: row;
   gap: 0.8rem;
+  align-items: center;
 `;
