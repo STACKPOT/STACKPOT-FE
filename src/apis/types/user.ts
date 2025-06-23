@@ -100,7 +100,7 @@ export interface PatchUserProfileUpdateParams {
 	role: Role;
 	interest: string;
 	userIntroduction: string;
-	kakaoId: string;
+	nickname: string;
 }
 
 export interface NicknameResponse {

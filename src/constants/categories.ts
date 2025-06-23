@@ -43,3 +43,11 @@ export const displayStatus = {
 export const taskStatue = ['진행 전', '진행 중', '완료'] as const;
 
 export const WorkModal = ['새로운 업무 추가', '업무 수정하기'] as const;
+
+export const categoryText: { [key: string]: string } = {
+	ALL: '모든',
+	PLANNING: '기획',
+	DESIGN: '디자인',
+	BACKEND: '백엔드',
+	FRONTEND: '프론트엔드',
+};
