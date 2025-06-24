@@ -3,16 +3,16 @@ import {
   buttonStyle,
   closeButtonStyle,
   containerStyle,
-  contentButtonContainerStyle,
-  deleteButtonStyle,
+  contentContainer,
   modalBackgroundStyle,
-  subtitleStyle,
   titleContentContainerStyle,
   titleStyle,
 } from "./ExplainModal.style";
+import Button from "@components/commons/Button/Button";
+import useWindowSize from "@hooks/useWindowSize";
 
 interface ExplainModalProps {
-  type?: "normal" | "delete" | "profile";
+  type?: "normal" | "profile" | "custom";
   title?: string;
   subtitle?: string;
   children?: React.ReactNode;
@@ -29,23 +29,32 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
   children,
   buttonText,
   disabled,
-  onButtonClick: onClick,
+  onButtonClick,
   onCancel,
 }: ExplainModalProps) => {
+  const { modalWidth, modalHeight } = useWindowSize();
+
   return (
     <div css={modalBackgroundStyle}>
-      <div css={containerStyle}>
+      <div css={containerStyle(modalWidth, modalHeight)}>
         <CloseIcon type="button" css={closeButtonStyle} onClick={onCancel} />
-        <div css={contentButtonContainerStyle(type)}>
+        {type === "custom" ?
+          children
+          :
           <div css={titleContentContainerStyle(type)}>
             {title && <p css={titleStyle}>{title}</p>}
-            {subtitle && <p css={subtitleStyle}>{subtitle}</p>}
-            {children}
+            <div css={contentContainer(modalHeight)}>
+              {children}
+            </div>
           </div>
-          <button css={type === "delete" ? deleteButtonStyle : buttonStyle(type)} onClick={onClick} disabled={disabled}>
-            {buttonText}
-          </button>
-        </div>
+        }
+        <Button
+          variant="action"
+          customStyle={buttonStyle(type)}
+          onClick={onButtonClick}
+          disabled={disabled}>
+          {buttonText}
+        </Button>
       </div>
     </div>
   );

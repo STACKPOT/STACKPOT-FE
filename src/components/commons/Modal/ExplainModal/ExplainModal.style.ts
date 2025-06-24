@@ -13,66 +13,44 @@ export const modalBackgroundStyle = css`
   background-color: rgba(0, 0, 0, 0.4);
   z-index:1000;
 `;
-export const containerStyle = css`
-  width: 54rem;
-  padding: 3.2rem;
-  border-radius: 24px;
-  border: 1px solid ${theme.color.object.alternative};
+export const containerStyle = (width: number, maxHeight: number) => css`
+  width: ${`${width / 10}rem`};
+  max-height: ${`${maxHeight / 10}rem`};
+  padding: 2.4rem;
+  border-radius: 12px;
+  border: 1px solid ${theme.color.object.assistive};
   background-color: ${theme.color.base.white};
   display: flex;
   flex-direction: column;
 `;
+
 export const closeButtonStyle = css`
   margin-left: auto;
   cursor: pointer;
 `;
-export const contentButtonContainerStyle = (type: "normal" | "delete" | "profile") => css`
+
+export const titleContentContainerStyle = (type: "normal" | "profile" | "custom") => css`
   display: flex;
   flex-direction: column;
-  gap: ${type === "profile" ? "2rem" : "3.2rem"};
-  align-items: center;
-`;
-export const titleContentContainerStyle = (type: "normal" | "delete" | "profile") => css`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${type === "profile" ? "2.4rem" : "0.8rem"};
-`;
-export const titleStyle = css`
-  ${theme.font.title1}
-  color: ${theme.color.base.darkgray};
-  white-space: pre-wrap;
-  text-align: center;
-  padding-top: 1.6rem;
+  gap: 1.6rem;
+  padding: 0.8rem 1.6rem;
+  align-items: ${type === "profile" && "center"};
 `;
 
-export const subtitleStyle = css`
-  ${theme.font.caption3}
-  color: black;
+export const titleStyle = css`
+  ${theme.font.title2}
+  color: ${theme.color.point.gray};
   white-space: pre-wrap;
-  text-align: center;
-  color: ${theme.color.object.assistive};
 `;
-export const buttonStyle = (type: "normal" | "profile") => css`
-  height: 5rem;
-  width: ${type === "profile" ? "39.9rem" : "42.9rem"};
-  ${theme.font.captionBold1}
-  color: ${theme.color.base.white};
-  background-color: ${theme.color.point.hero};
-  border-radius: 16px;
-  border: 1px solid ${theme.color.border.normal};
-  &:disabled {
-    background-color: ${theme.color.object.alternative};
-    cursor: not-allowed;
-    color: ${theme.color.interactive.inactive};
-  }
+
+export const contentContainer = (maxHeight: number) => css`
+  max-height: ${`${(maxHeight - 227) / 10}rem`};
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  };
 `;
-export const deleteButtonStyle = css`
-  ${buttonStyle("normal")};
-  padding: 1.7rem 12rem;
-  width: auto;
-  border-color: ${theme.color.feedback.negative};
-  color: ${theme.color.feedback.negative};
-  background-color: white;
+
+export const buttonStyle = (type: "normal" | "profile" | "custom") => css`
+  margin: 1.6rem;
 `;

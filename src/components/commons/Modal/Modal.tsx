@@ -6,8 +6,10 @@ import {
   messageStyle,
   background,
   closeIconStyle,
+  titleContentContainer,
 } from "./Modal.style";
 import { CloseIcon } from "@assets/svgs";
+import useWindowSize from "@hooks/useWindowSize";
 import theme from "@styles/theme";
 
 interface ModalProps {
@@ -23,21 +25,25 @@ const Modal: React.FC<ModalProps> = ({
   onConfirm,
   onCancel,
 }) => {
+  const { modalWidth, modalHeight } = useWindowSize();
+
   return (
     <div css={background}>
-      <div css={container}>
+      <div css={container(modalWidth)}>
         <CloseIcon css={closeIconStyle} onClick={onCancel} />
-        <p css={titleStyle}>{title}</p>
-        <p css={messageStyle}>{message}</p>
+        <div css={titleContentContainer}>
+          <p css={titleStyle}>{title}</p>
+          <p css={messageStyle(modalHeight)}>{message}</p>
+        </div>
         <div css={footer}>
           <button
             css={button(theme.color.interactive.inactive)}
             onClick={onCancel}
           >
-            아니요
+            취소
           </button>
           <button css={button(theme.color.point.hero)} onClick={onConfirm} type="button">
-            네
+            동의합니다
           </button>
         </div>
       </div>
