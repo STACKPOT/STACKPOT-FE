@@ -51,6 +51,6 @@ export const contentContainer = (maxHeight: number) => css`
   };
 `;
 
-export const buttonStyle = (type: "normal" | "profile" | "custom") => css`
+export const buttonStyle = css`
   margin: 1.6rem;
 `;

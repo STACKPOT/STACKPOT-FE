@@ -48,7 +48,7 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
         }
         <Button
           variant="action"
-          customStyle={buttonStyle(type)}
+          customStyle={buttonStyle}
           onClick={onButtonClick}
           disabled={disabled}>
           {buttonText}
