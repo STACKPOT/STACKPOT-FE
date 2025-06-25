@@ -14,7 +14,6 @@ import useWindowSize from "@hooks/useWindowSize";
 interface ExplainModalProps {
   type?: "normal" | "profile" | "custom";
   title?: string;
-  subtitle?: string;
   children?: React.ReactNode;
   buttonText: string;
   disabled?: boolean;
@@ -25,7 +24,6 @@ interface ExplainModalProps {
 const ExplainModal: React.FC<ExplainModalProps> = ({
   type = "normal",
   title,
-  subtitle,
   children,
   buttonText,
   disabled,
