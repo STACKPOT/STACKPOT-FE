@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { roleImages } from "@constants/roleImage";
 import ProfileDropdown from "@components/commons/Dropdown/ProfileDropdown/ProfileDropdown";
+import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -27,17 +28,12 @@ const Header: React.FC = () => {
   const [role, setRole] = useState(localStorage.getItem("role"));
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [roleProfileImage, setRoleProfileImage] = useState<string>("");
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const guestMode = role === "UNKNOWN";
 
-  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
-    import.meta.env.VITE_REST_API_KEY
-  }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
-&scope=account_email
-&prompt=login`;
-
   const handleClick = () => {
-    window.location.href = link;
+    setIsLoginModalOpen(true);
   };
 
   const handleSearchClick = () => {
@@ -115,6 +111,9 @@ const Header: React.FC = () => {
           </div>
         )}
       </header>
+      {isLoginModalOpen &&
+        <LoginModal onCancel={() => setIsLoginModalOpen(false)} />
+      }
     </div>
   );
 };
