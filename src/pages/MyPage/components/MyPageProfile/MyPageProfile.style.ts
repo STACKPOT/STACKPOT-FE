@@ -14,26 +14,29 @@ export const profileStyle = css`
 export const contentContainer = css`
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	width: 62.8rem;
 `;
 export const nicknameContainer = css`
 	display: flex;
 	justify-content: space-between;
 `;
 export const nicknameStyle = css`
-	${theme.font.bodyBold2};
-	color: ${theme.color.base.darkgray};
+	${theme.font.title2};
+	align-items: center;
+	color: ${theme.color.base.black};
 `;
 export const setUpIconStyle = css`
-	width: 4.4rem;
-	height: 4rem;
+	width: 4.8rem;
+	height: 4.4rem;
 	padding: 1rem 1.2rem;
-	margin-right: 1.1rem;
 	color: ${theme.color.interactive.inactive};
 	cursor: pointer;
 `;
 export const introductionStyle = css`
-	${theme.font.caption3};
+	${theme.font.body3};
 	color: ${theme.color.object.hero};
+	padding: 1.2rem 2.7rem;
+	border: 1px solid ${theme.color.object.assistive};
+	border-radius: 8px;
 	margin-top: 0.4rem;
 `;
