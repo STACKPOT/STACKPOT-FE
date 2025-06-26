@@ -48,7 +48,7 @@ const SignUp = () => {
     watch,
     formState: { isValid },
   } = methods;
-  
+
   const { mutate } = usePatchSignIn();
 
   const [role, interest, kakaoId, contractsAgreed] = watch([
@@ -101,8 +101,7 @@ const SignUp = () => {
           </div>
           <Button
             type="submit"
-            variant="action"
-            actionType="join"
+            variant="full"
             css={buttonStyle}
             disabled={!isValid || !contractsAgreed}
           >

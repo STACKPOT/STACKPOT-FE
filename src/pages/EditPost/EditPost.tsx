@@ -10,7 +10,7 @@ import {
   toastStyle,
 } from "./EditPost.style";
 import { PotIcon } from "@assets/svgs";
-import { Button, PotButton, UploadToast, PostForm } from "@components/index";
+import { Button, UploadToast, PostForm } from "@components/index";
 import { FeedPatch } from "apis/types/feed";
 import usePatchFeed from "apis/hooks/feeds/usePatchFeed";
 import useGetFeedDetails from "apis/hooks/feeds/useGetFeedDetails";
@@ -89,9 +89,9 @@ const EditPost = () => {
               게시물 수정하기
               <PotIcon css={iconStyle} />
               <div css={buttonContainer}>
-                <PotButton onClick={handleDelete} type="red">
+                <Button onClick={handleDelete} actionType="neg">
                   삭제하기
-                </PotButton>
+                </Button>
                 <Button variant="action" type="submit" disabled={!isValid}>
                   수정 완료
                 </Button>
