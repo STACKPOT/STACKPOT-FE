@@ -111,9 +111,9 @@ const Header: React.FC = () => {
           </div>
         )}
       </header>
-      {isLoginModalOpen &&
+      {isLoginModalOpen && (
         <LoginModal onCancel={() => setIsLoginModalOpen(false)} />
-      }
+      )}
     </div>
   );
 };

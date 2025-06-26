@@ -36,21 +36,20 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
     <div css={modalBackgroundStyle}>
       <div css={containerStyle(modalWidth, modalHeight)}>
         <CloseIcon type="button" css={closeButtonStyle} onClick={onCancel} />
-        {type === "custom" ?
+        {type === "custom" ? (
           children
-          :
+        ) : (
           <div css={titleContentContainerStyle(type)}>
             {title && <p css={titleStyle}>{title}</p>}
-            <div css={contentContainer(modalHeight)}>
-              {children}
-            </div>
+            <div css={contentContainer(modalHeight)}>{children}</div>
           </div>
-        }
+        )}
         <Button
           variant="action"
           customStyle={buttonStyle}
           onClick={onButtonClick}
-          disabled={disabled}>
+          disabled={disabled}
+        >
           {buttonText}
         </Button>
       </div>

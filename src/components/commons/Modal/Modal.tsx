@@ -42,7 +42,11 @@ const Modal: React.FC<ModalProps> = ({
           >
             취소
           </button>
-          <button css={button(theme.color.point.hero)} onClick={onConfirm} type="button">
+          <button
+            css={button(theme.color.point.hero)}
+            onClick={onConfirm}
+            type="button"
+          >
             동의합니다
           </button>
         </div>

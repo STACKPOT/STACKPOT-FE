@@ -1,5 +1,18 @@
 import { GoogleIcon, KaKaoTalkIcon, NaverIcon } from "@assets/svgs";
-import { background, buttonStyle, closeIconStyle, container, googleButtonStyle, kakaoButtonStyle, loginButtonContainer, naverButtonStyle, textHighlightStyle, textStyle, titleContentContainer, titleStyle } from "./LoginModal.style";
+import {
+  background,
+  buttonStyle,
+  closeIconStyle,
+  container,
+  googleButtonStyle,
+  kakaoButtonStyle,
+  loginButtonContainer,
+  naverButtonStyle,
+  textHighlightStyle,
+  textStyle,
+  titleContentContainer,
+  titleStyle,
+} from "./LoginModal.style";
 import { CloseIcon, Logo } from "@assets/svgs";
 
 import useWindowSize from "@hooks/useWindowSize";
@@ -12,8 +25,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ onCancel }) => {
   const { modalWidth } = useWindowSize();
 
   const googleLoginLink = "";
-  const kakaoLoginLink = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY
-    }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
+  const kakaoLoginLink = `https://kauth.kakao.com/oauth/authorize?client_id=${
+    import.meta.env.VITE_REST_API_KEY
+  }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
 &scope=account_email
 &prompt=login`;
   const naverLoginLink = "";
@@ -32,18 +46,24 @@ const LoginModal: React.FC<LoginModalProps> = ({ onCancel }) => {
           <div css={loginButtonContainer}>
             <button
               css={[buttonStyle, googleButtonStyle]}
-              onClick={() => handleLogin(googleLoginLink)}>
-              <GoogleIcon />Google 로그인
+              onClick={() => handleLogin(googleLoginLink)}
+            >
+              <GoogleIcon />
+              Google 로그인
             </button>
             <button
               css={[buttonStyle, kakaoButtonStyle]}
-              onClick={() => handleLogin(kakaoLoginLink)}>
-              <KaKaoTalkIcon />카카오 로그인
+              onClick={() => handleLogin(kakaoLoginLink)}
+            >
+              <KaKaoTalkIcon />
+              카카오 로그인
             </button>
             <button
               css={[buttonStyle, naverButtonStyle]}
-              onClick={() => handleLogin(naverLoginLink)}>
-              <NaverIcon />네이버 로그인
+              onClick={() => handleLogin(naverLoginLink)}
+            >
+              <NaverIcon />
+              네이버 로그인
             </button>
           </div>
           <p css={textStyle}>

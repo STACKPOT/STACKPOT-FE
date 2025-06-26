@@ -11,7 +11,7 @@ export const modalBackgroundStyle = css`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index:1000;
+  z-index: 1000;
 `;
 export const containerStyle = (width: number, maxHeight: number) => css`
   width: ${`${width / 10}rem`};
@@ -29,7 +29,9 @@ export const closeButtonStyle = css`
   cursor: pointer;
 `;
 
-export const titleContentContainerStyle = (type: "normal" | "profile" | "custom") => css`
+export const titleContentContainerStyle = (
+  type: "normal" | "profile" | "custom"
+) => css`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -48,7 +50,7 @@ export const contentContainer = (maxHeight: number) => css`
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;
-  };
+  }
 `;
 
 export const buttonStyle = css`
