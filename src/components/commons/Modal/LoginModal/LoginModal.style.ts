@@ -14,9 +14,14 @@ export const background = css`
   z-index: 10;
 `;
 
-export const container = (width: number) => css`
-  width: ${`${width / 10}rem`};
-  min-width: 44.1rem;
+export const container = css`
+  width: 44.1rem;
+  @media screen and (min-width: ${theme.breakpoints.narrow}) {
+    width: 56rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.wide}) {
+    width: 76rem;
+  }
   padding: 3.2rem 3.6rem;
   background: ${theme.color.base.white};
   border-radius: 8px;

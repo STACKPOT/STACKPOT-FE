@@ -13,17 +13,13 @@ import {
   titleContentContainer,
   titleStyle,
 } from "./LoginModal.style";
-import { CloseIcon, Logo } from "@assets/svgs";
-
-import useWindowSize from "@hooks/useWindowSize";
+import { CloseIcon } from "@assets/svgs";
 
 interface LoginModalProps {
   onCancel: () => void;
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ onCancel }) => {
-  const { modalWidth } = useWindowSize();
-
   const googleLoginLink = "";
   const kakaoLoginLink = `https://kauth.kakao.com/oauth/authorize?client_id=${
     import.meta.env.VITE_REST_API_KEY
@@ -38,7 +34,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ onCancel }) => {
 
   return (
     <div css={background}>
-      <div css={container(modalWidth)}>
+      <div css={container}>
         <CloseIcon css={closeIconStyle} onClick={onCancel} type="button" />
         <div css={titleContentContainer}>
           <p css={titleStyle}>STACKPOT에 오신 것을 환영합니다!</p>

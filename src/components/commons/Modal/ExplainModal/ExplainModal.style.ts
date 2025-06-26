@@ -13,9 +13,15 @@ export const modalBackgroundStyle = css`
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 1000;
 `;
-export const containerStyle = (width: number, maxHeight: number) => css`
-  width: ${`${width / 10}rem`};
-  max-height: ${`${maxHeight / 10}rem`};
+
+export const containerStyle = css`
+  width: 40rem;
+  @media screen and (min-width: ${theme.breakpoints.narrow}) {
+    width: 56rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.wide}) {
+    width: 76rem;
+  }
   padding: 2.4rem;
   border-radius: 12px;
   border: 1px solid ${theme.color.object.assistive};
@@ -25,6 +31,7 @@ export const containerStyle = (width: number, maxHeight: number) => css`
 `;
 
 export const closeButtonStyle = css`
+  height: 2.4rem;
   margin-left: auto;
   cursor: pointer;
 `;
@@ -45,8 +52,8 @@ export const titleStyle = css`
   white-space: pre-wrap;
 `;
 
-export const contentContainer = (maxHeight: number) => css`
-  max-height: ${`${(maxHeight - 227) / 10}rem`};
+export const contentContainer = css`
+  max-height: calc(var(--vh, 60vh) - 227px);
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;

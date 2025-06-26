@@ -14,8 +14,14 @@ export const background = css`
   z-index: 10;
 `;
 
-export const container = (width: number) => css`
-  width: ${`${width / 10}rem`};
+export const container = css`
+  width: 40rem;
+  @media screen and (min-width: ${theme.breakpoints.narrow}) {
+    width: 56rem;
+  }
+  @media screen and (min-width: ${theme.breakpoints.wide}) {
+    width: 76rem;
+  }
   padding: 2.4rem;
   background: ${theme.color.base.white};
   border: 1px solid ${theme.color.object.assistive};
@@ -40,8 +46,8 @@ export const titleStyle = css`
   ${theme.font.title2};
 `;
 
-export const messageStyle = (maxHeight: number) => css`
-  max-height: ${`${(maxHeight - 215) / 10}rem`};
+export const messageStyle = css`
+  max-height: calc(var(--vh, 60vh) - 215px);
   color: ${theme.color.point.gray};
   ${theme.font.body3};
   white-space: pre-line;

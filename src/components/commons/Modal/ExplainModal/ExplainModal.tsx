@@ -9,7 +9,6 @@ import {
   titleStyle,
 } from "./ExplainModal.style";
 import Button from "@components/commons/Button/Button";
-import useWindowSize from "@hooks/useWindowSize";
 
 interface ExplainModalProps {
   type?: "normal" | "profile" | "custom";
@@ -30,18 +29,16 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
   onButtonClick,
   onCancel,
 }: ExplainModalProps) => {
-  const { modalWidth, modalHeight } = useWindowSize();
-
   return (
     <div css={modalBackgroundStyle}>
-      <div css={containerStyle(modalWidth, modalHeight)}>
+      <div css={containerStyle}>
         <CloseIcon type="button" css={closeButtonStyle} onClick={onCancel} />
         {type === "custom" ? (
           children
         ) : (
           <div css={titleContentContainerStyle(type)}>
             {title && <p css={titleStyle}>{title}</p>}
-            <div css={contentContainer(modalHeight)}>{children}</div>
+            <div css={contentContainer}>{children}</div>
           </div>
         )}
         <Button
