@@ -87,7 +87,7 @@ export const handlers = [
     });
   }),
 
-  http.get("https://api.stackpot.co.kr/chat", ({ request }) => {
+  http.get("https://api.stackpot.co.kr/chats", ({ request }) => {
     const url = new URL(request.url);
     const chatRoomId = Number(url.searchParams.get("chatRoomId"));
     const cursor = url.searchParams.get("cursor");
