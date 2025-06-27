@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { media } from "@styles/media";
 import theme from "@styles/theme";
 
 export const background = css`
@@ -16,10 +17,10 @@ export const background = css`
 
 export const container = css`
   width: 40rem;
-  @media screen and (min-width: ${theme.breakpoints.narrow}) {
+  ${media[1440]} {
     width: 56rem;
   }
-  @media screen and (min-width: ${theme.breakpoints.wide}) {
+  ${media[1920]} {
     width: 76rem;
   }
   padding: 2.4rem;

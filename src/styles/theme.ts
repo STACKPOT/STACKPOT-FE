@@ -181,10 +181,6 @@ const theme = {
       letter-spacing: -0.1px;
     `,
   },
-  breakpoints: {
-    wide: "1920px",
-    narrow: "1440px",
-  },
 };
 
 export type ColorType = typeof theme.color;
