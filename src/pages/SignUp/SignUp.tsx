@@ -7,7 +7,6 @@ import {
   mainContainer,
   categoryContainer,
   buttonStyle,
-  inputStyle,
 } from "./SignUp.style";
 import { Button } from "@components/index";
 import {
@@ -48,7 +47,7 @@ const SignUp = () => {
     watch,
     formState: { isValid },
   } = methods;
-  
+
   const { mutate } = usePatchSignIn();
 
   const [role, interest, kakaoId, contractsAgreed] = watch([
@@ -88,7 +87,7 @@ const SignUp = () => {
               <CategorySelection type="role" title="역할" />
               <CategorySelection type="interest" title="관심사" />
             </div>
-            <Section
+            {/* <Section
               title="카카오톡 아이디"
               description={`팟이 시작될 경우, 원활한 진행을 위해 팀장에게 카카오 아이디가 보여집니다.\n카카오톡 아이디를 작성해 주세요.`}
             />
@@ -96,7 +95,7 @@ const SignUp = () => {
               css={inputStyle}
               placeholder="카카오톡 아이디 작성"
               {...register("kakaoId", { required: true })}
-            />
+            /> */}
             <ContractsSection />
           </div>
           <Button

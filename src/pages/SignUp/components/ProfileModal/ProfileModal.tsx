@@ -13,7 +13,6 @@ import { useState } from "react";
 import useGetNickname from "apis/hooks/users/useGetNickname";
 import usePostNickname from "apis/hooks/users/usePostNickname";
 import { useAuthStore } from "stores/useAuthStore";
-import { roleDescription, roleToVeggie } from "@constants/profileRole";
 
 interface ProfileModalProps {
   role: Role;
@@ -50,17 +49,15 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
 
   return (
     <ExplainModal
-      subtitle={`가입 전, 닉네임을 만들어 주세요.
-        STACKPOT은 네 가지의 재료 안에서 랜덤 닉네임을 부여받아요.`}
-      buttonText="이렇게 할래요"
+      subtitle={`시작하기 전 닉네임을 만들어 볼까요?`}
+      buttonText="저장하기"
       onButtonClick={handleConfirm}
       onCancel={onModalCancel}
     >
       <div css={profileContainer}>
         <img css={profileStyle} src={profileImage} alt="profile" />
         <p css={contentStyle}>
-          {roleDescription[role]} <br />
-          나는 무슨 {roleToVeggie[role]}이 될까요?
+          나는 무슨 새싹이 될까요?
         </p>
         <div css={inputContianer}>
           <input

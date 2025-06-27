@@ -23,7 +23,7 @@ export const potIconStyle = css`
 `;
 
 export const descriptionStyle = css`
-  ${theme.font.caption3}
-  color: ${theme.color.object.assistive};
+  ${theme.font.body3}
+  color: ${theme.color.object.hero};
   white-space: pre-wrap;
 `;
