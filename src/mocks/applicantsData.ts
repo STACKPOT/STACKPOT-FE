@@ -6,29 +6,29 @@ const applicantsListData: GetPotApplicationResponse[] = [
     potRole: "FRONTEND",
     status: "",
     userId: 1,
-    userNickname: "dfd"
+    userNickname: "dfd",
   },
   {
     applicationId: 1,
     potRole: "FRONTEND",
     status: "",
-    userId: 1,
-    userNickname: "dfd"
+    userId: 2,
+    userNickname: "dfd",
+  },
+  {
+    applicationId: 1,
+    potRole: "BACKEND",
+    status: "",
+    userId: 3,
+    userNickname: "dfd",
   },
   {
     applicationId: 1,
     potRole: "FRONTEND",
     status: "",
-    userId: 1,
-    userNickname: "dfd"
+    userId: 5,
+    userNickname: "dfd",
   },
-  {
-    applicationId: 1,
-    potRole: "FRONTEND",
-    status: "",
-    userId: 1,
-    userNickname: "dfd"
-  },
-]
+];
 
 export default applicantsListData;

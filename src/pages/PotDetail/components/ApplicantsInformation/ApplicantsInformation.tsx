@@ -18,6 +18,7 @@ import StartPotModal from "../StartPotModal/StartPotModal";
 import useGetPotApplicants from "apis/hooks/pots/useGetPotApplicants";
 import { GetPotApplicationResponse } from "apis/types/pot";
 import { useSnackbar } from "providers";
+import applicantsListData from "mocks/applicantsData";
 
 interface ApplicantsInformationProps {
   potId: number;
@@ -55,7 +56,8 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
     }
   };
 
-  const { data: applicants } = useGetPotApplicants(potId);
+  //const { data: applicants } = useGetPotApplicants(potId);
+  const applicants = applicantsListData;
 
   return (
     <>
@@ -70,7 +72,9 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
               <PotIcon css={titleIconStyle} />
             </div>
             <p css={descriptionStyle}>
-              {"함께하고 싶은 지원자를 체크하고, 팟 시작하기를 누르면 팟이 시작돼요.\n프로필 사진을 누르면 지원자 프로필을 확인할 수 있어요."}
+              {
+                "함께하고 싶은 지원자를 체크하고, 팟 시작하기를 누르면 팟이 시작돼요.\n프로필 사진을 누르면 지원자 프로필을 확인할 수 있어요."
+              }
             </p>
           </div>
           <div css={listContainer}>
@@ -82,12 +86,11 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
                 type="selection"
                 selected={selectedApplicants.includes(applicant)}
                 onClick={() => handleSelectApplicant(applicant)}
-                onProfileClick={() => setShowProfileMember(applicant)} />
+                onProfileClick={() => setShowProfileMember(applicant)}
+              />
             ))}
           </div>
-          <Button
-            customStyle={startPotButtonStyle}
-            onClick={handleStartPot}>
+          <Button customStyle={startPotButtonStyle} onClick={handleStartPot}>
             팟 시작하기
           </Button>
         </div>
@@ -109,9 +112,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
           onCancelModal={() => setShowStartModal(false)}
         />
       )}
-      {showKakaoIdModal && (
-        <MemberKakaoIdModal potId={potId} />
-      )}
+      {showKakaoIdModal && <MemberKakaoIdModal potId={potId} />}
     </>
   );
 };
