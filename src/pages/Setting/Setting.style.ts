@@ -2,12 +2,14 @@ import theme from "@styles/theme";
 import { css } from "@emotion/react";
 
 export const container = css`
-  padding: 4.5rem 8.2rem;
-  width: 71.3rem;
+  width: 78.1rem;
+  padding: 4.1rem 5rem;
+  box-sizing:border-box;
   margin: 8.4rem auto;
   border: 1px solid ${theme.color.object.alternative};
   border-radius: 8px;
 `;
+
 export const detailContainer = css`
   gap: 3.2rem;
   display: flex;
@@ -28,16 +30,16 @@ export const titleContent = css`
 `;
 
 export const title = css`
-  ${theme.font.bodyBold2};
-  color: ${theme.color.base.darkgray};
+  ${theme.font.title3};
+  color: ${theme.color.point.gray};
   display: flex;
   align-items: center;
   gap: 0.8rem;
 `;
 export const contentHeader = css`
-  gap: 1.6rem;
   ${theme.font.title1};
-  color: ${theme.color.base.darkgray};
+  gap: 1.6rem;
+  color: ${theme.color.point.gray};
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,8 +47,8 @@ export const contentHeader = css`
 `;
 
 export const describe = css`
-  ${theme.font.caption3};
-  color: ${theme.color.object.assistive};
+  ${theme.font.body3};
+  color: ${theme.color.object.hero};
   margin-bottom: 0.8rem;
 `;
 
@@ -58,8 +60,8 @@ export const contentBody = css`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  ${theme.font.caption3};
-  color: ${theme.color.object.assistive};
+  ${theme.font.body3};
+  color: ${theme.color.object.hero};
 `;
 
 export const textStyle = css`
@@ -71,11 +73,11 @@ export const textareaWrapper = css`
 `;
 
 export const textareaStyle = (isOverLimit: boolean) => css`
+  ${theme.font.body2};
   width: 100%;
   height: 8.9rem;
-  padding: 1.2rem 1.6rem;
-  border-radius: 12px;
-  ${theme.font.caption3};
+  padding: 1.4rem 1.6rem;
+  border-radius: 8px;
   resize: none;
   border: 1px solid
     ${isOverLimit
@@ -90,18 +92,19 @@ export const textareaStyle = (isOverLimit: boolean) => css`
   &:focus {
     border-color: ${isOverLimit
     ? theme.color.feedback.negative
-    : theme.color.point.hero};
+    : theme.color.point.alternative};
     outline: none;
   }
 `;
+
 export const charCountStyle = (isOverLimit: boolean) => css`
   position: absolute;
   bottom: 1.2rem;
   right: 1.6rem;
-  ${theme.font.caption3};
+  ${theme.font.body2};
   color: ${isOverLimit
     ? theme.color.feedback.negative
-    : theme.color.base.darkgray};
+    : theme.color.object.hero};
 `;
 
 export const buttonContainer = css`
@@ -110,8 +113,8 @@ export const buttonContainer = css`
 `;
 
 export const buttonStyle = css`
-  width: 54.9rem;
-  padding: 1.6rem 2.4rem;
+  ${theme.font.title1};
+  width: 100%;
   border-radius: 8px;
   background-color: ${theme.color.point.hero};
   border: none;

@@ -3,12 +3,12 @@ import theme from "@styles/theme";
 
 export const buttonStyle = css`
     display: inline-flex;
-    padding: 1.2rem 2.4rem;
+    padding: 1.4rem 1.9rem;
     border-radius: 0.8rem;
     background-color: ${theme.color.base.white};
     box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
     transition: all 0.3s ease;
-    ${theme.font.captionBold1};
+    ${theme.font.caption3};
     align-items: center;
     white-space: pre;
     cursor: pointer;

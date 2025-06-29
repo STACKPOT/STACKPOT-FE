@@ -26,3 +26,5 @@ export { default as FillLikeIcon } from './fillLike.svg?react';
 export { default as SaveIcon } from './save.svg?react';
 export { default as CommentIcon } from './comment.svg?react';
 export { default as FillSaveIcon } from './fillSave.svg?react';
+export { default as AddIcon } from './add.svg?react';
+export { default as SearchBlueIcon } from "./searchBlue.svg?react";

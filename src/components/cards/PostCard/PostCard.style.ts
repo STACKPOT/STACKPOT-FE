@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import theme from '@styles/theme';
 
 export const cardStyle = css`
-	width: 90.8rem;
 	padding: 2.4rem 3rem;
 	display: flex;
 	flex-direction: column;

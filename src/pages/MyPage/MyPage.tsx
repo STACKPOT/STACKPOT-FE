@@ -8,17 +8,15 @@ import {
 	tabsTextStyle,
 } from './MyPage.style';
 import { MyPageProfile } from './components';
-import { CtaCard, FinishedPotCard, FloatingButton, PostCard } from '@components/index';
+import { CtaCard, FloatingButton } from '@components/index';
 import useGetMyPage from 'apis/hooks/users/useGetMyPage';
-import { Role } from 'types/role';
+import MyPageContent from './components/MyPageContent/MyPageContent';
+
+
 
 const MyPage = () => {
-	const [contentType, setContentType] = useState<'feed' | 'pot'>('feed');
-
-
+	const [contentType, setContentType] = useState<'feed' | 'pot' | 'introduction'>('feed');
 	const { data } = useGetMyPage({ dataType: contentType });
-
-
 	if (!data) {
 		return <div>데이터가 없습니다.</div>;
 	}
@@ -33,54 +31,15 @@ const MyPage = () => {
 						피드
 					</p>
 					<p css={tabsTextStyle(contentType === 'pot')} onClick={() => setContentType('pot')}>
-						끓인 팟
+						모든 팟
+					</p>
+					<p css={tabsTextStyle(contentType === 'introduction')} onClick={() => setContentType('introduction')}>
+						소개
 					</p>
 				</div>
-				<CtaCard type="feed" />
+				{contentType !== 'introduction' && <CtaCard type="feed" />}
 				<div css={listContainer(contentType)}>
-					{contentType === 'feed'
-						? data.feeds.map((post) => (
-							<PostCard
-								nickname={post.writer}
-								role={post.writerRole}
-								isLiked={post.isLiked}
-								likeCount={post.likeCount}
-								key={post.feedId}
-								createdAt={post.createdAt}
-								title={post.title}
-								content={post.content}
-								feedId={post.feedId}
-								writerId={post.writerId}
-								saveCount={post.saveCount}
-								commentCount={post.commentCount}
-								isSaved={post.isSaved}
-								isMyPost={true}
-							/>
-						))
-						: data.completedPots.map((pot) => {
-							let members = [] as Role[];
-							Object.entries(pot.memberCounts).forEach((part) => {
-								for (let i = 0; i < part[1]; i++) {
-									members.push(part[0] as Role);
-								}
-							});
-							return (
-								<FinishedPotCard
-									id={pot.potId}
-									title={pot.potName}
-									myRole={pot.userPotRole}
-									startDate={pot.potStartDate}
-									stacks={pot.members}
-									languages={pot.potLan}
-									key={pot.potId}
-									members={members}
-									isProfilePage={true}
-									endDate={pot.potEndDate}
-									buttonType="appeal"
-									isUserPage={false}
-								/>
-							);
-						})}
+					<MyPageContent contentType={contentType} data={data} />
 				</div>
 			</div>
 			<FloatingButton type={'feed'} />
