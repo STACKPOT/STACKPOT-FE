@@ -43,3 +43,11 @@ export const displayStatus = {
 export const taskStatue = ['진행 전', '진행 중', '완료'] as const;
 
 export const WorkModal = ['새로운 업무 추가', '업무 수정하기'] as const;
+
+export const potStateMap: {
+	[key: string]: "진행 중" | "다 끓였어요" | "모집 중";
+} = {
+	RECRUITING: "모집 중",
+	ONGOING: "진행 중",
+	COMPLETED: "다 끓였어요",
+} as const;

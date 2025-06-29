@@ -75,6 +75,7 @@ export interface GetPotsApplyResponse {
   potModeOfOperation: Participation;
   potContent: string;
   recruitmentDetails: string;
+  members: Record<Role, number>;
   dday: string;
 }
 export interface GetPotDetailResponse {

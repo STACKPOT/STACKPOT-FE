@@ -26,6 +26,7 @@ import OnGoingPotCard from "./cards/OnGoingPotCard/OnGoingPotCard";
 import PartRecruitment from "./commons/PartRecruitment/PartRecruitment";
 import PostForm from "./commons/PostForm/PostForm";
 import CtaCard from "./cards/CtaCard/CtaCard";
+import PotDetailCard from "./cards/PotDetailCard/PotDetailCard";
 
 export {
   Modal,
@@ -56,4 +57,5 @@ export {
   PartRecruitment,
   PostForm,
   CtaCard,
+  PotDetailCard,
 };
