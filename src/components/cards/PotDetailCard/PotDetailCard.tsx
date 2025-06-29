@@ -9,6 +9,7 @@ import {
   elementContentStyle,
   elementLabelStyle,
   informationContainer,
+  layerBackground,
   layerStyle,
   memberGroupContainer,
   partBadgeContainer,
@@ -132,15 +133,17 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
         </div>
         {showButton && (
           <div onMouseLeave={() => handleMouseOver(false)}>
-            <div css={layerStyle(type === "applied" ? "red" : "blue")} />
-            <Button
-              variant="action"
-              actionType={type === "applied" ? "neg" : "action"}
-              customStyle={buttonStyle}
-              onClick={handleButtonClick}
-            >
-              {buttonTexts[type]}
-            </Button>
+            <div css={layerStyle}>
+              <div css={layerBackground(type === "applied" ? "red" : "blue")} />
+              <Button
+                variant="action"
+                actionType={type === "applied" ? "neg" : "action"}
+                customStyle={buttonStyle}
+                onClick={handleButtonClick}
+              >
+                {buttonTexts[type]}
+              </Button>
+            </div>
           </div>
         )}
       </div>

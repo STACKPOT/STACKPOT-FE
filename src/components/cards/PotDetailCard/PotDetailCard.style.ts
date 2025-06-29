@@ -77,12 +77,20 @@ export const elementContentStyle = css`
   white-space: nowrap;
 `;
 
-export const layerStyle = (color: "blue" | "red") => css`
+export const layerStyle = css`
   width: 35rem;
   height: 100%;
-  border-radius: 0px 15px 15px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   right: 0;
+`;
+
+export const layerBackground = (color: "blue" | "red") => css`
+  width: 100%;
+  height: 100%;
+  border-radius: 0px 15px 15px 0px;
   opacity: 0.5;
   background-color: ${color === "blue"
     ? theme.color.accent.blueBg
@@ -90,8 +98,6 @@ export const layerStyle = (color: "blue" | "red") => css`
 `;
 
 export const buttonStyle = css`
-  top: 9.6rem;
   opacity: 1;
   position: absolute;
-  right: 6.5rem;
 `;
