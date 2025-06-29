@@ -17,7 +17,8 @@ const PotMain: React.FC = () => {
             to={tab.path}
             end={tab.path === routes.pot.base}
             css={tabsTextStyle}
-            className={({ isActive }) => (isActive ? "active" : "")}>
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             {tab.label}
           </NavLink>
         ))}
