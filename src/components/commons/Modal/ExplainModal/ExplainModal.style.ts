@@ -64,3 +64,23 @@ export const contentContainer = css`
 export const buttonStyle = css`
   margin: 1.6rem;
 `;
+
+export const profileContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+  align-items: center;
+`;
+
+export const profileStyle = css`
+  width: 6.4rem;
+  height: 6.4rem;
+  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 50%;
+`;
+
+export const profileNicknameStyle = css`
+  ${theme.font.title1};
+  color: ${theme.color.point.hero};
+`;
