@@ -1,4 +1,4 @@
-import { DdayBadge, PotButton, PotInformation } from "@components/index";
+import { Button, DdayBadge, PotInformation } from "@components/index";
 import {
   container,
   ddayBadgeWrapper,
@@ -42,22 +42,21 @@ const PotInformationCard: React.FC<PotInformationCardProps> = ({
   potModeOfOperation,
   recruitmentDetails,
   potLan,
-  onButtonClick
+  onButtonClick,
 }: PotInformationCardProps) => {
   const navigate = useNavigate();
   const handleClickPot = (id: number) => {
     navigate(`${routes.pot.base}/${id}`);
     window.scrollTo(0, 0);
-  }
+  };
 
   return (
     <div css={container} onClick={() => handleClickPot(potId)}>
       <div css={titleContainer}>
         <h1 css={titleStyle}>{potName}</h1>
-        {potStatus === "RECRUITING" &&
-          <PotButton onClick={() => onButtonClick(potId)}>
-            지원 취소하기
-          </PotButton>}
+        {potStatus === "RECRUITING" && (
+          <Button onClick={() => onButtonClick(potId)}>지원 취소하기</Button>
+        )}
       </div>
       <div css={profileContainer}>
         <img css={profileStyle} src={roleImages[userRole]} alt="profile" />
