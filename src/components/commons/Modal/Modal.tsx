@@ -1,7 +1,6 @@
 import {
   container,
   footer,
-  button,
   titleStyle,
   messageStyle,
   background,
@@ -9,7 +8,6 @@ import {
   titleContentContainer,
 } from "./Modal.style";
 import { CloseIcon } from "@assets/svgs";
-import theme from "@styles/theme";
 import Button from "../Button/Button";
 
 interface ModalProps {
@@ -40,12 +38,12 @@ const Modal: React.FC<ModalProps> = ({
           <p css={messageStyle}>{message}</p>
         </div>
         <div css={footer}>
-          <Button actionType="alt" onClick={onCancel}>
+          <Button variant="action" actionType="alt" onClick={onCancel}>
             {cancelButton ?? "취소"}
           </Button>
           <Button
-            css={button(theme.color.point.hero)}
             onClick={onConfirm}
+            variant="action"
             actionType={confirmType === "neg" ? "neg" : "basic"}
           >
             {confirmButton ?? "동의합니다"}
