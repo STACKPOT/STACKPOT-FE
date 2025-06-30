@@ -2,7 +2,6 @@ import {
   container,
   content,
   contentHeader,
-
   contentBody,
   textareaStyle,
   describe,
@@ -14,7 +13,7 @@ import {
   buttonContainer,
   buttonStyle,
 } from "./Setting.style";
-import { Button, ExplainModal, PotButton } from "@components/index";
+import { Button, ExplainModal } from "@components/index";
 import { useEffect, useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import usePatchUserProfileUpdate from "apis/hooks/users/usePatchUserProfileUpdate";
@@ -55,7 +54,9 @@ const Setting = () => {
     }
   }, [profile]);
 
-  const handleSaveClick: SubmitHandler<PatchUserProfileUpdateParams> = (data) => {
+  const handleSaveClick: SubmitHandler<PatchUserProfileUpdateParams> = (
+    data
+  ) => {
     mutate(data, {
       onSuccess: () => {
         navigate(routes.myPage);
@@ -103,12 +104,13 @@ const Setting = () => {
             <div css={content(false)}>
               <div css={contentHeader}>
                 <p>계정 탈퇴하기</p>
-                <PotButton
-                  type="red"
+                <Button
+                  variant="action"
+                  actionType="neg"
                   onClick={() => setIsWithdrawModalOpen(true)}
                 >
                   탈퇴하기
-                </PotButton>
+                </Button>
               </div>
               <p css={contentBody}>그동안 올린 글과 정보가 모두 삭제돼요.</p>
             </div>
@@ -133,7 +135,8 @@ const Setting = () => {
           buttonText="탈퇴하기"
           subtitle={`탈퇴 후 30일 이내에는 계정을 복구할 수 있습니다.\n이후에는 모든 데이터가 영구적으로 삭제됩니다`}
           onButtonClick={handleClick}
-          onCancel={() => setIsWithdrawModalOpen(false)} />
+          onCancel={() => setIsWithdrawModalOpen(false)}
+        />
       )}
     </main>
   );

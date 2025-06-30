@@ -71,36 +71,37 @@ const PotHeader: React.FC<PotHeaderProps> = ({
     <>
       <div css={container}>
         <div css={titleContainer}>
-          <LeftIcon css={backButtonStyle} type="button" onClick={() => navigate(-1)} />
+          <LeftIcon
+            css={backButtonStyle}
+            type="button"
+            onClick={() => navigate(-1)}
+          />
           <h1 css={titleStyle}>{title}</h1>
           <div css={buttonWrapperStyle}>
-            {isMyPot ?
-              <Button
-                variant="action"
-                actionType="edit"
-                onClick={handleEdit}>
+            {isMyPot ? (
+              <Button variant="action" actionType="alt" onClick={handleEdit}>
                 수정
               </Button>
-              :
+            ) : (
               potStatus === "RECRUITING" &&
-              (isApplied ?
+              (isApplied ? (
                 <Button
                   variant="action"
-                  actionType="action"
-                  onClick={() => setShowCancelApplyModal(true)}>
+                  actionType="neg"
+                  onClick={() => setShowCancelApplyModal(true)}
+                >
                   지원 취소하기
                 </Button>
-                :
+              ) : (
                 <Button
                   variant="action"
-                  actionType="action"
-                  onClick={() => setShowApplyModal(true)}>
+                  onClick={() => setShowApplyModal(true)}
+                >
                   지원하기
                 </Button>
-              )
-            }
+              ))
+            )}
           </div>
-
         </div>
         <div css={profileContainer}>
           <img

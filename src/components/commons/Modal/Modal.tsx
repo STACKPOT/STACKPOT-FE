@@ -6,6 +6,7 @@ import {
   messageStyle,
   background,
   closeIconStyle,
+  titleContentContainer,
 } from "./Modal.style";
 import { CloseIcon } from "@assets/svgs";
 import theme from "@styles/theme";
@@ -27,17 +28,23 @@ const Modal: React.FC<ModalProps> = ({
     <div css={background}>
       <div css={container}>
         <CloseIcon css={closeIconStyle} onClick={onCancel} />
-        <p css={titleStyle}>{title}</p>
-        <p css={messageStyle}>{message}</p>
+        <div css={titleContentContainer}>
+          <p css={titleStyle}>{title}</p>
+          <p css={messageStyle}>{message}</p>
+        </div>
         <div css={footer}>
           <button
             css={button(theme.color.interactive.inactive)}
             onClick={onCancel}
           >
-            아니요
+            취소
           </button>
-          <button css={button(theme.color.point.hero)} onClick={onConfirm} type="button">
-            네
+          <button
+            css={button(theme.color.point.hero)}
+            onClick={onConfirm}
+            type="button"
+          >
+            동의합니다
           </button>
         </div>
       </div>
