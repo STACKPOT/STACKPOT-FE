@@ -84,7 +84,7 @@ const Header: React.FC = () => {
       <header css={headerStyle(isHomePage)}>
         <Logo css={logoStyle(isHomePage)} onClick={handleLogoClick} />
         {!accessToken ? (
-          <Button variant="entry" onClick={handleClick}>
+          <Button variant="cta" onClick={handleClick}>
             로그인/회원가입
           </Button>
         ) : (

@@ -9,7 +9,7 @@ import {
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: "entry" | "action" | "landing" | "full";
+  variant?: "cta" | "action" | "landing" | "full";
   actionType?: "basic" | "neg" | "alt";
   onClick?: () => void;
   customStyle?: SerializedStyles;
@@ -26,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const buttonType: SerializedStyles = (() => {
     switch (variant) {
-      case "entry":
+      case "cta":
         return ctaButtonStyle;
       case "action":
         return actionButtonStyle(actionType);
