@@ -10,10 +10,14 @@ import {
 } from "./Modal.style";
 import { CloseIcon } from "@assets/svgs";
 import theme from "@styles/theme";
+import Button from "../Button/Button";
 
 interface ModalProps {
   title: string;
   message: string;
+  confirmType?: "normal" | "neg";
+  cancelButton?: string;
+  confirmButton?: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -21,6 +25,9 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({
   title,
   message,
+  confirmType = "normal",
+  cancelButton,
+  confirmButton,
   onConfirm,
   onCancel,
 }) => {
@@ -33,19 +40,16 @@ const Modal: React.FC<ModalProps> = ({
           <p css={messageStyle}>{message}</p>
         </div>
         <div css={footer}>
-          <button
-            css={button(theme.color.interactive.inactive)}
-            onClick={onCancel}
-          >
-            취소
-          </button>
-          <button
+          <Button actionType="alt" onClick={onCancel}>
+            {cancelButton ?? "취소"}
+          </Button>
+          <Button
             css={button(theme.color.point.hero)}
             onClick={onConfirm}
-            type="button"
+            actionType={confirmType === "neg" && "neg"}
           >
-            동의합니다
-          </button>
+            {confirmButton ?? "동의합니다"}
+          </Button>
         </div>
       </div>
     </div>
