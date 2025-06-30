@@ -1,4 +1,4 @@
-import { MemberGroup, PotButton, PotInformation } from "@components/index";
+import { MemberGroup, PotInformation } from "@components/index";
 import {
   container,
   profileContainer,
@@ -84,11 +84,6 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
         <div css={titleProfileContainer}>
           <div css={titleContainer}>
             <h1 css={titleStyle}>{title}</h1>
-            {buttonType !== "none" && (
-              <PotButton onClick={() => handleEditPot(id)}>
-                {buttonType === "edit" ? "팟 소개 수정" : "여기서 저는요"}
-              </PotButton>
-            )}
           </div>
           <div css={profileContainer}>
             <MemberGroup memberRoleList={members} />
@@ -101,7 +96,8 @@ const FinishedPotCard: React.FC<FinishedPotCardProps> = ({
             { title: "사용 언어", content: languages },
             { title: "종료 날짜", content: endDate },
             { title: "팀 구성", content: stacks },
-          ]} />
+          ]}
+        />
       </div>
       {appealModal !== null && (
         <AppealModal
