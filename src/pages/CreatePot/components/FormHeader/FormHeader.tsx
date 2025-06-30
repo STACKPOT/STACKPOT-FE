@@ -1,6 +1,12 @@
 import { PotIcon } from "@assets/svgs";
-import { headButtonContainer, headContainer, iconStyle, titleContainer, titleStyle } from "./FormHeader.style";
-import { Button, Modal, PotButton } from "@components/index";
+import {
+  headButtonContainer,
+  headContainer,
+  iconStyle,
+  titleContainer,
+  titleStyle,
+} from "./FormHeader.style";
+import { Button, Modal } from "@components/index";
 import { useNavigate } from "react-router-dom";
 import useDeletePot from "apis/hooks/pots/useDeletePot";
 import routes from "@constants/routes";
@@ -22,10 +28,10 @@ const FormHeader = ({ type, potId, potName }: FormHeaderProps) => {
       deletePot(potId, {
         onSuccess: () => {
           navigate(routes.home);
-        }
+        },
       });
     }
-  }
+  };
 
   return (
     <div css={headContainer}>
@@ -36,30 +42,28 @@ const FormHeader = ({ type, potId, potName }: FormHeaderProps) => {
         <PotIcon css={iconStyle} />
       </div>
       {type === "create" ? (
-        <Button variant="action" type="submit" >
+        <Button variant="action" type="submit">
           팟 만들기
         </Button>
       ) : (
         <div css={headButtonContainer}>
-          <Button
-            type="submit"
-            variant="action"
-            actionType="edit"
-          >
+          <Button type="submit" variant="action">
             수정 완료
           </Button>
-          <PotButton type="red" onClick={() => setShowDeleteModal(true)}>
+          <Button actionType="neg" onClick={() => setShowDeleteModal(true)}>
             삭제하기
-          </PotButton>
+          </Button>
         </div>
       )}
-      {showDeleteModal &&
+      {showDeleteModal && (
         <Modal
           title={`${potName}을\n삭제하시겠습니까?`}
           message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
           onCancel={() => setShowDeleteModal(false)}
-          onConfirm={handleDeletePot} />}
+          onConfirm={handleDeletePot}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 export default FormHeader;

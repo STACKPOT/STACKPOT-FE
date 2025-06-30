@@ -46,7 +46,7 @@ const Modal: React.FC<ModalProps> = ({
           <Button
             css={button(theme.color.point.hero)}
             onClick={onConfirm}
-            actionType={confirmType === "neg" && "neg"}
+            actionType={confirmType === "neg" ? "neg" : "basic"}
           >
             {confirmButton ?? "동의합니다"}
           </Button>
