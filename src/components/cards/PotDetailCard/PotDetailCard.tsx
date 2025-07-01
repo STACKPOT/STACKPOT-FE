@@ -26,6 +26,7 @@ import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import Modal from "@components/commons/Modal/Modal";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
+import { PotSummaryModal } from "@pages/MyPage/components";
 
 interface PotDetailCardProps {
   potId: number;
@@ -64,6 +65,7 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState(false);
   const [showCancelApplyModal, setShowCancelApplyModal] = useState(false);
+  const [showSummaryModal, setShowSummaryModal] = useState<number | null>(null);
 
   const recruitments = Object.entries(members ?? {}).flatMap(([role, count]) =>
     Array(count).fill(role as Role)
@@ -84,6 +86,7 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
 
   const handleButtonClick = () => {
     if (type === "myPage") {
+      setShowSummaryModal(potId);
     } else if (type === "myPot") {
     } else if (type === "applied") {
       setShowCancelApplyModal(true);
@@ -156,6 +159,12 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
           message="팟 게시자는 지원자를 팟에 추가할 수 없게 됩니다."
           onConfirm={handleCancelApplyModalConfirm}
           onCancel={() => setShowCancelApplyModal(false)}
+        />
+      )}
+      {showSummaryModal && (
+        <PotSummaryModal
+          potId={potId}
+          onCancel={() => setShowSummaryModal(null)}
         />
       )}
     </>

@@ -78,7 +78,7 @@ export const elementContentStyle = css`
 `;
 
 export const layerStyle = css`
-  width: 35rem;
+  width: 35.1rem;
   height: 100%;
   display: flex;
   justify-content: center;
