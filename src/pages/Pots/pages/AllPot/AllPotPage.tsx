@@ -21,28 +21,20 @@ import routes from "@constants/routes";
 const AllPotPage: React.FC = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>("전체보기");
+  const [isMyPot, setIsMyPot] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [category, setCategory] = useState<string | null>(null);
 
   const { data } = useGetPots({
     page: currentPage,
     size: 9,
-    recruitmentRole: category,
+    recruitmentRole: partMap[selectedCategory],
+    onlyMine: isMyPot,
   });
 
   const handleClick = (partName: string) => {
     setCurrentPage(1);
     setSelectedCategory(partName);
-    switch (partName) {
-      case "전체보기":
-        setCategory(null);
-        return;
-      case "내가 만든 팟":
-        setCategory("MINE");
-        return;
-      default:
-        setCategory(partMap[partName]);
-    }
+    setIsMyPot(partName === "내가 만든 팟");
   };
 
   const handlePageChange = (

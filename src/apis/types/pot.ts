@@ -43,6 +43,7 @@ export interface GetPotsParams {
   page: number;
   size: number;
   recruitmentRole: string | null;
+  onlyMine: boolean;
 }
 
 export interface PotsResponse {
