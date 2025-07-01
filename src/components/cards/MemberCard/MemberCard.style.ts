@@ -13,9 +13,9 @@ export const container = (type: "selection" | "info" | "none") => css`
   box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.04);
   cursor: pointer;
   transition: all 0.1s ease-out;
-  &:hover{
+  &:hover {
     ${type === "info" && selectedContainerStyle};
-  };
+  }
   &:hover p {
     ${type === "info" && selectedNicknameStyle};
   }
@@ -43,9 +43,17 @@ export const profileStyle = css`
 export const nicknameStyle = css`
   ${theme.font.caption2};
   color: ${theme.color.point.gray};
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  flex: 1;
 `;
 
 export const selectedNicknameStyle = css`
   ${theme.font.caption2};
   color: ${theme.color.base.white};
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  flex: 1;
 `;

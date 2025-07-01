@@ -6,7 +6,7 @@ const applicantsListData: GetPotApplicationResponse[] = [
     potRole: "FRONTEND",
     status: "",
     userId: 1,
-    userNickname: "dfd",
+    userNickname: "dfddfddfddfddfddfddfd",
   },
   {
     applicationId: 1,
