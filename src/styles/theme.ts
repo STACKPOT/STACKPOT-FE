@@ -61,122 +61,125 @@ const theme = {
       disable: "#F3F3F3", // gray-0.100
       inactive: "#989BA2", // gray-300
     },
+    social: {
+      kakaoBg: "#FEE500",
+      naverBg: "#03C75A",
+    },
   },
   font: {
     display4: css`
-			font-size: 48px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 48px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     display3: css`
-			font-size: 40px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 40px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     display2: css`
-			font-size: 36px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 36px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     display1: css`
-			font-size: 32px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 32px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     title3: css`
-			font-size: 28px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 28px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     title2: css`
-			font-size: 24px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 24px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     title1: css`
-			font-size: 20px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 20px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     body3: css`
-			font-size: 16px;
-			line-height: 1.6;
-			letter-spacing: -0.1px;
-			font-weight: 400;
-		`,
+      font-size: 16px;
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+      font-weight: 400;
+    `,
     body2: css`
-			font-size: 14px;
-			line-height: 1.6;
-			letter-spacing: -0.1px;
-			font-weight: 400;
-		`,
+      font-size: 14px;
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+      font-weight: 400;
+    `,
     body1: css`
-			font-size: 12px;
-			line-height: 1.6;
-			letter-spacing: -0.1px;
-			font-weight: 400;
-		`,
+      font-size: 12px;
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+      font-weight: 400;
+    `,
     bodyBold3: css`
-			font-size: 16px;
-			line-height: 1.6;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 16px;
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     bodyBold2: css`
-			font-size: 14px;
-			line-height: 1.6;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 14px;
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     bodyBold1: css`
-			font-size: 10px;
-			line-height: 1.6;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 10px;
+      line-height: 1.6;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     caption3: css`
-			font-size: 16px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 16px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     caption2: css`
-			font-size: 14px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-		`,
+      font-size: 14px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     caption1: css`
-			font-size: 10px;
-			line-height: 1.3;
-			letter-spacing: -0.1px;
-			font-weight: 700;
-			
-		`,
+      font-size: 10px;
+      line-height: 1.3;
+      letter-spacing: -0.1px;
+      font-weight: 700;
+    `,
     captionBold1: css`
-			font-size: 12px;
-			line-height: 14px;
-			font-weight: 700;
-		`,
+      font-size: 12px;
+      line-height: 14px;
+      font-weight: 700;
+    `,
     label3: css`
-			font-size: 18px;
-			line-height: 1.3;
-			font-weight: 500;
-			letter-spacing: -0.1px;
-		`,
+      font-size: 18px;
+      line-height: 1.3;
+      font-weight: 500;
+      letter-spacing: -0.1px;
+    `,
     label2: css`
-			font-size: 16px;
-			line-height: 1.3;
-			font-weight: 500;
-			letter-spacing: -0.1px;
-		`,
+      font-size: 16px;
+      line-height: 1.3;
+      font-weight: 500;
+      letter-spacing: -0.1px;
+    `,
   },
 };
 

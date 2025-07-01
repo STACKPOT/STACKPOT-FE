@@ -14,7 +14,7 @@ import {
   titleContainer,
   titleStyle,
 } from "./FinishedPotForm.style";
-import { Button, Modal, PotButton } from "@components/index";
+import { Button, Modal } from "@components/index";
 import { AppealIcon, PotIcon } from "@assets/svgs";
 import { DatePicker } from "@pages/CreatePot/components";
 import { PatchPotCompleteBody } from "apis/types/pot";
@@ -148,10 +148,10 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({
             {type === "create" && (
               <div css={summaryButtonContainer}>
                 <label css={labelStyle}>팟 소개하기</label>
-                <PotButton onClick={handleSummary}>
+                <Button onClick={handleSummary}>
                   <AppealIcon css={appealIconStyle} />
                   AI 요약 생성
-                </PotButton>
+                </Button>
               </div>
             )}
             {type === "create" && (

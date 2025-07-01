@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { media } from "@styles/media";
 import theme from "@styles/theme";
 
 export const background = css`
@@ -13,37 +14,55 @@ export const background = css`
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 10;
 `;
+
 export const container = css`
-  width: 54rem;
-  padding: 3.2rem;
+  width: 40rem;
+  ${media[1440]} {
+    width: 56rem;
+  }
+  ${media[1920]} {
+    width: 76rem;
+  }
+  padding: 2.4rem;
   background: ${theme.color.base.white};
-  border: 0.1rem solid ${theme.color.object.alternative};
-  border-radius: 2.4rem;
+  border: 1px solid ${theme.color.object.assistive};
   display: inline-flex;
   flex-direction: column;
-  gap: 1.6rem;
 `;
+
 export const closeIconStyle = css`
   margin-left: auto;
   cursor: pointer;
 `;
+
+export const titleContentContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding: 0.8rem 1.6rem;
+`;
+
 export const titleStyle = css`
-  color: ${theme.color.base.darkgray};
-  ${theme.font.title1};
-  text-align: center;
+  color: ${theme.color.point.gray};
+  ${theme.font.title2};
 `;
 
 export const messageStyle = css`
-  color: ${theme.color.object.assistive};
-  ${theme.font.caption3};
-  text-align: center;
+  max-height: calc(var(--vh, 60vh) - 215px);
+  color: ${theme.color.point.gray};
+  ${theme.font.body3};
   white-space: pre-line;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
+
 export const footer = css`
-  margin-top: 1.6rem;
   display: flex;
-  justify-content: center;
-  gap: 3.2rem;
+  justify-content: end;
+  gap: 0.8rem;
+  padding: 1.6rem;
 `;
 
 export const button = (backgroundColor: string) => css`

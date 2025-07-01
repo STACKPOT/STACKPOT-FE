@@ -11,7 +11,6 @@ import DdayBadge from "./commons/Badge/DdayBadge/DdayBadge";
 import Badge from "./commons/Badge/Badge";
 import SearchInput from "./commons/SearchInput/SearchInput";
 import CheckBox from "./commons/Button/CheckBox/CheckBox";
-import PotButton from "./commons/Button/PotButton/PotButton";
 import ExplainModal from "./commons/Modal/ExplainModal/ExplainModal";
 import ArrowButton from "./commons/Button/ArrowButton/ArrowButton";
 import Dropdown from "./commons/Dropdown/Dropdown";
@@ -25,8 +24,11 @@ import InformationPopper from "./commons/InformationPopper/InformationPopper";
 import OnGoingPotCard from "./cards/OnGoingPotCard/OnGoingPotCard";
 import PartRecruitment from "./commons/PartRecruitment/PartRecruitment";
 import PostForm from "./commons/PostForm/PostForm";
+import Comment from "./commons/Comment/Comment";
+import CommentSection from "./commons/Comment/CommentSection";
 import CtaCard from "./cards/CtaCard/CtaCard";
 import PotDetailCard from "./cards/PotDetailCard/PotDetailCard";
+import PostButton from "./commons/Button/PostButton/PostButton";
 
 export {
   Modal,
@@ -42,7 +44,6 @@ export {
   SearchInput,
   StateBadge,
   DdayBadge,
-  PotButton,
   ExplainModal,
   CheckBox,
   ArrowButton,
@@ -56,6 +57,9 @@ export {
   OnGoingPotCard,
   PartRecruitment,
   PostForm,
+  Comment,
+  CommentSection,
   CtaCard,
   PotDetailCard,
+  PostButton,
 };
