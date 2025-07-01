@@ -33,7 +33,7 @@ interface PotDetailCardProps {
   potName: string;
   potContent: string;
   potStatus: PotStatus;
-  members: Record<Role, number>;
+  members?: Record<Role, number>;
   potModeOfOperation: Participation;
   potStartDate: string;
   potDuration: string;
@@ -65,7 +65,7 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
   const [showButton, setShowButton] = useState(false);
   const [showCancelApplyModal, setShowCancelApplyModal] = useState(false);
 
-  const recruitments = Object.entries(members).flatMap(([role, count]) =>
+  const recruitments = Object.entries(members ?? {}).flatMap(([role, count]) =>
     Array(count).fill(role as Role)
   ) as Role[];
 

@@ -10,6 +10,7 @@ export const container = css`
 `;
 
 export const contentContainer = css`
+  width: 74.9rem;
   display: flex;
   flex-direction: column;
   padding: 4.5rem 3.8rem;
@@ -25,7 +26,6 @@ export const informationContainer = css`
 `;
 
 export const titleContainer = css`
-  width: 67.2rem;
   display: flex;
   gap: 1.6rem;
   align-items: center;
