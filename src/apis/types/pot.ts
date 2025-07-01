@@ -64,18 +64,14 @@ interface Pots {
 }
 
 export interface GetPotsApplyResponse {
-  userId: number;
-  userRole: Role;
-  userNickname: string;
   potId: number;
   potStatus: PotStatus;
   potName: string;
   potStartDate: string;
   potDuration: string;
-  potLan: string;
   potModeOfOperation: Participation;
   potContent: string;
-  recruitmentDetails: string;
+  recruitmentRoles: Role[];
   members: Record<Role, number>;
   dday: string;
 }

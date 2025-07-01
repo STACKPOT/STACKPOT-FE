@@ -37,7 +37,7 @@ interface PotDetailCardProps {
   potModeOfOperation: Participation;
   potStartDate: string;
   potDuration: string;
-  applicants: Role[];
+  recruitmentRoles: Role[];
   type: "myPage" | "myPot" | "applied" | "recruiting";
 }
 
@@ -58,18 +58,21 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
   potModeOfOperation,
   potStartDate,
   potDuration,
-  applicants,
+  recruitmentRoles,
   type,
 }: PotDetailCardProps) => {
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState(false);
   const [showCancelApplyModal, setShowCancelApplyModal] = useState(false);
 
+  const recruitments = Object.entries(members).flatMap(([role, count]) =>
+    Array(count).fill(role as Role)
+  ) as Role[];
+
   const { mutate: cancelApply } = useCancelApply();
 
   const handleMouseOver = (mouseOver: boolean) => {
     if (type !== "recruiting") {
-      console.log(mouseOver);
       setShowButton(mouseOver);
     }
   };
@@ -103,18 +106,18 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
       <div css={container} onClick={handleCardClick}>
         <div css={contentContainer}>
           <div css={titleContainer}>
-            <Badge content={dday} />
+            <Badge color="red" content={dday} />
             <p css={titleStyle}>{potName}</p>
             <StateBadge badgeType="pot" potState={potStatus} />
           </div>
           <p css={contentStyle}>{potContent}</p>
           <div css={partBadgeContainer}>
-            {Object.keys(members).map((category) => (
+            {recruitmentRoles.map((category) => (
               <Badge content={category} key={category} />
             ))}
           </div>
           <div css={memberGroupContainer}>
-            <MemberGroup memberRoleList={applicants} />
+            <MemberGroup memberRoleList={recruitments} />
           </div>
         </div>
         <div

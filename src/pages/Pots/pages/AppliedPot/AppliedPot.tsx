@@ -37,12 +37,7 @@ const AppliedPotPage = () => {
       <CtaCard type="pot" />
       {pots && pots.length > 0 ? (
         pots.map((pot) => (
-          <PotDetailCard
-            key={pot.potId}
-            {...pot}
-            applicants={[]}
-            type="applied"
-          />
+          <PotDetailCard key={pot.potId} {...pot} type="applied" />
         ))
       ) : (
         <div css={noDataContainer}>
