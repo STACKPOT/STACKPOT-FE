@@ -29,6 +29,27 @@ const applicantsListData: GetPotApplicationResponse[] = [
     userId: 5,
     userNickname: "dfd",
   },
+  {
+    applicationId: 1,
+    potRole: "FRONTEND",
+    status: "",
+    userId: 90,
+    userNickname: "dfd",
+  },
+  {
+    applicationId: 1,
+    potRole: "DESIGN",
+    status: "",
+    userId: 89,
+    userNickname: "dfd",
+  },
+  {
+    applicationId: 1,
+    potRole: "PLANNING",
+    status: "",
+    userId: 89,
+    userNickname: "dfd",
+  },
 ];
 
 export default applicantsListData;

@@ -1,5 +1,5 @@
 import { ExplainModal, MemberCard } from "@components/index";
-import { memberListContainer } from "./StartPotModal.style";
+import { memberListContainer, titleStyle } from "./StartPotModal.style";
 import { GetPotApplicationResponse } from "apis/types/pot";
 import useStartPot from "apis/hooks/pots/useStartPot";
 
@@ -37,23 +37,26 @@ const StartPotModal: React.FC<StartPotModalProps> = ({
 
   return (
     <ExplainModal
-      title="이 멤버와 함께 팟을 시작할게요!"
       buttonText="준비 완료"
+      type="custom"
       disabled={isPending}
       onButtonClick={handleStartPot}
       onCancel={onCancelModal}
     >
-      <div css={memberListContainer}>
-        {selectedApplicants.map((applicant) => (
-          <MemberCard
-            userId={applicant.userId}
-            nickname={applicant.userNickname}
-            role={applicant.potRole}
-            type="selection"
-            onClick={() => {}}
-          />
-        ))}
-      </div>
+      <>
+        <p css={titleStyle}>이 멤버와 함께 팟을 시작할게요!</p>
+        <div css={memberListContainer}>
+          {selectedApplicants.map((applicant) => (
+            <MemberCard
+              userId={applicant.userId}
+              nickname={applicant.userNickname}
+              role={applicant.potRole}
+              type="selection"
+              onClick={() => {}}
+            />
+          ))}
+        </div>
+      </>
     </ExplainModal>
   );
 };

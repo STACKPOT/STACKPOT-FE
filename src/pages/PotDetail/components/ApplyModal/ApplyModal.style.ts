@@ -5,6 +5,7 @@ export const textStyle = css`
   ${theme.font.body3};
   color: ${theme.color.point.gray};
   margin-top: 0.8rem;
+  white-space: break-spaces;
 `;
 export const container = css`
   display: grid;
