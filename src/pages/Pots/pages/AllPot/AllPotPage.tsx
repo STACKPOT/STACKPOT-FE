@@ -99,7 +99,7 @@ const AllPotPage: React.FC = () => {
           <p css={noDataTextStyle}>
             😥{"\n"}생성된 팟이 없어요{"\n"}내 팟을 만들어 볼까요?
           </p>
-          <Button variant="entry" onClick={handleNavigateToCreatePot}>
+          <Button variant="cta" onClick={handleNavigateToCreatePot}>
             팟 만들기
           </Button>
         </div>

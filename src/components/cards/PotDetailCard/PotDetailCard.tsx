@@ -137,7 +137,7 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
               <div css={layerBackground(type === "applied" ? "red" : "blue")} />
               <Button
                 variant="action"
-                actionType={type === "applied" ? "neg" : "action"}
+                actionType={type === "applied" ? "neg" : "basic"}
                 customStyle={buttonStyle}
                 onClick={handleButtonClick}
               >

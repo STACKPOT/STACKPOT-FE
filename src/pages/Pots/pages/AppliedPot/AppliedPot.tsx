@@ -49,7 +49,7 @@ const AppliedPotPage = () => {
           <p css={noDataTextStyle}>
             😥{"\n"}지원한 팟이 없어요{"\n"}팟에 지원해 보세요!
           </p>
-          <Button variant="entry" onClick={handleNavigateToAllPot}>
+          <Button variant="cta" onClick={handleNavigateToAllPot}>
             모든 팟 페이지로
           </Button>
         </div>
