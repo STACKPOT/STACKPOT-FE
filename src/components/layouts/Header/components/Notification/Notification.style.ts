@@ -21,3 +21,17 @@ export const dividerStyle = css`
   border-bottom: 1px solid ${theme.color.object.alternative};
   margin: 0.8rem 0;
 `;
+
+export const emptyStateStyle = css`
+  ${theme.font.title1};
+  margin: 0.8rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+`;
+
+export const emptyTitleStyle = css`
+  color: ${theme.color.object.hero};
+`;
