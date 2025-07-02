@@ -50,4 +50,5 @@ export const listContainer = css`
 
 export const startPotButtonStyle = css`
   margin-top: 4.8rem;
-`
+  margin-bottom: 1.6rem;
+`;

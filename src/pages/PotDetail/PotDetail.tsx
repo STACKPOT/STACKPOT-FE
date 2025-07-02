@@ -5,11 +5,8 @@ import {
   dividerStyle,
 } from "./PotDetail.style";
 import { useParams } from "react-router-dom";
-import {
-  ApplicantsInformation,
-  PotHeader,
-} from "./components";
-import { PotInformation } from "@components/index";
+import { ApplicantsInformation, PotHeader } from "./components";
+import { CommentSection, PotInformation } from "@components/index";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 import { roleImages } from "@constants/roleImage";
 
@@ -43,12 +40,12 @@ const PotDetail = () => {
             />
             <p css={contentStyle}>{data.potDetail.potContent}</p>
             <div css={dividerStyle} />
-
           </div>
           {data.potDetail.owner &&
             data.potDetail.potStatus === "RECRUITING" && (
               <ApplicantsInformation potId={potIdNumber} />
             )}
+          <CommentSection />
         </main>
       )}
     </>
