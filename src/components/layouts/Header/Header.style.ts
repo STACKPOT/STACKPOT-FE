@@ -57,3 +57,7 @@ export const iconStyle = (isHomePage: boolean) => css`
     ? theme.color.point.yellow
     : theme.color.interactive.inactive};
 `;
+
+export const bellContainer = css`
+  position: relative;
+`;
