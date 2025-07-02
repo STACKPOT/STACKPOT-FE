@@ -9,7 +9,7 @@ import {
   profileStyle,
   nicknameStyle,
 } from "./PotHeader.style";
-import { Button, DdayBadge, Modal } from "@components/index";
+import { Button, DdayBadge, ExplainModal, Modal } from "@components/index";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ApplyModal from "../ApplyModal/ApplyModal";
@@ -17,7 +17,6 @@ import useCancelApply from "apis/hooks/pots/useCancelApply";
 import { PotStatus } from "types/potStatus";
 import routes from "@constants/routes";
 import { PostPotApplicationResponse } from "apis/types/pot";
-import ApplyProfileModal from "../ApplyProfileModal/ApplyProfileModal";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 
 interface PotHeaderProps {
@@ -119,7 +118,10 @@ const PotHeader: React.FC<PotHeaderProps> = ({
       {showCancelApplyModal && (
         <Modal
           title="지원을 취소하시겠어요?"
-          message="팟 게시자는 지원자를 팟에 추가할 수 없게 됩니다."
+          message="팟 게시자는 지원자를 팟에 추가할 수 없게 돼요."
+          confirmType="neg"
+          confirmButton="지원 취소하기"
+          cancelButton="아니요"
           onConfirm={handleCancelApplyModalConfirm}
           onCancel={() => setShowCancelApplyModal(false)}
         />
@@ -132,9 +134,13 @@ const PotHeader: React.FC<PotHeaderProps> = ({
         />
       )}
       {showApplyProfileModal && (
-        <ApplyProfileModal
-          potRole={showApplyProfileModal.potRole}
-          useNickname={showApplyProfileModal.userNickname}
+        <ExplainModal
+          type="profile"
+          title={`지원이 완료되었어요!${"\n"}팟 게시자가 회원님의 프로필을 확인할 수 있어요.`}
+          buttonText="확인했어요"
+          role={"FRONTEND"}
+          nickname={"dfd"}
+          onButtonClick={() => setShowApplyProfileModal(null)}
           onCancel={() => setShowApplyProfileModal(null)}
         />
       )}

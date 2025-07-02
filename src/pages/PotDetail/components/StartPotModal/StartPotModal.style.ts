@@ -16,3 +16,7 @@ export const titleStyle = css`
   color: ${theme.color.point.gray};
   white-space: pre-wrap;
 `;
+
+export const modalStyle = css`
+  width: 76.3rem;
+`;

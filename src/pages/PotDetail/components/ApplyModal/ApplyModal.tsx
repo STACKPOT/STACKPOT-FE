@@ -1,5 +1,5 @@
 import { ExplainModal, RoleCard } from "@components/index";
-import { container, textStyle } from "./ApplyModal.style";
+import { container, modalStyle, textStyle } from "./ApplyModal.style";
 import { useState } from "react";
 import { partMap } from "@constants/categories";
 import useApplyPot from "apis/hooks/pots/useApplyPot";
@@ -42,6 +42,7 @@ const ApplyModal: React.FC<ApplyModalProps> = ({
     <ExplainModal
       title={`어떤 파트로 지원할까요?\n`}
       buttonText="지원하기"
+      customContainerStyle={modalStyle}
       onButtonClick={handleApply}
       onCancel={onModalCancel}
     >

@@ -10,15 +10,16 @@ import {
   listContainer,
   startPotButtonStyle,
 } from "./ApplicantsInformation.style";
-import { Button, MemberCard } from "@components/index";
+import { Button, ExplainModal, MemberCard } from "@components/index";
 import { useState } from "react";
-import ProfileModal from "../ProfileModal/ProfileModal";
 import MemberKakaoIdModal from "../MemberKakaoIdModal/MemberKakaoIdModal";
 import StartPotModal from "../StartPotModal/StartPotModal";
 import useGetPotApplicants from "apis/hooks/pots/useGetPotApplicants";
 import { GetPotApplicationResponse } from "apis/types/pot";
 import { useSnackbar } from "providers";
 import applicantsListData from "mocks/applicantsData";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 interface ApplicantsInformationProps {
   potId: number;
@@ -26,6 +27,7 @@ interface ApplicantsInformationProps {
 
 const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
   const { showSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const [selectedApplicants, setSelectedApplicants] = useState<
     GetPotApplicationResponse[]
@@ -53,6 +55,12 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
       );
     } else {
       setSelectedApplicants((prev) => [...prev, applicant]);
+    }
+  };
+
+  const handleMemberProfile = () => {
+    if (showProfileMember) {
+      navigate(`${routes.userProfile}/${showProfileMember.userId}`);
     }
   };
 
@@ -90,18 +98,24 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
               />
             ))}
           </div>
-          <Button customStyle={startPotButtonStyle} onClick={handleStartPot}>
+          <Button
+            variant="full"
+            customStyle={startPotButtonStyle}
+            onClick={handleStartPot}
+          >
             팟 시작하기
           </Button>
         </div>
       ) : null}
       {showProfileMember && (
-        <ProfileModal
-          type="member"
-          potRole={showProfileMember.potRole}
+        <ExplainModal
+          type="profile"
+          title={`지원자의 프로필을 살펴보세요!${"\n"}다양한 활동이 궁금하신가요?`}
+          buttonText="지원자 활동 더보기"
+          role={showProfileMember.potRole}
           nickname={showProfileMember.userNickname}
-          userId={showProfileMember.userId}
-          onCancelModal={() => setShowProfileMember(null)}
+          onButtonClick={handleMemberProfile}
+          onCancel={() => setShowProfileMember(null)}
         />
       )}
       {showStartModal && (

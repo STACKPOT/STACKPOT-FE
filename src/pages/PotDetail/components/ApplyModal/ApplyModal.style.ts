@@ -15,3 +15,7 @@ export const container = css`
   justify-content: center;
   margin-top: 1.6rem;
 `;
+
+export const modalStyle = css`
+  width: 76rem;
+`;

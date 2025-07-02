@@ -1,5 +1,9 @@
 import { ExplainModal, MemberCard } from "@components/index";
-import { memberListContainer, titleStyle } from "./StartPotModal.style";
+import {
+  memberListContainer,
+  modalStyle,
+  titleStyle,
+} from "./StartPotModal.style";
 import { GetPotApplicationResponse } from "apis/types/pot";
 import useStartPot from "apis/hooks/pots/useStartPot";
 
@@ -40,6 +44,7 @@ const StartPotModal: React.FC<StartPotModalProps> = ({
       buttonText="준비 완료"
       type="custom"
       disabled={isPending}
+      customContainerStyle={modalStyle}
       onButtonClick={handleStartPot}
       onCancel={onCancelModal}
     >
