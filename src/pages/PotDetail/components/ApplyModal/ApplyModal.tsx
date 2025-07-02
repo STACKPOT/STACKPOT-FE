@@ -56,7 +56,7 @@ const ApplyModal: React.FC<ApplyModalProps> = ({
           {Object.keys(partMap).map((part) => (
             <RoleCard
               role={partMap[part]}
-              type="applicant"
+              type="selection"
               selected={selectedRole === partMap[part]}
               onClick={() => setSelectedRole(partMap[part] as Role)}
             />
