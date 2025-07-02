@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 import { media } from "@styles/media";
 import theme from "@styles/theme";
 
@@ -15,13 +15,13 @@ export const modalBackgroundStyle = css`
   z-index: 1000;
 `;
 
-export const containerStyle = css`
+export const containerStyle = (customStyle?: SerializedStyles) => css`
   width: 40rem;
   ${media[1440]} {
-    width: 56rem;
+    width: ${!customStyle && `56rem`};
   }
   ${media[1920]} {
-    width: 76rem;
+    width: ${!customStyle && `76rem`};
   }
   padding: 2.4rem;
   border-radius: 12px;
@@ -29,6 +29,11 @@ export const containerStyle = css`
   background-color: ${theme.color.base.white};
   display: flex;
   flex-direction: column;
+  ${customStyle};
+`;
+
+export const profileContainerStyle = css`
+  width: 76rem;
 `;
 
 export const closeButtonStyle = css`
@@ -53,8 +58,8 @@ export const titleStyle = css`
   white-space: pre-wrap;
 `;
 
-export const contentContainer = css`
-  max-height: calc(var(--vh, 60vh) - 227px);
+export const contentContainer = (customStyle: boolean) => css`
+  max-height: ${customStyle ? `none` : `calc(var(--vh, 60vh) - 227px)`};
   overflow-y: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -63,4 +68,23 @@ export const contentContainer = css`
 
 export const buttonStyle = css`
   margin: 1.6rem;
+`;
+
+export const profileContentStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+`;
+
+export const profileStyle = css`
+  width: 6.4rem;
+  height: 6.4rem;
+  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 50%;
+`;
+
+export const profileNicknameStyle = css`
+  ${theme.font.title1};
+  color: ${theme.color.point.hero};
 `;
