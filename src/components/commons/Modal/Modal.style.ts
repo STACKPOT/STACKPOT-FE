@@ -64,15 +64,3 @@ export const footer = css`
   gap: 0.8rem;
   padding: 1.6rem;
 `;
-
-export const button = (backgroundColor: string) => css`
-  width: 19.4rem;
-  height: 5rem;
-  padding: 0.6rem 2.4rem;
-  background: ${backgroundColor};
-  color: ${theme.color.point.ivory};
-  border-radius: 1.6rem;
-  border: 0.1rem solid rgba(112, 115, 124, 0.2);
-  ${theme.font.caption3};
-  cursor: pointer;
-`;

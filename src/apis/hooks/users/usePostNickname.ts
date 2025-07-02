@@ -10,12 +10,17 @@ const usePostNickname = () => {
 
   return useMutation({
     mutationFn: (nickname: string) => postNickname(nickname),
-    onSuccess: () => {
-      navigate(routes.home);
-      showSnackbar({
-        message: "회원가입이 완료됐습니다.",
-        severity: "success",
-      });
+    onSuccess: (data) => {
+      if (data.result) {
+        const { accessToken, refreshToken } = data?.result;
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        navigate(routes.home);
+        showSnackbar({
+          message: "회원가입이 완료됐습니다.",
+          severity: "success",
+        });
+      }
     },
   });
 };
