@@ -16,7 +16,7 @@ import { roleImages } from "@constants/roleImage";
 import Badge from "@components/commons/Badge/Badge";
 import { useRef, useState } from "react";
 import { CircleCheck, FillCircleCheck } from "@assets/svgs";
-import { partNameMap } from "@constants/categories";
+import { partKoreanNameMap } from "@constants/categories";
 
 interface RoleCardProps {
   role: Role;
@@ -103,7 +103,7 @@ const RoleCard: React.FC<RoleCardProps> = ({
                 <CircleCheck css={checkIconStyle} />
               )}
               <img css={profileStyle} src={roleImages[role]} alt="profile" />
-              <Badge content={partNameMap[role]} />
+              <Badge content={partKoreanNameMap[role]} />
             </>
           ) : (
             <>
