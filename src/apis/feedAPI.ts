@@ -11,10 +11,10 @@ import {
   PostFeedResponse,
   FeedPatch,
   PatchFeedResponse,
-  GetFeedDetailResponse,
   GetFeedCommentsResponse,
   PostFeedCommentsParams,
   PostFeedCommentsResponse,
+  GetFeedDetailResponse,
 } from "./types/feed";
 
 export const getFeeds = async ({

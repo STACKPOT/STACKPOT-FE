@@ -32,8 +32,8 @@ const FeedDetail = () => {
 
   const navigate = useNavigate();
 
-  const profileImage = data?.writerRole
-    ? roleImages[data.writerRole]
+  const profileImage = data?.feed.writerRole
+    ? roleImages[data.feed.writerRole]
     : undefined;
 
   const handleClick = () => {
@@ -41,7 +41,7 @@ const FeedDetail = () => {
   };
 
   const handleUserClick = () => {
-    const userId = data?.writerId;
+    const userId = data?.feed.writerId;
     navigate(`${routes.userProfile}/${userId}`);
   };
 
@@ -54,8 +54,8 @@ const FeedDetail = () => {
       <div css={sectionContainer}>
         <div css={titleContainer}>
           <LeftIcon type="button" onClick={handleClick} css={iconStyle} />
-          <h1 css={titleStyle}>{data?.title}</h1>
-          {user?.id === data?.writerId && (
+          <h1 css={titleStyle}>{data?.feed.title}</h1>
+          {user?.id === data?.feed.writerId && (
             <Button
               variant="action"
               actionType="alt"
@@ -75,16 +75,16 @@ const FeedDetail = () => {
           />
           <div css={informationContainer}>
             <a css={nicknameStyle} onClick={handleUserClick}>
-              {data?.writer}
+              {data?.feed.writer}
             </a>
-            <p css={dateStyle}>{data?.createdAt}</p>
+            <p css={dateStyle}>{data?.feed.createdAt}</p>
           </div>
         </div>
         <div css={dividerStyle} />
       </div>
       <div css={sectionContainer}>
         <div css={contentStyle}>
-          {data?.content.split("\n").map((line, index) => (
+          {data?.feed.content.split("\n").map((line, index) => (
             <React.Fragment key={index}>
               {line}
               <br />
