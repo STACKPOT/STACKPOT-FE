@@ -50,6 +50,7 @@ export const titleContentContainerStyle = (
   gap: 1.6rem;
   padding: 0.8rem 1.6rem;
   align-items: ${type === "profile" && "center"};
+  text-align: ${type === "profile" && "center"};
 `;
 
 export const titleStyle = css`
