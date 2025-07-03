@@ -56,3 +56,8 @@ export interface PatchChatRoomResponse {
   result: ChatMessagesResponse;
   message: string;
 }
+
+export interface PostChatRoomsInfoParams {
+  potMemberIds: number[];
+  potId: number;
+}

@@ -1,9 +1,10 @@
 import { useMutation } from "@tanstack/react-query"
 import { postChatRoomsInfo } from "apis/chatAPI";
+import { PostChatRoomsInfoParams } from "apis/types/chat";
 
 const usePostChatRoomsInfo = () => {
   return useMutation({
-    mutationFn: ({ potMemberIds, potId }: { potMemberIds: number[], potId: number }) => postChatRoomsInfo({ potMemberIds, potId }),
+    mutationFn: (params: PostChatRoomsInfoParams) => postChatRoomsInfo(params),
   });
 };
 export default usePostChatRoomsInfo;
