@@ -60,7 +60,10 @@ const FeedDetail = () => {
               variant="action"
               actionType="alt"
               onClick={handleEdit}
-              css={editButtonStyle}>수정</Button>
+              css={editButtonStyle}
+            >
+              수정
+            </Button>
           )}{" "}
         </div>
         <div css={profileContainer}>
@@ -81,7 +84,7 @@ const FeedDetail = () => {
       </div>
       <div css={sectionContainer}>
         <div css={contentStyle}>
-          {data?.content.split('\n').map((line, index) => (
+          {data?.content.split("\n").map((line, index) => (
             <React.Fragment key={index}>
               {line}
               <br />
@@ -93,7 +96,7 @@ const FeedDetail = () => {
           <PostButton postType="save" initialState={false} />
         </div>
       </div>
-      <CommentSection />
+      <CommentSection type="feed" id={numericFeedId} />
     </main>
   );
 };
