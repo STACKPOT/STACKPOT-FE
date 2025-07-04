@@ -109,6 +109,10 @@ export interface PostFeedCommentsParams {
 }
 
 export interface PostFeedCommentsResponse {
-  feedId: number;
+  userId: number;
+  userName: string;
+  isWriter: boolean;
+  commentId: number;
   comment: string;
+  createdAt: string;
 }

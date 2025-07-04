@@ -9,9 +9,9 @@ const usePostFeedComments = () => {
 
   return useMutation({
     mutationFn: (params: PostFeedCommentsParams) => postFeedComments(params),
-    onSuccess: (response) => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["feedComment", response.result?.feedId],
+        queryKey: ["feedComment", variables.feedId],
       });
     },
     onError: () => {

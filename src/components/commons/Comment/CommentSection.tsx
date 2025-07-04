@@ -6,8 +6,9 @@ import {
 import CommentWriter from "./CommentWriter";
 import Comment from "./Comment";
 import useGetFeedComments from "apis/hooks/feeds/useGetFeedComments";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GetFeedCommentsResponse } from "apis/types/feed";
+import usePostFeedComments from "apis/hooks/feeds/usePostFeedComments";
 
 interface CommentSectionProps {
   type: "feed" | "pot";
@@ -17,12 +18,29 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   type,
   id,
 }: CommentSectionProps) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
   const { data } =
     type === "feed" ? useGetFeedComments(id) : useGetFeedComments(id);
+  const { mutate } = usePostFeedComments();
+
   const [comments, setComments] = useState<GetFeedCommentsResponse[]>([]);
 
-  const handleSubmitComment = () => {
-    // 댓글 작성 api 호출
+  const handleSubmitComment = (comment: string) => {
+    mutate(
+      {
+        feedId: id,
+        comment: comment,
+      },
+      {
+        onSuccess: () => {
+          const scrollHeight = scrollRef.current?.clientHeight;
+          window.scrollTo({
+            top: scrollHeight,
+            behavior: "smooth",
+          });
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -52,9 +70,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   };
 
   return (
-    <div css={container}>
+    <div css={container} ref={scrollRef}>
       <p css={commentCountStyle}>{`${comments.length}개의 댓글`}</p>
-      <CommentWriter onSubmit={() => {}} onCancel={() => {}} />
+      <CommentWriter onSubmit={handleSubmitComment} onCancel={() => {}} />
       <div css={commentsContainer}>
         {comments.map((comment) => (
           <Comment {...comment} />
