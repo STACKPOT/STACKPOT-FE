@@ -105,7 +105,7 @@ const Comment: React.FC<CommentProps> = ({
   }, [isEditing]);
 
   return (
-    <div css={container(parentCommentId === null, isDeleted ?? false)}>
+    <div css={container(parentCommentId !== null, isDeleted ?? false)}>
       {isDeleted ? (
         <div css={deletedComment}>
           <p css={deletedCommentText}>삭제된 댓글입니다.</p>
