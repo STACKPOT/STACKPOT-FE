@@ -13,7 +13,7 @@ import {
   buttonContainer,
   buttonStyle,
 } from "./Setting.style";
-import { Button, ExplainModal } from "@components/index";
+import { Button, Modal } from "@components/index";
 import { useEffect, useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import usePatchUserProfileUpdate from "apis/hooks/users/usePatchUserProfileUpdate";
@@ -69,7 +69,7 @@ const Setting = () => {
   const handleClick = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
-      deleteUser(token);
+      deleteUser();
     }
   };
 
@@ -129,14 +129,23 @@ const Setting = () => {
       </FormProvider>
 
       {isWithdrawModalOpen && (
-        <ExplainModal
-          type="delete"
+        // <ExplainModal
+        //   type="profile"
+        //   title="정말로 탈퇴하시겠습니까?"
+        //   buttonText="탈퇴하기"
+        //   // subtitle={`탈퇴 후 30일 이내에는 계정을 복구할 수 있습니다.\n이후에는 모든 데이터가 영구적으로 삭제됩니다`}
+        //   onButtonClick={handleClick}
+        //   onCancel={() => setIsWithdrawModalOpen(false)}
+        // />
+        <Modal
           title="정말로 탈퇴하시겠습니까?"
-          buttonText="탈퇴하기"
-          subtitle={`탈퇴 후 30일 이내에는 계정을 복구할 수 있습니다.\n이후에는 모든 데이터가 영구적으로 삭제됩니다`}
-          onButtonClick={handleClick}
-          onCancel={() => setIsWithdrawModalOpen(false)}
-        />
+          message={`탈퇴 후 30일 이내에는 계정을 복구할 수 있습니다.\n이후에는 모든 데이터가 영구적으로 삭제됩니다.`}
+          confirmType='neg'
+          confirmButton='탈퇴하기'
+          onConfirm={handleClick}
+          onCancel={() => setIsWithdrawModalOpen(false)} >
+
+        </Modal>
       )}
     </main>
   );
