@@ -17,6 +17,7 @@ import {
 import { AddIcon, SearchBlueIcon } from "@assets/svgs";
 import { useState } from "react";
 import MDEditor from '@uiw/react-md-editor';
+import SeriesModal from "../SeriesModal/SeriesModal";
 
 type FeedPost = {
   writer: string;
@@ -46,20 +47,36 @@ type Pot = {
 
 const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const mockSeries = [
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isSeriesModalOpen, setIsSeriesModalOpen] = useState(false);
+  const [mockSeries, setMockSeries] = useState([
     { label: "전체보기" },
     { label: "시리즈1" },
     { label: "개발 공부" },
     { label: "동아리 프로젝트" },
     { label: "면접 후기" },
-  ];
+  ]);
+  const [seriesList, setSeriesList] = useState(mockSeries);
+
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
       <div css={feedHeaderContainer}>
         <div css={feedCategoryButtonGroup}>
-          <button css={feedCategoryAddButton}><AddIcon /></button>
-          {mockSeries.map(({ label }, index) => (
+          <button
+            css={feedCategoryAddButton}
+            onClick={() => {
+              setMockSeries(seriesList);
+              setIsSeriesModalOpen(true);
+            }}
+          >
+            <AddIcon />
+          </button>
+          {seriesList.map(({ label }, index) => (
             <button
               key={label}
               css={feedCategoryButton(selectedIndex === index)}
@@ -70,11 +87,15 @@ const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
           ))}
         </div>
         <div css={feedSearchBox}>
-          <input placeholder="검색어를 입력해주세요." />
+          <input
+            placeholder="검색어를 입력해주세요."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <span role="img" aria-label="search"><SearchBlueIcon /></span>
         </div>
       </div>
-      {posts.map((post) => (
+      {filteredPosts.map((post) => (
         <PostCard
           nickname={post.writer}
           role={post.writerRole}
@@ -92,6 +113,13 @@ const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
           isMyPost={true}
         />
       ))}
+      {isSeriesModalOpen && (
+        <SeriesModal
+          defaultSeriesList={seriesList}
+          onConfirm={(updated) => setSeriesList(updated)}
+          onClose={() => setIsSeriesModalOpen(false)}
+        />
+      )}
     </>
   );
 };
