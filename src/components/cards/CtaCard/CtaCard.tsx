@@ -1,5 +1,10 @@
 import Button from "@components/commons/Button/Button";
-import { bodyTextStyle, buttonContainer, container, profileImageStyle } from "./CtaCard.style";
+import {
+  bodyTextStyle,
+  buttonContainer,
+  container,
+  profileImageStyle,
+} from "./CtaCard.style";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { useEffect, useState } from "react";
@@ -9,9 +14,7 @@ interface CtaCardProps {
   type: "pot" | "feed";
 }
 
-const CtaCard: React.FC<CtaCardProps> = ({
-  type
-}: CtaCardProps) => {
+const CtaCard: React.FC<CtaCardProps> = ({ type }: CtaCardProps) => {
   const navigate = useNavigate();
   const [roleProfileImage, setRoleProfileImage] = useState<string>("");
 
@@ -23,10 +26,9 @@ const CtaCard: React.FC<CtaCardProps> = ({
 
   const handleClick = () => {
     if (type === "feed") {
-      navigate(routes.writePost)
-    }
-    else if (type === "pot") {
-      navigate(routes.createPot)
+      navigate(routes.writePost);
+    } else if (type === "pot") {
+      navigate(routes.createPot);
     }
     window.scrollTo(0, 0);
   };
@@ -37,11 +39,14 @@ const CtaCard: React.FC<CtaCardProps> = ({
       <p css={bodyTextStyle}>
         {type == "feed"
           ? "오늘 작업하다가 무슨 일이 있었냐면..."
-          : "꿈을 현실로 옮길 시간이에요. 팟을 만들고 팀원을 모집해 볼까요?"}</p>
+          : "꿈을 현실로 옮길 시간이에요. 팟을 만들고 팀원을 모집해 볼까요?"}
+      </p>
       <div css={buttonContainer}>
-        <Button variant="entry" >{type == "feed" ? "피드 작성" : "팟 만들기"}</Button>
+        <Button variant="cta">
+          {type == "feed" ? "피드 작성" : "팟 만들기"}
+        </Button>
       </div>
     </div>
-  )
-}
-export default CtaCard
+  );
+};
+export default CtaCard;

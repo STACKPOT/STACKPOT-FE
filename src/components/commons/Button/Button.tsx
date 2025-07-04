@@ -4,12 +4,13 @@ import {
   buttonStyle,
   landingButtonStyle,
   ctaButtonStyle,
+  fullButtonStyle,
 } from "./Button.style";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: "entry" | "action" | "landing";
-  actionType?: "action" | "join" | "edit";
+  variant?: "cta" | "action" | "landing" | "full";
+  actionType?: "basic" | "neg" | "alt";
   onClick?: () => void;
   customStyle?: SerializedStyles;
 }
@@ -17,7 +18,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<ButtonProps> = ({
   children,
   variant,
-  actionType = "action",
+  actionType = "basic",
   onClick,
   disabled,
   customStyle,
@@ -25,12 +26,14 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const buttonType: SerializedStyles = (() => {
     switch (variant) {
-      case "entry":
+      case "cta":
         return ctaButtonStyle;
       case "action":
         return actionButtonStyle(actionType);
       case "landing":
         return landingButtonStyle;
+      case "full":
+        return fullButtonStyle(actionType);
       default:
         return buttonStyle;
     }
