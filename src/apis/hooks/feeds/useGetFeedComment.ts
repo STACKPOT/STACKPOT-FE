@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getFeedComments } from "apis/feedAPI";
 
-const useGetFeedComments = (feedId: number) => {
+const useGetFeedComment = (feedId: number) => {
   return useQuery({
     queryKey: ["feedComment", feedId],
     queryFn: () => getFeedComments(feedId),
@@ -9,4 +9,4 @@ const useGetFeedComments = (feedId: number) => {
   });
 };
 
-export default useGetFeedComments;
+export default useGetFeedComment;

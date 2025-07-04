@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { postFeedCommentsReplies } from "apis/feedAPI";
-import { PostFeedCommentsRepliesParams } from "apis/types/feed";
+import { postFeedCommentReply } from "apis/feedAPI";
+import { PostFeedCommentReplyParams } from "apis/types/feed";
 import { useSnackbar } from "providers";
 
-const usePostFeedCommentsReplies = () => {
+const usePostFeedCommentReply = () => {
   const queryClient = useQueryClient();
   const { showSnackbar } = useSnackbar();
 
   return useMutation({
-    mutationFn: (params: PostFeedCommentsRepliesParams) =>
-      postFeedCommentsReplies(params),
+    mutationFn: (params: PostFeedCommentReplyParams) =>
+      postFeedCommentReply(params),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["feedComment", variables.feedId],
@@ -23,4 +23,4 @@ const usePostFeedCommentsReplies = () => {
   });
 };
 
-export default usePostFeedCommentsReplies;
+export default usePostFeedCommentReply;

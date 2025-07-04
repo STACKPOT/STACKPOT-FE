@@ -12,12 +12,12 @@ import {
   FeedPatch,
   PatchFeedResponse,
   GetFeedCommentsResponse,
-  PostFeedCommentsParams,
-  PostFeedCommentsResponse,
+  PostFeedCommentParams,
+  PostFeedCommentResponse,
   GetFeedDetailResponse,
-  PostFeedCommentsRepliesResponse,
-  PostFeedCommentsRepliesParams,
-  PatchFeedCommentsParams,
+  PostFeedCommentReplyResponse,
+  PostFeedCommentReplyParams,
+  PatchFeedCommentParams,
 } from "./types/feed";
 
 export const getFeeds = async ({
@@ -51,9 +51,6 @@ export const postFeedLike = async (feedId: number) => {
 export const postFeedSave = async (feedId: number) => {
   return authApiPost<Record<string, string>>(`/feeds/${feedId}/save`);
 };
-export const postFeedComment = async (feedId: number) => {
-  return authApiPost<Record<string, string>>(`/feeds/${feedId}/comment`);
-};
 
 export const DeleteFeed = async (feedId: number) => {
   return authApiDelete(`/feeds/${feedId}`);
@@ -63,22 +60,22 @@ export const getFeedComments = async (feedId: number) => {
   return authApiGet<GetFeedCommentsResponse[]>(`/feed-comments`, { feedId });
 };
 
-export const postFeedComments = async ({
+export const postFeedComment = async ({
   feedId,
   comment,
-}: PostFeedCommentsParams) => {
-  return authApiPost<PostFeedCommentsResponse>(`/feed-comments`, {
+}: PostFeedCommentParams) => {
+  return authApiPost<PostFeedCommentResponse>(`/feed-comments`, {
     feedId,
     comment,
   });
 };
 
-export const postFeedCommentsReplies = async ({
+export const postFeedCommentReply = async ({
   feedId,
   comment,
   parentCommentId,
-}: PostFeedCommentsRepliesParams) => {
-  return authApiPost<PostFeedCommentsRepliesResponse>(
+}: PostFeedCommentReplyParams) => {
+  return authApiPost<PostFeedCommentReplyResponse>(
     `/feed-comments/${parentCommentId}/replies`,
     {
       feedId,
@@ -87,15 +84,15 @@ export const postFeedCommentsReplies = async ({
   );
 };
 
-export const patchFeedComments = async ({
+export const patchFeedComment = async ({
   commentId,
   comment,
-}: PatchFeedCommentsParams) => {
+}: PatchFeedCommentParams) => {
   return authApiPatch(`/feed-comments/${commentId}`, {
     comment,
   });
 };
 
-export const deleteFeedComments = async (commentId: number) => {
+export const deleteFeedComment = async (commentId: number) => {
   return authApiDelete(`/feed-comments/${commentId}`);
 };

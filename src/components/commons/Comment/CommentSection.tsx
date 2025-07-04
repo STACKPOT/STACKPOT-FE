@@ -5,10 +5,10 @@ import {
 } from "./CommentSection.style";
 import CommentWriter from "./CommentWriter";
 import Comment from "./Comment";
-import useGetFeedComments from "apis/hooks/feeds/useGetFeedComments";
+import useGetFeedComment from "apis/hooks/feeds/useGetFeedComment";
 import { useEffect, useRef, useState } from "react";
 import { GetFeedCommentsResponse } from "apis/types/feed";
-import usePostFeedComments from "apis/hooks/feeds/usePostFeedComments";
+import usePostFeedComment from "apis/hooks/feeds/usePostFeedComment";
 
 interface CommentSectionProps {
   type: "feed" | "pot";
@@ -20,8 +20,8 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 }: CommentSectionProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const { data } =
-    type === "feed" ? useGetFeedComments(id) : useGetFeedComments(id);
-  const { mutate } = usePostFeedComments();
+    type === "feed" ? useGetFeedComment(id) : useGetFeedComment(id);
+  const { mutate } = usePostFeedComment();
 
   const [comments, setComments] = useState<GetFeedCommentsResponse[]>([]);
 

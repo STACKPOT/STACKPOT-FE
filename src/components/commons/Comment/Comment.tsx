@@ -30,9 +30,9 @@ import MyFeedDropdown from "../Dropdown/MyFeedDropdown/MyFeedDropdown";
 import CommentWriter from "./CommentWriter";
 import Badge from "../Badge/Badge";
 import Modal from "../Modal/Modal";
-import usePostFeedCommentsReplies from "apis/hooks/feeds/usePostFeedCommentsReplies";
-import usePatchFeedComments from "apis/hooks/feeds/usePatchFeedComments";
-import useDeleteFeedComment from "apis/hooks/feeds/useDeleteFeedComments";
+import usePostFeedCommentReply from "apis/hooks/feeds/usePostFeedCommentReply";
+import usePatchFeedComment from "apis/hooks/feeds/usePatchFeedComment";
+import useDeleteFeedComment from "apis/hooks/feeds/useDeleteFeedComment";
 
 interface CommentProps {
   id: number;
@@ -70,8 +70,8 @@ const Comment: React.FC<CommentProps> = ({
   const [editValue, setEditValue] = useState(comment);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const { mutate: submitRecomment } = usePostFeedCommentsReplies();
-  const { mutate: editComment } = usePatchFeedComments(id);
+  const { mutate: submitRecomment } = usePostFeedCommentReply();
+  const { mutate: editComment } = usePatchFeedComment(id);
   const { mutate: deleteComment } = useDeleteFeedComment(id);
 
   const editRef = useRef<HTMLTextAreaElement>(null);

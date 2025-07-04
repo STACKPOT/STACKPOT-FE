@@ -104,12 +104,12 @@ export interface GetFeedCommentsResponse {
   children: GetFeedCommentsResponse[];
 }
 
-export interface PostFeedCommentsParams {
+export interface PostFeedCommentParams {
   feedId: number;
   comment: string;
 }
 
-export interface PostFeedCommentsResponse {
+export interface PostFeedCommentResponse {
   userId: number;
   userName: string;
   role: Role;
@@ -119,13 +119,13 @@ export interface PostFeedCommentsResponse {
   createdAt: string;
 }
 
-export interface PostFeedCommentsRepliesParams {
+export interface PostFeedCommentReplyParams {
   feedId: number;
   comment: string;
   parentCommentId: number;
 }
 
-export interface PostFeedCommentsRepliesResponse {
+export interface PostFeedCommentReplyResponse {
   userId: number;
   userName: string;
   role: Role;
@@ -136,7 +136,7 @@ export interface PostFeedCommentsRepliesResponse {
   parentCommentId: number;
 }
 
-export interface PatchFeedCommentsParams {
+export interface PatchFeedCommentParams {
   commentId: number;
   comment: string;
 }
