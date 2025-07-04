@@ -17,6 +17,7 @@ import {
   GetFeedDetailResponse,
   PostFeedCommentsRepliesResponse,
   PostFeedCommentsRepliesParams,
+  PatchFeedCommentsParams,
 } from "./types/feed";
 
 export const getFeeds = async ({
@@ -84,4 +85,13 @@ export const postFeedCommentsReplies = async ({
       comment,
     }
   );
+};
+
+export const patchFeedComments = async ({
+  commentId,
+  comment,
+}: PatchFeedCommentsParams) => {
+  return authApiPatch(`/feed-comments/${commentId}`, {
+    comment,
+  });
 };

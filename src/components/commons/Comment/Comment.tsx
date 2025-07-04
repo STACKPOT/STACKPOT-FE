@@ -31,6 +31,7 @@ import CommentWriter from "./CommentWriter";
 import Badge from "../Badge/Badge";
 import Modal from "../Modal/Modal";
 import usePostFeedCommentsReplies from "apis/hooks/feeds/usePostFeedCommentsReplies";
+import usePatchFeedComments from "apis/hooks/feeds/usePatchFeedComments";
 
 interface CommentProps {
   id: number;
@@ -69,6 +70,7 @@ const Comment: React.FC<CommentProps> = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const { mutate: submitRecomment } = usePostFeedCommentsReplies();
+  const { mutate: editComment } = usePatchFeedComments(id);
 
   const editRef = useRef<HTMLTextAreaElement>(null);
 
@@ -107,7 +109,10 @@ const Comment: React.FC<CommentProps> = ({
     }
   };
   const handleSubmitEdit = () => {
-    // 댓글 수정 api 호출
+    editComment({
+      commentId: commentId,
+      comment: editValue,
+    });
     setIsEditing(false);
   };
   const handleDelete = () => {

@@ -135,3 +135,8 @@ export interface PostFeedCommentsRepliesResponse {
   createdAt: string;
   parentCommentId: number;
 }
+
+export interface PatchFeedCommentsParams {
+  commentId: number;
+  comment: string;
+}
