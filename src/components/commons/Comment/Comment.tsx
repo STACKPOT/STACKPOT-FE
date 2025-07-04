@@ -32,6 +32,7 @@ import Badge from "../Badge/Badge";
 import Modal from "../Modal/Modal";
 import usePostFeedCommentsReplies from "apis/hooks/feeds/usePostFeedCommentsReplies";
 import usePatchFeedComments from "apis/hooks/feeds/usePatchFeedComments";
+import useDeleteFeedComment from "apis/hooks/feeds/useDeleteFeedComments";
 
 interface CommentProps {
   id: number;
@@ -71,6 +72,7 @@ const Comment: React.FC<CommentProps> = ({
 
   const { mutate: submitRecomment } = usePostFeedCommentsReplies();
   const { mutate: editComment } = usePatchFeedComments(id);
+  const { mutate: deleteComment } = useDeleteFeedComment(id);
 
   const editRef = useRef<HTMLTextAreaElement>(null);
 
@@ -116,8 +118,11 @@ const Comment: React.FC<CommentProps> = ({
     setIsEditing(false);
   };
   const handleDelete = () => {
-    // 댓글 삭제 api
-    setIsDeleteModalOpen(false);
+    deleteComment(commentId, {
+      onSuccess: () => {
+        setIsDeleteModalOpen(false);
+      },
+    });
   };
 
   useEffect(() => {
@@ -215,6 +220,8 @@ const Comment: React.FC<CommentProps> = ({
         <Modal
           title="댓글을 삭제하시겠습니까?"
           message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
+          confirmType="neg"
+          confirmButton="삭제하기"
           onConfirm={handleDelete}
           onCancel={() => setIsDeleteModalOpen(false)}
         />

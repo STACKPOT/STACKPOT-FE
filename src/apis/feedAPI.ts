@@ -95,3 +95,7 @@ export const patchFeedComments = async ({
     comment,
   });
 };
+
+export const deleteFeedComments = async (commentId: number) => {
+  return authApiDelete(`/feed-comments/${commentId}`);
+};
