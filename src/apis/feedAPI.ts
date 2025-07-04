@@ -15,6 +15,8 @@ import {
   PostFeedCommentsParams,
   PostFeedCommentsResponse,
   GetFeedDetailResponse,
+  PostFeedCommentsRepliesResponse,
+  PostFeedCommentsRepliesParams,
 } from "./types/feed";
 
 export const getFeeds = async ({
@@ -68,4 +70,18 @@ export const postFeedComments = async ({
     feedId,
     comment,
   });
+};
+
+export const postFeedCommentsReplies = async ({
+  feedId,
+  comment,
+  parentCommentId,
+}: PostFeedCommentsRepliesParams) => {
+  return authApiPost<PostFeedCommentsRepliesResponse>(
+    `/feed-comments/${parentCommentId}/replies`,
+    {
+      feedId,
+      comment,
+    }
+  );
 };

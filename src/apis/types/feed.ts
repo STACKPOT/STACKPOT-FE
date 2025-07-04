@@ -95,6 +95,7 @@ export interface FeedDetail {
 export interface GetFeedCommentsResponse {
   userId: number;
   userName: string;
+  role: Role;
   isWriter: boolean;
   commentId: number;
   comment: string;
@@ -111,8 +112,26 @@ export interface PostFeedCommentsParams {
 export interface PostFeedCommentsResponse {
   userId: number;
   userName: string;
+  role: Role;
   isWriter: boolean;
   commentId: number;
   comment: string;
   createdAt: string;
+}
+
+export interface PostFeedCommentsRepliesParams {
+  feedId: number;
+  comment: string;
+  parentCommentId: number;
+}
+
+export interface PostFeedCommentsRepliesResponse {
+  userId: number;
+  userName: string;
+  role: Role;
+  isWriter: boolean;
+  commentId: number;
+  comment: string;
+  createdAt: string;
+  parentCommentId: number;
 }

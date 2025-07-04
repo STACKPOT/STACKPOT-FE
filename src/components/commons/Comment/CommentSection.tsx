@@ -75,7 +75,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
       <CommentWriter onSubmit={handleSubmitComment} onCancel={() => {}} />
       <div css={commentsContainer}>
         {comments.map((comment) => (
-          <Comment {...comment} />
+          <Comment id={id} type={type} {...comment} />
         ))}
       </div>
     </div>

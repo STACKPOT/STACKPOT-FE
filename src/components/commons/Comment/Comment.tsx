@@ -17,7 +17,6 @@ import {
   profileImageStyle,
   profileTextContainer,
   recommentCancelStyle,
-  recommentContainer,
   submitButtonContainer,
   textAreaStyle,
 } from "./Comment.style";
@@ -31,13 +30,17 @@ import MyFeedDropdown from "../Dropdown/MyFeedDropdown/MyFeedDropdown";
 import CommentWriter from "./CommentWriter";
 import Badge from "../Badge/Badge";
 import Modal from "../Modal/Modal";
+import usePostFeedCommentsReplies from "apis/hooks/feeds/usePostFeedCommentsReplies";
 
 interface CommentProps {
+  id: number;
+  type: "feed" | "pot";
   userId: number;
   role: Role;
   userName: string;
   createdAt: string;
   comment: string;
+  commentId: number;
   parentCommentId: number;
   isMyComment: boolean;
   isDeleted?: boolean;
@@ -45,33 +48,50 @@ interface CommentProps {
 }
 
 const Comment: React.FC<CommentProps> = ({
+  id,
+  type,
   userId,
   role,
   userName,
   createdAt,
   comment,
+  commentId,
   parentCommentId,
   isMyComment,
   isDeleted,
   isWriter,
 }: CommentProps) => {
   const navigate = useNavigate();
+
   const [openRecomment, setOpenRecomment] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(comment);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  const { mutate: submitRecomment } = usePostFeedCommentsReplies();
+
   const editRef = useRef<HTMLTextAreaElement>(null);
 
   const handleNicknameClick = () => {
     navigate(`${routes.userProfile}/${userId}`);
+    window.scrollTo(0, 0);
   };
   const handleOpenRecomment = () => {
     setOpenRecomment(!openRecomment);
   };
   const handleSubmitRecomment = (recomment: string) => {
-    // api 호출
-    setOpenRecomment(false);
+    submitRecomment(
+      {
+        feedId: id,
+        comment: recomment,
+        parentCommentId: commentId,
+      },
+      {
+        onSuccess: () => {
+          setOpenRecomment(false);
+        },
+      }
+    );
   };
   const handleEdit = () => {
     setIsEditing(!isEditing);
