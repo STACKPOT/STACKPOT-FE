@@ -45,17 +45,16 @@ tokenInstance.interceptors.response.use(
         } catch {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
-          alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
           window.location.href = routes.home;
         }
       } else {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
         window.location.href = routes.home;
       }
     } else {
-      window.location.href = "/404";
+      console.error(error);
+      // window.location.href = "/404";
     }
     return Promise.reject(error);
   }

@@ -6,6 +6,7 @@ export const formatDate = (date: Date) => {
 }
 
 export const formatTime = (isoString: string) => {
+  if (!isoString) return null;
   const date = new Date(isoString);
   const now = new Date();
 

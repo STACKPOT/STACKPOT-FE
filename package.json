@@ -25,6 +25,7 @@
     "@uiw/react-md-editor": "^4.0.7",
     "axios": "^1.7.9",
     "dayjs": "^1.11.13",
+    "event-source-polyfill": "^1.0.31",
     "net": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

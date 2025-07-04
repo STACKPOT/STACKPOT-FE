@@ -38,6 +38,7 @@ export interface ChatMessagesResponse {
 
 export interface ChatMessages {
   chatId: number;
+  userId: number;
   userName: string;
   role: Role;
   message: string;
@@ -52,6 +53,11 @@ export interface PatchChatRoomThumnailParams {
 export interface PatchChatRoomResponse {
   isSuccess: boolean;
   code: string;
-  result: {};
+  result: ChatMessagesResponse;
   message: string;
+}
+
+export interface PostChatRoomsInfoParams {
+  potMemberIds: number[];
+  potId: number;
 }

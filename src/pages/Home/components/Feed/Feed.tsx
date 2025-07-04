@@ -9,7 +9,7 @@ import {
 	feedWriteButton,
 	emptyFeedFallbackStyle,
 } from './Feed.style';
-import { contentTitle } from '@pages/Home/Home.style';
+import { contentText, contentTitle } from '@pages/Home/Home.style';
 import { useState, useEffect } from 'react';
 import { categoryText, searchPartMap } from '@constants/categories';
 import useGetFeeds from 'apis/hooks/feeds/useGetFeeds';
@@ -21,8 +21,6 @@ import routes from '@constants/routes';
 import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
 
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from 'stores/useAuthStore';
-import theme from '@styles/theme';
 
 
 
@@ -47,42 +45,34 @@ const EmptyFeedFallback = ({ onWrite }: { onWrite: () => void }) => (
 
 const Feed = () => {
 	const navigate = useNavigate();
-	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-	const [category, setCategory] = useState<string | null>(null);
+	const [selectedCategory, setSelectedCategory] = useState<string>('전체보기');
 	const [sort, setSort] = useState<string>('new');
-
 	const { data: user } = useGetMyProfile(!!localStorage.getItem('accessToken'));
 
-	const role = useAuthStore((state) => state.role);
-
-	const handleCategoryClick = (category: string, partName: string) => {
+	const handleCategoryClick = (partName: string) => {
 		if (selectedCategory === partName) {
-			setSelectedCategory(null);
-			setCategory('ALL');
+			setSelectedCategory('전체보기');
 		} else {
 			setSelectedCategory(partName);
-			setCategory(category);
 		}
 	};
 
 	const handleChange = (key: string) => {
 		setSort(key);
 	};
+
 	const handleWriteFeed = () => {
 		const token = localStorage.getItem('accessToken');
 		if (token) {
 			navigate(routes.writePost);
 		} else {
-			const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY}&redirect_uri=${import.meta.env.VITE_REDIRECT_URI
-				}&response_type=code
-&scope=account_email
-&prompt=login`;
+			const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY}&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code&scope=account_email&prompt=login`;
 			window.location.href = link;
 		}
 	};
 
 	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useGetFeeds({
-		category: category || 'ALL',
+		category: searchPartMap[selectedCategory],
 		sort,
 		limit: 10,
 		cursor: null,
@@ -100,7 +90,7 @@ const Feed = () => {
 		<>
 			<div css={contentHeader}>
 				<div css={contentTitle}>
-					<p css={{ color: theme.color.point.hero }}>{categoryText[category ?? 'ALL']}</p>
+					<p css={contentText}>{categoryText[searchPartMap[selectedCategory]]}</p>
 					<p> 피드를 탐색해 볼까요?</p>
 					<div css={{ marginLeft: 'auto' }}>
 						<Dropdown options={options} handleChange={handleChange} />
@@ -109,7 +99,7 @@ const Feed = () => {
 				<div css={buttonContainer}>
 					{Object.keys(searchPartMap).map((partName) => (
 						<div key={partName}>
-							<CategoryButton style="pot" selected={selectedCategory === partName} onClick={() => handleCategoryClick(searchPartMap[partName], partName)}>
+							<CategoryButton style="pot" selected={selectedCategory === partName} onClick={() => handleCategoryClick(partName)}>
 								{partName}
 							</CategoryButton>
 						</div>

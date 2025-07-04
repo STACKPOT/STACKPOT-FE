@@ -68,6 +68,11 @@ export const contentTitle = css`
 	gap: 0.8rem;
 `;
 
+
+export const contentText = css`
+	color: ${theme.color.point.hero};
+`;
+
 export const iconStyle = css`
 	width: 31px;
 	height: 31px;

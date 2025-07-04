@@ -7,6 +7,13 @@ export const chatRoomIconTextWrapperStyle = css`
   align-items: center;
 `;
 
+export const chatRoomIconImgStyle = css`
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  object-fit: cover;
+`;
+
 export const chatRoomContentStyle = css`
   display: flex;
   justify-content: space-between;
@@ -276,4 +283,52 @@ export const dateDividerStyle = css`
     height: 0.1rem;
     background-color: ${theme.color.object.assistive};
   }
+`;
+
+
+export const modalProfileStyle = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+`;
+
+export const modalProfileImageStyle = css`
+  width: 64px;
+  height: 64px;
+`;
+
+export const modalNicknameTextStyle = css`
+  ${theme.font.title1};
+  color: ${theme.color.point.hero};
+`;
+
+
+export const fileUploadContainer = css`
+  display: flex;
+  padding: 4rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  align-self: stretch;
+
+  background: ${theme.color.object.alternative};
+  border-radius: 12px;
+`;
+
+export const fileUploadText = css`
+  ${theme.font.body3};
+`;
+
+export const fileUploadButton = css`
+  ${theme.font.caption2};
+  background: ${theme.color.point.hero};
+  border-radius: 32px;
+  color: ${theme.color.base.white};
+  display: flex;
+  padding: 11px 16px;
+  justify-content: center;
+  align-items: center;
 `;
