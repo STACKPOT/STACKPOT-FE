@@ -20,6 +20,7 @@ import {
   GetUsersMyPagesParams,
   GetUsersMyPagesResponse,
   GetUsersInfoParams,
+  TokenServiceResponse,
 } from "./types/user";
 import { PatchPotCompleteBody, PostPotResponse } from "./types/pot";
 
@@ -47,7 +48,7 @@ export const getNickname = async (role: Role) => {
 };
 
 export const postNickname = async (nickname: string) => {
-  return authApiPost("/users/nickname/save", undefined, { nickname });
+  return authApiPost<TokenServiceResponse>("/users/nickname/save", undefined, { nickname });
 };
 
 export const GetMyPage = async ({ dataType }: GetMyPageParams) => {

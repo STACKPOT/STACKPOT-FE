@@ -4,7 +4,7 @@ import {
   contentContainer,
   titleStyle,
 } from "./OnGoingPotCard.style";
-import { MemberGroup, PotButton } from "@components/index";
+import { MemberGroup } from "@components/index";
 import routes from "@constants/routes";
 import { useNavigate } from "react-router-dom";
 import { Role } from "types/role";
@@ -38,11 +38,7 @@ const OnGoingPotCard: React.FC<OnGoingPotCardProps> = ({
         <p css={titleStyle}>{title}</p>
         <MemberGroup memberRoleList={memberList} />
       </div>
-      {isMyPot && (
-        <div css={buttonContainer}>
-          <PotButton onClick={() => handleFinishPot(id)}>다 끓였어요</PotButton>
-        </div>
-      )}
+      {isMyPot && <div css={buttonContainer}></div>}
     </div>
   );
 };
