@@ -44,9 +44,9 @@ interface CommentProps {
   comment: string;
   commentId: number;
   parentCommentId: number;
-  isMyComment: boolean;
+  isCommentWriter: boolean;
   isDeleted?: boolean;
-  isWriter: boolean;
+  isFeedWriter: boolean;
 }
 
 const Comment: React.FC<CommentProps> = ({
@@ -59,9 +59,9 @@ const Comment: React.FC<CommentProps> = ({
   comment,
   commentId,
   parentCommentId,
-  isMyComment,
+  isCommentWriter,
   isDeleted,
-  isWriter,
+  isFeedWriter,
 }: CommentProps) => {
   const navigate = useNavigate();
 
@@ -149,16 +149,16 @@ const Comment: React.FC<CommentProps> = ({
                 <div css={profileTextContainer}>
                   <div css={nicknameContainer}>
                     <a
-                      css={nicknameStyle(isMyComment)}
+                      css={nicknameStyle(isCommentWriter)}
                       onClick={handleNicknameClick}
                     >
                       {userName}
                     </a>
-                    {isWriter && <Badge content="작성자" color="blue" />}
+                    {isFeedWriter && <Badge content="작성자" color="blue" />}
                   </div>
                   <p css={dateStyle}>{createdAt}</p>
                 </div>
-                {isMyComment && (
+                {isCommentWriter && (
                   <div
                     css={meatballIconStyle}
                     onClick={(e) => {
@@ -195,7 +195,7 @@ const Comment: React.FC<CommentProps> = ({
               <div css={editCommentContainer}>
                 <div css={profileContainer}>
                   <img css={profileImageStyle} src={roleImages[role]} />
-                  <p css={nicknameStyle(isMyComment)}>{userName}</p>
+                  <p css={nicknameStyle(isCommentWriter)}>{userName}</p>
                 </div>
                 <textarea
                   css={editCommentTextAreaStyle}

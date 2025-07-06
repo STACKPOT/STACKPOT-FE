@@ -19,8 +19,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   id,
 }: CommentSectionProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { data } =
-    type === "feed" ? useGetFeedComment(id) : useGetFeedComment(id);
+  const { data } = useGetFeedComment(id);
   const { mutate } = usePostFeedComment();
 
   const [comments, setComments] = useState<GetFeedCommentsResponse[]>([]);

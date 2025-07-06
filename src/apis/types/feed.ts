@@ -96,7 +96,8 @@ export interface GetFeedCommentsResponse {
   userId: number;
   userName: string;
   role: Role;
-  isWriter: boolean;
+  isCommentWriter: boolean;
+  isFeedWriter: boolean;
   commentId: number;
   comment: string;
   parentCommentId: number;
