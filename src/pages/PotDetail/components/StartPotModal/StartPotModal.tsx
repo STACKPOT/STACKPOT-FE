@@ -1,55 +1,68 @@
-import { Badge, ExplainModal } from "@components/index";
-import { memberContainer, memberListContainer, nicknameStyle, profileStyle, stackNicknameContainer } from "./StartPotModal.style";
+import { ExplainModal, MemberCard } from "@components/index";
+import {
+  memberListContainer,
+  modalStyle,
+  titleStyle,
+} from "./StartPotModal.style";
 import { GetPotApplicationResponse } from "apis/types/pot";
-import { roleImages } from "@constants/roleImage";
 import useStartPot from "apis/hooks/pots/useStartPot";
 
 interface StartPotModalProps {
-    potId: number;
-    selectedApplicants: GetPotApplicationResponse[];
-    onStartPotSuccess: () => void;
-    onCancelModal: () => void;
+  potId: number;
+  selectedApplicants: GetPotApplicationResponse[];
+  onStartPotSuccess: () => void;
+  onCancelModal: () => void;
 }
-const StartPotModal: React.FC<StartPotModalProps> = ({ potId, selectedApplicants, onStartPotSuccess, onCancelModal }: StartPotModalProps) => {
-    const { mutate, isPending } = useStartPot();
-    const handleStartPot = () => {
-        mutate(
-            {
-                potId: potId,
-                body: {
-                    applicantIds: selectedApplicants.map((applicant) => applicant.applicationId)
-                },
-            },
-            {
-                onSuccess: () => {
-                    onCancelModal();
-                    onStartPotSuccess();
-                }
-            }
-        )
-    }
+const StartPotModal: React.FC<StartPotModalProps> = ({
+  potId,
+  selectedApplicants,
+  onStartPotSuccess,
+  onCancelModal,
+}: StartPotModalProps) => {
+  const { mutate, isPending } = useStartPot();
+  const handleStartPot = () => {
+    mutate(
+      {
+        potId: potId,
+        body: {
+          applicantIds: selectedApplicants.map(
+            (applicant) => applicant.applicationId
+          ),
+        },
+      },
+      {
+        onSuccess: () => {
+          onCancelModal();
+          onStartPotSuccess();
+        },
+      }
+    );
+  };
 
-    return (
-        <ExplainModal
-            title="이 멤버들로 팟을 시작할까요?"
-            buttonText="팟 시작하기"
-            disabled={isPending}
-            onButtonClick={handleStartPot}
-            onCancel={onCancelModal}>
-            <div css={memberListContainer}>
-                <>
-                    {selectedApplicants.map((applicant) =>
-                        <div css={memberContainer}>
-                            <img css={profileStyle} src={roleImages[applicant.potRole]} alt="profile" />
-                            <div css={stackNicknameContainer}>
-                                <Badge content={applicant.potRole} />
-                                <p css={nicknameStyle}>{applicant.userNickname}</p>
-                            </div>
-                        </div>
-                    )}
-                </>
-            </div>
-        </ExplainModal>
-    )
-}
+  return (
+    <ExplainModal
+      buttonText="준비 완료"
+      type="custom"
+      disabled={isPending}
+      customContainerStyle={modalStyle}
+      onButtonClick={handleStartPot}
+      onCancel={onCancelModal}
+    >
+      <>
+        <p css={titleStyle}>이 멤버와 함께 팟을 시작할게요!</p>
+        <div css={memberListContainer}>
+          {selectedApplicants.map((applicant) => (
+            <MemberCard
+              userId={applicant.userId}
+              nickname={applicant.userNickname}
+              role={applicant.potRole}
+              type="selection"
+              onClick={() => {}}
+            />
+          ))}
+        </div>
+      </>
+    </ExplainModal>
+  );
+};
 export default StartPotModal;

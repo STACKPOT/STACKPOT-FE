@@ -1,27 +1,43 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
+export const container = css`
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+`;
+
 export const gridContainer = css`
   display: grid;
-  grid-template-columns: 30rem 30rem;
-  column-gap: 17rem;
+  grid-template-columns: 51.4rem 58.6rem;
   row-gap: 1.8rem;
 `;
 export const elementContainer = css`
   display: flex;
-  gap: 2.6rem;
 `;
+
+export const elementIconStyle = css`
+  width: 2.4rem;
+  height: 2.4rem;
+  color: ${theme.color.object.hero};
+`
 export const elementTitleStyle = css`
-  ${theme.font.body1}
-  color: ${theme.color.interactive.inactive};
+  margin-left: 0.8rem;
+  ${theme.font.bodyBold3};
+  color: ${theme.color.object.hero};
   white-space: nowrap;
-  width: 6.7rem;
 `;
 
 export const elementContentStyle = css`
-  ${theme.font.body1};
-  color: ${theme.color.base.darkgray};
+  margin-left: 2.4rem;
+  ${theme.font.bodyBold3};
+  color: ${theme.color.point.hero};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const dividerStyle = css`
+  height: 1px;
+  background-color: ${theme.color.object.alternative};
 `;

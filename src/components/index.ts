@@ -28,6 +28,8 @@ import Comment from "./commons/Comment/Comment";
 import CommentSection from "./commons/Comment/CommentSection";
 import CtaCard from "./cards/CtaCard/CtaCard";
 import PotDetailCard from "./cards/PotDetailCard/PotDetailCard";
+import RoleCard from "./cards/RoleCard/RoleCard";
+import MemberCard from "./cards/MemberCard/MemberCard";
 import PostButton from "./commons/Button/PostButton/PostButton";
 
 export {
@@ -61,5 +63,7 @@ export {
   CommentSection,
   CtaCard,
   PotDetailCard,
+  RoleCard,
+  MemberCard,
   PostButton,
 };

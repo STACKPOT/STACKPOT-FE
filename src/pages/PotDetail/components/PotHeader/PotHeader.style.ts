@@ -3,30 +3,46 @@ import theme from "@styles/theme";
 
 export const container = css`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.8rem;
 `;
+
 export const titleContainer = css`
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.6rem;
 `;
 export const backButtonStyle = css`
   height: 4rem;
-  display: flex;
-  align-items: center;
-  padding: 0.4rem;
-  border-radius: 4px;
-  border: none;
-  background-color: transparent;
+  width: 4rem;
   cursor: pointer;
 `;
-export const backButtonIconStyle = css`
-  width: 2.4rem;
-  height: 2.4rem;
-`;
+
 export const titleStyle = css`
-  ${theme.font.bodyBold3}
-  color: ${theme.color.base.darkgray};
+  ${theme.font.display1}
+  color: ${theme.color.point.gray};
   word-break: break-all;
   margin-right: 1.6rem;
 `;
+
+export const buttonWrapperStyle = css`
+  margin-left: auto;
+`;
+
+export const profileContainer = css`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+`
+export const profileStyle = css`
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 50%;
+  cursor: pointer;
+`
+export const nicknameStyle = css`
+  ${theme.font.caption3};
+  color: ${theme.color.base.black};
+  cursor: pointer;
+`

@@ -33,6 +33,15 @@ export const interests = [
   "네트워킹 행사",
 ] as const;
 
+export const partKoreanNameMap: {
+  [key: string]: "프론트엔드" | "백엔드" | "디자인" | "기획";
+} = {
+  FRONTEND: "프론트엔드",
+  BACKEND: "백엔드",
+  DESIGN: "디자인",
+  PLANNING: "기획",
+} as const;
+
 export const categories = ["프론트엔드", "백엔드", "디자인", "기획"] as const;
 
 export const participationMap: {
