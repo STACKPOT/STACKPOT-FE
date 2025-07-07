@@ -1,4 +1,10 @@
-import { ArrowDropdownIcon, BellIcon, Logo, SearchIcon } from "@assets/svgs";
+import {
+  ArrowDropdownIcon,
+  BellFilledIcon,
+  BellIcon,
+  Logo,
+  SearchIcon,
+} from "@assets/svgs";
 import {
   bellContainer,
   guestProfileStyle,
@@ -7,6 +13,7 @@ import {
   iconStyle,
   logoStyle,
   profileContainer,
+  ProfileStyle,
   profileStyle,
   searchIconStyle,
 } from "./Header.style";
@@ -98,7 +105,12 @@ const Header: React.FC = () => {
               onClick={handleSearchClick}
             />
             <div css={bellContainer}>
-              <BellIcon onClick={handleNotificationClick} />
+              {isNotificationOpen ? (
+                <BellFilledIcon onClick={handleNotificationClick} />
+              ) : (
+                <BellIcon onClick={handleNotificationClick} />
+              )}
+
               {isNotificationOpen && <Notification />}
             </div>
 
