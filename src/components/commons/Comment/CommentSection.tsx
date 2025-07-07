@@ -5,13 +5,16 @@ import {
 } from "./CommentSection.style";
 import CommentWriter from "./CommentWriter";
 import Comment from "./Comment";
-import useGetFeedComment from "apis/hooks/feeds/useGetFeedComment";
+import useGetFeedComment from "apis/hooks/comments/useGetFeedComment";
 import { useEffect, useRef, useState } from "react";
-import { CommentResponse, GetFeedCommentsResponse } from "apis/types/feed";
-import usePostFeedComment from "apis/hooks/feeds/usePostFeedComment";
-import useGetPotComment from "apis/hooks/pots/useGetPotComment";
-import { GetPotCommentResponse } from "apis/types/pot";
+import usePostFeedComment from "apis/hooks/comments/usePostFeedComment";
+import useGetPotComment from "apis/hooks/comments/useGetPotComment";
 import usePostPotComment from "apis/hooks/comments/usePostPotComment";
+import {
+  CommentResponse,
+  GetFeedCommentsResponse,
+  GetPotCommentResponse,
+} from "apis/types/comment";
 
 interface CommentSectionProps {
   type: "feed" | "pot";

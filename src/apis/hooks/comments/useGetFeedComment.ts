@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getFeedComments } from "apis/feedAPI";
+import { getFeedComments } from "apis/commentAPI";
 
 const useGetFeedComment = (feedId: number) => {
   return useQuery({

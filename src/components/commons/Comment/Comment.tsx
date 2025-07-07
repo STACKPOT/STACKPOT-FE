@@ -30,9 +30,9 @@ import MyFeedDropdown from "../Dropdown/MyFeedDropdown/MyFeedDropdown";
 import CommentWriter from "./CommentWriter";
 import Badge from "../Badge/Badge";
 import Modal from "../Modal/Modal";
-import usePostFeedCommentReply from "apis/hooks/feeds/usePostFeedCommentReply";
-import usePatchFeedComment from "apis/hooks/feeds/usePatchFeedComment";
-import useDeleteFeedComment from "apis/hooks/feeds/useDeleteFeedComment";
+import usePostFeedCommentReply from "apis/hooks/comments/usePostFeedCommentReply";
+import usePatchFeedComment from "apis/hooks/comments/usePatchFeedComment";
+import useDeleteFeedComment from "apis/hooks/comments/useDeleteFeedComment";
 import usePostPotCommentReply from "apis/hooks/comments/usePostPotCommentReply";
 
 interface CommentProps {

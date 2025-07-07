@@ -24,11 +24,6 @@ import {
   PatchPotCompleteBody,
   PostPotApplicationResponse,
   AppealPotPatch,
-  GetPotCommentResponse,
-  PostPotCommentParams,
-  PostPotCommentResponse,
-  PostPotCommentReplyParams,
-  PostPotCommentReplyResponse,
 } from "./types/pot";
 
 export const PostPot = async (postPotParams: PostPotParams) => {
@@ -113,32 +108,4 @@ export const PatchPotComplete = async (
 
 export const GetPotSummary = async (potId: number) => {
   return authApiGet<GetPotSummaryResponse>(`/pots/${potId}/summary`);
-};
-
-export const GetPotComments = async (potId: number) => {
-  return authApiGet<GetPotCommentResponse[]>(`/pot-comments`, { potId });
-};
-
-export const postPotComment = async ({
-  potId,
-  comment,
-}: PostPotCommentParams) => {
-  return authApiPost<PostPotCommentResponse>(`/pot-comments`, {
-    potId,
-    comment,
-  });
-};
-
-export const postPotCommentReply = async ({
-  potId,
-  comment,
-  parentCommentId,
-}: PostPotCommentReplyParams) => {
-  return authApiPost<PostPotCommentReplyResponse>(
-    `/pot-comments/${parentCommentId}/replies`,
-    {
-      potId,
-      comment,
-    }
-  );
 };

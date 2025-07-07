@@ -1,14 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { patchFeedComment } from "apis/feedAPI";
-import { PatchFeedCommentParams } from "apis/types/feed";
+import { deleteFeedComment } from "apis/commentAPI";
 import { useSnackbar } from "providers";
 
-const usePatchFeedComment = (feedId: number) => {
+const useDeleteFeedComment = (feedId: number) => {
   const queryClient = useQueryClient();
   const { showSnackbar } = useSnackbar();
 
   return useMutation({
-    mutationFn: (params: PatchFeedCommentParams) => patchFeedComment(params),
+    mutationFn: (commentId: number) => deleteFeedComment(commentId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["feedComment", feedId],
@@ -16,10 +15,10 @@ const usePatchFeedComment = (feedId: number) => {
     },
     onError: () => {
       showSnackbar({
-        message: "댓글 수정에 실패했습니다.",
+        message: "댓글 삭제에 실패했습니다.",
       });
     },
   });
 };
 
-export default usePatchFeedComment;
+export default useDeleteFeedComment;

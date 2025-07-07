@@ -1,7 +1,6 @@
 import { Participation } from "types/participation";
 import { PotStatus } from "types/potStatus";
 import { Role } from "types/role";
-import { CommentResponse } from "./feed";
 export interface PostPotParams {
   potName: string;
   potStartDate: string;
@@ -204,40 +203,4 @@ export interface PatchPotCompleteBody {
   potStartDate: string;
   potLan: string;
   potSummary: string;
-}
-
-export interface GetPotCommentResponse extends CommentResponse {
-  isPotWriter: boolean;
-}
-
-export interface PostPotCommentParams {
-  potId: number;
-  comment: string;
-}
-
-export interface PostPotCommentResponse {
-  userId: number;
-  userName: string;
-  role: Role;
-  isWriter: boolean;
-  commentId: number;
-  comment: string;
-  createdAt: string;
-}
-
-export interface PostPotCommentReplyParams {
-  potId: number;
-  comment: string;
-  parentCommentId: number;
-}
-
-export interface PostPotCommentReplyResponse {
-  userId: number;
-  userName: string;
-  role: Role;
-  isWriter: boolean;
-  commentId: number;
-  comment: string;
-  createdAt: string;
-  parentCommentId: number;
 }

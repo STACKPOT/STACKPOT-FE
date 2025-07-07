@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { postPotComment } from "apis/potAPI";
-import { PostPotCommentParams } from "apis/types/pot";
+import { postPotComment } from "apis/commentAPI";
+import { PostPotCommentParams } from "apis/types/comment";
 import { useSnackbar } from "providers";
 
 const usePostPotComment = () => {

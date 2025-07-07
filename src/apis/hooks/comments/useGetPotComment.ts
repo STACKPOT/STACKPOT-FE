@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GetPotComments } from "apis/potAPI";
+import { GetPotComments } from "apis/commentAPI";
 
 const useGetPotComment = (potId: number) => {
   return useQuery({

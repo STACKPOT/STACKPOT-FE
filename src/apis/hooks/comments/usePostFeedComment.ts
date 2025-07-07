@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { postFeedComment } from "apis/feedAPI";
-import { PostFeedCommentParams } from "apis/types/feed";
+import { postFeedComment } from "apis/commentAPI";
+import { PostFeedCommentParams } from "apis/types/comment";
 import { useSnackbar } from "providers";
 
 const usePostFeedComment = () => {

@@ -4,6 +4,7 @@ import {
   authApiPatch,
   authApiDelete,
 } from "./axios/apiUtils";
+
 import {
   GetFeedParams,
   FeedResponse,
@@ -11,13 +12,7 @@ import {
   PostFeedResponse,
   FeedPatch,
   PatchFeedResponse,
-  GetFeedCommentsResponse,
-  PostFeedCommentParams,
-  PostFeedCommentResponse,
   GetFeedDetailResponse,
-  PostFeedCommentReplyResponse,
-  PostFeedCommentReplyParams,
-  PatchFeedCommentParams,
 } from "./types/feed";
 
 export const getFeeds = async ({
@@ -54,45 +49,4 @@ export const postFeedSave = async (feedId: number) => {
 
 export const DeleteFeed = async (feedId: number) => {
   return authApiDelete(`/feeds/${feedId}`);
-};
-
-export const getFeedComments = async (feedId: number) => {
-  return authApiGet<GetFeedCommentsResponse[]>(`/feed-comments`, { feedId });
-};
-
-export const postFeedComment = async ({
-  feedId,
-  comment,
-}: PostFeedCommentParams) => {
-  return authApiPost<PostFeedCommentResponse>(`/feed-comments`, {
-    feedId,
-    comment,
-  });
-};
-
-export const postFeedCommentReply = async ({
-  feedId,
-  comment,
-  parentCommentId,
-}: PostFeedCommentReplyParams) => {
-  return authApiPost<PostFeedCommentReplyResponse>(
-    `/feed-comments/${parentCommentId}/replies`,
-    {
-      feedId,
-      comment,
-    }
-  );
-};
-
-export const patchFeedComment = async ({
-  commentId,
-  comment,
-}: PatchFeedCommentParams) => {
-  return authApiPatch(`/feed-comments/${commentId}`, {
-    comment,
-  });
-};
-
-export const deleteFeedComment = async (commentId: number) => {
-  return authApiDelete(`/feed-comments/${commentId}`);
 };
