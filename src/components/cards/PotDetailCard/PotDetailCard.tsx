@@ -163,7 +163,10 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
       {showCancelApplyModal && (
         <Modal
           title="지원을 취소하시겠어요?"
-          message="팟 게시자는 지원자를 팟에 추가할 수 없게 됩니다."
+          message="팟 게시자는 지원자를 팟에 추가할 수 없게 돼요."
+          confirmType="neg"
+          confirmButton="지원 취소하기"
+          cancelButton="아니요"
           onConfirm={handleCancelApplyModalConfirm}
           onCancel={() => setShowCancelApplyModal(false)}
         />
