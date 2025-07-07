@@ -7,22 +7,45 @@ import CommentWriter from "./CommentWriter";
 import Comment from "./Comment";
 import useGetFeedComment from "apis/hooks/feeds/useGetFeedComment";
 import { useEffect, useRef, useState } from "react";
-import { GetFeedCommentsResponse } from "apis/types/feed";
+import { CommentResponse, GetFeedCommentsResponse } from "apis/types/feed";
 import usePostFeedComment from "apis/hooks/feeds/usePostFeedComment";
+import useGetPotComment from "apis/hooks/pots/useGetPotComment";
+import { GetPotCommentResponse } from "apis/types/pot";
 
 interface CommentSectionProps {
   type: "feed" | "pot";
   id: number;
 }
+
+function flattenComments<T>(list: CommentResponse[]) {
+  const result: CommentResponse[] = [];
+
+  const traverse = (comments: CommentResponse[]) => {
+    if (comments) {
+      comments.forEach((comment) => {
+        result.push(comment);
+        if (comment.children && comment.children.length > 0) {
+          traverse(comment.children);
+        }
+      });
+    }
+  };
+  traverse(list);
+  return result as T;
+}
+
 const CommentSection: React.FC<CommentSectionProps> = ({
   type,
   id,
 }: CommentSectionProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { data } = useGetFeedComment(id);
+  const { data } =
+    type === "feed" ? useGetFeedComment(id) : useGetPotComment(id);
   const { mutate } = usePostFeedComment();
 
-  const [comments, setComments] = useState<GetFeedCommentsResponse[]>([]);
+  const [comments, setComments] = useState<
+    GetFeedCommentsResponse[] | GetPotCommentResponse[]
+  >([]);
 
   const handleSubmitComment = (comment: string) => {
     mutate(
@@ -47,26 +70,9 @@ const CommentSection: React.FC<CommentSectionProps> = ({
       setComments([]);
       return;
     }
-    const flatComments = flattenComments(data);
+    const flatComments = flattenComments<typeof data>(data);
     setComments(flatComments);
   }, [data]);
-
-  const flattenComments = (
-    list: GetFeedCommentsResponse[]
-  ): GetFeedCommentsResponse[] => {
-    const result: GetFeedCommentsResponse[] = [];
-
-    const traverse = (comments: GetFeedCommentsResponse[]) => {
-      comments.forEach((comment) => {
-        result.push(comment);
-        if (comment.children && comment.children.length > 0) {
-          traverse(comment.children);
-        }
-      });
-    };
-    traverse(list);
-    return result;
-  };
 
   return (
     <div css={container} ref={scrollRef}>

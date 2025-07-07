@@ -46,7 +46,8 @@ interface CommentProps {
   parentCommentId: number;
   isCommentWriter: boolean;
   isDeleted?: boolean;
-  isFeedWriter: boolean;
+  isFeedWriter?: boolean;
+  isPotWriter?: boolean;
 }
 
 const Comment: React.FC<CommentProps> = ({
@@ -62,6 +63,7 @@ const Comment: React.FC<CommentProps> = ({
   isCommentWriter,
   isDeleted,
   isFeedWriter,
+  isPotWriter,
 }: CommentProps) => {
   const navigate = useNavigate();
 
@@ -154,7 +156,9 @@ const Comment: React.FC<CommentProps> = ({
                     >
                       {userName}
                     </a>
-                    {isFeedWriter && <Badge content="작성자" color="blue" />}
+                    {(isFeedWriter || isPotWriter) && (
+                      <Badge content="작성자" color="blue" />
+                    )}
                   </div>
                   <p css={dateStyle}>{createdAt}</p>
                 </div>

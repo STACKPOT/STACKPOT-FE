@@ -24,6 +24,7 @@ import {
   PatchPotCompleteBody,
   PostPotApplicationResponse,
   AppealPotPatch,
+  GetPotCommentResponse,
 } from "./types/pot";
 
 export const PostPot = async (postPotParams: PostPotParams) => {
@@ -108,4 +109,8 @@ export const PatchPotComplete = async (
 
 export const GetPotSummary = async (potId: number) => {
   return authApiGet<GetPotSummaryResponse>(`/pots/${potId}/summary`);
+};
+
+export const GetPotComments = async (potId: number) => {
+  return authApiGet<GetPotCommentResponse[]>(`/pot-comments`, { potId });
 };

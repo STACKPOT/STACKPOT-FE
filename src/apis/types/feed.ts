@@ -92,17 +92,8 @@ export interface FeedDetail {
   series: Record<string, string>;
 }
 
-export interface GetFeedCommentsResponse {
-  userId: number;
-  userName: string;
-  role: Role;
-  isCommentWriter: boolean;
+export interface GetFeedCommentsResponse extends CommentResponse {
   isFeedWriter: boolean;
-  commentId: number;
-  comment: string;
-  parentCommentId: number;
-  createdAt: string;
-  children: GetFeedCommentsResponse[];
 }
 
 export interface PostFeedCommentParams {
@@ -140,4 +131,16 @@ export interface PostFeedCommentReplyResponse {
 export interface PatchFeedCommentParams {
   commentId: number;
   comment: string;
+}
+
+export interface CommentResponse {
+  userId: number;
+  userName: string;
+  role: Role;
+  isCommentWriter: boolean;
+  commentId: number;
+  comment: string;
+  parentCommentId: number;
+  createdAt: string;
+  children: CommentResponse[];
 }
