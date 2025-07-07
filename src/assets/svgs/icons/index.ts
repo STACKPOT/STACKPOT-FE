@@ -29,3 +29,4 @@ export { default as FillSaveIcon } from "./fillSave.svg?react";
 export { default as AddIcon } from "./add.svg?react";
 export { default as SearchBlueIcon } from "./searchBlue.svg?react";
 export { default as BellIcon } from "./bell.svg?react";
+export { default as BellFilledIcon } from "./bellFilled.svg?react";
