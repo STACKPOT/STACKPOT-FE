@@ -42,7 +42,7 @@ const CtaCard: React.FC<CtaCardProps> = ({ type }: CtaCardProps) => {
           : "꿈을 현실로 옮길 시간이에요. 팟을 만들고 팀원을 모집해 볼까요?"}
       </p>
       <div css={buttonContainer}>
-        <Button variant="cta">
+        <Button variant="cta" onClick={handleClick}>
           {type == "feed" ? "피드 작성" : "팟 만들기"}
         </Button>
       </div>
