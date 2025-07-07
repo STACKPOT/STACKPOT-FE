@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { patchFeedComment } from "apis/commentAPI";
+import { patchPotComment } from "apis/commentAPI";
 import { PatchCommentParams } from "apis/types/comment";
 import { useSnackbar } from "providers";
 
-const usePatchFeedComment = (feedId: number) => {
+const usePatchPotComment = (potId: number) => {
   const queryClient = useQueryClient();
   const { showSnackbar } = useSnackbar();
 
   return useMutation({
-    mutationFn: (params: PatchCommentParams) => patchFeedComment(params),
+    mutationFn: (params: PatchCommentParams) => patchPotComment(params),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["feedComment", feedId],
+        queryKey: ["potComment", potId],
       });
     },
     onError: () => {
@@ -22,4 +22,4 @@ const usePatchFeedComment = (feedId: number) => {
   });
 };
 
-export default usePatchFeedComment;
+export default usePatchPotComment;

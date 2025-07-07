@@ -34,6 +34,8 @@ import usePostFeedCommentReply from "apis/hooks/comments/usePostFeedCommentReply
 import usePatchFeedComment from "apis/hooks/comments/usePatchFeedComment";
 import useDeleteFeedComment from "apis/hooks/comments/useDeleteFeedComment";
 import usePostPotCommentReply from "apis/hooks/comments/usePostPotCommentReply";
+import usePatchPotComment from "apis/hooks/comments/usePatchPotComment";
+import useDeletePotComment from "apis/hooks/comments/useDeletePotComment";
 
 interface CommentProps {
   id: number;
@@ -75,8 +77,10 @@ const Comment: React.FC<CommentProps> = ({
 
   const { mutate: submitFeedRecomment } = usePostFeedCommentReply();
   const { mutate: submitPotRecomment } = usePostPotCommentReply();
-  const { mutate: editComment } = usePatchFeedComment(id);
-  const { mutate: deleteComment } = useDeleteFeedComment(id);
+  const { mutate: editComment } =
+    type === "feed" ? usePatchFeedComment(id) : usePatchPotComment(id);
+  const { mutate: deleteComment } =
+    type === "feed" ? useDeleteFeedComment(id) : useDeletePotComment(id);
 
   const editRef = useRef<HTMLTextAreaElement>(null);
 

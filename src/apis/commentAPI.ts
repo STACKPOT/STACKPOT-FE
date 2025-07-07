@@ -7,7 +7,7 @@ import {
 import {
   GetFeedCommentsResponse,
   GetPotCommentResponse,
-  PatchFeedCommentParams,
+  PatchCommentParams,
   PostFeedCommentParams,
   PostFeedCommentReplyParams,
   PostFeedCommentReplyResponse,
@@ -49,7 +49,7 @@ export const postFeedCommentReply = async ({
 export const patchFeedComment = async ({
   commentId,
   comment,
-}: PatchFeedCommentParams) => {
+}: PatchCommentParams) => {
   return authApiPatch(`/feed-comments/${commentId}`, {
     comment,
   });
@@ -85,4 +85,17 @@ export const postPotCommentReply = async ({
       comment,
     }
   );
+};
+
+export const patchPotComment = async ({
+  commentId,
+  comment,
+}: PatchCommentParams) => {
+  return authApiPatch(`/pot-comments/${commentId}`, {
+    comment,
+  });
+};
+
+export const deletePotComment = async (commentId: number) => {
+  return authApiDelete(`/pot-comments/${commentId}`);
 };

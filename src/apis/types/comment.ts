@@ -36,7 +36,7 @@ export interface PostFeedCommentReplyResponse {
   parentCommentId: number;
 }
 
-export interface PatchFeedCommentParams {
+export interface PatchCommentParams {
   commentId: number;
   comment: string;
 }
