@@ -52,6 +52,14 @@ export const participationMap: {
   혼합: "HYBRID",
 };
 
+export const participationKoreanMap: {
+  [key: string]: "온라인" | "오프라인" | "혼합";
+} = {
+  ONLINE: "온라인",
+  OFFLINE: "오프라인",
+  HYBRID: "혼합",
+};
+
 export const categoryOptions = ["팟", "피드"] as const;
 
 export const displayStatus = {

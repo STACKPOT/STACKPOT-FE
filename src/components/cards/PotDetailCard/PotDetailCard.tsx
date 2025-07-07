@@ -27,6 +27,8 @@ import routes from "@constants/routes";
 import Modal from "@components/commons/Modal/Modal";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
 import { PotSummaryModal } from "@pages/MyPage/components";
+import { DateRangeIcon, FlagIcon, WebTrafficIcon } from "@assets/svgs";
+import { participationKoreanMap } from "@constants/categories";
 
 interface PotDetailCardProps {
   potId: number;
@@ -99,9 +101,13 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
   };
 
   const elementLabels = [
-    { icon: null, label: "진행 방식", content: potModeOfOperation },
-    { icon: null, label: "시작 날짜", content: potStartDate },
-    { icon: null, label: "예상 기간", content: potDuration },
+    {
+      icon: WebTrafficIcon,
+      label: "진행 방식",
+      content: participationKoreanMap[potModeOfOperation],
+    },
+    { icon: FlagIcon, label: "시작 날짜", content: potStartDate },
+    { icon: DateRangeIcon, label: "예상 기간", content: potDuration },
   ];
 
   return (
@@ -131,6 +137,7 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
             const LabelIcon = element.icon;
             return (
               <div css={elementContainer} key={element.label}>
+                <LabelIcon />
                 <p css={elementLabelStyle}>{element.label}</p>
                 <p css={elementContentStyle}>{element.content}</p>
               </div>
