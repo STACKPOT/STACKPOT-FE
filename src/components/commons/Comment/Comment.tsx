@@ -33,6 +33,7 @@ import Modal from "../Modal/Modal";
 import usePostFeedCommentReply from "apis/hooks/feeds/usePostFeedCommentReply";
 import usePatchFeedComment from "apis/hooks/feeds/usePatchFeedComment";
 import useDeleteFeedComment from "apis/hooks/feeds/useDeleteFeedComment";
+import usePostPotCommentReply from "apis/hooks/comments/usePostPotCommentReply";
 
 interface CommentProps {
   id: number;
@@ -72,7 +73,8 @@ const Comment: React.FC<CommentProps> = ({
   const [editValue, setEditValue] = useState(comment);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const { mutate: submitRecomment } = usePostFeedCommentReply();
+  const { mutate: submitFeedRecomment } = usePostFeedCommentReply();
+  const { mutate: submitPotRecomment } = usePostPotCommentReply();
   const { mutate: editComment } = usePatchFeedComment(id);
   const { mutate: deleteComment } = useDeleteFeedComment(id);
 
@@ -86,18 +88,33 @@ const Comment: React.FC<CommentProps> = ({
     setOpenRecomment(!openRecomment);
   };
   const handleSubmitRecomment = (recomment: string) => {
-    submitRecomment(
-      {
-        feedId: id,
-        comment: recomment,
-        parentCommentId: commentId,
-      },
-      {
-        onSuccess: () => {
-          setOpenRecomment(false);
+    if (type === "feed") {
+      submitFeedRecomment(
+        {
+          feedId: id,
+          comment: recomment,
+          parentCommentId: commentId,
         },
-      }
-    );
+        {
+          onSuccess: () => {
+            setOpenRecomment(false);
+          },
+        }
+      );
+    } else {
+      submitPotRecomment(
+        {
+          potId: id,
+          comment: recomment,
+          parentCommentId: commentId,
+        },
+        {
+          onSuccess: () => {
+            setOpenRecomment(false);
+          },
+        }
+      );
+    }
   };
   const handleEdit = () => {
     setIsEditing(!isEditing);

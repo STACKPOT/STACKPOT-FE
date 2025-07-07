@@ -1,7 +1,7 @@
 import {
   commentCountStyle,
-  commentsContainer,
-  container,
+  commentListContainer,
+  commentContainer,
 } from "./CommentSection.style";
 import CommentWriter from "./CommentWriter";
 import Comment from "./Comment";
@@ -11,6 +11,7 @@ import { CommentResponse, GetFeedCommentsResponse } from "apis/types/feed";
 import usePostFeedComment from "apis/hooks/feeds/usePostFeedComment";
 import useGetPotComment from "apis/hooks/pots/useGetPotComment";
 import { GetPotCommentResponse } from "apis/types/pot";
+import usePostPotComment from "apis/hooks/comments/usePostPotComment";
 
 interface CommentSectionProps {
   type: "feed" | "pot";
@@ -41,28 +42,44 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   const scrollRef = useRef<HTMLDivElement>(null);
   const { data } =
     type === "feed" ? useGetFeedComment(id) : useGetPotComment(id);
-  const { mutate } = usePostFeedComment();
+  const { mutate: submitFeedComment } = usePostFeedComment();
+  const { mutate: submitPotComment } = usePostPotComment();
 
   const [comments, setComments] = useState<
     GetFeedCommentsResponse[] | GetPotCommentResponse[]
   >([]);
 
   const handleSubmitComment = (comment: string) => {
-    mutate(
-      {
-        feedId: id,
-        comment: comment,
-      },
-      {
-        onSuccess: () => {
-          const scrollHeight = scrollRef.current?.clientHeight;
+    const onSuccess = {
+      onSuccess: () => {
+        if (scrollRef.current) {
+          const scrollHeight =
+            window.scrollY + scrollRef.current.getBoundingClientRect().bottom;
           window.scrollTo({
             top: scrollHeight,
             behavior: "smooth",
           });
+        }
+      },
+    };
+
+    if (type === "feed") {
+      submitFeedComment(
+        {
+          feedId: id,
+          comment: comment,
         },
-      }
-    );
+        onSuccess
+      );
+    } else {
+      submitPotComment(
+        {
+          potId: id,
+          comment: comment,
+        },
+        onSuccess
+      );
+    }
   };
 
   useEffect(() => {
@@ -75,10 +92,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   }, [data]);
 
   return (
-    <div css={container} ref={scrollRef}>
+    <div css={commentContainer} ref={scrollRef} id="container">
       <p css={commentCountStyle}>{`${comments.length}개의 댓글`}</p>
       <CommentWriter onSubmit={handleSubmitComment} onCancel={() => {}} />
-      <div css={commentsContainer}>
+      <div css={commentListContainer}>
         {comments.map((comment) => (
           <Comment id={id} type={type} {...comment} />
         ))}
