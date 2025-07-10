@@ -9,7 +9,8 @@ import {
   SubmitButton,
   contentHeader,
 } from './RoleUpdate.style';
-import { ExplainModal } from '@components/index';
+import { Modal } from '@components/index';
+import { nicknameText } from '../Setting.style';
 
 const RoleUpdate = ({ profile }: { profile: GetUserResponse }) => {
   const { setValue, watch, register } = useFormContext();
@@ -41,13 +42,23 @@ const RoleUpdate = ({ profile }: { profile: GetUserResponse }) => {
         <button type="button" css={SubmitButton} onClick={() => setIsWithdrawModalOpen(true)}>닉네임 변경하기</button>
       </div>
       {isWithdrawModalOpen && (
-        <ExplainModal
-          type="normal"
+        <Modal
           title="메인 역할을 변경할까요?"
-          buttonText="변경하기"
-          subtitle={`메인 역할을 변경할 경우, 닉네임 또한 ${profile?.nickname}에서 새로운 닉네임으로 변경됩니다. `}
-          onButtonClick={handleUpdateNickname}
-          onCancel={() => setIsWithdrawModalOpen(false)} />
+          message={
+            <>
+              메인 역할을 변경할 경우, 닉네임 또한{" "}
+              <span css={nicknameText}>
+                {profile?.nickname}
+              </span>
+              에서 새로운 닉네임으로 변경됩니다.
+            </>
+          }
+          confirmType='normal'
+          confirmButton='변경하기'
+          onConfirm={handleUpdateNickname}
+          onCancel={() => setIsWithdrawModalOpen(false)} >
+
+        </Modal>
       )}
     </div>
   );

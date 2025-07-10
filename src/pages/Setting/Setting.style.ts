@@ -119,3 +119,7 @@ export const buttonStyle = css`
   background-color: ${theme.color.point.hero};
   border: none;
 `;
+
+export const nicknameText = css`
+  color: ${theme.color.point.hero};
+`
