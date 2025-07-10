@@ -125,9 +125,14 @@ export interface PostPotApplicationBody {
 
 export interface PostPotApplicationResponse {
   applicationId: number;
-  potRole: Role;
+  potRole: PotRole;
   userId: number;
   userNickname: string;
+}
+
+export interface PotRole {
+  name: Role;
+  koreanName: string;
 }
 
 export interface PostPotMembersParams {

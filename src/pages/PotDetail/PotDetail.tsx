@@ -6,7 +6,7 @@ import {
 } from "./PotDetail.style";
 import { useParams } from "react-router-dom";
 import { ApplicantsInformation, PotHeader } from "./components";
-import { CommentSection, PotInformation } from "@components/index";
+import { CommentSection, PostButton, PotInformation } from "@components/index";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 import { roleImages } from "@constants/roleImage";
 
@@ -39,6 +39,7 @@ const PotDetail = () => {
               potLan={data.potDetail.potLan}
             />
             <p css={contentStyle}>{data.potDetail.potContent}</p>
+            <PostButton postType="save" initialState={false} />
             <div css={dividerStyle} />
           </div>
           {data.potDetail.owner &&

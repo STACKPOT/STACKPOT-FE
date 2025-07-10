@@ -17,7 +17,6 @@ import StartPotModal from "../StartPotModal/StartPotModal";
 import useGetPotApplicants from "apis/hooks/pots/useGetPotApplicants";
 import { GetPotApplicationResponse } from "apis/types/pot";
 import { useSnackbar } from "providers";
-import applicantsListData from "mocks/applicantsData";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 
@@ -64,8 +63,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
     }
   };
 
-  //const { data: applicants } = useGetPotApplicants(potId);
-  const applicants = applicantsListData;
+  const { data: applicants } = useGetPotApplicants(potId);
 
   return (
     <>
