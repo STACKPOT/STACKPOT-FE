@@ -5,24 +5,17 @@ export const container = css`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  padding: 4.8rem 0;
-`;
-
-export const selectContainer = css`
-  justify-content: center;
-  gap: 1.6rem;
+  padding: 8.4rem 0;
 `;
 
 export const tabsContainer = css`
   display: flex;
-  padding: 1.6rem 0;
-  align-items: flex-end;
-  gap: 3.2rem;
 `;
 
 export const tabsTextStyle = css`
-  ${theme.font.bodyBold2};
-  color: ${theme.color.interactive.inactive};
+  ${theme.font.title2};
+  color: ${theme.color.object.hero};
+  padding: 1.2rem 3rem;
   text-decoration: none;
   transition: color 0.3s ease-out;
 

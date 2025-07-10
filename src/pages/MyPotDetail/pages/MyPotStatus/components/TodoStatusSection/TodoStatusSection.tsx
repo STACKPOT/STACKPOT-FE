@@ -21,7 +21,7 @@ const TodoStatusSection: React.FC<TodoStatusSectionProps> = ({
   return (
   <div css={toDoStatusContainer}>
     <div css={toDoStatusHeader}>
-      <StateBadge content={status} />
+      <StateBadge badgeType="task" taskState={status} />
       <PlusButtonIcon css={plusButtonStyle} onClick={onOpenModal} />
     </div>
     <TaskCardList tasks={tasks} onTaskCardClick={onTaskCardClick} />
