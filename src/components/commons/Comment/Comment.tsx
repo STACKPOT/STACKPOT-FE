@@ -1,5 +1,25 @@
 import { PlusButtonIcon } from "@assets/svgs";
-import { container, contentStyle, dateStyle, deletedComment, deletedCommentText, editCommentContainer, editCommentTextAreaStyle, meatballIconStyle, nicknameContainer, nicknameStyle, openRecommentContainer, openRecommentIconStyle, openRecommentTextStyle, profileContainer, profileImageStyle, profileTextContainer, recommentCancelStyle, recommentContainer, submitButtonContainer, textAreaStyle } from "./Comment.style";
+import {
+  container,
+  contentStyle,
+  dateStyle,
+  deletedComment,
+  deletedCommentText,
+  editCommentContainer,
+  editCommentTextAreaStyle,
+  meatballIconStyle,
+  nicknameContainer,
+  nicknameStyle,
+  openRecommentContainer,
+  openRecommentIconStyle,
+  openRecommentTextStyle,
+  profileContainer,
+  profileImageStyle,
+  profileTextContainer,
+  recommentCancelStyle,
+  submitButtonContainer,
+  textAreaStyle,
+} from "./Comment.style";
 import Button from "../Button/Button";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
@@ -10,69 +30,123 @@ import MyFeedDropdown from "../Dropdown/MyFeedDropdown/MyFeedDropdown";
 import CommentWriter from "./CommentWriter";
 import Badge from "../Badge/Badge";
 import Modal from "../Modal/Modal";
+import usePostFeedCommentReply from "apis/hooks/comments/usePostFeedCommentReply";
+import usePatchFeedComment from "apis/hooks/comments/usePatchFeedComment";
+import useDeleteFeedComment from "apis/hooks/comments/useDeleteFeedComment";
+import usePostPotCommentReply from "apis/hooks/comments/usePostPotCommentReply";
+import usePatchPotComment from "apis/hooks/comments/usePatchPotComment";
+import useDeletePotComment from "apis/hooks/comments/useDeletePotComment";
 
 interface CommentProps {
+  id: number;
+  type: "feed" | "pot";
   userId: number;
   role: Role;
-  nickname: string;
-  date: string;
-  content: string;
-  isMyComment: boolean;
-  isRecomment: boolean;
-  isDeleted: boolean;
-  isWriter: boolean;
+  userName: string;
+  createdAt: string;
+  comment: string;
+  commentId: number;
+  parentCommentId: number;
+  isCommentWriter: boolean;
+  isDeleted?: boolean;
+  isFeedWriter?: boolean;
+  isPotWriter?: boolean;
 }
 
 const Comment: React.FC<CommentProps> = ({
+  id,
+  type,
   userId,
   role,
-  nickname,
-  date,
-  content,
-  isMyComment,
-  isRecomment,
+  userName,
+  createdAt,
+  comment,
+  commentId,
+  parentCommentId,
+  isCommentWriter,
   isDeleted,
-  isWriter,
+  isFeedWriter,
+  isPotWriter,
 }: CommentProps) => {
   const navigate = useNavigate();
+
   const [openRecomment, setOpenRecomment] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [editValue, setEditValue] = useState(content);
+  const [editValue, setEditValue] = useState(comment);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const { mutate: submitFeedRecomment } = usePostFeedCommentReply();
+  const { mutate: submitPotRecomment } = usePostPotCommentReply();
+  const { mutate: editComment } =
+    type === "feed" ? usePatchFeedComment(id) : usePatchPotComment(id);
+  const { mutate: deleteComment } =
+    type === "feed" ? useDeleteFeedComment(id) : useDeletePotComment(id);
 
   const editRef = useRef<HTMLTextAreaElement>(null);
 
   const handleNicknameClick = () => {
-    navigate(`${routes.userProfile}/${userId}`)
-  }
+    navigate(`${routes.userProfile}/${userId}`);
+    window.scrollTo(0, 0);
+  };
   const handleOpenRecomment = () => {
-    setOpenRecomment(!openRecomment)
-  }
+    setOpenRecomment(!openRecomment);
+  };
   const handleSubmitRecomment = (recomment: string) => {
-    // api 호출
-    setOpenRecomment(false);
-  }
+    if (type === "feed") {
+      submitFeedRecomment(
+        {
+          feedId: id,
+          comment: recomment,
+          parentCommentId: commentId,
+        },
+        {
+          onSuccess: () => {
+            setOpenRecomment(false);
+          },
+        }
+      );
+    } else {
+      submitPotRecomment(
+        {
+          potId: id,
+          comment: recomment,
+          parentCommentId: commentId,
+        },
+        {
+          onSuccess: () => {
+            setOpenRecomment(false);
+          },
+        }
+      );
+    }
+  };
   const handleEdit = () => {
     setIsEditing(!isEditing);
     if (!isEditing) {
-      setEditValue(content);
+      setEditValue(comment);
     }
-  }
+  };
   const handleEditInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setEditValue(e.target.value);
     if (editRef.current) {
       editRef.current.style.height = "0px";
       editRef.current.style.height = editRef.current.scrollHeight + "px";
     }
-  }
+  };
   const handleSubmitEdit = () => {
-    // 댓글 수정 api 호출
+    editComment({
+      commentId: commentId,
+      comment: editValue,
+    });
     setIsEditing(false);
-  }
+  };
   const handleDelete = () => {
-    // 댓글 삭제 api
-    setIsDeleteModalOpen(false);
-  }
+    deleteComment(commentId, {
+      onSuccess: () => {
+        setIsDeleteModalOpen(false);
+      },
+    });
+  };
 
   useEffect(() => {
     if (isEditing) {
@@ -81,55 +155,72 @@ const Comment: React.FC<CommentProps> = ({
         editRef.current.style.height = editRef.current.scrollHeight + "px";
       }
     }
-  }, [isEditing])
+  }, [isEditing]);
 
   return (
-    <div css={container(isRecomment, isDeleted)}>
-      {isDeleted ?
+    <div css={container(parentCommentId !== null, isDeleted ?? false)}>
+      {isDeleted ? (
         <div css={deletedComment}>
           <p css={deletedCommentText}>삭제된 댓글입니다.</p>
         </div>
-        :
+      ) : (
         <>
-          {!isEditing ?
+          {!isEditing ? (
             <>
               <div css={profileContainer}>
                 <img css={profileImageStyle} src={roleImages[role]} />
                 <div css={profileTextContainer}>
                   <div css={nicknameContainer}>
-                    <a css={nicknameStyle(isMyComment)} onClick={handleNicknameClick}>{nickname}</a>
-                    {isWriter && <Badge content="작성자" color="blue" />}
+                    <a
+                      css={nicknameStyle(isCommentWriter)}
+                      onClick={handleNicknameClick}
+                    >
+                      {userName}
+                    </a>
+                    {(isFeedWriter || isPotWriter) && (
+                      <Badge content="작성자" color="blue" />
+                    )}
                   </div>
-                  <p css={dateStyle}>{date}</p>
+                  <p css={dateStyle}>{createdAt}</p>
                 </div>
-                {isMyComment &&
-                  <div css={meatballIconStyle}
-                    onClick={(e) => { e.stopPropagation(); }}>
+                {isCommentWriter && (
+                  <div
+                    css={meatballIconStyle}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                  >
                     <MyFeedDropdown
                       topMessage="수정하기"
                       bottomMessage="삭제하기"
                       onTop={handleEdit}
                       onBottom={() => setIsDeleteModalOpen(true)}
                     />
-                  </div>}
+                  </div>
+                )}
               </div>
-              <p css={contentStyle}>{content}</p>
-              <button css={openRecommentContainer} onClick={handleOpenRecomment}>
+              <p css={contentStyle}>{comment}</p>
+              <button
+                css={openRecommentContainer}
+                onClick={handleOpenRecomment}
+              >
                 <PlusButtonIcon css={openRecommentIconStyle} />
                 <p css={openRecommentTextStyle}>답글 달기</p>
               </button>
-              {openRecomment &&
+              {openRecomment && (
                 <CommentWriter
                   onSubmit={handleSubmitRecomment}
                   onCancel={handleOpenRecomment}
-                  textAreaCustomStyle={textAreaStyle} />}
+                  textAreaCustomStyle={textAreaStyle}
+                />
+              )}
             </>
-            :
+          ) : (
             <>
               <div css={editCommentContainer}>
                 <div css={profileContainer}>
                   <img css={profileImageStyle} src={roleImages[role]} />
-                  <p css={nicknameStyle(isMyComment)}>{nickname}</p>
+                  <p css={nicknameStyle(isCommentWriter)}>{userName}</p>
                 </div>
                 <textarea
                   css={editCommentTextAreaStyle}
@@ -139,20 +230,28 @@ const Comment: React.FC<CommentProps> = ({
                 />
               </div>
               <div css={submitButtonContainer}>
-                <button css={recommentCancelStyle} onClick={handleEdit}>취소</button>
-                <Button variant="action" onClick={handleSubmitEdit}>댓글 작성</Button>
+                <button css={recommentCancelStyle} onClick={handleEdit}>
+                  취소
+                </button>
+                <Button variant="action" onClick={handleSubmitEdit}>
+                  댓글 작성
+                </Button>
               </div>
             </>
-          }
+          )}
         </>
-      }
-      {isDeleteModalOpen &&
+      )}
+      {isDeleteModalOpen && (
         <Modal
           title="댓글을 삭제하시겠습니까?"
           message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
+          confirmType="neg"
+          confirmButton="삭제하기"
           onConfirm={handleDelete}
-          onCancel={() => setIsDeleteModalOpen(false)} />}
+          onCancel={() => setIsDeleteModalOpen(false)}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 export default Comment;
