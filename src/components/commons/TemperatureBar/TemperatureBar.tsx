@@ -12,7 +12,11 @@ const TemperatureBar: React.FC<TemperatureProps> = ({ temperature }) => {
       <div css={container}>
         <div css={titleContainer}>
           <p css={titleStyle}>나의 온도</p>
-          <InformationPopper marginBottom="1.75rem">피드 작성, 프로젝트를 매칭, 완료하면 온도가 올라가요. 높은 온도를 유지해보세요!</InformationPopper>
+          <InformationPopper>
+            피드 작성, 프로젝트를 매칭, 완료하면 온도가 올라가요.
+            <br />
+            높은 온도를 유지해보세요!
+          </InformationPopper>
         </div>
         <div css={temperatureBarContainer}>
           <div css={temperatureBase}>
