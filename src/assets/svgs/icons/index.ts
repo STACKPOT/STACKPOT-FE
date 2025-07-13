@@ -28,5 +28,15 @@ export { default as CommentIcon } from './comment.svg?react';
 export { default as FillSaveIcon } from './fillSave.svg?react';
 export { default as DefaultChatIcon } from './defaultChat.svg?react';
 export { default as WavingHandIcon } from './wavingHand.svg?react';
-export { default as AddIcon } from './add.svg?react';
+export { default as ComputerIcon } from "./computer.svg?react";
+export { default as DateRangeIcon } from "./dateRange.svg?react";
+export { default as FlagIcon } from "./flag.svg?react";
+export { default as SupervisedUserCircle } from "./supervisedUserCircle.svg?react";
+export { default as WebTrafficIcon } from "./webTraffic.svg?react";
+export { default as CircleCheck } from "./circleCheck.svg?react";
+export { default as FillCircleCheck } from "./fillCircleCheck.svg?react";
+export { default as AddIcon } from "./add.svg?react";
 export { default as SearchBlueIcon } from "./searchBlue.svg?react";
+export { default as BellIcon } from "./bell.svg?react";
+export { default as BellFilledIcon } from "./bellFilled.svg?react";
+

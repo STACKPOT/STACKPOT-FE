@@ -1,12 +1,15 @@
 import { LeftIcon } from "@assets/svgs";
 import {
-  backButtonIconStyle,
+  buttonWrapperStyle,
   backButtonStyle,
   container,
   titleContainer,
   titleStyle,
+  profileContainer,
+  profileStyle,
+  nicknameStyle,
 } from "./PotHeader.style";
-import { Button, Modal } from "@components/index";
+import { Button, DdayBadge, ExplainModal, Modal } from "@components/index";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ApplyModal from "../ApplyModal/ApplyModal";
@@ -14,7 +17,7 @@ import useCancelApply from "apis/hooks/pots/useCancelApply";
 import { PotStatus } from "types/potStatus";
 import routes from "@constants/routes";
 import { PostPotApplicationResponse } from "apis/types/pot";
-import ApplyProfileModal from "../ApplyProfileModal/ApplyProfileModal";
+import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 
 interface PotHeaderProps {
   title: string;
@@ -22,6 +25,9 @@ interface PotHeaderProps {
   isApplied: boolean;
   potId: number;
   potStatus: PotStatus;
+  nickname: string;
+  profileImage: string;
+  dday: string;
 }
 const PotHeader: React.FC<PotHeaderProps> = ({
   title,
@@ -29,9 +35,18 @@ const PotHeader: React.FC<PotHeaderProps> = ({
   isApplied,
   potId,
   potStatus,
+  nickname,
+  profileImage,
+  dday,
 }: PotHeaderProps) => {
   const navigate = useNavigate();
   const { mutate: cancelApply } = useCancelApply();
+
+  const { data } = useGetPotDetail(potId);
+  const handleUserClick = () => {
+    const userId = data?.potDetail.userId;
+    navigate(`${routes.userProfile}/${userId}`);
+  };
 
   const [showCancelApplyModal, setShowCancelApplyModal] =
     useState<boolean>(false);
@@ -42,9 +57,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({
   const handleEdit = () => {
     navigate(`${routes.editPot}/${potId}`);
   };
-  const handleFinishedPotEdit = () => {
-    navigate(`${routes.editFinishedPot}/${potId}`);
-  };
+
   const handleCancelApplyModalConfirm = () => {
     cancelApply(potId);
     setShowCancelApplyModal(false);
@@ -57,35 +70,58 @@ const PotHeader: React.FC<PotHeaderProps> = ({
     <>
       <div css={container}>
         <div css={titleContainer}>
-          <button css={backButtonStyle} onClick={() => navigate(-1)}>
-            <LeftIcon css={backButtonIconStyle} type="button" />
-          </button>
+          <LeftIcon
+            css={backButtonStyle}
+            type="button"
+            onClick={() => navigate(-1)}
+          />
           <h1 css={titleStyle}>{title}</h1>
+          <div css={buttonWrapperStyle}>
+            {isMyPot ? (
+              <Button variant="action" actionType="alt" onClick={handleEdit}>
+                수정
+              </Button>
+            ) : (
+              potStatus === "RECRUITING" &&
+              (isApplied ? (
+                <Button
+                  variant="action"
+                  actionType="neg"
+                  onClick={() => setShowCancelApplyModal(true)}
+                >
+                  지원 취소하기
+                </Button>
+              ) : (
+                <Button
+                  variant="action"
+                  onClick={() => setShowApplyModal(true)}
+                >
+                  지원하기
+                </Button>
+              ))
+            )}
+          </div>
         </div>
-        {potStatus !== "ONGOING" &&
-          !(potStatus === "COMPLETED" && !isMyPot) && (
-            <Button
-              variant="action"
-              onClick={
-                (potStatus === "COMPLETED" &&
-                  isMyPot &&
-                  handleFinishedPotEdit) ||
-                (isMyPot && handleEdit) ||
-                (isApplied && (() => setShowCancelApplyModal(true))) ||
-                (() => setShowApplyModal(true))
-              }
-            >
-              {(potStatus === "COMPLETED" && isMyPot && "팟 소개 수정") ||
-                (isMyPot && "수정") ||
-                (isApplied && "지원 취소하기") ||
-                "이 팟에 지원하기"}
-            </Button>
-          )}
+        <div css={profileContainer}>
+          <img
+            css={profileStyle}
+            src={profileImage}
+            alt="profile"
+            onClick={handleUserClick}
+          />
+          <a css={nicknameStyle} onClick={handleUserClick}>
+            {nickname}
+          </a>
+          <DdayBadge days={dday} />
+        </div>
       </div>
       {showCancelApplyModal && (
         <Modal
           title="지원을 취소하시겠어요?"
-          message="팟 게시자는 지원자를 팟에 추가할 수 없게 됩니다."
+          message="팟 게시자는 지원자를 팟에 추가할 수 없게 돼요."
+          confirmType="neg"
+          confirmButton="지원 취소하기"
+          cancelButton="아니요"
           onConfirm={handleCancelApplyModalConfirm}
           onCancel={() => setShowCancelApplyModal(false)}
         />
@@ -98,9 +134,13 @@ const PotHeader: React.FC<PotHeaderProps> = ({
         />
       )}
       {showApplyProfileModal && (
-        <ApplyProfileModal
-          potRole={showApplyProfileModal.potRole}
-          useNickname={showApplyProfileModal.userNickname}
+        <ExplainModal
+          type="profile"
+          title={`지원이 완료되었어요!${"\n"}팟 게시자가 회원님의 프로필을 확인할 수 있어요.`}
+          buttonText="확인했어요"
+          role={"FRONTEND"}
+          nickname={"dfd"}
+          onButtonClick={() => setShowApplyProfileModal(null)}
           onCancel={() => setShowApplyProfileModal(null)}
         />
       )}
