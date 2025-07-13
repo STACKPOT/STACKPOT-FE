@@ -4,7 +4,7 @@ import theme from "@styles/theme";
 export const swiperContainer = css`
   position: relative;
   overflow: hidden;
-  width: 84.8rem;
+  width: 94.8rem;
 
   .swiper-button-next,
   .swiper-button-prev {
