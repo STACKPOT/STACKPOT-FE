@@ -20,6 +20,7 @@ import { Role } from "types/role";
 import routes from "@constants/routes";
 import { SaveFilledIcon, SaveIcon } from "@assets/svgs";
 import usePostSavePot from "apis/hooks/saves/useSavePot";
+import { useSnackbar } from "providers";
 
 interface PotCardProps {
   userId: number;
@@ -49,6 +50,7 @@ const PotCard: React.FC<PotCardProps> = ({
   const navigate = useNavigate();
   const isLoggedIn = Boolean(localStorage.getItem("accessToken"));
   const { mutate } = usePostSavePot();
+  const { showSnackbar } = useSnackbar();
 
   const handleCardClick = () => {
     if (isLoggedIn) {
@@ -63,8 +65,14 @@ const PotCard: React.FC<PotCardProps> = ({
   };
 
   const handleSave = () => {
-    //TODO: API 연결
-    mutate(potId);
+    if (isLoggedIn) {
+      mutate(potId);
+    } else {
+      showSnackbar({
+        message: "로그인 후 이용해주세요.",
+        severity: "error",
+      });
+    }
   };
 
   const profileImage = roleImages[role];
