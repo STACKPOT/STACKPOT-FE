@@ -1,11 +1,19 @@
-import { ArrowDropdownIcon, Logo, SearchIcon } from "@assets/svgs";
 import {
+  ArrowDropdownIcon,
+  BellFilledIcon,
+  BellIcon,
+  Logo,
+  SearchIcon,
+} from "@assets/svgs";
+import {
+  bellContainer,
   guestProfileStyle,
   headerStyle,
   iconContainer,
   iconStyle,
   logoStyle,
   profileContainer,
+  ProfileStyle,
   profileStyle,
   searchIconStyle,
 } from "./Header.style";
@@ -16,6 +24,7 @@ import routes from "@constants/routes";
 import { roleImages } from "@constants/roleImage";
 import ProfileDropdown from "@components/commons/Dropdown/ProfileDropdown/ProfileDropdown";
 import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
+import Notification from "./components/Notification/Notification";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -28,6 +37,7 @@ const Header: React.FC = () => {
   const [role, setRole] = useState(localStorage.getItem("role"));
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [roleProfileImage, setRoleProfileImage] = useState<string>("");
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const guestMode = role === "UNKNOWN";
@@ -75,6 +85,10 @@ const Header: React.FC = () => {
     };
   }, [ref]);
 
+  const handleNotificationClick = () => {
+    setIsNotificationOpen((prev) => !prev);
+  };
+
   return (
     <div ref={ref}>
       <header css={headerStyle(isHomePage)}>
@@ -90,6 +104,15 @@ const Header: React.FC = () => {
               css={searchIconStyle(isHomePage)}
               onClick={handleSearchClick}
             />
+            <div css={bellContainer}>
+              {isNotificationOpen ? (
+                <BellFilledIcon onClick={handleNotificationClick} />
+              ) : (
+                <BellIcon onClick={handleNotificationClick} />
+              )}
+
+              {isNotificationOpen && <Notification />}
+            </div>
 
             <div css={profileContainer}>
               <img

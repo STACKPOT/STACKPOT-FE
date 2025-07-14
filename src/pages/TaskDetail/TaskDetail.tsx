@@ -153,7 +153,7 @@ const TaskDetailPage: React.FC = () => {
           <div css={titleStyle}>{task.result.title}</div>
         </div>
         <div css={rightContainer}>
-          <StateBadge content={displayStatus[task.result.status]} onClick={handleOpenChangingModal} />
+          <StateBadge badgeType="task" taskState={displayStatus[task.result.status]} onClick={handleOpenChangingModal} />
           <div css={dropdownWrapperStyle} onClick={(event) => event.stopPropagation()}>
             <MyFeedDropdown
               topMessage="수정하기"
