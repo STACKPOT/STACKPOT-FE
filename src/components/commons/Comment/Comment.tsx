@@ -3,10 +3,6 @@ import {
   container,
   contentStyle,
   dateStyle,
-  deletedComment,
-  deletedCommentText,
-  editCommentContainer,
-  editCommentTextAreaStyle,
   meatballIconStyle,
   nicknameContainer,
   nicknameStyle,
@@ -16,26 +12,23 @@ import {
   profileContainer,
   profileImageStyle,
   profileTextContainer,
-  recommentCancelStyle,
-  submitButtonContainer,
   textAreaStyle,
 } from "./Comment.style";
-import Button from "../Button/Button";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import MyFeedDropdown from "../Dropdown/MyFeedDropdown/MyFeedDropdown";
 import CommentWriter from "./CommentWriter";
 import Badge from "../Badge/Badge";
 import Modal from "../Modal/Modal";
 import usePostFeedCommentReply from "apis/hooks/comments/usePostFeedCommentReply";
-import usePatchFeedComment from "apis/hooks/comments/usePatchFeedComment";
 import useDeleteFeedComment from "apis/hooks/comments/useDeleteFeedComment";
 import usePostPotCommentReply from "apis/hooks/comments/usePostPotCommentReply";
-import usePatchPotComment from "apis/hooks/comments/usePatchPotComment";
 import useDeletePotComment from "apis/hooks/comments/useDeletePotComment";
+import EditingComment from "./EditingComment";
+import DeletedComment from "./DeletedComent";
 
 interface CommentProps {
   id: number;
@@ -72,17 +65,12 @@ const Comment: React.FC<CommentProps> = ({
 
   const [openRecomment, setOpenRecomment] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [editValue, setEditValue] = useState(comment);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const { mutate: submitFeedRecomment } = usePostFeedCommentReply();
   const { mutate: submitPotRecomment } = usePostPotCommentReply();
-  const { mutate: editComment } =
-    type === "feed" ? usePatchFeedComment(id) : usePatchPotComment(id);
   const { mutate: deleteComment } =
     type === "feed" ? useDeleteFeedComment(id) : useDeletePotComment(id);
-
-  const editRef = useRef<HTMLTextAreaElement>(null);
 
   const handleNicknameClick = () => {
     navigate(`${routes.userProfile}/${userId}`);
@@ -120,26 +108,7 @@ const Comment: React.FC<CommentProps> = ({
       );
     }
   };
-  const handleEdit = () => {
-    setIsEditing(!isEditing);
-    if (!isEditing) {
-      setEditValue(comment);
-    }
-  };
-  const handleEditInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setEditValue(e.target.value);
-    if (editRef.current) {
-      editRef.current.style.height = "0px";
-      editRef.current.style.height = editRef.current.scrollHeight + "px";
-    }
-  };
-  const handleSubmitEdit = () => {
-    editComment({
-      commentId: commentId,
-      comment: editValue,
-    });
-    setIsEditing(false);
-  };
+
   const handleDelete = () => {
     deleteComment(commentId, {
       onSuccess: () => {
@@ -148,21 +117,10 @@ const Comment: React.FC<CommentProps> = ({
     });
   };
 
-  useEffect(() => {
-    if (isEditing) {
-      if (editRef.current) {
-        editRef.current.style.height = "0px";
-        editRef.current.style.height = editRef.current.scrollHeight + "px";
-      }
-    }
-  }, [isEditing]);
-
   return (
     <div css={container(parentCommentId !== null, isDeleted ?? false)}>
       {isDeleted ? (
-        <div css={deletedComment}>
-          <p css={deletedCommentText}>삭제된 댓글입니다.</p>
-        </div>
+        <DeletedComment />
       ) : (
         <>
           {!isEditing ? (
@@ -193,7 +151,7 @@ const Comment: React.FC<CommentProps> = ({
                     <MyFeedDropdown
                       topMessage="수정하기"
                       bottomMessage="삭제하기"
-                      onTop={handleEdit}
+                      onTop={() => setIsEditing(true)}
                       onBottom={() => setIsDeleteModalOpen(true)}
                     />
                   </div>
@@ -216,28 +174,15 @@ const Comment: React.FC<CommentProps> = ({
               )}
             </>
           ) : (
-            <>
-              <div css={editCommentContainer}>
-                <div css={profileContainer}>
-                  <img css={profileImageStyle} src={roleImages[role]} />
-                  <p css={nicknameStyle(isCommentWriter)}>{userName}</p>
-                </div>
-                <textarea
-                  css={editCommentTextAreaStyle}
-                  ref={editRef}
-                  value={editValue}
-                  onChange={(e) => handleEditInputChange(e)}
-                />
-              </div>
-              <div css={submitButtonContainer}>
-                <button css={recommentCancelStyle} onClick={handleEdit}>
-                  취소
-                </button>
-                <Button variant="action" onClick={handleSubmitEdit}>
-                  댓글 작성
-                </Button>
-              </div>
-            </>
+            <EditingComment
+              id={id}
+              role={role}
+              userName={userName}
+              comment={comment}
+              commentId={commentId}
+              type={type}
+              closeEdit={() => setIsEditing(false)}
+            />
           )}
         </>
       )}
