@@ -3,8 +3,6 @@ import {
   editCommentContainer,
   editCommentTextAreaStyle,
   nicknameStyle,
-  profileContainer,
-  profileImageStyle,
   recommentCancelStyle,
   submitButtonContainer,
 } from "./EditingComment.style";
@@ -13,6 +11,7 @@ import { Role } from "types/role";
 import { useEffect, useRef, useState } from "react";
 import usePatchFeedComment from "apis/hooks/comments/usePatchFeedComment";
 import usePatchPotComment from "apis/hooks/comments/usePatchPotComment";
+import { profileContainer, profileImageStyle } from "./Comment.style";
 
 interface EditingCommentProps {
   id: number;
@@ -58,7 +57,7 @@ const EditingComment: React.FC<EditingCommentProps> = ({
     <>
       <div css={editCommentContainer}>
         <div css={profileContainer}>
-          <img css={profileImageStyle} src={roleImages[role]} />
+          <img css={profileImageStyle} src={roleImages[role]} alt="profile" />
           <p css={nicknameStyle}>{userName}</p>
         </div>
         <textarea

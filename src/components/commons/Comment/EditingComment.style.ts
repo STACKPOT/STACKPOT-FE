@@ -23,19 +23,6 @@ export const editCommentTextAreaStyle = css`
   }
 `;
 
-export const profileContainer = css`
-  display: flex;
-  gap: 1.6rem;
-  align-items: center;
-`;
-
-export const profileImageStyle = css`
-  width: 5rem;
-  height: 5rem;
-  border: 1px solid ${theme.color.object.alternative};
-  border-radius: 50%;
-`;
-
 export const nicknameStyle = css`
   ${theme.font.caption3};
   color: ${theme.color.point.hero};
