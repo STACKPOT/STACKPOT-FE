@@ -18,12 +18,14 @@ import "react-loading-skeleton/dist/skeleton.css";
 const PopularPots = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading } = useGetPots({
-    page: currentPage,
-    size: 3,
+    page: 1,
+    size: 9,
     recruitmentRole: null,
   });
 
-  const totalPages = 3;
+  const pots = data?.pots ?? [];
+  const totalPages = Math.ceil(pots.length / 3);
+  const currentPots = pots.slice((currentPage - 1) * 3, currentPage * 3);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -60,7 +62,7 @@ const PopularPots = () => {
                     <Skeleton css={cardStyle} />
                   </SwiperSlide>
                 ))
-              : data?.pots.map((pot) => (
+              : currentPots.map((pot) => (
                   <SwiperSlide key={pot.potId}>
                     <PotCard
                       userId={pot.userId}

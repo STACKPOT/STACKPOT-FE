@@ -3,7 +3,7 @@ import theme from "@styles/theme";
 
 export const cardStyle = css`
   width: 30rem;
-  height: 22.1rem;
+  height: 21.3rem;
   padding: 2.8rem 1.6rem;
   border-radius: 24px;
   box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
