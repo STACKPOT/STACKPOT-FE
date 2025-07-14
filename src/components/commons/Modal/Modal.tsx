@@ -15,7 +15,7 @@ interface ModalProps {
   title: string;
 
   /** 모달의 본문 텍스트 */
-  message: string;
+  message: string | React.ReactNode;
 
   /**
    * _확인 버튼_ 스타일 타입
