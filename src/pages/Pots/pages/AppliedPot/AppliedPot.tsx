@@ -1,13 +1,9 @@
-import {
-  container,
-  noDataContainer,
-  noDataTextStyle,
-} from "./AppliedPot.style";
+import { container } from "./AppliedPot.style";
 import { useState } from "react";
 import Modal from "@components/commons/Modal/Modal";
 import useGetPotsApply from "apis/hooks/pots/useGetPotApply";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
-import { Button, CtaCard, MyPotCard } from "@components/index";
+import { CtaCard, MyPotCard, NoData } from "@components/index";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 
@@ -22,7 +18,6 @@ const AppliedPotPage = () => {
     mutate(potId, {
       onSuccess: () => {
         setCancelApplyPotId(null);
-        window.location.reload();
       },
     });
   };
@@ -38,14 +33,11 @@ const AppliedPotPage = () => {
       {pots && pots.length > 0 ? (
         pots.map((pot) => <MyPotCard key={pot.potId} {...pot} type="applied" />)
       ) : (
-        <div css={noDataContainer}>
-          <p css={noDataTextStyle}>
-            😥{"\n"}지원한 팟이 없어요{"\n"}팟에 지원해 보세요!
-          </p>
-          <Button variant="cta" onClick={handleNavigateToAllPot}>
-            모든 팟 페이지로
-          </Button>
-        </div>
+        <NoData
+          message={`😥\n지원한 팟이 없어요\n팟에 지원해 보세요!`}
+          buttonText="모든 팟 페이지로"
+          onClickButton={handleNavigateToAllPot}
+        />
       )}
       {cancelApplyPotId !== null && (
         <Modal

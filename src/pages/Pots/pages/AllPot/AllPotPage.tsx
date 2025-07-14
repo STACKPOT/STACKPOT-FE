@@ -7,14 +7,12 @@ import {
   categoryButtonWrapper,
   ctaCardWrapper,
   container,
-  noDataContainer,
-  noDataTextStyle,
 } from "./AllPotPage.style";
 import PotCard from "@components/cards/PotCard/PotCard";
 import useGetPots from "apis/hooks/pots/useGetPots";
 import { Pagination, PaginationItem } from "@mui/material";
 import { partMap, searchPartMap } from "@constants/categories";
-import { Button, CategoryButton, CtaCard } from "@components/index";
+import { CategoryButton, CtaCard, NoData } from "@components/index";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 
@@ -87,14 +85,11 @@ const AllPotPage: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div css={noDataContainer}>
-          <p css={noDataTextStyle}>
-            😥{"\n"}생성된 팟이 없어요{"\n"}내 팟을 만들어 볼까요?
-          </p>
-          <Button variant="cta" onClick={handleNavigateToCreatePot}>
-            팟 만들기
-          </Button>
-        </div>
+        <NoData
+          message={`😥\n생성된 팟이 없어요\n내 팟을 만들어 볼까요?`}
+          buttonText="팟 만들기"
+          onClickButton={handleNavigateToCreatePot}
+        />
       )}
 
       <Pagination

@@ -31,6 +31,7 @@ import MyPotCard from "./cards/PotDetailCard/MyPotCard";
 import RoleCard from "./cards/RoleCard/RoleCard";
 import MemberCard from "./cards/MemberCard/MemberCard";
 import PostButton from "./commons/Button/PostButton/PostButton";
+import NoData from "./commons/NoData/NoData";
 
 export {
   Modal,
@@ -66,4 +67,5 @@ export {
   RoleCard,
   MemberCard,
   PostButton,
+  NoData,
 };
