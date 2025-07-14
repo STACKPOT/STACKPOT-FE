@@ -3,12 +3,12 @@ import { postFeedLike } from "apis/feedAPI";
 import { useSnackbar } from "providers";
 
 const usePostFeedLike = () => {
-  const queryCient = useQueryClient();
+  const queryClient = useQueryClient();
   const { showSnackbar } = useSnackbar();
   return useMutation({
     mutationFn: (feedId: number) => postFeedLike(feedId),
     onSuccess: (_, variables) => {
-      queryCient.invalidateQueries({
+      queryClient.invalidateQueries({
         queryKey: ["feedDetail", variables],
       });
     },
