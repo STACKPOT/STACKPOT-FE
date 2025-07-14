@@ -65,7 +65,6 @@ const PotCard: React.FC<PotCardProps> = ({
   const handleSave = () => {
     //TODO: API 연결
     mutate(potId);
-    console.log("저장")
   };
 
   const profileImage = roleImages[role];
@@ -101,11 +100,7 @@ const PotCard: React.FC<PotCardProps> = ({
               handleSave();
             }}
           >
-            {isSaved ? (
-              <SaveFilledIcon onClick={handleSave} />
-            ) : (
-              <SaveIcon onClick={handleSave} />
-            )}
+            {isSaved === true ? <SaveFilledIcon /> : <SaveIcon />}
           </button>
           <p css={potSaveCountStyle}>{potSaveCount}</p>
         </div>

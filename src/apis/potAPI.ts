@@ -35,7 +35,7 @@ export const GetPots = async ({
   size,
   recruitmentRole,
 }: GetPotsParams) => {
-  return apiGet<PotsResponse>("pots", { page, size, recruitmentRole });
+  return apiGet<PotsResponse>("/pots", { page, size, recruitmentRole });
 };
 
 export const GetPotsApply = async () => {
