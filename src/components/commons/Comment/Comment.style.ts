@@ -34,6 +34,7 @@ export const nicknameContainer = css`
 export const nicknameStyle = (isMine: boolean) => css`
   ${theme.font.caption3};
   color: ${isMine ? theme.color.point.hero : theme.color.base.black};
+  background-color: transparent;
   cursor: pointer;
 `;
 export const dateStyle = css`

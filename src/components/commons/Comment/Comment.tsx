@@ -126,15 +126,19 @@ const Comment: React.FC<CommentProps> = ({
           {!isEditing ? (
             <>
               <div css={profileContainer}>
-                <img css={profileImageStyle} src={roleImages[role]} />
+                <img
+                  css={profileImageStyle}
+                  src={roleImages[role]}
+                  alt="profile"
+                />
                 <div css={profileTextContainer}>
                   <div css={nicknameContainer}>
-                    <a
+                    <button
                       css={nicknameStyle(isCommentWriter)}
                       onClick={handleNicknameClick}
                     >
                       {userName}
-                    </a>
+                    </button>
                     {(isFeedWriter || isPotWriter) && (
                       <Badge content="작성자" color="blue" />
                     )}

@@ -21,7 +21,7 @@ interface CommentSectionProps {
   id: number;
 }
 
-function flattenComments<T>(list: CommentResponse[]) {
+function flattenComments<T extends CommentResponse[]>(list: T) {
   const result: CommentResponse[] = [];
 
   const traverse = (comments: CommentResponse[]) => {
@@ -100,7 +100,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
       <CommentWriter onSubmit={handleSubmitComment} onCancel={() => {}} />
       <div css={commentListContainer}>
         {comments.map((comment) => (
-          <Comment id={id} type={type} {...comment} />
+          <Comment key={id} id={id} type={type} {...comment} />
         ))}
       </div>
     </div>
