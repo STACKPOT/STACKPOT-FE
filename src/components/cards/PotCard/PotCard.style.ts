@@ -87,6 +87,19 @@ export const buttonContainer = css`
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  ${theme.font.caption1}
-  color: ${theme.color.object.hero}
+  ${theme.font.caption1};
+  color: ${theme.color.object.hero};
+  width: 4rem;
+  height: 4rem;
+  &:hover {
+    background-color: ${theme.color.point.normal};
+    cursor: pointer;
+    border-radius: 8px;
+  }
+`;
+
+export const potSaveCountStyle = css`
+  padding: 0 0.5rem;
+  width: 100%;
+  text-align: center;
 `;

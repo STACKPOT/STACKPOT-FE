@@ -60,6 +60,8 @@ interface Pots {
   potContent: string;
   recruitmentRoles: string[];
   dday: string;
+  isSaved: boolean;
+  potSaveCount: number;
 }
 
 export interface GetPotsApplyResponse {

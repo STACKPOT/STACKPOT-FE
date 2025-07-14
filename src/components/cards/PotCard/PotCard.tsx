@@ -8,6 +8,7 @@ import {
   contentContainer,
   contentStyle,
   nicknameStyle,
+  potSaveCountStyle,
   profileContainer,
   profileImageStyle,
   titleContainer,
@@ -17,7 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
 import routes from "@constants/routes";
-import { SaveIcon } from "@assets/svgs";
+import { SaveFilledIcon, SaveIcon } from "@assets/svgs";
+import usePostSavePot from "apis/hooks/saves/useSavePot";
 
 interface PotCardProps {
   userId: number;
@@ -28,6 +30,8 @@ interface PotCardProps {
   title: string;
   content: string;
   categories: string[];
+  isSaved: boolean;
+  potSaveCount: number;
 }
 
 const PotCard: React.FC<PotCardProps> = ({
@@ -39,9 +43,12 @@ const PotCard: React.FC<PotCardProps> = ({
   title,
   content,
   categories,
+  isSaved,
+  potSaveCount,
 }: PotCardProps) => {
   const navigate = useNavigate();
   const isLoggedIn = Boolean(localStorage.getItem("accessToken"));
+  const { mutate } = usePostSavePot();
 
   const handleCardClick = () => {
     if (isLoggedIn) {
@@ -57,6 +64,8 @@ const PotCard: React.FC<PotCardProps> = ({
 
   const handleSave = () => {
     //TODO: API 연결
+    mutate(potId);
+    console.log("저장")
   };
 
   const profileImage = roleImages[role];
@@ -92,9 +101,13 @@ const PotCard: React.FC<PotCardProps> = ({
               handleSave();
             }}
           >
-            <SaveIcon />
+            {isSaved ? (
+              <SaveFilledIcon onClick={handleSave} />
+            ) : (
+              <SaveIcon onClick={handleSave} />
+            )}
           </button>
-          <p>99+</p>
+          <p css={potSaveCountStyle}>{potSaveCount}</p>
         </div>
       </div>
       <div css={contentContainer}>
