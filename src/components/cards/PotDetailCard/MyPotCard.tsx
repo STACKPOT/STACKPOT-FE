@@ -15,7 +15,7 @@ import {
   partBadgeContainer,
   titleContainer,
   titleStyle,
-} from "./PotDetailCard.style";
+} from "./MyPotCard.style";
 import StateBadge from "@components/commons/Badge/StateBadge/StateBadge";
 import Badge from "@components/commons/Badge/Badge";
 import MemberGroup from "@components/commons/Badge/MemberGroup/MemberGroup";
@@ -30,7 +30,7 @@ import { PotSummaryModal } from "@pages/MyPage/components";
 import { DateRangeIcon, FlagIcon, WebTrafficIcon } from "@assets/svgs";
 import { participationKoreanMap } from "@constants/categories";
 
-interface PotDetailCardProps {
+interface MyPotCardProps {
   potId: number;
   dday: string;
   potName: string;
@@ -51,7 +51,7 @@ const buttonTexts = {
   recruiting: "",
 };
 
-const PotDetailCard: React.FC<PotDetailCardProps> = ({
+const MyPotCard: React.FC<MyPotCardProps> = ({
   potId,
   dday,
   potName,
@@ -63,7 +63,7 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
   potDuration,
   recruitmentRoles,
   type,
-}: PotDetailCardProps) => {
+}: MyPotCardProps) => {
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState(false);
   const [showCancelApplyModal, setShowCancelApplyModal] = useState(false);
@@ -181,4 +181,4 @@ const PotDetailCard: React.FC<PotDetailCardProps> = ({
   );
 };
 
-export default PotDetailCard;
+export default MyPotCard;

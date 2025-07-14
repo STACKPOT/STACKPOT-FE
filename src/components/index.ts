@@ -27,7 +27,7 @@ import PostForm from "./commons/PostForm/PostForm";
 import Comment from "./commons/Comment/Comment";
 import CommentSection from "./commons/Comment/CommentSection";
 import CtaCard from "./cards/CtaCard/CtaCard";
-import PotDetailCard from "./cards/PotDetailCard/PotDetailCard";
+import MyPotCard from "./cards/PotDetailCard/MyPotCard";
 import RoleCard from "./cards/RoleCard/RoleCard";
 import MemberCard from "./cards/MemberCard/MemberCard";
 import PostButton from "./commons/Button/PostButton/PostButton";
@@ -62,7 +62,7 @@ export {
   Comment,
   CommentSection,
   CtaCard,
-  PotDetailCard,
+  MyPotCard,
   RoleCard,
   MemberCard,
   PostButton,

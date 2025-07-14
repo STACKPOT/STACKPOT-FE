@@ -7,7 +7,7 @@ import { useState } from "react";
 import Modal from "@components/commons/Modal/Modal";
 import useGetPotsApply from "apis/hooks/pots/useGetPotApply";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
-import { Button, CtaCard, PotDetailCard } from "@components/index";
+import { Button, CtaCard, MyPotCard } from "@components/index";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 
@@ -36,9 +36,7 @@ const AppliedPotPage = () => {
     <div css={container}>
       <CtaCard type="pot" />
       {pots && pots.length > 0 ? (
-        pots.map((pot) => (
-          <PotDetailCard key={pot.potId} {...pot} type="applied" />
-        ))
+        pots.map((pot) => <MyPotCard key={pot.potId} {...pot} type="applied" />)
       ) : (
         <div css={noDataContainer}>
           <p css={noDataTextStyle}>
