@@ -4,7 +4,7 @@ import theme from "@styles/theme";
 export const swiperContainer = css`
   position: relative;
   overflow: hidden;
-  width: 84.8rem;
+  width: 94.8rem;
 
   .swiper-button-next,
   .swiper-button-prev {
@@ -21,15 +21,15 @@ export const buttonContainer = css`
 `;
 
 export const pageNumberStyle = css`
-  ${theme.font.body2}
-  color: ${theme.color.object.assistive};
+  ${theme.font.caption3}
+  color: ${theme.color.point.gray};
 `;
 
 export const buttonStyle = css`
   padding: 1rem;
   border-radius: 50%;
   border: none;
-  background-color: ${theme.color.object.normal};
+  background-color: ${theme.color.point.normal};
   height: 4.4rem;
 `;
 
