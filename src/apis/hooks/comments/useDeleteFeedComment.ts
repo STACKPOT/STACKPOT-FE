@@ -1,22 +1,24 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { postFeedLike } from "apis/feedAPI";
+import { deleteFeedComment } from "apis/commentAPI";
 import { useSnackbar } from "providers";
 
-const usePostFeedLike = () => {
+const useDeleteFeedComment = (feedId: number) => {
   const queryClient = useQueryClient();
   const { showSnackbar } = useSnackbar();
+
   return useMutation({
-    mutationFn: (feedId: number) => postFeedLike(feedId),
-    onSuccess: (_, variables) => {
+    mutationFn: (commentId: number) => deleteFeedComment(commentId),
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["feedDetail", variables],
+        queryKey: ["feedComment", feedId],
       });
     },
     onError: () => {
       showSnackbar({
-        message: "피드 좋아요에 실패했습니다.",
+        message: "댓글 삭제에 실패했습니다.",
       });
     },
   });
 };
-export default usePostFeedLike;
+
+export default useDeleteFeedComment;

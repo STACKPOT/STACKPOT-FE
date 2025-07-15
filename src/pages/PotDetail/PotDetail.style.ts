@@ -12,11 +12,13 @@ export const containerStyle = css`
 export const bodyContainerStyle = css`
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 2.4rem;
 `;
 
 export const dividerStyle = css`
   height: 1px;
+  width: 100%;
   background-color: ${theme.color.object.alternative};
 `;
 
