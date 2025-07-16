@@ -26,7 +26,7 @@ export interface PotFormData {
   recruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetail[];
   recruitingMembers: Record<Role, number>;
-  myRole: Role;
+  potRole: Role;
 }
 
 const PotForm: React.FC<PotFormProps> = ({
@@ -49,7 +49,7 @@ const PotForm: React.FC<PotFormProps> = ({
       recruitmentDeadline: dayjs().format("YYYY-MM-DD"),
       recruitmentDetails: undefined,
       recruitingMembers: undefined,
-      myRole: undefined,
+      potRole: undefined,
     },
   });
   const {
@@ -59,21 +59,21 @@ const PotForm: React.FC<PotFormProps> = ({
     trigger,
   } = methods;
 
-  const [potModeOfOperation, potDuration, potStartDate, potEndDate, recruitmentDeadline, myRole] =
+  const [potModeOfOperation, potDuration, potStartDate, potEndDate, recruitmentDeadline, potRole] =
     watch([
       "potModeOfOperation",
       "potDuration",
       "potStartDate",
       "potEndDate",
       "recruitmentDeadline",
-      "myRole",
+      "potRole",
     ]);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const isFormValid = await trigger();
-    if (!isFormValid || !potDuration || !potModeOfOperation || !potStartDate || !potEndDate || !recruitmentDeadline || !myRole) {
+    if (!isFormValid || !potDuration || !potModeOfOperation || !potStartDate || !potEndDate || !recruitmentDeadline || !potRole) {
       showSnackbar({
         message: "비어있는 항목이 있습니다. 확인해주세요",
         severity: "warning"
@@ -118,7 +118,7 @@ const PotForm: React.FC<PotFormProps> = ({
         }))
       );
       setValue("recruitingMembers", potData.recruitingMembers);
-      setValue("myRole", potData.userRole as Role);
+      setValue("potRole", potData.userRole as Role);
       methods.trigger();
     }
   }, [potData]);

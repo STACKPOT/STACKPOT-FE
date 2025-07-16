@@ -43,7 +43,7 @@ const FormBody = forwardRef<HTMLDivElement>(
       setValue,
     } = useFormContext<PotFormData>();
 
-    const [potModeOfOperation, potDuration, potStartDate, potEndDate, recruitmentDeadline, recruitingMembers, myRole] =
+    const [potModeOfOperation, potDuration, potStartDate, potEndDate, recruitmentDeadline, recruitingMembers, potRole] =
       watch([
         "potModeOfOperation",
         "potDuration",
@@ -51,8 +51,10 @@ const FormBody = forwardRef<HTMLDivElement>(
         "potEndDate",
         "recruitmentDeadline",
         "recruitingMembers",
-        "myRole"
+        "potRole"
       ]);
+
+    console.log(potRole);
     // const handleStartDate = (day: Dayjs | null) => {
     //   if (day) {
     //     setValue("potStartDate", day.format("YYYY-MM-DD"));
@@ -91,8 +93,8 @@ const FormBody = forwardRef<HTMLDivElement>(
                 key={category}
                 category={category}
                 image={image}
-                checked={myRole === category}
-                onClick={() => setValue("myRole", category as Role)}
+                checked={potRole === partMap[category]}
+                onClick={() => setValue("potRole", category as Role)}
               />
             ))}
           </div>
