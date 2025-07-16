@@ -15,25 +15,26 @@ import {
   tildeStyle,
 } from "./FormBody.style";
 import { useFormContext } from "react-hook-form";
-import { participation, participationMap, partMap, period } from "@constants/categories";
+import { participation, participationMap, partKoreanNameMap, period } from "@constants/categories";
 import { CategoryButton } from "@components/index";
 import DatePicker from "../DatePicker/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import { PotFormData } from "../PotForm";
 import { Role } from "types/role";
-import broccoli from "@assets/images/characters/broccoli.webp";
-import carrot from "@assets/images/characters/carrot.webp";
-import mushroom from "@assets/images/characters/mushroom.webp";
-import onion from "@assets/images/characters/onion.webp";
+
+
 import CharacterCheckBox from "@components/commons/CharacterCheckbox/CharacterCheckbox";
+import { roleImages } from "@constants/roleImage";
 
-const characterOptions = [
-  { category: "기획", image: carrot },
-  { category: "디자인", image: broccoli },
-  { category: "백엔드", image: onion },
-  { category: "프론트엔드", image: mushroom },
-];
 
+// 재사용 가능성 있을지 모르겠음
+const visibleRoles = Object.entries(roleImages)
+  .filter(([role]) => role !== "UNKNOWN")
+  .sort(([a], [b]) => {
+    const aKor = partKoreanNameMap[a];
+    const bKor = partKoreanNameMap[b];
+    return aKor.localeCompare(bKor);
+  });
 
 const FormBody = forwardRef<HTMLDivElement>(
   ({ }, ref) => {
@@ -54,7 +55,6 @@ const FormBody = forwardRef<HTMLDivElement>(
         "potRole"
       ]);
 
-    console.log(potRole);
     // const handleStartDate = (day: Dayjs | null) => {
     //   if (day) {
     //     setValue("potStartDate", day.format("YYYY-MM-DD"));
@@ -71,8 +71,23 @@ const FormBody = forwardRef<HTMLDivElement>(
         setValue("recruitmentDeadline", day.format("YYYY-MM-DD"));
       }
     };
-    // const p
-    // setValue("potDuration", period[0]);
+
+    // 모집 파트 인원 수 변경 핸들러
+    const handleRecruitmentChange = (category: Role, value: string) => {
+      const newRecruiting = {
+        ...recruitingMembers,
+        [category]: Number(value),
+      };
+
+      setValue("recruitingMembers", newRecruiting);
+
+      const recruitmentDetails = Object.entries(newRecruiting).map(([role, count]) => ({
+        recruitmentRole: role as Role,
+        recruitmentCount: count,
+      }));
+
+      setValue("recruitmentDetails", recruitmentDetails);
+    };
 
     return (
       <div ref={ref} css={formContainer}>
@@ -88,12 +103,12 @@ const FormBody = forwardRef<HTMLDivElement>(
         <div css={roleLabelStyle}>
           <div>나의 역할</div>
           <div css={roleButtonContainer}>
-            {characterOptions.map(({ category, image }) => (
+            {visibleRoles.map(([category, image]) => (
               <CharacterCheckBox
                 key={category}
-                category={category}
+                category={category as Role}
                 image={image}
-                checked={potRole === partMap[category]}
+                checked={potRole === category}
                 onClick={() => setValue("potRole", category as Role)}
               />
             ))}
@@ -101,13 +116,6 @@ const FormBody = forwardRef<HTMLDivElement>(
         </div>
         <div css={dividerStyle} />
         <div css={dateContainerStyle}>
-          {/* <div css={labelStyle}>
-            
-            <div css={{ display: "flex", alignItems: "center", gap: "6px", fontWeight: 600 }}>
-              <CalendarIcon />
-              <span>날짜 선택하기</span>
-            </div>
-          </div> */}
           <div css={labelStyle}>
             모집 마감
             <DatePicker
@@ -183,28 +191,17 @@ const FormBody = forwardRef<HTMLDivElement>(
         <div css={roleLabelStyle}>
           <div> 모집 파트</div>
           <div css={roleButtonContainer}>
-            {characterOptions.map(({ category, image }) => (
+            {visibleRoles.map(([category, image]) => (
               <CharacterCheckBox
                 key={category}
-                category={category}
+                category={category as Role}
                 image={image}
                 // checked={watch("myRole") === category}
                 initialRecruitment={recruitingMembers}
                 option={true}
                 checked={false}
-                onCountChange={(e) => {
-                  const newRecruiting = {
-                    ...recruitingMembers,
-                    [partMap[category]]: Number(e.target.value),
-                  };
-                  setValue("recruitingMembers", newRecruiting);
-
-                  const recruitmentDetails = Object.entries(newRecruiting).map(([role, count]) => ({
-                    recruitmentRole: role as Role,
-                    recruitmentCount: count,
-                  }));
-                  setValue("recruitmentDetails", recruitmentDetails);
-                }} />
+                onCountChange={(e) => handleRecruitmentChange(category as Role, e.target.value)}
+              />
             ))}
           </div>
         </div>

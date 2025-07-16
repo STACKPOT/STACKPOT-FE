@@ -15,11 +15,11 @@ import {
 } from "./ChacracterCheckbox.style";
 import { CircleCheck } from "@assets/svgs";
 import { Role } from "types/role";
-import { partMap } from "@constants/categories";
+import { partKoreanNameMap, partMap } from "@constants/categories";
 
 
 interface CharacterCheckBoxProps {
-  category: string;
+  category: Role;
   image: string;
   checked: boolean;
   onClick?: () => void;
@@ -61,7 +61,7 @@ const CharacterCheckBox = ({ category, image, checked, onClick, option, initialR
             <input
               min={0}
               css={inputStyle}
-              value={recruitment[partMap[category]] > 0 ? recruitment[partMap[category]] : ""}
+              value={recruitment[category] > 0 ? recruitment[category] : ""}
               onClick={(e) => e.stopPropagation()}
               onChange={onCountChange}
             />
@@ -72,7 +72,7 @@ const CharacterCheckBox = ({ category, image, checked, onClick, option, initialR
         <>
           <CircleCheck css={checkIconStyle} style={{ "--check-fill": checked ? "#FFFFFF" : "#2098F3" } as React.CSSProperties} />
           <img src={image} alt={category} css={imageStyle} />
-          <Badge content={category} />
+          <Badge content={partKoreanNameMap[category]} />
         </>
       )}
     </div>
