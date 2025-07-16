@@ -11,21 +11,24 @@ import { Dayjs } from "dayjs";
 interface DatePickerProps {
   date?: Dayjs;
   onChange: (date: Dayjs | null) => void;
+  buttonMode?: boolean;
 }
-const DatePicker: React.FC<DatePickerProps> = ({ date, onChange }: DatePickerProps) => {
+const DatePicker: React.FC<DatePickerProps> = ({
+  date,
+  onChange,
+  buttonMode = false,
+}: DatePickerProps) => {
   return (
-    <>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DesktopDatePicker
-          css={[datePickerCalendarStyle, datePickerStyle]}
-          slots={{
-            layout: StyledPickersLayout,
-          }}
-          value={date}
-          onChange={onChange}
-        />
-      </LocalizationProvider>
-    </>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DesktopDatePicker
+        css={buttonMode ? datePickerStyle : [datePickerCalendarStyle, datePickerStyle]}
+        slots={{
+          layout: StyledPickersLayout,
+        }}
+        value={date}
+        onChange={onChange}
+      />
+    </LocalizationProvider>
   );
 };
 

@@ -61,8 +61,6 @@ interface Pots {
   potContent: string;
   recruitmentRoles: string[];
   dday: string;
-  isSaved: boolean;
-  potSaveCount: number;
 }
 
 export interface GetPotsApplyResponse {
@@ -88,6 +86,7 @@ export interface PotDetail {
   potId: number;
   potName: string;
   potStartDate: string;
+  potEndDate: string;
   potDuration: string;
   potLan: string;
   potStatus: PotStatus;
