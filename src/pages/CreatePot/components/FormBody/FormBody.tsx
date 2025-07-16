@@ -8,7 +8,6 @@ import {
   inputStyle,
   labelStyle,
   languageInputStyle,
-  partStyle,
   potDateStyle,
   roleButtonContainer,
   roleLabelStyle,
@@ -17,7 +16,7 @@ import {
 } from "./FormBody.style";
 import { useFormContext } from "react-hook-form";
 import { participation, participationMap, partMap, period } from "@constants/categories";
-import { CategoryButton, PartRecruitment } from "@components/index";
+import { CategoryButton } from "@components/index";
 import DatePicker from "../DatePicker/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import { PotFormData } from "../PotForm";
@@ -54,17 +53,16 @@ const FormBody = forwardRef<HTMLDivElement>(
         "recruitingMembers",
         "myRole"
       ]);
-
-    const handleStartDate = (day: Dayjs | null) => {
-      if (day) {
-        setValue("potStartDate", day.format("YYYY-MM-DD"));
-      }
-    };
-    const handleEndDate = (day: Dayjs | null) => {
-      if (day) {
-        setValue("potEndDate", day.format("YYYY-MM-DD"));
-      }
-    };
+    // const handleStartDate = (day: Dayjs | null) => {
+    //   if (day) {
+    //     setValue("potStartDate", day.format("YYYY-MM-DD"));
+    //   }
+    // };
+    // const handleEndDate = (day: Dayjs | null) => {
+    //   if (day) {
+    //     setValue("potEndDate", day.format("YYYY-MM-DD"));
+    //   }
+    // };
 
     const handleDeadline = (day: Dayjs | null) => {
       if (day) {
@@ -121,7 +119,7 @@ const FormBody = forwardRef<HTMLDivElement>(
               <input
                 css={dateInputStyle}
                 type="text"
-                placeholder="YYYY-MM"
+                placeholder="YYYY-MM-DD"
                 value={potStartDate}
                 onChange={(e) => setValue("potStartDate", e.target.value)}
               />
@@ -133,7 +131,7 @@ const FormBody = forwardRef<HTMLDivElement>(
               <input
                 css={dateInputStyle}
                 type="text"
-                placeholder="YYYY-MM"
+                placeholder="YYYY-MM-DD"
                 value={potEndDate}
                 onChange={(e) => setValue("potEndDate", e.target.value)}
               />

@@ -44,8 +44,8 @@ const PotForm: React.FC<PotFormProps> = ({
       potDuration: undefined,
       potModeOfOperation: undefined,
       potContent: "",
-      potStartDate: dayjs().format("YYYY-MM"),
-      potEndDate: dayjs().format("YYYY-MM"),
+      potStartDate: dayjs().format("YYYY-MM-DD"),
+      potEndDate: dayjs().format("YYYY-MM-DD"),
       recruitmentDeadline: dayjs().format("YYYY-MM-DD"),
       recruitmentDetails: undefined,
       recruitingMembers: undefined,
@@ -59,10 +59,10 @@ const PotForm: React.FC<PotFormProps> = ({
     trigger,
   } = methods;
 
-  const [potModeOfOperation, potStartDate, podEndDate, recruitmentDeadline, myRole] =
+  const [potModeOfOperation, potDuration, potStartDate, potEndDate, recruitmentDeadline, myRole] =
     watch([
-      // "potDuration",
       "potModeOfOperation",
+      "potDuration",
       "potStartDate",
       "potEndDate",
       "recruitmentDeadline",
@@ -73,13 +73,18 @@ const PotForm: React.FC<PotFormProps> = ({
     e.preventDefault();
 
     const isFormValid = await trigger();
-    if (!isFormValid || !potModeOfOperation || !potStartDate || !podEndDate || !recruitmentDeadline || !myRole) {
+    if (!isFormValid || !potDuration || !potModeOfOperation || !potStartDate || !potEndDate || !recruitmentDeadline || !myRole) {
       showSnackbar({
         message: "비어있는 항목이 있습니다. 확인해주세요",
         severity: "warning"
       });
     }
     else if (new Date(recruitmentDeadline) > new Date(potStartDate)) {
+      showSnackbar({
+        message: "모집 마감 날짜가 팟 시작일 날짜 보다 이후일 수 없습니다.",
+        severity: "warning"
+      })
+    } else if (new Date(potStartDate) > new Date(potEndDate)) {
       showSnackbar({
         message: "모집 마감 날짜가 팟 시작일 날짜 보다 이후일 수 없습니다.",
         severity: "warning"
@@ -93,6 +98,7 @@ const PotForm: React.FC<PotFormProps> = ({
     if (potData) {
       setValue("potName", potData.potName);
       setValue("potLan", potData.potLan);
+      setValue("potDuration", potData.potDuration);
       setValue(
         "potModeOfOperation",
         participationMap[potData.potModeOfOperation]

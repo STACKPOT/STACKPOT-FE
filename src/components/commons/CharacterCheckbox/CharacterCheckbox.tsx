@@ -31,7 +31,6 @@ interface CharacterCheckBoxProps {
 const CharacterCheckBox = ({ category, image, checked, onClick, option, initialRecruitment, onCountChange }: CharacterCheckBoxProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [recruitment, setRecruitment] = useState<Record<Role, number>>({} as Record<Role, number>);
-  console.log(recruitment);
 
   useEffect(() => {
     const partValues = Object.values(partMap);

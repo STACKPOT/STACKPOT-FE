@@ -14,15 +14,6 @@ export const datePickerStyle = css`
   font-size: 1.6rem;
 `;
 
-export const datePickerCalendarStyle = css`
-  & .MuiInputBase-root {
-    font-size: 1.6rem;
-  }
-  & .MuiSvgIcon-root {
-    width: 2rem;
-    height: 2rem;
-  }
-`;
 
 export const StyledPickersLayout = styled(PickersLayout)<
   PickersLayoutProps<Dayjs | null, Dayjs, DateView>
