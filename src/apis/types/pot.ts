@@ -43,6 +43,7 @@ export interface GetPotsParams {
   page: number;
   size: number;
   recruitmentRole: string | null;
+  onlyMine: boolean;
 }
 
 export interface PotsResponse {
@@ -60,21 +61,20 @@ interface Pots {
   potContent: string;
   recruitmentRoles: string[];
   dday: string;
+  isSaved: boolean;
+  potSaveCount: number;
 }
 
 export interface GetPotsApplyResponse {
-  userId: number;
-  userRole: Role;
-  userNickname: string;
   potId: number;
   potStatus: PotStatus;
   potName: string;
   potStartDate: string;
   potDuration: string;
-  potLan: string;
   potModeOfOperation: Participation;
   potContent: string;
-  recruitmentDetails: string;
+  recruitmentRoles: Role[];
+  members: Record<Role, number>;
   dday: string;
 }
 export interface GetPotDetailResponse {
@@ -125,9 +125,14 @@ export interface PostPotApplicationBody {
 
 export interface PostPotApplicationResponse {
   applicationId: number;
-  potRole: Role;
+  potRole: PotRole;
   userId: number;
   userNickname: string;
+}
+
+export interface PotRole {
+  name: Role;
+  koreanName: string;
 }
 
 export interface PostPotMembersParams {

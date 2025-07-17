@@ -27,10 +27,12 @@ import PostForm from "./commons/PostForm/PostForm";
 import Comment from "./commons/Comment/Comment";
 import CommentSection from "./commons/Comment/CommentSection";
 import CtaCard from "./cards/CtaCard/CtaCard";
+import MyPotCard from "./cards/PotDetailCard/MyPotCard";
 import RoleCard from "./cards/RoleCard/RoleCard";
 import MemberCard from "./cards/MemberCard/MemberCard";
 import PostButton from "./commons/Button/PostButton/PostButton";
 import DatePickerButton from "./commons/DatePicker/DatePickerButton/DatePickerButton";
+import NoData from "./commons/NoData/NoData";
 
 export {
   Modal,
@@ -62,8 +64,10 @@ export {
   Comment,
   CommentSection,
   CtaCard,
+  MyPotCard,
   RoleCard,
   MemberCard,
   PostButton,
   DatePickerButton,
+  NoData,
 };

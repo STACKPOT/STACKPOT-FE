@@ -1,29 +1,49 @@
 import { AnotherTaskStatus } from "types/taskStatus";
-import { badgeStyle, unselectedBadgeStyle } from "./StateBadge.style";
+import { potBadgeStyle, taskBadgeStyle } from "./StateBadge.style";
+import { PotStatus } from "types/potStatus";
+import { potStateMap } from "@constants/categories";
 
 interface StateBadgeProps {
-  type?: "display" | "select";
-  content: AnotherTaskStatus;
-  onClick?: (state: AnotherTaskStatus) => void;
-  selectedState?: AnotherTaskStatus | null;
+  badgeType: "task" | "pot";
+  taskState?: AnotherTaskStatus;
+  potState?: PotStatus;
+  onClick?: () => void;
 }
 
 const StateBadge: React.FC<StateBadgeProps> = ({
-  type = "display",
-  content,
+  badgeType,
+  taskState,
+  potState,
   onClick,
-  selectedState,
 }) => {
+  let badgeStyle;
+  let potEmoji;
+  let badgeContent;
+
+  if (badgeType === "task") {
+    if (!taskState) return null;
+    badgeStyle = taskBadgeStyle(taskState, !!onClick);
+    badgeContent = taskState;
+  } else {
+    if (!potState) return null;
+    badgeStyle = potBadgeStyle(potState);
+    badgeContent = potStateMap[potState];
+    switch (potState) {
+      case "ONGOING":
+        potEmoji = "🙌";
+        break;
+      case "COMPLETED":
+        potEmoji = "🔥";
+        break;
+      default:
+        potEmoji = "💦";
+    }
+  }
+
   return (
-    <div
-      css={
-        type === "display" || selectedState === content
-          ? badgeStyle(content, !!onClick || type === "select")
-          : unselectedBadgeStyle
-      }
-      onClick={() => onClick?.(content)}
-    >
-      {content}
+    <div css={badgeStyle} onClick={onClick}>
+      {badgeContent}
+      {badgeType === "pot" && potEmoji}
     </div>
   );
 };

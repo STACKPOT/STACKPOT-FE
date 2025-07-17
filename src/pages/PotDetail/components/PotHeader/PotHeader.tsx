@@ -138,8 +138,8 @@ const PotHeader: React.FC<PotHeaderProps> = ({
           type="profile"
           title={`지원이 완료되었어요!${"\n"}팟 게시자가 회원님의 프로필을 확인할 수 있어요.`}
           buttonText="확인했어요"
-          role={"FRONTEND"}
-          nickname={"dfd"}
+          role={showApplyProfileModal.potRole.name}
+          nickname={showApplyProfileModal.userNickname}
           onButtonClick={() => setShowApplyProfileModal(null)}
           onCancel={() => setShowApplyProfileModal(null)}
         />

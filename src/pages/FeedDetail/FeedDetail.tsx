@@ -32,8 +32,8 @@ const FeedDetail = () => {
 
   const navigate = useNavigate();
 
-  const profileImage = data?.writerRole
-    ? roleImages[data.writerRole]
+  const profileImage = data?.feed.writerRole
+    ? roleImages[data.feed.writerRole]
     : undefined;
 
   const handleClick = () => {
@@ -41,7 +41,7 @@ const FeedDetail = () => {
   };
 
   const handleUserClick = () => {
-    const userId = data?.writerId;
+    const userId = data?.feed.writerId;
     navigate(`${routes.userProfile}/${userId}`);
   };
 
@@ -54,13 +54,16 @@ const FeedDetail = () => {
       <div css={sectionContainer}>
         <div css={titleContainer}>
           <LeftIcon type="button" onClick={handleClick} css={iconStyle} />
-          <h1 css={titleStyle}>{data?.title}</h1>
-          {user?.id === data?.writerId && (
+          <h1 css={titleStyle}>{data?.feed.title}</h1>
+          {user?.id === data?.feed.writerId && (
             <Button
               variant="action"
               actionType="alt"
               onClick={handleEdit}
-              css={editButtonStyle}>수정</Button>
+              css={editButtonStyle}
+            >
+              수정
+            </Button>
           )}{" "}
         </div>
         <div css={profileContainer}>
@@ -72,16 +75,16 @@ const FeedDetail = () => {
           />
           <div css={informationContainer}>
             <a css={nicknameStyle} onClick={handleUserClick}>
-              {data?.writer}
+              {data?.feed.writer}
             </a>
-            <p css={dateStyle}>{data?.createdAt}</p>
+            <p css={dateStyle}>{data?.feed.createdAt}</p>
           </div>
         </div>
         <div css={dividerStyle} />
       </div>
       <div css={sectionContainer}>
         <div css={contentStyle}>
-          {data?.content.split('\n').map((line, index) => (
+          {data?.feed.content.split("\n").map((line, index) => (
             <React.Fragment key={index}>
               {line}
               <br />
@@ -89,11 +92,15 @@ const FeedDetail = () => {
           ))}
         </div>
         <div css={postButtonsContainer}>
-          <PostButton postType="like" initialState={false} />
-          <PostButton postType="save" initialState={false} />
+          <PostButton
+            postType="like"
+            isToggled={data?.feed.isLiked ?? false}
+            id={numericFeedId}
+          />
+          <PostButton postType="save" isToggled={false} id={numericFeedId} />
         </div>
       </div>
-      <CommentSection />
+      <CommentSection type="feed" id={numericFeedId} />
     </main>
   );
 };

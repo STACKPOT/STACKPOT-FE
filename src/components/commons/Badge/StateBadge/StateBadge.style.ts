@@ -1,33 +1,46 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
+import { PotStatus } from "types/potStatus";
 import { AnotherTaskStatus } from "types/taskStatus";
 
-export const unselectedBadgeStyle = css`
+export const taskBadgeStyle = (
+  content: AnotherTaskStatus,
+  clickable = false
+) => css`
   display: flex;
   padding: 1.2rem 2rem;
   border-radius: 8px;
-  background: ${theme.color.object.alternative};
-  ${theme.font.caption3};
-  color: ${theme.color.object.hero};
+  background-color: ${content === "진행 전"
+    ? theme.color.accent.redBg
+    : content === "진행 중"
+    ? theme.color.accent.yellowBg
+    : theme.color.accent.greenBg};
+  color: ${content === "진행 전"
+    ? theme.color.accent.redFg
+    : content === "진행 중"
+    ? theme.color.accent.pinkFg
+    : theme.color.status.positive};
+  ${theme.font.captionBold1};
   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  white-space: nowrap;
+  cursor: ${clickable ? "pointer" : "default"};
 `;
 
-export const badgeStyle = (
-  state: AnotherTaskStatus,
-  clickable: boolean = false
-) => css`
-  ${unselectedBadgeStyle};
-  background-color: ${state === "진행 전"
-    ? theme.color.accent.redBg
-    : state === "진행 중"
-    ? theme.color.accent.blueBg
-    : theme.color.accent.greenBg};
-  color: ${state === "진행 전"
-    ? theme.color.accent.redFg
-    : state === "진행 중"
-    ? theme.color.point.assistive
-    : theme.color.accent.greenFg};
-  cursor: ${clickable ? "pointer" : "default"};
+export const potBadgeStyle = (type: PotStatus) => css`
+  display: flex;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem;
+  border-radius: 4px;
+  background-color: ${type === "ONGOING"
+    ? theme.color.accent.yellowBg
+    : type === "COMPLETED"
+    ? theme.color.accent.pinkBg
+    : theme.color.accent.blueBg};
+  color: ${type === "ONGOING"
+    ? theme.color.accent.yellowFg
+    : type === "COMPLETED"
+    ? theme.color.accent.pinkFg
+    : theme.color.point.darkblue};
+  ${theme.font.caption1};
+  white-space: nowrap;
 `;

@@ -3,7 +3,7 @@ import theme from "@styles/theme";
 
 export const cardStyle = css`
   width: 30rem;
-  height: 22.1rem;
+  height: 21.3rem;
   padding: 2.8rem 1.6rem;
   border-radius: 24px;
   box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
@@ -87,6 +87,19 @@ export const buttonContainer = css`
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  ${theme.font.caption1}
-  color: ${theme.color.object.hero}
+  ${theme.font.caption1};
+  color: ${theme.color.object.hero};
+  width: 4rem;
+  height: 4rem;
+  &:hover {
+    background-color: ${theme.color.point.normal};
+    cursor: pointer;
+    border-radius: 8px;
+  }
+`;
+
+export const potSaveCountStyle = css`
+  padding: 0 0.5rem;
+  width: 100%;
+  text-align: center;
 `;
