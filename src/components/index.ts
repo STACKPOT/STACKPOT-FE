@@ -30,6 +30,7 @@ import CtaCard from "./cards/CtaCard/CtaCard";
 import RoleCard from "./cards/RoleCard/RoleCard";
 import MemberCard from "./cards/MemberCard/MemberCard";
 import PostButton from "./commons/Button/PostButton/PostButton";
+import DatePickerButton from "./commons/DatePicker/DatePickerButton/DatePickerButton";
 
 export {
   Modal,
@@ -64,4 +65,5 @@ export {
   RoleCard,
   MemberCard,
   PostButton,
+  DatePickerButton,
 };
