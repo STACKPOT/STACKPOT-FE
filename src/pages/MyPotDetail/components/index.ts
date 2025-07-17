@@ -7,7 +7,6 @@ import ActionButton from "./ActionButton/ActionButton";
 import AboutWorkModalWrapper from "./AboutWorkModalWrapper/AboutworkModalWrapper";
 import AboutWorkModal from "./AboutWorkModal/AboutWorkModal";
 import Loading from "./Loading/Loading";
-import MemberIdModalWrapper from "./MemberIdModalWrapper/MemberIdModalWrapper";
 
 export {
   TextInput,
@@ -19,5 +18,4 @@ export {
   AboutWorkModalWrapper,
   AboutWorkModal,
   Loading,
-  MemberIdModalWrapper,
 };
