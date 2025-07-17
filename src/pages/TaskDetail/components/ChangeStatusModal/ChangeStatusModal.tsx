@@ -3,8 +3,6 @@ import { CloseIcon } from "@assets/svgs";
 import {
   cancelContainer,
   cancelIconStyle,
-} from "../../../MyPotDetail/components/MemberIdModal/MemberIdModal.style";
-import {
   changeButtonStyle,
   changebuttonTextStyle,
   innerContainer,
@@ -14,7 +12,7 @@ import {
 import { badgeContainer } from "../../../MyPotDetail/components/StateBadgeSelect/StateBadgeSelect.style";
 import { AnotherTaskStatus } from "../../../../types/taskStatus";
 import { taskStatue } from "../../../../constants/categories";
-import { StateBadge } from "@components/index";
+import { StateBadge, StateButton } from "@components/index";
 
 interface ChangeStatusModalProps {
   onClose: () => void;
@@ -45,11 +43,10 @@ const ChangeStatusModal: React.FC<ChangeStatusModalProps> = ({
         <h1 css={titleTextStyle}>상태값을 변경할까요?</h1>
         <div css={badgeContainer}>
           {taskStatue.map((status) => (
-            <StateBadge
-              type="select"
-              content={status}
+            <StateButton
+              state={status}
               onClick={() => setSelectedStatus(status)}
-              selectedState={selectedStatus}
+              selected={status === selectedStatus}
             />
           ))}
         </div>

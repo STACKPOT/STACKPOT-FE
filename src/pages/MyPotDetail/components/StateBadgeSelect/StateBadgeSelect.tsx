@@ -3,7 +3,7 @@ import { firstSectionContainer } from "../TextInput/TextInput.style";
 import { badgeContainer } from "./StateBadgeSelect.style";
 import { labelTextStyle } from "../AboutWorkModal/AboutWorkModal.style";
 import { taskStatue } from "@constants/categories";
-import { StateBadge } from "@components/index";
+import { StateButton } from "@components/index";
 
 interface StatusBadgeSelectorProps {
   selectedStatus: AnotherTaskStatus | null;
@@ -19,11 +19,10 @@ const StatusBadgeSelector: React.FC<StatusBadgeSelectorProps> = ({
       <div css={labelTextStyle}>진행 상태</div>
       <div css={badgeContainer}>
         {taskStatue.map((status) => (
-          <StateBadge
-            type="select"
-            content={status}
+          <StateButton
+            state={status}
             onClick={() => setSelectedStatus(status)}
-            selectedState={selectedStatus}
+            selected={status === selectedStatus}
           />
         ))}
       </div>

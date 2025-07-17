@@ -33,6 +33,7 @@ import MemberCard from "./cards/MemberCard/MemberCard";
 import PostButton from "./commons/Button/PostButton/PostButton";
 import DatePickerButton from "./commons/DatePicker/DatePickerButton/DatePickerButton";
 import NoData from "./commons/NoData/NoData";
+import StateButton from "./commons/Button/StateButton/StateButton";
 
 export {
   Modal,
@@ -70,4 +71,5 @@ export {
   PostButton,
   DatePickerButton,
   NoData,
+  StateButton,
 };
