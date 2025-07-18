@@ -2,7 +2,6 @@ import { forwardRef } from "react";
 import {
   buttonContainer,
   dateContainerStyle,
-  dateInputStyle,
   dividerStyle,
   formContainer,
   inputStyle,
@@ -25,6 +24,7 @@ import { Role } from "types/role";
 
 import CharacterCheckBox from "@components/commons/CharacterCheckbox/CharacterCheckbox";
 import { roleImages } from "@constants/roleImage";
+import { datePickerStyle } from "../DatePicker/DatePicker.style";
 
 
 // 재사용 가능성 있을지 모르겠음
@@ -55,16 +55,16 @@ const FormBody = forwardRef<HTMLDivElement>(
         "potRole"
       ]);
 
-    // const handleStartDate = (day: Dayjs | null) => {
-    //   if (day) {
-    //     setValue("potStartDate", day.format("YYYY-MM-DD"));
-    //   }
-    // };
-    // const handleEndDate = (day: Dayjs | null) => {
-    //   if (day) {
-    //     setValue("potEndDate", day.format("YYYY-MM-DD"));
-    //   }
-    // };
+    const handleStartDate = (day: Dayjs | null) => {
+      if (day) {
+        setValue("potStartDate", day.format("YYYY-MM-DD"));
+      }
+    };
+    const handleEndDate = (day: Dayjs | null) => {
+      if (day) {
+        setValue("potEndDate", day.format("YYYY-MM-DD"));
+      }
+    };
 
     const handleDeadline = (day: Dayjs | null) => {
       if (day) {
@@ -126,24 +126,32 @@ const FormBody = forwardRef<HTMLDivElement>(
           <div css={potDateStyle}>
             <div css={labelStyle}>
               예상 기간
-              <input
+              {/* <input
                 css={dateInputStyle}
                 type="text"
                 placeholder="YYYY-MM-DD"
                 value={potStartDate}
                 onChange={(e) => setValue("potStartDate", e.target.value)}
+              /> */}
+              <DatePicker
+                date={dayjs(potStartDate)}
+                onChange={handleStartDate}
               />
             </div>
             <div css={tildeStyle}>
               ~
             </div>
             <div css={labelStyle}>
-              <input
+              {/* <input
                 css={dateInputStyle}
                 type="text"
                 placeholder="YYYY-MM-DD"
                 value={potEndDate}
                 onChange={(e) => setValue("potEndDate", e.target.value)}
+              /> */}
+              <DatePicker
+                date={dayjs(potEndDate)}
+                onChange={handleEndDate}
               />
             </div>
           </div>

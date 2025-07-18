@@ -105,7 +105,7 @@ export const partStyle = css`
 export const dateContainerStyle = css`
   display: flex;
   flex-direction: row;
-  gap: 40rem;
+  justify-content: space-between;
   text-align:center;
 `;
 
@@ -120,4 +120,14 @@ export const tildeStyle = css`
   align-items: center;
   justify-content: center;
   margin-left: 3.2rem;
+`;
+
+export const datePickerStyle = css`
+  background: #fff;
+  border-radius: 12px;
+
+  .rdp-day_selected {
+    background: #3b82f6;
+    color: white;
+  }
 `;
