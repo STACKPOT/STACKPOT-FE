@@ -21,15 +21,12 @@ const usePatchMyPotTask = () => {
         message: "업무가 수정되었습니다.",
         severity: "success",
       });
-      if (variables.taskId != null) {
-        queryClient.invalidateQueries({
-          queryKey: ["taskDetail", variables.potId, variables.taskId],
-        });
-      } else {
-        queryClient.invalidateQueries({
-          queryKey: ["myPotTasks", variables.potId],
-        });
-      }
+      queryClient.invalidateQueries({
+        queryKey: ["taskDetail", variables.potId, variables.taskId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["myPotTasks", variables.potId],
+      });
     },
     onError: () => {
       showSnackbar({

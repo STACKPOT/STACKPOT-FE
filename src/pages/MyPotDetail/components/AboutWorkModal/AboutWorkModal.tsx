@@ -19,8 +19,9 @@ import { AnotherTaskStatus } from "../../../../types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import { displayStatus } from "@constants/categories";
 import { useSnackbar } from "providers";
-import { ExplainModal } from "@components/index";
+import { ExplainModal, Modal } from "@components/index";
 import dayjs from "dayjs";
+import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
 
 export type FormValues = {
   title: string;
@@ -49,11 +50,14 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   const taskIdNumber = taskId;
   const { showSnackbar } = useSnackbar();
   const [step, setStep] = useState<"content" | "member">("content");
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const { data: taskDetail, isLoading } =
     type === "patch" && taskIdNumber !== null
       ? useGetMyPotTaskDetail({ potId: potIdNumber, taskId: taskIdNumber })
       : { data: null, isLoading: false };
+
+  const { mutate: deleteTask } = useDeleteMyPotTask();
 
   const defaultValues = {
     title: taskDetail?.result?.title || "",
@@ -88,6 +92,23 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
     setValue("title", value, { shouldValidate: true });
   };
 
+  const handleDeleteTask = () => {
+    if (taskIdNumber !== null) {
+      deleteTask(
+        {
+          potId: potIdNumber,
+          taskId: taskIdNumber,
+        },
+        {
+          onSuccess: () => {
+            setDeleteModal(false);
+            onClose();
+          },
+        }
+      );
+    }
+  };
+
   if (isLoading) return <Loading />;
 
   return (
@@ -101,6 +122,9 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
             disabled={!isValid}
             onButtonClick={() => setStep("member")}
             onCancel={onClose}
+            onDeleteClick={
+              type === "patch" ? () => setDeleteModal(true) : undefined
+            }
           >
             <div css={thirdContainer}>
               <div css={titleTextStyle}>
@@ -166,6 +190,17 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
           />
         )}
       </form>
+      {deleteModal && (
+        <Modal
+          title="업무 내용을 삭제하시겠습니까?"
+          message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
+          confirmType="neg"
+          cancelButton="취소"
+          confirmButton="삭제하기"
+          onCancel={() => setDeleteModal(false)}
+          onConfirm={handleDeleteTask}
+        />
+      )}
     </FormProvider>
   );
 };
