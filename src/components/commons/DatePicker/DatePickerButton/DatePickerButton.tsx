@@ -126,6 +126,12 @@ const ButtonDatePicker = (
   );
 };
 
+/**
+ *
+ * @param onChange - 날짜 선택시 콜백
+ * @param date - (optional)날짜 초기 값
+ *
+ */
 const DatePickerButton: React.FC<ButtonDatePickerProps> = ({
   onChange,
   date,
