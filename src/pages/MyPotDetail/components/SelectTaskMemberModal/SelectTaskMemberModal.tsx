@@ -14,6 +14,7 @@ import { reverseDisplayStatus } from "@constants/categories";
 import { PostTask, TaskPatch } from "apis/types/myPot";
 import usePatchMyPotTask from "apis/hooks/myPots/usePatchMyPotTask";
 import { usePostMyPotTask } from "apis/hooks/myPots/usePostMyPotTask";
+import dayjs from "dayjs";
 
 interface SelectTaskMemberModalProps {
   type: "post" | "patch";
@@ -63,6 +64,7 @@ const SelectTaskMemberModal: React.FC<SelectTaskMemberModalProps> = ({
     if (potId && taskId) {
       const updatedTask: TaskPatch = {
         ...data,
+        deadline: dayjs(data.deadline).format("YYYY-MM-DD"),
         taskboardStatus: reverseDisplayStatus[data.taskboardStatus],
       };
       patchTask(
