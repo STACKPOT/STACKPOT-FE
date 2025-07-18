@@ -7,4 +7,3 @@ export { default as PartyIcon } from "./party.svg?react";
 export { default as TodoCheckIcon } from "./todoCheckIcon.svg?react";
 export { default as TodoPlusButtonIcon } from "./todoPlusButton.svg?react";
 export { default as FireIcon } from "./fire.svg?react";
-export { default as WorkGroupIcon } from "./workGroup.svg?react";

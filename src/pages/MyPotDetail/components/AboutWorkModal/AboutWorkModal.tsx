@@ -58,8 +58,8 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   const potIdNumber = Number(potId);
   const taskIdNumber = paramTaskId !== undefined && !isNaN(Number(paramTaskId)) ? Number(paramTaskId) : null;
   const taskIdSource = taskId ?? taskIdNumber;
-    const { showSnackbar } = useSnackbar();
-  
+  const { showSnackbar } = useSnackbar();
+
   const { data: taskDetail, isLoading } =
     title === WorkModal[1] && taskIdSource !== null
       ? useGetMyPotTaskDetail({ potId: potIdNumber, taskId: taskIdSource })
@@ -206,14 +206,14 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
             >
               <input type="hidden" {...register("selectedParticipants")} />
               <TextInput
-  value={taskTitleValue}
-  {...register("taskTitle", {
-    required: true,
-    maxLength: { value: 20, message: "최대 20글자까지 입력 가능합니다" },
-  })}
-  onChange={handleTaskTitleChange}
-  maxLength={20}
-/>
+                value={taskTitleValue}
+                {...register("taskTitle", {
+                  required: true,
+                  maxLength: { value: 20, message: "최대 20글자까지 입력 가능합니다" },
+                })}
+                onChange={handleTaskTitleChange}
+                maxLength={20}
+              />
               <DateInput
                 onChange={(date) =>
                   setValue("taskDate", date ? date.format("YYYY-MM-DD") : "")

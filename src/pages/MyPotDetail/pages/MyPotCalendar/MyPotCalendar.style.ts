@@ -1,8 +1,8 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 import theme from "@styles/theme";
 
 export const mainContainer = css`
-  width: 1062px;
+  width: 106.2rem;
 `;
 
 export const container = css`
@@ -18,75 +18,14 @@ export const taskContainerStyle = css`
   }
 `;
 
-export const calendarDateStyle = css`
-  ${theme.font.body3};
-  color: ${theme.color.object.assistive};
-  height: 3.4rem;
-  margin: 0.4rem;
-  border-color: transparent;
-`;
 
 export const calendarStyle = css`
   padding: 3.2rem 5rem;
   border-radius: 24px;
-  width: 53.6rem;
+  width: 53.6rem
   border: 1px solid ${theme.color.object.alternative};
-  box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
-  color: ${theme.color.base.darkgray};
-
-  .mbsc-ios.mbsc-datepicker-inline {
-    border-color: white;
-  }
-  .mbsc-calendar-day-text{
-    ${calendarDateStyle};
-  }
-  .mbsc-hover .mbsc-ios .mbsc-calendar-day-text{
-    ${calendarDateStyle};
-    background: transparent;
-  }
-  .mbsc-selected .mbsc-ios .mbsc-calendar-day-text{
-    ${calendarDateStyle};
-    background: ${theme.color.point.alternative};
-    color: white;
-  }
-  .mbsc-calendar-marks {
-    bottom: -0.4rem;
-  }
-  .mbsc-calendar-cell {
-    padding-bottom: 1.7rem;
-  }
-  .mbsc-calendar-week-days {
-    margin-bottom: 1.4rem;
-  }
-  .mbsc-calendar-week-day {
-    ${theme.font.bodyBold1};
-  }
-  .mbsc-calendar-title {
-    ${theme.font.title1};
-  }
-  .mbsc-button-icon{
-    color: ${theme.color.base.darkgray};
-  }
-  .mbsc-calendar-header {
-    padding-bottom: 5.4rem;
-  }
-  .mbsc-calendar-controls {
-    min-height: 0;
-  }
-  .mbsc-calendar-slide {
-    padding: 0;
-  }
-  .mbsc-calendar-button {
-    padding: 0 0.8rem;
-    height: auto;
-  }
-  .mbsc-ios.mbsc-calendar-button.mbsc-button {
-    color: ${theme.color.base.darkgray};
-    cursor: auto;
-  }
-  .mbsc-hover.mbsc-ios.mbsc-calendar-button.mbsc-button{
-    opacity: 1;
-  }
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.04);
+  color: ${theme.color.base.darkgray};  
 `;
 
 export const taskContainer = css`
@@ -99,8 +38,16 @@ export const taskContainer = css`
   box-shadow: 0px 4px 12px 0px rgba(13, 10, 44, 0.06);
 `;
 
+export const dateAndButtonContainer = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+`;
+
 export const dateStyle = css`
   ${theme.font.title1}
+  color: ${theme.color.point.hero};
   text-align: center;
 `;
 
@@ -113,9 +60,63 @@ export const dividerStyle = css`
 
 export const noticeStyle = css`
   ${theme.font.title1};
-  color: ${theme.color.interactive.inactive};
+  color: ${theme.color.object.hero};
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+`;
+
+export const emptyTaskContainerStyle = css`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rem;
+  gap: 1.6rem;
+`;
+
+export const dayPickerGlobalStyle = css`
+  * {
+    ${theme.font.title1}
+  }
+  
+  .rdp-root {
+    --rdp-accent-color: ${theme.color.point.gray};
+    --rdp-nav-height: 65px;
+    --rdp-selected-border: none;
+  }
+  
+  .rdp-day {
+    color: ${theme.color.object.hero}
+  }
+  
+  .rdp-selected {
+    background-color: ${theme.color.point.hero}; 
+    color:${theme.color.base.white} !important;
+    border-radius: 100%;
+    border: none;
+  }
+
+  .rdp-month_grid {
+    border-collapse: separate;
+    border-spacing: 0 20px;
+  }
+
+  .has-task {
+    position: relative;
+  }
+
+  .has-task::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: ${theme.color.point.hero};
+  }
 `;
