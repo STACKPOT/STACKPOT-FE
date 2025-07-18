@@ -34,8 +34,8 @@ const SelectTaskMemberModal: React.FC<SelectTaskMemberModalProps> = ({
   const selectedParticipants = watch("participants");
   const [selectNone, setSelectNone] = useState(false);
 
-  const { mutate: patchTask } = usePatchMyPotTask();
-  const { mutate: postTask } = usePostMyPotTask();
+  const { mutate: patchTask, isPending: isPatchPending } = usePatchMyPotTask();
+  const { mutate: postTask, isPending: isPostPending } = usePostMyPotTask();
 
   const updateSelectedParticipants = (memberId: number) => {
     const current: number[] = selectedParticipants || [];
@@ -94,6 +94,11 @@ const SelectTaskMemberModal: React.FC<SelectTaskMemberModalProps> = ({
     <ExplainModal
       type="custom"
       buttonText={type === "post" ? "등록하기" : "수정 완료"}
+      disabled={
+        (!selectNone && selectedParticipants.length === 0) ||
+        isPostPending ||
+        isPatchPending
+      }
       customContainerStyle={modalStyle}
       onButtonClick={handleSubmit(
         type === "post" ? handleSavePost : handleSavePatch
@@ -101,7 +106,9 @@ const SelectTaskMemberModal: React.FC<SelectTaskMemberModalProps> = ({
       onCancel={onClose}
     >
       <div css={container}>
-        <p css={titleTextStyle}>업무 등록하기</p>
+        <p css={titleTextStyle}>
+          {type === "post" ? "업무 등록하기" : "업무 수정하기"}
+        </p>
         <p css={descriptionStyle}>
           내 업무에 함께하는 참여자를 골라 주세요. 없을 경우 ‘없음’ 버튼을
           클릭해 주세요.
