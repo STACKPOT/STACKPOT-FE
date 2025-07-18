@@ -16,38 +16,41 @@ export const background = css`
 `;
 
 export const modalStyle = css`
-  width: 54rem;
-  height: 33.9rem;
-  padding: 3.2rem;
+  width: 76rem;
+  height: 36.6rem;
+  padding: 2.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 24px;
-  border: 1px solid ${theme.color.object.alternative};
+  border-radius: 8px;
+  border: 1px solid ${theme.color.object.assistive};
   background-color: white;
-`
+`;
 
 export const closeIconStyle = css`
-  margin: 0.8rem 0.4rem 0.8rem auto;
+  margin-left: auto;
   cursor: pointer;
-`
+`;
 export const messageStyle = css`
-  ${theme.font.title1};
-  color: ${theme.color.base.black};
-  text-align: center;
+  ${theme.font.title2};
+  color: ${theme.color.point.gray};
   white-space: pre-wrap;
-  margin-top: 1.2rem;
-`
+  margin-top: 0.8rem;
+  padding: 0 1.6rem;
+  align-self: flex-start;
+`;
+
 export const messageHightlightStyle = css`
-  ${theme.font.title1};
+  ${theme.font.title2};
   color: ${theme.color.point.hero};
-`
+`;
+
 export const spinnerContainer = css`
   display: flex;
   align-items: center;
   flex: 1 0 auto;
-  margin-top: 3.2rem;
-`
+  margin-top: 1.6rem;
+`;
 export const spinnerStyle = css`
   animation: ${spin} 1s linear infinite;
-`
+`;
