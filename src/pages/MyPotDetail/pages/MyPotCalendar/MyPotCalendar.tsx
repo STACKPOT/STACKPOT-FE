@@ -1,41 +1,49 @@
 import { useEffect, useState } from "react";
-import "@mobiscroll/react/dist/css/mobiscroll.min.css";
-import { Datepicker, setOptions, localeKo, MbscDatepickerPageChangeEvent } from "@mobiscroll/react";
 import {
   calendarStyle,
   container,
   dateStyle,
+  dateAndButtonContainer,
+  dayPickerGlobalStyle,
   dividerStyle,
   mainContainer,
   noticeStyle,
   taskContainer,
   taskContainerStyle,
+  emptyTaskContainerStyle,
 } from "./MyPotCalendar.style";
 import { TaskBox } from "./components";
 import useGetTasksMonth from "apis/hooks/myPots/useGetTasksMonth";
 import { useParams } from "react-router-dom";
 import useGetTasksCalendar from "apis/hooks/myPots/useGetTasksCalendar";
-setOptions({
-  locale: localeKo,
-  themeVariant: "light",
-  theme: "ios"
-});
+
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
+import { ko } from 'date-fns/locale';
+import 'react-day-picker/dist/style.css';
 import { formatDate } from "@utils/dateUtils";
-import theme from "@styles/theme";
+import { Global } from "@emotion/react";
+import { AboutWorkModalWrapper } from "@pages/MyPotDetail/components";
+import { WorkModal } from "@constants/categories";
+import { Button } from "@components/index";
+import { WavingHandIcon } from "@assets/svgs";
 
 const MyPotCalendar = () => {
   const { potId } = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const potIdNumber = Number(potId);
 
   const [date, setDate] = useState<Date | null>(null);
   const [month, setMonth] = useState<Date>(new Date());
   const [days, setDays] = useState<string[]>([]);
+  const taskDates = days.map((d) => new Date(d));
 
   const { data: monthTasks } = useGetTasksMonth({
     potId: potIdNumber,
     year: month.getFullYear(),
     month: month.getMonth() + 1,
   })
+
   const { data: dayTasks } = useGetTasksCalendar({
     potId: potIdNumber,
     date: formatDate(date ?? new Date())
@@ -55,11 +63,9 @@ const MyPotCalendar = () => {
     return days[date.getDay()];
   };
 
-  const handleMonthChange = (e: MbscDatepickerPageChangeEvent) => {
-    if (e.month) {
-      setMonth(e.month);
-    }
-  }
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     setDays([...new Set(monthTasks?.map(task => task.deadLine))]);
@@ -67,47 +73,66 @@ const MyPotCalendar = () => {
 
   return (
     <main css={mainContainer}>
+      <AboutWorkModalWrapper
+        isModalOpen={isModalOpen}
+        activeStatus={null}
+        modalTitle={WorkModal[0]}
+        taskId={null}
+        onClose={() => setIsModalOpen(false)}
+      />
       <div css={container}>
         <div css={calendarStyle}>
-          <Datepicker
-            display="inline"
-            marked={
-              days.map((day) => {
-                const hasParticipating = monthTasks?.some(task =>
-                  task.deadLine === day &&
-                  task.participating === true);
-                return {
-                  date: day,
-                  color: hasParticipating
-                    ? theme.color.point.alternative
-                    : theme.color.object.alternative,
-                }
-              })
-            }
-            value={date}
-            onChange={(e) => setDate(e.value as Date)}
-            onPageChange={handleMonthChange}
-            showOuterDays={false}
-            firstDay={1}
+          <Global styles={dayPickerGlobalStyle} />
+          <DayPicker
+
+            mode="single"
+            selected={date ?? undefined}
+            onSelect={(selected) => {
+              setDate(selected ?? null);
+            }}
+            formatters={{
+              formatCaption: (date, options) =>
+                format(date, 'yyyy년 M월', options),
+            }}
+            defaultMonth={month}
+            onMonthChange={(m) => setMonth(m)}
+            showOutsideDays
+            fixedWeeks
+            weekStartsOn={1}
+            locale={ko}
+            modifiers={{
+              hasTask: taskDates
+            }}
+            modifiersClassNames={{
+              hasTask: 'has-task'
+            }}
           />
         </div>
         <div css={taskContainer}>
-          <p css={dateStyle}>
-            {date
-              ? `${date.getFullYear()}. ${String(date.getMonth() + 1).padStart(
-                2,
-                "0"
-              )}. ${String(date.getDate()).padStart(2, "0")} (${getDayOfWeek(
-                date
-              )})`
-              : ""}
-          </p>
+          <div css={dateAndButtonContainer}>
+            <p css={dateStyle}>
+              {date
+                ? `${date.getFullYear()}. ${String(date.getMonth() + 1).padStart(
+                  2,
+                  "0"
+                )}. ${String(date.getDate()).padStart(2, "0")} (${getDayOfWeek(
+                  date
+                )})`
+                : ""}
+            </p>
+            <Button variant="cta" onClick={handleOpenModal}>
+              새로운 업무 추가
+            </Button>
+          </div>
           <div css={dividerStyle} />
           <div css={taskContainerStyle}>
             {dayTasks && dayTasks.length > 0 ? (
               dayTasks.map((task) => <TaskBox potId={potIdNumber} task={task} key={task.taskboardId} />)
             ) : (
-              <p css={noticeStyle}>일정이 없습니다</p>
+              <div css={emptyTaskContainerStyle}>
+                <WavingHandIcon />
+                <p css={noticeStyle}>일정이 없어요</p>
+              </div>
             )}
           </div>
         </div>

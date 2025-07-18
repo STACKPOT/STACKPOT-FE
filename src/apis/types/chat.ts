@@ -14,6 +14,7 @@ export interface ChatRoom {
   lastChatTime: string;
   lastChat: string;
   unReadMessageCount: number;
+  participants: any[];
 }
 
 export interface GetFeedParams {
