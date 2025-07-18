@@ -22,10 +22,12 @@ import {
   prevButtonStyle,
   dropdownWrapperStyle,
   profileImageStyle,
-  arrowIconStyle
+  arrowIconStyle,
+  profileInnerContainer,
+  createdDateStyle
 } from "./TaskDetail.style";
 import { container } from "../MyPotDetail/MyPotDetail.style"
-import { DdayBadge, StateBadge, MyFeedDropdown } from "@components/index";
+import { DdayBadge, StateBadge, MyFeedDropdown, Badge } from "@components/index";
 import { CalendarIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { headerStyle } from "@pages/MyPotDetail/MyPotDetail.style";
@@ -37,7 +39,7 @@ import { AboutWorkModalWrapper, Loading } from "../MyPotDetail/components/index"
 import { APITaskStatus, TaskStatus } from "types/taskStatus";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
-import { displayStatus, WorkModal } from "@constants/categories";
+import { displayStatus, partKoreanNameMap, WorkModal } from "@constants/categories";
 import { usePatchMyPotStatus } from "apis/hooks/myPots/usePatchMyPotStatus";
 import { AnotherTaskStatus } from "../../types/taskStatus";
 import { ChangeStatusModalWrapper } from "./components";
@@ -59,6 +61,7 @@ const TaskDetailPage: React.FC = () => {
     potId: potIdNumber,
     taskId: taskIdNumber,
   });
+  console.log(task);
   const { mutate: deleteTask, isPending: isDeletePending } = useDeleteMyPotTask();
   const { mutate: patchStatus, isPending: isStatusPending } = usePatchMyPotStatus();
 
@@ -150,6 +153,7 @@ const TaskDetailPage: React.FC = () => {
           <button onClick={handlePrev} css={prevButtonStyle}>
             <ArrowLeftIcon css={arrowIconStyle} />
           </button>
+          <DdayBadge days={task.result.dday} />
           <div css={titleStyle}>{task.result.title}</div>
         </div>
         <div css={rightContainer}>
@@ -170,18 +174,22 @@ const TaskDetailPage: React.FC = () => {
           src={roleImages[task.result.creatorRole as Role] ?? ""}
           alt={task.result.creatorNickname}
         />
-        <span css={nicknameStyle}>{task.result.creatorNickname}</span>
-        <DdayBadge days={task.result.dday} />
+        <div css={profileInnerContainer}>
+          <span css={nicknameStyle}>{task.result.creatorNickname}</span>
+          <span css={createdDateStyle}>{'2025년 2월 8일 15:20'}</span>
+          {/* API 에서 건네주는 createdDate가 없어서 임의 작성 */}
+        </div>
       </div>
+      <div css={dividerStyle} />
       <div css={dateContainer}>
         <CalendarIcon />
         <span css={dateStyle}>{task.result.deadLine}</span>
       </div>
-      <div css={dividerStyle} />
       <div css={bottomContainer}>
         <div css={contentContainerStyle}>
           <span css={contentStyle}>{task.result.description}</span>
         </div>
+        <div css={dividerStyle} />
         <header css={headerStyle}>
           <div css={statusTextStyle}>업무 참여자</div>
           <PotIcon css={iconStyle} />
@@ -193,6 +201,7 @@ const TaskDetailPage: React.FC = () => {
             <div css={contributorInner}>
               <img src={roleImages[participant.role as Role]} css={profileImageStyle} alt="프로필" />
               <span css={contributorNicknameStyle}>{participant.nickName}</span>
+              <Badge key={index} content={partKoreanNameMap[participant.role]} />
             </div>
           </div>
         ))}

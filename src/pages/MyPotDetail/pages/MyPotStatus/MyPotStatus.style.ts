@@ -86,7 +86,7 @@ export const statusBoardStyle = css`
 `;
 
 export const statusTextStyle = css`
-  ${theme.font.bodyBold2};
+  ${theme.font.title1};
   color: ${theme.color.base.darkgray};
 `;
 
