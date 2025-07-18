@@ -4,11 +4,12 @@ import {
   contentTitle,
   description,
   iconStyle,
-  onGoningPotContainer,
+  potListContainer,
   textContainer,
 } from "./MyPots.style";
-import { OnGoingPotCard } from "@components/index";
+import { MyPotCard } from "@components/index";
 import useGetMyPot from "apis/hooks/myPots/useGetMyPot";
+import { partKoreanNameMap } from "@constants/categories";
 
 const MyPots: React.FC = () => {
   const { data } = useGetMyPot();
@@ -22,16 +23,15 @@ const MyPots: React.FC = () => {
       <p css={description}>
         내가 입장한 팟을 모았어요. 클릭한 뒤 각각의 팟에서 업무를 시작해 보세요.
       </p>
-      <div css={onGoningPotContainer}>
+      <div css={potListContainer}>
         {data && data.length > 0 ? (
           data.map((pot) => (
-            <OnGoingPotCard
+            <MyPotCard
               key={pot.potId}
-              id={pot.potId}
-              isMyPot={pot.isOwner}
-              title={pot.potName}
-              memberList={Object.entries(pot.members).flatMap(([role, count]) =>
-                Array(count).fill(role)
+              {...pot}
+              type="myPot"
+              recruitmentRoles={Object.keys(pot.members).map(
+                (role) => partKoreanNameMap[role]
               )}
             />
           ))
