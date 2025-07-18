@@ -82,7 +82,12 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   };
 
   const handleCardClick = () => {
-    navigate(`${routes.pot.base}/${potId}`);
+    if (type === "myPage") {
+    } else if (type === "myPot") {
+      navigate(`${routes.myPot.task}/${potId}`);
+    } else {
+      navigate(`${routes.pot.base}/${potId}`);
+    }
     window.scrollTo(0, 0);
   };
 
