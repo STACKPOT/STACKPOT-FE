@@ -13,12 +13,12 @@ import Badge from "@components/commons/Badge/Badge";
 import { partKoreanNameMap } from "@constants/categories";
 
 interface MemberCardProps {
-  userId: number;
+  userId?: number;
   nickname?: string;
   role?: Role;
   type: "selection" | "info" | "none";
   selected?: boolean;
-  onClick: () => void;
+  onClick: (userId: number | undefined) => void;
   onProfileClick?: () => void;
 }
 
@@ -32,7 +32,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
   onProfileClick,
 }: MemberCardProps) => {
   const handleOnClick = () => {
-    onClick();
+    onClick(userId);
   };
   const handleProfileClick = (e: React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();

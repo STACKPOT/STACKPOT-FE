@@ -10,7 +10,12 @@ interface StateBadgeProps {
   onClick?: () => void;
 }
 
-const StateBadge: React.FC<StateBadgeProps> = ({ badgeType, taskState, potState, onClick }) => {
+const StateBadge: React.FC<StateBadgeProps> = ({
+  badgeType,
+  taskState,
+  potState,
+  onClick,
+}) => {
   let badgeStyle;
   let potEmoji;
   let badgeContent;
@@ -19,16 +24,17 @@ const StateBadge: React.FC<StateBadgeProps> = ({ badgeType, taskState, potState,
     if (!taskState) return null;
     badgeStyle = taskBadgeStyle(taskState, !!onClick);
     badgeContent = taskState;
-  }
-  else {
+  } else {
     if (!potState) return null;
     badgeStyle = potBadgeStyle(potState);
     badgeContent = potStateMap[potState];
     switch (potState) {
       case "ONGOING":
-        potEmoji = "🙌"; break;
+        potEmoji = "🙌";
+        break;
       case "COMPLETED":
-        potEmoji = "🔥"; break;
+        potEmoji = "🔥";
+        break;
       default:
         potEmoji = "💦";
     }

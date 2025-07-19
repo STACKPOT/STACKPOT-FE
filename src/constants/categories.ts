@@ -68,6 +68,13 @@ export const displayStatus = {
   CLOSED: "완료",
 } as const;
 
+export const reverseDisplayStatus = Object.fromEntries(
+  Object.entries(displayStatus).map(([key, value]) => [value, key])
+) as Record<
+  (typeof displayStatus)[keyof typeof displayStatus],
+  keyof typeof displayStatus
+>;
+
 export const taskStatue = ["진행 전", "진행 중", "완료"] as const;
 
 export const WorkModal = ["새로운 업무 추가", "업무 수정하기"] as const;
