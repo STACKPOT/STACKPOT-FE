@@ -14,6 +14,7 @@ const StateButton: React.FC<StateButtonProps> = ({
 }: StateButtonProps) => {
   return (
     <div
+      role="button"
       css={[buttonStyle, selected && selectedButtonStyle(state)]}
       onClick={onClick}
     >

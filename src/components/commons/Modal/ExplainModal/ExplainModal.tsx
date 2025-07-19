@@ -144,6 +144,7 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
           </div>
         )}
         <Button
+          type="button"
           variant="full"
           customStyle={buttonStyle}
           onClick={onButtonClick}
@@ -153,6 +154,7 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
         </Button>
         {onDeleteClick && (
           <Button
+            type="button"
             variant="full"
             actionType="neg"
             customStyle={buttonStyle}

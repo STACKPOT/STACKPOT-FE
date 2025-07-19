@@ -20,6 +20,7 @@ const StatusBadgeSelector: React.FC<StatusBadgeSelectorProps> = ({
       <div css={badgeContainer}>
         {taskStatue.map((status) => (
           <StateButton
+            key={status}
             state={status}
             onClick={() => setSelectedStatus(status)}
             selected={status === selectedStatus}

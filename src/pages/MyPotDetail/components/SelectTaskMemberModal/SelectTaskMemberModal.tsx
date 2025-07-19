@@ -122,6 +122,7 @@ const SelectTaskMemberModal: React.FC<SelectTaskMemberModalProps> = ({
           {members?.result &&
             members.result.map((member) => (
               <MemberCard
+                key={member.potMemberId}
                 userId={member.potMemberId}
                 nickname={member.nickname}
                 role={member.potRole}
