@@ -81,6 +81,8 @@ const AllPotPage: React.FC = () => {
               title={pot.potName}
               content={pot.potContent}
               categories={pot.recruitmentRoles}
+              isSaved={pot.isSaved}
+              potSaveCount={pot.potSaveCount}
             />
           ))}
         </div>
