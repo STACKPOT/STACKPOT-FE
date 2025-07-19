@@ -1,3 +1,4 @@
+import { Interest } from "types/interest";
 import { Role } from "types/role";
 
 export interface FeedResponse {
@@ -31,7 +32,9 @@ export interface GetFeedParams {
 export interface PostFeedParams {
   title: string;
   content: string;
-  category: string;
+  categories: Role[];
+  interest: Interest[];
+  seriesId: number;
 }
 
 export interface PostFeedResponse {

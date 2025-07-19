@@ -5,15 +5,17 @@ import {
   contentStyle,
   iconStyle,
   buttonContainer,
+  backIconStyle,
 } from "./WritePost.style";
-import { PotIcon } from "@assets/svgs";
+import { LeftIcon, PotIcon } from "@assets/svgs";
 import { Button, Modal, PostForm } from "@components/index";
-import { useBlocker } from "react-router-dom";
+import { useBlocker, useNavigate } from "react-router-dom";
 import usePostFeed from "apis/hooks/feeds/usePostFeed";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { PostFeedParams } from "apis/types/feed";
 
 const WritePost: React.FC = () => {
+  const navigate = useNavigate();
   const [isFilled, setIsFilled] = useState(false);
 
   const methods = useForm<PostFeedParams>({
@@ -21,7 +23,8 @@ const WritePost: React.FC = () => {
     defaultValues: {
       title: "",
       content: "",
-      category: "ALL",
+      categories: [],
+      interest: [],
     },
   });
 
@@ -49,6 +52,7 @@ const WritePost: React.FC = () => {
         <FormProvider {...methods}>
           <form css={contentStyle} onSubmit={handleSubmit(onSubmit)}>
             <div css={contentTitle}>
+              <LeftIcon css={backIconStyle} onClick={() => navigate(-1)} />
               피드 작성하기
               <PotIcon css={iconStyle} />
               <div css={buttonContainer}>
