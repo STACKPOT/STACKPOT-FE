@@ -10,7 +10,6 @@ import {
   FeedResponse,
   PostFeedParams,
   PostFeedResponse,
-  FeedPatch,
   PatchFeedResponse,
   GetFeedDetailResponse,
 } from "./types/feed";
@@ -40,7 +39,7 @@ export const postFeed = async ({
   });
 };
 
-export const patchFeed = async (feedId: number, body: FeedPatch) => {
+export const patchFeed = async (feedId: number, body: PostFeedParams) => {
   return authApiPatch<PatchFeedResponse>(`/feeds/${feedId}`, body);
 };
 
@@ -60,5 +59,5 @@ export const DeleteFeed = async (feedId: number) => {
 };
 
 export const getFeedSeries = async () => {
-  return authApiGet<Record<string, string>>(`/feeds/series`);
+  return authApiGet<Record<number, string>>(`/feeds/series`);
 };

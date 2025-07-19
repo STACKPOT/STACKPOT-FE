@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import {
   contentBody,
@@ -14,7 +14,10 @@ import { interestMap, interests, partMap } from "@constants/categories";
 import { PostFeedParams } from "apis/types/feed";
 import useGetFeedSeries from "apis/hooks/feeds/useGetFeedSeries";
 
-const PostForm: React.FC = ({}) => {
+interface PostFormProps {
+  isDataSet?: boolean;
+}
+const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const { register, watch, setValue } = useFormContext<PostFeedParams>();
   const [selectedCategories, selectedInterests, selectedSeries] = watch([
@@ -27,6 +30,12 @@ const PostForm: React.FC = ({}) => {
   const [selectedSeriesName, setSelectedSeriesName] = useState<string | null>(
     null
   );
+
+  useEffect(() => {
+    if (series && selectedSeries) {
+      setSelectedSeriesName(series[selectedSeries]);
+    }
+  }, [isDataSet]);
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue("content", e.target.value, { shouldValidate: true });
@@ -60,8 +69,12 @@ const PostForm: React.FC = ({}) => {
       const selectedId = Object.entries(series)
         .find(([_, value]) => value === selected)
         ?.at(0);
+      const selectedIdNumber = Number(selectedId);
       if (selectedId) {
-        setValue("seriesId", selectedId === selectedSeries ? null : selectedId);
+        setValue(
+          "seriesId",
+          selectedIdNumber === selectedSeries ? null : selectedIdNumber
+        );
       }
     }
   };
@@ -98,6 +111,7 @@ const PostForm: React.FC = ({}) => {
         placeholder="나의 열정을 이야기해봐요"
         {...register("content", { required: true })}
         ref={contentRef}
+        value={watch("content")}
         onChange={handleContentChange}
       />
 

@@ -34,7 +34,7 @@ export interface PostFeedParams {
   content: string;
   categories: Role[];
   interests: Interest[];
-  seriesId: string | null;
+  seriesId: number | null;
 }
 
 export interface PostFeedResponse {
@@ -51,14 +51,9 @@ export interface PostFeedResponse {
 
 export interface PatchFeedParams {
   feedId: number;
-  body: FeedPatch;
+  body: PostFeedParams;
 }
 
-export interface FeedPatch {
-  title: string | null;
-  content: string | null;
-  category: string | null;
-}
 export interface PatchFeedResponse {
   feedId: number;
   writerId: number;
@@ -90,7 +85,12 @@ export interface FeedDetail {
   likeCount: number;
   isLiked: boolean;
   createdAt: string;
-  categories: string[];
+  categories: Role[];
   interests: string[];
-  series: Record<string, string>;
+  series: Series | null;
+}
+
+export interface Series {
+  comment: string;
+  seriesId: number;
 }
