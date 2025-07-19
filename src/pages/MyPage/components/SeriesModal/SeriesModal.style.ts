@@ -51,15 +51,6 @@ export const modalTitleStyle = css`
   ${theme.font.title2};
 `;
 
-export const modalAddButtonStyle = css`
-  ${theme.font.caption2};
-  color: ${theme.color.base.white};
-  background-color: ${theme.color.point.hero};
-  padding: 1.1rem 1.6rem;
-  border-radius: 32px;
-  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.04);
-  margin-left: auto;
-`;
 
 export const modalExplainStyle = css`
   ${theme.font.body3};
@@ -105,14 +96,6 @@ export const modalTagCloseButtonStyle = css`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-`;
-
-export const modalCompleteButtonStyle = css`
-  ${theme.font.title1};
-  background-color: ${theme.color.point.hero};
-  color: white;
-  padding: 1.7rem 30.5rem;
-  border-radius: 8px;
 `;
 
 

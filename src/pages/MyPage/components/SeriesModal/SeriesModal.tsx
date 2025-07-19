@@ -1,7 +1,8 @@
 
 import { CloseIcon } from "@assets/svgs";
 import { useState } from "react";
-import { modalAddButtonStyle, modalBodyStyle, modalCloseButtonStyle, modalCompleteButtonStyle, modalContainerStyle, modalExplainStyle, modalHeaderStyle, modalInputStyle, modalOverlayStyle, modalSeriesInputStyle, modalTagCloseButtonStyle, modalTagListStyle, modalTagStyle, modalTitleStyle } from "./SeriesModal.style";
+import { modalBodyStyle, modalCloseButtonStyle, modalContainerStyle, modalExplainStyle, modalHeaderStyle, modalInputStyle, modalOverlayStyle, modalSeriesInputStyle, modalTagCloseButtonStyle, modalTagListStyle, modalTagStyle, modalTitleStyle } from "./SeriesModal.style";
+import { Button } from "@components/index";
 
 
 interface SeriesModalProps {
@@ -23,7 +24,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
         </button>
         <div css={modalHeaderStyle}>
           <strong css={modalTitleStyle}>시리즈 편집</strong>
-          <button css={modalAddButtonStyle}
+          <Button variant="cta"
             onClick={() => {
               if (newSeries && series.length < 5) {
                 setSeries([...series, { label: newSeries }]);
@@ -32,7 +33,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
             }}
           >
             시리즈 추가하기
-          </button>
+          </Button>
         </div>
         <div css={modalBodyStyle}>
           <div css={modalExplainStyle}>
@@ -78,7 +79,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
             </div>
           </div>
 
-          <button css={modalCompleteButtonStyle}
+          <Button variant="full"
             onClick={() => {
               onConfirm(series);
               setNewSeries("");
@@ -86,7 +87,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
             }}
           >
             작성 완료
-          </button>
+          </Button>
         </div>
       </div>
     </div>
