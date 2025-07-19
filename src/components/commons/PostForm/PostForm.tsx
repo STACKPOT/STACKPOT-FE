@@ -1,10 +1,5 @@
-import React, { useRef } from "react";
-import {
-  UseFormRegister,
-  UseFormWatch,
-  UseFormSetValue,
-  useFormContext,
-} from "react-hook-form";
+import React, { useRef, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import {
   contentBody,
   inputStyle,
@@ -17,23 +12,24 @@ import {
 import { CategoryButton } from "@components/index";
 import { interestMap, interests, partMap } from "@constants/categories";
 import { PostFeedParams } from "apis/types/feed";
+import useGetFeedSeries from "apis/hooks/feeds/useGetFeedSeries";
 
-interface PostFormProps {
-  register: UseFormRegister<any>;
-  watch: UseFormWatch<any>;
-  setValue: UseFormSetValue<any>;
-}
-
-const PostForm: React.FC<PostFormProps> = ({}) => {
+const PostForm: React.FC = ({}) => {
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const { register, watch, setValue } = useFormContext<PostFeedParams>();
-  const [selectedCategories, selectedInterests] = watch([
+  const [selectedCategories, selectedInterests, selectedSeries] = watch([
     "categories",
     "interest",
+    "seriesId",
   ]);
 
+  const { data: series } = useGetFeedSeries();
+  const [selectedSeriesName, setSelectedSeriesName] = useState<string | null>(
+    null
+  );
+
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue("content", e.target.value);
+    setValue("content", e.target.value, { shouldValidate: true });
     if (contentRef.current) {
       contentRef.current.style.height = "0px";
       contentRef.current.style.height = contentRef.current.scrollHeight + "px";
@@ -57,11 +53,36 @@ const PostForm: React.FC<PostFormProps> = ({}) => {
         : [...selectedInterests, interestMap[interest]]
     );
   };
+
+  const handleSeriesClick = (selected: string) => {
+    setSelectedSeriesName(selectedSeriesName ? null : selected);
+    if (series) {
+      const selectedId = Object.entries(series)
+        .find(([_, value]) => value === selected)
+        ?.at(0);
+      if (selectedId) {
+        setValue("seriesId", selectedId === selectedSeries ? null : selectedId);
+      }
+    }
+  };
+
   return (
     <div css={contentBody}>
       <div css={labelContainer}>
         시리즈
-        <div css={buttons("series")}></div>
+        <div css={buttons("series")}>
+          {series &&
+            Object.values(series).map((item) => (
+              <CategoryButton
+                key={item}
+                style="pot"
+                onClick={handleSeriesClick}
+                selected={selectedSeriesName === item}
+              >
+                {item}
+              </CategoryButton>
+            ))}
+        </div>
       </div>
       <div css={titleLabelContainer}>
         제목
@@ -72,7 +93,6 @@ const PostForm: React.FC<PostFormProps> = ({}) => {
           maxLength={50}
         />
       </div>
-
       <textarea
         css={textareaStyle}
         placeholder="나의 열정을 이야기해봐요"

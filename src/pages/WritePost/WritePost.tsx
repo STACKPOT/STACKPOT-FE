@@ -25,14 +25,12 @@ const WritePost: React.FC = () => {
       content: "",
       categories: [],
       interest: [],
+      seriesId: null,
     },
   });
 
   const {
-    register,
     handleSubmit,
-    setValue,
-    watch,
     formState: { isValid },
   } = methods;
 
@@ -62,7 +60,7 @@ const WritePost: React.FC = () => {
               </div>
             </div>
 
-            <PostForm register={register} watch={watch} setValue={setValue} />
+            <PostForm />
           </form>
         </FormProvider>
       </div>

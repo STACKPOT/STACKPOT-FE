@@ -34,7 +34,7 @@ export interface PostFeedParams {
   content: string;
   categories: Role[];
   interest: Interest[];
-  seriesId: number;
+  seriesId: string | null;
 }
 
 export interface PostFeedResponse {
