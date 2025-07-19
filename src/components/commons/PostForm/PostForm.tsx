@@ -8,6 +8,7 @@ import {
   buttons,
   labelContainer,
   titleLabelContainer,
+  titleCountStyle,
 } from "./PostForm.style";
 import { CategoryButton } from "@components/index";
 import { interestMap, interests, partMap } from "@constants/categories";
@@ -18,6 +19,7 @@ interface PostFormProps {
   isDataSet?: boolean;
 }
 const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
+  const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const { register, watch, setValue } = useFormContext<PostFeedParams>();
   const [selectedCategories, selectedInterests, selectedSeries] = watch([
@@ -104,7 +106,13 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
           placeholder="메인 제목 작성"
           {...register("title", { maxLength: 50, required: true })}
           maxLength={50}
+          ref={titleRef}
+          value={watch("title")}
+          onChange={(e) =>
+            setValue("title", e.target.value, { shouldValidate: true })
+          }
         />
+        <p css={titleCountStyle}>{titleRef.current?.value.length ?? 0}/50</p>
       </div>
       <textarea
         css={textareaStyle}

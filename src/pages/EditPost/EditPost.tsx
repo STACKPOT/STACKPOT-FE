@@ -10,7 +10,7 @@ import {
   iconStyle,
 } from "./EditPost.style";
 import { LeftIcon, PotIcon } from "@assets/svgs";
-import { Button, PostForm } from "@components/index";
+import { Button, Modal, PostForm } from "@components/index";
 import { PostFeedParams } from "apis/types/feed";
 import usePatchFeed from "apis/hooks/feeds/usePatchFeed";
 import useGetFeedDetails from "apis/hooks/feeds/useGetFeedDetails";
@@ -24,6 +24,7 @@ const EditPost = () => {
   const feedIdNumber = feedId ? ~~feedId : 0;
   const navigate = useNavigate();
   const [isDataSet, setIsDataSet] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const { data } = useGetFeedDetails({ feedId: feedIdNumber });
   const { mutate: editFeed } = usePatchFeed();
@@ -90,7 +91,7 @@ const EditPost = () => {
                 <Button
                   variant="action"
                   actionType="neg"
-                  onClick={handleDelete}
+                  onClick={() => setIsDeleteModalOpen(true)}
                 >
                   피드 삭제
                 </Button>
@@ -103,6 +104,17 @@ const EditPost = () => {
           </form>
         </FormProvider>
       </div>
+      {isDeleteModalOpen && (
+        <Modal
+          title="피드 게시글을 삭제하시겠습니까?"
+          message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
+          confirmType="neg"
+          confirmButton="삭제하기"
+          cancelButton="취소"
+          onCancel={() => setIsDeleteModalOpen(false)}
+          onConfirm={handleDelete}
+        />
+      )}
     </main>
   );
 };

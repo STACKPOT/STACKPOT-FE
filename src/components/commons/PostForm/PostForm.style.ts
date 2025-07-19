@@ -35,6 +35,12 @@ export const inputStyle = css`
   }
 `;
 
+export const titleCountStyle = css`
+  ${theme.font.body3}
+  color: ${theme.color.object.hero};
+  margin-left: auto;
+`;
+
 export const textareaStyle = css`
   ${theme.font.body3};
   resize: none;
