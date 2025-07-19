@@ -24,7 +24,7 @@ const WritePost: React.FC = () => {
       title: "",
       content: "",
       categories: [],
-      interest: [],
+      interests: [],
       seriesId: null,
     },
   });

@@ -27,9 +27,17 @@ export const getFeeds = async ({
 export const postFeed = async ({
   title,
   content,
-  category,
+  categories,
+  interests,
+  seriesId,
 }: PostFeedParams) => {
-  return authApiPost<PostFeedResponse>("/feeds", { title, content, category });
+  return authApiPost<PostFeedResponse>("/feeds", {
+    title,
+    content,
+    categories,
+    interests,
+    seriesId,
+  });
 };
 
 export const patchFeed = async (feedId: number, body: FeedPatch) => {

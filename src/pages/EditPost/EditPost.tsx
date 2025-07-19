@@ -97,7 +97,7 @@ const EditPost = () => {
                 </Button>
               </div>
             </div>
-            <PostForm register={register} watch={watch} setValue={setValue} />
+            <PostForm />
           </form>
         </FormProvider>
       </div>

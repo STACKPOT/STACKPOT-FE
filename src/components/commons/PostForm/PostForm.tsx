@@ -19,7 +19,7 @@ const PostForm: React.FC = ({}) => {
   const { register, watch, setValue } = useFormContext<PostFeedParams>();
   const [selectedCategories, selectedInterests, selectedSeries] = watch([
     "categories",
-    "interest",
+    "interests",
     "seriesId",
   ]);
 
@@ -47,7 +47,7 @@ const PostForm: React.FC = ({}) => {
 
   const handleInterestClick = (interest: string) => {
     setValue(
-      "interest",
+      "interests",
       selectedInterests.includes(interestMap[interest])
         ? selectedInterests.filter((item) => item !== interestMap[interest])
         : [...selectedInterests, interestMap[interest]]

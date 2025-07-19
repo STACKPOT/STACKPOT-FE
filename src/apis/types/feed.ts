@@ -33,7 +33,7 @@ export interface PostFeedParams {
   title: string;
   content: string;
   categories: Role[];
-  interest: Interest[];
+  interests: Interest[];
   seriesId: string | null;
 }
 
