@@ -13,14 +13,14 @@ export const taskBadgeStyle = (
   background-color: ${content === "진행 전"
     ? theme.color.accent.redBg
     : content === "진행 중"
-    ? theme.color.accent.yellowBg
-    : theme.color.accent.greenBg};
+      ? theme.color.accent.yellowBg
+      : theme.color.accent.greenBg};
   color: ${content === "진행 전"
     ? theme.color.accent.redFg
     : content === "진행 중"
-    ? theme.color.accent.pinkFg
-    : theme.color.status.positive};
-  ${theme.font.captionBold1};
+      ? theme.color.accent.pinkFg
+      : theme.color.status.positive};
+  ${theme.font.caption3};
   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
   white-space: nowrap;
   cursor: ${clickable ? "pointer" : "default"};
@@ -34,13 +34,13 @@ export const potBadgeStyle = (type: PotStatus) => css`
   background-color: ${type === "ONGOING"
     ? theme.color.accent.yellowBg
     : type === "COMPLETED"
-    ? theme.color.accent.pinkBg
-    : theme.color.accent.blueBg};
+      ? theme.color.accent.pinkBg
+      : theme.color.accent.blueBg};
   color: ${type === "ONGOING"
     ? theme.color.accent.yellowFg
     : type === "COMPLETED"
-    ? theme.color.accent.pinkFg
-    : theme.color.point.darkblue};
+      ? theme.color.accent.pinkFg
+      : theme.color.point.darkblue};
   ${theme.font.caption1};
   white-space: nowrap;
 `;
