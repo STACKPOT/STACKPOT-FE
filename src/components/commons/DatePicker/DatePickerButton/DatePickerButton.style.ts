@@ -28,7 +28,11 @@ export const StyledPickersLayout = styled(PickersLayout)({
     fontSize: "1.3rem",
   },
   ".MuiDayCalendar-weekDayLabel": {
-    fontSize: "1.4rem",
+    height: "3rem",
+    width: "3rem",
+    color: `${theme.color.point.gray}`,
+    fontSize: "9px",
+    fontFamily: "Pretendard",
   },
   ".MuiPickersDay-root": {
     width: "3rem",
@@ -40,31 +44,21 @@ export const StyledPickersLayout = styled(PickersLayout)({
   },
 
   ".MuiDateCalendar-root": {
+    width: "39.3rem",
     borderRadius: "8px",
     backgroundColor: `${theme.color.point.normal}`,
     padding: "1.9rem 2.4rem",
     height: "fit-content",
   },
-  ".css-17f9e7e-MuiTypography-root-MuiDayCalendar-weekDayLabel": {
-    height: "3rem",
-    width: "3rem",
-    color: `${theme.color.point.gray}`,
-    fontSize: "9px",
-    fontFamily: "Pretendard",
-  },
-  ".css-1rl1vrc-MuiDayCalendar-header": {
+  ".MuiDayCalendar-header": {
     display: "flex",
     gap: "2rem",
     borderBottom: `1px solid ${theme.color.object.alternative}`,
   },
-  ".css-1n1xn3x-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition":
-    {
-      minHeight: "19.4rem",
-    },
-  ".css-5wchs2-MuiDateCalendar-root": {
-    width: "39.3rem",
+  ".MuiPickersSlideTransition-root": {
+    minHeight: "19.4rem",
   },
-  ".css-1pv2de5-MuiDayCalendar-weekContainer": {
+  ".MuiDayCalendar-weekContainer": {
     gap: "2rem",
   },
 });
