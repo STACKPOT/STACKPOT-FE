@@ -4,14 +4,17 @@ import {
   contentTitle,
   description,
   iconStyle,
+  noDataContainerStyle,
   potListContainer,
-  textContainer,
 } from "./MyPots.style";
-import { MyPotCard } from "@components/index";
+import { MyPotCard, NoData } from "@components/index";
 import useGetMyPot from "apis/hooks/myPots/useGetMyPot";
 import { partKoreanNameMap } from "@constants/categories";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 const MyPots: React.FC = () => {
+  const navigate = useNavigate();
   const { data } = useGetMyPot();
 
   return (
@@ -36,7 +39,12 @@ const MyPots: React.FC = () => {
             />
           ))
         ) : (
-          <p css={textContainer}>데이터가 없습니다.</p>
+          <NoData
+            message={`😥\n입장한 팟이 없어요\n팟에 입장해 보세요!`}
+            buttonText="모든 팟 페이지로"
+            onClickButton={() => navigate(`${routes.pot.base}`)}
+            containerStyle={noDataContainerStyle}
+          />
         )}
       </div>
     </main>

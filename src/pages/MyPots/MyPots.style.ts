@@ -42,3 +42,8 @@ export const textContainer = css`
   justify-content: center;
   flex-grow: 1;
 `;
+
+export const noDataContainerStyle = css`
+  padding: 16.9rem 0;
+  margin: 0;
+`;
