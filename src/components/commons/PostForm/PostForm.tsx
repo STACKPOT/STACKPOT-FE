@@ -32,12 +32,26 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
   const [selectedSeriesName, setSelectedSeriesName] = useState<string | null>(
     null
   );
+  const [titleState, setTitleState] = useState<"blur" | "focus" | "max">(
+    "blur"
+  );
 
   useEffect(() => {
     if (series && selectedSeries) {
       setSelectedSeriesName(series[selectedSeries]);
     }
   }, [isDataSet]);
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue("title", e.target.value, { shouldValidate: true });
+    setTitleState(e.target.value.length >= 50 ? "max" : "focus");
+  };
+
+  const handleTitleFocus = (focus: boolean) => {
+    if (watch("title").length < 50) {
+      setTitleState(focus ? "focus" : "blur");
+    }
+  };
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue("content", e.target.value, { shouldValidate: true });
@@ -102,17 +116,19 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
       <div css={titleLabelContainer}>
         제목
         <input
-          css={inputStyle}
+          css={inputStyle(titleState)}
           placeholder="메인 제목 작성"
           {...register("title", { maxLength: 50, required: true })}
           maxLength={50}
           ref={titleRef}
           value={watch("title")}
-          onChange={(e) =>
-            setValue("title", e.target.value, { shouldValidate: true })
-          }
+          onChange={handleTitleChange}
+          onFocus={() => handleTitleFocus(true)}
+          onBlur={() => handleTitleFocus(false)}
         />
-        <p css={titleCountStyle}>{titleRef.current?.value.length ?? 0}/50</p>
+        <p css={titleCountStyle(titleState)}>
+          {titleRef.current?.value.length ?? 0}/50
+        </p>
       </div>
       <textarea
         css={textareaStyle}

@@ -20,24 +20,32 @@ export const titleLabelContainer = css`
   gap: 0.4rem;
 `;
 
-export const inputStyle = css`
+export const inputStyle = (state: "blur" | "focus" | "max") => css`
   padding: 1.2rem 1.6rem;
   ${theme.font.body3}
   display: flex;
   border-radius: 8px;
-  border: 1px solid ${theme.color.object.alternative};
+  border: 1px solid
+    ${state === "blur"
+      ? theme.color.object.alternative
+      : state === "focus"
+      ? theme.color.point.alternative
+      : theme.color.accent.redBg};
   &::placeholder {
     color: ${theme.color.object.hero};
   }
   &:focus {
-    border-color: ${theme.color.point.hero};
     outline: none;
   }
 `;
 
-export const titleCountStyle = css`
+export const titleCountStyle = (state: "blur" | "focus" | "max") => css`
   ${theme.font.body3}
-  color: ${theme.color.object.hero};
+  color: ${state === "blur"
+    ? theme.color.object.hero
+    : state === "focus"
+    ? theme.color.point.hero
+    : theme.color.status.negative};
   margin-left: auto;
 `;
 
