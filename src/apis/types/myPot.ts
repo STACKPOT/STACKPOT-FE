@@ -144,7 +144,7 @@ export interface MyPotMember {
   potMemberId: number;
   nickname: string;
   kakaoId?: string;
-  potRole: string;
+  potRole: Role;
   owner: boolean;
 }
 

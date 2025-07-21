@@ -10,7 +10,7 @@ export const mainContainer = css`
   border-radius: 24px;
   border: 1px ${theme.color.border.alternative};
   background: ${theme.color.base.white};
-`
+`;
 
 export const innerContainer = css`
   display: flex;
@@ -18,11 +18,11 @@ export const innerContainer = css`
   justify-content: center;
   align-items: center;
   gap: 3.2rem;
-`
+`;
 
 export const titleTextStyle = css`
   ${theme.font.title1};
-`
+`;
 
 export const changeButtonStyle = css`
   display: flex;
@@ -33,9 +33,21 @@ export const changeButtonStyle = css`
   border-radius: 16px;
   border: 1px solid ${theme.color.border.normal};
   background: ${theme.color.point.hero};
-`
+`;
 
 export const changebuttonTextStyle = css`
   color: ${theme.color.point.ivory};
   ${theme.font.captionBold1};
-`
+`;
+export const cancelContainer = css`
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
+  width: 100%;
+`;
+
+export const cancelIconStyle = css`
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+`;
