@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  datepickerCContainer,
   formContainer,
   headContainer,
   iconStyle,
@@ -12,9 +13,8 @@ import {
   textareaStyle,
   titleStyle,
 } from "./FinishedPotForm.style";
-import { AiButton, Button, Modal } from "@components/index";
-import { AppealIcon, PotIcon } from "@assets/svgs";
-import { DatePicker } from "@pages/CreatePot/components";
+import { AiButton, Button, DatePickerButton, Modal } from "@components/index";
+import { PotIcon } from "@assets/svgs";
 import { PatchPotCompleteBody } from "apis/types/pot";
 import dayjs, { Dayjs } from "dayjs";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
@@ -132,10 +132,12 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({
             </label>
             <div css={labelStyle}>
               시작 날짜
-              <DatePicker
-                date={dayjs(potStartDate)}
-                onChange={handleStartDate}
-              />
+              <div css={datepickerCContainer}>
+                <DatePickerButton
+                  onChange={handleStartDate}
+                  date={dayjs(potStartDate)}
+                />
+              </div>
             </div>
             <label css={labelStyle}>
               사용 언어

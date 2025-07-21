@@ -64,6 +64,10 @@ export const labelStyle = css`
   white-space: pre;
 `;
 
+export const datepickerCContainer = css`
+  margin-left: 3rem;
+`;
+
 export const textareaStyle = css`
   padding: 2.4rem;
   height: 40.6rem;
