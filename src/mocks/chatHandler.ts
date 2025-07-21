@@ -9,6 +9,15 @@ const chatRooms = [
     lastChatTime: "2025-05-31T19:35:00",
     lastChat: "첫 대화를 시작해 보세요!",
     unReadMessageCount: 4,
+    participants: [
+      { userId: 1, userName: "졸린 양파", role: "FRONTEND" },
+      { userId: 2, userName: "게으른 토끼", role: "BACKEND" },
+      { userId: 3, userName: "열정적인 사자", role: "DESIGN" },
+      { userId: 4, userName: "졸린 양파", role: "FRONTEND" },
+      { userId: 5, userName: "게으른 토끼", role: "BACKEND" },
+      { userId: 6, userName: "열정적인 사자", role: "PLANNING" },
+
+    ],
   },
   {
     chatRoomId: 2,
@@ -17,6 +26,11 @@ const chatRooms = [
     lastChatTime: "2025-05-31T19:40:00",
     lastChat: "팀 회의가 곧 시작돼요.",
     unReadMessageCount: 0,
+    participants: [
+      { userId: 1, userName: "졸린 양파", role: "FRONTEND" },
+      { userId: 2, userName: "게으른 토끼", role: "BACKEND" },
+      { userId: 3, userName: "열정적인 사자", role: "DESIGN" },
+    ],
   },
   {
     chatRoomId: 3,
@@ -25,6 +39,11 @@ const chatRooms = [
     lastChatTime: null,
     lastChat: null,
     unReadMessageCount: 0,
+    participants: [
+      { userId: 1, userName: "졸린 양파", role: "FRONTEND" },
+      { userId: 2, userName: "게으른 토끼", role: "BACKEND" },
+      { userId: 3, userName: "열정적인 사자", role: "PLANNING" },
+    ],
   },
 ];
 
