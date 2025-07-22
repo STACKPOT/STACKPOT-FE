@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { containerStyle, toDoGirdContainer } from "./MyPotStatus.style";
-import { AboutWorkModal, AboutWorkModalWrapper } from "../../components/index";
+import { AboutWorkModal } from "../../components/index";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { APITaskStatus, TaskStatus } from "types/taskStatus";
