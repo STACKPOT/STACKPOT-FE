@@ -3,37 +3,35 @@ import { css } from "@emotion/react";
 
 export const container = css`
   display: flex;
-  padding: 3.2rem;
-  align-items: center;
-  border-radius: 24px;
+  padding: 2.4rem;
+  border-radius: 8px;
   background: ${theme.color.base.white};
-  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
   border: 1px solid ${theme.color.object.alternative};
+  flex-direction: column;
+  position: relative;
+  width: 60rem;
+  height: 53.2rem;
 `;
 
-export const innerContainer = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.4rem;
+export const cancelIconStyle = css`
+  width: 2.4rem;
+  height: 2.4rem;
+  cursor: pointer;
+  position: absolute;
+  top: 2.4rem;
+  right: 2.4rem;
 `;
 
 export const titleContainer = css`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 22rem;
+  margin-top: 3.2rem;
+  justify-content: space-between;
+  padding: 0 1.6rem;
 `;
 
 export const titleTextStyle = css`
-  ${theme.font.title1};
-  color: ${theme.color.base.darkgray};
-`;
-
-export const cancelIconStyle = css`
-  width: 1.7rem;
-  height: 1.7rem;
-  cursor: pointer;
+  ${theme.font.title2};
+  color: ${theme.color.point.gray};
 `;
 
 export const buttonStyle = css`
@@ -84,7 +82,7 @@ export const todoContainer = css`
   }
 `;
 
-export const noTaskTextContainer = css`
+export const noneTodoTextContainer = css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,8 +92,7 @@ export const noTaskTextContainer = css`
 
 export const noneTodoTextStyle = css`
   ${theme.font.caption3};
-  color: #989ba2;
-  width: 100%;
+  color: ${theme.color.object.hero};
 `;
 
 export const saveButtonStyle = css`

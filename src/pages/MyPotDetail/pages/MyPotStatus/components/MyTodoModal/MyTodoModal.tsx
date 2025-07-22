@@ -11,17 +11,15 @@ import {
   buttonContainer,
   buttonStyle,
   container,
-  innerContainer,
   titleContainer,
   titleTextStyle,
   cancelIconStyle,
   todoContainer,
   eachTodoContainer,
   saveButtonStyle,
-  noTaskTextContainer,
   noneTodoTextStyle,
+  noneTodoTextContainer,
 } from "./MyTodoModal.style";
-import { cancelContainer } from "../../../../components/AboutWorkModal/AboutWorkModal.style";
 import { inputFieldStyle } from "@pages/MyPotDetail/components/TextInput/TextInput.style";
 import { Todo } from "apis/types/myPot";
 import { useSnackbar } from "providers";
@@ -77,68 +75,63 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
 
   return (
     <div css={container}>
-      <div css={innerContainer}>
-        <div css={cancelContainer}>
-          <CloseIcon css={cancelIconStyle} onClick={onClose} />
-        </div>
-
-        <div css={titleContainer}>
-          <p css={titleTextStyle}>{"나의 할 일"}</p>
-          <div
-            css={buttonStyle}
-            className={localTasks.length >= 10 ? "max-tasks" : ""}
-            onClick={handleAddTask}
-          >
-            <div css={buttonContainer}>
-              할 일 추가
-              <TodoPlusButtonIcon />
-            </div>
+      <CloseIcon css={cancelIconStyle} onClick={onClose} />
+      <div css={titleContainer}>
+        <p css={titleTextStyle}>나의 할 일</p>
+        <div
+          css={buttonStyle}
+          className={localTasks.length >= 10 ? "max-tasks" : ""}
+          onClick={handleAddTask}
+        >
+          <div css={buttonContainer}>
+            할 일 추가
+            <TodoPlusButtonIcon />
           </div>
         </div>
-
-        <div
-          css={todoContainer}
-          className={localTasks.length === 0 ? "empty" : ""}
-        >
-          {localTasks.length === 0 ? (
-            <div css={noTaskTextContainer}>
-              <p css={noneTodoTextStyle}>
-                {"<할 일 추가> 버튼을 눌러서 작성할 수 있어요."}
-              </p>
-            </div>
-          ) : (
-            localTasks.map((task, index) => (
-              <div key={index} css={eachTodoContainer}>
-                <TodoCheckIcon />
-                <input
-                  type="text"
-                  css={inputFieldStyle}
-                  value={task.content}
-                  onChange={(e) => handleTaskChange(index, e.target.value)}
-                />
-                <DeleteIcon onClick={() => handleDeleteTask(index)} />
-              </div>
-            ))
-          )}
-        </div>
-
-        <button
-          css={saveButtonStyle}
-          onClick={(e) => {
-            if (isDisabled) {
-              e.preventDefault();
-              showSnackbar({
-                message: "비어있는 todo 는 저장할 수 없습니다.",
-                severity: "warning",
-              });
-            } else {
-              handleSaveTasks();
-            }
-          }}
-        >
-          작성 완료
-        </button>
       </div>
+
+      {/* <div
+        css={todoContainer}
+        className={localTasks.length === 0 ? "empty" : ""}
+      > */}
+      {localTasks.length === 0 ? (
+        <div css={noneTodoTextContainer}>
+          <p css={noneTodoTextStyle}>
+            {"<할 일 추가> 버튼을 눌러서 작성할 수 있어요."}
+          </p>
+        </div>
+      ) : (
+        localTasks.map((task, index) => (
+          <div key={index} css={eachTodoContainer}>
+            <TodoCheckIcon />
+            <input
+              type="text"
+              css={inputFieldStyle}
+              value={task.content}
+              onChange={(e) => handleTaskChange(index, e.target.value)}
+            />
+            <DeleteIcon onClick={() => handleDeleteTask(index)} />
+          </div>
+        ))
+      )}
+      {/* </div> */}
+
+      <button
+        css={saveButtonStyle}
+        onClick={(e) => {
+          if (isDisabled) {
+            e.preventDefault();
+            showSnackbar({
+              message: "비어있는 todo 는 저장할 수 없습니다.",
+              severity: "warning",
+            });
+          } else {
+            handleSaveTasks();
+          }
+        }}
+      >
+        작성 완료
+      </button>
     </div>
   );
 };
