@@ -34,25 +34,15 @@ export const titleTextStyle = css`
   color: ${theme.color.point.gray};
 `;
 
-export const buttonStyle = css`
-  display: flex;
-  align-items: center;
-  padding: 0.6rem 1.6rem;
-  border-radius: 16px;
-  cursor: pointer;
-  background: ${theme.color.point.alternative};
-
-  &.max-tasks {
-    background-color: ${theme.color.object.alternative};
-  }
-`;
-
-export const buttonContainer = css`
+export const addTodoButtonStyle = css`
   ${theme.font.caption2}
   color: ${theme.color.base.white};
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding: 1.1rem 1.6rem;
+  background: ${theme.color.point.hero};
+  border-radius: 32px;
 `;
 
 export const eachTodoContainer = css`
@@ -98,16 +88,14 @@ export const noneTodoTextStyle = css`
 export const saveButtonStyle = css`
   ${theme.font.caption2}
   color: ${theme.color.base.white};
-  align-items: center;
-  width: 100%;
   background: ${theme.color.point.hero};
-  padding: 1.6rem 3.2rem;
-  border-radius: 24px;
-  border: none;
-  outline: none;
+  padding: 1.7rem 0;
+  border-radius: 8px;
   cursor: pointer;
-  font-family: inherit;
-
+  position: absolute;
+  bottom: 2.4rem;
+  width: 52.1rem;
+  margin: 0 1.5rem;
   &:disabled {
     background: ${theme.color.object.alternative};
     cursor: not-allowed;

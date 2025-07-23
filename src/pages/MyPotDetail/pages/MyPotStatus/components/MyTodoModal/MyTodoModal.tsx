@@ -1,24 +1,17 @@
 import { useState } from "react";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { usePatchMyPotTodo } from "apis/hooks/myPots/usePatchMyPotTodo";
+import { CloseIcon, DeleteIcon, TodoCheckIcon } from "@assets/svgs";
 import {
-  CloseIcon,
-  DeleteIcon,
-  TodoCheckIcon,
-  TodoPlusButtonIcon,
-} from "@assets/svgs";
-import {
-  buttonContainer,
-  buttonStyle,
   container,
   titleContainer,
   titleTextStyle,
   cancelIconStyle,
-  todoContainer,
   eachTodoContainer,
   saveButtonStyle,
   noneTodoTextStyle,
   noneTodoTextContainer,
+  addTodoButtonStyle,
 } from "./MyTodoModal.style";
 import { inputFieldStyle } from "@pages/MyPotDetail/components/TextInput/TextInput.style";
 import { Todo } from "apis/types/myPot";
@@ -71,6 +64,7 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
 
   const isDisabled = localTasks.some((task) => task.content.trim() === "");
 
+  //TODO: 로딩처리
   if (isLoading) return <div>Loading...</div>;
 
   return (
@@ -78,22 +72,15 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
       <CloseIcon css={cancelIconStyle} onClick={onClose} />
       <div css={titleContainer}>
         <p css={titleTextStyle}>나의 할 일</p>
-        <div
-          css={buttonStyle}
-          className={localTasks.length >= 10 ? "max-tasks" : ""}
+        <button
+          css={addTodoButtonStyle}
           onClick={handleAddTask}
+          disabled={localTasks.length >= 10}
         >
-          <div css={buttonContainer}>
-            할 일 추가
-            <TodoPlusButtonIcon />
-          </div>
-        </div>
+          할 일 추가하기
+        </button>
       </div>
 
-      {/* <div
-        css={todoContainer}
-        className={localTasks.length === 0 ? "empty" : ""}
-      > */}
       {localTasks.length === 0 ? (
         <div css={noneTodoTextContainer}>
           <p css={noneTodoTextStyle}>
@@ -114,7 +101,6 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
           </div>
         ))
       )}
-      {/* </div> */}
 
       <button
         css={saveButtonStyle}
