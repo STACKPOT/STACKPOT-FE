@@ -5,6 +5,5 @@ export { default as CreateIcon } from "./create.svg?react";
 export { default as DeleteIcon } from "./delteIcon.svg?react";
 export { default as PartyIcon } from "./party.svg?react";
 export { default as TodoCheckIcon } from "./todoCheckIcon.svg?react";
-export { default as TodoPlusButtonIcon } from "./todoPlusButton.svg?react";
 export { default as FireIcon } from "./fire.svg?react";
 export { default as WorkGroupIcon } from "./workGroup.svg?react";
