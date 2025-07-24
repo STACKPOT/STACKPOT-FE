@@ -89,7 +89,7 @@ const FinishedPotForm: React.FC<FinishedPotFormProps> = ({
       setValue("potName", potData.potDetail.potName);
       setValue(
         "potStartDate",
-        potData.potDetail.potStartDate.split(". ").join("-")
+        potData.potDetail.potStartDate.split(".").join("-")
       );
       setValue("potLan", potData.potDetail.potLan);
       setValue("potSummary", potData.potDetail.potSummary);
