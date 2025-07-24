@@ -24,7 +24,7 @@ export const cancelIconStyle = css`
 
 export const titleContainer = css`
   display: flex;
-  margin-top: 3.2rem;
+  margin: 3.2rem 0 1.6rem 0;
   justify-content: space-between;
   padding: 0 1.6rem;
 `;
@@ -43,6 +43,12 @@ export const addTodoButtonStyle = css`
   padding: 1.1rem 1.6rem;
   background: ${theme.color.point.hero};
   border-radius: 32px;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.04);
+  &:disabled {
+    background: ${theme.color.object.alternative};
+    cursor: not-allowed;
+    color: ${theme.color.object.hero};
+  }
 `;
 
 export const eachTodoContainer = css`
