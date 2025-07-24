@@ -28,6 +28,7 @@ const routes = {
   feed: { base: "/feed", edit: "/feed/edit" },
   login: "/login",
   chat: "/chat",
+  finishedPot: "/finished-pot",
 } as const;
 
 export default routes;

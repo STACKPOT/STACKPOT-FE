@@ -26,6 +26,7 @@ import EditPotPage from "./EditPot/EditPot";
 import FeedDetailPage from "./FeedDetail/FeedDetail";
 import MyPotsPage from "./MyPots/MyPots";
 import ChatPage from "@pages/Chat/Chat";
+import FinishedPotDetailPage from "./FinishedPotDetail/FinishedPotDetail";
 
 export {
   HomePage,
@@ -56,4 +57,5 @@ export {
   EditPotPage,
   FeedDetailPage,
   ChatPage,
+  FinishedPotDetailPage,
 };
