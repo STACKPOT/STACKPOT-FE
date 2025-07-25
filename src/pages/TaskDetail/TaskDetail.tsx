@@ -23,11 +23,12 @@ import {
   dropdownWrapperStyle,
   profileImageStyle,
   arrowIconStyle,
+
   profileInnerContainer,
   createdDateStyle
 } from "./TaskDetail.style";
 import { container } from "../MyPotDetail/MyPotDetail.style"
-import { DdayBadge, StateBadge, MyFeedDropdown, Badge } from "@components/index";
+import { DdayBadge, StateBadge, MyFeedDropdown, MemberCard } from "@components/index";
 import { CalendarIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { headerStyle } from "@pages/MyPotDetail/MyPotDetail.style";
@@ -35,18 +36,17 @@ import { statusTextStyle } from "../MyPotDetail/pages/MyPotStatus/MyPotStatus.st
 import routes from "@constants/routes";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import { useDeleteMyPotTask } from "apis/hooks/myPots/useDeleteMyPotTask";
-import { AboutWorkModalWrapper, Loading } from "../MyPotDetail/components/index";
+import { AboutWorkModal, Loading } from "../MyPotDetail/components/index";
 import { APITaskStatus, TaskStatus } from "types/taskStatus";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
-import { displayStatus, partKoreanNameMap, WorkModal } from "@constants/categories";
+import { displayStatus, WorkModal } from "@constants/categories";
 import { usePatchMyPotStatus } from "apis/hooks/myPots/usePatchMyPotStatus";
 import { AnotherTaskStatus } from "../../types/taskStatus";
 import { ChangeStatusModalWrapper } from "./components";
 import ConfirmModalWrapper from "@pages/MyPotDetail/components/ConfirmModalWrapper/ConfirmModalWrapper";
 
 const TaskDetailPage: React.FC = () => {
-
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
 
@@ -57,10 +57,15 @@ const TaskDetailPage: React.FC = () => {
   const potIdNumber = Number(potId);
   const taskIdNumber = Number(taskId);
 
-  const { data: task, isLoading, error } = useGetMyPotTaskDetail({
+  const {
+    data: task,
+    isLoading,
+    error,
+  } = useGetMyPotTaskDetail({
     potId: potIdNumber,
     taskId: taskIdNumber,
   });
+
   console.log(task);
   const { mutate: deleteTask, isPending: isDeletePending } = useDeleteMyPotTask();
   const { mutate: patchStatus, isPending: isStatusPending } = usePatchMyPotStatus();
@@ -93,7 +98,9 @@ const TaskDetailPage: React.FC = () => {
 
   const handleOpenModal = () => {
     setModalTitle(WorkModal[1]);
-    const convertedStatus = task?.result?.status ? displayStatus[task.result.status] : null;
+    const convertedStatus = task?.result?.status
+      ? displayStatus[task.result.status]
+      : null;
     setActiveStatus(convertedStatus);
     setIsModalOpen(true);
   };
@@ -119,7 +126,7 @@ const TaskDetailPage: React.FC = () => {
 
   const handleProfileClick = (userId: number) => {
     navigate(`${routes.userProfile}/${userId}`);
-  }
+  };
 
   if (isLoading || isDeletePending || isStatusPending) return <Loading />;
   if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
@@ -140,13 +147,14 @@ const TaskDetailPage: React.FC = () => {
         initialStatus={displayStatus[task.result.status]}
       />
 
-      <AboutWorkModalWrapper
-        isModalOpen={isModalOpen}
-        activeStatus={activeStatus}
-        modalTitle={modalTitle}
-        taskId={Number(taskId)}
-        onClose={() => setIsModalOpen(false)}
-      />
+      {isModalOpen && (
+        <AboutWorkModal
+          type="patch"
+          // activeStatus={activeStatus}
+          taskId={Number(taskId)}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
 
       <div css={titleContainer}>
         <div css={leftContainer}>
@@ -157,8 +165,15 @@ const TaskDetailPage: React.FC = () => {
           <div css={titleStyle}>{task.result.title}</div>
         </div>
         <div css={rightContainer}>
-          <StateBadge badgeType="task" taskState={displayStatus[task.result.status]} onClick={handleOpenChangingModal} />
-          <div css={dropdownWrapperStyle} onClick={(event) => event.stopPropagation()}>
+          <StateBadge
+            badgeType="task"
+            taskState={displayStatus[task.result.status]}
+            onClick={handleOpenChangingModal}
+          />
+          <div
+            css={dropdownWrapperStyle}
+            onClick={(event) => event.stopPropagation()}
+          >
             <MyFeedDropdown
               topMessage="수정하기"
               bottomMessage="삭제하기"
@@ -197,11 +212,21 @@ const TaskDetailPage: React.FC = () => {
       </div>
       <div css={contributorContainer}>
         {task.result.participants.map((participant, index) => (
-          <div css={contributorCard} key={index} onClick={() => { handleProfileClick(participant.userId) }}>
+          <div
+            css={contributorCard}
+            key={index}
+            onClick={() => {
+              handleProfileClick(participant.userId);
+            }}
+          >
             <div css={contributorInner}>
-              <img src={roleImages[participant.role as Role]} css={profileImageStyle} alt="프로필" />
+              <img
+                src={roleImages[participant.role as Role]}
+                css={profileImageStyle}
+                alt="프로필"
+              />
               <span css={contributorNicknameStyle}>{participant.nickName}</span>
-              <Badge key={index} content={partKoreanNameMap[participant.role]} />
+              <MemberCard key={index} role={participant.role as Role} type={"selection"} onClick={() => { }} />
             </div>
           </div>
         ))}
