@@ -25,7 +25,12 @@ import {
   arrowIconStyle,
 } from "./TaskDetail.style";
 import { container } from "../MyPotDetail/MyPotDetail.style";
-import { DdayBadge, StateBadge, MyFeedDropdown } from "@components/index";
+import {
+  DdayBadge,
+  StateBadge,
+  MyFeedDropdown,
+  Modal,
+} from "@components/index";
 import { CalendarIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { headerStyle } from "@pages/MyPotDetail/MyPotDetail.style";
@@ -70,26 +75,27 @@ const TaskDetailPage: React.FC = () => {
   const [isChangingModalOpen, setIsChangingModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState<string>(WorkModal[0]);
   const [activeStatus, setActiveStatus] = useState<TaskStatus | null>(null);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  // const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const handlePrev = () => {
     navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
   };
 
-  const confirmDeleteTask = () => {
+  const handleDeleteTask = () => {
     deleteTask(
       { potId: potIdNumber, taskId: taskIdNumber },
       {
         onSuccess: () => {
-          setIsConfirmOpen(false);
+          setDeleteModal(false);
           navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
         },
       }
     );
   };
 
-  const handleDeleteTask = () => {
-    setIsConfirmOpen(true);
+  const handleDeleteTaskModal = () => {
+    setDeleteModal(true);
   };
 
   const handleOpenModal = () => {
@@ -128,28 +134,33 @@ const TaskDetailPage: React.FC = () => {
   if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
   if (!task?.result) return <p>데이터를 찾을 수 없습니다.</p>;
 
-  //TODO: 주석 처리된 모달 변경
   return (
     <main css={container}>
-      {/* <ConfirmModalWrapper
-        isModalOpen={isConfirmOpen}
-        onClose={() => setIsConfirmOpen(false)}
-        onConfirm={confirmDeleteTask}
-      /> */}
+      {isModalOpen && (
+        <AboutWorkModal
+          type="patch"
+          onClose={() => setIsModalOpen(false)}
+          taskId={task?.result?.taskboardId}
+        />
+      )}
+      {deleteModal && (
+        <Modal
+          title="업무 내용을 삭제하시겠습니까?"
+          message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
+          confirmType="neg"
+          cancelButton="취소"
+          confirmButton="삭제하기"
+          onCancel={() => setDeleteModal(false)}
+          onConfirm={handleDeleteTask}
+        />
+      )}
       <ChangeStatusModalWrapper
         isModalOpen={isChangingModalOpen}
         onClose={() => setIsChangingModalOpen(false)}
         onConfirm={confirmChangeModal}
         initialStatus={displayStatus[task.result.status]}
       />
-      {/* {isModalOpen && (
-        <AboutWorkModal
-          type="patch"
-          activeStatus={activeStatus}
-          taskId={Number(taskId)}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )} */}
+
       <div css={titleContainer}>
         <div css={leftContainer}>
           <button onClick={handlePrev} css={prevButtonStyle}>
@@ -171,7 +182,7 @@ const TaskDetailPage: React.FC = () => {
               topMessage="수정하기"
               bottomMessage="삭제하기"
               onTop={handleOpenModal}
-              onBottom={handleDeleteTask}
+              onBottom={handleDeleteTaskModal}
             />
           </div>
         </div>
