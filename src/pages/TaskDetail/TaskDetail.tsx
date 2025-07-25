@@ -41,7 +41,6 @@ import { displayStatus, WorkModal } from "@constants/categories";
 import { usePatchMyPotStatus } from "apis/hooks/myPots/usePatchMyPotStatus";
 import { AnotherTaskStatus } from "../../types/taskStatus";
 import { ChangeStatusModalWrapper } from "./components";
-import ConfirmModalWrapper from "@pages/MyPotDetail/components/ConfirmModalWrapper/ConfirmModalWrapper";
 
 const TaskDetailPage: React.FC = () => {
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
@@ -129,30 +128,28 @@ const TaskDetailPage: React.FC = () => {
   if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
   if (!task?.result) return <p>데이터를 찾을 수 없습니다.</p>;
 
+  //TODO: 주석 처리된 모달 변경
   return (
     <main css={container}>
-      <ConfirmModalWrapper
+      {/* <ConfirmModalWrapper
         isModalOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={confirmDeleteTask}
-      />
-
+      /> */}
       <ChangeStatusModalWrapper
         isModalOpen={isChangingModalOpen}
         onClose={() => setIsChangingModalOpen(false)}
         onConfirm={confirmChangeModal}
         initialStatus={displayStatus[task.result.status]}
       />
-
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <AboutWorkModal
           type="patch"
           activeStatus={activeStatus}
           taskId={Number(taskId)}
           onClose={() => setIsModalOpen(false)}
         />
-      )}
-
+      )} */}
       <div css={titleContainer}>
         <div css={leftContainer}>
           <button onClick={handlePrev} css={prevButtonStyle}>

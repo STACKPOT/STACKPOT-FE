@@ -14,6 +14,7 @@ import {
   titleTextStyle,
   bodyContainer,
   modalStyle,
+  aboutWorkModalOverlayStyle,
 } from "./AboutWorkModal.style";
 import { AnotherTaskStatus } from "../../../../types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
@@ -113,7 +114,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
 
   return (
     <FormProvider {...methods}>
-      <form>
+      <form css={aboutWorkModalOverlayStyle}>
         {step === "content" ? (
           <ExplainModal
             type="custom"
