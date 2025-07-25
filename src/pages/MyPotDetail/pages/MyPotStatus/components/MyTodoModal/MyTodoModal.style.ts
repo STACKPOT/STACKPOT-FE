@@ -54,8 +54,17 @@ export const addTodoButtonStyle = css`
 export const eachTodoContainer = css`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.6rem;
   width: 100%;
+  padding: 0 1.6rem;
+`;
+
+export const contentContainer = css`
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  height: 30.4rem;
+  overflow-y: auto;
 `;
 
 export const todoContainer = css`

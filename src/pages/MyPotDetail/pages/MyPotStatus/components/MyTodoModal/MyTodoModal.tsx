@@ -12,6 +12,7 @@ import {
   noneTodoTextStyle,
   noneTodoTextContainer,
   addTodoButtonStyle,
+  contentContainer,
 } from "./MyTodoModal.style";
 import { inputFieldStyle } from "@pages/MyPotDetail/components/TextInput/TextInput.style";
 import { Todo } from "apis/types/myPot";
@@ -25,7 +26,7 @@ interface MyTodoModalProps {
 const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
   const { showSnackbar } = useSnackbar();
 
-  const { data, isLoading } = useGetMyPotTodo({ potId, page: 1, size: 3 });
+  const { data } = useGetMyPotTodo({ potId, page: 1, size: 3 });
   const { mutate: updateTasks } = usePatchMyPotTodo();
 
   const [localTasks, setLocalTasks] = useState<Todo[]>(
@@ -64,9 +65,6 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
 
   const isDisabled = localTasks.some((task) => task.content.trim() === "");
 
-  //TODO: 로딩처리
-  if (isLoading) return <div>Loading...</div>;
-
   return (
     <div css={container}>
       <CloseIcon css={cancelIconStyle} onClick={onClose} />
@@ -88,18 +86,20 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
           </p>
         </div>
       ) : (
-        localTasks.map((task, index) => (
-          <div key={index} css={eachTodoContainer}>
-            <TodoCheckIcon />
-            <input
-              type="text"
-              css={inputFieldStyle}
-              value={task.content}
-              onChange={(e) => handleTaskChange(index, e.target.value)}
-            />
-            <DeleteIcon onClick={() => handleDeleteTask(index)} />
-          </div>
-        ))
+        <div css={contentContainer}>
+          {localTasks.map((task, index) => (
+            <div key={index} css={eachTodoContainer}>
+              <TodoCheckIcon />
+              <input
+                type="text"
+                css={inputFieldStyle}
+                value={task.content}
+                onChange={(e) => handleTaskChange(index, e.target.value)}
+              />
+              <DeleteIcon onClick={() => handleDeleteTask(index)} />
+            </div>
+          ))}
+        </div>
       )}
 
       <button
