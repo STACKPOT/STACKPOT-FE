@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   container,
   contentTitle,
@@ -16,7 +16,6 @@ import { PostFeedParams } from "apis/types/feed";
 
 const WritePost: React.FC = () => {
   const navigate = useNavigate();
-  const [isFilled, setIsFilled] = useState(false);
 
   const methods = useForm<PostFeedParams>({
     mode: "onChange",
@@ -29,16 +28,17 @@ const WritePost: React.FC = () => {
     },
   });
 
-  const {
-    handleSubmit,
-    formState: { isValid },
-  } = methods;
+  const { handleSubmit, formState, watch } = methods;
 
   const postFeedMutation = usePostFeed();
 
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    return isFilled && currentLocation.pathname !== nextLocation.pathname;
+    return (
+      formState.isDirty && currentLocation.pathname !== nextLocation.pathname
+    );
   });
+
+  console.log(`isDirty: ${formState.isDirty} title: ${watch("title")}`);
 
   const onSubmit: SubmitHandler<PostFeedParams> = (data) => {
     postFeedMutation.mutate(data);
@@ -54,7 +54,11 @@ const WritePost: React.FC = () => {
               피드 작성하기
               <PotIcon css={iconStyle} />
               <div css={buttonContainer}>
-                <Button variant="action" type="submit" disabled={!isValid}>
+                <Button
+                  variant="action"
+                  type="submit"
+                  disabled={!formState.isValid}
+                >
                   피드 업로드
                 </Button>
               </div>
@@ -69,6 +73,8 @@ const WritePost: React.FC = () => {
         <Modal
           title="페이지를 나가시겠어요?"
           message="입력한 내용을 처음부터 시작해야 해요."
+          confirmButton="나가기"
+          cancelButton="취소"
           onConfirm={blocker.proceed}
           onCancel={blocker.reset}
         />

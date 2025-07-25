@@ -43,7 +43,10 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
   }, [isDataSet]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue("title", e.target.value, { shouldValidate: true });
+    setValue("title", e.target.value, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
     setTitleState(e.target.value.length >= 50 ? "max" : "focus");
   };
 
@@ -54,7 +57,10 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
   };
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue("content", e.target.value, { shouldValidate: true });
+    setValue("content", e.target.value, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
     if (contentRef.current) {
       contentRef.current.style.height = "0px";
       contentRef.current.style.height = contentRef.current.scrollHeight + "px";
