@@ -1,62 +1,37 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
-export const mainContainer = css`
-  display: flex;
-  padding: 3.2rem;
-  flex-direction: column;
-  align-items: flex-start;
-  background: ${theme.color.base.white};
-  border: 1px solid ${theme.color.object.alternative};
-  border-radius: 24px;
-  width: 84rem;
-`;
-
-export const subContainer = css`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const cancelContainer = css`
-  display: flex;
-  padding: 0.8rem 0.4rem;
-  justify-content: flex-end;
-  align-self: center;
-  width: 100%;
-`;
-
-export const cancelIconStyle = css`
-  width: 2.5rem;
-  height: 2.5rem;
-  cursor: pointer;
+export const modalStyle = css`
+  width: 76rem;
 `;
 
 export const thirdContainer = css`
   display: flex;
-  width: 65.3rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2.4rem;
-`;
-
-export const titleContainer = css`
-  display: flex;
-  width: 100%;
-  height: 2.8rem;
-  justify-content: center;
-  align-items: center;
+  width: 71.2rem;
+  padding: 0.8rem 0;
 `;
 
 export const titleTextStyle = css`
-  ${theme.font.title1};
-  color: ${theme.color.base.darkgray};
+  ${theme.font.title2};
+  color: ${theme.color.point.gray};
+`;
+
+export const bodyContainer = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 68rem;
+  gap: 2.4rem;
+  margin-top: 1.6rem;
 `;
 
 export const labelTextStyle = css`
   ${theme.font.caption3};
-  color: ${theme.color.base.darkgray};
+  color: ${theme.color.base.black};
   white-space: nowrap;
 `;
+
+export const cancelContainer = css``; // 삭제 예정

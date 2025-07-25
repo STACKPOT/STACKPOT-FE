@@ -12,7 +12,7 @@ export const background = css`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 10;
+  z-index: 1000;
 `;
 
 export const container = css`

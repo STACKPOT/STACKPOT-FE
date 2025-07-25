@@ -1,30 +1,30 @@
 import { AnotherTaskStatus } from "../../../../types/taskStatus";
 import { firstSectionContainer } from "../TextInput/TextInput.style";
-import { badgeContainer, badgeStyle, selectedBadgeStyle, statusStyles } from "./StateBadgeSelect.style";
-import { labelTextStyle } from "../AboutWorkModal/AboutWorkModal.style"
-import theme from "@styles/theme";
+import { badgeContainer } from "./StateBadgeSelect.style";
+import { labelTextStyle } from "../AboutWorkModal/AboutWorkModal.style";
 import { taskStatue } from "@constants/categories";
+import { StateButton } from "@components/index";
 
 interface StatusBadgeSelectorProps {
   selectedStatus: AnotherTaskStatus | null;
   setSelectedStatus: (status: AnotherTaskStatus) => void;
 }
 
-const StatusBadgeSelector: React.FC<StatusBadgeSelectorProps> = ({ selectedStatus, setSelectedStatus }) => {
-  const getBadgeStyle = (status: AnotherTaskStatus) => {
-    const isSelected = selectedStatus === status;
-    const badgeColor = statusStyles[status] || theme.color.object.alternative;
-    return isSelected ? selectedBadgeStyle(badgeColor) : badgeStyle;
-  };
-
+const StatusBadgeSelector: React.FC<StatusBadgeSelectorProps> = ({
+  selectedStatus,
+  setSelectedStatus,
+}) => {
   return (
     <div css={firstSectionContainer}>
-      <div css={labelTextStyle}>업무 상태</div>
+      <div css={labelTextStyle}>진행 상태</div>
       <div css={badgeContainer}>
         {taskStatue.map((status) => (
-          <button key={status} type="button" css={getBadgeStyle(status)} onClick={() => setSelectedStatus(status)}>
-            {status}
-          </button>
+          <StateButton
+            key={status}
+            state={status}
+            onClick={() => setSelectedStatus(status)}
+            selected={status === selectedStatus}
+          />
         ))}
       </div>
     </div>

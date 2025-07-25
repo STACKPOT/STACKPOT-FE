@@ -12,7 +12,6 @@ import {
 } from "./ApplicantsInformation.style";
 import { Button, ExplainModal, MemberCard } from "@components/index";
 import { useState } from "react";
-import MemberKakaoIdModal from "../MemberKakaoIdModal/MemberKakaoIdModal";
 import StartPotModal from "../StartPotModal/StartPotModal";
 import useGetPotApplicants from "apis/hooks/pots/useGetPotApplicants";
 import { GetPotApplicationResponse } from "apis/types/pot";
@@ -35,7 +34,6 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
     useState<GetPotApplicationResponse | null>(null);
 
   const [showStartModal, setShowStartModal] = useState<boolean>(false);
-  const [showKakaoIdModal, setShowKakaoIdModal] = useState<boolean>(false);
 
   const handleStartPot = () => {
     if (selectedApplicants.length > 0) {
@@ -120,11 +118,10 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
         <StartPotModal
           potId={potId}
           selectedApplicants={selectedApplicants}
-          onStartPotSuccess={() => setShowKakaoIdModal(true)}
+          onStartPotSuccess={() => {}}
           onCancelModal={() => setShowStartModal(false)}
         />
       )}
-      {showKakaoIdModal && <MemberKakaoIdModal potId={potId} />}
     </>
   );
 };
