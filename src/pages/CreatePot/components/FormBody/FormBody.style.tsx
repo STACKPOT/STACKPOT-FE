@@ -9,7 +9,7 @@ export const formContainer = css`
 `;
 
 export const inputStyle = css`
-  margin-left: 4.4rem;
+  margin-left: 1.2rem;
   padding: 1.2rem 1.6rem;
   ${theme.font.caption3}
   font-family: "Pretendard";
@@ -34,11 +34,6 @@ export const dateInputStyle = css`
   color: ${theme.color.base.darkgray};
   border: 1px solid ${theme.color.object.alternative};
   width: 100px;
-  margin-left: 3.2rem;
-`;
-
-export const languageInputStyle = css`
-  // margin-left: 1.2rem;
 `;
 
 export const labelStyle = css`
@@ -46,7 +41,7 @@ export const labelStyle = css`
   align-items: center;
   color: ${theme.color.base.darkgray};
   ${theme.font.caption3}
-  // gap: 3.2rem;
+  gap: 3.2rem;
 `;
 
 export const roleLabelStyle = css`
@@ -67,7 +62,6 @@ export const buttonContainer = css`
   display: flex;
   flex-direction: row;
   gap: 0.7rem;
-  margin-left: 3rem;
 `;
 
 export const roleButtonContainer = css`
@@ -120,14 +114,4 @@ export const tildeStyle = css`
   align-items: center;
   justify-content: center;
   margin-left: 3.2rem;
-`;
-
-export const datePickerStyle = css`
-  background: #fff;
-  border-radius: 12px;
-
-  .rdp-day_selected {
-    background: #3b82f6;
-    color: white;
-  }
 `;

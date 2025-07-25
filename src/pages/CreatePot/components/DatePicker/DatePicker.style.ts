@@ -17,19 +17,43 @@ export const datePickerStyle = css`
 `;
 
 
-export const StyledPickersLayout = styled(
-  PickersLayout as React.JSXElementConstructor<
-    PickersLayoutProps<Dayjs | null, Dayjs, DateView> & React.RefAttributes<HTMLDivElement>
-  >
-)({
+export const StyledPickersLayout = styled(PickersLayout as React.JSXElementConstructor<PickersLayoutProps<Dayjs | null, Dayjs, DateView> & React.RefAttributes<HTMLDivElement>>)({
   ".MuiPickersCalendarHeader-label": {
-    fontSize: "1.6rem",
+    fontSize: "1.3rem",
   },
   ".MuiDayCalendar-weekDayLabel": {
-    fontSize: "1.6rem",
+    height: "3rem",
+    width: "3rem",
+    color: `${theme.color.point.gray}`,
+    fontSize: "9px",
+    fontFamily: "Pretendard",
   },
   ".MuiPickersDay-root": {
-    fontSize: "1.6rem",
+    width: "3rem",
+    height: "3rem",
+    color: `${theme.color.point.gray}`,
+    fontSize: "12px",
+    fontFamily: "Pretendard",
+    fontWeight: "700",
+  },
+
+  ".MuiDateCalendar-root": {
+    width: "39.3rem",
+    borderRadius: "8px",
+    backgroundColor: `${theme.color.point.normal}`,
+    padding: "1.9rem 2.4rem",
+    height: "fit-content",
+  },
+  ".MuiDayCalendar-header": {
+    display: "flex",
+    gap: "2rem",
+    borderBottom: `1px solid ${theme.color.object.alternative}`,
+  },
+  ".MuiPickersSlideTransition-root": {
+    minHeight: "19.4rem",
+  },
+  ".MuiDayCalendar-weekContainer": {
+    gap: "2rem",
   },
 });
 

@@ -6,7 +6,6 @@ import {
   formContainer,
   inputStyle,
   labelStyle,
-  languageInputStyle,
   potDateStyle,
   roleButtonContainer,
   roleLabelStyle,
@@ -15,16 +14,13 @@ import {
 } from "./FormBody.style";
 import { useFormContext } from "react-hook-form";
 import { participation, participationMap, partKoreanNameMap, period } from "@constants/categories";
-import { CategoryButton } from "@components/index";
+import { CategoryButton, DatePickerButton } from "@components/index";
 import DatePicker from "../DatePicker/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import { PotFormData } from "../PotForm";
 import { Role } from "types/role";
-
-
 import CharacterCheckBox from "@components/commons/CharacterCheckbox/CharacterCheckbox";
 import { roleImages } from "@constants/roleImage";
-import { datePickerStyle } from "../DatePicker/DatePicker.style";
 
 
 // 재사용 가능성 있을지 모르겠음
@@ -72,7 +68,6 @@ const FormBody = forwardRef<HTMLDivElement>(
       }
     };
 
-    // 모집 파트 인원 수 변경 핸들러
     const handleRecruitmentChange = (category: Role, value: string) => {
       const newRecruiting = {
         ...recruitingMembers,
@@ -118,7 +113,7 @@ const FormBody = forwardRef<HTMLDivElement>(
         <div css={dateContainerStyle}>
           <div css={labelStyle}>
             모집 마감
-            <DatePicker
+            <DatePickerButton
               date={dayjs(recruitmentDeadline)}
               onChange={handleDeadline}
             />
@@ -126,13 +121,6 @@ const FormBody = forwardRef<HTMLDivElement>(
           <div css={potDateStyle}>
             <div css={labelStyle}>
               예상 기간
-              {/* <input
-                css={dateInputStyle}
-                type="text"
-                placeholder="YYYY-MM-DD"
-                value={potStartDate}
-                onChange={(e) => setValue("potStartDate", e.target.value)}
-              /> */}
               <DatePicker
                 date={dayjs(potStartDate)}
                 onChange={handleStartDate}
@@ -142,13 +130,6 @@ const FormBody = forwardRef<HTMLDivElement>(
               ~
             </div>
             <div css={labelStyle}>
-              {/* <input
-                css={dateInputStyle}
-                type="text"
-                placeholder="YYYY-MM-DD"
-                value={potEndDate}
-                onChange={(e) => setValue("potEndDate", e.target.value)}
-              /> */}
               <DatePicker
                 date={dayjs(potEndDate)}
                 onChange={handleEndDate}
@@ -204,7 +185,6 @@ const FormBody = forwardRef<HTMLDivElement>(
                 key={category}
                 category={category as Role}
                 image={image}
-                // checked={watch("myRole") === category}
                 initialRecruitment={recruitingMembers}
                 option={true}
                 checked={false}
@@ -216,7 +196,7 @@ const FormBody = forwardRef<HTMLDivElement>(
         <label css={labelStyle}>
           사용 언어
           <input
-            css={[inputStyle, languageInputStyle]}
+            css={inputStyle}
             placeholder="사용 언어 작성"
             {...register("potLan", { required: true })}
             maxLength={255}
