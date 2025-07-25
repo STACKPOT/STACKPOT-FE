@@ -1,4 +1,10 @@
-import { NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import {
   container,
   headerStyle,
@@ -15,7 +21,6 @@ import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { prevButtonStyle } from "../TaskDetail/TaskDetail.style";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
-import { MemberIdModalWrapper } from "./components/index";
 import { useState } from "react";
 
 const MyPotDetail: React.FC = () => {
@@ -23,15 +28,21 @@ const MyPotDetail: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
   const tabs = [
-    { label: "업무 현황", path: `${routes.myPot.base}/${routes.task}/${potId}` },
-    { label: "캘린더", path: `${routes.myPot.base}/${routes.calendar}/${potId}` },
+    {
+      label: "업무 현황",
+      path: `${routes.myPot.base}/${routes.task}/${potId}`,
+    },
+    {
+      label: "캘린더",
+      path: `${routes.myPot.base}/${routes.calendar}/${potId}`,
+    },
   ];
 
   const potIdNumber = Number(potId);
@@ -50,7 +61,6 @@ const MyPotDetail: React.FC = () => {
 
   return (
     <>
-      <MemberIdModalWrapper isModalOpen={isModalOpen} onClose={() => setIsModalOpen(false)}/>
       <main css={container}>
         <header css={headerStyle}>
           <button onClick={handlePrev} css={prevButtonStyle}>
@@ -62,7 +72,11 @@ const MyPotDetail: React.FC = () => {
           {tabs.map((tab) => {
             const isActive = location.pathname.includes(tab.path);
             return (
-              <NavLink key={tab.path} to={tab.path} css={[navLinkStyle(isActive)]}>
+              <NavLink
+                key={tab.path}
+                to={tab.path}
+                css={[navLinkStyle(isActive)]}
+              >
                 {tab.label}
               </NavLink>
             );

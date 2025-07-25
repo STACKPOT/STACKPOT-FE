@@ -61,6 +61,9 @@ interface ExplainModalProps {
 
   /** 닫기 아이콘을 클릭했을 때 호출되는 콜백함수 */
   onCancel: () => void;
+
+  /** 삭제하기 버튼을 클릭했을 때 호출되는 콜백 */
+  onDeleteClick?: () => void;
 }
 
 /**
@@ -78,6 +81,7 @@ interface ExplainModalProps {
  * @param props.customContainerStyle (optional) 모달 컨테이너에 대한 커스텀 스타일 (예: 모달 너비 등)
  * @param props.onButtonClick 모달 버튼을 클릭했을 때 호출되는 콜백함수
  * @param props.onCancel 닫기 아이콘을 클릭했을 때 호출되는 콜백함수
+ * @param props.onDeleteClick '삭제하기'버튼을 클릭했을 때 호출되는 콜백
  * 
  * @remarks
  * 모달은 기본적으로 반응형으로 처리됨.
@@ -108,6 +112,7 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
   customContainerStyle,
   onButtonClick,
   onCancel,
+  onDeleteClick,
 }: ExplainModalProps) => {
   return (
     <div css={modalBackgroundStyle}>
@@ -139,13 +144,25 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
           </div>
         )}
         <Button
-          variant="action"
+          type="button"
+          variant="full"
           customStyle={buttonStyle}
           onClick={onButtonClick}
           disabled={disabled}
         >
           {buttonText}
         </Button>
+        {onDeleteClick && (
+          <Button
+            type="button"
+            variant="full"
+            actionType="neg"
+            customStyle={buttonStyle}
+            onClick={onDeleteClick}
+          >
+            삭제하기
+          </Button>
+        )}
       </div>
     </div>
   );
