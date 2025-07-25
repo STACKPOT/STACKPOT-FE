@@ -47,11 +47,11 @@ const FormHeader = ({ type, potId, potName }: FormHeaderProps) => {
         </Button>
       ) : (
         <div css={headButtonContainer}>
-          <Button type="submit" variant="action">
+          <Button variant="action" type="submit" >
             수정 완료
           </Button>
-          <Button actionType="neg" onClick={() => setShowDeleteModal(true)}>
-            삭제하기
+          <Button variant="action" actionType="neg" onClick={() => setShowDeleteModal(true)}>
+            팟 삭제
           </Button>
         </div>
       )}
@@ -61,6 +61,8 @@ const FormHeader = ({ type, potId, potName }: FormHeaderProps) => {
           message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
           onCancel={() => setShowDeleteModal(false)}
           onConfirm={handleDeletePot}
+          confirmType="neg"
+          confirmButton="삭제하기"
         />
       )}
     </div>

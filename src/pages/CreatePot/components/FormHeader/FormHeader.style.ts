@@ -12,7 +12,7 @@ export const headButtonContainer = css`
 `
 
 export const titleStyle = css`
-  ${theme.font.bodyBold2}
+  ${theme.font.display1};
   color: ${theme.color.base.darkgray};
 `;
 

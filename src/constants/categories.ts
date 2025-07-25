@@ -94,3 +94,5 @@ export const potStateMap: {
   ONGOING: "진행 중",
   COMPLETED: "다 끓였어요",
 } as const;
+
+

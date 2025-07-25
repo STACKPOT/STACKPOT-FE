@@ -88,6 +88,7 @@ export interface PotDetail {
   potId: number;
   potName: string;
   potStartDate: string;
+  potEndDate: string;
   potDuration: string;
   potLan: string;
   potStatus: PotStatus;

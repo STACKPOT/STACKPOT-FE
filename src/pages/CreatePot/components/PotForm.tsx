@@ -1,6 +1,6 @@
 import { PotDetail, RecruitmentDetail } from "apis/types/pot";
 import dayjs from "dayjs";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { Participation } from "types/participation";
 import { participationMap } from "@constants/categories";
 import { useEffect } from "react";
@@ -22,9 +22,11 @@ export interface PotFormData {
   potModeOfOperation: Participation;
   potContent: string;
   potStartDate: string;
+  potEndDate: string;
   recruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetail[];
   recruitingMembers: Record<Role, number>;
+  potRole: Role;
 }
 
 const PotForm: React.FC<PotFormProps> = ({
@@ -43,9 +45,11 @@ const PotForm: React.FC<PotFormProps> = ({
       potModeOfOperation: undefined,
       potContent: "",
       potStartDate: dayjs().format("YYYY-MM-DD"),
+      potEndDate: dayjs().format("YYYY-MM-DD"),
       recruitmentDeadline: dayjs().format("YYYY-MM-DD"),
       recruitmentDetails: undefined,
       recruitingMembers: undefined,
+      potRole: undefined,
     },
   });
   const {
@@ -55,25 +59,32 @@ const PotForm: React.FC<PotFormProps> = ({
     trigger,
   } = methods;
 
-  const [potDuration, potModeOfOperation, potStartDate, recruitmentDeadline] =
+  const [potModeOfOperation, potDuration, potStartDate, potEndDate, recruitmentDeadline, potRole] =
     watch([
-      "potDuration",
       "potModeOfOperation",
+      "potDuration",
       "potStartDate",
+      "potEndDate",
       "recruitmentDeadline",
+      "potRole",
     ]);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const isFormValid = await trigger();
-    if (!isFormValid || !potDuration || !potModeOfOperation || !potStartDate || !recruitmentDeadline) {
+    if (!isFormValid || !potDuration || !potModeOfOperation || !potStartDate || !potEndDate || !recruitmentDeadline || !potRole) {
       showSnackbar({
         message: "비어있는 항목이 있습니다. 확인해주세요",
         severity: "warning"
       });
     }
     else if (new Date(recruitmentDeadline) > new Date(potStartDate)) {
+      showSnackbar({
+        message: "모집 마감 날짜가 팟 시작일 날짜 보다 이후일 수 없습니다.",
+        severity: "warning"
+      })
+    } else if (new Date(potStartDate) > new Date(potEndDate)) {
       showSnackbar({
         message: "모집 마감 날짜가 팟 시작일 날짜 보다 이후일 수 없습니다.",
         severity: "warning"
@@ -93,8 +104,8 @@ const PotForm: React.FC<PotFormProps> = ({
         participationMap[potData.potModeOfOperation]
       );
       setValue("potContent", potData.potContent);
-      setValue("potDuration", potData.potDuration);
       setValue("potStartDate", potData.potStartDate.split(". ").join("-"));
+      setValue("potEndDate", potData.potEndDate.split(". ").join("-"));
       setValue(
         "recruitmentDeadline",
         potData.recruitmentDeadline.split(". ").join("-")
@@ -107,6 +118,7 @@ const PotForm: React.FC<PotFormProps> = ({
         }))
       );
       setValue("recruitingMembers", potData.recruitingMembers);
+      setValue("potRole", potData.userRole as Role);
       methods.trigger();
     }
   }, [potData]);
