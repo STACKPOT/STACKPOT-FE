@@ -150,7 +150,6 @@ const TaskDetailPage: React.FC = () => {
       {isModalOpen && (
         <AboutWorkModal
           type="patch"
-          // activeStatus={activeStatus}
           taskId={Number(taskId)}
           onClose={() => setIsModalOpen(false)}
         />
@@ -212,23 +211,7 @@ const TaskDetailPage: React.FC = () => {
       </div>
       <div css={contributorContainer}>
         {task.result.participants.map((participant, index) => (
-          <div
-            css={contributorCard}
-            key={index}
-            onClick={() => {
-              handleProfileClick(participant.userId);
-            }}
-          >
-            <div css={contributorInner}>
-              <img
-                src={roleImages[participant.role as Role]}
-                css={profileImageStyle}
-                alt="프로필"
-              />
-              <span css={contributorNicknameStyle}>{participant.nickName}</span>
-              <MemberCard key={index} role={participant.role as Role} type={"selection"} onClick={() => { }} />
-            </div>
-          </div>
+          <MemberCard key={index} nickname={participant.nickName} role={participant.role as Role} type={"selection"} onClick={() => handleProfileClick(participant.userId)} />
         ))}
       </div>
     </main>
