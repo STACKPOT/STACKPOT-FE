@@ -190,9 +190,7 @@ const TaskDetailPage: React.FC = () => {
         />
         <div css={profileInnerContainer}>
           <span css={nicknameStyle}>{task.result.creatorNickname}</span>
-          <span css={createdDateStyle}>{'2025년 2월 8일 15:20'}</span>
-          {/* API 에서 건네주는 createdDate가 없어서 임의 작성 */}
-        </div>
+          <span css={createdDateStyle}>{task.result.createdAt ? task.result.createdAt : '날짜 정보 없음'}</span>        </div>
       </div>
       <div css={dividerStyle} />
       <div css={dateContainer}>
