@@ -80,8 +80,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const roleList = participants.map((p) => p.role) as Role[];
 
   const handleDeleteTask = () => {
-    deleteTask({ potId: potIdNumber, taskId: taskId });
-    setDeleteModal(false);
+    deleteTask(
+      { potId: potIdNumber, taskId: taskId },
+      { onSuccess: () => setDeleteModal(false) }
+    );
   };
 
   const handleDeleteTaskModal = () => {
