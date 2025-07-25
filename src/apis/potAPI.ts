@@ -1,5 +1,4 @@
 import {
-  apiGet,
   authApiDelete,
   authApiGet,
   authApiPatch,
