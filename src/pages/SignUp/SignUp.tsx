@@ -9,7 +9,7 @@ import {
   buttonStyle,
   inputStyle,
 } from "./SignUp.style";
-import { Button } from "@components/index";
+import { Button, Modal } from "@components/index";
 import {
   CategorySelection,
   ContractsSection,
@@ -21,6 +21,7 @@ import usePatchSignIn from "apis/hooks/users/usePatchSignIn";
 import { useState } from "react";
 import { SignInResponse } from "apis/types/user";
 import { Role } from "types/role";
+import { useBlocker } from "react-router-dom";
 
 type SignInFormData = {
   kakaoId: string;
@@ -46,7 +47,7 @@ const SignUp = () => {
     register,
     handleSubmit,
     watch,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = methods;
 
   const { mutate } = usePatchSignIn();
@@ -70,6 +71,10 @@ const SignUp = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
+    return isDirty && currentLocation.pathname !== nextLocation.pathname;
+  });
 
   return (
     <main css={container}>
@@ -111,6 +116,16 @@ const SignUp = () => {
       </FormProvider>
       {isModalOpen && responseData?.role && (
         <ProfileModal onModalCancel={handleCancel} role={responseData?.role} />
+      )}
+      {blocker.state === "blocked" && (
+        <Modal
+          title="페이지를 나가시겠어요?"
+          message="입력한 내용을 처음부터 시작해야 해요."
+          confirmButton="나가기"
+          cancelButton="취소"
+          onConfirm={blocker.proceed}
+          onCancel={blocker.reset}
+        />
       )}
     </main>
   );

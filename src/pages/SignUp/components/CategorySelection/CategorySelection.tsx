@@ -24,7 +24,7 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
     const handleSelectCategory = (category: string) => {
       setSelectedCategory(category);
       const value = type === "role" ? partMap[category] : category;
-      setValue(type, value);
+      setValue(type, value, { shouldDirty: true });
     };
 
     return (
