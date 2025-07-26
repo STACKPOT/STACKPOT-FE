@@ -2,29 +2,29 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const container = css`
-  margin: 4.8rem 0;
+  margin-top: 8.4rem;
   display: flex;
   flex-direction: column;
-`;
-export const toastStyle = css`
-  transform: translate(-50%);
-  top: 8.3rem;
-  position: absolute;
-  left: 50%;
 `;
 
-export const contentContainer = css`
+export const contentStyle = css`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
+  gap: 4.8rem;
 `;
 
 export const contentTitle = css`
-  ${theme.font.bodyBold2};
-  color: ${theme.color.base.darkgray};
+  ${theme.font.display1};
+  color: ${theme.color.point.gray};
   display: flex;
   align-items: center;
   gap: 0.8rem;
+`;
+
+export const backIconStyle = css`
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
 `;
 
 export const iconStyle = css`

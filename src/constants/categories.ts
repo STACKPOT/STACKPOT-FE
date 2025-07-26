@@ -1,3 +1,5 @@
+import { Interest } from "types/interest";
+
 export const participation = ["온라인", "오프라인", "혼합"] as const;
 export const period = [
   "단기-1개월",
@@ -32,6 +34,25 @@ export const interests = [
   "창업",
   "네트워킹 행사",
 ] as const;
+
+export const interestKoreanMap: {
+  [key: string]:
+    | "사이드 프로젝트"
+    | "1인 개발"
+    | "공모전"
+    | "창업"
+    | "네트워킹 행사";
+} = {
+  SIDE_PROJECT: "사이드 프로젝트",
+  SOLO_DEVELOPMENT: "1인 개발",
+  COMPETITION: "공모전",
+  STARTUP: "창업",
+  NETWORKING: "네트워킹 행사",
+};
+
+export const interestMap = Object.fromEntries(
+  Object.entries(interestKoreanMap).map(([key, value]) => [value, key])
+) as Record<string, Interest>;
 
 export const partKoreanNameMap: {
   [key: string]: "프론트엔드" | "백엔드" | "디자인" | "기획";
