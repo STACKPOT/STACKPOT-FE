@@ -38,8 +38,6 @@ const WritePost: React.FC = () => {
     );
   });
 
-  console.log(`isDirty: ${formState.isDirty} title: ${watch("title")}`);
-
   const onSubmit: SubmitHandler<PostFeedParams> = (data) => {
     postFeedMutation.mutate(data);
   };
