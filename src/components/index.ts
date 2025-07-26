@@ -21,7 +21,6 @@ import PotInformation from "./commons/PotInformation/PotInformation";
 import UploadToast from "./commons/Toast/UploadToast";
 import FinishedPotCard from "./cards/FinishedPotCard/FinishedPotCard";
 import InformationPopper from "./commons/InformationPopper/InformationPopper";
-import OnGoingPotCard from "./cards/OnGoingPotCard/OnGoingPotCard";
 import PartRecruitment from "./commons/PartRecruitment/PartRecruitment";
 import PostForm from "./commons/PostForm/PostForm";
 import Comment from "./commons/Comment/Comment";
@@ -33,6 +32,7 @@ import MemberCard from "./cards/MemberCard/MemberCard";
 import PostButton from "./commons/Button/PostButton/PostButton";
 import DatePickerButton from "./commons/DatePicker/DatePickerButton/DatePickerButton";
 import NoData from "./commons/NoData/NoData";
+import AiButton from "./commons/Button/AiButton/AiButton";
 import StateButton from "./commons/Button/StateButton/StateButton";
 
 export {
@@ -59,7 +59,6 @@ export {
   UploadToast,
   FinishedPotCard,
   InformationPopper,
-  OnGoingPotCard,
   PartRecruitment,
   PostForm,
   Comment,
@@ -71,5 +70,6 @@ export {
   PostButton,
   DatePickerButton,
   NoData,
+  AiButton,
   StateButton,
 };

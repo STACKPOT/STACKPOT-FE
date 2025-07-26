@@ -1,3 +1,5 @@
+import { Participation } from "types/participation";
+import { PotStatus } from "types/potStatus";
 import { Role } from "types/role";
 import { APITaskStatus } from "types/taskStatus";
 
@@ -88,16 +90,16 @@ export interface PatchTodoStatusParams {
 }
 
 export interface MyPotResponse {
-  map: any;
   potId: number;
   potName: string;
+  potStartDate: string;
+  potStatus: PotStatus;
+  potModeOfOperation: Participation;
+  potDuration: string;
+  potContent: string;
   isOwner: boolean;
-  members: {
-    FRONTEND?: number;
-    BACKEND?: number;
-    DESIGN?: number;
-    PLANNING?: number;
-  };
+  members: Record<Role, number>;
+  dday: string;
 }
 
 export interface TaskAPIParams {

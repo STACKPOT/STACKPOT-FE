@@ -1,5 +1,6 @@
 import { SerializedStyles } from "@emotion/react";
 import {
+  backgroundButtonStyle,
   beButtonStyle,
   buttonStyle,
   deButtonStyle,
@@ -12,7 +13,7 @@ interface CategoryButtonProps {
   children: string;
   selected: boolean;
   onClick: (category: string) => void;
-  style: "pot" | "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  style: "pot" | "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN" | "background";
 }
 
 const CategoryButton: React.FC<CategoryButtonProps> = ({
@@ -32,7 +33,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
       ? pmButtonStyle(selected)
       : style === "DESIGN"
       ? deButtonStyle(selected)
-      : potButtonStyle(selected);
+      : backgroundButtonStyle(selected);
 
   return (
     <button

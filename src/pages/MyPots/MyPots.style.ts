@@ -2,23 +2,18 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const container = css`
-  padding: 4.8rem 0;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const content = css`
+  padding: 8.4rem 0;
   display: flex;
   flex-direction: column;
 `;
 
 export const contentTitle = css`
-  ${theme.font.bodyBold2};
-  color: ${theme.color.base.darkgray};
+  ${theme.font.display1};
+  color: ${theme.color.point.gray};
   display: flex;
   justify-content: row;
   align-items: center;
-  gap: 1.6rem;
+  gap: 0.8rem;
 `;
 
 export const iconStyle = css`
@@ -27,20 +22,15 @@ export const iconStyle = css`
 
 export const description = css`
   margin-top: 0.8rem;
-  color: ${theme.color.object.assistive};
-  ${theme.font.caption3};
+  color: ${theme.color.object.hero};
+  ${theme.font.body3};
 `;
 
-export const contentBody = css`
+export const potListContainer = css`
   display: flex;
   flex-direction: column;
-`;
-
-export const onGoningPotContainer = css`
-  display: flex;
-  flex-direction: column;
-  gap: 3.6rem;
-  margin-top: 3.6rem;
+  gap: 3.2rem;
+  margin-top: 3.2rem;
   flex-grow: 1;
 `;
 
@@ -51,4 +41,9 @@ export const textContainer = css`
   align-items: center;
   justify-content: center;
   flex-grow: 1;
+`;
+
+export const noDataContainerStyle = css`
+  padding: 16.9rem 0;
+  margin: 0;
 `;
