@@ -29,7 +29,6 @@ export interface GetTodoParams {
   size: number;
 }
 
-
 export interface Participant {
   potMemberId: number;
   userId: number;
@@ -68,6 +67,7 @@ export interface TaskDetailResponse {
   potId: number;
   participants: Participant[];
   dday: string;
+  createdAt: string;
 }
 
 export interface TodoUpdateRequest {
@@ -119,12 +119,12 @@ export interface GetTasksMonthParams {
 export interface GetTasksMonthResponse {
   taskId: number;
   deadLine: string;
-  participating: boolean
+  participating: boolean;
 }
 
 export interface GetTasksCalendarParams {
   potId: number;
-  date: string
+  date: string;
 }
 
 export interface GetTasksCalendarResponse {
@@ -143,7 +143,7 @@ export interface MyPotMember {
   potMemberId: number;
   nickname: string;
   kakaoId?: string;
-  potRole: string;
+  potRole: Role;
   owner: boolean;
 }
 

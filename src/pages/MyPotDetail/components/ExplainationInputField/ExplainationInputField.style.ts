@@ -1,35 +1,20 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
-export const explainationInputFieldStyle = css`
-  width: 100%;
-  display: flex;
-  padding: 24px;
-  flex-direction: column;
-  align-items: flex-start;
-  border-radius: 12px;
-  border: 1px solid ${theme.color.object.alternative};
-  transition: border 0.3s ease;
-  
-  &:focus-within {
-    border: 2px solid ${theme.color.base.darkgray}; 
-  }
-`;
-
 export const textareaContainer = css`
-  height: 14rem;
-  width: 100%;
+  height: 20.4rem;
   resize: none;
-  border: none;
-  outline: none;
-  font: unset;
-  ${theme.font.caption3};
+  ${theme.font.body3};
+  border: 1px solid ${theme.color.object.alternative};
+  padding: 24px;
+  border-radius: 8px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  padding: 0;
-  background: transparent;
-
   &::placeholder {
-    color: ${theme.color.object.hero};  
+    color: ${theme.color.object.hero};
+  }
+  &:focus {
+    outline: none;
+    border-color: ${theme.color.point.alternative};
   }
 `;
