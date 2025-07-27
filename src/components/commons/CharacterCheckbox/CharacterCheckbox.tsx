@@ -70,7 +70,7 @@ const CharacterCheckBox = ({ category, image, checked, onClick, option, initialR
         </div>
       ) : (
         <>
-          <CircleCheck css={checkIconStyle} style={{ "--check-fill": checked ? "#FFFFFF" : "#2098F3" } as React.CSSProperties} />
+          <CircleCheck css={checkIconStyle({ checked })} />
           <img src={image} alt={category} css={imageStyle} />
           <Badge content={partKoreanNameMap[category]} />
         </>

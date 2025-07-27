@@ -46,7 +46,7 @@ const PotDetail = () => {
             data.potDetail.potStatus === "RECRUITING" && (
               <ApplicantsInformation potId={potIdNumber} />
             )}
-          {/* <CommentSection type="pot" id={potIdNumber} /> */}
+          <CommentSection type="pot" id={potIdNumber} />
         </main>
       )}
     </>

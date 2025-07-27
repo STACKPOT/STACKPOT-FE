@@ -21,7 +21,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
         css={datePickerStyle}
         slots={{
           layout: StyledPickersLayout,
-          textField: DatePickerTextField, // 이렇게 커스텀 텍스트필드 적용
+          textField: DatePickerTextField,
         }}
         value={date}
         onChange={onChange}

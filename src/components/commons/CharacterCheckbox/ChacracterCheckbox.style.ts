@@ -17,8 +17,7 @@ export const containerStyle = css`
   padding: 2.5rem 3.7rem;
   gap: 1.6rem;
   background : ${theme.color.base.white};
-  width: 23rem;
-  height: 9rem;
+  
 `;
 
 export const selectedStyle = css`
@@ -29,6 +28,8 @@ export const selectedStyle = css`
 export const imageStyle = css`
   width: 4.0rem;
   height: 4.0rem;
+  border-radius: 40px;
+  border: 1px solid ${theme.color.object.alternative};
 `;
 
 export const labelStyle = css`
@@ -37,10 +38,11 @@ export const labelStyle = css`
 `;
 
 
-export const checkIconStyle = css`
+export const checkIconStyle = ({ checked }: { checked: boolean }) => css`
   width: 2.4rem;
   height: 2.4rem;
-  fill: ${theme.color.base.white};
+
+  --check-fill: ${checked ? theme.color.base.white : theme.color.point.hero};
 `;
 
 export const myRoleSectionStyle = css`

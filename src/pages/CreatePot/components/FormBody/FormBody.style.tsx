@@ -65,9 +65,9 @@ export const buttonContainer = css`
 `;
 
 export const roleButtonContainer = css`
-  display: flex;
-  flex-direction: row;
-  gap: 5.6rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5.6rem;  
 `;
 
 export const textareaStyle = css`
