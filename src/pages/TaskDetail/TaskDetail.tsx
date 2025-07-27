@@ -23,9 +23,12 @@ import {
   dropdownWrapperStyle,
   profileImageStyle,
   arrowIconStyle,
+
+  profileInnerContainer,
+  createdDateStyle
 } from "./TaskDetail.style";
-import { container } from "../MyPotDetail/MyPotDetail.style";
-import { DdayBadge, StateBadge, MyFeedDropdown } from "@components/index";
+import { container } from "../MyPotDetail/MyPotDetail.style"
+import { DdayBadge, StateBadge, MyFeedDropdown, MemberCard } from "@components/index";
 import { CalendarIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { headerStyle } from "@pages/MyPotDetail/MyPotDetail.style";
@@ -62,10 +65,10 @@ const TaskDetailPage: React.FC = () => {
     potId: potIdNumber,
     taskId: taskIdNumber,
   });
-  const { mutate: deleteTask, isPending: isDeletePending } =
-    useDeleteMyPotTask();
-  const { mutate: patchStatus, isPending: isStatusPending } =
-    usePatchMyPotStatus();
+
+  console.log(task);
+  const { mutate: deleteTask, isPending: isDeletePending } = useDeleteMyPotTask();
+  const { mutate: patchStatus, isPending: isStatusPending } = usePatchMyPotStatus();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChangingModalOpen, setIsChangingModalOpen] = useState(false);
@@ -147,7 +150,6 @@ const TaskDetailPage: React.FC = () => {
       {isModalOpen && (
         <AboutWorkModal
           type="patch"
-          activeStatus={activeStatus}
           taskId={Number(taskId)}
           onClose={() => setIsModalOpen(false)}
         />
@@ -158,6 +160,7 @@ const TaskDetailPage: React.FC = () => {
           <button onClick={handlePrev} css={prevButtonStyle}>
             <ArrowLeftIcon css={arrowIconStyle} />
           </button>
+          <DdayBadge days={task.result.dday} />
           <div css={titleStyle}>{task.result.title}</div>
         </div>
         <div css={rightContainer}>
@@ -185,18 +188,20 @@ const TaskDetailPage: React.FC = () => {
           src={roleImages[task.result.creatorRole as Role] ?? ""}
           alt={task.result.creatorNickname}
         />
-        <span css={nicknameStyle}>{task.result.creatorNickname}</span>
-        <DdayBadge days={task.result.dday} />
+        <div css={profileInnerContainer}>
+          <span css={nicknameStyle}>{task.result.creatorNickname}</span>
+          <span css={createdDateStyle}>{task.result.createdAt ? task.result.createdAt : '날짜 정보 없음'}</span>        </div>
       </div>
+      <div css={dividerStyle} />
       <div css={dateContainer}>
         <CalendarIcon />
         <span css={dateStyle}>{task.result.deadLine}</span>
       </div>
-      <div css={dividerStyle} />
       <div css={bottomContainer}>
         <div css={contentContainerStyle}>
           <span css={contentStyle}>{task.result.description}</span>
         </div>
+        <div css={dividerStyle} />
         <header css={headerStyle}>
           <div css={statusTextStyle}>업무 참여자</div>
           <PotIcon css={iconStyle} />
@@ -204,22 +209,7 @@ const TaskDetailPage: React.FC = () => {
       </div>
       <div css={contributorContainer}>
         {task.result.participants.map((participant, index) => (
-          <div
-            css={contributorCard}
-            key={index}
-            onClick={() => {
-              handleProfileClick(participant.userId);
-            }}
-          >
-            <div css={contributorInner}>
-              <img
-                src={roleImages[participant.role as Role]}
-                css={profileImageStyle}
-                alt="프로필"
-              />
-              <span css={contributorNicknameStyle}>{participant.nickName}</span>
-            </div>
-          </div>
+          <MemberCard key={index} nickname={participant.nickName} role={participant.role as Role} type={"selection"} onClick={() => handleProfileClick(participant.userId)} />
         ))}
       </div>
     </main>
