@@ -67,6 +67,7 @@ export interface TaskDetailResponse {
   potId: number;
   participants: Participant[];
   dday: string;
+  createdAt: string;
 }
 
 export interface TodoUpdateRequest {
