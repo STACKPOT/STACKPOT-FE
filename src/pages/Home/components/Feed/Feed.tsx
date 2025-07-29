@@ -106,7 +106,6 @@ const Feed = () => {
           {Object.keys(searchPartMap).map((partName) => (
             <div key={partName}>
               <CategoryButton
-                style="pot"
                 selected={selectedCategory === partName}
                 onClick={() => handleCategoryClick(partName)}
               >

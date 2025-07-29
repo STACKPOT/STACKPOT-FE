@@ -18,7 +18,7 @@ const CategorySelection = () => {
 				<div css={categoryContainer}>
 					{interests.map((interest) => (
 						<div key={interest}>
-							<CategoryButton style="pot" selected={watch('interest') === interest} onClick={handleSelectCategory}>
+							<CategoryButton selected={watch('interest') === interest} onClick={handleSelectCategory}>
 								{interest}
 							</CategoryButton>
 						</div>

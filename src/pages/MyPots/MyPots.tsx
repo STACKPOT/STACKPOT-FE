@@ -4,13 +4,17 @@ import {
   contentTitle,
   description,
   iconStyle,
-  onGoningPotContainer,
-  textContainer,
+  noDataContainerStyle,
+  potListContainer,
 } from "./MyPots.style";
-import { OnGoingPotCard } from "@components/index";
+import { MyPotCard, NoData } from "@components/index";
 import useGetMyPot from "apis/hooks/myPots/useGetMyPot";
+import { partKoreanNameMap } from "@constants/categories";
+import { useNavigate } from "react-router-dom";
+import routes from "@constants/routes";
 
 const MyPots: React.FC = () => {
+  const navigate = useNavigate();
   const { data } = useGetMyPot();
 
   return (
@@ -22,21 +26,25 @@ const MyPots: React.FC = () => {
       <p css={description}>
         내가 입장한 팟을 모았어요. 클릭한 뒤 각각의 팟에서 업무를 시작해 보세요.
       </p>
-      <div css={onGoningPotContainer}>
+      <div css={potListContainer}>
         {data && data.length > 0 ? (
           data.map((pot) => (
-            <OnGoingPotCard
+            <MyPotCard
               key={pot.potId}
-              id={pot.potId}
-              isMyPot={pot.isOwner}
-              title={pot.potName}
-              memberList={Object.entries(pot.members).flatMap(([role, count]) =>
-                Array(count).fill(role)
+              {...pot}
+              type="myPot"
+              recruitmentRoles={Object.keys(pot.members).map(
+                (role) => partKoreanNameMap[role]
               )}
             />
           ))
         ) : (
-          <p css={textContainer}>데이터가 없습니다.</p>
+          <NoData
+            message={`😥\n입장한 팟이 없어요\n팟에 입장해 보세요!`}
+            buttonText="모든 팟 페이지로"
+            onClickButton={() => navigate(`${routes.pot.base}`)}
+            containerStyle={noDataContainerStyle}
+          />
         )}
       </div>
     </main>

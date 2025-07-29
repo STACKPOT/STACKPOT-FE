@@ -23,10 +23,9 @@ import { ko } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
 import { formatDate } from "@utils/dateUtils";
 import { Global } from "@emotion/react";
-import { AboutWorkModalWrapper } from "@pages/MyPotDetail/components";
-import { WorkModal } from "@constants/categories";
 import { Button } from "@components/index";
 import { WavingHandIcon } from "@assets/svgs";
+import { AboutWorkModal } from "@pages/MyPotDetail/components";
 
 const MyPotCalendar = () => {
   const { potId } = useParams();
@@ -73,18 +72,16 @@ const MyPotCalendar = () => {
 
   return (
     <main css={mainContainer}>
-      <AboutWorkModalWrapper
-        isModalOpen={isModalOpen}
-        activeStatus={null}
-        modalTitle={WorkModal[0]}
+      {isModalOpen && 
+      <AboutWorkModal
+        type="patch"
         taskId={null}
         onClose={() => setIsModalOpen(false)}
-      />
+      />}
       <div css={container}>
         <div css={calendarStyle}>
           <Global styles={dayPickerGlobalStyle} />
           <DayPicker
-
             mode="single"
             selected={date ?? undefined}
             onSelect={(selected) => {

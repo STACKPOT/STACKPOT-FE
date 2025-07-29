@@ -40,7 +40,7 @@ interface MyPotCardProps {
   potModeOfOperation: Participation;
   potStartDate: string;
   potDuration: string;
-  recruitmentRoles: Role[];
+  recruitmentRoles?: string[];
   type: "myPage" | "myPot" | "applied" | "recruiting";
 }
 
@@ -82,7 +82,12 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   };
 
   const handleCardClick = () => {
-    navigate(`${routes.pot.base}/${potId}`);
+    if (type === "myPage") {
+    } else if (type === "myPot") {
+      navigate(`${routes.myPot.task}/${potId}`);
+    } else {
+      navigate(`${routes.pot.base}/${potId}`);
+    }
     window.scrollTo(0, 0);
   };
 
@@ -90,6 +95,7 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
     if (type === "myPage") {
       setShowSummaryModal(potId);
     } else if (type === "myPot") {
+      navigate(`${routes.createFinishedPot}/${potId}`);
     } else if (type === "applied") {
       setShowCancelApplyModal(true);
     }
@@ -121,7 +127,7 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
           </div>
           <p css={contentStyle}>{potContent}</p>
           <div css={partBadgeContainer}>
-            {recruitmentRoles.map((category) => (
+            {recruitmentRoles?.map((category) => (
               <Badge content={category} key={category} />
             ))}
           </div>
