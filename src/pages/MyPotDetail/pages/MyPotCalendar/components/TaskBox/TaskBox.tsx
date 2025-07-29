@@ -1,4 +1,4 @@
-import { DdayBadge, MemberGroup } from "@components/index";
+import { Badge, DdayBadge, MemberGroup } from "@components/index";
 import {
   contentStyle,
   dividerStyle,
@@ -15,6 +15,7 @@ import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
+import { partKoreanNameMap } from "@constants/categories"
 
 interface TaskBoxProps {
   potId: number;
@@ -27,11 +28,12 @@ const TaskBox: React.FC<TaskBoxProps> = ({ potId, task }) => {
     navigate(`${routes.myPot.base}/${routes.task}/${potId}/${task.taskboardId}`);
     window.scrollTo(0, 0);
   }
-
+  console.log(task.participants);
   return (
     <div css={taskBoxStyle} onClick={handleTaskClick}>
       <div css={taskTitleContainer}>
         <DdayBadge days={task.dday} />
+        <Badge content={partKoreanNameMap[task.creatorRole]} />
         <p css={taskTitleStyle}>{task.title}</p>
       </div>
       <p css={contentStyle}>{task.description}</p>

@@ -40,7 +40,7 @@ import {
   fileUploadText,
   fileUploadButton,
 } from "./Chat.style";
-import { DefaultChatIcon, ImageIcon, SelectChatIcon, WavingHandIcon, WorkGroupIcon } from '@assets/svgs';
+import { DefaultChatIcon, ImageIcon, SelectChatIcon, WavingHandIcon } from '@assets/svgs';
 import { roleImages } from '@constants/roleImage';
 import useGetChatRooms from "apis/hooks/chats/useGetChatRooms";
 import useGetChatMessages from "apis/hooks/chats/useGetChatMessages";
@@ -50,7 +50,8 @@ import { format, parseISO } from "date-fns";
 import usePatchChatRoomThumbnails from "apis/hooks/chats/usePatchChatRoomThumbnails";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import { ExplainModal } from "@components/index";
+import { ExplainModal, MemberGroup } from "@components/index";
+import { Role } from "types/role";
 
 
 
@@ -197,7 +198,11 @@ const ChatPage = () => {
           )}
           <div css={chatTopBarStyle}>
             <div css={selectedRoomStyle}>
-              <WorkGroupIcon />
+              {selectedRoom && <MemberGroup
+                memberRoleList={
+                  selectedRoom.participants.map((member) =>
+                    member.role as Role)
+                } />}
               <div css={chatRoomHeaderStyle}>{selectedRoom ? selectedRoom.chatRoomName : "채팅할 팟을 선택해 주세요."}</div>
               <div css={chatRoomTextStyle} onClick={() => setIsModalOpen(true)}><ImageIcon />커버 추가</div>
             </div>
