@@ -11,27 +11,17 @@ import {
   textStyle,
   tabsContainer,
   navLinkStyle,
-  viewId,
-  viewTextStyle,
   iconStyle,
 } from "./MyPotDetail.style";
 import routes from "@constants/routes";
-import { ArrowLeftRoundIcon, ChattingIcon, KaKaoTalkIcon } from "@assets/svgs";
+import { ArrowLeftRoundIcon, ChattingIcon } from "@assets/svgs";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { prevButtonStyle } from "../TaskDetail/TaskDetail.style";
-import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
-import { useState } from "react";
 
 const MyPotDetail: React.FC = () => {
   const { potId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
 
   const tabs = [
     {
@@ -45,8 +35,6 @@ const MyPotDetail: React.FC = () => {
   ];
 
   const potIdNumber = Number(potId);
-
-  const { data: check } = useGetMyPotOwner({ potId: potIdNumber });
 
   const { data } = useGetMyPotTodo({
     potId: potIdNumber,

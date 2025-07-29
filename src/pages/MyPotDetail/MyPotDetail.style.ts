@@ -46,18 +46,3 @@ export const navLinkStyle = (isActive: boolean) => css`
     color: ${theme.color.point.hero};
   }
 `;
-
-export const viewId = css`
-  padding: 0.8rem 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  border-radius: 4px;
-  background: #fee500;
-  cursor: pointer;
-`;
-
-export const viewTextStyle = css`
-  ${theme.font.caption1};
-  color: rgba(0, 0, 0, 0.85);
-`;
