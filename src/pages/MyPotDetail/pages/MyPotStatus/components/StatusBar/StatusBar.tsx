@@ -9,12 +9,23 @@ import {
   highlightStyle,
   titleContainer,
 } from "./StatusBar.style";
+import { useState } from "react";
+import MyTodoModalWrapper from "../MyTodoModalWrapper/MyTodoModalWrapper";
 
-const MyPotStatusHeader = () => {
+const StatusBar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { potId } = useParams<{ potId: string }>();
   const potIdNumber = Number(potId) || 0;
 
   const { data } = useGetMyPotTodo({ potId: potIdNumber, page: 1, size: 1 });
+
+  const handleClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div css={boardStyle}>
@@ -27,9 +38,17 @@ const MyPotStatusHeader = () => {
           있어요.
         </p>
       </div>
-      <Button variant="cta">할 일 추가하기</Button>
+      <Button variant="cta" onClick={handleClick}>
+        할 일 추가하기
+      </Button>
+
+      <MyTodoModalWrapper
+        potId={potIdNumber}
+        isModalOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };
 
-export default MyPotStatusHeader;
+export default StatusBar;
