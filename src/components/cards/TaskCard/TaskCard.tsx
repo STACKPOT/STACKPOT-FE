@@ -19,17 +19,17 @@ import {
   DdayBadge,
   Badge,
   MyFeedDropdown,
+  Modal,
 } from "@components/index";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
-import ConfirmModalWrapper from "@pages/MyPotDetail/components/ConfirmModalWrapper/ConfirmModalWrapper";
 import { useParams } from "react-router-dom";
 import useDeleteMyPotTask from "apis/hooks/myPots/useDeleteMyPotTask";
 import { useState } from "react";
 import { TaskStatus } from "types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import { displayStatus } from "@constants/categories";
-import { AboutWorkModal, Loading } from "@pages/MyPotDetail/components";
+import { AboutWorkModal } from "@pages/MyPotDetail/components";
 
 interface Participant {
   role: string;
@@ -64,28 +64,30 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const { potId } = useParams<{ potId: string }>();
   const potIdNumber = Number(potId);
 
-  const { mutate: deleteTask, isPending } = useDeleteMyPotTask();
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const { mutate: deleteTask } = useDeleteMyPotTask();
   const [modalTitle, setModalTitle] = useState("새로운 업무 추가");
   const [activeStatus, setActiveStatus] = useState<TaskStatus | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {
-    data: task,
-    isLoading,
-    error,
-  } = useGetMyPotTaskDetail({ potId: potIdNumber, taskId: Number(taskId) });
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const { data: task, error } = useGetMyPotTaskDetail({
+    potId: potIdNumber,
+    taskId: Number(taskId),
+  });
 
   const profileImage = roleImages[creatorRole as Role] || "";
 
   const roleList = participants.map((p) => p.role) as Role[];
 
-  const confirmDeleteTask = () => {
-    deleteTask({ potId: potIdNumber, taskId: taskId });
-    setIsConfirmOpen(false);
+  const handleDeleteTask = () => {
+    deleteTask(
+      { potId: potIdNumber, taskId: taskId },
+      { onSuccess: () => setDeleteModal(false) }
+    );
   };
 
-  const handleDeleteTask = () => {
-    setIsConfirmOpen(true);
+  const handleDeleteTaskModal = () => {
+    setDeleteModal(true);
   };
 
   const handleOpenModal = () => {
@@ -97,23 +99,27 @@ const TaskCard: React.FC<TaskCardProps> = ({
     setIsModalOpen(true);
   };
 
-  if (isLoading || isPending) return <Loading />;
   if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
   if (!task?.result) return <p>데이터를 찾을 수 없습니다.</p>;
 
   return (
     <>
-      <ConfirmModalWrapper
-        isModalOpen={isConfirmOpen}
-        onClose={() => setIsConfirmOpen(false)}
-        onConfirm={confirmDeleteTask}
-      />
-
       {isModalOpen && (
         <AboutWorkModal
           type="patch"
           onClose={() => setIsModalOpen(false)}
           taskId={task?.result?.taskboardId}
+        />
+      )}
+      {deleteModal && (
+        <Modal
+          title="업무 내용을 삭제하시겠습니까?"
+          message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
+          confirmType="neg"
+          cancelButton="취소"
+          confirmButton="삭제하기"
+          onCancel={() => setDeleteModal(false)}
+          onConfirm={handleDeleteTask}
         />
       )}
 
@@ -138,7 +144,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
                 topMessage="수정하기"
                 bottomMessage="삭제하기"
                 onTop={handleOpenModal}
-                onBottom={handleDeleteTask}
+                onBottom={handleDeleteTaskModal}
               />
             </div>
           </div>

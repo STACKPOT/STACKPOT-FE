@@ -12,7 +12,9 @@ const usePostFeed = () => {
   return useMutation({
     mutationFn: (params: PostFeedParams) => postFeed(params),
     onSuccess: (response) => {
-      navigate(`${routes.feed.base}/${response.result?.feedId}`);
+      navigate(`${routes.feed.base}/${response.result?.feedId}`, {
+        replace: true,
+      });
       showSnackbar({
         message: "피드가 성공적으로 업로드되었습니다!",
         severity: "success",

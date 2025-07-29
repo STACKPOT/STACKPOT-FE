@@ -21,6 +21,7 @@ const PopularPots = () => {
     page: 1,
     size: 9,
     recruitmentRole: null,
+    onlyMine: false,
   });
 
   const pots = data?.pots ?? [];

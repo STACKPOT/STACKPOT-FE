@@ -27,7 +27,7 @@ export const rightContainer = css`
 `;
 
 export const titleStyle = css`
-  ${theme.font.bodyBold3};
+  ${theme.font.display1};
   color: ${theme.color.base.darkgray};
   white-space: normal;
   word-break: break-word; 
@@ -49,17 +49,27 @@ export const profileContainer = css`
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 1.9rem;
+  gap: 1.6rem;
+`;
+
+export const profileInnerContainer = css`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const profileImgStyle = css`
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
+`;
+
+export const createdDateStyle = css`
+  ${theme.font.caption2};
+  color: ${theme.color.object.hero};
 `;
 
 export const nicknameStyle = css`
-  ${theme.font.caption2};
-  color: ${theme.color.object.assistive};
+  ${theme.font.caption3};
+  color: ${theme.color.base.black};
 `;
 
 export const dateContainer = css`
@@ -71,7 +81,7 @@ export const dateContainer = css`
 
 export const dateStyle = css`
   ${theme.font.caption3};
-  color: ${theme.color.object.assistive};
+  color: ${theme.color.point.hero};
 `;
 
 export const dividerStyle = css`
@@ -92,8 +102,8 @@ export const contentContainerStyle = css`
 `;
 
 export const contentStyle = css`
-  ${theme.font.title1};
-  color: ${theme.color.base.darkgray};
+  ${theme.font.body3};
+  color: ${theme.color.point.gray};
 `;
 
 export const bottomContainer = css`
@@ -128,8 +138,8 @@ export const contributorInner = css`
 `
 
 export const contributorNicknameStyle = css`
-  ${theme.font.caption1};
-  color: ${theme.color.object.assistive};
+  ${theme.font.caption2};
+  color: ${theme.color.base.darkgray};
 `
 
 export const dropdownWrapperStyle = css`
