@@ -9,9 +9,9 @@ import { useParams } from "react-router-dom";
 import { useGetMyPotTask } from "apis/hooks/myPots/useGetMyPotTask";
 import { displayStatus, WorkModal } from "@constants/categories";
 import {
-  MyPotStatusHeader,
   MyPotTodoList,
   Pagination,
+  StatusBar,
   StatusBoard,
   TodoStatusSection,
 } from "./components";
@@ -67,7 +67,7 @@ const MyPotStatusPage: React.FC = () => {
           taskId={null}
         />
       )}
-      <MyPotStatusHeader />
+      <StatusBar />
 
       <div css={containerStyle}>
         <MyPotTodoList currentPage={currentPage} />

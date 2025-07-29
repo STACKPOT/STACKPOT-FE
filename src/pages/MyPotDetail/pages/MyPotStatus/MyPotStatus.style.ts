@@ -1,33 +1,6 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
-export const boardStyle = css`
-  display: flex;
-  padding: 1.6rem 3.2rem;
-  gap: 1.6rem;
-  align-items: flex-start;
-  align-self: stretch;
-  border-radius: 24px;
-  background: ${theme.color.point.alternative};
-`;
-
-export const potIconStyle = css`
-  color: ${theme.color.point.hero};
-`;
-
-export const iconStyle = css`
-  color: ${theme.color.base.white};
-`;
-
-export const boardTextStyle = css`
-  ${theme.font.title1};
-  color: ${theme.color.base.white};
-`;
-
-export const highlightStyle = css`
-  color: ${theme.color.point.navy};
-`;
-
 export const containerStyle = css`
   width: 100%;
   padding: 3.2rem 4.8rem;
