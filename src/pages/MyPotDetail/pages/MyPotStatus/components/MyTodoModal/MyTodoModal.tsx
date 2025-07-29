@@ -25,7 +25,7 @@ interface MyTodoModalProps {
 }
 
 const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
-  // const { showSnackbar } = useSnackbar();
+  const { showSnackbar } = useSnackbar();
 
   const { data } = useGetMyPotTodo({ potId, page: 1, size: 3 });
   const { mutate: updateTasks } = usePatchMyPotTodo();
@@ -36,10 +36,10 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
 
   const handleAddTask = () => {
     if (localTasks.length >= 10) {
-      // showSnackbar({
-      //   message: "할 일은 최대 10개까지 작성 가능합니다.",
-      //   severity: "warning",
-      // });
+      showSnackbar({
+        message: "할 일은 최대 10개까지 작성 가능합니다.",
+        severity: "warning",
+      });
     }
     setLocalTasks([
       ...localTasks,
@@ -109,10 +109,10 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
           onClick={(e) => {
             if (isDisabled) {
               e.preventDefault();
-              // showSnackbar({
-              //   message: "비어있는 todo 는 저장할 수 없습니다.",
-              //   severity: "warning",
-              // });
+              showSnackbar({
+                message: "비어있는 todo 는 저장할 수 없습니다.",
+                severity: "warning",
+              });
             } else {
               handleSaveTasks();
             }
