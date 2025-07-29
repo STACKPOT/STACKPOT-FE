@@ -16,10 +16,9 @@ import {
   iconStyle,
 } from "./MyPotDetail.style";
 import routes from "@constants/routes";
-import { KaKaoTalkIcon } from "@assets/svgs";
+import { ArrowLeftRoundIcon, ChattingIcon, KaKaoTalkIcon } from "@assets/svgs";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { prevButtonStyle } from "../TaskDetail/TaskDetail.style";
-import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
 import { useState } from "react";
 
@@ -64,9 +63,10 @@ const MyPotDetail: React.FC = () => {
       <main css={container}>
         <header css={headerStyle}>
           <button onClick={handlePrev} css={prevButtonStyle}>
-            <ArrowLeftIcon css={iconStyle} />
+            <ArrowLeftRoundIcon css={iconStyle} />
           </button>
-          <div css={textStyle}>{data?.title ?? null}</div>
+          <h2 css={textStyle}>{data?.title ?? null}</h2>
+          <ChattingIcon />
         </header>
         <div css={tabsContainer}>
           {tabs.map((tab) => {
