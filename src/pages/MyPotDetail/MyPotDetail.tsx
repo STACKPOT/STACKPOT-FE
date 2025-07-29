@@ -86,12 +86,6 @@ const MyPotDetail: React.FC = () => {
               </NavLink>
             );
           })}
-          {(check?.result ?? false) && (
-            <button css={viewId} onClick={handleOpenModal} type="button">
-              <KaKaoTalkIcon />
-              <p css={viewTextStyle}>아이디 보기</p>
-            </button>
-          )}
         </div>
         <Outlet />
       </main>

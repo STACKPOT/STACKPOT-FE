@@ -31,7 +31,7 @@ export const iconStyle = css`
 export const tabsContainer = css`
   display: flex;
   align-items: flex-start;
-  gap: 4.8rem;
+  gap: 3.2rem;
   align-self: stretch;
 `;
 
@@ -40,8 +40,8 @@ export const navLinkStyle = (isActive: boolean) => css`
     ? theme.color.point.hero
     : theme.color.interactive.inactive};
   text-decoration: none;
-  transition: color 0.3s ease-out;
-  ${theme.font.bodyBold2};
+  padding: 1.2rem 3rem;
+  ${theme.font.title2};
   &:hover {
     color: ${theme.color.point.hero};
   }
