@@ -17,6 +17,7 @@ import {
 import { inputFieldStyle } from "@pages/MyPotDetail/components/TextInput/TextInput.style";
 import { Todo } from "apis/types/myPot";
 import { useSnackbar } from "providers";
+import { modalOverlayStyle } from "../../MyPotStatus.style";
 
 interface MyTodoModalProps {
   potId: number;
@@ -66,58 +67,60 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
   const isDisabled = localTasks.some((task) => task.content.trim() === "");
 
   return (
-    <div css={container}>
-      <CloseIcon css={cancelIconStyle} onClick={onClose} />
-      <div css={titleContainer}>
-        <p css={titleTextStyle}>나의 할 일</p>
+    <div css={modalOverlayStyle}>
+      <div css={container}>
+        <CloseIcon css={cancelIconStyle} onClick={onClose} />
+        <div css={titleContainer}>
+          <p css={titleTextStyle}>나의 할 일</p>
+          <button
+            css={addTodoButtonStyle}
+            onClick={handleAddTask}
+            disabled={localTasks.length >= 10}
+          >
+            할 일 추가하기
+          </button>
+        </div>
+
+        {localTasks.length === 0 ? (
+          <div css={noneTodoTextContainer}>
+            <p css={noneTodoTextStyle}>
+              {"<할 일 추가> 버튼을 눌러서 작성할 수 있어요."}
+            </p>
+          </div>
+        ) : (
+          <div css={contentContainer}>
+            {localTasks.map((task, index) => (
+              <div key={index} css={eachTodoContainer}>
+                <TodoCheckIcon />
+                <input
+                  type="text"
+                  css={inputFieldStyle}
+                  value={task.content}
+                  onChange={(e) => handleTaskChange(index, e.target.value)}
+                />
+                <DeleteIcon onClick={() => handleDeleteTask(index)} />
+              </div>
+            ))}
+          </div>
+        )}
+
         <button
-          css={addTodoButtonStyle}
-          onClick={handleAddTask}
-          disabled={localTasks.length >= 10}
+          css={saveButtonStyle}
+          onClick={(e) => {
+            if (isDisabled) {
+              e.preventDefault();
+              showSnackbar({
+                message: "비어있는 todo 는 저장할 수 없습니다.",
+                severity: "warning",
+              });
+            } else {
+              handleSaveTasks();
+            }
+          }}
         >
-          할 일 추가하기
+          작성 완료
         </button>
       </div>
-
-      {localTasks.length === 0 ? (
-        <div css={noneTodoTextContainer}>
-          <p css={noneTodoTextStyle}>
-            {"<할 일 추가> 버튼을 눌러서 작성할 수 있어요."}
-          </p>
-        </div>
-      ) : (
-        <div css={contentContainer}>
-          {localTasks.map((task, index) => (
-            <div key={index} css={eachTodoContainer}>
-              <TodoCheckIcon />
-              <input
-                type="text"
-                css={inputFieldStyle}
-                value={task.content}
-                onChange={(e) => handleTaskChange(index, e.target.value)}
-              />
-              <DeleteIcon onClick={() => handleDeleteTask(index)} />
-            </div>
-          ))}
-        </div>
-      )}
-
-      <button
-        css={saveButtonStyle}
-        onClick={(e) => {
-          if (isDisabled) {
-            e.preventDefault();
-            showSnackbar({
-              message: "비어있는 todo 는 저장할 수 없습니다.",
-              severity: "warning",
-            });
-          } else {
-            handleSaveTasks();
-          }
-        }}
-      >
-        작성 완료
-      </button>
     </div>
   );
 };

@@ -10,7 +10,7 @@ import {
   titleContainer,
 } from "./StatusBar.style";
 import { useState } from "react";
-import MyTodoModalWrapper from "../MyTodoModalWrapper/MyTodoModalWrapper";
+import MyTodoModal from "../MyTodoModal/MyTodoModal";
 
 const StatusBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +23,7 @@ const StatusBar = () => {
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = () => {
+  const handleClose = () => {
     setIsModalOpen(false);
   };
 
@@ -41,12 +41,7 @@ const StatusBar = () => {
       <Button variant="cta" onClick={handleClick}>
         할 일 추가하기
       </Button>
-
-      <MyTodoModalWrapper
-        potId={potIdNumber}
-        isModalOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+      {isModalOpen && <MyTodoModal potId={potIdNumber} onClose={handleClose} />}
     </div>
   );
 };
