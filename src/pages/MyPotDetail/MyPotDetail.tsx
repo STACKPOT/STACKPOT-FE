@@ -58,6 +58,11 @@ const MyPotDetail: React.FC = () => {
     navigate(`${routes.myPot.base}`);
   };
 
+  const handleChattingClick = () => {
+    navigate(`${routes.chat}`);
+    //TODO: 해당 채팅방으로 연결
+  };
+
   return (
     <>
       <main css={container}>
@@ -66,7 +71,7 @@ const MyPotDetail: React.FC = () => {
             <ArrowLeftRoundIcon css={iconStyle} />
           </button>
           <h2 css={textStyle}>{data?.title ?? null}</h2>
-          <ChattingIcon />
+          <ChattingIcon onClick={handleChattingClick} />
         </header>
         <div css={tabsContainer}>
           {tabs.map((tab) => {
