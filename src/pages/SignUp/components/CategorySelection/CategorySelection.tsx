@@ -34,7 +34,6 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
           {categories.map((category) => (
             <CategoryButton
               key={category}
-              style="pot"
               selected={selectedCategory === category}
               onClick={() => handleSelectCategory(category)}
             >
