@@ -13,7 +13,7 @@ import {
   textareaStyle,
   titleStyle,
 } from "./FinishedPotForm.style";
-import { AiButton, Button, DatePickerButton, Modal } from "@components/index";
+import { Button, DatePickerButton, Modal } from "@components/index";
 import { PotIcon } from "@assets/svgs";
 import { PatchPotCompleteBody } from "apis/types/pot";
 import dayjs, { Dayjs } from "dayjs";
@@ -21,6 +21,7 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 import useGetPotSummary from "apis/hooks/pots/useGetPotSummary";
 import SummaryLoadingModal from "./SummaryLoadingModal";
+import AiButton from "./AiButton";
 
 interface FinishedPotFormProps {
   potId: number;
