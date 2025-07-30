@@ -23,9 +23,9 @@ import { ko } from "date-fns/locale";
 import "react-day-picker/dist/style.css";
 import { formatDate } from "@utils/dateUtils";
 import { Global } from "@emotion/react";
-import { WorkModal } from "@constants/categories";
 import { Button } from "@components/index";
 import { WavingHandIcon } from "@assets/svgs";
+import { AboutWorkModal } from "@pages/MyPotDetail/components";
 
 const MyPotCalendar = () => {
   const { potId } = useParams();
@@ -72,13 +72,12 @@ const MyPotCalendar = () => {
 
   return (
     <main css={mainContainer}>
-      {/* <AboutWorkModalWrapper
-        isModalOpen={isModalOpen}
-        activeStatus={null}
-        modalTitle={WorkModal[0]}
-        taskId={null}
-        onClose={() => setIsModalOpen(false)}
-      /> */}
+      {isModalOpen &&
+        <AboutWorkModal
+          taskId={null}
+          onClose={() => setIsModalOpen(false)}
+          type={"post"}
+        />}
       <div css={container}>
         <div css={calendarStyle}>
           <Global styles={dayPickerGlobalStyle} />
@@ -111,11 +110,11 @@ const MyPotCalendar = () => {
             <p css={dateStyle}>
               {date
                 ? `${date.getFullYear()}. ${String(
-                    date.getMonth() + 1
-                  ).padStart(2, "0")}. ${String(date.getDate()).padStart(
-                    2,
-                    "0"
-                  )} (${getDayOfWeek(date)})`
+                  date.getMonth() + 1
+                ).padStart(2, "0")}. ${String(date.getDate()).padStart(
+                  2,
+                  "0"
+                )} (${getDayOfWeek(date)})`
                 : ""}
             </p>
             <Button variant="cta" onClick={handleOpenModal}>
