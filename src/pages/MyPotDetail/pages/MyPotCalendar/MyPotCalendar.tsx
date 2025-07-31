@@ -28,9 +28,10 @@ import { WavingHandIcon } from "@assets/svgs";
 import { AboutWorkModal } from "@pages/MyPotDetail/components";
 
 const MyPotCalendar = () => {
-  const { potId } = useParams();
+  const { potId, taskId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const potIdNumber = Number(potId);
+  const taskNumber = Number(taskId);
 
   const [date, setDate] = useState<Date | null>(null);
   const [month, setMonth] = useState<Date>(new Date());
@@ -72,12 +73,14 @@ const MyPotCalendar = () => {
 
   return (
     <main css={mainContainer}>
-      {isModalOpen &&
+      {isModalOpen && (
         <AboutWorkModal
-          taskId={null}
+          taskId={taskNumber}
+          potId={potIdNumber}
           onClose={() => setIsModalOpen(false)}
           type={"post"}
-        />}
+        />
+      )}
       <div css={container}>
         <div css={calendarStyle}>
           <Global styles={dayPickerGlobalStyle} />
@@ -110,11 +113,11 @@ const MyPotCalendar = () => {
             <p css={dateStyle}>
               {date
                 ? `${date.getFullYear()}. ${String(
-                  date.getMonth() + 1
-                ).padStart(2, "0")}. ${String(date.getDate()).padStart(
-                  2,
-                  "0"
-                )} (${getDayOfWeek(date)})`
+                    date.getMonth() + 1
+                  ).padStart(2, "0")}. ${String(date.getDate()).padStart(
+                    2,
+                    "0"
+                  )} (${getDayOfWeek(date)})`
                 : ""}
             </p>
             <Button variant="cta" onClick={handleOpenModal}>

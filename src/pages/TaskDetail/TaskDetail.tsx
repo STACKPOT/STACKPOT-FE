@@ -141,6 +141,7 @@ const TaskDetailPage: React.FC = () => {
           type="patch"
           onClose={() => setIsModalOpen(false)}
           taskId={task?.result?.taskboardId}
+          potId={potIdNumber}
         />
       )}
       {deleteModal && (
@@ -160,7 +161,6 @@ const TaskDetailPage: React.FC = () => {
         onConfirm={confirmChangeModal}
         initialStatus={displayStatus[task.result.status]}
       />
-
 
       <div css={titleContainer}>
         <div css={leftContainer}>

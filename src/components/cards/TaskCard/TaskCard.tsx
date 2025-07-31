@@ -109,6 +109,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
           type="patch"
           onClose={() => setIsModalOpen(false)}
           taskId={task?.result?.taskboardId}
+          potId={potIdNumber}
         />
       )}
       {deleteModal && (
