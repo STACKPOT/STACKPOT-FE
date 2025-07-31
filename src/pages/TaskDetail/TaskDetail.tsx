@@ -140,7 +140,7 @@ const TaskDetailPage: React.FC = () => {
         <AboutWorkModal
           type="patch"
           onClose={() => setIsModalOpen(false)}
-          taskId={task?.result?.taskboardId}
+          taskId={task.result.taskboardId}
           potId={potIdNumber}
         />
       )}
