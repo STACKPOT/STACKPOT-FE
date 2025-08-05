@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import {
   containerStyle,
+  iconStyle,
   statusBoardContainer,
   statusBoardStyle,
   textStyle,
@@ -20,7 +21,6 @@ import {
   StatusBar,
   TodoStatusSection,
 } from "./components";
-import { iconStyle } from "@pages/Home/Home.style";
 import { PotIcon } from "@assets/svgs";
 import { Button } from "@components/index";
 
