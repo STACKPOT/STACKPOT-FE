@@ -3,7 +3,6 @@ import {
   containerStyle,
   statusBoardContainer,
   statusBoardStyle,
-  statusTextStyle,
   textStyle,
   toDoGirdContainer,
 } from "./MyPotStatus.style";

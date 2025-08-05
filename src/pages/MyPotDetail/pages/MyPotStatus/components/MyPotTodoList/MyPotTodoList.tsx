@@ -3,7 +3,7 @@ import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { User } from "apis/types/myPot";
 import { Role } from "types/role";
 import MyPotTodoCard from "../MyPotTodoCard/MyPotTodoCard";
-import { gridContainerStyle } from "../../MyPotStatus.style";
+import { gridContainerStyle } from "./MyPotTodoList.style";
 
 interface MyPotTodoListProps {
   currentPage: number;

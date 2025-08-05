@@ -3,22 +3,9 @@ import theme from "@styles/theme";
 
 export const containerStyle = css`
   width: 100%;
-  padding: 3.2rem 4.8rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  border-radius: 24px;
-  border: 0.1rem solid ${theme.color.object.alternative};
-  background: ${theme.color.base.white};
-  box-shadow: 0 4px 12px 0 rgba(13, 10, 44, 0.06);
-`;
-
-export const gridContainerStyle = css`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  height: 23.9rem;
-  padding: 0 6.4rem;
+  gap: 2.4rem;
 `;
 
 export const paginationContainer = css`

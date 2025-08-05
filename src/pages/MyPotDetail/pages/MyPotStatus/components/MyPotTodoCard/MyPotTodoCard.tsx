@@ -3,7 +3,6 @@ import {
   cardStyle,
   nicknameStyle,
   profileImageStyle,
-  statusContainer,
   todoContainer,
   todoListContainer,
   todoTextStyle,
@@ -47,32 +46,30 @@ const MyPotTodoCard: React.FC<MyPotTodoCardProps> = ({
   };
 
   return (
-    <div css={cardStyle}>
+    <div css={cardStyle(isFirst)}>
       <img
         css={profileImageStyle}
         src={roleImages[userRole] || roleImages.UNKNOWN}
         alt="프로필"
         onClick={handleProfileClick}
       />
-      <div css={nicknameStyle}>
-        <p onClick={handleProfileClick}>{nickname}</p>
-      </div>
-      <div css={statusContainer}>
-        <div css={todoListContainer}>
-          {(todos ?? []).map(
-            (todo) =>
-              todo.todoId !== null && (
-                <div css={todoContainer} key={todo.todoId}>
-                  <CheckBox
-                    selected={todo.status === "COMPLETED"}
-                    onSelect={() => handleSelectTodo(todo.todoId!)}
-                    disabled={!isFirst || currentPage !== 1}
-                  />
-                  <p css={todoTextStyle}>{todo.content}</p>
-                </div>
-              )
-          )}
-        </div>
+      <p onClick={handleProfileClick} css={nicknameStyle}>
+        {nickname}
+      </p>
+      <div css={todoListContainer}>
+        {todos?.map(
+          (todo) =>
+            todo.todoId !== null && (
+              <div css={todoContainer} key={todo.todoId}>
+                <CheckBox
+                  selected={todo.status === "COMPLETED"}
+                  onSelect={() => handleSelectTodo(todo.todoId!)}
+                  disabled={!isFirst || currentPage !== 1}
+                />
+                <p css={todoTextStyle}>{todo.content}</p>
+              </div>
+            )
+        )}
       </div>
     </div>
   );
