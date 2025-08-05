@@ -1,42 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   container,
   contentTitle,
   contentStyle,
   iconStyle,
   buttonContainer,
+  backIconStyle,
 } from "./WritePost.style";
-import { PotIcon } from "@assets/svgs";
+import { LeftIcon, PotIcon } from "@assets/svgs";
 import { Button, Modal, PostForm } from "@components/index";
-import { useBlocker } from "react-router-dom";
+import { useBlocker, useNavigate } from "react-router-dom";
 import usePostFeed from "apis/hooks/feeds/usePostFeed";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { PostFeedParams } from "apis/types/feed";
 
 const WritePost: React.FC = () => {
-  const [isFilled, setIsFilled] = useState(false);
+  const navigate = useNavigate();
 
   const methods = useForm<PostFeedParams>({
     mode: "onChange",
     defaultValues: {
       title: "",
       content: "",
-      category: "ALL",
+      categories: [],
+      interests: [],
+      seriesId: null,
     },
   });
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { isValid },
-  } = methods;
+  const { handleSubmit, formState, watch } = methods;
 
   const postFeedMutation = usePostFeed();
 
   const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    return isFilled && currentLocation.pathname !== nextLocation.pathname;
+    return (
+      formState.isDirty && currentLocation.pathname !== nextLocation.pathname
+    );
   });
 
   const onSubmit: SubmitHandler<PostFeedParams> = (data) => {
@@ -49,16 +48,21 @@ const WritePost: React.FC = () => {
         <FormProvider {...methods}>
           <form css={contentStyle} onSubmit={handleSubmit(onSubmit)}>
             <div css={contentTitle}>
+              <LeftIcon css={backIconStyle} onClick={() => navigate(-1)} />
               피드 작성하기
               <PotIcon css={iconStyle} />
               <div css={buttonContainer}>
-                <Button variant="action" type="submit" disabled={!isValid}>
+                <Button
+                  variant="action"
+                  type="submit"
+                  disabled={!formState.isValid}
+                >
                   피드 업로드
                 </Button>
               </div>
             </div>
 
-            <PostForm register={register} watch={watch} setValue={setValue} />
+            <PostForm />
           </form>
         </FormProvider>
       </div>
@@ -67,6 +71,8 @@ const WritePost: React.FC = () => {
         <Modal
           title="페이지를 나가시겠어요?"
           message="입력한 내용을 처음부터 시작해야 해요."
+          confirmButton="나가기"
+          cancelButton="취소"
           onConfirm={blocker.proceed}
           onCancel={blocker.reset}
         />

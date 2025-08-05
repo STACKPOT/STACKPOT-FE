@@ -14,14 +14,14 @@ export const taskTitleContainer = css`
 `;
 
 export const taskTitleStyle = css`
-  ${theme.font.bodyBold1}
+  ${theme.font.caption2}
   color: ${theme.color.base.darkgray}
 `;
 
 export const contentStyle = css`
-  ${theme.font.caption1};
+  ${theme.font.body2};
   color: ${theme.color.object.hero};
-  height: 2.7rem;
+  // height: 2.7rem;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -48,8 +48,8 @@ export const profileStyle = css`
   border-radius: 50%;
 `
 export const nickNameStyle = css`
-  ${theme.font.caption1}
-  color: ${theme.color.object.assistive}
+  ${theme.font.caption2}
+  color: ${theme.color.object.hero}
 `;
 
 export const dividerStyle = css`

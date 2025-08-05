@@ -1,8 +1,7 @@
 import MyTodoModal from "./MyTodoModal/MyTodoModal";
 import MyPotTodoCard from "./MyPotTodoCard/MyPotTodoCard";
 import MyPotTodoList from "./MyPotTodoList/MyPotTodoList";
-import MyPotStatusHeader from "./MyPotStatusHeader/MyPotStatusHeader";
-import MyTodoModalWrapper from "./MyTodoModalWrapper/MyTodoModalWrapper";
+import StatusBar from "./StatusBar/StatusBar";
 import Pagination from "./Pagination/Pagination";
 import StatusBoard from "./Statusboard/StatusBoard";
 import TaskCardList from "./TaskCardList/TaskCardList";
@@ -12,10 +11,9 @@ export {
   MyTodoModal,
   MyPotTodoCard,
   MyPotTodoList,
-  MyPotStatusHeader,
-  MyTodoModalWrapper,
+  StatusBar,
   Pagination,
   StatusBoard,
   TaskCardList,
   TodoStatusSection,
-}
+};

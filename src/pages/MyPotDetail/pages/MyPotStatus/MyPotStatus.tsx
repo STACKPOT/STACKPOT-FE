@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { containerStyle, toDoGirdContainer } from "./MyPotStatus.style";
-import { AboutWorkModal, AboutWorkModalWrapper } from "../../components/index";
+import { AboutWorkModal } from "../../components/index";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { APITaskStatus, TaskStatus } from "types/taskStatus";
@@ -9,9 +9,9 @@ import { useParams } from "react-router-dom";
 import { useGetMyPotTask } from "apis/hooks/myPots/useGetMyPotTask";
 import { displayStatus, WorkModal } from "@constants/categories";
 import {
-  MyPotStatusHeader,
   MyPotTodoList,
   Pagination,
+  StatusBar,
   StatusBoard,
   TodoStatusSection,
 } from "./components";
@@ -22,10 +22,11 @@ const MyPotStatusPage: React.FC = () => {
   const [activeStatus, setActiveStatus] = useState<TaskStatus>(null);
   const [modalTitle, setModalTitle] = useState<string>(WorkModal[0]);
 
-  const { potId } = useParams<{ potId: string }>();
+  const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
 
   const potIdNumber = Number(potId);
+  const taskIdNumber = Number(taskId);
 
   const { data } = useGetMyPotTodo({
     potId: potIdNumber,
@@ -64,10 +65,11 @@ const MyPotStatusPage: React.FC = () => {
         <AboutWorkModal
           type="post"
           onClose={() => setIsModalOpen(false)}
-          taskId={null}
+          potId={potIdNumber}
+          taskId={taskIdNumber}
         />
       )}
-      <MyPotStatusHeader />
+      <StatusBar />
 
       <div css={containerStyle}>
         <MyPotTodoList currentPage={currentPage} />

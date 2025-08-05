@@ -41,7 +41,7 @@ export const ctaButtonStyle = css`
   border-radius: 32px;
   ${theme.font.caption2};
   transition: background-color 0.2s ease-out;
-  &:hover{
+  &:hover {
     color: ${theme.color.point.alternative};
     background-color: ${theme.color.accent.blueBg};
   }
@@ -58,8 +58,10 @@ export const actionButtonStyle = (actionType?: "basic" | "neg" | "alt") => css`
   padding: 1.4rem 1.9rem;
   border-radius: 8px;
   ${theme.font.caption3};
-  ${(actionType === "neg" && negButtonStyle) || (actionType === "alt" && altButtonStlye)};
-  &:disabled{
+  white-space: pre;
+  ${(actionType === "neg" && negButtonStyle) ||
+  (actionType === "alt" && altButtonStlye)};
+  &:disabled {
     background-color: ${theme.color.object.alternative};
     color: ${theme.color.object.hero};
   }

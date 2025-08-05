@@ -14,48 +14,35 @@ export const headerStyle = css`
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 1.6rem;
+  gap: 0.8rem;
 `;
 
 export const textStyle = css`
-  ${theme.font.bodyBold2};
+  ${theme.font.title3};
   color: ${theme.color.point.hero};
 `;
 
 export const iconStyle = css`
-  width: 2.4rem;
-  height: 2.4rem;
-  color: ${theme.color.object.assistive};
+  width: 4rem;
+  height: 4rem;
+  color: ${theme.color.object.hero};
 `;
 
 export const tabsContainer = css`
   display: flex;
   align-items: flex-start;
-  gap: 4.8rem;
+  gap: 3.2rem;
   align-self: stretch;
 `;
 
 export const navLinkStyle = (isActive: boolean) => css`
-  color: ${isActive ? theme.color.point.hero : theme.color.interactive.inactive};
+  color: ${isActive
+    ? theme.color.point.hero
+    : theme.color.interactive.inactive};
   text-decoration: none;
-  transition: color 0.3s ease-out;
-  ${theme.font.bodyBold2};
+  padding: 1.2rem 3rem;
+  ${theme.font.title2};
   &:hover {
     color: ${theme.color.point.hero};
   }
-`;
-
-export const viewId = css`
-  padding: 0.8rem 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  border-radius: 4px;
-  background: #FEE500;
-  cursor: pointer;
-`;
-
-export const viewTextStyle = css`
-  ${theme.font.caption1};
-  color: rgba(0, 0, 0, 0.85);
 `;
