@@ -210,3 +210,7 @@ export interface PatchPotCompleteBody {
   potLan: string;
   potSummary: string;
 }
+
+export interface PatchDescriptionBody {
+  userDescription: string;
+}
