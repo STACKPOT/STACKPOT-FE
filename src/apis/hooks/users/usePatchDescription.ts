@@ -20,7 +20,7 @@ const usePatchDescription = () => {
     onError: () => {
       showSnackbar({
         message: "저장에 실패했습니다.",
-        severity: "success",
+        severity: "error",
       });
     },
   });
