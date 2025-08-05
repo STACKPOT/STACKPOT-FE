@@ -45,18 +45,6 @@ export const paginationTextStyle = css`
   color: ${theme.color.object.assistive};
 `;
 
-export const statusBoardContainer = css`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const statusBoardStyle = css`
-  gap: 1.6rem;
-  display: flex;
-  align-items: center;
-`;
 
 export const statusTextStyle = css`
   ${theme.font.title1};
