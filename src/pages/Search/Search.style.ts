@@ -6,7 +6,6 @@ export const containerStyle = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3.2rem;
 `;
 
 export const textContainerStyle = css`
@@ -14,16 +13,18 @@ export const textContainerStyle = css`
   gap: 1.6rem;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0.8rem;
 `;
 
 export const titleStyle = css`
-  ${theme.font.bodyBold2};
-  color: ${theme.color.base.darkgray};
+  ${theme.font.title2};
+  color: ${theme.color.point.gray};
 `;
 
 export const subtitleStyle = css`
-  ${theme.font.caption3};
+  ${theme.font.body3};
   color: ${theme.color.object.hero};
+  margin-bottom: 3.2rem;
 `;
 
 export const iconStyle = css`
