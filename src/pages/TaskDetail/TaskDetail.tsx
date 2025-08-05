@@ -66,7 +66,6 @@ const TaskDetailPage: React.FC = () => {
     taskId: taskIdNumber,
   });
 
-  console.log(task);
   const { mutate: deleteTask, isPending: isDeletePending } =
     useDeleteMyPotTask();
   const { mutate: patchStatus, isPending: isStatusPending } =
