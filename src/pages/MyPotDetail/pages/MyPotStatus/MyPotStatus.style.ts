@@ -8,13 +8,6 @@ export const containerStyle = css`
   gap: 2.4rem;
 `;
 
-export const paginationContainer = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2.4rem;
-`;
-
 export const paginationButton = css`
   background: ${theme.color.object.normal};
   border-radius: 4px;
@@ -25,11 +18,6 @@ export const paginationButton = css`
     cursor: not-allowed;
     opacity: 0.5;
   }
-`;
-
-export const paginationTextStyle = css`
-  ${theme.font.body2};
-  color: ${theme.color.object.assistive};
 `;
 
 export const statusTextStyle = css`
