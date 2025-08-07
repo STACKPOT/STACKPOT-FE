@@ -83,7 +83,7 @@ const PotForm: React.FC<PotFormProps> = ({
       })
     } else if (new Date(potStartDate) > new Date(potEndDate)) {
       showSnackbar({
-        message: "모집 시작 날짜가 모집 마감 날짜 보다 이후일 수 없습니다.",
+        message: "팟 시작일이 팟 종료일보다 이후일 수 없습니다.",
         severity: "warning"
       })
     } else {
