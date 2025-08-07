@@ -18,12 +18,11 @@ interface PotFormProps {
 export interface PotFormData {
   potName: string;
   potLan: string;
-  potDuration: string;
   potModeOfOperation: Participation;
   potContent: string;
   potStartDate: string;
   potEndDate: string;
-  recruitmentDeadline: string;
+  potRecruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetail[];
   recruitingMembers: Record<Role, number>;
   potRole: Role;
@@ -41,12 +40,11 @@ const PotForm: React.FC<PotFormProps> = ({
     defaultValues: {
       potName: "",
       potLan: "",
-      potDuration: undefined,
       potModeOfOperation: undefined,
       potContent: "",
       potStartDate: dayjs().format("YYYY-MM-DD"),
       potEndDate: dayjs().format("YYYY-MM-DD"),
-      recruitmentDeadline: dayjs().format("YYYY-MM-DD"),
+      potRecruitmentDeadline: dayjs().format("YYYY-MM-DD"),
       recruitmentDetails: undefined,
       recruitingMembers: undefined,
       potRole: undefined,
@@ -59,13 +57,12 @@ const PotForm: React.FC<PotFormProps> = ({
     trigger,
   } = methods;
 
-  const [potModeOfOperation, potDuration, potStartDate, potEndDate, recruitmentDeadline, potRole] =
+  const [potModeOfOperation, potStartDate, potEndDate, potRecruitmentDeadline, potRole] =
     watch([
       "potModeOfOperation",
-      "potDuration",
       "potStartDate",
       "potEndDate",
-      "recruitmentDeadline",
+      "potRecruitmentDeadline",
       "potRole",
     ]);
 
@@ -73,20 +70,20 @@ const PotForm: React.FC<PotFormProps> = ({
     e.preventDefault();
 
     const isFormValid = await trigger();
-    if (!isFormValid || !potDuration || !potModeOfOperation || !potStartDate || !potEndDate || !recruitmentDeadline || !potRole) {
+    if (!isFormValid || !potModeOfOperation || !potStartDate || !potEndDate || !potRecruitmentDeadline || !potRole) {
       showSnackbar({
         message: "비어있는 항목이 있습니다. 확인해주세요",
         severity: "warning"
       });
     }
-    else if (new Date(recruitmentDeadline) > new Date(potStartDate)) {
+    else if (new Date(potRecruitmentDeadline) > new Date(potStartDate)) {
       showSnackbar({
         message: "모집 마감 날짜가 팟 시작일 날짜 보다 이후일 수 없습니다.",
         severity: "warning"
       })
     } else if (new Date(potStartDate) > new Date(potEndDate)) {
       showSnackbar({
-        message: "모집 마감 날짜가 팟 시작일 날짜 보다 이후일 수 없습니다.",
+        message: "팟 시작일이 팟 종료일보다 이후일 수 없습니다.",
         severity: "warning"
       })
     } else {
@@ -98,7 +95,6 @@ const PotForm: React.FC<PotFormProps> = ({
     if (potData) {
       setValue("potName", potData.potName);
       setValue("potLan", potData.potLan);
-      setValue("potDuration", potData.potDuration);
       setValue(
         "potModeOfOperation",
         participationMap[potData.potModeOfOperation]
@@ -107,8 +103,8 @@ const PotForm: React.FC<PotFormProps> = ({
       setValue("potStartDate", potData.potStartDate.split(". ").join("-"));
       setValue("potEndDate", potData.potEndDate.split(". ").join("-"));
       setValue(
-        "recruitmentDeadline",
-        potData.recruitmentDeadline.split(". ").join("-")
+        "potRecruitmentDeadline",
+        potData.potRecruitmentDeadline.split(". ").join("-")
       );
       setValue(
         "recruitmentDetails",

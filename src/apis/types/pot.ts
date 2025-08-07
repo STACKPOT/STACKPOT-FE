@@ -4,14 +4,13 @@ import { Role } from "types/role";
 export interface PostPotParams {
   potName: string;
   potStartDate: string;
-  potEndDate?: string;
-  potDuration: string;
+  potEndDate: string;
   potLan: string;
   potContent: string;
   potStatus?: PotStatus;
   potModeOfOperation: Participation;
   potSummary?: string;
-  recruitmentDeadline: string;
+  potRecruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetail[];
 }
 
@@ -24,13 +23,12 @@ export interface PostPotResponse {
   potName: string;
   potStartDate: string;
   potEndDate: string;
-  potDuration: string;
   potLan: string;
   potContent: string;
   potStatus?: PotStatus;
   potModeOfOperation: Participation;
   potSummary: string;
-  recruitmentDeadline: string;
+  potRecruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetailResponse;
 }
 export interface RecruitmentDetailResponse {
@@ -95,7 +93,7 @@ export interface PotDetail {
   applied: boolean;
   potModeOfOperation: Participation;
   potContent: string;
-  recruitmentDeadline: string;
+  potRecruitmentDeadline: string;
   recruitmentDetails: string;
   recruitingMembers: Record<Role, number>;
   owner: boolean;
