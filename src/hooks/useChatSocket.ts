@@ -14,6 +14,7 @@ export const useChatSocket = (
 ) => {
   const clientRef = useRef<any>(null);
   const [connected, setConnected] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'open' | 'closed' | 'error'>('closed');
   const accessToken = localStorage.getItem('accessToken');
   const { mutate } = usePatchChatRoomJoin();
 
@@ -35,25 +36,33 @@ export const useChatSocket = (
         onReceive(parsed);
       });
       setConnected(true);
+      setConnectionStatus('open');
     };
 
     client.onStompError = (frame) => {
       console.error("STOMP error:", frame);
       setConnected(false);
+      setConnectionStatus('error');
     };
     client.onWebSocketClose = (event) => {
       console.error("WebSocket closed", event);
+      setConnectionStatus('closed');
     };
 
     client.onWebSocketError = (event) => {
       console.error("WebSocket error", event);
+      setConnectionStatus('error');
     };
+    setConnectionStatus('connecting');
     client.activate();
 
     clientRef.current = client;
 
     return () => {
-      client.disconnect(() => setConnected(false));
+      client.disconnect(() => {
+        setConnected(false);
+        setConnectionStatus('closed');
+      });
     };
   }, [chatRoomId, accessToken]);
 
@@ -66,5 +75,6 @@ export const useChatSocket = (
   return {
     sendMessage,
     connected,
+    connectionStatus,
   };
 };

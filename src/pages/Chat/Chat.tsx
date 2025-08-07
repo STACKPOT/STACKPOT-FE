@@ -158,7 +158,7 @@ const ChatPage = () => {
   }, [hasPreviousPage, isFetchingPreviousPage, fetchPreviousPage]);
 
 
-  const { sendMessage, connected } = useChatSocket(
+  const { sendMessage, connected, connectionStatus } = useChatSocket(
     selectedRoomId,
     (msg: ChatMessages) => {
       setSocketMessages((prev) => [...prev, msg]);
@@ -277,11 +277,24 @@ const ChatPage = () => {
           <div css={inputContainerStyle}>
             <textarea
               css={textAreaStyle}
-              placeholder="메시지를 입력해 보세요."
+              placeholder={
+                connectionStatus === 'connecting'
+                  ? '연결 중입니다...'
+                  : connectionStatus === 'error'
+                    ? '연결 오류 - 새로고침 해주세요'
+                    : '메시지를 입력해 보세요.'
+              }
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
+              disabled={connectionStatus !== 'open'}
             />
-            <button css={sendButtonStyle} onClick={handleSendClick} disabled={!connected}>전송</button>
+            <button
+              css={sendButtonStyle}
+              onClick={handleSendClick}
+              disabled={connectionStatus !== 'open' || !inputValue.trim()}
+            >
+              전송
+            </button>
           </div>
         </div>
       </div >
