@@ -21,7 +21,7 @@ const useGetChatMessages = ({ chatRoomId, size = 20 }: { chatRoomId: number; siz
         ? { cursor: String(prev), direction: 'prev' }
         : undefined;
     },
-    enabled: chatRoomId !== 0,
+    enabled: !!chatRoomId,
   });
 };
 

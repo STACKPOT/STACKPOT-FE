@@ -25,7 +25,7 @@ import { Role } from "types/role";
 type SignInFormData = {
   kakaoId: string;
   role: Role;
-  interest: string;
+  interest: string[];
 };
 
 const SignUp = () => {
@@ -37,7 +37,7 @@ const SignUp = () => {
     defaultValues: {
       kakaoId: "",
       role: "UNKNOWN" as Role,
-      interest: "",
+      interest: [],
       contractsAgreed: false,
     },
   });
@@ -59,6 +59,7 @@ const SignUp = () => {
   ]);
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
+    console.log(data);
     mutate(data, {
       onSuccess: (response) => {
         setResponseData(response.result ?? null);
