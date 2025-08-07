@@ -1,5 +1,4 @@
 import {
-  apiGet,
   authApiDelete,
   authApiGet,
   authApiPatch,
@@ -34,8 +33,14 @@ export const GetPots = async ({
   page,
   size,
   recruitmentRole,
+  onlyMine,
 }: GetPotsParams) => {
-  return apiGet<PotsResponse>("pots", { page, size, recruitmentRole });
+  return authApiGet<PotsResponse>("pots", {
+    page,
+    size,
+    recruitmentRole,
+    onlyMine,
+  });
 };
 
 export const GetPotsApply = async () => {

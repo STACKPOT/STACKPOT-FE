@@ -1,24 +1,32 @@
-import { useState } from "react";
 import { buttonStyle, iconStyle, textStyle } from "./PostButton.style";
 import { FillLikeIcon, FillSaveIcon, LikeIcon, SaveIcon } from "@assets/svgs";
+import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
 
 interface PostButtonProps {
   postType: "like" | "save";
-  initialState: boolean;
+  isToggled: boolean;
+  id: number;
 }
 
-const PostButton: React.FC<PostButtonProps> = ({ postType, initialState }) => {
-  const [isToggle, setIsToggle] = useState(initialState);
-  const CurrentIcon = postType === "like" ? (isToggle ? FillLikeIcon : LikeIcon) : (isToggle ? FillSaveIcon : SaveIcon);
+const PostButton: React.FC<PostButtonProps> = ({ postType, isToggled, id }) => {
+  const CurrentIcon =
+    postType === "like"
+      ? isToggled
+        ? FillLikeIcon
+        : LikeIcon
+      : isToggled
+      ? FillSaveIcon
+      : SaveIcon;
+
+  const { mutate: likeFeed } = usePostFeedLike();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (postType === "like") {
-      // 공감 post api
-      setIsToggle(!isToggle);
+      likeFeed(id);
     } else {
       // 저장하기 post api
-      setIsToggle(!isToggle);
+      //setIsToggle(!isToggled);
     }
   };
 
@@ -27,6 +35,6 @@ const PostButton: React.FC<PostButtonProps> = ({ postType, initialState }) => {
       <p css={textStyle}>{postType === "like" ? "공감" : "저장하기"}</p>
       <CurrentIcon css={iconStyle} />
     </button>
-  )
-}
+  );
+};
 export default PostButton;

@@ -17,6 +17,8 @@ import {
 import { AddIcon, SearchBlueIcon } from "@assets/svgs";
 import { useState } from "react";
 import MDEditor from '@uiw/react-md-editor';
+import SeriesModal from "../SeriesModal/SeriesModal";
+import usePatchDescription from "apis/hooks/users/usePatchDescription";
 
 type FeedPost = {
   writer: string;
@@ -46,20 +48,36 @@ type Pot = {
 
 const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const mockSeries = [
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isSeriesModalOpen, setIsSeriesModalOpen] = useState(false);
+  const [mockSeries, setMockSeries] = useState([
     { label: "전체보기" },
     { label: "시리즈1" },
     { label: "개발 공부" },
     { label: "동아리 프로젝트" },
     { label: "면접 후기" },
-  ];
+  ]);
+  const [seriesList, setSeriesList] = useState(mockSeries);
+
+  const filteredPosts = posts.filter((post) =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
       <div css={feedHeaderContainer}>
         <div css={feedCategoryButtonGroup}>
-          <button css={feedCategoryAddButton}><AddIcon /></button>
-          {mockSeries.map(({ label }, index) => (
+          <button
+            css={feedCategoryAddButton}
+            onClick={() => {
+              setMockSeries(seriesList);
+              setIsSeriesModalOpen(true);
+            }}
+          >
+            <AddIcon />
+          </button>
+          {seriesList.map(({ label }, index) => (
             <button
               key={label}
               css={feedCategoryButton(selectedIndex === index)}
@@ -70,11 +88,15 @@ const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
           ))}
         </div>
         <div css={feedSearchBox}>
-          <input placeholder="검색어를 입력해주세요." />
+          <input
+            placeholder="검색어를 입력해주세요."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <span role="img" aria-label="search"><SearchBlueIcon /></span>
         </div>
       </div>
-      {posts.map((post) => (
+      {filteredPosts.map((post) => (
         <PostCard
           nickname={post.writer}
           role={post.writerRole}
@@ -92,6 +114,13 @@ const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
           isMyPost={true}
         />
       ))}
+      {isSeriesModalOpen && (
+        <SeriesModal
+          defaultSeriesList={seriesList}
+          onConfirm={(updated) => setSeriesList(updated)}
+          onClose={() => setIsSeriesModalOpen(false)}
+        />
+      )}
     </>
   );
 };
@@ -138,26 +167,37 @@ const EmptyFeedFallback = ({ onWrite }: { onWrite: () => void }) => (
   </div>
 );
 
-const IntroductionContent = ({ introduction }: { introduction: { title: string, body: string } }) => {
+const IntroductionContent = ({ userDescription }: { userDescription: string }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editTitle, setEditTitle] = useState(introduction?.title ?? "");
-  const [editBody, setEditBody] = useState(introduction?.body ?? "");
-
+  const [prevBody, setPrevBody] = useState(userDescription ?? "");
+  const [editBody, setEditBody] = useState(userDescription ?? "");
+  const { mutate } = usePatchDescription();
   const handleWriteIntroduction = () => {
-    console.log("소개 작성");
+    setIsEditing(true);
   };
 
   const handleEditIntroduction = () => {
     setIsEditing(true);
   };
 
+
   const handleSaveIntroduction = () => {
-    console.log("저장할 제목:", editTitle);
-    console.log("저장할 내용:", editBody);
-    setIsEditing(false);
+    setPrevBody(editBody);
+    mutate(
+      { userDescription: editBody },
+      {
+        onSuccess: () => {
+          setIsEditing(false);
+        },
+        onError: () => {
+          setEditBody(prevBody);
+          setIsEditing(true);
+        },
+      }
+    );
   };
 
-  if (!introduction) {
+  if (!editBody && !isEditing) {
     return <EmptyFeedFallback onWrite={handleWriteIntroduction} />;
   }
 
@@ -174,12 +214,12 @@ const IntroductionContent = ({ introduction }: { introduction: { title: string, 
 
       {isEditing ? (
         <div css={introductionWrapper(isEditing)}>
-          <textarea
+          {/* <textarea
             css={introductionTitleStyle}
             value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
             placeholder="제목을 입력하세요"
-          />
+          /> */}
           <div >
             <MDEditor
               value={editBody}
@@ -191,9 +231,9 @@ const IntroductionContent = ({ introduction }: { introduction: { title: string, 
         </div>
       ) : (
         <div css={introductionWrapper(isEditing)}>
-          <p css={introductionTitleStyle}>
+          {/* <p css={introductionTitleStyle}>
             {editTitle}
-          </p>
+          </p> */}
           <MDEditor.Markdown source={editBody} css={introductionBodyStyle} />
         </div>
       )}
@@ -208,7 +248,7 @@ const MyPageContent = ({ contentType, data }: { contentType: 'feed' | 'pot' | 'i
     case 'pot':
       return <PotContent pots={data.completedPots} />;
     default:
-      return <IntroductionContent introduction={data.introduction} />;
+      return <IntroductionContent userDescription={data.userDescription} />;
   }
 };
 

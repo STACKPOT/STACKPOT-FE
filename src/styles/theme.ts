@@ -27,7 +27,7 @@ const theme = {
       negative: "#DE3412",
     },
     accent: {
-      blueBg: "#D3E8FD",
+      blueBg: "#D3EBFD",
       greenBg: "#EAF6EC",
       pinkBg: "#FBEBF0",
       purpleBg: "#EBE2FF",
@@ -36,7 +36,7 @@ const theme = {
       greenFg: "#228738",
       pinkFg: "#D65C66",
       purpleFg: "#602D95",
-      yellowFg: "#D65C66",
+      yellowFg: "#774F00",
       redFg: "#8A240F",
     },
     border: {

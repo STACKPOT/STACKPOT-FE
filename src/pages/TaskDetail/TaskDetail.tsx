@@ -15,17 +15,21 @@ import {
   contentContainerStyle,
   bottomContainer,
   contributorContainer,
-  contributorCard,
-  contributorInner,
-  contributorNicknameStyle,
   iconStyle,
   prevButtonStyle,
   dropdownWrapperStyle,
-  profileImageStyle,
-  arrowIconStyle
+  arrowIconStyle,
+  profileInnerContainer,
+  createdDateStyle,
 } from "./TaskDetail.style";
-import { container } from "../MyPotDetail/MyPotDetail.style"
-import { DdayBadge, StateBadge, MyFeedDropdown } from "@components/index";
+import { container } from "../MyPotDetail/MyPotDetail.style";
+import {
+  DdayBadge,
+  StateBadge,
+  MyFeedDropdown,
+  MemberCard,
+  Modal,
+} from "@components/index";
 import { CalendarIcon, PotIcon } from "@assets/svgs";
 import { ArrowLeftIcon } from "@mui/x-date-pickers";
 import { headerStyle } from "@pages/MyPotDetail/MyPotDetail.style";
@@ -33,7 +37,7 @@ import { statusTextStyle } from "../MyPotDetail/pages/MyPotStatus/MyPotStatus.st
 import routes from "@constants/routes";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import { useDeleteMyPotTask } from "apis/hooks/myPots/useDeleteMyPotTask";
-import { AboutWorkModalWrapper, Loading } from "../MyPotDetail/components/index";
+import { AboutWorkModal, Loading } from "../MyPotDetail/components/index";
 import { APITaskStatus, TaskStatus } from "types/taskStatus";
 import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
@@ -41,10 +45,8 @@ import { displayStatus, WorkModal } from "@constants/categories";
 import { usePatchMyPotStatus } from "apis/hooks/myPots/usePatchMyPotStatus";
 import { AnotherTaskStatus } from "../../types/taskStatus";
 import { ChangeStatusModalWrapper } from "./components";
-import ConfirmModalWrapper from "@pages/MyPotDetail/components/ConfirmModalWrapper/ConfirmModalWrapper";
 
 const TaskDetailPage: React.FC = () => {
-
   const { potId, taskId } = useParams<{ potId: string; taskId: string }>();
   const navigate = useNavigate();
 
@@ -55,42 +57,51 @@ const TaskDetailPage: React.FC = () => {
   const potIdNumber = Number(potId);
   const taskIdNumber = Number(taskId);
 
-  const { data: task, isLoading, error } = useGetMyPotTaskDetail({
+  const {
+    data: task,
+    isLoading,
+    error,
+  } = useGetMyPotTaskDetail({
     potId: potIdNumber,
     taskId: taskIdNumber,
   });
-  const { mutate: deleteTask, isPending: isDeletePending } = useDeleteMyPotTask();
-  const { mutate: patchStatus, isPending: isStatusPending } = usePatchMyPotStatus();
+
+  const { mutate: deleteTask, isPending: isDeletePending } =
+    useDeleteMyPotTask();
+  const { mutate: patchStatus, isPending: isStatusPending } =
+    usePatchMyPotStatus();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChangingModalOpen, setIsChangingModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState<string>(WorkModal[0]);
   const [activeStatus, setActiveStatus] = useState<TaskStatus | null>(null);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const handlePrev = () => {
     navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
   };
 
-  const confirmDeleteTask = () => {
+  const handleDeleteTask = () => {
     deleteTask(
       { potId: potIdNumber, taskId: taskIdNumber },
       {
         onSuccess: () => {
-          setIsConfirmOpen(false);
+          setDeleteModal(false);
           navigate(`${routes.myPot.base}/${routes.task}/${potId}`);
         },
       }
     );
   };
 
-  const handleDeleteTask = () => {
-    setIsConfirmOpen(true);
+  const handleDeleteTaskModal = () => {
+    setDeleteModal(true);
   };
 
   const handleOpenModal = () => {
     setModalTitle(WorkModal[1]);
-    const convertedStatus = task?.result?.status ? displayStatus[task.result.status] : null;
+    const convertedStatus = task?.result?.status
+      ? displayStatus[task.result.status]
+      : null;
     setActiveStatus(convertedStatus);
     setIsModalOpen(true);
   };
@@ -116,7 +127,7 @@ const TaskDetailPage: React.FC = () => {
 
   const handleProfileClick = (userId: number) => {
     navigate(`${routes.userProfile}/${userId}`);
-  }
+  };
 
   if (isLoading || isDeletePending || isStatusPending) return <Loading />;
   if (error) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
@@ -124,12 +135,25 @@ const TaskDetailPage: React.FC = () => {
 
   return (
     <main css={container}>
-      <ConfirmModalWrapper
-        isModalOpen={isConfirmOpen}
-        onClose={() => setIsConfirmOpen(false)}
-        onConfirm={confirmDeleteTask}
-      />
-
+      {isModalOpen && (
+        <AboutWorkModal
+          type="patch"
+          onClose={() => setIsModalOpen(false)}
+          taskId={task.result.taskboardId}
+          potId={potIdNumber}
+        />
+      )}
+      {deleteModal && (
+        <Modal
+          title="업무 내용을 삭제하시겠습니까?"
+          message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
+          confirmType="neg"
+          cancelButton="취소"
+          confirmButton="삭제하기"
+          onCancel={() => setDeleteModal(false)}
+          onConfirm={handleDeleteTask}
+        />
+      )}
       <ChangeStatusModalWrapper
         isModalOpen={isChangingModalOpen}
         onClose={() => setIsChangingModalOpen(false)}
@@ -137,29 +161,29 @@ const TaskDetailPage: React.FC = () => {
         initialStatus={displayStatus[task.result.status]}
       />
 
-      <AboutWorkModalWrapper
-        isModalOpen={isModalOpen}
-        activeStatus={activeStatus}
-        modalTitle={modalTitle}
-        taskId={Number(taskId)}
-        onClose={() => setIsModalOpen(false)}
-      />
-
       <div css={titleContainer}>
         <div css={leftContainer}>
           <button onClick={handlePrev} css={prevButtonStyle}>
             <ArrowLeftIcon css={arrowIconStyle} />
           </button>
+          <DdayBadge days={task.result.dday} />
           <div css={titleStyle}>{task.result.title}</div>
         </div>
         <div css={rightContainer}>
-          <StateBadge content={displayStatus[task.result.status]} onClick={handleOpenChangingModal} />
-          <div css={dropdownWrapperStyle} onClick={(event) => event.stopPropagation()}>
+          <StateBadge
+            badgeType="task"
+            taskState={displayStatus[task.result.status]}
+            onClick={handleOpenChangingModal}
+          />
+          <div
+            css={dropdownWrapperStyle}
+            onClick={(event) => event.stopPropagation()}
+          >
             <MyFeedDropdown
               topMessage="수정하기"
               bottomMessage="삭제하기"
               onTop={handleOpenModal}
-              onBottom={handleDeleteTask}
+              onBottom={handleDeleteTaskModal}
             />
           </div>
         </div>
@@ -170,18 +194,23 @@ const TaskDetailPage: React.FC = () => {
           src={roleImages[task.result.creatorRole as Role] ?? ""}
           alt={task.result.creatorNickname}
         />
-        <span css={nicknameStyle}>{task.result.creatorNickname}</span>
-        <DdayBadge days={task.result.dday} />
+        <div css={profileInnerContainer}>
+          <span css={nicknameStyle}>{task.result.creatorNickname}</span>
+          <span css={createdDateStyle}>
+            {task.result.createdAt ? task.result.createdAt : "날짜 정보 없음"}
+          </span>{" "}
+        </div>
       </div>
+      <div css={dividerStyle} />
       <div css={dateContainer}>
         <CalendarIcon />
         <span css={dateStyle}>{task.result.deadLine}</span>
       </div>
-      <div css={dividerStyle} />
       <div css={bottomContainer}>
         <div css={contentContainerStyle}>
           <span css={contentStyle}>{task.result.description}</span>
         </div>
+        <div css={dividerStyle} />
         <header css={headerStyle}>
           <div css={statusTextStyle}>업무 참여자</div>
           <PotIcon css={iconStyle} />
@@ -189,12 +218,13 @@ const TaskDetailPage: React.FC = () => {
       </div>
       <div css={contributorContainer}>
         {task.result.participants.map((participant, index) => (
-          <div css={contributorCard} key={index} onClick={() => { handleProfileClick(participant.userId) }}>
-            <div css={contributorInner}>
-              <img src={roleImages[participant.role as Role]} css={profileImageStyle} alt="프로필" />
-              <span css={contributorNicknameStyle}>{participant.nickName}</span>
-            </div>
-          </div>
+          <MemberCard
+            key={index}
+            nickname={participant.nickName}
+            role={participant.role as Role}
+            type={"selection"}
+            onClick={() => handleProfileClick(participant.userId)}
+          />
         ))}
       </div>
     </main>

@@ -43,7 +43,10 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type="button"
       css={[buttonStyle, buttonType, customStyle]}
-      onClick={onClick}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.();
+      }}
       disabled={disabled}
       {...props}
     >

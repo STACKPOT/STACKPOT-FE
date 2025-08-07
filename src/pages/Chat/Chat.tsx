@@ -40,17 +40,20 @@ import {
   fileUploadText,
   fileUploadButton,
 } from "./Chat.style";
-import { DefaultChatIcon, ImageIcon, SelectChatIcon, WavingHandIcon, WorkGroupIcon } from '@assets/svgs';
+import { DefaultChatIcon, ImageIcon, SelectChatIcon, WavingHandIcon } from '@assets/svgs';
 import { roleImages } from '@constants/roleImage';
 import useGetChatRooms from "apis/hooks/chats/useGetChatRooms";
 import useGetChatMessages from "apis/hooks/chats/useGetChatMessages";
 import { ChatMessages, ChatRoom } from "apis/types/chat";
 import { formatCreatedAt, formatTime } from "@utils/dateUtils";
-import { format, parseISO } from "date-fns";
+import { format, parse } from "date-fns";
 import usePatchChatRoomThumbnails from "apis/hooks/chats/usePatchChatRoomThumbnails";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import { ExplainModal } from "@components/index";
+import { ExplainModal, MemberGroup } from "@components/index";
+import { Role } from "types/role";
+import { useChatSocket } from "@hooks/useChatSocket";
+import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 
 
 
@@ -60,11 +63,18 @@ const ChatPage = () => {
   const { data } = useGetChatRooms();
   const { mutate: patchChatRoomThumbnails } = usePatchChatRoomThumbnails();
   const chatRooms = (data?.result ?? []) as ChatRoom[];
-  console.log(chatRooms);
+  const { data: user } = useGetMyProfile();
+  const myUserId = user?.id;
 
   const messageListRef = useRef<HTMLDivElement | null>(null);
   const topSentinelRef = useRef<HTMLDivElement | null>(null);
+  const [inputValue, setInputValue] = useState("");
 
+  const handleSendClick = () => {
+    if (!inputValue.trim()) return;
+    sendMessage(inputValue);
+    setInputValue(""); // 전송 후 입력창 초기화
+  };
   const {
     data: messagesData,
     fetchPreviousPage,
@@ -78,17 +88,17 @@ const ChatPage = () => {
     direction: null,
   });
 
-  const allChats = messagesData?.pages.flatMap((page) => page.result?.chats ?? []) ?? [];
+  const [socketMessages, setSocketMessages] = useState<ChatMessages[]>([]);
+  const allChats = [
+    ...(messagesData?.pages.flatMap((page) => page.result?.chats ?? []) ?? []),
+    ...socketMessages
+  ];
   const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleRoomClick = (room: ChatRoom) => {
-    const nextRoomId = selectedRoomId === room.chatRoomId ? null : room.chatRoomId;
-    setSelectedRoomId(nextRoomId);
-
-    if (nextRoomId !== null) {
-      refetch(); // Trigger refetch of chat messages
-    }
+    setSelectedRoomId(room.chatRoomId);
+    refetch();
   }
 
 
@@ -131,6 +141,22 @@ const ChatPage = () => {
     list.addEventListener("scroll", handleScroll);
     return () => list.removeEventListener("scroll", handleScroll);
   }, [hasPreviousPage, isFetchingPreviousPage, fetchPreviousPage]);
+
+
+  const { sendMessage, connected } = useChatSocket(
+    selectedRoomId,
+    (msg: ChatMessages) => {
+      setSocketMessages((prev) => [...prev, msg]);
+    }
+  );
+
+  useEffect(() => {
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  }, [socketMessages]);
+
+  useEffect(() => setSocketMessages([]), [selectedRoomId]);
 
   return (
     <div css={pageWrapperStyle}>
@@ -197,7 +223,11 @@ const ChatPage = () => {
           )}
           <div css={chatTopBarStyle}>
             <div css={selectedRoomStyle}>
-              <WorkGroupIcon />
+              {/* {selectedRoom && <MemberGroup
+                memberRoleList={
+                  selectedRoom.participants.map((member) =>
+                    member.role as Role)
+                } />} */}
               <div css={chatRoomHeaderStyle}>{selectedRoom ? selectedRoom.chatRoomName : "채팅할 팟을 선택해 주세요."}</div>
               <div css={chatRoomTextStyle} onClick={() => setIsModalOpen(true)}><ImageIcon />커버 추가</div>
             </div>
@@ -219,19 +249,24 @@ const ChatPage = () => {
               {groupMessagesByDate(allChats).map(([date, chats]) => (
                 <div key={date}>
                   <div css={dateDividerStyle}>
-                    {format(new Date(date), "yyyy년 M월 d일")}
+                    {format(parse(date, "yyyy-MM-dd", new Date()), "yyyy년 M월 d일")}
                   </div>
-                  {chats.map((chat) => (
-                    <MessageBubble key={chat.chatId} message={chat} isMine={chat.userName === "나"} />
-                  ))}
+                  {chats.map((chat) => {
+                    return <MessageBubble key={chat.chatId} message={chat} isMine={chat.userId === myUserId} />
+                  })}
                 </div>
               ))}
             </div>
           )}
 
           <div css={inputContainerStyle}>
-            <textarea css={textAreaStyle} placeholder="메시지를 입력해 보세요." />
-            <button css={sendButtonStyle}>전송</button>
+            <textarea
+              css={textAreaStyle}
+              placeholder="메시지를 입력해 보세요."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button css={sendButtonStyle} onClick={handleSendClick} disabled={!connected}>전송</button>
           </div>
         </div>
       </div >
@@ -245,7 +280,8 @@ const groupMessagesByDate = (messages: ChatMessages[]) => {
   const groups: { [date: string]: ChatMessages[] } = {};
 
   messages.forEach((message) => {
-    const dateKey = format(parseISO(message.createdAt), "yyyy-MM-dd");
+    const dateKey = format(parse(message.createdAt, "yyyy년 M월 d일 HH:mm", new Date()), "yyyy-MM-dd");
+
     if (!groups[dateKey]) {
       groups[dateKey] = [];
     }
@@ -268,7 +304,6 @@ const MessageBubble = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleProfileClick = () => {
-    console.log(message.userId);
     setIsModalOpen(true);
   };
 
