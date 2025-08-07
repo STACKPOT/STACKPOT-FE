@@ -11,28 +11,17 @@ import {
   textStyle,
   tabsContainer,
   navLinkStyle,
-  viewId,
-  viewTextStyle,
   iconStyle,
 } from "./MyPotDetail.style";
 import routes from "@constants/routes";
-import { KaKaoTalkIcon } from "@assets/svgs";
+import { ArrowLeftRoundIcon, ChattingIcon } from "@assets/svgs";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { prevButtonStyle } from "../TaskDetail/TaskDetail.style";
-import { ArrowLeftIcon } from "@mui/x-date-pickers";
-import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
-import { useState } from "react";
 
 const MyPotDetail: React.FC = () => {
   const { potId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
 
   const tabs = [
     {
@@ -47,8 +36,6 @@ const MyPotDetail: React.FC = () => {
 
   const potIdNumber = Number(potId);
 
-  const { data: check } = useGetMyPotOwner({ potId: potIdNumber });
-
   const { data } = useGetMyPotTodo({
     potId: potIdNumber,
     page: 1,
@@ -59,14 +46,20 @@ const MyPotDetail: React.FC = () => {
     navigate(`${routes.myPot.base}`);
   };
 
+  const handleChattingClick = () => {
+    navigate(`${routes.chat}`);
+    //TODO: 해당 채팅방으로 연결
+  };
+
   return (
     <>
       <main css={container}>
         <header css={headerStyle}>
           <button onClick={handlePrev} css={prevButtonStyle}>
-            <ArrowLeftIcon css={iconStyle} />
+            <ArrowLeftRoundIcon css={iconStyle} />
           </button>
-          <div css={textStyle}>{data?.title ?? null}</div>
+          <h2 css={textStyle}>{data?.title ?? null}</h2>
+          <ChattingIcon onClick={handleChattingClick} />
         </header>
         <div css={tabsContainer}>
           {tabs.map((tab) => {
@@ -81,12 +74,6 @@ const MyPotDetail: React.FC = () => {
               </NavLink>
             );
           })}
-          {(check?.result ?? false) && (
-            <button css={viewId} onClick={handleOpenModal} type="button">
-              <KaKaoTalkIcon />
-              <p css={viewTextStyle}>아이디 보기</p>
-            </button>
-          )}
         </div>
         <Outlet />
       </main>

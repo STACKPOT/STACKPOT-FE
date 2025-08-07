@@ -1,57 +1,10 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
-export const boardStyle = css`
-  display: flex;
-  padding: 1.6rem 3.2rem;
-  gap: 1.6rem;
-  align-items: flex-start;
-  align-self: stretch;
-  border-radius: 24px;
-  background: ${theme.color.point.alternative};
-`;
-
-export const potIconStyle = css`
-  color: ${theme.color.point.hero};
-`;
-
-export const iconStyle = css`
-  color: ${theme.color.base.white};
-`;
-
-export const boardTextStyle = css`
-  ${theme.font.title1};
-  color: ${theme.color.base.white};
-`;
-
-export const highlightStyle = css`
-  color: ${theme.color.point.navy};
-`;
-
 export const containerStyle = css`
   width: 100%;
-  padding: 3.2rem 4.8rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  border-radius: 24px;
-  border: 0.1rem solid ${theme.color.object.alternative};
-  background: ${theme.color.base.white};
-  box-shadow: 0 4px 12px 0 rgba(13, 10, 44, 0.06);
-`;
-
-export const gridContainerStyle = css`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  height: 23.9rem;
-  padding: 0 6.4rem;
-`;
-
-export const paginationContainer = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 2.4rem;
 `;
 
@@ -65,24 +18,6 @@ export const paginationButton = css`
     cursor: not-allowed;
     opacity: 0.5;
   }
-`;
-
-export const paginationTextStyle = css`
-  ${theme.font.body2};
-  color: ${theme.color.object.assistive};
-`;
-
-export const statusBoardContainer = css`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const statusBoardStyle = css`
-  gap: 1.6rem;
-  display: flex;
-  align-items: center;
 `;
 
 export const statusTextStyle = css`
@@ -152,4 +87,26 @@ export const modalOverlayStyle = css`
   justify-content: center;
   align-items: center;
   z-index: 15;
+`;
+
+export const statusBoardContainer = css`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const iconStyle = css`
+  color: ${theme.color.point.hero};
+`;
+
+export const statusBoardStyle = css`
+  gap: 1.6rem;
+  display: flex;
+  align-items: center;
+`;
+
+export const textStyle = css`
+  ${theme.font.display1};
+  color: ${theme.color.point.gray};
 `;

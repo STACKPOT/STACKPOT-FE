@@ -125,3 +125,6 @@ export interface GetUsersMyPagesResponse {
 export interface GetUsersInfoParams {
 	userId: number;
 }
+export interface DescriptionResponse {
+	userDescription: string;
+}

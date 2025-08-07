@@ -27,7 +27,7 @@ const theme = {
       negative: "#DE3412",
     },
     accent: {
-      blueBg: "#D3E8FD",
+      blueBg: "#D3EBFD",
       greenBg: "#EAF6EC",
       pinkBg: "#FBEBF0",
       purpleBg: "#EBE2FF",
