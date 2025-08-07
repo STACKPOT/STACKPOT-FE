@@ -24,7 +24,7 @@ export interface GetUserResponse {
 
 export interface postSignInPayload {
 	role: Role;
-	interest: string;
+	interest: string[];
 	kakaoId: string;
 }
 

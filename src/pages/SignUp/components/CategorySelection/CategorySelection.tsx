@@ -17,14 +17,21 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
   ({ type, title }, ref) => {
     const { setValue } = useFormContext();
     const categories = type === "role" ? Object.keys(partMap) : interests;
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(
-      null
-    );
+    const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
 
     const handleSelectCategory = (category: string) => {
-      setSelectedCategory(category);
-      const value = type === "role" ? partMap[category] : category;
-      setValue(type, value);
+      if (type === "interest") {
+        setSelectedCategory((prev) => {
+          const updated = prev.includes(category)
+            ? prev.filter((item) => item !== category)
+            : [...prev, category];
+          setValue("interest", updated);
+          return updated;
+        });
+      } else if (type === "role") {
+        setSelectedCategory([category]);
+        setValue("role", partMap[category]);
+      }
     };
 
     return (
@@ -35,7 +42,7 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
             <CategoryButton
               key={category}
               style="pot"
-              selected={selectedCategory === category}
+              selected={selectedCategory.includes(category)}
               onClick={() => handleSelectCategory(category)}
             >
               {category}

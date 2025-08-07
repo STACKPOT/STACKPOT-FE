@@ -3,6 +3,8 @@ import { http, HttpResponse, passthrough } from "msw";
 export const myPageHandler = [
 
   http.get("https://api.stackpot.co.kr/users/mypages", ({ request }) => {
+
+    return passthrough();
     const url = new URL(request.url);
     const dataType = url.searchParams.get("dataType");
     if (dataType === "introduction") {
