@@ -1,5 +1,3 @@
-
-
 import { useEffect, useRef, useState } from "react";
 import SockJS from "sockjs-client";
 import { Stomp } from "@stomp/stompjs";
@@ -23,9 +21,8 @@ export const useChatSocket = (
     if (!chatRoomId || !accessToken) return;
     mutate(chatRoomId);
 
-
     const client = Stomp.over(() => new SockJS(SOCKET_URL));
-    client.reconnectDelay = 5000;
+    client.reconnectDelay = 1000;
 
     client.connectHeaders = {
       Authorization: accessToken,

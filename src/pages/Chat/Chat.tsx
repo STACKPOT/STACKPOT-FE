@@ -44,7 +44,7 @@ import { DefaultChatIcon, ImageIcon, SelectChatIcon, WavingHandIcon } from '@ass
 import { roleImages } from '@constants/roleImage';
 import useGetChatRooms from "apis/hooks/chats/useGetChatRooms";
 import useGetChatMessages from "apis/hooks/chats/useGetChatMessages";
-import { ChatMessages, ChatRoom } from "apis/types/chat";
+import { ChatMessages, ChatMessagesResponse, ChatRoom } from "apis/types/chat";
 import { formatCreatedAt, formatTime } from "@utils/dateUtils";
 import { format, parse } from "date-fns";
 import usePatchChatRoomThumbnails from "apis/hooks/chats/usePatchChatRoomThumbnails";
@@ -54,6 +54,7 @@ import { ExplainModal, MemberGroup } from "@components/index";
 import { Role } from "types/role";
 import { useChatSocket } from "@hooks/useChatSocket";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
+import { ApiResponse } from "apis/types/response";
 
 
 
@@ -73,8 +74,9 @@ const ChatPage = () => {
   const handleSendClick = () => {
     if (!inputValue.trim()) return;
     sendMessage(inputValue);
-    setInputValue(""); // 전송 후 입력창 초기화
+    setInputValue("");
   };
+
   const {
     data: messagesData,
     fetchPreviousPage,
@@ -83,14 +85,12 @@ const ChatPage = () => {
     isFetchingPreviousPage,
   } = useGetChatMessages({
     chatRoomId: selectedRoomId ?? 0,
-    cursor: null,
     size: 20,
-    direction: null,
   });
 
   const [socketMessages, setSocketMessages] = useState<ChatMessages[]>([]);
   const allChats = [
-    ...(messagesData?.pages.flatMap((page) => page.result?.chats ?? []) ?? []),
+    ...(messagesData?.pages.flatMap((page) => (page as ApiResponse<ChatMessagesResponse>).result?.chats ?? []) ?? []),
     ...socketMessages
   ];
   const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
@@ -118,7 +118,15 @@ const ChatPage = () => {
 
   const handleUploadCoverClick = () => {
     if (selectedRoomId !== null && selectedFile) {
-      patchChatRoomThumbnails({ chatRoomId: selectedRoomId, file: selectedFile });
+      patchChatRoomThumbnails(
+        { chatRoomId: selectedRoomId, file: selectedFile },
+        {
+          onSuccess: () => {
+            setIsModalOpen(false);
+            setSelectedFile(null);
+          },
+        }
+      );
     }
   };
 
@@ -134,7 +142,14 @@ const ChatPage = () => {
 
     const handleScroll = () => {
       if (list.scrollTop === 0 && hasPreviousPage && !isFetchingPreviousPage) {
-        fetchPreviousPage();
+        const prevScrollHeight = list.scrollHeight;
+
+        fetchPreviousPage().then(() => {
+          requestAnimationFrame(() => {
+            const newScrollHeight = list.scrollHeight;
+            list.scrollTop = newScrollHeight - prevScrollHeight;
+          });
+        });
       }
     };
 
@@ -202,7 +217,7 @@ const ChatPage = () => {
               title={`채팅방 커버 이미지를 변경할까요?`}
               buttonText="변경하기"
               onButtonClick={handleUploadCoverClick}
-              onCancel={() => setIsModalOpen(false)} >
+              onCancel={() => { setIsModalOpen(false); }} >
               {selectedFile ? (
                 <img
                   src={URL.createObjectURL(selectedFile)}

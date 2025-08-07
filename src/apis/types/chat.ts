@@ -24,9 +24,10 @@ export interface GetFeedParams {
   cursor: number | null;
 }
 
+
 export interface GetChatMessagesParams {
   chatRoomId: number;
-  cursor: number | null;
+  cursor: string | null;
   size: number;
   direction: "prev" | "next" | null;
 }
