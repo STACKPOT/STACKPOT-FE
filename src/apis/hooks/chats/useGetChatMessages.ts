@@ -8,17 +8,17 @@ const useGetChatMessages = ({ chatRoomId, size = 20 }: { chatRoomId: number; siz
       const { cursor, direction } = pageParam;
       return getChatMessages({ chatRoomId, cursor, direction: direction as 'prev' | 'next' | null, size });
     },
-    initialPageParam: { cursor: '', direction: 'next' },
+    initialPageParam: { cursor: null, direction: 'next' },
     getNextPageParam: (lastPage) => {
       const next = lastPage.result?.nextCursor;
       return next !== null && next !== undefined
-        ? { cursor: String(next), direction: 'next' }
+        ? { cursor: next, direction: 'next' }
         : undefined;
     },
     getPreviousPageParam: (firstPage) => {
       const prev = firstPage.result?.prevCursor;
       return prev !== null && prev !== undefined
-        ? { cursor: String(prev), direction: 'prev' }
+        ? { cursor: prev, direction: 'prev' }
         : undefined;
     },
     enabled: !!chatRoomId,
