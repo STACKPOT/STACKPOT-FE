@@ -2,11 +2,9 @@ import {
   badgeContainer,
   bottomContainer,
   cardStyle,
-  contentContainer,
   contentTextStyle,
   dateTextStyle,
   forDropdownStyle,
-  innerContainer,
   lineStyle,
   taskCardInnerTopContainer,
   nicknameStyle,
@@ -125,48 +123,43 @@ const TaskCard: React.FC<TaskCardProps> = ({
       )}
 
       <div css={cardStyle} onClick={onClick}>
-        <div css={innerContainer}>
-          <div css={taskCardInnerTopContainer}>
-            <div css={badgeContainer}>
-              <DdayBadge days={dday} />
-              {tag.length >= 4 ? (
-                <Badge content="전체" />
-              ) : (
-                tag.map((t, index) => <Badge key={index} content={t} />)
-              )}
-            </div>
-            <div
-              css={forDropdownStyle}
-              onClick={(event) => {
-                event.stopPropagation();
-              }}
-            >
-              <MyFeedDropdown
-                topMessage="수정하기"
-                bottomMessage="삭제하기"
-                onTop={handleOpenModal}
-                onBottom={handleDeleteTaskModal}
-              />
-            </div>
+        <div css={taskCardInnerTopContainer}>
+          <div css={badgeContainer}>
+            <DdayBadge days={dday} />
+            {tag.length >= 4 ? (
+              <Badge content="전체" />
+            ) : (
+              tag.map((t, index) => <Badge key={index} content={t} />)
+            )}
           </div>
-
-          <div css={contentContainer}>
-            <p css={titleTextStyle}>{title}</p>
-            <p css={contentTextStyle}>{content}</p>
+          <div
+            css={forDropdownStyle}
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            <MyFeedDropdown
+              topMessage="수정하기"
+              bottomMessage="삭제하기"
+              onTop={handleOpenModal}
+              onBottom={handleDeleteTaskModal}
+            />
           </div>
-          <p css={dateTextStyle}>{date}</p>
-          <div css={lineStyle} />
-          <div css={bottomContainer}>
-            <div css={profileContainer}>
-              <img
-                css={profileImageStyle}
-                src={profileImage}
-                alt="ProfileImage"
-              />
-              <p css={nicknameStyle}>{nickname}</p>
-            </div>
-            <MemberGroup memberRoleList={roleList} />
+        </div>
+        <p css={titleTextStyle}>{title}</p>
+        <p css={contentTextStyle}>{content}</p>
+        <p css={dateTextStyle}>{date}</p>
+        <div css={lineStyle} />
+        <div css={bottomContainer}>
+          <div css={profileContainer}>
+            <img
+              css={profileImageStyle}
+              src={profileImage}
+              alt="ProfileImage"
+            />
+            <p css={nicknameStyle}>{nickname}</p>
           </div>
+          <MemberGroup memberRoleList={roleList} />
         </div>
       </div>
     </>
