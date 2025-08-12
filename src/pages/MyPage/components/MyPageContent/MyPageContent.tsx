@@ -4,7 +4,6 @@ import {
   emptyFeedFallbackStyle,
   introductionWriteButton,
   introductionContentStyle,
-  introductionTitleStyle,
   introductionBodyStyle,
   introductionButton,
   feedHeaderContainer,
@@ -128,12 +127,13 @@ const FeedContent = ({ posts }: { posts: FeedPost[] }) => {
 const PotContent = ({ pots }: { pots: Pot[] }) => (
   <>
     {pots.map((pot) => {
-      let members = [] as Role[];
-      Object.entries(pot.memberCounts).forEach(([role, count]) => {
-        for (let i = 0; i < count; i++) {
-          members.push(role as Role);
-        }
-      });
+      // let members = [] as Role[];
+      // Object.entries(pot.memberCounts).forEach(([role, count]) => {
+      //   for (let i = 0; i < count; i++) {
+      //     members.push(role as Role);
+      //   }
+      // });
+      return null;
       return (
         <FinishedPotCard
           id={pot.potId}
@@ -246,7 +246,7 @@ const MyPageContent = ({ contentType, data }: { contentType: 'feed' | 'pot' | 'i
     case 'feed':
       return <FeedContent posts={data.feeds} />;
     case 'pot':
-      return <PotContent pots={data.completedPots} />;
+      return <PotContent pots={data} />;
     default:
       return <IntroductionContent userDescription={data.userDescription} />;
   }

@@ -53,13 +53,20 @@ export const postNickname = async (nickname: string) => {
 };
 
 export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
-  if (dataType === 'feed') {
-    return authApiGet<MyPageResponse>("/users/mypages");
-  } else if (dataType === 'pot') {
-    return authApiGet<MyPageResponse>("/users/mypages", { dataType });
-  } else {
-    return authApiGet<DescriptionResponse>("/users/description");
+  // Map data type to endpoint, with a safe fallback
+  const ENDPOINTS = {
+    feed: "/users/feeds",
+    pot: "/users/pots",
+    description: "/users/description",
+  } as const;
+
+  const endpoint = (ENDPOINTS as Record<string, string>)[dataType] ?? ENDPOINTS.description;
+
+  // Description는 응답 스키마가 다르므로 분기 처리
+  if (endpoint === ENDPOINTS.description) {
+    return authApiGet<DescriptionResponse>(endpoint);
   }
+  return authApiGet<MyPageResponse>(endpoint);
 };
 
 export const GetFinishedModal = async (potId: number) => {
