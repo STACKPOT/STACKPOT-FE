@@ -13,7 +13,6 @@ import {
   GetUserResponse,
   MyPageResponse,
   GetMyPageParams,
-  GetFinishedModalParams,
   FinishedModalResponse,
   NicknameResponse,
   PatchUserProfileUpdateParams,
@@ -34,13 +33,11 @@ export const GetMyUser = async () => {
 };
 export const patchSignIn = async ({
   role,
-  interest,
-  kakaoId,
+  interest
 }: postSignInPayload) => {
   return authApiPatch<SignInResponse>("/users/profile", {
     role,
-    interest,
-    kakaoId,
+    interest
   });
 };
 
