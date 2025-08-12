@@ -40,13 +40,12 @@ const FormBody = forwardRef<HTMLDivElement>(
       setValue,
     } = useFormContext<PotFormData>();
 
-    const [potModeOfOperation, potDuration, potStartDate, potEndDate, recruitmentDeadline, recruitingMembers, potRole] =
+    const [potModeOfOperation, potStartDate, potEndDate, potRecruitmentDeadline, recruitingMembers, potRole] =
       watch([
         "potModeOfOperation",
-        "potDuration",
         "potStartDate",
         "potEndDate",
-        "recruitmentDeadline",
+        "potRecruitmentDeadline",
         "recruitingMembers",
         "potRole"
       ]);
@@ -64,7 +63,7 @@ const FormBody = forwardRef<HTMLDivElement>(
 
     const handleDeadline = (day: Dayjs | null) => {
       if (day) {
-        setValue("recruitmentDeadline", day.format("YYYY-MM-DD"));
+        setValue("potRecruitmentDeadline", day.format("YYYY-MM-DD"));
       }
     };
 
@@ -114,7 +113,7 @@ const FormBody = forwardRef<HTMLDivElement>(
           <div css={labelStyle}>
             모집 마감
             <DatePickerButton
-              date={dayjs(recruitmentDeadline)}
+              date={dayjs(potRecruitmentDeadline)}
               onChange={handleDeadline}
             />
           </div>
@@ -160,9 +159,7 @@ const FormBody = forwardRef<HTMLDivElement>(
             ))}
           </div>
         </div>
-
-
-        <div css={labelStyle}>
+        {/* <div css={labelStyle}>
           예상 기간
           <div css={buttonContainer}>
             {period.map((period) => (
@@ -176,7 +173,7 @@ const FormBody = forwardRef<HTMLDivElement>(
               </CategoryButton>
             ))}
           </div>
-        </div>
+        </div> */}
         <div css={roleLabelStyle}>
           <div> 모집 파트</div>
           <div css={roleButtonContainer}>

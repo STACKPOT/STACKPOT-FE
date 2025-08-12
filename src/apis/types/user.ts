@@ -18,16 +18,14 @@ export interface GetUserResponse {
 	email: string;
 	nickname: string;
 	role: Role;
-	interest: string;
+	interest: string[];
 	userTemperature: number;
-	kakaoId: string;
 	userIntroduction: string;
 }
 
 export interface postSignInPayload {
 	role: Role;
-	interest: string;
-	kakaoId: string;
+	interest: string[];
 }
 
 export interface SignInResponse {
@@ -91,7 +89,7 @@ export interface GetFinishedModalParams {
 
 export interface PatchUserProfileUpdateParams {
 	role: Role;
-	interest: string;
+	interest: string[];
 	userIntroduction: string;
 	nickname: string;
 }

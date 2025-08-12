@@ -7,7 +7,6 @@ import {
   mainContainer,
   categoryContainer,
   buttonStyle,
-  inputStyle,
 } from "./SignUp.style";
 import { Button } from "@components/index";
 import {
@@ -23,9 +22,8 @@ import { SignInResponse } from "apis/types/user";
 import { Role } from "types/role";
 
 type SignInFormData = {
-  kakaoId: string;
   role: Role;
-  interest: string;
+  interest: string[];
 };
 
 const SignUp = () => {
@@ -35,9 +33,8 @@ const SignUp = () => {
   const methods = useForm({
     mode: "onChange",
     defaultValues: {
-      kakaoId: "",
       role: "UNKNOWN" as Role,
-      interest: "",
+      interest: [],
       contractsAgreed: false,
     },
   });
@@ -51,14 +48,14 @@ const SignUp = () => {
 
   const { mutate } = usePatchSignIn();
 
-  const [role, interest, kakaoId, contractsAgreed] = watch([
+  const [role, interest, contractsAgreed] = watch([
     "role",
     "interest",
-    "kakaoId",
     "contractsAgreed",
   ]);
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
+    console.log(data);
     mutate(data, {
       onSuccess: (response) => {
         setResponseData(response.result ?? null);
@@ -88,15 +85,6 @@ const SignUp = () => {
               <CategorySelection type="role" title="역할" />
               <CategorySelection type="interest" title="관심사" />
             </div>
-            <Section
-              title="카카오톡 아이디"
-              description={`팟이 시작될 경우, 원활한 진행을 위해 팀장에게 카카오 아이디가 보여집니다.\n카카오톡 아이디를 작성해 주세요.`}
-            />
-            <input
-              css={inputStyle}
-              placeholder="카카오톡 아이디 작성"
-              {...register("kakaoId", { required: true })}
-            />
             <ContractsSection />
           </div>
           <Button
