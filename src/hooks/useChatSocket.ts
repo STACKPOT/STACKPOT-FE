@@ -32,8 +32,12 @@ export const useChatSocket = (
 
     client.onConnect = () => {
       client.subscribe(`/sub/chat/${chatRoomId}`, (msg) => {
-        const parsed = JSON.parse(msg.body) as ChatMessages;
-        onReceive(parsed);
+        try {
+          const parsed = JSON.parse(msg.body) as ChatMessages;
+          onReceive(parsed);
+        } catch (e) {
+          console.error(e, msg.body);
+        }
       });
       setConnected(true);
       setConnectionStatus('open');
@@ -46,30 +50,48 @@ export const useChatSocket = (
     };
     client.onWebSocketClose = (event) => {
       console.error("WebSocket closed", event);
+      setConnected(false);
       setConnectionStatus('closed');
     };
 
     client.onWebSocketError = (event) => {
       console.error("WebSocket error", event);
+      setConnected(false);
       setConnectionStatus('error');
     };
+
     setConnectionStatus('connecting');
     client.activate();
 
     clientRef.current = client;
 
     return () => {
-      client.disconnect(() => {
+      if (client.active) {
+        client.deactivate()
+          .then(() => {
+            setConnected(false);
+            setConnectionStatus('closed');
+          })
+          .catch(() => {
+            setConnected(false);
+            setConnectionStatus('closed');
+          });
+      } else {
         setConnected(false);
         setConnectionStatus('closed');
-      });
+      }
+      clientRef.current = null;
     };
   }, [chatRoomId, accessToken]);
 
   const sendMessage = (message: string, fileUrl?: string) => {
-    if (clientRef.current && connected) {
-      clientRef.current.send(`/pub/chat/${chatRoomId}`, {}, JSON.stringify({ message, fileUrl }));
-    }
+    if (!clientRef.current || !connected || !chatRoomId) return false;
+    clientRef.current.publish({
+      destination: `/pub/chat/${chatRoomId}`,
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ message, fileUrl }),
+    });
+    return true;
   };
 
   return {
