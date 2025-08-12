@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import {
   pageWrapperStyle,
   chatWrapperStyle,
@@ -89,10 +89,25 @@ const ChatPage = () => {
   });
 
   const [socketMessages, setSocketMessages] = useState<ChatMessages[]>([]);
-  const allChats = [
-    ...(messagesData?.pages.flatMap((page) => (page as ApiResponse<ChatMessagesResponse>).result?.chats ?? []) ?? []),
-    ...socketMessages
-  ];
+
+  const apiChats = useMemo(
+    () =>
+      messagesData?.pages.flatMap(
+        (page) => (page as ApiResponse<ChatMessagesResponse>).result?.chats ?? []
+      ) ?? [],
+    [messagesData]
+  );
+
+  // API 우선
+  const allChats = useMemo(() => {
+    const seen = new Set<number>(); // chatId가 string이면 Set<string>으로
+    return [...apiChats, ...socketMessages].filter((c) => {
+      if (seen.has(c.chatId)) return false;
+      seen.add(c.chatId);
+      return true;
+    });
+  }, [apiChats, socketMessages]);
+
   const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
