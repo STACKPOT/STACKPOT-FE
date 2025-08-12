@@ -11,20 +11,23 @@ import {
 import TemperatureBar from "@components/commons/TemperatureBar/TemperatureBar";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import useGetMyPage from "apis/hooks/users/useGetMyPage";
 import { roleImages } from "@constants/roleImage";
 import { categoryText } from "@constants/categories";
 import { Badge } from "@components/index";
+import { Role } from "types/role";
+import useGetProfile from "apis/hooks/users/useGetProfile";
 
-const MyPageProfile: React.FC = () => {
+type Props = { userId?: number };
+
+const MyPageProfile: React.FC<Props> = ({ userId }) => {
   const navigate = useNavigate();
-  const { data } = useGetMyPage({ dataType: "pot" });
+  const { data } = useGetProfile(userId);
 
   const nickname = data?.nickname || "사용자";
   const userIntroduction = data?.userIntroduction || "소개가 없습니다.";
   const userTemperature = data?.userTemperature ?? 0;
   const role = data?.role || "FRONTEND";
-  const profileImage = roleImages[role];
+  const profileImage = roleImages[role as Role];
 
   const handleSetUp = () => {
     navigate(routes.setting);
@@ -36,7 +39,9 @@ const MyPageProfile: React.FC = () => {
       <div css={contentContainer}>
         <div css={nicknameContainer}>
           <h1 css={nicknameStyle}>{nickname} <Badge content={categoryText[role]} /></h1>
-          <SetUpIcon type="button" css={setUpIconStyle} onClick={handleSetUp} />
+          {!userId && (
+            <SetUpIcon type="button" css={setUpIconStyle} onClick={handleSetUp} />
+          )}
         </div>
         <div css={introductionStyle}>{userIntroduction}</div>
         <TemperatureBar temperature={userTemperature} />

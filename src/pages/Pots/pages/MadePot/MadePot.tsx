@@ -40,7 +40,7 @@ const MadePotPage = () => {
         <Section title="모집 중인 나의 팟">
           <>
             {recruitingPots &&
-              recruitingPots.map((pot) => (
+              recruitingPots?.map((pot) => (
                 <RecruitingMyPotCard
                   key={pot.potId}
                   {...pot}

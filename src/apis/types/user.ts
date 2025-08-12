@@ -1,3 +1,5 @@
+import { Participation } from 'types/participation';
+import { PotStatus } from 'types/potStatus';
 import { Role } from 'types/role';
 
 export interface LogInResponse {
@@ -33,16 +35,7 @@ export interface SignInResponse {
 	role: Role;
 }
 
-export interface MyPageResponse {
-	id: number;
-	nickname: string;
-	role: Role;
-	userTemperature: number;
-	userIntroduction: string;
-	completedPots: CompletedPots[];
-	feeds: Feeds[];
-}
-interface Feeds {
+export interface Feeds {
 	writerId: number;
 	feedId: number;
 	writer: string;
@@ -75,8 +68,8 @@ interface MyBadges {
 	badgeName: string;
 }
 
-export interface GetMyPageParams {
-	dataType: string;
+export interface GetMyPagePotsParams {
+	status: 'all' | 'recruiting' | 'ongoing' | 'completed';
 }
 
 export interface FinishedModalResponse {
@@ -128,3 +121,26 @@ export interface GetUsersInfoParams {
 export interface DescriptionResponse {
 	userDescription: string;
 }
+
+export interface MyPageFeedsResponse {
+	id: number;
+	seriesComments: string[];
+	feeds: Feeds[];
+}
+
+export interface MyPagePotItem {
+	potId: number;
+	potName: string;
+	potStartDate: string;
+	potEndDate: string;
+	potStatus: PotStatus;
+	potModeOfOperation: Participation;
+	potRecruitmentDeadline: string;
+	potContent: string;
+	isOwner: boolean;
+	members: Record<string, number>;
+	isMember: boolean;
+	dday: string;
+}
+
+export type MyPagePotsResponse = MyPagePotItem[];

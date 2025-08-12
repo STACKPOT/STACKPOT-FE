@@ -11,7 +11,7 @@ import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
 import { useState } from "react";
 import useGetNickname from "apis/hooks/users/useGetNickname";
-import usePostNickname from "apis/hooks/users/usePostNickname";
+import useGetPostNickname from "apis/hooks/users/useGetPostNickname";
 import { useAuthStore } from "stores/useAuthStore";
 import { roleDescription, roleToVeggie } from "@constants/profileRole";
 
@@ -27,7 +27,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   const [nickname, setNickname] = useState<string>("");
 
   const { mutate: getNickname, isPending } = useGetNickname();
-  const { mutate: postNickname } = usePostNickname();
+  const { mutate: postNickname } = useGetPostNickname();
 
   const setRole = useAuthStore((state) => state.setRole);
 

@@ -11,9 +11,6 @@ import {
   postSignInPayload,
   SignInResponse,
   GetUserResponse,
-  MyPageResponse,
-  GetMyPageParams,
-  GetFinishedModalParams,
   FinishedModalResponse,
   NicknameResponse,
   PatchUserProfileUpdateParams,
@@ -22,6 +19,9 @@ import {
   GetUsersInfoParams,
   TokenServiceResponse,
   DescriptionResponse,
+  GetMyPagePotsParams,
+  MyPagePotsResponse,
+  MyPageFeedsResponse,
 } from "./types/user";
 import { PatchDescriptionBody, PatchPotCompleteBody, PostPotResponse } from "./types/pot";
 
@@ -52,22 +52,18 @@ export const postNickname = async (nickname: string) => {
   return authApiPost<TokenServiceResponse>("/users/nickname/save", undefined, { nickname });
 };
 
-export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
-  // Map data type to endpoint, with a safe fallback
-  const ENDPOINTS = {
-    feed: "/users/feeds",
-    pot: "/users/pots",
-    description: "/users/description",
-  } as const;
 
-  const endpoint = (ENDPOINTS as Record<string, string>)[dataType] ?? ENDPOINTS.description;
-
-  // Description는 응답 스키마가 다르므로 분기 처리
-  if (endpoint === ENDPOINTS.description) {
-    return authApiGet<DescriptionResponse>(endpoint);
-  }
-  return authApiGet<MyPageResponse>(endpoint);
+export const getMyPageFeeds = async () => {
+  return authApiGet<MyPageFeedsResponse>("/users/feeds");
 };
+
+export const getMyPagePots = async ({ status }: GetMyPagePotsParams) => {
+  return authApiGet<MyPagePotsResponse>("/users/pots", { status });
+};
+export const getMyPageDescription = async () => {
+  return authApiGet<DescriptionResponse>("/users/description");
+};
+
 
 export const GetFinishedModal = async (potId: number) => {
   return authApiGet<FinishedModalResponse>(`/my-pots/${potId}/details`);
@@ -87,13 +83,16 @@ export const deleteUser = () => {
   return authApiDelete("/users/delete");
 };
 
-export const getUsersMyPages = async ({
-  userId,
-  dataType,
-}: GetUsersMyPagesParams) => {
-  return authApiGet<GetUsersMyPagesResponse>(`/users/${userId}/mypages`, {
-    dataType,
-  });
+export const getUsersMyPagesFeeds = async (userId: number) => {
+  return authApiGet<MyPageFeedsResponse>(`/users/${userId}/feeds`);
+};
+
+export const getUsersMyPagesPots = async (userId: number) => {
+  return authApiGet<MyPagePotsResponse>(`/users/pots/${userId}`);
+};
+
+export const getUsersMyPagesDescription = async (userId: number) => {
+  return authApiGet<DescriptionResponse>(`/users/description/${userId}`);
 };
 
 export const getUsersInfo = async ({ userId }: GetUsersInfoParams) => {

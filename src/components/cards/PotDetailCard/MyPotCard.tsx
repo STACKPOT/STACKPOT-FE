@@ -40,7 +40,7 @@ interface MyPotCardProps {
   potModeOfOperation: Participation;
   potStartDate: string;
   potDuration: string;
-  recruitmentRoles: Role[];
+  recruitmentRoles: string[];
   type: "myPage" | "myPot" | "applied" | "recruiting";
 }
 

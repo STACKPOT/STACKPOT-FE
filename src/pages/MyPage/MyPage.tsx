@@ -9,17 +9,10 @@ import {
 } from './MyPage.style';
 import { MyPageProfile } from './components';
 import { CtaCard, FloatingButton } from '@components/index';
-import useGetMyPage from 'apis/hooks/users/useGetMyPage';
-import MyPageContent from './components/MyPageContent/MyPageContent';
-
-
+import ProfileContent from '@components/commons/ProfileContent/ProfileContent';
 
 const MyPage = () => {
 	const [contentType, setContentType] = useState<'feed' | 'pot' | 'introduction'>('feed');
-	const { data } = useGetMyPage({ dataType: contentType });
-	if (!data) {
-		return <div>데이터가 없습니다.</div>;
-	}
 
 	return (
 		<main css={container}>
@@ -37,9 +30,9 @@ const MyPage = () => {
 						소개
 					</p>
 				</div>
-				{contentType !== 'introduction' && <CtaCard type="feed" />}
+				{contentType === 'feed' && <CtaCard type="feed" />}
 				<div css={listContainer(contentType)}>
-					<MyPageContent contentType={contentType} data={data} />
+					<ProfileContent contentType={contentType} viewerIsOwner={true} />
 				</div>
 			</div>
 			<FloatingButton type={'feed'} />

@@ -15,6 +15,7 @@ export const contentContainer = css`
 	display: flex;
 	flex-direction: column;
 	width: 62.8rem;
+	gap: 1.6rem;
 `;
 export const nicknameContainer = css`
 	display: flex;

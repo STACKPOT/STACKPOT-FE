@@ -4,7 +4,7 @@ import { postNickname } from "apis/userAPI";
 import { useSnackbar } from "providers";
 import { useNavigate } from "react-router-dom";
 
-const usePostNickname = () => {
+const useGetPostNickname = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
 
@@ -25,4 +25,4 @@ const usePostNickname = () => {
   });
 };
 
-export default usePostNickname;
+export default useGetPostNickname;
