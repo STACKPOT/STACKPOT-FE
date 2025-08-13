@@ -144,7 +144,6 @@ export interface GetTasksCalendarResponse {
 export interface MyPotMember {
   potMemberId: number;
   nickname: string;
-  kakaoId?: string;
   potRole: Role;
   owner: boolean;
 }

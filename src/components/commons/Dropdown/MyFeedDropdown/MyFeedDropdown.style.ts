@@ -17,6 +17,8 @@ export const dropdownStyle = css`
 
 export const iconStyle = css`
   cursor: pointer;
+  height: 2.4rem;
+  width: 2.4rem;
 `;
 
 export const containerStyle = (edit: boolean) => css`

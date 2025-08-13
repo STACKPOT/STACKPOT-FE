@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import {
   TextInput,
@@ -35,27 +34,23 @@ export type FormValues = {
 interface AboutWorkModalProps {
   type: "post" | "patch";
   onClose: () => void;
-  taskId: number | null;
+  taskId: number;
+  potId: number;
 }
 
 const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   type,
   onClose,
   taskId,
+  potId,
 }) => {
-  const { potId } = useParams<{
-    potId: string;
-    taskId: string;
-  }>();
-  const potIdNumber = Number(potId);
-  const taskIdNumber = taskId;
   const { showSnackbar } = useSnackbar();
   const [step, setStep] = useState<"content" | "member">("content");
   const [deleteModal, setDeleteModal] = useState(false);
 
   const { data: taskDetail, isLoading } =
-    type === "patch" && taskIdNumber !== null
-      ? useGetMyPotTaskDetail({ potId: potIdNumber, taskId: taskIdNumber })
+    type === "patch" && taskId && potId
+      ? useGetMyPotTaskDetail({ potId, taskId })
       : { data: null, isLoading: false };
 
   const { mutate: deleteTask } = useDeleteMyPotTask();
@@ -94,11 +89,11 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   };
 
   const handleDeleteTask = () => {
-    if (taskIdNumber !== null) {
+    if (taskId && potId) {
       deleteTask(
         {
-          potId: potIdNumber,
-          taskId: taskIdNumber,
+          potId,
+          taskId,
         },
         {
           onSuccess: () => {
@@ -185,8 +180,8 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
         ) : (
           <SelectTaskMemberModal
             type={type}
-            potId={potIdNumber}
-            taskId={taskIdNumber}
+            potId={potId}
+            taskId={taskId}
             onClose={onClose}
           />
         )}

@@ -35,7 +35,7 @@ const Setting = () => {
     mode: "onChange",
     defaultValues: {
       role: undefined,
-      interest: "",
+      interest: [],
       userIntroduction: "",
       nickname: "",
     },

@@ -47,4 +47,3 @@ export const labelTextStyle = css`
   white-space: nowrap;
 `;
 
-export const cancelContainer = css``; // 삭제 예정

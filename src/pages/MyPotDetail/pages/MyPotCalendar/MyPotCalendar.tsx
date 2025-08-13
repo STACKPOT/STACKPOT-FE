@@ -17,10 +17,10 @@ import useGetTasksMonth from "apis/hooks/myPots/useGetTasksMonth";
 import { useParams } from "react-router-dom";
 import useGetTasksCalendar from "apis/hooks/myPots/useGetTasksCalendar";
 
-import { format } from 'date-fns';
-import { DayPicker } from 'react-day-picker';
-import { ko } from 'date-fns/locale';
-import 'react-day-picker/dist/style.css';
+import { format } from "date-fns";
+import { DayPicker } from "react-day-picker";
+import { ko } from "date-fns/locale";
+import "react-day-picker/dist/style.css";
 import { formatDate } from "@utils/dateUtils";
 import { Global } from "@emotion/react";
 import { Button } from "@components/index";
@@ -28,9 +28,10 @@ import { WavingHandIcon } from "@assets/svgs";
 import { AboutWorkModal } from "@pages/MyPotDetail/components";
 
 const MyPotCalendar = () => {
-  const { potId } = useParams();
+  const { potId, taskId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const potIdNumber = Number(potId);
+  const taskNumber = Number(taskId);
 
   const [date, setDate] = useState<Date | null>(null);
   const [month, setMonth] = useState<Date>(new Date());
@@ -41,12 +42,12 @@ const MyPotCalendar = () => {
     potId: potIdNumber,
     year: month.getFullYear(),
     month: month.getMonth() + 1,
-  })
+  });
 
   const { data: dayTasks } = useGetTasksCalendar({
     potId: potIdNumber,
-    date: formatDate(date ?? new Date())
-  })
+    date: formatDate(date ?? new Date()),
+  });
 
   const getDayOfWeek = (date: Date | null) => {
     if (!date) return "";
@@ -67,17 +68,19 @@ const MyPotCalendar = () => {
   };
 
   useEffect(() => {
-    setDays([...new Set(monthTasks?.map(task => task.deadLine))]);
-  }, [monthTasks])
+    setDays([...new Set(monthTasks?.map((task) => task.deadLine))]);
+  }, [monthTasks]);
 
   return (
     <main css={mainContainer}>
-      {isModalOpen && 
-      <AboutWorkModal
-        type="patch"
-        taskId={null}
-        onClose={() => setIsModalOpen(false)}
-      />}
+      {isModalOpen && (
+        <AboutWorkModal
+          taskId={taskNumber}
+          potId={potIdNumber}
+          onClose={() => setIsModalOpen(false)}
+          type={"post"}
+        />
+      )}
       <div css={container}>
         <div css={calendarStyle}>
           <Global styles={dayPickerGlobalStyle} />
@@ -89,7 +92,7 @@ const MyPotCalendar = () => {
             }}
             formatters={{
               formatCaption: (date, options) =>
-                format(date, 'yyyy년 M월', options),
+                format(date, "yyyy년 M월", options),
             }}
             defaultMonth={month}
             onMonthChange={(m) => setMonth(m)}
@@ -98,10 +101,10 @@ const MyPotCalendar = () => {
             weekStartsOn={1}
             locale={ko}
             modifiers={{
-              hasTask: taskDates
+              hasTask: taskDates,
             }}
             modifiersClassNames={{
-              hasTask: 'has-task'
+              hasTask: "has-task",
             }}
           />
         </div>
@@ -109,12 +112,12 @@ const MyPotCalendar = () => {
           <div css={dateAndButtonContainer}>
             <p css={dateStyle}>
               {date
-                ? `${date.getFullYear()}. ${String(date.getMonth() + 1).padStart(
-                  2,
-                  "0"
-                )}. ${String(date.getDate()).padStart(2, "0")} (${getDayOfWeek(
-                  date
-                )})`
+                ? `${date.getFullYear()}. ${String(
+                    date.getMonth() + 1
+                  ).padStart(2, "0")}. ${String(date.getDate()).padStart(
+                    2,
+                    "0"
+                  )} (${getDayOfWeek(date)})`
                 : ""}
             </p>
             <Button variant="cta" onClick={handleOpenModal}>
@@ -124,7 +127,13 @@ const MyPotCalendar = () => {
           <div css={dividerStyle} />
           <div css={taskContainerStyle}>
             {dayTasks && dayTasks.length > 0 ? (
-              dayTasks.map((task) => <TaskBox potId={potIdNumber} task={task} key={task.taskboardId} />)
+              dayTasks.map((task) => (
+                <TaskBox
+                  potId={potIdNumber}
+                  task={task}
+                  key={task.taskboardId}
+                />
+              ))
             ) : (
               <div css={emptyTaskContainerStyle}>
                 <WavingHandIcon />

@@ -6,3 +6,6 @@ export { default as DeleteIcon } from "./delete.svg?react";
 export { default as PartyIcon } from "./party.svg?react";
 export { default as TodoCheckIcon } from "./todoCheckIcon.svg?react";
 export { default as FireIcon } from "./fire.svg?react";
+export { default as ChattingIcon } from "./chat.svg?react";
+export { default as MypotFillIcon } from "./pot.svg?react";
+

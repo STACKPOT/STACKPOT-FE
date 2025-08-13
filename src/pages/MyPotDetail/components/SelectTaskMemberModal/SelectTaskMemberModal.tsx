@@ -19,7 +19,7 @@ import dayjs from "dayjs";
 interface SelectTaskMemberModalProps {
   type: "post" | "patch";
   potId: number;
-  taskId: number | null;
+  taskId?: number;
   onClose: () => void;
 }
 
@@ -29,7 +29,7 @@ const SelectTaskMemberModal: React.FC<SelectTaskMemberModalProps> = ({
   taskId,
   onClose,
 }: SelectTaskMemberModalProps) => {
-  const { data: members } = useGetMyPotMembers({ potId: potId });
+  const { data: members } = useGetMyPotMembers({ potId });
   const { setValue, watch, handleSubmit } = useFormContext<FormValues>();
   const selectedParticipants = watch("participants");
   const [selectNone, setSelectNone] = useState(false);
@@ -68,7 +68,7 @@ const SelectTaskMemberModal: React.FC<SelectTaskMemberModalProps> = ({
         taskboardStatus: reverseDisplayStatus[data.taskboardStatus],
       };
       patchTask(
-        { potId: potId, taskId: taskId, data: updatedTask },
+        { potId, taskId, data: updatedTask },
         {
           onSuccess: () => onClose(),
         }
@@ -82,7 +82,7 @@ const SelectTaskMemberModal: React.FC<SelectTaskMemberModalProps> = ({
       taskboardStatus: reverseDisplayStatus[data.taskboardStatus],
     };
     postTask(
-      { potId: potId, data: newTask },
+      { potId, data: newTask },
       {
         onSuccess: () => onClose(),
       }
@@ -119,18 +119,17 @@ const SelectTaskMemberModal: React.FC<SelectTaskMemberModalProps> = ({
             onClick={clearSelectedParticipants}
             selected={selectNone && selectedParticipants.length === 0}
           />
-          {members?.result &&
-            members.result.map((member) => (
-              <MemberCard
-                key={member.potMemberId}
-                userId={member.potMemberId}
-                nickname={member.nickname}
-                role={member.potRole}
-                type="selection"
-                selected={selectedParticipants?.includes(member.potMemberId)}
-                onClick={(id) => id && updateSelectedParticipants(id)}
-              />
-            ))}
+          {members?.result?.map((member) => (
+            <MemberCard
+              key={member.potMemberId}
+              userId={member.potMemberId}
+              nickname={member.nickname}
+              role={member.potRole}
+              type="selection"
+              selected={selectedParticipants?.includes(member.potMemberId)}
+              onClick={(id) => id && updateSelectedParticipants(id)}
+            />
+          ))}
         </div>
       </div>
     </ExplainModal>

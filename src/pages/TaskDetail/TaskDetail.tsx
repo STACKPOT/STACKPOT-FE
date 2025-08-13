@@ -66,7 +66,6 @@ const TaskDetailPage: React.FC = () => {
     taskId: taskIdNumber,
   });
 
-  console.log(task);
   const { mutate: deleteTask, isPending: isDeletePending } =
     useDeleteMyPotTask();
   const { mutate: patchStatus, isPending: isStatusPending } =
@@ -140,7 +139,8 @@ const TaskDetailPage: React.FC = () => {
         <AboutWorkModal
           type="patch"
           onClose={() => setIsModalOpen(false)}
-          taskId={task?.result?.taskboardId}
+          taskId={task.result.taskboardId}
+          potId={potIdNumber}
         />
       )}
       {deleteModal && (
@@ -160,7 +160,6 @@ const TaskDetailPage: React.FC = () => {
         onConfirm={confirmChangeModal}
         initialStatus={displayStatus[task.result.status]}
       />
-
 
       <div css={titleContainer}>
         <div css={leftContainer}>
