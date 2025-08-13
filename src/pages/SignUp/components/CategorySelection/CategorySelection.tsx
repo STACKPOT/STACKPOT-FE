@@ -25,12 +25,18 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
           const updated = prev.includes(category)
             ? prev.filter((item) => item !== category)
             : [...prev, category];
-          setValue("interest", updated);
+          setValue("interest", updated, {
+            shouldValidate: true,
+            shouldDirty: true,
+          });
           return updated;
         });
       } else if (type === "role") {
         setSelectedCategory([category]);
-        setValue("role", partMap[category]);
+        setValue("role", partMap[category], {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
       }
     };
 
