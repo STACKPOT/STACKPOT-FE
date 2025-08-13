@@ -1,30 +1,23 @@
 import { useState } from "react";
 import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 import { usePatchMyPotTodo } from "apis/hooks/myPots/usePatchMyPotTodo";
+import { CloseIcon, DeleteIcon, TodoCheckIcon } from "@assets/svgs";
 import {
-  CloseIcon,
-  DeleteIcon,
-  TodoCheckIcon,
-  TodoPlusButtonIcon,
-} from "@assets/svgs";
-import {
-  buttonContainer,
-  buttonStyle,
   container,
-  innerContainer,
   titleContainer,
   titleTextStyle,
   cancelIconStyle,
-  todoContainer,
   eachTodoContainer,
   saveButtonStyle,
-  noTaskTextContainer,
   noneTodoTextStyle,
+  noneTodoTextContainer,
+  addTodoButtonStyle,
+  contentContainer,
 } from "./MyTodoModal.style";
-import { cancelContainer } from "../../../../components/AboutWorkModal/AboutWorkModal.style";
 import { inputFieldStyle } from "@pages/MyPotDetail/components/TextInput/TextInput.style";
 import { Todo } from "apis/types/myPot";
 import { useSnackbar } from "providers";
+import { modalOverlayStyle } from "../../MyPotStatus.style";
 
 interface MyTodoModalProps {
   potId: number;
@@ -34,7 +27,7 @@ interface MyTodoModalProps {
 const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
   const { showSnackbar } = useSnackbar();
 
-  const { data, isLoading } = useGetMyPotTodo({ potId, page: 1, size: 3 });
+  const { data } = useGetMyPotTodo({ potId, page: 1, size: 3 });
   const { mutate: updateTasks } = usePatchMyPotTodo();
 
   const [localTasks, setLocalTasks] = useState<Todo[]>(
@@ -73,41 +66,30 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
 
   const isDisabled = localTasks.some((task) => task.content.trim() === "");
 
-  if (isLoading) return <div>Loading...</div>;
-
   return (
-    <div css={container}>
-      <div css={innerContainer}>
-        <div css={cancelContainer}>
-          <CloseIcon css={cancelIconStyle} onClick={onClose} />
-        </div>
-
+    <div css={modalOverlayStyle}>
+      <div css={container}>
+        <CloseIcon css={cancelIconStyle} onClick={onClose} />
         <div css={titleContainer}>
-          <p css={titleTextStyle}>{"나의 할 일"}</p>
-          <div
-            css={buttonStyle}
-            className={localTasks.length >= 10 ? "max-tasks" : ""}
+          <p css={titleTextStyle}>나의 할 일</p>
+          <button
+            css={addTodoButtonStyle}
             onClick={handleAddTask}
+            disabled={localTasks.length >= 10}
           >
-            <div css={buttonContainer}>
-              할 일 추가
-              <TodoPlusButtonIcon />
-            </div>
-          </div>
+            할 일 추가하기
+          </button>
         </div>
 
-        <div
-          css={todoContainer}
-          className={localTasks.length === 0 ? "empty" : ""}
-        >
-          {localTasks.length === 0 ? (
-            <div css={noTaskTextContainer}>
-              <p css={noneTodoTextStyle}>
-                {"<할 일 추가> 버튼을 눌러서 작성할 수 있어요."}
-              </p>
-            </div>
-          ) : (
-            localTasks.map((task, index) => (
+        {localTasks.length === 0 ? (
+          <div css={noneTodoTextContainer}>
+            <p css={noneTodoTextStyle}>
+              {"<할 일 추가> 버튼을 눌러서 작성할 수 있어요."}
+            </p>
+          </div>
+        ) : (
+          <div css={contentContainer}>
+            {localTasks.map((task, index) => (
               <div key={index} css={eachTodoContainer}>
                 <TodoCheckIcon />
                 <input
@@ -118,9 +100,9 @@ const MyTodoModal: React.FC<MyTodoModalProps> = ({ potId, onClose }) => {
                 />
                 <DeleteIcon onClick={() => handleDeleteTask(index)} />
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
 
         <button
           css={saveButtonStyle}

@@ -4,14 +4,13 @@ import { Role } from "types/role";
 export interface PostPotParams {
   potName: string;
   potStartDate: string;
-  potEndDate?: string;
-  potDuration: string;
+  potEndDate: string;
   potLan: string;
   potContent: string;
   potStatus?: PotStatus;
   potModeOfOperation: Participation;
   potSummary?: string;
-  recruitmentDeadline: string;
+  potRecruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetail[];
 }
 
@@ -24,13 +23,12 @@ export interface PostPotResponse {
   potName: string;
   potStartDate: string;
   potEndDate: string;
-  potDuration: string;
   potLan: string;
   potContent: string;
   potStatus?: PotStatus;
   potModeOfOperation: Participation;
   potSummary: string;
-  recruitmentDeadline: string;
+  potRecruitmentDeadline: string;
   recruitmentDetails: RecruitmentDetailResponse;
 }
 export interface RecruitmentDetailResponse {
@@ -88,13 +86,14 @@ export interface PotDetail {
   potId: number;
   potName: string;
   potStartDate: string;
+  potEndDate: string;
   potDuration: string;
   potLan: string;
   potStatus: PotStatus;
   applied: boolean;
   potModeOfOperation: Participation;
   potContent: string;
-  recruitmentDeadline: string;
+  potRecruitmentDeadline: string;
   recruitmentDetails: string;
   recruitingMembers: Record<Role, number>;
   owner: boolean;
@@ -111,7 +110,6 @@ export interface GetPotApplicationResponse {
 export interface GetPotMemberResponse {
   potMemberId: number;
   nickname: string;
-  kakaoId: string;
   potRole: Role;
   owner: boolean;
 }
@@ -147,7 +145,6 @@ export interface PostPotMemersResponse {
   potId: number;
   userId: number;
   roleName: Role;
-  kakaoId: string;
   nickname: string;
   appealContent: string;
 }
@@ -208,4 +205,8 @@ export interface PatchPotCompleteBody {
   potStartDate: string;
   potLan: string;
   potSummary: string;
+}
+
+export interface PatchDescriptionBody {
+  userDescription: string;
 }

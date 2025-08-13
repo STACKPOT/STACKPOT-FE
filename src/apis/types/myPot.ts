@@ -67,6 +67,7 @@ export interface TaskDetailResponse {
   potId: number;
   participants: Participant[];
   dday: string;
+  createdAt: string;
 }
 
 export interface TodoUpdateRequest {
@@ -141,7 +142,6 @@ export interface GetTasksCalendarResponse {
 export interface MyPotMember {
   potMemberId: number;
   nickname: string;
-  kakaoId?: string;
   potRole: Role;
   owner: boolean;
 }

@@ -97,7 +97,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   return (
     <div css={commentContainer} ref={scrollRef} id="container">
       <p css={commentCountStyle}>{`${comments.length}개의 댓글`}</p>
-      <CommentWriter onSubmit={handleSubmitComment} onCancel={() => {}} />
+      <CommentWriter onSubmit={handleSubmitComment} onCancel={() => { }} />
       <div css={commentListContainer}>
         {comments.map((comment) => (
           <Comment key={id} id={id} type={type} {...comment} />

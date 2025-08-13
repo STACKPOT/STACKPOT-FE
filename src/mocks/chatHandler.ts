@@ -9,6 +9,15 @@ const chatRooms = [
     lastChatTime: "2025-05-31T19:35:00",
     lastChat: "첫 대화를 시작해 보세요!",
     unReadMessageCount: 4,
+    participants: [
+      { userId: 1, userName: "졸린 양파", role: "FRONTEND" },
+      { userId: 2, userName: "게으른 토끼", role: "BACKEND" },
+      { userId: 3, userName: "열정적인 사자", role: "DESIGN" },
+      { userId: 4, userName: "졸린 양파", role: "FRONTEND" },
+      { userId: 5, userName: "게으른 토끼", role: "BACKEND" },
+      { userId: 6, userName: "열정적인 사자", role: "PLANNING" },
+
+    ],
   },
   {
     chatRoomId: 2,
@@ -17,6 +26,11 @@ const chatRooms = [
     lastChatTime: "2025-05-31T19:40:00",
     lastChat: "팀 회의가 곧 시작돼요.",
     unReadMessageCount: 0,
+    participants: [
+      { userId: 1, userName: "졸린 양파", role: "FRONTEND" },
+      { userId: 2, userName: "게으른 토끼", role: "BACKEND" },
+      { userId: 3, userName: "열정적인 사자", role: "DESIGN" },
+    ],
   },
   {
     chatRoomId: 3,
@@ -25,6 +39,11 @@ const chatRooms = [
     lastChatTime: null,
     lastChat: null,
     unReadMessageCount: 0,
+    participants: [
+      { userId: 1, userName: "졸린 양파", role: "FRONTEND" },
+      { userId: 2, userName: "게으른 토끼", role: "BACKEND" },
+      { userId: 3, userName: "열정적인 사자", role: "PLANNING" },
+    ],
   },
 ];
 
@@ -55,54 +74,12 @@ const mockChats = [
 
 
 export const chatHandler = [
-
-
   http.get("https://api.stackpot.co.kr/chat-rooms", () => {
-    // return passthrough();
+    return passthrough();
 
-    return HttpResponse.json({
-      isSuccess: true,
-      code: "SUCCESS",
-      result: chatRooms,
-      message: "Chat rooms fetched successfully.",
-    });
   }),
 
-  http.get("https://api.stackpot.co.kr/chats", ({ request }) => {
-    // return passthrough();
-
-    const url = new URL(request.url);
-    const chatRoomId = Number(url.searchParams.get("chatRoomId"));
-    const cursor = url.searchParams.get("cursor");
-    const direction = url.searchParams.get("direction");
-    const size = Number(url.searchParams.get("size"));
-    const roomChats = mockChats.filter(chat => chat.chatRoomId === chatRoomId);
-    let startIndex = 0;
-    if (cursor) {
-      const index = roomChats.findIndex(chat => chat.chatId === cursor);
-      if (index !== -1) {
-        startIndex = direction === "prev" ? index - size : index + 1;
-      }
-    }
-
-    const sliced = roomChats.slice(
-      Math.max(startIndex, 0),
-      Math.max(startIndex, 0) + size
-    );
-
-    const resultChats = direction === "prev" ? sliced.reverse() : sliced;
-    const prevCursor = resultChats.length ? resultChats[0].chatId : null;
-    const nextCursor = resultChats.length ? resultChats[resultChats.length - 1].chatId : null;
-
-    return HttpResponse.json({
-      isSuccess: true,
-      code: "SUCCESS",
-      result: {
-        prevCursor,
-        nextCursor,
-        chats: resultChats,
-      },
-      message: "Chats fetched successfully.",
-    });
+  http.get("https://api.stackpot.co.kr/chats", () => {
+    return passthrough();
   }),
 ];

@@ -1,78 +1,70 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
-export const cardStyle = css`
-    width: 26.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.6rem;
+export const cardStyle = (isFirst: boolean) => css`
+  width: 27.3rem;
+  padding: 2.4rem 0 1.6rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  background-color: ${isFirst ? `${theme.color.point.normal}` : "white"};
 `;
 
 export const profileImageStyle = css`
-    width: 7.2rem;
-    height: 7.2rem;
-    border: 0.1rem solid ${theme.color.object.alternative};
-    border-radius: 50%;
+  width: 7.2rem;
+  height: 7.2rem;
+  border: 0.1rem solid ${theme.color.object.alternative};
+  border-radius: 50%;
+  cursor: pointer;
 `;
 
 export const nicknameStyle = css`
-    ${theme.font.bodyBold1}
-    color: ${theme.color.object.assistive};
-    display: flex;
-    align-items: center; 
-    gap: 1rem;
-`;
-
-export const statusContainer = css`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.6rem;
+  ${theme.font.caption3}
+  color: ${theme.color.point.hero};
+  margin: 1.6rem 0 0.8rem 0;
 `;
 
 export const todoListContainer = css`
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
-    height: 11.6rem;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 11.6rem;
+  overflow-y: auto;
+  width: 100%;
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    -ms-overflow-style: none; 
-    scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 export const todoContainer = css`
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    max-width: 26.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 5.4rem;
 `;
 
 export const checkBoxStyle = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2.1rem;
-    height: 2.1rem;
-    border: 0.1rem solid ${theme.color.interactive.inactive};
-    border-radius: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 0.1rem solid ${theme.color.interactive.inactive};
+  border-radius: 0.6rem;
 `;
 
 export const todoTextStyle = css`
-    ${theme.font.caption3}
-    color: ${theme.color.base.darkgray};
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+  ${theme.font.body3}
+  color: ${theme.color.point.gray};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const plusButtonStyle = css`
-    cursor: pointer;
-    height: 1.9rem;
+  cursor: pointer;
+  height: 1.9rem;
 `;
