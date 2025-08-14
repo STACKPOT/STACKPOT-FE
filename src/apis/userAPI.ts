@@ -13,7 +13,6 @@ import {
   GetUserResponse,
   MyPageResponse,
   GetMyPageParams,
-  GetFinishedModalParams,
   FinishedModalResponse,
   NicknameResponse,
   PatchUserProfileUpdateParams,
@@ -21,8 +20,9 @@ import {
   GetUsersMyPagesResponse,
   GetUsersInfoParams,
   TokenServiceResponse,
+  DescriptionResponse,
 } from "./types/user";
-import { PatchPotCompleteBody, PostPotResponse } from "./types/pot";
+import { PatchDescriptionBody, PatchPotCompleteBody, PostPotResponse } from "./types/pot";
 
 export const getKakaoLogIn = async (code: string) => {
   return apiGet<LogInResponse>("/users/oauth/kakao", { code });
@@ -33,13 +33,11 @@ export const GetMyUser = async () => {
 };
 export const patchSignIn = async ({
   role,
-  interest,
-  kakaoId,
+  interest
 }: postSignInPayload) => {
   return authApiPatch<SignInResponse>("/users/profile", {
     role,
-    interest,
-    kakaoId,
+    interest
   });
 };
 
@@ -52,7 +50,13 @@ export const postNickname = async (nickname: string) => {
 };
 
 export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
-  return authApiGet<MyPageResponse>("/users/mypages", { dataType });
+  if (dataType === 'feed') {
+    return authApiGet<MyPageResponse>("/users/mypages");
+  } else if (dataType === 'pot') {
+    return authApiGet<MyPageResponse>("/users/mypages", { dataType });
+  } else {
+    return authApiGet<DescriptionResponse>("/users/description");
+  }
 };
 
 export const GetFinishedModal = async (potId: number) => {
@@ -92,3 +96,9 @@ export const patchFinishedPot = async (
 ) => {
   return authApiPatch<PostPotResponse>(`/users/${potId}`, body);
 };
+
+export const patchDescription = async (
+  body: PatchDescriptionBody,
+) => {
+  return authApiPatch('/users/description', body);
+}

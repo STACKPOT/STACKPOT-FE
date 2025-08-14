@@ -1,14 +1,19 @@
 import { CategoryButton, } from '@components/index';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { interests, } from '@constants/categories';
 import { categoryContainer, content, contentHeader } from './CategorySelection.style';
 
 
+
 const CategorySelection = () => {
-	const { setValue, watch } = useFormContext();
+	const { control, setValue } = useFormContext<{ interest: string[] }>();
+	const interest = useWatch({ control, name: "interest", defaultValue: [] });
 
 	const handleSelectCategory = (selected: string) => {
-		setValue('interest', selected);
+		const next = interest.includes(selected)
+			? interest.filter(v => v !== selected)
+			: [...interest, selected];
+		setValue("interest", next, { shouldDirty: true });
 	};
 
 	return (
@@ -16,10 +21,10 @@ const CategorySelection = () => {
 			<div css={contentHeader}>
 				<div>관심사</div>
 				<div css={categoryContainer}>
-					{interests.map((interest) => (
-						<div key={interest}>
-							<CategoryButton style="pot" selected={watch('interest') === interest} onClick={handleSelectCategory}>
-								{interest}
+					{interests.map((item) => (
+						<div key={item}>
+							<CategoryButton style="pot" selected={interest.includes(item)} onClick={() => handleSelectCategory(item)}>
+								{item}
 							</CategoryButton>
 						</div>
 					))}

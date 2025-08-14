@@ -1,5 +1,12 @@
 import React, { useState, useMemo } from "react";
-import { containerStyle, toDoGirdContainer } from "./MyPotStatus.style";
+import {
+  containerStyle,
+  iconStyle,
+  statusBoardContainer,
+  statusBoardStyle,
+  textStyle,
+  toDoGirdContainer,
+} from "./MyPotStatus.style";
 import { AboutWorkModal } from "../../components/index";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
@@ -12,9 +19,10 @@ import {
   MyPotTodoList,
   Pagination,
   StatusBar,
-  StatusBoard,
   TodoStatusSection,
 } from "./components";
+import { PotIcon } from "@assets/svgs";
+import { Button } from "@components/index";
 
 const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -80,8 +88,18 @@ const MyPotStatusPage: React.FC = () => {
           onNext={handleNext}
         />
       </div>
-
-      <StatusBoard onOpenModal={() => handleOpenModal(null, WorkModal[0])} />
+      <div css={statusBoardContainer}>
+        <div css={statusBoardStyle}>
+          <div css={textStyle}>업무 보드</div>
+          <PotIcon css={iconStyle} />
+        </div>
+        <Button
+          variant="action"
+          onClick={() => handleOpenModal(null, WorkModal[0])}
+        >
+          업무 보드 등록
+        </Button>
+      </div>
 
       <div css={toDoGirdContainer}>
         {Object.values(displayStatus).map((status) => {

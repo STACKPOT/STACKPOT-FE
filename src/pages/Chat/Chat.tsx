@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import {
   pageWrapperStyle,
   chatWrapperStyle,
@@ -44,14 +44,17 @@ import { DefaultChatIcon, ImageIcon, SelectChatIcon, WavingHandIcon } from '@ass
 import { roleImages } from '@constants/roleImage';
 import useGetChatRooms from "apis/hooks/chats/useGetChatRooms";
 import useGetChatMessages from "apis/hooks/chats/useGetChatMessages";
-import { ChatMessages, ChatRoom } from "apis/types/chat";
+import { ChatMessages, ChatMessagesResponse, ChatRoom } from "apis/types/chat";
 import { formatCreatedAt, formatTime } from "@utils/dateUtils";
-import { format, parseISO } from "date-fns";
+import { format, parse } from "date-fns";
 import usePatchChatRoomThumbnails from "apis/hooks/chats/usePatchChatRoomThumbnails";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { ExplainModal, MemberGroup } from "@components/index";
 import { Role } from "types/role";
+import { useChatSocket } from "@hooks/useChatSocket";
+import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
+import { ApiResponse } from "apis/types/response";
 
 
 
@@ -61,10 +64,18 @@ const ChatPage = () => {
   const { data } = useGetChatRooms();
   const { mutate: patchChatRoomThumbnails } = usePatchChatRoomThumbnails();
   const chatRooms = (data?.result ?? []) as ChatRoom[];
-  console.log(chatRooms);
+  const { data: user } = useGetMyProfile();
+  const myUserId = user?.id;
 
   const messageListRef = useRef<HTMLDivElement | null>(null);
   const topSentinelRef = useRef<HTMLDivElement | null>(null);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSendClick = () => {
+    if (!inputValue.trim()) return;
+    sendMessage(inputValue);
+    setInputValue("");
+  };
 
   const {
     data: messagesData,
@@ -74,22 +85,35 @@ const ChatPage = () => {
     isFetchingPreviousPage,
   } = useGetChatMessages({
     chatRoomId: selectedRoomId ?? 0,
-    cursor: null,
     size: 20,
-    direction: null,
   });
 
-  const allChats = messagesData?.pages.flatMap((page) => page.result?.chats ?? []) ?? [];
+  const [socketMessages, setSocketMessages] = useState<ChatMessages[]>([]);
+
+  const apiChats = useMemo(
+    () =>
+      messagesData?.pages.flatMap(
+        (page) => (page as ApiResponse<ChatMessagesResponse>).result?.chats ?? []
+      ) ?? [],
+    [messagesData]
+  );
+
+  // API 우선
+  const allChats = useMemo(() => {
+    const seen = new Set<number>(); // chatId가 string이면 Set<string>으로
+    return [...apiChats, ...socketMessages].filter((c) => {
+      if (seen.has(c.chatId)) return false;
+      seen.add(c.chatId);
+      return true;
+    });
+  }, [apiChats, socketMessages]);
+
   const selectedRoom = chatRooms.find((room: ChatRoom) => room.chatRoomId === selectedRoomId);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleRoomClick = (room: ChatRoom) => {
-    const nextRoomId = selectedRoomId === room.chatRoomId ? null : room.chatRoomId;
-    setSelectedRoomId(nextRoomId);
-
-    if (nextRoomId !== null) {
-      refetch(); // Trigger refetch of chat messages
-    }
+    setSelectedRoomId(room.chatRoomId);
+    refetch();
   }
 
 
@@ -109,7 +133,15 @@ const ChatPage = () => {
 
   const handleUploadCoverClick = () => {
     if (selectedRoomId !== null && selectedFile) {
-      patchChatRoomThumbnails({ chatRoomId: selectedRoomId, file: selectedFile });
+      patchChatRoomThumbnails(
+        { chatRoomId: selectedRoomId, file: selectedFile },
+        {
+          onSuccess: () => {
+            setIsModalOpen(false);
+            setSelectedFile(null);
+          },
+        }
+      );
     }
   };
 
@@ -125,13 +157,36 @@ const ChatPage = () => {
 
     const handleScroll = () => {
       if (list.scrollTop === 0 && hasPreviousPage && !isFetchingPreviousPage) {
-        fetchPreviousPage();
+        const prevScrollHeight = list.scrollHeight;
+
+        fetchPreviousPage().then(() => {
+          requestAnimationFrame(() => {
+            const newScrollHeight = list.scrollHeight;
+            list.scrollTop = newScrollHeight - prevScrollHeight;
+          });
+        });
       }
     };
 
     list.addEventListener("scroll", handleScroll);
     return () => list.removeEventListener("scroll", handleScroll);
   }, [hasPreviousPage, isFetchingPreviousPage, fetchPreviousPage]);
+
+
+  const { sendMessage, connected, connectionStatus } = useChatSocket(
+    selectedRoomId,
+    (msg: ChatMessages) => {
+      setSocketMessages((prev) => [...prev, msg]);
+    }
+  );
+
+  useEffect(() => {
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
+  }, [socketMessages]);
+
+  useEffect(() => setSocketMessages([]), [selectedRoomId]);
 
   return (
     <div css={pageWrapperStyle}>
@@ -177,7 +232,7 @@ const ChatPage = () => {
               title={`채팅방 커버 이미지를 변경할까요?`}
               buttonText="변경하기"
               onButtonClick={handleUploadCoverClick}
-              onCancel={() => setIsModalOpen(false)} >
+              onCancel={() => { setIsModalOpen(false); }} >
               {selectedFile ? (
                 <img
                   src={URL.createObjectURL(selectedFile)}
@@ -198,11 +253,11 @@ const ChatPage = () => {
           )}
           <div css={chatTopBarStyle}>
             <div css={selectedRoomStyle}>
-              {selectedRoom && <MemberGroup
+              {/* {selectedRoom && <MemberGroup
                 memberRoleList={
                   selectedRoom.participants.map((member) =>
                     member.role as Role)
-                } />}
+                } />} */}
               <div css={chatRoomHeaderStyle}>{selectedRoom ? selectedRoom.chatRoomName : "채팅할 팟을 선택해 주세요."}</div>
               <div css={chatRoomTextStyle} onClick={() => setIsModalOpen(true)}><ImageIcon />커버 추가</div>
             </div>
@@ -224,19 +279,37 @@ const ChatPage = () => {
               {groupMessagesByDate(allChats).map(([date, chats]) => (
                 <div key={date}>
                   <div css={dateDividerStyle}>
-                    {format(new Date(date), "yyyy년 M월 d일")}
+                    {format(parse(date, "yyyy-MM-dd", new Date()), "yyyy년 M월 d일")}
                   </div>
-                  {chats.map((chat) => (
-                    <MessageBubble key={chat.chatId} message={chat} isMine={chat.userName === "나"} />
-                  ))}
+                  {chats.map((chat) => {
+                    return <MessageBubble key={chat.chatId} message={chat} isMine={chat.userId === myUserId} />
+                  })}
                 </div>
               ))}
             </div>
           )}
 
           <div css={inputContainerStyle}>
-            <textarea css={textAreaStyle} placeholder="메시지를 입력해 보세요." />
-            <button css={sendButtonStyle}>전송</button>
+            <textarea
+              css={textAreaStyle}
+              placeholder={
+                connectionStatus === 'connecting'
+                  ? '연결 중입니다...'
+                  : connectionStatus === 'error'
+                    ? '연결 오류 - 새로고침 해주세요'
+                    : '메시지를 입력해 보세요.'
+              }
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              disabled={connectionStatus !== 'open'}
+            />
+            <button
+              css={sendButtonStyle}
+              onClick={handleSendClick}
+              disabled={connectionStatus !== 'open' || !inputValue.trim()}
+            >
+              전송
+            </button>
           </div>
         </div>
       </div >
@@ -250,7 +323,8 @@ const groupMessagesByDate = (messages: ChatMessages[]) => {
   const groups: { [date: string]: ChatMessages[] } = {};
 
   messages.forEach((message) => {
-    const dateKey = format(parseISO(message.createdAt), "yyyy-MM-dd");
+    const dateKey = format(parse(message.createdAt, "yyyy년 M월 d일 HH:mm", new Date()), "yyyy-MM-dd");
+
     if (!groups[dateKey]) {
       groups[dateKey] = [];
     }
@@ -273,7 +347,6 @@ const MessageBubble = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleProfileClick = () => {
-    console.log(message.userId);
     setIsModalOpen(true);
   };
 
