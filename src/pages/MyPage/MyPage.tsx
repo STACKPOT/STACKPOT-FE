@@ -16,7 +16,7 @@ const MyPage = () => {
 
 	return (
 		<main css={container}>
-			<MyPageProfile />
+			<MyPageProfile viewerIsOwner={true} />
 			<div css={dividerStyle} />
 			<div css={bodyContainer}>
 				<div css={tabsContainer}>

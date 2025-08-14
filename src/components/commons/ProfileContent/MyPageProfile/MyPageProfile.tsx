@@ -17,9 +17,9 @@ import { Badge } from "@components/index";
 import { Role } from "types/role";
 import useGetProfile from "apis/hooks/users/useGetProfile";
 
-type Props = { userId?: number };
+type Props = { userId?: number, viewerIsOwner?: boolean };
 
-const MyPageProfile: React.FC<Props> = ({ userId }) => {
+const MyPageProfile: React.FC<Props> = ({ userId, viewerIsOwner }) => {
   const navigate = useNavigate();
   const { data } = useGetProfile(userId);
 
@@ -39,7 +39,7 @@ const MyPageProfile: React.FC<Props> = ({ userId }) => {
       <div css={contentContainer}>
         <div css={nicknameContainer}>
           <h1 css={nicknameStyle}>{nickname} <Badge content={categoryText[role]} /></h1>
-          {!userId && (
+          {viewerIsOwner && (
             <SetUpIcon type="button" css={setUpIconStyle} onClick={handleSetUp} />
           )}
         </div>

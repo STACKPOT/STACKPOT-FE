@@ -15,7 +15,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
   const [series, setSeries] = useState(defaultSeriesList);
   const [newSeries, setNewSeries] = useState("");
   const [isComposing, setIsComposing] = useState(false);
-  console.log(series);
+
   return (
     <div css={modalOverlayStyle}>
       <div css={modalContainerStyle}>

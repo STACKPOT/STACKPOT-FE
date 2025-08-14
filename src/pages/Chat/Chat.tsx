@@ -59,7 +59,7 @@ import { ApiResponse } from "apis/types/response";
 
 
 const ChatPage = () => {
-  const [selectedRoomId, setSelectedRoomId] = useState<number | null>(null);
+  const [selectedRoomId, setSelectedRoomId] = useState<number | undefined>(undefined);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { data } = useGetChatRooms();
   const { mutate: patchChatRoomThumbnails } = usePatchChatRoomThumbnails();
@@ -81,10 +81,9 @@ const ChatPage = () => {
     data: messagesData,
     fetchPreviousPage,
     hasPreviousPage,
-    refetch,
     isFetchingPreviousPage,
   } = useGetChatMessages({
-    chatRoomId: selectedRoomId ?? 0,
+    chatRoomId: selectedRoomId,
     size: 20,
   });
 
@@ -113,7 +112,6 @@ const ChatPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleRoomClick = (room: ChatRoom) => {
     setSelectedRoomId(room.chatRoomId);
-    refetch();
   }
 
 
@@ -132,7 +130,7 @@ const ChatPage = () => {
   };
 
   const handleUploadCoverClick = () => {
-    if (selectedRoomId !== null && selectedFile) {
+    if (selectedRoomId && selectedFile) {
       patchChatRoomThumbnails(
         { chatRoomId: selectedRoomId, file: selectedFile },
         {

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import SockJS from "sockjs-client";
 import { Stomp } from "@stomp/stompjs";
 import { ChatMessages } from "apis/types/chat";
@@ -9,7 +10,7 @@ const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "https://api.stackpot.co.k
 
 
 export const useChatSocket = (
-  chatRoomId: number | null,
+  chatRoomId: number | undefined,
   onReceive: (msg: ChatMessages) => void
 ) => {
   const clientRef = useRef<any>(null);
@@ -17,10 +18,31 @@ export const useChatSocket = (
   const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'open' | 'closed' | 'error'>('closed');
   const accessToken = localStorage.getItem('accessToken');
   const { mutate } = usePatchChatRoomJoin();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (!chatRoomId || !accessToken) return;
-    mutate(chatRoomId);
+    mutate(chatRoomId, {
+      onSuccess: () => {
+        // 읽음 처리 직후 사이드바의 해당 채팅방 뱃지(미읽음 수)를 즉시 0으로 반영
+        queryClient.setQueryData(["chatRooms"], (prev: any) => {
+          if (!prev) return prev;
+          // prev.result가 배열 구조라고 가정하여 안전하게 업데이트
+          if (Array.isArray(prev.result)) {
+            return {
+              ...prev,
+              result: prev.result.map((room: any) =>
+                room.chatRoomId === chatRoomId
+                  ? { ...room, unReadMessageCount: 0 }
+                  : room
+              ),
+            };
+          }
+
+          return prev;
+        });
+      },
+    });
 
     const client = Stomp.over(() => new SockJS(SOCKET_URL));
     client.reconnectDelay = 1000;
