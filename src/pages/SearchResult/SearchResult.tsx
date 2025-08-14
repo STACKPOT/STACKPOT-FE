@@ -109,7 +109,7 @@ const SearchResult = () => {
               content={pot.potContent}
               categories={pot.recruitmentRoles}
               isSaved={pot.isSaved}
-              potSaveCount={pot.saveCount}
+              potSaveCount={pot.potSaveCount}
             />
           ))}
         </div>
