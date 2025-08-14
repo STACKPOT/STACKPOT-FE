@@ -10,7 +10,7 @@ export const container = css`
 export const mainContainer = css`
   display: flex;
   flex-direction: column;
-  padding: 4.4rem 7.2rem;
+  padding: 4.4rem 5.1rem;
   border: 1px solid ${theme.color.object.alternative};
   border-radius: 8px;
 `;
@@ -21,8 +21,8 @@ export const headerContainer = css`
   margin-bottom: 2.4rem;
 `;
 export const headerStyle = css`
-  ${theme.font.bodyBold2}
-  color: ${theme.color.base.darkgray};
+  ${theme.font.title3}
+  color: ${theme.color.point.gray};
 `;
 export const dividerStyle = css`
   height: 0.1px;
@@ -31,14 +31,13 @@ export const dividerStyle = css`
 export const bodyContainer = css`
   display: flex;
   flex-direction: column;
-  /* gap: 5.6rem; */
 `;
 
 export const categoryContainer = css`
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  margin-bottom: 4.4rem;
+  margin-bottom: 5.2rem;
 `;
 
 export const buttonStyle = css`
