@@ -11,6 +11,8 @@ export const usePostMyPotTask = () => {
     mutationFn: ({ potId, data }: { potId: number; data: PostTask }) => postMyPotTask({ potId, data }),
     onSuccess: (_, { potId }) => {
       queryClient.invalidateQueries({ queryKey: ["myPotTasks", potId] });
+      queryClient.invalidateQueries({ queryKey: ["tasksMonth"], });
+
       showSnackbar({
         message: "업무가 생성되었습니다.",
         severity: "success",

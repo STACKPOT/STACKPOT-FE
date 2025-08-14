@@ -7,9 +7,9 @@ import {
 	tabsContainer,
 	tabsTextStyle,
 } from './MyPage.style';
-import { MyPageProfile } from './components';
 import { CtaCard, FloatingButton } from '@components/index';
 import ProfileContent from '@components/commons/ProfileContent/ProfileContent';
+import { MyPageProfile } from '@components/commons/ProfileContent';
 
 const MyPage = () => {
 	const [contentType, setContentType] = useState<'feed' | 'pot' | 'introduction'>('feed');

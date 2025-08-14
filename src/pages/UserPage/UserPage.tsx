@@ -3,7 +3,7 @@ import { bodyContainer, container, dividerStyle, listContainer, tabsContainer, t
 import { CtaCard, FloatingButton } from '@components/index';
 import { useParams } from 'react-router-dom';
 import ProfileContent from '@components/commons/ProfileContent/ProfileContent';
-import { MyPageProfile } from '@pages/MyPage/components';
+import { MyPageProfile } from '@components/commons/ProfileContent';
 import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
 
 const UserPage = () => {

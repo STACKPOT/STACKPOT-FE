@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import Modal from "@components/commons/Modal/Modal";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
-import { PotSummaryModal } from "@pages/MyPage/components";
+import { PotSummaryModal } from "@components/commons/ProfileContent";
 import { DateRangeIcon, FlagIcon, WebTrafficIcon } from "@assets/svgs";
 import { participationKoreanMap } from "@constants/categories";
 

@@ -8,7 +8,7 @@ import {
 } from "./FinishedPotCard.style";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { AppealModal, PotSummaryModal } from "@pages/MyPage/components";
+import { AppealModal, PotSummaryModal } from "@components/commons/ProfileContent";
 import { Role } from "types/role";
 import routes from "@constants/routes";
 import { AppealPotPatch } from "apis/types/pot";
