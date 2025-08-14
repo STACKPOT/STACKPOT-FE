@@ -47,7 +47,7 @@ interface PostCardProps {
   profileImage?: string;
   feedId: number;
   writerId: number;
-  isMyPost: boolean;
+  isMyPost?: boolean;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
