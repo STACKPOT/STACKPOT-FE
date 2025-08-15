@@ -69,9 +69,7 @@ const SignUp = () => {
     setIsModalOpen(false);
   };
 
-  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    return isDirty && currentLocation.pathname !== nextLocation.pathname;
-  });
+  const blocker = useBlocker(isDirty);
 
   return (
     <main css={container}>
