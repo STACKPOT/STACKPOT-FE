@@ -28,3 +28,7 @@ export const detailButtonStyle = css`
     color: ${theme.color.feedback.positive};
   }
 `;
+
+export const modalContainerStyle = css`
+  width: 76rem;
+`;
