@@ -55,7 +55,7 @@ const StartPotModal: React.FC<StartPotModalProps> = ({
             <MemberCard
               userId={applicant.userId}
               nickname={applicant.userNickname}
-              role={applicant.potRole}
+              role={applicant.potRole.name}
               type="selection"
               onClick={() => {}}
             />

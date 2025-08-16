@@ -102,8 +102,7 @@ export interface PotDetail {
 }
 export interface GetPotApplicationResponse {
   applicationId: number;
-  potRole: Role;
-  status: string;
+  potRole: PotRole;
   userId: number;
   userNickname: string;
 }
