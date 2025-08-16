@@ -14,12 +14,7 @@ export const headerStyle = (isHomePage: boolean) => css`
 `;
 
 export const searchIconStyle = (isHomePage: boolean) => css`
-  /* width: 2.2rem;
-  height: 2.2rem; */
-  /* margin: 0.8rem; */
-  color: ${isHomePage
-    ? theme.color.point.yellow
-    : theme.color.interactive.inactive};
+  color: ${isHomePage ? theme.color.point.yellow : theme.color.object.hero};
   cursor: pointer;
 `;
 
