@@ -1,15 +1,24 @@
 import routes from "@constants/routes";
 import { useMutation } from "@tanstack/react-query";
-import { getKakaoLogIn } from "apis/userAPI";
+import { getGoogleLogIn, getKakaoLogIn, getNaverLogIn } from "apis/userAPI";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "stores/useAuthStore";
 
-const useGetSignIn = () => {
+const useGetSignIn = (signInType: "google" | "kakao" | "naver") => {
   const navigate = useNavigate();
   const setRole = useAuthStore((state) => state.setRole);
 
   return useMutation({
-    mutationFn: (code: string) => getKakaoLogIn(code),
+    mutationFn: (code: string) => {
+      switch (signInType) {
+        case "google":
+          return getGoogleLogIn(code);
+        case "kakao":
+          return getKakaoLogIn(code);
+        default:
+          return getNaverLogIn(code);
+      }
+    },
     onSuccess: (data) => {
       if (data.result) {
         const { accessToken, refreshToken } = data.result.tokenServiceResponse;

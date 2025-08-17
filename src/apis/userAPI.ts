@@ -22,22 +22,31 @@ import {
   TokenServiceResponse,
   DescriptionResponse,
 } from "./types/user";
-import { PatchDescriptionBody, PatchPotCompleteBody, PostPotResponse } from "./types/pot";
+import {
+  PatchDescriptionBody,
+  PatchPotCompleteBody,
+  PostPotResponse,
+} from "./types/pot";
+
+export const getGoogleLogIn = async (code: string) => {
+  return apiGet<LogInResponse>("/users/oauth/google", { code });
+};
 
 export const getKakaoLogIn = async (code: string) => {
   return apiGet<LogInResponse>("/users/oauth/kakao", { code });
 };
 
+export const getNaverLogIn = async (code: string) => {
+  return apiGet<LogInResponse>("/users/oauth/naver", { code });
+};
+
 export const GetMyUser = async () => {
   return authApiGet<GetUserResponse>("/users");
 };
-export const patchSignIn = async ({
-  role,
-  interest
-}: postSignInPayload) => {
+export const patchSignIn = async ({ role, interest }: postSignInPayload) => {
   return authApiPatch<SignInResponse>("/users/profile", {
     role,
-    interest
+    interest,
   });
 };
 
@@ -46,13 +55,15 @@ export const getNickname = async (role: Role) => {
 };
 
 export const postNickname = async (nickname: string) => {
-  return authApiPost<TokenServiceResponse>("/users/nickname/save", undefined, { nickname });
+  return authApiPost<TokenServiceResponse>("/users/nickname/save", undefined, {
+    nickname,
+  });
 };
 
 export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
-  if (dataType === 'feed') {
+  if (dataType === "feed") {
     return authApiGet<MyPageResponse>("/users/mypages");
-  } else if (dataType === 'pot') {
+  } else if (dataType === "pot") {
     return authApiGet<MyPageResponse>("/users/mypages", { dataType });
   } else {
     return authApiGet<DescriptionResponse>("/users/description");
@@ -97,8 +108,6 @@ export const patchFinishedPot = async (
   return authApiPatch<PostPotResponse>(`/users/${potId}`, body);
 };
 
-export const patchDescription = async (
-  body: PatchDescriptionBody,
-) => {
-  return authApiPatch('/users/description', body);
-}
+export const patchDescription = async (body: PatchDescriptionBody) => {
+  return authApiPatch("/users/description", body);
+};
