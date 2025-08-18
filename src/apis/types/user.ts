@@ -67,7 +67,7 @@ interface MyBadges {
 }
 
 export interface GetMyPagePotsParams {
-	status: 'all' | 'recruiting' | 'ongoing' | 'completed';
+	potStatus: 'all' | 'recruiting' | 'ongoing' | 'completed';
 }
 
 export interface FinishedModalResponse {

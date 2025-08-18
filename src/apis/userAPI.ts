@@ -53,8 +53,8 @@ export const getMyPageFeeds = async () => {
   return authApiGet<MyPageFeedsResponse>("/users/feeds");
 };
 
-export const getMyPagePots = async ({ status }: GetMyPagePotsParams) => {
-  return authApiGet<MyPagePotsResponse>("/users/pots", { status });
+export const getMyPagePots = async ({ potStatus }: GetMyPagePotsParams) => {
+  return authApiGet<MyPagePotsResponse>("/users/pots", { potStatus });
 };
 export const getMyPageDescription = async () => {
   return authApiGet<DescriptionResponse>("/users/description");
@@ -83,8 +83,13 @@ export const getUsersMyPagesFeeds = async (userId: number) => {
   return authApiGet<MyPageFeedsResponse>(`/users/${userId}/feeds`);
 };
 
-export const getUsersMyPagesPots = async (userId: number) => {
-  return authApiGet<MyPagePotsResponse>(`/users/pots/${userId}`);
+export const getUsersMyPagesPots = async (
+  userId: number,
+  potStatus?: GetMyPagePotsParams['potStatus']
+) => {
+  const url = `/users/pots/${userId}`;
+  const params = potStatus ? { status } : undefined;
+  return authApiGet<MyPagePotsResponse>(url, params);
 };
 
 export const getUsersMyPagesDescription = async (userId: number) => {

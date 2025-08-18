@@ -16,8 +16,9 @@ const usePatchDescription = () => {
         message: "작성한 내용이 저장되었습니다.",
         severity: "success",
       });
+
       queryClient.invalidateQueries({
-        queryKey: ['mypage', 'description'],
+        queryKey: ['profile', 'description', 'me'],
       });
     },
     onError: () => {

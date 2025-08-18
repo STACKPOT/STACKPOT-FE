@@ -6,11 +6,10 @@ import { GetUserResponse } from 'apis/types/user';
 const useGetProfile = (userId?: number) => {
   return useQuery({
     queryKey: ['profile', userId ?? 'me'],
-    queryFn: () => (userId ? getUsersInfo({ userId }) : GetMyUser()),
+    queryFn: () => (userId !== undefined ? getUsersInfo({ userId }) : GetMyUser()),
     select: (response: ApiResponse<GetUserResponse>) => response.result,
     staleTime: 0,
   });
 };
-
 export default useGetProfile;
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import { MyPotCard, PostCard } from '@components/index';
 import { AddIcon, SearchBlueIcon } from '@assets/svgs';
@@ -31,16 +31,24 @@ type Props = {
 const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner: boolean }) => {
   const { data } = useGetProfileFeeds(userId);
   const feeds = data?.feeds ?? [];
-  const defaultSeries = data?.seriesModal ?? [{ label: '전체보기' }];
+  const defaultSeries = data?.seriesComments ?? [{ label: '전체보기' }];
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSeriesModalOpen, setIsSeriesModalOpen] = useState(false);
   const [seriesList, setSeriesList] = useState(defaultSeries);
 
-  const filteredPosts = feeds.filter((post: Feeds) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    post.content.toLowerCase().includes(searchTerm.toLowerCase())
+  useEffect(() => {
+    setSeriesList(defaultSeries);
+  }, [defaultSeries]);
+
+  const filteredPosts = useMemo(() =>
+    feeds.filter(
+      (post: Feeds) =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.content.toLowerCase().includes(searchTerm.toLowerCase()),
+    ),
+    [feeds, searchTerm],
   );
 
   return (
@@ -105,10 +113,10 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
 };
 
 const PotContent = ({ userId }: { userId?: number }) => {
-  const [status, setStatus] = useState<GetMyPagePotsParams['status']>('all');
+  const [status, setStatus] = useState<GetMyPagePotsParams['potStatus']>('all');
   const { data: pots } = useGetProfilePots(status, userId);
 
-  const STATUS_TABS: { key: GetMyPagePotsParams['status']; label: string }[] = [
+  const STATUS_TABS: { key: GetMyPagePotsParams['potStatus']; label: string }[] = [
     { key: 'all', label: '전체보기' },
     { key: 'recruiting', label: '모집 중인 팟' },
     { key: 'ongoing', label: '진행 중인 팟' },

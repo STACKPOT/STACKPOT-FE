@@ -1,26 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { bodyContainer, container, dividerStyle, listContainer, tabsContainer, tabsTextStyle } from './UserPage.style';
-import { CtaCard, FloatingButton } from '@components/index';
-import { useParams } from 'react-router-dom';
+import { FloatingButton } from '@components/index';
+import { useNavigate, useParams } from 'react-router-dom';
 import ProfileContent from '@components/commons/ProfileContent/ProfileContent';
 import { MyPageProfile } from '@components/commons/ProfileContent';
 import useGetMyProfile from 'apis/hooks/users/useGetMyProfile';
+import routes from '@constants/routes';
 
 const UserPage = () => {
   const [contentType, setContentType] = useState<'feed' | 'pot' | 'introduction'>('feed');
   const { userId } = useParams<{ userId: string }>();
   const { data: user } = useGetMyProfile();
-
-  if (!userId) {
+  const navigate = useNavigate();
+  const targetUserId = Number(userId);
+  if (Number.isNaN(targetUserId)) {
     return <div>유효한 유저 ID가 필요합니다.</div>;
   }
+  const viewerIsOwner = targetUserId === user?.id;
 
-  const UserId = Number(userId);
-  const viewerIsOwner = UserId === user?.id;
+  useEffect(() => {
+    if (viewerIsOwner) {
+      navigate(routes.myPage);
+    }
+  }, []);
 
   return (
     <main css={container}>
-      <MyPageProfile userId={UserId} viewerIsOwner={viewerIsOwner} />
+      <MyPageProfile userId={targetUserId} viewerIsOwner={false} />
       <div css={dividerStyle} />
       <div css={bodyContainer}>
         <div css={tabsContainer}>
@@ -34,9 +40,8 @@ const UserPage = () => {
             소개
           </p>
         </div>
-        {viewerIsOwner && contentType === 'feed' && <CtaCard type="feed" />}
         <div css={listContainer(contentType)}>
-          <ProfileContent contentType={contentType} viewerIsOwner={viewerIsOwner} userId={UserId} />
+          <ProfileContent contentType={contentType} viewerIsOwner={false} userId={targetUserId} />
         </div>
       </div>
       <FloatingButton type={'feed'} />

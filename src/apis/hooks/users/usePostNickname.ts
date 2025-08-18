@@ -4,7 +4,7 @@ import { postNickname } from "apis/userAPI";
 import { useSnackbar } from "providers";
 import { useNavigate } from "react-router-dom";
 
-const useGetPostNickname = () => {
+const usePostNickname = () => {
   const navigate = useNavigate();
   const { showSnackbar } = useSnackbar();
 
@@ -12,7 +12,7 @@ const useGetPostNickname = () => {
     mutationFn: (nickname: string) => postNickname(nickname),
     onSuccess: (data) => {
       if (data.result) {
-        const { accessToken, refreshToken } = data?.result;
+        const { accessToken, refreshToken } = data.result;
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
         navigate(routes.home);
@@ -25,4 +25,4 @@ const useGetPostNickname = () => {
   });
 };
 
-export default useGetPostNickname;
+export default usePostNickname;
