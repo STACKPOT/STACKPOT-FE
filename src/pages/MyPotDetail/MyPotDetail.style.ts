@@ -72,3 +72,19 @@ export const navLinkStyle = (isActive: boolean) => css`
     color: ${theme.color.point.hero};
   }
 `;
+
+export const memberListContainer = css`
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: space-between;
+  grid-gap: 1.2rem 2.4rem;
+  max-height: 28rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-gutter: stable;
+`;
