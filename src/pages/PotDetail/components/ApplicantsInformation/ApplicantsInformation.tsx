@@ -118,9 +118,10 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
         <StartPotModal
           potId={potId}
           selectedApplicants={selectedApplicants}
-          onStartPotSuccess={() =>
-            navigate(`${routes.myPot.task}/${potId}`, { replace: true })
-          }
+          onStartPotSuccess={() => {
+            navigate(`${routes.myPot.task}/${potId}`, { replace: true });
+            window.scrollTo(0, 0);
+          }}
           onCancelModal={() => setShowStartModal(false)}
         />
       )}
