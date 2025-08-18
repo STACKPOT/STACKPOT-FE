@@ -41,6 +41,7 @@ interface MyPotCardProps {
   potStartDate: string;
   potDuration: string;
   recruitmentRoles?: string[];
+  isOwner: boolean;
   type: "myPage" | "myPot" | "applied" | "recruiting";
 }
 
@@ -62,6 +63,7 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   potStartDate,
   potDuration,
   recruitmentRoles,
+  isOwner,
   type,
 }: MyPotCardProps) => {
   const navigate = useNavigate();
@@ -77,7 +79,9 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
 
   const handleMouseOver = (mouseOver: boolean) => {
     if (type !== "recruiting") {
-      setShowButton(mouseOver);
+      if (type !== "myPot" || isOwner) {
+        setShowButton(mouseOver);
+      }
     }
   };
 
