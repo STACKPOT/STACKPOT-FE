@@ -4,7 +4,7 @@ import { getGoogleLogIn, getKakaoLogIn, getNaverLogIn } from "apis/userAPI";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "stores/useAuthStore";
 
-const useGetSignIn = (signInType: "google" | "kakao" | "naver") => {
+const useGetSignIn = (signInType: string | undefined) => {
   const navigate = useNavigate();
   const setRole = useAuthStore((state) => state.setRole);
 
