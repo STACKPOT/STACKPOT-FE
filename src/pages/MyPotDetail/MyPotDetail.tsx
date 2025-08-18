@@ -12,6 +12,9 @@ import {
   tabsContainer,
   navLinkStyle,
   iconStyle,
+  titleStyle,
+  titleButtonStyle,
+  actionButtonStyle,
 } from "./MyPotDetail.style";
 import routes from "@constants/routes";
 import { ArrowLeftRoundIcon, ChattingIcon } from "@assets/svgs";
@@ -54,13 +57,20 @@ const MyPotDetail: React.FC = () => {
   return (
     <>
       <main css={container}>
-        <header css={headerStyle}>
-          <button onClick={handlePrev} css={prevButtonStyle}>
-            <ArrowLeftRoundIcon css={iconStyle} />
-          </button>
-          <h2 css={textStyle}>{data?.title ?? null}</h2>
-          <ChattingIcon onClick={handleChattingClick} />
-        </header>
+        <div css={titleStyle}>
+          <div css={headerStyle}>
+            <button onClick={handlePrev} css={prevButtonStyle}>
+              <ArrowLeftRoundIcon css={iconStyle} />
+            </button>
+            <h2 css={textStyle}>{data?.title ?? null}</h2>
+            <ChattingIcon onClick={handleChattingClick} />
+          </div>
+
+          <div css={titleButtonStyle}>
+            <button css={actionButtonStyle("modify")}>수정</button>
+            <button css={actionButtonStyle("permission")}>권한 설정</button>
+          </div>
+        </div>
         <div css={tabsContainer}>
           {tabs.map((tab) => {
             const isActive = location.pathname.includes(tab.path);
