@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { MyPotIcon, HomeIcon, HomeFilledIcon, PotIcon, LogoFilledIcon, ChatIcon, MyPotFilledIcon, ChatFilledIcon } from "@assets/svgs";
+import {
+  MyPotIcon,
+  HomeIcon,
+  HomeFilledIcon,
+  PotIcon,
+  LogoFilledIcon,
+  ChatIcon,
+  MyPotFilledIcon,
+  ChatFilledIcon,
+} from "@assets/svgs";
 import {
   container,
   iconStyle,
@@ -11,37 +20,38 @@ import {
   menuItemStyle,
 } from "./SideBar.style";
 import routes from "@constants/routes";
-
-
+import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
 
 const menuItems = [
   {
     to: routes.home,
     icon: <HomeIcon css={iconStyle} />,
     activeIcon: <HomeFilledIcon css={iconStyle} />,
-    label: '홈'
+    label: "홈",
   },
   {
     to: routes.pot.base,
     icon: <PotIcon css={potIconStyle} />,
     activeIcon: <LogoFilledIcon css={potIconStyle} />,
-    label: '모든팟',
+    label: "모든팟",
   },
   {
     to: routes.myPot.base,
     icon: <MyPotIcon css={iconStyle} />,
     activeIcon: <MyPotFilledIcon css={iconStyle} />,
-    label: '나의팟',
-  }, {
+    label: "나의팟",
+  },
+  {
     to: routes.chat,
     icon: <ChatIcon css={iconStyle} />,
     activeIcon: <ChatFilledIcon css={iconStyle} />,
-    label: '채팅',
+    label: "채팅",
   },
 ];
 
 const SideBar: React.FC = () => {
   const [top, setTop] = useState(0);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
     const initialTop = window.innerHeight / 2 + window.scrollY;
@@ -67,31 +77,42 @@ const SideBar: React.FC = () => {
   }, []);
 
   return (
-    <div css={mainContainer(top)}>
-      <div css={container}>
-        {menuItems.map(({ to, icon, activeIcon, label }, index) => {
-          const accessToken = localStorage.getItem("accessToken");
-          const isPrivateRoute = to === routes.myPot.base || to === routes.chat;
-          const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY}&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code&scope=account_email&prompt=login`;
+    <>
+      <div css={mainContainer(top)}>
+        <div css={container}>
+          {menuItems.map(({ to, icon, activeIcon, label }, index) => {
+            const accessToken = localStorage.getItem("accessToken");
+            const isPrivateRoute =
+              to === routes.myPot.base || to === routes.chat;
 
-          return (
-            <NavLink
-              key={index}
-              to={!accessToken && isPrivateRoute ? link : to}
-              style={({ isActive }) => getNavLinkStyle(isActive)}
-              css={menuItemStyle}
-            >
-              {({ isActive }) => (
-                <>
-                  {isActive ? activeIcon : icon}
-                  <p css={labelStyle}>{label}</p>
-                </>
-              )}
-            </NavLink>
-          );
-        })}
+            return (
+              <NavLink
+                key={index}
+                to={to}
+                style={({ isActive }) => getNavLinkStyle(isActive)}
+                css={menuItemStyle}
+                onClick={(e) => {
+                  if (!accessToken && isPrivateRoute) {
+                    e.preventDefault();
+                    setIsLoginModalOpen(true);
+                  }
+                }}
+              >
+                {({ isActive }) => (
+                  <>
+                    {isActive ? activeIcon : icon}
+                    <p css={labelStyle}>{label}</p>
+                  </>
+                )}
+              </NavLink>
+            );
+          })}
+        </div>
       </div>
-    </div>
+      {isLoginModalOpen && (
+        <LoginModal onCancel={() => setIsLoginModalOpen(false)} />
+      )}
+    </>
   );
 };
 
