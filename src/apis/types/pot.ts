@@ -69,7 +69,6 @@ export interface GetPotsApplyResponse {
   potName: string;
   potStartDate: string;
   potEndDate: string;
-  potDuration: string;
   potModeOfOperation: Participation;
   potContent: string;
   recruitmentRoles: Role[];
