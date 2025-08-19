@@ -39,7 +39,7 @@ interface MyPotCardProps {
   members?: Record<Role, number>;
   potModeOfOperation: Participation;
   potStartDate: string;
-  potDuration: string;
+  potEndDate: string;
   recruitmentRoles?: string[];
   isOwner: boolean;
   type: "myPage" | "myPot" | "applied" | "recruiting";
@@ -61,7 +61,7 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   members,
   potModeOfOperation,
   potStartDate,
-  potDuration,
+  potEndDate,
   recruitmentRoles,
   isOwner,
   type,
@@ -116,8 +116,18 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
       label: "진행 방식",
       content: participationKoreanMap[potModeOfOperation],
     },
-    { icon: FlagIcon, label: "시작 날짜", content: potStartDate },
-    { icon: DateRangeIcon, label: "예상 기간", content: potDuration },
+    {
+      icon: FlagIcon,
+      label: "시작 날짜",
+      content: potStartDate.split("-").join("."),
+    },
+    {
+      icon: DateRangeIcon,
+      label: "예상 기간",
+      content: `${potStartDate.split("-").join(".")} - ${potEndDate
+        .split("-")
+        .join(".")}`,
+    },
   ];
 
   return (

@@ -94,12 +94,14 @@ export interface MyPotResponse {
   potId: number;
   potName: string;
   potStartDate: string;
+  potEndDate: string;
   potStatus: PotStatus;
   potModeOfOperation: Participation;
-  potDuration: string;
+  potRecruitmentDeadline: string;
   potContent: string;
   isOwner: boolean;
   members: Record<Role, number>;
+  isMember: boolean;
   dday: string;
 }
 
