@@ -68,6 +68,7 @@ export interface GetPotsApplyResponse {
   potStatus: PotStatus;
   potName: string;
   potStartDate: string;
+  potEndDate: string;
   potDuration: string;
   potModeOfOperation: Participation;
   potContent: string;

@@ -50,7 +50,7 @@ interface MyPotCardProps {
   potStartDate: string;
   potEndDate: string;
   recruitmentRoles?: string[];
-  isOwner: boolean;
+  isOwner?: boolean;
   type: "myPage" | "myPot" | "applied" | "recruiting";
 }
 
