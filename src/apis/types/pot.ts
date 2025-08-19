@@ -40,7 +40,7 @@ export interface RecruitmentDetailResponse {
 export interface GetPotsParams {
   page: number;
   size: number;
-  recruitmentRole: string | null;
+  recruitmentRoles: string | null;
   onlyMine: boolean;
 }
 
