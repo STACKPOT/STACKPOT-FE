@@ -34,10 +34,11 @@ export const buttonContainer = css`
 
 export const gridContainer = css`
   display: grid;
-  grid-template-columns: repeat(3, 27.2rem);
+  grid-template-columns: repeat(3, 30rem);
   grid-template-rows: repeat(2, 1fr);
-  gap: 4rem 3.2rem;
+  gap: 3.2rem 3.7rem;
   padding-bottom: 4rem;
+  margin: 0 auto;
 `;
 
 export const paginationStyle = css`

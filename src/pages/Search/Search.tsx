@@ -26,13 +26,13 @@ const Search = () => {
         <h2 css={titleStyle}>찾고 싶은 내용이 있으신가요?</h2>
         <PotIcon css={iconStyle} />
       </div>
+      <p css={subtitleStyle}>키워드를 입력하면 관련 내용을 찾아드릴게요.</p>
       <SearchInput
         query={query}
         setQuery={setQuery}
         onSearch={handleSearch}
         onKeyDown={handleSearch}
       />
-      <p css={subtitleStyle}>키워드를 입력하면 관련 내용을 찾아드릴게요.</p>
     </main>
   );
 };
