@@ -18,6 +18,12 @@ const PotMain: React.FC = () => {
             end={tab.path === routes.pot.base}
             css={tabsTextStyle}
             className={({ isActive }) => (isActive ? "active" : "")}
+            onClick={(e) => {
+              const accessToken = localStorage.getItem("accessToken");
+              if (!accessToken && tab.label === "지원한 팟") {
+                e.preventDefault();
+              }
+            }}
           >
             {tab.label}
           </NavLink>
