@@ -30,6 +30,15 @@ import { PotSummaryModal } from "@pages/MyPage/components";
 import { DateRangeIcon, FlagIcon, WebTrafficIcon } from "@assets/svgs";
 import { participationKoreanMap } from "@constants/categories";
 
+const potCardButtonMap: {
+  [key: string]: "" | "지원 취소하기" | "다 끓였어요 🔥" | "여기서 저는요 👋";
+} = {
+  NONE: "",
+  CANCEL_APPLY: "지원 취소하기",
+  FINISH_POT: "다 끓였어요 🔥",
+  APPEAL: "여기서 저는요 👋",
+};
+
 interface MyPotCardProps {
   potId: number;
   dday: string;
@@ -44,13 +53,6 @@ interface MyPotCardProps {
   isOwner: boolean;
   type: "myPage" | "myPot" | "applied" | "recruiting";
 }
-
-const buttonTexts = {
-  myPage: "여기서 저는요 👋",
-  myPot: "다 끓였어요 🔥",
-  applied: "지원 취소하기",
-  recruiting: "",
-};
 
 const MyPotCard: React.FC<MyPotCardProps> = ({
   potId,
@@ -70,6 +72,16 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   const [showButton, setShowButton] = useState(false);
   const [showCancelApplyModal, setShowCancelApplyModal] = useState(false);
   const [showSummaryModal, setShowSummaryModal] = useState<number | null>(null);
+  const buttonType =
+    type === "applied" && potStatus === "RECRUITING"
+      ? "CANCEL_APPLY"
+      : type === "myPage" && potStatus === "COMPLETED"
+      ? "APPEAL"
+      : (type === "myPot" || type === "myPage") &&
+        potStatus === "ONGOING" &&
+        isOwner
+      ? "FINISH_POT"
+      : "NONE";
 
   const recruitments = Object.entries(members ?? {}).flatMap(([role, count]) =>
     Array(count).fill(role as Role)
@@ -78,16 +90,15 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   const { mutate: cancelApply } = useCancelApply();
 
   const handleMouseOver = (mouseOver: boolean) => {
-    if (type !== "recruiting") {
-      if (type !== "myPot" || isOwner) {
-        setShowButton(mouseOver);
-      }
+    if (buttonType !== "NONE") {
+      setShowButton(mouseOver);
     }
   };
 
   const handleCardClick = () => {
-    if (type === "myPage") {
-    } else if (type === "myPot") {
+    if (potStatus === "COMPLETED") {
+      navigate(`${routes.finishedPot}/${potId}`);
+    } else if (potStatus === "ONGOING" /* && isMember */) {
       navigate(`${routes.myPot.task}/${potId}`);
     } else {
       navigate(`${routes.pot.base}/${potId}`);
@@ -96,13 +107,14 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   };
 
   const handleButtonClick = () => {
-    if (type === "myPage") {
+    if (buttonType === "APPEAL") {
       setShowSummaryModal(potId);
-    } else if (type === "myPot") {
+    } else if (buttonType === "FINISH_POT") {
       navigate(`${routes.createFinishedPot}/${potId}`);
-    } else if (type === "applied") {
+    } else if (buttonType === "CANCEL_APPLY") {
       setShowCancelApplyModal(true);
     }
+    window.scrollTo(0, 0);
   };
 
   const handleCancelApplyModalConfirm = () => {
@@ -167,14 +179,18 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
         {showButton && (
           <div onMouseLeave={() => handleMouseOver(false)}>
             <div css={layerStyle}>
-              <div css={layerBackground(type === "applied" ? "red" : "blue")} />
+              <div
+                css={layerBackground(
+                  buttonType === "CANCEL_APPLY" ? "red" : "blue"
+                )}
+              />
               <Button
                 variant="action"
-                actionType={type === "applied" ? "neg" : "basic"}
+                actionType={buttonType === "CANCEL_APPLY" ? "neg" : "basic"}
                 customStyle={buttonStyle}
                 onClick={handleButtonClick}
               >
-                {buttonTexts[type]}
+                {potCardButtonMap[buttonType]}
               </Button>
             </div>
           </div>
