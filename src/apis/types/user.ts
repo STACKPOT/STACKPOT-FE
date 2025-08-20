@@ -47,7 +47,7 @@ export interface Feeds {
 	commentCount: number;
 	isCommented: boolean;
 	createdAt: string;
-	seriesId: string;
+	seriesId: number | null;
 }
 
 interface CompletedPots {

@@ -26,8 +26,9 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
           <strong css={modalTitleStyle}>시리즈 편집</strong>
           <Button variant="cta"
             onClick={() => {
-              if (newSeries && series.length < 5) {
-                setSeries([...series, { comments: newSeries }]);
+              const trimmed = newSeries.trim();
+              if (trimmed && series.filter((s) => s.comments !== '전체보기').length < 5) {
+                setSeries([...series, { comments: trimmed }]);
                 setNewSeries("");
               }
             }}
@@ -65,7 +66,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
                   if (e.key === "Enter" && !isComposing) {
                     e.preventDefault();
                     const trimmed = newSeries.trim();
-                    if (trimmed && series.length < 6) {
+                    if (trimmed && series.filter((s) => s.comments !== '전체보기').length < 5) {
                       setSeries([...series, { comments: trimmed }]);
                       setNewSeries("");
                     }

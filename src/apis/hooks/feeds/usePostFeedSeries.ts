@@ -17,13 +17,16 @@ const usePostFeedSeries = () => {
 				queryKey: ["series"],
 			});
 			queryClient.invalidateQueries({
-				queryKey: ["feeds"],
+				queryKey: ["feeds",],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ["feeds", "profile"],
 			});
 		},
 		onError: () => {
 			showSnackbar({
 				message: "피드 저장에 실패했습니다.",
-				severity: "success",
+				severity: "error",
 			});
 		},
 	});
