@@ -5,7 +5,7 @@ import { Feeds, MyPageFeedsResponse } from 'apis/types/user';
 
 export type ProfileFeedsView = {
   feeds: Feeds[];
-  seriesComments: { label: string }[];
+  seriesComments: { comments: string }[];
 };
 
 const useGetProfileFeeds = (userId?: number) => {
@@ -15,7 +15,7 @@ const useGetProfileFeeds = (userId?: number) => {
     select: (response) => {
       const feeds = response.result?.feeds ?? [];
       const seriesNames = response.result?.seriesComments ?? [];
-      const seriesComments = [{ label: '전체보기' }, ...seriesNames.map((name) => ({ label: name }))];
+      const seriesComments = [{ comments: '전체보기' }, ...seriesNames.map((name) => ({ comments: name }))];
       return { feeds, seriesComments };
     },
     staleTime: 0,

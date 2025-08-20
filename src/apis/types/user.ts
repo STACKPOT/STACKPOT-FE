@@ -47,6 +47,7 @@ export interface Feeds {
 	commentCount: number;
 	isCommented: boolean;
 	createdAt: string;
+	seriesId: string;
 }
 
 interface CompletedPots {
@@ -71,16 +72,9 @@ export interface GetMyPagePotsParams {
 }
 
 export interface FinishedModalResponse {
-	potId: number;
-	potName: string;
-	userId: number;
-	potStartDate: string;
-	potEndDate: string;
-	potContent: string;
-	potStatus: string;
-	potSummary: string;
-	appealContent: string;
-	userPotRole: string;
+	appealContent: string,
+	userPotRole: string
+	myBadges: MyBadges[],
 }
 
 export interface GetFinishedModalParams {

@@ -6,8 +6,8 @@ import { Button } from "@components/index";
 
 
 interface SeriesModalProps {
-  defaultSeriesList: { label: string }[];
-  onConfirm: (updated: { label: string }[]) => void;
+  defaultSeriesList: { comments: string }[];
+  onConfirm: (updated: { comments: string }[]) => void;
   onClose: () => void;
 }
 
@@ -27,7 +27,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
           <Button variant="cta"
             onClick={() => {
               if (newSeries && series.length < 5) {
-                setSeries([...series, { label: newSeries }]);
+                setSeries([...series, { comments: newSeries }]);
                 setNewSeries("");
               }
             }}
@@ -42,9 +42,9 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
           <div css={modalInputStyle(series.length === 1)}>
             <div css={modalTagListStyle}>
               {series.map((item, index) => (
-                item.label !== "전체보기" && (
+                item.comments !== "전체보기" && (
                   <div key={index} css={modalTagStyle}>
-                    {item.label}
+                    {item.comments}
                     <button
                       onClick={() => {
                         const updated = [...series];
@@ -66,7 +66,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
                     e.preventDefault();
                     const trimmed = newSeries.trim();
                     if (trimmed && series.length < 6) {
-                      setSeries([...series, { label: trimmed }]);
+                      setSeries([...series, { comments: trimmed }]);
                       setNewSeries("");
                     }
                   }

@@ -22,6 +22,7 @@ import useGetProfilePots from 'apis/hooks/users/useGetProfilePots';
 import useGetProfileDescription from 'apis/hooks/users/useGetProfileDescription';
 import SeriesModal from './SeriesModal/SeriesModal';
 import { partKoreanNameMap } from '@constants/categories';
+import usePostFeedSeries from 'apis/hooks/feeds/usePostFeedSeries';
 
 type Props = {
   contentType: 'feed' | 'pot' | 'introduction';
@@ -32,8 +33,8 @@ type Props = {
 const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner: boolean }) => {
   const { data } = useGetProfileFeeds(userId);
   const feeds = data?.feeds ?? [];
-  const defaultSeries = data?.seriesComments ?? [{ label: '전체보기' }];
-
+  const { mutate } = usePostFeedSeries();
+  const defaultSeries = data?.seriesComments ?? [{ comments: '전체보기' }];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSeriesModalOpen, setIsSeriesModalOpen] = useState(false);
@@ -47,7 +48,9 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
     feeds.filter(
       (post: Feeds) =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.content.toLowerCase().includes(searchTerm.toLowerCase()),
+        post.content.toLowerCase().includes(searchTerm.toLowerCase())
+      // && post.seriesId
+      ,
     ),
     [feeds, searchTerm],
   );
@@ -65,13 +68,13 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
             <AddIcon />
           </button>
           }
-          {seriesList.map(({ label }, index) => (
+          {seriesList.map(({ comments }, index) => (
             <button
-              key={label}
+              key={comments}
               css={feedCategoryButton(selectedIndex === index)}
               onClick={() => setSelectedIndex(index)}
             >
-              {label}
+              {comments}
             </button>
           ))}
         </div>
@@ -105,7 +108,7 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
       {isSeriesModalOpen && (
         <SeriesModal
           defaultSeriesList={seriesList}
-          onConfirm={(updated) => setSeriesList(updated)}
+          onConfirm={(updated) => mutate({ comments: updated.filter((s) => s.comments !== '전체보기').map((s) => s.comments) })}
           onClose={() => setIsSeriesModalOpen(false)}
         />
       )}

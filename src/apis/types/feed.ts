@@ -94,3 +94,7 @@ export interface Series {
   comment: string;
   seriesId: number;
 }
+
+export interface PostFeedSeriesParams {
+  comments: string[];
+}
