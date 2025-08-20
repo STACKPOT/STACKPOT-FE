@@ -4,10 +4,11 @@ import {
   container,
   detailButtonStyle,
   contractStyle,
+  modalContainerStyle,
 } from "./ContractsSection.style";
-import { CheckBox } from "@components/index";
+import { CheckBox, Modal } from "@components/index";
 import { useFormContext } from "react-hook-form";
-import ContractModal from "../ContractModal/ContractModal";
+import { privacyContent, serviceContent } from "@constants/contracts";
 
 interface ContractsSectionProps {
   onAgree?: (agreed: boolean) => void;
@@ -60,9 +61,19 @@ const ContractsSection: React.FC<ContractsSectionProps> = ({ onAgree }) => {
         ))}
       </div>
       {contractModal && (
-        <ContractModal
-          {...contractModal}
-          onCancelModal={() => setContractModal(null)}
+        <Modal
+          title={
+            contractModal.type === "service"
+              ? "서비스 약관"
+              : "개인정보 수집 및 이용 약관"
+          }
+          message={
+            contractModal.type === "service" ? serviceContent : privacyContent
+          }
+          confirmButton="확인했어요"
+          customContainerStyle={modalContainerStyle}
+          onConfirm={() => setContractModal(null)}
+          onCancel={() => setContractModal(null)}
         />
       )}
     </>
