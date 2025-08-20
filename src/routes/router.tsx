@@ -29,7 +29,7 @@ import {
   CreateFinishedPot,
   EditPotPage,
   FeedDetailPage,
-  ChatPage
+  ChatPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -95,7 +95,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: routes.callback,
+        path: `${routes.callback}/:loginType`,
         element: <CallbackPage />,
       },
       {
