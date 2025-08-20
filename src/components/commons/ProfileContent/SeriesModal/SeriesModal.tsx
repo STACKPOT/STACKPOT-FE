@@ -27,7 +27,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
           <Button variant="cta"
             onClick={() => {
               const trimmed = newSeries.trim();
-              if (trimmed && series.filter((s) => s.comments !== '전체보기').length < 5) {
+              if (trimmed && trimmed !== '전체보기' && series.filter((s) => s.comments !== '전체보기').length < 5) {
                 setSeries([...series, { comments: trimmed }]);
                 setNewSeries("");
               }
@@ -66,7 +66,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
                   if (e.key === "Enter" && !isComposing) {
                     e.preventDefault();
                     const trimmed = newSeries.trim();
-                    if (trimmed && series.filter((s) => s.comments !== '전체보기').length < 5) {
+                    if (trimmed && trimmed !== '전체보기' && series.filter((s) => s.comments !== '전체보기').length < 5) {
                       setSeries([...series, { comments: trimmed }]);
                       setNewSeries("");
                     }
@@ -82,7 +82,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
 
           <Button variant="full"
             onClick={() => {
-              onConfirm(series);
+              onConfirm(series.filter((s) => s.comments !== '전체보기'));
               setNewSeries("");
               onClose();
             }}

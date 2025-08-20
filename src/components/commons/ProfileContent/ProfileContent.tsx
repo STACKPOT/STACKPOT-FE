@@ -108,7 +108,7 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
       {isSeriesModalOpen && (
         <SeriesModal
           defaultSeriesList={seriesList}
-          onConfirm={(updated) => mutate({ comments: updated.filter((s) => s.comments !== '전체보기').map((s) => s.comments) })}
+          onConfirm={(updated) => mutate({ comments: updated.map((s) => s.comments) })}
           onClose={() => setIsSeriesModalOpen(false)}
         />
       )}
