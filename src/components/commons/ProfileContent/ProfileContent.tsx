@@ -99,7 +99,7 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
           saveCount={post.saveCount}
           commentCount={post.commentCount}
           isSaved={post.isSaved}
-          isMyPost={false}
+          isMyPost={viewerIsOwner}
         />
       ))}
       {isSeriesModalOpen && (

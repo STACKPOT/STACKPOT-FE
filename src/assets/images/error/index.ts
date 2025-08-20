@@ -1,1 +1,1 @@
-export { default as NotFoundImage } from './404.png';
+export { default as NotFoundImage } from './404.webp';
