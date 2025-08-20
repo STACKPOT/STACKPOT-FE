@@ -22,7 +22,7 @@ const UserPage = () => {
     if (viewerIsOwner) {
       navigate(routes.myPage);
     }
-  }, []);
+  }, [navigate, viewerIsOwner]);
 
   return (
     <main css={container}>

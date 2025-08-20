@@ -110,7 +110,7 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
             Object.values(series).map((item) => (
               <CategoryButton
                 key={item}
-                style="pot"
+                style="basic"
                 onClick={handleSeriesClick}
                 selected={selectedSeriesName === item}
               >
@@ -152,7 +152,7 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
             {Object.keys(partMap).map((partName) => (
               <CategoryButton
                 key={partName}
-                style="pot"
+                style="basic"
                 selected={selectedCategories.includes(partMap[partName])}
                 onClick={handleCategoryClick}
               >
@@ -167,7 +167,7 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
             {interests.map((interestName) => (
               <CategoryButton
                 key={interestName}
-                style="pot"
+                style="basic"
                 selected={selectedInterests.includes(interestMap[interestName])}
                 onClick={handleInterestClick}
               >

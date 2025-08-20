@@ -86,7 +86,6 @@ const SearchResult = () => {
           {categoryOptions.map((category) => (
             <CategoryButton
               key={category}
-              style="pot"
               selected={selectedCategory === category}
               onClick={() => handleClick(category)}
             >

@@ -56,7 +56,7 @@ const AllPotPage: React.FC = () => {
           .map((partName) => (
             <div key={partName} css={categoryButtonWrapper}>
               <CategoryButton
-                style="pot"
+                style={partName === "내가 만든 팟" ? "background" : "basic"}
                 selected={selectedCategory === partName}
                 onClick={() => handleClick(partName)}
               >

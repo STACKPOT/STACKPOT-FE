@@ -21,6 +21,7 @@ import useGetProfileFeeds from 'apis/hooks/users/useGetProfileFeeds';
 import useGetProfilePots from 'apis/hooks/users/useGetProfilePots';
 import useGetProfileDescription from 'apis/hooks/users/useGetProfileDescription';
 import SeriesModal from './SeriesModal/SeriesModal';
+import { partKoreanNameMap } from '@constants/categories';
 
 type Props = {
   contentType: 'feed' | 'pot' | 'introduction';
@@ -139,7 +140,13 @@ const PotContent = ({ userId }: { userId?: number }) => {
         </div>
       </div>
       {(pots ?? []).map((pot: MyPagePotItem) => (
-        <MyPotCard key={pot.potId} potDuration={''} recruitmentRoles={[]} type={'myPot'} {...pot} />
+        <MyPotCard
+          key={pot.potId}
+          recruitmentRoles={Object.keys(pot.members).map(
+            (role) => partKoreanNameMap[role]
+          )}
+          type={'myPage'}
+          {...pot} />
       ))}
     </>
   );

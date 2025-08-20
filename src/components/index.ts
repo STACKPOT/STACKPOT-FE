@@ -21,7 +21,6 @@ import PotInformation from "./commons/PotInformation/PotInformation";
 import UploadToast from "./commons/Toast/UploadToast";
 import FinishedPotCard from "./cards/FinishedPotCard/FinishedPotCard";
 import InformationPopper from "./commons/InformationPopper/InformationPopper";
-import OnGoingPotCard from "./cards/OnGoingPotCard/OnGoingPotCard";
 import PartRecruitment from "./commons/PartRecruitment/PartRecruitment";
 import PostForm from "./commons/PostForm/PostForm";
 import Comment from "./commons/Comment/Comment";
@@ -60,7 +59,6 @@ export {
   UploadToast,
   FinishedPotCard,
   InformationPopper,
-  OnGoingPotCard,
   PartRecruitment,
   PostForm,
   Comment,
