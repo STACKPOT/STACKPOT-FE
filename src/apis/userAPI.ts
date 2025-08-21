@@ -20,8 +20,13 @@ import {
   GetMyPagePotsParams,
   MyPagePotsResponse,
   MyPageFeedsResponse,
+  GetPotSummaryResponse,
 } from "./types/user";
-import { PatchDescriptionBody, PatchPotCompleteBody, PostPotResponse } from "./types/pot";
+import {
+  PatchDescriptionBody,
+  PatchPotCompleteBody,
+  PostPotResponse,
+} from "./types/pot";
 
 export const getKakaoLogIn = async (code: string) => {
   return apiGet<LogInResponse>("/users/oauth/kakao", { code });
@@ -30,13 +35,10 @@ export const getKakaoLogIn = async (code: string) => {
 export const GetMyUser = async () => {
   return authApiGet<GetUserResponse>("/users");
 };
-export const patchSignIn = async ({
-  role,
-  interest
-}: postSignInPayload) => {
+export const patchSignIn = async ({ role, interest }: postSignInPayload) => {
   return authApiPatch<SignInResponse>("/users/profile", {
     role,
-    interest
+    interest,
   });
 };
 
@@ -45,9 +47,10 @@ export const getNickname = async (role: Role) => {
 };
 
 export const postNickname = async (nickname: string) => {
-  return authApiPost<TokenServiceResponse>("/users/nickname/save", undefined, { nickname });
+  return authApiPost<TokenServiceResponse>("/users/nickname/save", undefined, {
+    nickname,
+  });
 };
-
 
 export const getMyPageFeeds = async () => {
   return authApiGet<MyPageFeedsResponse>("/users/feeds");
@@ -59,7 +62,6 @@ export const getMyPagePots = async ({ potStatus }: GetMyPagePotsParams) => {
 export const getMyPageDescription = async () => {
   return authApiGet<DescriptionResponse>("/users/description");
 };
-
 
 export const GetFinishedModal = async (potId: number) => {
   return authApiGet<FinishedModalResponse>(`/my-pots/${potId}/details`);
@@ -85,7 +87,7 @@ export const getUsersMyPagesFeeds = async (userId: number) => {
 
 export const getUsersMyPagesPots = async (
   userId: number,
-  potStatus?: GetMyPagePotsParams['potStatus']
+  potStatus?: GetMyPagePotsParams["potStatus"]
 ) => {
   const url = `/users/pots/${userId}`;
   const params = potStatus ? { status } : undefined;
@@ -107,8 +109,10 @@ export const patchFinishedPot = async (
   return authApiPatch<PostPotResponse>(`/users/${potId}`, body);
 };
 
-export const patchDescription = async (
-  body: PatchDescriptionBody,
-) => {
-  return authApiPatch('/users/description', body);
-}
+export const patchDescription = async (body: PatchDescriptionBody) => {
+  return authApiPatch("/users/description", body);
+};
+
+export const getPotSummary = async (potId: number) => {
+  return authApiGet<GetPotSummaryResponse>(`/users/potSummary${potId}`);
+};
