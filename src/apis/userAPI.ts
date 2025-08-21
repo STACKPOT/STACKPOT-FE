@@ -88,7 +88,7 @@ export const getUsersMyPagesPots = async (
   potStatus?: GetMyPagePotsParams['potStatus']
 ) => {
   const url = `/users/pots/${userId}`;
-  const params = potStatus ? { status } : undefined;
+  const params = potStatus ? { potStatus } : undefined;
   return authApiGet<MyPagePotsResponse>(url, params);
 };
 

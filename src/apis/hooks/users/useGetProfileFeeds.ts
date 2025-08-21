@@ -16,7 +16,10 @@ const useGetProfileFeeds = (userId?: number) => {
       const feeds = response.result?.feeds ?? [];
       const seriesNames = response.result?.seriesComments ?? [];
       const seriesComments = [{ comments: '전체보기' }, ...seriesNames.map((name) => ({ comments: name }))];
-      return { feeds, seriesComments };
+      return {
+        feeds: [...feeds], // 깊은 복사
+        seriesComments: [...seriesComments]
+      }
     },
     staleTime: 0,
   });

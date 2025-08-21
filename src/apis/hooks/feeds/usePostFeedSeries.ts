@@ -20,7 +20,8 @@ const usePostFeedSeries = () => {
 				queryKey: ["feeds",],
 			});
 			queryClient.invalidateQueries({
-				queryKey: ["feeds", "profile"],
+				queryKey: ['profile', 'feeds'],
+				exact: false,
 			});
 		},
 		onError: () => {

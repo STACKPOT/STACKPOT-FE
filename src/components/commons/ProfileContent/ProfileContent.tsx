@@ -1,7 +1,12 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import { MyPotCard, PostCard } from '@components/index';
 import { AddIcon, SearchBlueIcon } from '@assets/svgs';
+import useGetSearchMyFeeds from 'apis/hooks/searches/useGetSearchMyFeeds';
+import useGetSearchFeedsUsers from 'apis/hooks/searches/useGetSearchFeedsUsers';
+import useGetProfileFeeds from 'apis/hooks/users/useGetProfileFeeds';
+import usePostFeedSeries from 'apis/hooks/feeds/usePostFeedSeries';
+
 import {
   feedHeaderContainer,
   feedCategoryButtonGroup,
@@ -16,13 +21,11 @@ import {
   introductionWriteButton,
 } from './ProfileContent.style';
 import usePatchDescription from 'apis/hooks/users/usePatchDescription';
-import { Feeds, GetMyPagePotsParams, MyPagePotItem } from 'apis/types/user';
-import useGetProfileFeeds from 'apis/hooks/users/useGetProfileFeeds';
+import { GetMyPagePotsParams, MyPagePotItem } from 'apis/types/user';
 import useGetProfilePots from 'apis/hooks/users/useGetProfilePots';
 import useGetProfileDescription from 'apis/hooks/users/useGetProfileDescription';
 import SeriesModal from './SeriesModal/SeriesModal';
 import { partKoreanNameMap } from '@constants/categories';
-import usePostFeedSeries from 'apis/hooks/feeds/usePostFeedSeries';
 
 type Props = {
   contentType: 'feed' | 'pot' | 'introduction';
@@ -31,29 +34,32 @@ type Props = {
 };
 
 const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner: boolean }) => {
-  const { data } = useGetProfileFeeds(userId);
-  const feeds = data?.feeds ?? [];
-  const { mutate } = usePostFeedSeries();
-  const defaultSeries = data?.seriesComments ?? [{ comments: '전체보기' }];
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  const hasSearch = searchTerm.trim().length > 0;
+
+  const {
+    data: searchData,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+  } = viewerIsOwner
+      ? useGetSearchMyFeeds({ keyword: searchTerm, size: 10, })
+      : useGetSearchFeedsUsers({ keyword: searchTerm, size: 10, userId: userId! });
+
+  const profileQuery = useGetProfileFeeds(userId);
+  const profileData = hasSearch ? undefined : profileQuery.data;
+
+  const feeds = useMemo(() => {
+    if (hasSearch) {
+      return searchData?.pages.flatMap((page) => page.result?.feeds ?? []) ?? [];
+    }
+    return profileData?.feeds ?? [];
+  }, [hasSearch, searchData, profileData]);
+
+  const { mutate } = usePostFeedSeries();
+  const seriesList = profileData?.seriesComments ?? [{ comments: '전체보기' }];
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [isSeriesModalOpen, setIsSeriesModalOpen] = useState(false);
-  const [seriesList, setSeriesList] = useState(defaultSeries);
-
-  useEffect(() => {
-    setSeriesList(defaultSeries);
-  }, [defaultSeries]);
-
-  const filteredPosts = useMemo(() =>
-    feeds.filter(
-      (post: Feeds) =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.content.toLowerCase().includes(searchTerm.toLowerCase())
-      // && post.seriesId
-      ,
-    ),
-    [feeds, searchTerm],
-  );
 
   return (
     <>
@@ -87,7 +93,7 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
           <span role="img" aria-label="search"><SearchBlueIcon /></span>
         </div>
       </div>
-      {filteredPosts.map((post) => (
+      {feeds.map((post) => (
         <PostCard
           nickname={post.writer}
           role={post.writerRole}
@@ -221,4 +227,3 @@ const ProfileContent = ({ contentType, viewerIsOwner, userId }: Props) => {
 };
 
 export default ProfileContent;
-
