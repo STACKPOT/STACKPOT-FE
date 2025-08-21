@@ -5,12 +5,9 @@ interface BadgeProps {
   color?: variant;
 }
 
-type variant = "red" | "green" | "blue" | "purple" | "pink";
+export type variant = "red" | "green" | "blue" | "purple" | "pink";
 
-const Badge: React.FC<BadgeProps> = ({
-  content,
-  color = "blue",
-}) => {
+const Badge: React.FC<BadgeProps> = ({ content, color = "blue" }) => {
   const contentToVariantMap: Record<string, variant> = {
     프론트엔드: "blue",
     백엔드: "green",
