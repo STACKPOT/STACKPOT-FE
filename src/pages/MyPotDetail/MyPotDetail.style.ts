@@ -30,6 +30,11 @@ export const textStyle = css`
   color: ${theme.color.point.hero};
 `;
 
+export const inputStyle = css`
+  ${theme.font.body3};
+  color: ${theme.color.object.hero};
+`;
+
 export const titleButtonStyle = css`
   display: flex;
   gap: 1.6rem;

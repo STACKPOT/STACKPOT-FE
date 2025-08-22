@@ -16,6 +16,7 @@ import {
   titleButtonStyle,
   actionButtonStyle,
   memberListContainer,
+  inputStyle,
 } from "./MyPotDetail.style";
 import routes from "@constants/routes";
 import { ArrowLeftRoundIcon, ChattingIcon } from "@assets/svgs";
@@ -25,6 +26,7 @@ import { useState } from "react";
 import { ExplainModal, MemberCard } from "@components/index";
 import { Role } from "types/role";
 import { css } from "@emotion/react";
+import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
 
 const MyPotDetail: React.FC = () => {
   const { potId } = useParams();
@@ -52,6 +54,8 @@ const MyPotDetail: React.FC = () => {
     page: 1,
     size: 1,
   });
+
+  const { data: isOwner } = useGetMyPotOwner({ potId: potIdNumber });
 
   const handlePrev = () => {
     navigate(`${routes.myPot.base}`);
@@ -115,24 +119,26 @@ const MyPotDetail: React.FC = () => {
             <button onClick={handlePrev} css={prevButtonStyle}>
               <ArrowLeftRoundIcon css={iconStyle} />
             </button>
-            <h2 css={textStyle}>{data?.title ?? null}</h2>
             <ChattingIcon onClick={handleChattingClick} />
+            <h2 css={textStyle}>{data?.title ?? null}</h2>
+            <input css={inputStyle} placeholder={data?.title} />
           </div>
-
-          <div css={titleButtonStyle}>
-            <button
-              css={actionButtonStyle("modify")}
-              onClick={handleModifyClick}
-            >
-              수정
-            </button>
-            <button
-              css={actionButtonStyle("permission")}
-              onClick={handlePermissionClick}
-            >
-              권한 설정
-            </button>
-          </div>
+          {isOwner === true && (
+            <div css={titleButtonStyle}>
+              <button
+                css={actionButtonStyle("modify")}
+                onClick={handleModifyClick}
+              >
+                수정
+              </button>
+              <button
+                css={actionButtonStyle("permission")}
+                onClick={handlePermissionClick}
+              >
+                권한 설정
+              </button>
+            </div>
+          )}
         </div>
         <div css={tabsContainer}>
           {tabs.map((tab) => {
