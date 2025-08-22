@@ -40,7 +40,14 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, user
 			css={backgroundStyle}
 			onClick={(e) => { if (e.target === e.currentTarget) onCancel(); }}
 		>
-			<div css={modalStyle} role="dialog" aria-modal aria-labelledby="pot-summary-title" onClick={(e) => e.stopPropagation()}>
+			<div
+				css={modalStyle}
+				ref={modalRef}
+				role="dialog"
+				aria-modal="true"
+				aria-labelledby="pot-summary-title"
+				onClick={(e) => e.stopPropagation()}
+			>
 				<button css={closeBtnStyle} aria-label="닫기" onClick={onCancel}>
 					<CloseIcon />
 				</button>
@@ -60,7 +67,7 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, user
 					))}
 				</ul>
 
-				<div css={contentStyle}>
+				<div id="pot-summary-content" css={contentStyle}>
 					<p>{appealContent}</p>
 				</div>
 
@@ -73,7 +80,7 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, user
 					</Button>
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 };
 
