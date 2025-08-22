@@ -166,3 +166,8 @@ export interface RenameParams {
   potId: number;
   potName: string;
 }
+
+export interface DelegateParams {
+  potId: number;
+  memberId: number;
+}

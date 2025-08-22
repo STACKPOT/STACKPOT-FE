@@ -23,6 +23,7 @@ import {
   PostTask,
   PatchStatus,
   RenameParams,
+  DelegateParams,
 } from "./types/myPot";
 
 export const getMyPotTodo = async ({ potId, page, size }: GetTodoParams) => {
@@ -115,4 +116,11 @@ export const getTasksCalendar = async ({
 
 export const patchMyPotRename = async ({ potId, potName }: RenameParams) => {
   return authApiPatch(`/my-pots/${potId}/rename`, potName);
+};
+
+export const patchMyPotDelegate = async ({
+  potId,
+  memberId,
+}: DelegateParams) => {
+  return authApiPatch(`/my-pots/${potId}/delegate/${memberId}`);
 };

@@ -29,6 +29,7 @@ import { css } from "@emotion/react";
 import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
 import { usePatchRename } from "apis/hooks/myPots/usePatchRename";
 import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemeber";
+import { usePatchDelegate } from "apis/hooks/myPots/usePatchDelegate";
 
 const MyPotDetail: React.FC = () => {
   const { potId } = useParams();
@@ -62,6 +63,9 @@ const MyPotDetail: React.FC = () => {
   const { data: isOwner } = useGetMyPotOwner({ potId: potIdNumber });
   const { mutate } = usePatchRename();
   const { data: members } = useGetMyPotMembers({ potId: potIdNumber });
+  const { mutate: delegate } = usePatchDelegate();
+
+  console.log(members);
 
   const handlePrev = () => {
     navigate(`${routes.myPot.base}`);
@@ -81,7 +85,10 @@ const MyPotDetail: React.FC = () => {
   };
 
   const handleButtonClick = () => {
-    //TODO: 권한설정 모달
+    if (potId && selectedUserId) {
+      console.log(potId, selectedUserId);
+      delegate({ potId: potIdNumber, memberId: selectedUserId });
+    }
   };
 
   const handleCancelModal = () => {
