@@ -20,6 +20,10 @@ const usePostFeedLike = () => {
       queryClient.invalidateQueries({
         queryKey: ["feedDetail", feedId]
       });
+      queryClient.invalidateQueries({
+        queryKey: ["my-page", "search", "users"],
+        exact: false,  // prefix match으로 userId·keyword·size 포함 모든 검색 피드 무효화
+      });
     },
     onError: () => {
       showSnackbar({
