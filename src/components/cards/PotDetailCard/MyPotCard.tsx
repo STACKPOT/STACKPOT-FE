@@ -51,7 +51,9 @@ interface MyPotCardProps {
   potEndDate: string;
   recruitmentRoles?: string[];
   isOwner?: boolean;
+  isMember: boolean;
   type: "myPage" | "myPot" | "applied" | "recruiting";
+  userId?: number
 }
 
 const MyPotCard: React.FC<MyPotCardProps> = ({
@@ -67,6 +69,8 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   recruitmentRoles,
   isOwner,
   type,
+  isMember,
+  userId,
 }: MyPotCardProps) => {
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState(false);
@@ -211,6 +215,8 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
         <PotSummaryModal
           potId={potId}
           onCancel={() => setShowSummaryModal(null)}
+          isMember={isMember ?? false}
+          userId={userId}
         />
       )}
     </>

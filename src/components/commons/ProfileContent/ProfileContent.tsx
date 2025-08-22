@@ -155,7 +155,8 @@ const PotContent = ({ userId }: { userId?: number }) => {
             (role) => partKoreanNameMap[role]
           )}
           type={'myPage'}
-          {...pot} />
+          {...pot}
+          userId={userId} />
       ))}
     </>
   );

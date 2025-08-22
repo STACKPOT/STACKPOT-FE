@@ -112,3 +112,10 @@ export const patchDescription = async (
 ) => {
   return authApiPatch('/users/description', body);
 }
+
+export const getMyPagesPotAppealContent = async (potId: number) => {
+  return authApiGet<FinishedModalResponse>(`/users/potAppealContent/${potId}`);
+}
+export const getUsersMyPagesPotAppealContent = async (potId: number, userId: number) => {
+  return authApiGet<FinishedModalResponse>(`/users/potAppealContent/${potId}/${userId}`);
+}

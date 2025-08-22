@@ -1,17 +1,19 @@
-import { AppealIcon, BookIcon, CloseIcon, CreateIcon } from '@assets/svgs';
+import { CloseIcon } from '@assets/svgs';
 import { backgroundStyle, modalStyle, headerStyle, titleStyle, closeBtnStyle, badgeListStyle, badgeItemStyle, contentStyle, footerStyle } from './PotSummaryModal.style';
 import { useEffect } from 'react';
-import useGetFinishedModal from 'apis/hooks/users/useGetFinishedModal';
 import { Badge, Button } from '@components/index';
+import useGetProfilePotAppealContent from 'apis/hooks/users/useGetProfilePotAppealContent';
 
 
 interface PotSummaryModalProps {
 	potId: number;
 	onCancel: () => void;
+	isMember: boolean;
+	userId?: number
 }
 
-const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel }: PotSummaryModalProps) => {
-	const { data } = useGetFinishedModal(potId);
+const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, isMember, userId }: PotSummaryModalProps) => {
+	const { data } = useGetProfilePotAppealContent(potId, userId);
 
 	useEffect(() => {
 		// 모달 외부 스크롤 방지
