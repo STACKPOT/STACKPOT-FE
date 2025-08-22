@@ -1,5 +1,5 @@
-import { CloseIcon } from '@assets/svgs';
-import { backgroundStyle, modalStyle, headerStyle, titleStyle, closeBtnStyle, badgeListStyle, badgeItemStyle, contentStyle, footerStyle } from './PotSummaryModal.style';
+import { CloseIcon, WavingHandIcon } from '@assets/svgs';
+import { backgroundStyle, modalStyle, headerStyle, titleStyle, closeBtnStyle, badgeListStyle, badgeItemStyle, contentStyle, footerStyle, emptyContentStyle } from './PotSummaryModal.style';
 import { useEffect, useRef } from 'react';
 import { Badge, Button } from '@components/index';
 import useGetProfilePotAppealContent from 'apis/hooks/users/useGetProfilePotAppealContent';
@@ -68,15 +68,12 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, user
 				</ul>
 
 				<div id="pot-summary-content" css={contentStyle}>
-					<p>{appealContent}</p>
+					{appealContent ? <div >{appealContent}</div> : <div css={emptyContentStyle}> <WavingHandIcon />설명을 작성하지 않았어요.</div>}
 				</div>
 
 				<div css={footerStyle}>
-					<Button variant="full" type="button" onClick={() => { }}>
-						편집하기
-					</Button>
-					<Button variant="full" type="button" actionType="neg" onClick={() => { }}>
-						삭제하기
+					<Button variant="full" type="button" onClick={onCancel}>
+						확인했어요
 					</Button>
 				</div>
 			</div>

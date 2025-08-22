@@ -75,6 +75,18 @@ export const contentStyle = css`
     overscroll-behavior: contain;
 `;
 
+export const emptyContentStyle = css`
+    ${theme.font.title1}
+    color: ${theme.color.object.hero};
+    display: flex;
+    height: 28.1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    align-self: stretch;
+`;
+
 export const footerStyle = css`
     display: grid;
     gap: 1.2rem;
@@ -86,3 +98,4 @@ export const footerStyle = css`
         width: 100%;
     }
 `;
+
