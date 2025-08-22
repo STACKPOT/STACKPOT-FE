@@ -91,7 +91,7 @@ export const footerStyle = css`
     display: grid;
     gap: 1.2rem;
     align-items: stretch;
-    padding-top: 0.8rem;
+    padding: 1.6rem;
 
     /* make children buttons fill their grid cell */
     & > * {
