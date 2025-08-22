@@ -27,6 +27,7 @@ import { ExplainModal, MemberCard } from "@components/index";
 import { Role } from "types/role";
 import { css } from "@emotion/react";
 import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
+import { usePatchRename } from "apis/hooks/myPots/usePatchRename";
 
 const MyPotDetail: React.FC = () => {
   const { potId } = useParams();
@@ -35,6 +36,8 @@ const MyPotDetail: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+  const [isModified, setIsModified] = useState(false);
+  const [titleInput, setTitleInput] = useState("");
 
   const tabs = [
     {
@@ -56,6 +59,7 @@ const MyPotDetail: React.FC = () => {
   });
 
   const { data: isOwner } = useGetMyPotOwner({ potId: potIdNumber });
+  const { mutate } = usePatchRename();
 
   const handlePrev = () => {
     navigate(`${routes.myPot.base}`);
@@ -67,7 +71,7 @@ const MyPotDetail: React.FC = () => {
   };
 
   const handleModifyClick = () => {
-    //TODO: 팟 이름 수정
+    setIsModified(true);
   };
 
   const handlePermissionClick = () => {
@@ -80,6 +84,13 @@ const MyPotDetail: React.FC = () => {
 
   const handleCancelModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleTitleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && titleInput.trim()) {
+      mutate({ potId: potIdNumber, potName: titleInput });
+      setIsModified(false);
+    }
   };
 
   // TODO: API 연결 후 삭제
@@ -120,8 +131,17 @@ const MyPotDetail: React.FC = () => {
               <ArrowLeftRoundIcon css={iconStyle} />
             </button>
             <ChattingIcon onClick={handleChattingClick} />
-            <h2 css={textStyle}>{data?.title ?? null}</h2>
-            <input css={inputStyle} placeholder={data?.title} />
+
+            {isModified ? (
+              <input
+                css={inputStyle}
+                placeholder={data?.title}
+                onChange={(e) => setTitleInput(e.target.value)}
+                onKeyDown={handleTitleKeyDown}
+              />
+            ) : (
+              <h2 css={textStyle}>{data?.title ?? null}</h2>
+            )}
           </div>
           {isOwner === true && (
             <div css={titleButtonStyle}>
