@@ -30,6 +30,7 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const ref = useRef<HTMLDivElement>(null);
+  const notificationRef = useRef<HTMLDivElement>(null);
 
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
@@ -74,8 +75,16 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+
+      if (
+        ref.current &&
+        !ref.current.contains(target) &&
+        notificationRef.current &&
+        !notificationRef.current.contains(target)
+      ) {
         setIsDropdownOpen(false);
+        setIsNotificationOpen(false);
       }
     };
 
@@ -83,7 +92,7 @@ const Header: React.FC = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref]);
+  }, []);
 
   const handleNotificationClick = () => {
     setIsNotificationOpen((prev) => !prev);
@@ -111,7 +120,11 @@ const Header: React.FC = () => {
                 <BellIcon onClick={handleNotificationClick} />
               )}
 
-              {isNotificationOpen && <Notification />}
+              {isNotificationOpen && (
+                <div ref={notificationRef}>
+                  <Notification />
+                </div>
+              )}
             </div>
 
             <div css={profileContainer}>
