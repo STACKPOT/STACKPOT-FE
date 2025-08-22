@@ -57,7 +57,7 @@ interface CompletedPots {
 	potEndDate: string;
 	potLan: string;
 	members: string;
-	userPotRole: string;
+	userPotRole: Role;
 	myBadges: MyBadges[];
 	memberCounts: number;
 }

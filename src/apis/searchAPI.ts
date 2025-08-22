@@ -1,5 +1,5 @@
 import { authApiGet } from "./axios/apiUtils";
-import { GetMyFeedsSearchParams, GetSearchParams, GetUserFeedsSearchParams, MyPageSearchResponse, SearchResponse } from "./types/search";
+import { GetFeedsSearchParams, GetSearchParams, MyPageSearchResponse, SearchResponse } from "./types/search";
 
 export const getSearch = async ({
   type,
@@ -14,7 +14,7 @@ export const getSearchMyFeeds = async ({
   keyword,
   nextCursor,
   size,
-}: GetMyFeedsSearchParams) => {
+}: GetFeedsSearchParams) => {
   return authApiGet<MyPageSearchResponse>("search/my-feeds", { keyword, nextCursor, size });
 };
 
@@ -23,6 +23,6 @@ export const getSearchFeedsUsers = async ({
   nextCursor,
   size,
   userId
-}: GetUserFeedsSearchParams) => {
+}: GetFeedsSearchParams) => {
   return authApiGet<MyPageSearchResponse>(`search/feeds/users/${userId}`, { keyword, nextCursor, size });
 };
