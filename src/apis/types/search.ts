@@ -7,14 +7,11 @@ export interface GetSearchParams {
   page: number;
   size: number;
 }
-export interface GetMyFeedsSearchParams {
+export interface GetFeedsSearchParams {
   keyword: string;
   nextCursor?: number;
   size: number;
-}
-
-export interface GetUserFeedsSearchParams extends GetMyFeedsSearchParams {
-  userId: number;
+  userId?: number;
 }
 export interface SearchResponse {
   currentPage: number;

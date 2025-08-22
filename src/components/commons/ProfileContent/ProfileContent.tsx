@@ -2,8 +2,6 @@ import { useMemo, useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import { MyPotCard, PostCard } from '@components/index';
 import { AddIcon, SearchBlueIcon } from '@assets/svgs';
-import useGetSearchMyFeeds from 'apis/hooks/searches/useGetSearchMyFeeds';
-import useGetSearchFeedsUsers from 'apis/hooks/searches/useGetSearchFeedsUsers';
 import useGetProfileFeeds from 'apis/hooks/users/useGetProfileFeeds';
 import usePostFeedSeries from 'apis/hooks/feeds/usePostFeedSeries';
 
@@ -26,6 +24,7 @@ import useGetProfilePots from 'apis/hooks/users/useGetProfilePots';
 import useGetProfileDescription from 'apis/hooks/users/useGetProfileDescription';
 import SeriesModal from './SeriesModal/SeriesModal';
 import { partKoreanNameMap } from '@constants/categories';
+import useGetSearchFeeds from 'apis/hooks/searches/useGetSearchFeeds';
 
 type Props = {
   contentType: 'feed' | 'pot' | 'introduction';
@@ -42,9 +41,7 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = viewerIsOwner
-      ? useGetSearchMyFeeds({ keyword: searchTerm, size: 10, })
-      : useGetSearchFeedsUsers({ keyword: searchTerm, size: 10, userId: userId! });
+  } = useGetSearchFeeds({ keyword: searchTerm, size: 10, userId })
 
   const profileQuery = useGetProfileFeeds(userId);
   const profileData = hasSearch ? undefined : profileQuery.data;
