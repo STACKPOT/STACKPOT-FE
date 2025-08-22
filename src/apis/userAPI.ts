@@ -20,6 +20,7 @@ import {
   GetMyPagePotsParams,
   MyPagePotsResponse,
   MyPageFeedsResponse,
+  GetFeedsParams,
 } from "./types/user";
 import { PatchDescriptionBody, PatchPotCompleteBody, PostPotResponse } from "./types/pot";
 
@@ -49,8 +50,11 @@ export const postNickname = async (nickname: string) => {
 };
 
 
-export const getMyPageFeeds = async () => {
-  return authApiGet<MyPageFeedsResponse>("/users/feeds");
+export const getMyPageFeeds = async ({
+  nextCursor,
+  size,
+}: GetFeedsParams) => {
+  return authApiGet<MyPageFeedsResponse>("/users/feeds", { nextCursor, size });
 };
 
 export const getMyPagePots = async ({ potStatus }: GetMyPagePotsParams) => {
@@ -79,8 +83,12 @@ export const deleteUser = () => {
   return authApiDelete("/users/delete");
 };
 
-export const getUsersMyPagesFeeds = async (userId: number) => {
-  return authApiGet<MyPageFeedsResponse>(`/users/${userId}/feeds`);
+export const getUsersMyPagesFeeds = async ({
+  nextCursor,
+  size,
+  userId
+}: GetFeedsParams) => {
+  return authApiGet<MyPageFeedsResponse>(`/users/${userId}/feeds`, { nextCursor, size });
 };
 
 export const getUsersMyPagesPots = async (

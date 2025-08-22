@@ -47,7 +47,7 @@ export interface Feeds {
 	commentCount: number;
 	isCommented: boolean;
 	createdAt: string;
-	seriesId: number | null;
+	seriesId: string;
 }
 
 interface CompletedPots {
@@ -113,11 +113,16 @@ export interface GetUsersInfoParams {
 export interface DescriptionResponse {
 	userDescription: string;
 }
-
+export interface GetFeedsParams {
+	nextCursor?: number;
+	size: number;
+	userId?: number;
+}
 export interface MyPageFeedsResponse {
 	id: number;
 	seriesComments: string[];
 	feeds: Feeds[];
+	nextCursor: number | null;
 }
 
 export interface MyPagePotItem {

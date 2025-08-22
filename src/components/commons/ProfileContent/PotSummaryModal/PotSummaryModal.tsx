@@ -13,7 +13,7 @@ interface PotSummaryModalProps {
 
 const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, userId }: PotSummaryModalProps) => {
 	const { data } = useGetProfilePotAppealContent(potId, userId);
-	const modalRef = useRef<HTMLDivElement>(null);
+	const modalRef = useRef<HTMLDialogElement>(null);
 
 	useEffect(() => {
 		document.body.style.overflow = 'hidden';
@@ -40,13 +40,12 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, user
 			css={backgroundStyle}
 			onClick={(e) => { if (e.target === e.currentTarget) onCancel(); }}
 		>
-			<div
+			<dialog
 				css={modalStyle}
 				ref={modalRef}
-				role="dialog"
-				aria-modal="true"
 				aria-labelledby="pot-summary-title"
 				onClick={(e) => e.stopPropagation()}
+				open
 			>
 				<button css={closeBtnStyle} aria-label="닫기" onClick={onCancel}>
 					<CloseIcon />
@@ -76,7 +75,7 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, user
 						확인했어요
 					</Button>
 				</div>
-			</div>
+			</dialog>
 		</div >
 	);
 };

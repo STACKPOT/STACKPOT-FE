@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import MDEditor from '@uiw/react-md-editor';
 import { MyPotCard, PostCard } from '@components/index';
 import { AddIcon, SearchBlueIcon } from '@assets/svgs';
@@ -25,6 +26,7 @@ import useGetProfileDescription from 'apis/hooks/users/useGetProfileDescription'
 import SeriesModal from './SeriesModal/SeriesModal';
 import { partKoreanNameMap } from '@constants/categories';
 import useGetSearchFeeds from 'apis/hooks/searches/useGetSearchFeeds';
+import useGetFeedSeries from 'apis/hooks/feeds/useGetFeedSeries';
 
 type Props = {
   contentType: 'feed' | 'pot' | 'introduction';
@@ -33,18 +35,33 @@ type Props = {
 };
 
 const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner: boolean }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const hasSearch = searchTerm.trim().length > 0;
+  const { data: series } = useGetFeedSeries();
+  const { mutate } = usePostFeedSeries();
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedSeriesId, setSelectedSeriesId] = useState("0");
+  const [isSeriesModalOpen, setIsSeriesModalOpen] = useState(false);
+
+  const { ref: bottomRef, inView } = useInView({
+    threshold: 0,
+    rootMargin: '100px',
+  });
   const {
     data: searchData,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-  } = useGetSearchFeeds({ keyword: searchTerm, size: 10, userId })
+    fetchNextPage: fetchSearchNextPage,
+    hasNextPage: hasSearchNextPage,
+    isFetching: isSearchFetching,
+  } = useGetSearchFeeds({ keyword: searchTerm, size: 10, userId });
 
-  const profileQuery = useGetProfileFeeds(userId);
-  const profileData = hasSearch ? undefined : profileQuery.data;
+  const {
+    data: profileData,
+    fetchNextPage: fetchProfileNextPage,
+    hasNextPage: hasProfileNextPage,
+    isFetching: isProfileFetching,
+  } = useGetProfileFeeds({ size: 100, userId });
+
+  const hasSearch = searchTerm.trim().length > 0;
 
   const feeds = useMemo(() => {
     if (hasSearch) {
@@ -53,11 +70,32 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
     return profileData?.feeds ?? [];
   }, [hasSearch, searchData, profileData]);
 
-  const { mutate } = usePostFeedSeries();
-  const seriesList = profileData?.seriesComments ?? [{ comments: '전체보기' }];
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isSeriesModalOpen, setIsSeriesModalOpen] = useState(false);
+  const filteredFeeds = selectedSeriesId !== '0' ? feeds.filter((feed) => feed.seriesId === selectedSeriesId) : feeds;
 
+  const seriesList = [
+    { comments: '전체보기', seriesId: '0' },
+    ...(series
+      ? Object.entries(series).map(([seriesId, comments]) => ({
+        comments,
+        seriesId,
+      }))
+      : []),
+  ];
+
+
+  useEffect(() => {
+    const shouldFetch = hasSearch ? hasSearchNextPage : hasProfileNextPage;
+    const isCurrentlyFetching = hasSearch ? isSearchFetching : isProfileFetching;
+    const fetchNext = hasSearch ? fetchSearchNextPage : fetchProfileNextPage;
+    if (inView && shouldFetch && !isCurrentlyFetching) {
+      fetchNext();
+    }
+  }, [inView, hasSearch, hasSearchNextPage, hasProfileNextPage, isSearchFetching, isProfileFetching, fetchSearchNextPage, fetchProfileNextPage]);
+
+  const handleSeriesClick = (seriesId: string, index: number) => {
+    setSelectedIndex(index);
+    setSelectedSeriesId(seriesId);
+  }
   return (
     <>
       <div css={feedHeaderContainer}>
@@ -71,11 +109,11 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
             <AddIcon />
           </button>
           }
-          {seriesList.map(({ comments }, index) => (
+          {seriesList.map(({ comments, seriesId }, index) => (
             <button
               key={comments}
               css={feedCategoryButton(selectedIndex === index)}
-              onClick={() => setSelectedIndex(index)}
+              onClick={() => handleSeriesClick(seriesId, index)}
             >
               {comments}
             </button>
@@ -90,24 +128,16 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
           <span role="img" aria-label="search"><SearchBlueIcon /></span>
         </div>
       </div>
-      {feeds.map((post) => (
+      {filteredFeeds.map((post) => (
         <PostCard
           nickname={post.writer}
           role={post.writerRole}
-          isLiked={post.isLiked}
-          likeCount={post.likeCount}
           key={post.feedId}
-          createdAt={post.createdAt}
-          title={post.title}
-          content={post.content}
-          feedId={post.feedId}
-          writerId={post.writerId}
-          saveCount={post.saveCount}
-          commentCount={post.commentCount}
-          isSaved={post.isSaved}
+          {...post}
           isMyPost={viewerIsOwner}
         />
       ))}
+      {(hasSearch ? hasSearchNextPage : hasProfileNextPage) && <div ref={bottomRef} style={{ height: 1 }} />}
       {isSeriesModalOpen && (
         <SeriesModal
           defaultSeriesList={seriesList}
