@@ -73,7 +73,7 @@ export interface GetMyPagePotsParams {
 
 export interface FinishedModalResponse {
 	appealContent: string,
-	userPotRole: string
+	userPotRole: Role,
 	myBadges: MyBadges[],
 }
 

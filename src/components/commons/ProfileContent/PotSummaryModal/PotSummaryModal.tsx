@@ -1,6 +1,6 @@
 import { CloseIcon } from '@assets/svgs';
 import { backgroundStyle, modalStyle, headerStyle, titleStyle, closeBtnStyle, badgeListStyle, badgeItemStyle, contentStyle, footerStyle } from './PotSummaryModal.style';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Badge, Button } from '@components/index';
 import useGetProfilePotAppealContent from 'apis/hooks/users/useGetProfilePotAppealContent';
 
@@ -8,17 +8,16 @@ import useGetProfilePotAppealContent from 'apis/hooks/users/useGetProfilePotAppe
 interface PotSummaryModalProps {
 	potId: number;
 	onCancel: () => void;
-	isMember: boolean;
 	userId?: number
 }
 
-const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, isMember, userId }: PotSummaryModalProps) => {
+const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, userId }: PotSummaryModalProps) => {
 	const { data } = useGetProfilePotAppealContent(potId, userId);
+	const modalRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		// 모달 외부 스크롤 방지
 		document.body.style.overflow = 'hidden';
-
+		modalRef.current?.focus();
 		const onKeyDown = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') onCancel();
 		};
@@ -41,7 +40,7 @@ const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, isMe
 			css={backgroundStyle}
 			onClick={(e) => { if (e.target === e.currentTarget) onCancel(); }}
 		>
-			<div css={modalStyle} aria-modal aria-labelledby="pot-summary-title" onClick={(e) => e.stopPropagation()}>
+			<div css={modalStyle} role="dialog" aria-modal aria-labelledby="pot-summary-title" onClick={(e) => e.stopPropagation()}>
 				<button css={closeBtnStyle} aria-label="닫기" onClick={onCancel}>
 					<CloseIcon />
 				</button>

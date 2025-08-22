@@ -69,7 +69,6 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   recruitmentRoles,
   isOwner,
   type,
-  isMember,
   userId,
 }: MyPotCardProps) => {
   const navigate = useNavigate();
@@ -215,7 +214,6 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
         <PotSummaryModal
           potId={potId}
           onCancel={() => setShowSummaryModal(null)}
-          isMember={isMember ?? false}
           userId={userId}
         />
       )}

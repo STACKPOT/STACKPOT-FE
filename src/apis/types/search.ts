@@ -25,7 +25,7 @@ export interface SearchResponse {
 
 export interface MyPageSearchResponse {
   feeds: Feeds[];
-  nextCursor: number;
+  nextCursor: number | null;
 }
 export interface Content {
   userId: number;

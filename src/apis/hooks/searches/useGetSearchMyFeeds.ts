@@ -6,7 +6,7 @@ const useGetSearchMyFeeds = ({ keyword, nextCursor, size = 10 }: GetMyFeedsSearc
   return useInfiniteQuery({
     queryKey: ["my-page", "search", keyword, size],
     queryFn: ({ pageParam = nextCursor }) => getSearchMyFeeds({ keyword, nextCursor: pageParam, size }),
-    getNextPageParam: (lastPage) => lastPage.result?.nextCursor ?? null,
+    getNextPageParam: (lastPage) => lastPage.result?.nextCursor ?? undefined,
     initialPageParam: nextCursor,
   });
 };
