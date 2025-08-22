@@ -77,7 +77,6 @@ const PostCard: React.FC<PostCardProps> = ({
   const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
     if (accessToken) {
-      console.log(feedId);
       likeFeed(feedId);
     }
   };

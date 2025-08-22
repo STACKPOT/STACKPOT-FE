@@ -7,7 +7,7 @@ const usePostFeedLike = () => {
   const { showSnackbar } = useSnackbar();
   return useMutation({
     mutationFn: (feedId: number) => postFeedLike(feedId),
-    onSuccess: () => {
+    onSuccess: (_, feedId) => {
       queryClient.invalidateQueries({
         queryKey: ["feeds"],
       });
@@ -16,6 +16,9 @@ const usePostFeedLike = () => {
       });
       queryClient.invalidateQueries({
         queryKey: ['profile', 'feeds']
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["feedDetail", feedId]
       });
     },
     onError: () => {

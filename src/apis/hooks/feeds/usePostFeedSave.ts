@@ -7,7 +7,7 @@ const usePostFeedSave = () => {
 	const { showSnackbar } = useSnackbar();
 	return useMutation({
 		mutationFn: (feedId: number) => postFeedSave(feedId),
-		onSuccess: () => {
+		onSuccess: (_, feedId) => {
 			queryClient.invalidateQueries({
 				queryKey: ["feeds"],
 			});
@@ -16,6 +16,9 @@ const usePostFeedSave = () => {
 			});
 			queryClient.invalidateQueries({
 				queryKey: ['profile', 'feeds']
+			});
+			queryClient.invalidateQueries({
+				queryKey: ["feedDetail", feedId]
 			});
 		},
 		onError: () => {

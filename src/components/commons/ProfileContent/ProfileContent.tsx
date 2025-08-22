@@ -70,7 +70,7 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
     return profileData?.feeds ?? [];
   }, [hasSearch, searchData, profileData]);
 
-  const filteredFeeds = selectedSeriesId !== '0' ? feeds.filter((feed) => feed.seriesId === selectedSeriesId) : feeds;
+  const filteredFeeds = feeds.filter(feed => selectedSeriesId === '0' || feed.seriesId === selectedSeriesId);
 
   const seriesList = [
     { comments: '전체보기', seriesId: '0' },
