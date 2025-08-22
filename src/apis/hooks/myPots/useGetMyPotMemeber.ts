@@ -5,6 +5,6 @@ import { GetTaskParams } from "apis/types/myPot";
 export const useGetMyPotMembers = ({ potId }: GetTaskParams) => {
   return useQuery({
     queryKey: ["myPotMembers", potId],
-    queryFn: () => getMyPotMembers({potId}),
+    queryFn: () => getMyPotMembers({ potId }),
   });
 };

@@ -28,6 +28,7 @@ import { Role } from "types/role";
 import { css } from "@emotion/react";
 import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
 import { usePatchRename } from "apis/hooks/myPots/usePatchRename";
+import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemeber";
 
 const MyPotDetail: React.FC = () => {
   const { potId } = useParams();
@@ -60,6 +61,7 @@ const MyPotDetail: React.FC = () => {
 
   const { data: isOwner } = useGetMyPotOwner({ potId: potIdNumber });
   const { mutate } = usePatchRename();
+  const { data: members } = useGetMyPotMembers({ potId: potIdNumber });
 
   const handlePrev = () => {
     navigate(`${routes.myPot.base}`);
@@ -92,35 +94,6 @@ const MyPotDetail: React.FC = () => {
       setIsModified(false);
     }
   };
-
-  // TODO: API 연결 후 삭제
-  const dummyMembers = [
-    {
-      userId: 1,
-      nickname: "눈물을 마구 흘리는 브로콜리",
-      role: "BACKEND",
-    },
-    {
-      userId: 2,
-      nickname: "웃는 스파게티",
-      role: "FRONTEND",
-    },
-    {
-      userId: 3,
-      nickname: "화난 당근",
-      role: "DESIGN",
-    },
-    {
-      userId: 3,
-      nickname: "화난 당근",
-      role: "DESIGN",
-    },
-    {
-      userId: 3,
-      nickname: "화난 당근",
-      role: "DESIGN",
-    },
-  ];
 
   return (
     <>
@@ -186,15 +159,15 @@ const MyPotDetail: React.FC = () => {
           customContainerStyle={css({ width: "78rem" })}
         >
           <div css={memberListContainer}>
-            {dummyMembers.map((member) => (
+            {members?.result?.map((member) => (
               <MemberCard
-                key={member.userId}
-                userId={member.userId}
+                key={member.potMemberId}
+                userId={member.potMemberId}
                 nickname={member.nickname}
-                role={member.role as Role}
+                role={member.potRole as Role}
                 type="selection"
-                selected={selectedUserId === member.userId}
-                onClick={() => setSelectedUserId(member.userId)}
+                selected={selectedUserId === member.potMemberId}
+                onClick={() => setSelectedUserId(member.potMemberId)}
               />
             ))}
           </div>
