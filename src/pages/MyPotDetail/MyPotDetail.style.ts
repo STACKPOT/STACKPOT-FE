@@ -32,7 +32,18 @@ export const textStyle = css`
 
 export const inputStyle = css`
   ${theme.font.body3};
-  color: ${theme.color.object.hero};
+  color: black;
+  border-radius: 8px;
+  border: 1px solid ${theme.color.object.alternative};
+  padding: 1.2rem 1.6rem;
+  width: 70rem;
+  :focus {
+    border: 1px solid ${theme.color.point.alternative};
+    outline: none;
+  }
+  :placeholder {
+    color: ${theme.color.object.hero};
+  }
 `;
 
 export const titleButtonStyle = css`
