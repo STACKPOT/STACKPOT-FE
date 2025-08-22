@@ -65,8 +65,6 @@ const MyPotDetail: React.FC = () => {
   const { data: members } = useGetMyPotMembers({ potId: potIdNumber });
   const { mutate: delegate } = usePatchDelegate();
 
-  console.log(members);
-
   const handlePrev = () => {
     navigate(`${routes.myPot.base}`);
   };
