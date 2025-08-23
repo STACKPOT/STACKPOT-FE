@@ -146,4 +146,6 @@ export type MyPagePotsResponse = MyPagePotItem[];
 export interface GetPotSummaryResponse {
   summary: string;
   potLan: string[];
+  potName: string;
+  isMember: boolean;
 }

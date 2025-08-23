@@ -30,7 +30,6 @@ import { useState } from "react";
 import { AboutWorkModal } from "@pages/MyPotDetail/components";
 import FinishedPotStatusSection from "./components/FinishedPotStatusSection";
 import MyPotCalendar from "@pages/MyPotDetail/pages/MyPotCalendar/MyPotCalendar";
-import useGetMyPotTodo from "apis/hooks/myPots/useGetMyPotTodo";
 
 const badgeColors: variant[] = ["red", "green", "blue", "purple", "pink"];
 
@@ -40,11 +39,6 @@ const FinishedPotDetail = () => {
   const potIdNumber = Number(potId);
   const taskIdNumber = Number(taskId);
 
-  const { data: potDetailData } = useGetMyPotTodo({
-    potId: potIdNumber,
-    page: 1,
-    size: 1,
-  });
   const { data: potSummaryData } = useGetPotSummary(potIdNumber);
 
   const [contentType, setContentType] = useState<"status" | "calendar">(
@@ -89,7 +83,7 @@ const FinishedPotDetail = () => {
             <button onClick={handlePrev} css={prevButtonStyle}>
               <ArrowLeftRoundIcon css={iconStyle} />
             </button>
-            <h2 css={textStyle}>{potDetailData?.title ?? null}</h2>
+            <h2 css={textStyle}>{potSummaryData?.potName}</h2>
             <ChattingIcon onClick={handleChattingClick} />
           </div>
         </div>
@@ -112,24 +106,28 @@ const FinishedPotDetail = () => {
             </div>
           </div>
         </div>
-        <div css={tabsContainer}>
-          {tabs.map((tab) => {
-            const isActive = contentType === tab.type;
-            return (
-              <div
-                key={tab.label}
-                onClick={tab.onclick}
-                css={[navLinkStyle(isActive)]}
-              >
-                {tab.label}
-              </div>
-            );
-          })}
-        </div>
-        {contentType === "status" ? (
-          <FinishedPotStatusSection potId={potIdNumber} />
-        ) : (
-          <MyPotCalendar />
+        {potSummaryData?.isMember && (
+          <>
+            <div css={tabsContainer}>
+              {tabs.map((tab) => {
+                const isActive = contentType === tab.type;
+                return (
+                  <div
+                    key={tab.label}
+                    onClick={tab.onclick}
+                    css={[navLinkStyle(isActive)]}
+                  >
+                    {tab.label}
+                  </div>
+                );
+              })}
+            </div>
+            {contentType === "status" ? (
+              <FinishedPotStatusSection potId={potIdNumber} />
+            ) : (
+              <MyPotCalendar />
+            )}
+          </>
         )}
       </main>
     </>

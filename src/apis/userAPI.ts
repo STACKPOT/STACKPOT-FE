@@ -114,5 +114,5 @@ export const patchDescription = async (body: PatchDescriptionBody) => {
 };
 
 export const getPotSummary = async (potId: number) => {
-  return authApiGet<GetPotSummaryResponse>(`/users/potSummary${potId}`);
+  return authApiGet<GetPotSummaryResponse>(`/users/potSummary/${potId}`);
 };
