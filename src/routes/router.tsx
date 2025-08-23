@@ -143,7 +143,7 @@ const router = createBrowserRouter([
         element: <FeedDetailPage />,
       },
       {
-        path: `${routes.finishedPot}/:potId`,
+        path: `${routes.finishedPot}/:potId/:userId`,
         element: <FinishedPotDetailPage />,
       },
     ],

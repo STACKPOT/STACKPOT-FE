@@ -22,7 +22,7 @@ import MemberGroup from "@components/commons/Badge/MemberGroup/MemberGroup";
 import { Role } from "types/role";
 import Button from "@components/commons/Button/Button";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import routes from "@constants/routes";
 import Modal from "@components/commons/Modal/Modal";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
@@ -69,6 +69,9 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   type,
 }: MyPotCardProps) => {
   const navigate = useNavigate();
+  const { userId } = useParams<{ userId: string }>();
+  const userIdNumber = Number(userId);
+
   const [showButton, setShowButton] = useState(false);
   const [showCancelApplyModal, setShowCancelApplyModal] = useState(false);
   const [showSummaryModal, setShowSummaryModal] = useState<number | null>(null);
@@ -76,12 +79,12 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
     type === "applied" && potStatus === "RECRUITING"
       ? "CANCEL_APPLY"
       : type === "myPage" && potStatus === "COMPLETED"
-        ? "APPEAL"
-        : (type === "myPot" || type === "myPage") &&
-          potStatus === "ONGOING" &&
-          isOwner
-          ? "FINISH_POT"
-          : "NONE";
+      ? "APPEAL"
+      : (type === "myPot" || type === "myPage") &&
+        potStatus === "ONGOING" &&
+        isOwner
+      ? "FINISH_POT"
+      : "NONE";
 
   const recruitments = Object.entries(members ?? {}).flatMap(([role, count]) =>
     Array(count).fill(role as Role)
@@ -97,7 +100,7 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
 
   const handleCardClick = () => {
     if (potStatus === "COMPLETED") {
-      navigate(`${routes.finishedPot}/${potId}`);
+      navigate(`${routes.finishedPot}/${potId}/${userIdNumber}`);
     } else if (potStatus === "ONGOING" /* && isMember */) {
       navigate(`${routes.myPot.task}/${potId}`);
     } else {
