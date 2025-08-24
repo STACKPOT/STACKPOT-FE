@@ -54,6 +54,7 @@ const FinishedPotDetail = () => {
   const taskIdNumber = Number(taskId);
   const userIdNumber = Number(userId);
   const textRef = useRef<HTMLTextAreaElement>(null);
+  console.log(`useId: ${userIdNumber}`);
 
   const { data: potSummaryData } = useGetPotSummary(potIdNumber);
   const { mutate: submitAppeal } = usePatchAppealPot();
@@ -145,7 +146,7 @@ const FinishedPotDetail = () => {
         >
           <div css={appealTitleContainer}>
             여기서 저는요 👋
-            {potSummaryData?.isMember && (
+            {userId === "NaN" && (
               <div css={appealTitleButtonContainer}>
                 <Button variant="action" actionType="neg" onClick={() => {}}>
                   삭제
