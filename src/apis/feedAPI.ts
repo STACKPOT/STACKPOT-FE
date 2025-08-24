@@ -51,7 +51,7 @@ export const postFeedLike = async (feedId: number) => {
   return authApiPost<Record<string, string>>(`/feeds/${feedId}/like`);
 };
 export const postFeedSave = async (feedId: number) => {
-  return authApiPost<Record<string, string>>(`/feeds/${feedId}/save`);
+  return authApiPost<Record<string, string>>(`/saves/feeds/${feedId}`);
 };
 
 export const DeleteFeed = async (feedId: number) => {

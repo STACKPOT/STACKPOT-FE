@@ -93,11 +93,17 @@ const FeedDetail = () => {
         </div>
         <div css={postButtonsContainer}>
           <PostButton
+            type="feed"
             postType="like"
-            isToggled={data?.feed.isLiked ?? false}
+            isToggled={data?.isLiked ?? false}
             id={numericFeedId}
           />
-          <PostButton postType="save" isToggled={false} id={numericFeedId} />
+          <PostButton
+            type="feed"
+            postType="save"
+            isToggled={data?.isSaved ?? false}
+            id={numericFeedId}
+          />
         </div>
       </div>
       <CommentSection type="feed" id={numericFeedId} />

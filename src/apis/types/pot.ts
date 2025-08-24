@@ -93,12 +93,13 @@ export interface PotDetail {
   applied: boolean;
   potModeOfOperation: Participation;
   potContent: string;
+  potSummary: string;
+  isSaved: boolean;
   potRecruitmentDeadline: string;
   recruitmentDetails: string;
   recruitingMembers: Record<Role, number>;
   owner: boolean;
   dday: string;
-  potSummary: string;
 }
 export interface GetPotApplicationResponse {
   applicationId: number;
