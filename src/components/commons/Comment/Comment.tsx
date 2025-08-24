@@ -14,7 +14,6 @@ import {
   profileTextContainer,
   textAreaStyle,
 } from "./Comment.style";
-import { Role } from "types/role";
 import { roleImages } from "@constants/roleImage";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
@@ -34,7 +33,6 @@ interface CommentProps {
   id: number;
   type: "feed" | "pot";
   userId: number;
-  role: Role;
   userName: string;
   createdAt: string;
   comment: string;
@@ -50,7 +48,6 @@ const Comment: React.FC<CommentProps> = ({
   id,
   type,
   userId,
-  role,
   userName,
   createdAt,
   comment,
@@ -128,7 +125,7 @@ const Comment: React.FC<CommentProps> = ({
               <div css={profileContainer}>
                 <img
                   css={profileImageStyle}
-                  src={roleImages[role]}
+                  src={roleImages["UNKNOWN"]}
                   alt="profile"
                 />
                 <div css={profileTextContainer}>
@@ -180,7 +177,7 @@ const Comment: React.FC<CommentProps> = ({
           ) : (
             <EditingComment
               id={id}
-              role={role}
+              role={"UNKNOWN"}
               userName={userName}
               comment={comment}
               commentId={commentId}
