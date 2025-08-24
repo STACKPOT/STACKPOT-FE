@@ -132,9 +132,9 @@ export const getUsersMyPagesPotAppealContent = async (potId: number, userId: num
 }
 
 export const getFeedSeries = async () => {
-  return authApiGet<Record<number, string>>(`/feeds/series`);
+  return authApiGet<Record<string, string>>(`/feeds/series`);
 };
 
 export const getUserFeedSeries = async (userId: number) => {
-  return authApiGet<Record<number, string>>(`/feeds/series/${userId}`);
+  return authApiGet<Record<string, string>>(`/feeds/series/${userId}`);
 };
