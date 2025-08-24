@@ -7,10 +7,10 @@ export type ProfileFeedsView = {
   seriesComments: { comments: string }[];
 };
 
-const useGetProfileFeeds = ({ nextCursor, size = 10, userId }: GetFeedsParams) => {
+const useGetProfileFeeds = ({ nextCursor, size = 10, userId, seriesId }: GetFeedsParams) => {
   return useInfiniteQuery({
-    queryKey: ['profile', 'feeds', userId === undefined ? 'me' : userId, size],
-    queryFn: ({ pageParam = nextCursor }) => (userId !== undefined ? getUsersMyPagesFeeds({ userId, nextCursor: pageParam, size }) : getMyPageFeeds({ nextCursor: pageParam, size })),
+    queryKey: ['profile', 'feeds', userId === undefined ? 'me' : userId, size, seriesId],
+    queryFn: ({ pageParam = nextCursor }) => (userId !== undefined ? getUsersMyPagesFeeds({ userId, nextCursor: pageParam, size, seriesId }) : getMyPageFeeds({ nextCursor: pageParam, size, seriesId })),
     getNextPageParam: (lastPage) => { return lastPage.result?.nextCursor ?? undefined },
     select: (data) => {
       const feeds = data.pages.flatMap((page) => page.result?.feeds ?? []);

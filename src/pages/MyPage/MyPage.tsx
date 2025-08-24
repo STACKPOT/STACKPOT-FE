@@ -7,7 +7,7 @@ import {
 	tabsContainer,
 	tabsTextStyle,
 } from './MyPage.style';
-import { CtaCard, FloatingButton } from '@components/index';
+import { CtaCard, } from '@components/index';
 import ProfileContent from '@components/commons/ProfileContent/ProfileContent';
 import { MyPageProfile } from '@components/commons/ProfileContent';
 
@@ -35,7 +35,6 @@ const MyPage = () => {
 					<ProfileContent contentType={contentType} viewerIsOwner={true} />
 				</div>
 			</div>
-			<FloatingButton type={'feed'} />
 		</main>
 	);
 };

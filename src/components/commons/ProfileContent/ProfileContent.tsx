@@ -35,7 +35,7 @@ type Props = {
 };
 
 const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner: boolean }) => {
-  const { data: series } = useGetFeedSeries();
+  const { data: series } = useGetFeedSeries(userId);
   const { mutate } = usePostFeedSeries();
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -59,7 +59,7 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
     fetchNextPage: fetchProfileNextPage,
     hasNextPage: hasProfileNextPage,
     isFetching: isProfileFetching,
-  } = useGetProfileFeeds({ size: 100, userId });
+  } = useGetProfileFeeds({ size: 100, userId, seriesId: selectedSeriesId === "0" ? undefined : Number(selectedSeriesId) });
 
   const hasSearch = searchTerm.trim().length > 0;
 
@@ -70,7 +70,6 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
     return profileData?.feeds ?? [];
   }, [hasSearch, searchData, profileData]);
 
-  const filteredFeeds = feeds.filter(feed => selectedSeriesId === '0' || feed.seriesId === selectedSeriesId);
 
   const seriesList = [
     { comments: '전체보기', seriesId: '0' },
@@ -128,7 +127,7 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
           <span role="img" aria-label="search"><SearchBlueIcon /></span>
         </div>
       </div>
-      {filteredFeeds.map((post) => (
+      {feeds.map((post) => (
         <PostCard
           nickname={post.writer}
           role={post.writerRole}

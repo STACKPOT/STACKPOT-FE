@@ -53,8 +53,9 @@ export const postNickname = async (nickname: string) => {
 export const getMyPageFeeds = async ({
   nextCursor,
   size,
+  seriesId
 }: GetFeedsParams) => {
-  return authApiGet<MyPageFeedsResponse>("/users/feeds", { nextCursor, size });
+  return authApiGet<MyPageFeedsResponse>("/users/feeds", { nextCursor, size, seriesId });
 };
 
 export const getMyPagePots = async ({ potStatus }: GetMyPagePotsParams) => {
@@ -86,9 +87,10 @@ export const deleteUser = () => {
 export const getUsersMyPagesFeeds = async ({
   nextCursor,
   size,
-  userId
+  userId,
+  seriesId
 }: GetFeedsParams) => {
-  return authApiGet<MyPageFeedsResponse>(`/users/${userId}/feeds`, { nextCursor, size });
+  return authApiGet<MyPageFeedsResponse>(`/users/${userId}/feeds`, { nextCursor, size, seriesId });
 };
 
 export const getUsersMyPagesPots = async (
@@ -124,6 +126,15 @@ export const patchDescription = async (
 export const getMyPagesPotAppealContent = async (potId: number) => {
   return authApiGet<FinishedModalResponse>(`/users/potAppealContent/${potId}`);
 }
+
 export const getUsersMyPagesPotAppealContent = async (potId: number, userId: number) => {
   return authApiGet<FinishedModalResponse>(`/users/potAppealContent/${potId}/${userId}`);
 }
+
+export const getFeedSeries = async () => {
+  return authApiGet<Record<number, string>>(`/feeds/series`);
+};
+
+export const getUserFeedSeries = async (userId: number) => {
+  return authApiGet<Record<number, string>>(`/feeds/series/${userId}`);
+};

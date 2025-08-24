@@ -117,6 +117,7 @@ export interface GetFeedsParams {
 	nextCursor?: number;
 	size: number;
 	userId?: number;
+	seriesId?: number;
 }
 export interface MyPageFeedsResponse {
 	id: number;

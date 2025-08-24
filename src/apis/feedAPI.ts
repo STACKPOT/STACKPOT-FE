@@ -61,9 +61,6 @@ export const DeleteFeed = async (feedId: number) => {
   return authApiDelete(`/feeds/${feedId}`);
 };
 
-export const getFeedSeries = async () => {
-  return authApiGet<Record<number, string>>(`/feeds/series`);
-};
 
 export const postFeedSeries = async (body: PostFeedSeriesParams) => {
   return authApiPost<Record<number, string>>(`/feeds/series`, body);

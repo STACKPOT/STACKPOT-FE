@@ -1,11 +1,10 @@
-import { PotIcon, RightIcon } from "@assets/svgs";
-import { Button, CtaCard, FloatingButton } from "@components/index";
+import { RightIcon } from "@assets/svgs";
+import { Button, CtaCard } from "@components/index";
 
 import {
   container,
   content,
   contentTitle,
-  iconStyle,
   bannerStyle,
   bannerTitleStyle,
   spanStyle,
@@ -23,9 +22,8 @@ import { Feed, PopularPots } from "./components";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${
-    import.meta.env.VITE_REST_API_KEY
-  }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
+  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY
+    }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
 &scope=account_email
 &prompt=login`;
 
@@ -69,7 +67,6 @@ const Home: React.FC = () => {
             <Feed />
           </div>
         </div>
-        <FloatingButton type="feed" />
       </main>
     </>
   );
