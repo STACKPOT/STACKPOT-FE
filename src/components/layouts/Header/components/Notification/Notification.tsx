@@ -20,7 +20,7 @@ const Notification: React.FC = () => {
         </div>
       ) : (
         notifications?.map((item, index) => (
-          <React.Fragment key={`${item.potId}-${item.feedId}}`}>
+          <React.Fragment key={`${item.notificationId}`}>
             <NotificationItem
               title={item.type}
               body={item.content}
