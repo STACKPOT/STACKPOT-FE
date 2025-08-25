@@ -3,7 +3,7 @@ import {
   buttonStyle,
   contentStyle,
   imageStyle,
-  inputContianer,
+  inputContainer,
   inputStyle,
   modalStyle,
   nicknameInputContainer,
@@ -67,7 +67,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
         <img src={SproutImage} css={imageStyle} alt="sprout" />
         <p css={contentStyle}>나는 무슨 새싹이 될까요?</p>
         <div css={nicknameInputContainer}>
-          <div css={inputContianer}>
+          <div css={inputContainer}>
             <input
               readOnly
               placeholder="닉네임 생성하기를 눌러 주세요"

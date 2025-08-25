@@ -30,7 +30,7 @@ export const imageStyle = css`
   margin-bottom: 0.8rem;
 `;
 
-export const inputContianer = css`
+export const inputContainer = css`
   display: flex;
   gap: 1.2rem;
   width: 100%;
