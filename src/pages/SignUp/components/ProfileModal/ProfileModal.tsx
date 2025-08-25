@@ -24,12 +24,11 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   role,
   onModalCancel,
 }: ProfileModalProps) => {
-  const [nickname, setNickname] = useState<string>("");
-
   const { mutate: getNickname, isPending } = useGetNickname();
   const { mutate: postNickname } = usePostNickname();
 
-  const setRole = useAuthStore((state) => state.setRole);
+  const setNicknameStore = useAuthStore((s) => s.setNickname);
+  const nickname = useAuthStore((s) => s.nickname);
 
   const [showEditWarning, setShowEditWarning] = useState(false);
 
@@ -37,7 +36,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
     getNickname(role, {
       onSuccess: (response) => {
         if (response.result?.nickname) {
-          setNickname(response.result.nickname);
+          setNicknameStore(response.result.nickname);
           setShowEditWarning(false);
         }
       },
@@ -45,9 +44,8 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   };
 
   const handleConfirm = () => {
-    postNickname(nickname);
-    if (role) {
-      setRole(role);
+    if (nickname) {
+      postNickname(nickname);
     }
   };
 
