@@ -8,14 +8,13 @@ import {
 import {
   bellContainer,
   guestProfileStyle,
+  headerIconStyle,
   headerStyle,
   iconContainer,
   iconStyle,
   logoStyle,
   profileContainer,
-  ProfileStyle,
   profileStyle,
-  searchIconStyle,
 } from "./Header.style";
 import Button from "@components/commons/Button/Button";
 import { useEffect, useRef, useState } from "react";
@@ -30,6 +29,7 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const ref = useRef<HTMLDivElement>(null);
+  const notificationRef = useRef<HTMLDivElement>(null);
 
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
@@ -74,8 +74,16 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+
+      if (
+        ref.current &&
+        !ref.current.contains(target) &&
+        notificationRef.current &&
+        !notificationRef.current.contains(target)
+      ) {
         setIsDropdownOpen(false);
+        setIsNotificationOpen(false);
       }
     };
 
@@ -83,7 +91,7 @@ const Header: React.FC = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref]);
+  }, []);
 
   const handleNotificationClick = () => {
     setIsNotificationOpen((prev) => !prev);
@@ -101,17 +109,27 @@ const Header: React.FC = () => {
           <div css={iconContainer}>
             <SearchIcon
               type="button"
-              css={searchIconStyle(isHomePage)}
+              css={headerIconStyle(isHomePage)}
               onClick={handleSearchClick}
             />
             <div css={bellContainer}>
               {isNotificationOpen ? (
-                <BellFilledIcon onClick={handleNotificationClick} />
+                <BellFilledIcon
+                  css={headerIconStyle(isHomePage)}
+                  onClick={handleNotificationClick}
+                />
               ) : (
-                <BellIcon onClick={handleNotificationClick} />
+                <BellIcon
+                  css={headerIconStyle(isHomePage)}
+                  onClick={handleNotificationClick}
+                />
               )}
 
-              {isNotificationOpen && <Notification />}
+              {isNotificationOpen && (
+                <div ref={notificationRef}>
+                  <Notification />
+                </div>
+              )}
             </div>
 
             <div css={profileContainer}>
