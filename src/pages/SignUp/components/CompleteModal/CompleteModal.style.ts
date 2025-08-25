@@ -13,9 +13,11 @@ export const modalStyle = css`
 
 export const bodyContainer = css`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const nicknameStyle = css`
   color: ${theme.color.point.hero};
+  ${theme.font.title1}
 `;
