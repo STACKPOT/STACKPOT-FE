@@ -115,7 +115,7 @@ export const getTasksCalendar = async ({
 };
 
 export const patchMyPotRename = async ({ potId, potName }: RenameParams) => {
-  return authApiPatch(`/my-pots/${potId}/rename`, potName);
+  return authApiPatch(`/my-pots/${potId}/rename`, { potName });
 };
 
 export const patchMyPotDelegate = async ({

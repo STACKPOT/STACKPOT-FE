@@ -28,7 +28,7 @@ import { Role } from "types/role";
 import { css } from "@emotion/react";
 import { useGetMyPotOwner } from "apis/hooks/myPots/useGetMyPotOwner";
 import { usePatchRename } from "apis/hooks/myPots/usePatchRename";
-import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemeber";
+import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemebers";
 import { usePatchDelegate } from "apis/hooks/myPots/usePatchDelegate";
 
 const MyPotDetail: React.FC = () => {

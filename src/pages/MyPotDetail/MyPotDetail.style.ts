@@ -41,7 +41,7 @@ export const inputStyle = css`
     border: 1px solid ${theme.color.point.alternative};
     outline: none;
   }
-  :placeholder {
+  ::placeholder {
     color: ${theme.color.object.hero};
   }
 `;
