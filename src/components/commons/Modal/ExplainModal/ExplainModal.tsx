@@ -32,6 +32,7 @@ interface ExplainModalProps {
    * type=`"normal"`, `"profile"`인 경우에만 필요.
    */
   title?: string;
+  centerTitle?: boolean;
 
   /**
    * 모달에 들어가는 컨텐츠 부분.
@@ -68,7 +69,7 @@ interface ExplainModalProps {
 
 /**
  * 컨텐츠를 직접 구성해야 하는 모달
- * 
+ *
  *
  * @param props ExplainModalProps 객체
  * @param props.type (optional) 모달의 타입. 기본값은 `"normal"`
@@ -82,11 +83,11 @@ interface ExplainModalProps {
  * @param props.onButtonClick 모달 버튼을 클릭했을 때 호출되는 콜백함수
  * @param props.onCancel 닫기 아이콘을 클릭했을 때 호출되는 콜백함수
  * @param props.onDeleteClick '삭제하기'버튼을 클릭했을 때 호출되는 콜백
- * 
+ *
  * @remarks
  * 모달은 기본적으로 반응형으로 처리됨.
  * 단, `customContainerStyle`값을 지정하는 경우에는 반응형이 적응되지 않고 모달 크기가 고정됨.
- * 
+ *
  * @example
  * ```tsx
  * <ExplainModal
@@ -104,6 +105,7 @@ interface ExplainModalProps {
 const ExplainModal: React.FC<ExplainModalProps> = ({
   type = "normal",
   title,
+  centerTitle = false,
   children,
   buttonText,
   disabled,
@@ -126,7 +128,7 @@ const ExplainModal: React.FC<ExplainModalProps> = ({
           children
         ) : (
           <div css={titleContentContainerStyle(type)}>
-            {title && <p css={titleStyle}>{title}</p>}
+            {title && <p css={titleStyle(centerTitle)}>{title}</p>}
             <div css={contentContainer(customContainerStyle !== undefined)}>
               {type === "normal" ? (
                 children
