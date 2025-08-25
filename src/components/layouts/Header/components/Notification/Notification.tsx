@@ -11,7 +11,6 @@ import useGetNotification from "apis/hooks/notification/useGetNotification";
 const Notification: React.FC = () => {
   const { data: notifications } = useGetNotification();
 
-  console.log(notifications);
   return (
     <div css={container}>
       {notifications?.length === 0 ? (
