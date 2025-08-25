@@ -45,7 +45,11 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
 
   const handleConfirm = () => {
     if (nickname) {
-      postNickname(nickname);
+      postNickname(nickname, {
+        onSuccess: () => {
+          onModalCancel();
+        },
+      });
     }
   };
 
