@@ -20,6 +20,7 @@ import usePatchSignIn from "apis/hooks/users/usePatchSignIn";
 import { useState } from "react";
 import { SignInResponse } from "apis/types/user";
 import { Role } from "types/role";
+import CompleteModal from "./components/CompleteModal/CompleteModal";
 
 type SignInFormData = {
   role: Role;
@@ -28,6 +29,7 @@ type SignInFormData = {
 
 const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
   const [responseData, setResponseData] = useState<SignInResponse | null>(null);
 
   const methods = useForm({
@@ -66,6 +68,11 @@ const SignUp = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setIsCompleteModalOpen(true);
+  };
+
+  const handleModalCancel = () => {
+    setIsCompleteModalOpen(false);
   };
 
   return (
@@ -99,6 +106,9 @@ const SignUp = () => {
       </FormProvider>
       {isModalOpen && responseData?.role && (
         <ProfileModal onModalCancel={handleCancel} role={responseData?.role} />
+      )}
+      {isCompleteModalOpen && (
+        <CompleteModal onModalCancel={handleModalCancel} />
       )}
     </main>
   );
