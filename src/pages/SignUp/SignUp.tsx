@@ -57,7 +57,6 @@ const SignUp = () => {
   ]);
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
-    console.log(data);
     mutate(data, {
       onSuccess: (response) => {
         setResponseData(response.result ?? null);
