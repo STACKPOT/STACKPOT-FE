@@ -8,14 +8,13 @@ import {
 import {
   bellContainer,
   guestProfileStyle,
+  headerIconStyle,
   headerStyle,
   iconContainer,
   iconStyle,
   logoStyle,
   profileContainer,
-  ProfileStyle,
   profileStyle,
-  searchIconStyle,
 } from "./Header.style";
 import Button from "@components/commons/Button/Button";
 import { useEffect, useRef, useState } from "react";
@@ -110,14 +109,20 @@ const Header: React.FC = () => {
           <div css={iconContainer}>
             <SearchIcon
               type="button"
-              css={searchIconStyle(isHomePage)}
+              css={headerIconStyle(isHomePage)}
               onClick={handleSearchClick}
             />
             <div css={bellContainer}>
               {isNotificationOpen ? (
-                <BellFilledIcon onClick={handleNotificationClick} />
+                <BellFilledIcon
+                  css={headerIconStyle(isHomePage)}
+                  onClick={handleNotificationClick}
+                />
               ) : (
-                <BellIcon onClick={handleNotificationClick} />
+                <BellIcon
+                  css={headerIconStyle(isHomePage)}
+                  onClick={handleNotificationClick}
+                />
               )}
 
               {isNotificationOpen && (
