@@ -13,7 +13,6 @@ import {
   iconStyle,
   logoStyle,
   profileContainer,
-  ProfileStyle,
   profileStyle,
   searchIconStyle,
 } from "./Header.style";
@@ -25,6 +24,7 @@ import { roleImages } from "@constants/roleImage";
 import ProfileDropdown from "@components/commons/Dropdown/ProfileDropdown/ProfileDropdown";
 import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
 import Notification from "./components/Notification/Notification";
+import { ProfileImage } from "@assets/images";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -117,7 +117,7 @@ const Header: React.FC = () => {
             <div css={profileContainer}>
               <img
                 css={guestMode ? guestProfileStyle : profileStyle}
-                src={roleProfileImage}
+                src={ProfileImage}
                 alt="profileImage"
               />
               {!guestMode && (
