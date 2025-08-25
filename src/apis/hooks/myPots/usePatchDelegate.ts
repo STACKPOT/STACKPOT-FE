@@ -12,6 +12,7 @@ export const usePatchDelegate = () => {
       patchMyPotDelegate({ potId, memberId }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
+      queryClient.invalidateQueries({ queryKey: ["potOwner"] });
       showSnackbar({
         message: "권한 위임이 완료되었습니다.",
         severity: "success",
