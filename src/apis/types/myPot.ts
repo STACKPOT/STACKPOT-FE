@@ -161,3 +161,13 @@ export interface PostTask {
 export interface PatchStatus {
   status: string;
 }
+
+export interface RenameParams {
+  potId: number;
+  potName: string;
+}
+
+export interface DelegateParams {
+  potId: number;
+  memberId: number;
+}

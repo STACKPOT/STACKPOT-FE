@@ -6,7 +6,7 @@ const axiosInstance: AxiosInstance = axios.create({
   baseURL,
   headers: {
     Accept: "*/*",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json; charset=UTF-8",
   },
 });
 
