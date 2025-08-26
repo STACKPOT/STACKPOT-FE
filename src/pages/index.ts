@@ -9,7 +9,6 @@ import PotDetailPage from "./PotDetail/PotDetail";
 import PotMain from "./Pots/PotMain";
 import AllPotPage from "./Pots/pages/AllPot/AllPotPage";
 import AppliedPotPage from "./Pots/pages/AppliedPot/AppliedPot";
-import MadePotPage from "./Pots/pages/MadePot/MadePot";
 import SignUpPage from "./SignUp/SignUp";
 import CreatePotPage from "./CreatePot/CreatePot";
 import MyPotDetailMainPage from "./MyPotDetail/MyPotDetail";
@@ -40,7 +39,6 @@ export {
   PotMain,
   AllPotPage,
   AppliedPotPage,
-  MadePotPage,
   SignUpPage,
   CreatePotPage,
   MyPotDetailMainPage,

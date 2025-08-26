@@ -13,7 +13,6 @@ import {
   PotMain,
   AllPotPage,
   AppliedPotPage,
-  MadePotPage,
   SignUpPage,
   CreatePotPage,
   MyPotDetailMainPage,
@@ -92,7 +91,6 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AllPotPage /> },
           { path: routes.pot.applied, element: <AppliedPotPage /> },
-          { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
       },
       {

@@ -1,7 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import MDEditor from '@uiw/react-md-editor';
 import { MyPotCard, PostCard } from '@components/index';
 import { AddIcon, SearchBlueIcon } from '@assets/svgs';
+import useGetProfileFeeds from 'apis/hooks/users/useGetProfileFeeds';
+import usePostFeedSeries from 'apis/hooks/feeds/usePostFeedSeries';
+
 import {
   feedHeaderContainer,
   feedCategoryButtonGroup,
@@ -16,12 +20,13 @@ import {
   introductionWriteButton,
 } from './ProfileContent.style';
 import usePatchDescription from 'apis/hooks/users/usePatchDescription';
-import { Feeds, GetMyPagePotsParams, MyPagePotItem } from 'apis/types/user';
-import useGetProfileFeeds from 'apis/hooks/users/useGetProfileFeeds';
+import { GetMyPagePotsParams, MyPagePotItem } from 'apis/types/user';
 import useGetProfilePots from 'apis/hooks/users/useGetProfilePots';
 import useGetProfileDescription from 'apis/hooks/users/useGetProfileDescription';
 import SeriesModal from './SeriesModal/SeriesModal';
 import { partKoreanNameMap } from '@constants/categories';
+import useGetSearchFeeds from 'apis/hooks/searches/useGetSearchFeeds';
+import useGetFeedSeries from 'apis/hooks/feeds/useGetFeedSeries';
 
 type Props = {
   contentType: 'feed' | 'pot' | 'introduction';
@@ -30,28 +35,66 @@ type Props = {
 };
 
 const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner: boolean }) => {
-  const { data } = useGetProfileFeeds(userId);
-  const feeds = data?.feeds ?? [];
-  const defaultSeries = data?.seriesComments ?? [{ label: '전체보기' }];
+  const { data: series } = useGetFeedSeries(userId);
+  const { mutate } = usePostFeedSeries();
 
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedSeriesId, setSelectedSeriesId] = useState("0");
   const [isSeriesModalOpen, setIsSeriesModalOpen] = useState(false);
-  const [seriesList, setSeriesList] = useState(defaultSeries);
+
+  const { ref: bottomRef, inView } = useInView({
+    threshold: 0,
+    rootMargin: '100px',
+  });
+  const {
+    data: searchData,
+    fetchNextPage: fetchSearchNextPage,
+    hasNextPage: hasSearchNextPage,
+    isFetching: isSearchFetching,
+  } = useGetSearchFeeds({ keyword: searchTerm, size: 10, userId });
+
+  const {
+    data: profileData,
+    fetchNextPage: fetchProfileNextPage,
+    hasNextPage: hasProfileNextPage,
+    isFetching: isProfileFetching,
+  } = useGetProfileFeeds({ size: 100, userId, seriesId: selectedSeriesId === "0" ? undefined : Number(selectedSeriesId) });
+
+  const hasSearch = searchTerm.trim().length > 0;
+
+  const feeds = useMemo(() => {
+    if (hasSearch) {
+      return searchData?.pages.flatMap((page) => page.result?.feeds ?? []) ?? [];
+    }
+    return profileData?.feeds ?? [];
+  }, [hasSearch, searchData, profileData]);
+
+
+  const seriesList = [
+    { comments: '전체보기', seriesId: '0' },
+    ...(series
+      ? Object.entries(series).map(([seriesId, comments]) => ({
+        comments,
+        seriesId,
+      }))
+      : []),
+  ];
+
 
   useEffect(() => {
-    setSeriesList(defaultSeries);
-  }, [defaultSeries]);
+    const shouldFetch = hasSearch ? hasSearchNextPage : hasProfileNextPage;
+    const isCurrentlyFetching = hasSearch ? isSearchFetching : isProfileFetching;
+    const fetchNext = hasSearch ? fetchSearchNextPage : fetchProfileNextPage;
+    if (inView && shouldFetch && !isCurrentlyFetching) {
+      fetchNext();
+    }
+  }, [inView, hasSearch, hasSearchNextPage, hasProfileNextPage, isSearchFetching, isProfileFetching, fetchSearchNextPage, fetchProfileNextPage]);
 
-  const filteredPosts = useMemo(() =>
-    feeds.filter(
-      (post: Feeds) =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.content.toLowerCase().includes(searchTerm.toLowerCase()),
-    ),
-    [feeds, searchTerm],
-  );
-
+  const handleSeriesClick = (seriesId: string, index: number) => {
+    setSelectedIndex(index);
+    setSelectedSeriesId(seriesId);
+  }
   return (
     <>
       <div css={feedHeaderContainer}>
@@ -65,13 +108,13 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
             <AddIcon />
           </button>
           }
-          {seriesList.map(({ label }, index) => (
+          {seriesList.map(({ comments, seriesId }, index) => (
             <button
-              key={label}
+              key={comments}
               css={feedCategoryButton(selectedIndex === index)}
-              onClick={() => setSelectedIndex(index)}
+              onClick={() => handleSeriesClick(seriesId, index)}
             >
-              {label}
+              {comments}
             </button>
           ))}
         </div>
@@ -84,28 +127,20 @@ const FeedContent = ({ userId, viewerIsOwner }: { userId?: number, viewerIsOwner
           <span role="img" aria-label="search"><SearchBlueIcon /></span>
         </div>
       </div>
-      {filteredPosts.map((post) => (
+      {feeds.map((post) => (
         <PostCard
           nickname={post.writer}
           role={post.writerRole}
-          isLiked={post.isLiked}
-          likeCount={post.likeCount}
           key={post.feedId}
-          createdAt={post.createdAt}
-          title={post.title}
-          content={post.content}
-          feedId={post.feedId}
-          writerId={post.writerId}
-          saveCount={post.saveCount}
-          commentCount={post.commentCount}
-          isSaved={post.isSaved}
+          {...post}
           isMyPost={viewerIsOwner}
         />
       ))}
+      {(hasSearch ? hasSearchNextPage : hasProfileNextPage) && <div ref={bottomRef} style={{ height: 1 }} />}
       {isSeriesModalOpen && (
         <SeriesModal
           defaultSeriesList={seriesList}
-          onConfirm={(updated) => setSeriesList(updated)}
+          onConfirm={(updated) => mutate({ comments: updated.map((s) => s.comments) })}
           onClose={() => setIsSeriesModalOpen(false)}
         />
       )}
@@ -146,7 +181,8 @@ const PotContent = ({ userId }: { userId?: number }) => {
             (role) => partKoreanNameMap[role]
           )}
           type={'myPage'}
-          {...pot} />
+          {...pot}
+          userId={userId} />
       ))}
     </>
   );
@@ -218,4 +254,3 @@ const ProfileContent = ({ contentType, viewerIsOwner, userId }: Props) => {
 };
 
 export default ProfileContent;
-

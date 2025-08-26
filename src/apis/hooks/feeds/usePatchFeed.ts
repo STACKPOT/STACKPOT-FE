@@ -21,7 +21,7 @@ const usePatchFeed = () => {
     onError: () => {
       showSnackbar({
         message: "피드 저장에 실패했습니다.",
-        severity: "success",
+        severity: "error",
       });
     },
   });

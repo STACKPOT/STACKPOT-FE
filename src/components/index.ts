@@ -19,7 +19,6 @@ import Modal from "./commons/Modal/Modal";
 import MyFeedDropdown from "./commons/Dropdown/MyFeedDropdown/MyFeedDropdown";
 import PotInformation from "./commons/PotInformation/PotInformation";
 import UploadToast from "./commons/Toast/UploadToast";
-import FinishedPotCard from "./cards/FinishedPotCard/FinishedPotCard";
 import InformationPopper from "./commons/InformationPopper/InformationPopper";
 import PartRecruitment from "./commons/PartRecruitment/PartRecruitment";
 import PostForm from "./commons/PostForm/PostForm";
@@ -57,7 +56,6 @@ export {
   MyFeedDropdown,
   PotInformation,
   UploadToast,
-  FinishedPotCard,
   InformationPopper,
   PartRecruitment,
   PostForm,

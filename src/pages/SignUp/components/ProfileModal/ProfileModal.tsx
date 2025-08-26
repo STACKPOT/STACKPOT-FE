@@ -2,18 +2,20 @@ import { Button, ExplainModal } from "@components/index";
 import {
   buttonStyle,
   contentStyle,
-  inputContianer,
+  imageStyle,
+  inputContainer,
   inputStyle,
+  modalStyle,
+  nicknameInputContainer,
   profileContainer,
-  profileStyle,
+  supportingTextStyle,
 } from "./ProfileModal.style";
 import { Role } from "types/role";
-import { roleImages } from "@constants/roleImage";
 import { useState } from "react";
 import useGetNickname from "apis/hooks/users/useGetNickname";
 import { useAuthStore } from "stores/useAuthStore";
-import { roleDescription, roleToVeggie } from "@constants/profileRole";
 import usePostNickname from "apis/hooks/users/usePostNickname";
+import { SproutImage } from "@assets/images";
 interface ProfileModalProps {
   role: Role;
   onModalCancel: () => void;
@@ -22,55 +24,73 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   role,
   onModalCancel,
 }: ProfileModalProps) => {
-  const profileImage = roleImages[role];
-  const [nickname, setNickname] = useState<string>("");
-
   const { mutate: getNickname, isPending } = useGetNickname();
   const { mutate: postNickname } = usePostNickname();
 
-  const setRole = useAuthStore((state) => state.setRole);
+  const setNicknameStore = useAuthStore((s) => s.setNickname);
+  const nickname = useAuthStore((s) => s.nickname);
+
+  const [showEditWarning, setShowEditWarning] = useState(false);
 
   const handleClick = () => {
     getNickname(role, {
       onSuccess: (response) => {
         if (response.result?.nickname) {
-          setNickname(response.result.nickname);
+          setNicknameStore(response.result.nickname);
+          setShowEditWarning(false);
         }
       },
     });
   };
 
   const handleConfirm = () => {
-    postNickname(nickname);
-    if (role) {
-      setRole(role);
+    if (nickname) {
+      postNickname(nickname, {
+        onSuccess: () => {
+          onModalCancel();
+        },
+      });
     }
   };
 
   return (
     <ExplainModal
-      subtitle={`가입 전, 닉네임을 만들어 주세요.
-        STACKPOT은 네 가지의 재료 안에서 랜덤 닉네임을 부여받아요.`}
-      buttonText="이렇게 할래요"
+      type="normal"
+      centerTitle={true}
+      title={`시작하기 전 닉네임을 만들어 볼까요?`}
+      buttonText="저장하기"
       onButtonClick={handleConfirm}
       onCancel={onModalCancel}
+      customContainerStyle={modalStyle}
     >
       <div css={profileContainer}>
-        <img css={profileStyle} src={profileImage} alt="profile" />
-        <p css={contentStyle}>
-          {roleDescription[role]} <br />
-          나는 무슨 {roleToVeggie[role]}이 될까요?
-        </p>
-        <div css={inputContianer}>
-          <input
-            readOnly
-            placeholder="닉네임 생성하기를 눌러 주세요"
-            css={inputStyle(nickname.length > 0)}
-            value={nickname}
-          />
-          <Button css={buttonStyle} onClick={handleClick} disabled={isPending}>
-            {nickname.length < 1 ? "닉네임 생성하기" : "다시 생성하기"}
-          </Button>
+        <img src={SproutImage} css={imageStyle} alt="sprout" />
+        <p css={contentStyle}>나는 무슨 새싹이 될까요?</p>
+        <div css={nicknameInputContainer}>
+          <div css={inputContainer}>
+            <input
+              readOnly
+              placeholder="닉네임 생성하기를 눌러 주세요"
+              css={inputStyle(nickname.length > 0)}
+              value={nickname}
+              onClick={() => {
+                setShowEditWarning(true);
+              }}
+            />
+
+            <Button
+              css={buttonStyle}
+              onClick={handleClick}
+              disabled={isPending}
+            >
+              {nickname.length < 1 ? "닉네임 생성하기" : "다시 생성하기"}
+            </Button>
+          </div>
+          {showEditWarning ? (
+            <p css={supportingTextStyle("error")}>닉네임은 편집할 수 없어요</p>
+          ) : (
+            nickname && <p css={supportingTextStyle("complete")}>생성 완료!</p>
+          )}
         </div>
       </div>
     </ExplainModal>
