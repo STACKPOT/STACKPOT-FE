@@ -136,7 +136,7 @@ const Header: React.FC = () => {
             <div css={profileContainer}>
               <img
                 css={guestMode ? guestProfileStyle : profileStyle}
-                src={ProfileImage}
+                src={guestMode ? ProfileImage : roleProfileImage}
                 alt="profileImage"
               />
               {!guestMode && (
