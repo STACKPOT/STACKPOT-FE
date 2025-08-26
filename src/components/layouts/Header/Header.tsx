@@ -128,7 +128,7 @@ const Header: React.FC = () => {
 
               {isNotificationOpen && (
                 <div ref={notificationRef}>
-                  <Notification />
+                  <Notification onClose={() => setIsNotificationOpen(false)} />
                 </div>
               )}
             </div>

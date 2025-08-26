@@ -7,3 +7,8 @@ export interface NotificationResponse {
   content: string;
   createdAt: string;
 }
+
+export interface NotificationBody {
+  notificationId: number;
+  notificationType: string;
+}
