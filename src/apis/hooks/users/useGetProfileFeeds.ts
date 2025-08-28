@@ -1,26 +1,32 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getMyPageFeeds, getUsersMyPagesFeeds } from 'apis/userAPI';
-import { ApiResponse } from 'apis/types/response';
-import { Feeds, MyPageFeedsResponse } from 'apis/types/user';
+import { Feeds, GetFeedsParams } from 'apis/types/user';
 
 export type ProfileFeedsView = {
   feeds: Feeds[];
-  seriesComments: { label: string }[];
+  seriesComments: { comments: string }[];
 };
 
-const useGetProfileFeeds = (userId?: number) => {
-  return useQuery<ApiResponse<MyPageFeedsResponse>, Error, ProfileFeedsView>({
-    queryKey: ['profile', 'feeds', userId === undefined ? 'me' : userId],
-    queryFn: () => (userId !== undefined ? getUsersMyPagesFeeds(userId) : getMyPageFeeds()),
-    select: (response) => {
-      const feeds = response.result?.feeds ?? [];
-      const seriesNames = response.result?.seriesComments ?? [];
-      const seriesComments = [{ label: '전체보기' }, ...seriesNames.map((name) => ({ label: name }))];
-      return { feeds, seriesComments };
+const useGetProfileFeeds = ({ nextCursor, size = 10, userId, seriesId }: GetFeedsParams) => {
+  return useInfiniteQuery({
+    queryKey: ['profile', 'feeds', userId === undefined ? 'me' : userId, size, seriesId],
+    queryFn: ({ pageParam = nextCursor }) => (userId !== undefined ? getUsersMyPagesFeeds({ userId, nextCursor: pageParam, size, seriesId }) : getMyPageFeeds({ nextCursor: pageParam, size, seriesId })),
+    getNextPageParam: (lastPage) => { return lastPage.result?.nextCursor ?? undefined },
+    select: (data) => {
+      const feeds = data.pages.flatMap((page) => page.result?.feeds ?? []);
+      const seriesNames = data.pages[0].result?.seriesComments ?? [];
+      const seriesComments = [
+        { comments: '전체보기' },
+        ...seriesNames.map((name) => ({ comments: name }))
+      ];
+      return {
+        feeds,
+        seriesComments
+      };
     },
     staleTime: 0,
+    initialPageParam: nextCursor,
   });
 };
 
 export default useGetProfileFeeds;
-

@@ -53,10 +53,11 @@ export const titleContentContainerStyle = (
   text-align: ${type === "profile" && "center"};
 `;
 
-export const titleStyle = css`
+export const titleStyle = (center?: boolean) => css`
   ${theme.font.title2}
   color: ${theme.color.point.gray};
   white-space: pre-wrap;
+  text-align: ${center ? "center" : "left"};
 `;
 
 export const contentContainer = (customStyle: boolean) => css`

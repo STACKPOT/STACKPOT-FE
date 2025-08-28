@@ -6,8 +6,8 @@ import { Button } from "@components/index";
 
 
 interface SeriesModalProps {
-  defaultSeriesList: { label: string }[];
-  onConfirm: (updated: { label: string }[]) => void;
+  defaultSeriesList: { comments: string }[];
+  onConfirm: (updated: { comments: string }[]) => void;
   onClose: () => void;
 }
 
@@ -26,8 +26,9 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
           <strong css={modalTitleStyle}>시리즈 편집</strong>
           <Button variant="cta"
             onClick={() => {
-              if (newSeries && series.length < 5) {
-                setSeries([...series, { label: newSeries }]);
+              const trimmed = newSeries.trim();
+              if (trimmed && trimmed !== '전체보기' && series.filter((s) => s.comments !== '전체보기').length < 5) {
+                setSeries([...series, { comments: trimmed }]);
                 setNewSeries("");
               }
             }}
@@ -42,9 +43,9 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
           <div css={modalInputStyle(series.length === 1)}>
             <div css={modalTagListStyle}>
               {series.map((item, index) => (
-                item.label !== "전체보기" && (
+                item.comments !== "전체보기" && (
                   <div key={index} css={modalTagStyle}>
-                    {item.label}
+                    {item.comments}
                     <button
                       onClick={() => {
                         const updated = [...series];
@@ -65,8 +66,8 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
                   if (e.key === "Enter" && !isComposing) {
                     e.preventDefault();
                     const trimmed = newSeries.trim();
-                    if (trimmed && series.length < 6) {
-                      setSeries([...series, { label: trimmed }]);
+                    if (trimmed && trimmed !== '전체보기' && series.filter((s) => s.comments !== '전체보기').length < 5) {
+                      setSeries([...series, { comments: trimmed }]);
                       setNewSeries("");
                     }
                   }
@@ -81,7 +82,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
 
           <Button variant="full"
             onClick={() => {
-              onConfirm(series);
+              onConfirm(series.filter((s) => s.comments !== '전체보기'));
               setNewSeries("");
               onClose();
             }}

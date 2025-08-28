@@ -87,7 +87,7 @@ export const DeletePot = async (potId: number) => {
   return authApiDelete(`/pots/${potId}`);
 };
 export const GetPotsRecruiting = async () => {
-  return authApiGet<GetPotsRecruitingResponse[]>(`/pots/recruiting`);
+  return authApiGet<GetPotsRecruitingResponse>(`/pots/recruiting`);
 };
 
 export const GetPotsCompleted = async ({
