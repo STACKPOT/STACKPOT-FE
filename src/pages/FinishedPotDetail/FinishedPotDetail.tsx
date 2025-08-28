@@ -39,7 +39,7 @@ import { AboutWorkModal } from "@pages/MyPotDetail/components";
 import FinishedPotStatusSection from "./components/FinishedPotStatusSection";
 import MyPotCalendar from "@pages/MyPotDetail/pages/MyPotCalendar/MyPotCalendar";
 import usePatchAppealPot from "apis/hooks/pots/usePatchAppealPot";
-import appealData from "mocks/appealData";
+import useGetProfilePotAppealContent from "apis/hooks/users/useGetProfilePotAppealContent";
 
 const badgeColors: variant[] = ["red", "green", "blue", "purple", "pink"];
 
@@ -54,9 +54,12 @@ const FinishedPotDetail = () => {
   const taskIdNumber = Number(taskId);
   const userIdNumber = Number(userId);
   const textRef = useRef<HTMLTextAreaElement>(null);
-  console.log(`useId: ${userIdNumber}`);
 
   const { data: potSummaryData } = useGetPotSummary(potIdNumber);
+  const { data: appealData } = useGetProfilePotAppealContent(
+    potIdNumber,
+    userId === "my" ? undefined : userIdNumber
+  );
   const { mutate: submitAppeal } = usePatchAppealPot();
 
   const [contentType, setContentType] = useState<"status" | "calendar">(
@@ -64,7 +67,9 @@ const FinishedPotDetail = () => {
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [appealContent, setAppealContent] = useState(appealData.appealContent);
+  const [appealContent, setAppealContent] = useState(
+    appealData?.appealContent ?? ""
+  );
 
   const tabs = [
     {
@@ -89,13 +94,14 @@ const FinishedPotDetail = () => {
 
   const handleEditing = () => {
     if (!isEditing) {
+      setAppealContent(appealData?.appealContent ?? "");
       setIsEditing(true);
     } else {
       submitAppeal(
         {
           potId: potIdNumber,
           body: {
-            appealContent: appealContent,
+            appealContent: appealContent === "" ? null : appealContent,
           },
         },
         {
@@ -146,7 +152,7 @@ const FinishedPotDetail = () => {
         >
           <div css={appealTitleContainer}>
             여기서 저는요 👋
-            {userId === "NaN" && (
+            {userId === "my" && (
               <div css={appealTitleButtonContainer}>
                 <Button variant="action" actionType="neg" onClick={() => {}}>
                   삭제
@@ -167,13 +173,16 @@ const FinishedPotDetail = () => {
             />
           ) : (
             <p css={[summaryContentStyle, appealContentStyle]}>
-              {appealData.appealContent}
+              {appealData?.appealContent ?? "설명을 작성하지 않았어요."}
             </p>
           )}
           <div css={appealBadgeListContainer}>
-            {appealData.myBadges.map((badge, index) => (
-              <Badge content={badge.badgeName} color={badgeColors[index / 5]} />
-            ))}
+            {appealData &&
+              [appealData.userPotRole as string]
+                .concat(appealData.myBadges.map((badge) => badge.badgeName))
+                .map((badge, index) => (
+                  <Badge content={badge} color={badgeColors[index / 5]} />
+                ))}
           </div>
         </div>
         <div css={summaryContainer}>
