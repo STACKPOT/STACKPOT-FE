@@ -148,8 +148,10 @@ const FinishedPotDetail = () => {
             <button onClick={handlePrev} css={prevButtonStyle}>
               <ArrowLeftRoundIcon css={iconStyle} />
             </button>
+            {potSummaryData?.isMember && (
+              <ChattingIcon onClick={handleChattingClick} />
+            )}
             <h2 css={textStyle}>{potSummaryData?.potName}</h2>
-            <ChattingIcon onClick={handleChattingClick} />
           </div>
         </div>
         <div
