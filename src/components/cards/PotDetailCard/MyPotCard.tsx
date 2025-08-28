@@ -53,7 +53,7 @@ interface MyPotCardProps {
   isOwner?: boolean;
   isMember: boolean;
   type: "myPage" | "myPot" | "applied" | "recruiting";
-  userId?: number
+  userId?: number;
 }
 
 const MyPotCard: React.FC<MyPotCardProps> = ({
@@ -72,7 +72,6 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   userId,
 }: MyPotCardProps) => {
   const navigate = useNavigate();
-  const { userId } = useParams<{ userId: string }>();
   const userIdNumber = Number(userId);
 
   const [showButton, setShowButton] = useState(false);
@@ -103,7 +102,9 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
 
   const handleCardClick = () => {
     if (potStatus === "COMPLETED") {
-      navigate(`${routes.finishedPot}/${potId}/${userIdNumber}`);
+      navigate(
+        `${routes.finishedPot}/${potId}/${userId ? userIdNumber : "my"}`
+      );
     } else if (potStatus === "ONGOING" /* && isMember */) {
       navigate(`${routes.myPot.task}/${potId}`);
     } else {
