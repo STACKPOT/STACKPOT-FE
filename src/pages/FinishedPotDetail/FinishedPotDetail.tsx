@@ -32,7 +32,7 @@ import {
 import routes from "@constants/routes";
 import { prevButtonStyle } from "@pages/TaskDetail/TaskDetail.style";
 import useGetPotSummary from "apis/hooks/users/useGetPotSummary";
-import { Badge, Button } from "@components/index";
+import { Badge, Button, Modal } from "@components/index";
 import { variant } from "@components/commons/Badge/Badge";
 import { useRef, useState } from "react";
 import { AboutWorkModal } from "@pages/MyPotDetail/components";
@@ -70,6 +70,7 @@ const FinishedPotDetail = () => {
   const [appealContent, setAppealContent] = useState(
     appealData?.appealContent ?? ""
   );
+  const [isDeleteAppealModalOpen, setIsDeleteAppealModalOpen] = useState(false);
 
   const tabs = [
     {
@@ -114,6 +115,15 @@ const FinishedPotDetail = () => {
     }
   };
 
+  const handleDeleteAppeal = () => {
+    submitAppeal(
+      { potId: potIdNumber, body: { appealContent: null } },
+      {
+        onSuccess: () => setIsDeleteAppealModalOpen(false),
+      }
+    );
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setAppealContent(e.target.value);
     if (textRef.current) {
@@ -154,7 +164,11 @@ const FinishedPotDetail = () => {
             여기서 저는요 👋
             {userId === "my" && (
               <div css={appealTitleButtonContainer}>
-                <Button variant="action" actionType="neg" onClick={() => {}}>
+                <Button
+                  variant="action"
+                  actionType="neg"
+                  onClick={() => setIsDeleteAppealModalOpen(true)}
+                >
                   삭제
                 </Button>
                 <Button variant="action" onClick={handleEditing}>
@@ -228,6 +242,16 @@ const FinishedPotDetail = () => {
           </>
         )}
       </main>
+      {isDeleteAppealModalOpen && (
+        <Modal
+          title="업무 내용을 삭제하시겠습니까?"
+          message="삭제하시면 복구할 수 없습니다. 정말로 삭제할까요?"
+          confirmType="neg"
+          confirmButton="삭제하기"
+          onCancel={() => setIsDeleteAppealModalOpen(false)}
+          onConfirm={() => handleDeleteAppeal()}
+        />
+      )}
     </>
   );
 };
