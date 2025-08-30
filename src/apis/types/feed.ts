@@ -20,6 +20,7 @@ interface Feeds {
   isLiked: boolean;
   isSaved: boolean;
   isCommented: boolean;
+  isOwner?: boolean;
 }
 
 export interface GetFeedParams {
@@ -95,4 +96,8 @@ export interface FeedDetail {
 export interface Series {
   comment: string;
   seriesId: number;
+}
+
+export interface PostFeedSeriesParams {
+  comments: string[];
 }

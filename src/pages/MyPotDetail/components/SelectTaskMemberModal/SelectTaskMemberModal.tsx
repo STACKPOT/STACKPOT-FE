@@ -7,7 +7,7 @@ import {
   titleTextStyle,
 } from "./SelectTaskMemberModal.style";
 import { useState } from "react";
-import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemeber";
+import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemebers";
 import { useFormContext } from "react-hook-form";
 import { FormValues } from "../AboutWorkModal/AboutWorkModal";
 import { reverseDisplayStatus } from "@constants/categories";

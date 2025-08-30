@@ -5,6 +5,7 @@ export const container = css`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  cursor: pointer;
 `;
 
 export const titleStyle = css`

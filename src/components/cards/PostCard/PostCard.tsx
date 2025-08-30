@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   cardStyle,
   profileContainer,
@@ -29,7 +28,6 @@ import { Role } from "types/role";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
-import usePostFeedComment from "apis/hooks/comments/usePostFeedComment";
 import usePostFeedSave from "apis/hooks/feeds/usePostFeedSave";
 import useDeleteFeed from "apis/hooks/feeds/useDeleteFeed";
 
@@ -67,51 +65,25 @@ const PostCard: React.FC<PostCardProps> = ({
 }: PostCardProps) => {
   const navigate = useNavigate();
 
-  const [isLike, setIsLike] = useState<boolean>(isLiked);
-  const [likes, setLikes] = useState<number>(likeCount);
-  const [isSave, setIsSave] = useState<boolean>(isSaved);
-  const [saves, setSaves] = useState<number>(saveCount ?? 0);
-  const CurrentLikeIcon = isLike ? FillLikeIcon : LikeIcon;
-  const CurrentSaveIcon = isSave ? FillSaveIcon : SaveIcon;
+  const CurrentLikeIcon = isLiked ? FillLikeIcon : LikeIcon;
+  const CurrentSaveIcon = isSaved ? FillSaveIcon : SaveIcon;
   const profileImage = roleImages[role];
 
   const { mutate: likeFeed } = usePostFeedLike();
   const { mutate: saveFeed } = usePostFeedSave();
-  const { mutate: commentFeed } = usePostFeedComment();
   const { mutate: deleteFeed } = useDeleteFeed();
   const accessToken = localStorage.getItem("accessToken");
 
   const handleLike = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
     if (accessToken) {
-      likeFeed(feedId, {
-        onSuccess: () => {
-          setIsLike((prev) => !prev);
-          setLikes((prev) => (isLike ? prev - 1 : prev + 1));
-        },
-      });
+      likeFeed(feedId);
     }
   };
   const handleSave = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
     if (accessToken) {
-      setIsSave((prev) => !prev);
-      setSaves((prev) => (isSave ? prev - 1 : prev + 1));
-      // saveFeed(feedId, {
-      // 	onSuccess: () => {
-      // 		setIsSave((prev) => !prev);
-      // 		setSaves((prev) => (isSave ? prev - 1 : prev + 1));
-      // 	},
-      // });
-    }
-  };
-  const handleComment = (e: React.MouseEvent<SVGSVGElement>) => {
-    e.stopPropagation();
-    if (accessToken) {
-      // commentFeed(feedId, {
-      // 	onSuccess: () => {
-      // 	},
-      // });
+      saveFeed(feedId);
     }
   };
 
@@ -193,7 +165,7 @@ const PostCard: React.FC<PostCardProps> = ({
             css={IconStyle(accessToken !== null)}
             onClick={handleLike}
           />
-          <p css={textStyle}>{likes >= 100 ? "99+" : likes}</p>
+          <p css={textStyle}>{likeCount >= 100 ? "99+" : likeCount}</p>
         </div>
         <div css={iconGroup}>
           <CurrentSaveIcon
@@ -201,13 +173,12 @@ const PostCard: React.FC<PostCardProps> = ({
             css={IconStyle(accessToken !== null)}
             onClick={handleSave}
           />
-          <p css={textStyle}>{saves >= 100 ? "99+" : saves}</p>
+          <p css={textStyle}>{saveCount >= 100 ? "99+" : saveCount}</p>
         </div>
         <div css={iconGroup}>
           <CommentIcon
             type="button"
             css={IconStyle(accessToken !== null)}
-            onClick={handleComment}
           />
           <p css={textStyle}>{commentCount >= 100 ? "99+" : commentCount}</p>
         </div>

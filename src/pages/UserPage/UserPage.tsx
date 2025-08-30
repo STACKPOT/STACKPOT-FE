@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { bodyContainer, container, dividerStyle, listContainer, tabsContainer, tabsTextStyle } from './UserPage.style';
-import { FloatingButton } from '@components/index';
 import { useNavigate, useParams } from 'react-router-dom';
 import ProfileContent from '@components/commons/ProfileContent/ProfileContent';
 import { MyPageProfile } from '@components/commons/ProfileContent';
@@ -44,7 +43,6 @@ const UserPage = () => {
           <ProfileContent contentType={contentType} viewerIsOwner={false} userId={targetUserId} />
         </div>
       </div>
-      <FloatingButton type={'feed'} />
     </main>
   );
 };

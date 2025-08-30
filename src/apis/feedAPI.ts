@@ -12,6 +12,7 @@ import {
   PostFeedResponse,
   PatchFeedResponse,
   GetFeedDetailResponse,
+  PostFeedSeriesParams,
 } from "./types/feed";
 
 export const getFeeds = async ({
@@ -48,16 +49,17 @@ export const getFeedDetails = async (feedId: number) => {
 };
 
 export const postFeedLike = async (feedId: number) => {
-  return authApiPost<Record<string, string>>(`/feeds/${feedId}/like`);
+  return authApiPost(`/feeds/${feedId}/like`);
 };
-export const postFeedSave = async (feedId: number) => {
-  return authApiPost<Record<string, string>>(`/saves/feeds/${feedId}`);
+
+export const postFeedSave = async (feed_id: number) => {
+  return authApiPost(`/saves/feeds/${feed_id}`);
 };
 
 export const DeleteFeed = async (feedId: number) => {
   return authApiDelete(`/feeds/${feedId}`);
 };
 
-export const getFeedSeries = async () => {
-  return authApiGet<Record<number, string>>(`/feeds/series`);
+export const postFeedSeries = async (body: PostFeedSeriesParams) => {
+  return authApiPost<Record<number, string>>(`/feeds/series`, body);
 };

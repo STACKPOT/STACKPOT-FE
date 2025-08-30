@@ -1,72 +1,82 @@
-import { AppealIcon, BookIcon, CloseIcon, CreateIcon } from '@assets/svgs';
-import {
-	backgroundStyle,
-	bodyContainer,
-	bodyTitleContainer,
-	bodyTitleStyle,
-	closeIconStyle,
-	dateContainer,
-	dateStyle,
-	dividerStyle,
-	contentStyle,
-	modalStyle,
-	titleContainer,
-	titleStyle,
-} from './PotSummaryModal.style';
-import { useEffect } from 'react';
-import useGetFinishedModal from 'apis/hooks/users/useGetFinishedModal';
+import { CloseIcon, WavingHandIcon } from '@assets/svgs';
+import { backgroundStyle, modalStyle, headerStyle, titleStyle, closeBtnStyle, badgeListStyle, badgeItemStyle, contentStyle, footerStyle, emptyContentStyle } from './PotSummaryModal.style';
+import { useEffect, useRef } from 'react';
+import { Badge, Button } from '@components/index';
+import useGetProfilePotAppealContent from 'apis/hooks/users/useGetProfilePotAppealContent';
+
 
 interface PotSummaryModalProps {
 	potId: number;
 	onCancel: () => void;
+	userId?: number
 }
 
-const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel }: PotSummaryModalProps) => {
-	const { data } = useGetFinishedModal(potId);
+const PotSummaryModal: React.FC<PotSummaryModalProps> = ({ potId, onCancel, userId }: PotSummaryModalProps) => {
+	const { data } = useGetProfilePotAppealContent(potId, userId);
+	const modalRef = useRef<HTMLDialogElement>(null);
 
 	useEffect(() => {
-		// 모달 외부 스크롤 방지
 		document.body.style.overflow = 'hidden';
+		modalRef.current?.focus();
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') onCancel();
+		};
+		window.addEventListener('keydown', onKeyDown);
+
 		return () => {
 			document.body.style.overflow = 'auto';
+			window.removeEventListener('keydown', onKeyDown);
 		};
-	}, []);
+	}, [onCancel]);
 
 	if (!data) {
 		return <div>데이터가 없습니다.</div>;
 	}
 
-	const { potName, userPotRole, potStartDate, potEndDate, potSummary, appealContent } = data;
+	const { appealContent, userPotRole, myBadges } = data;
 
 	return (
-		<div css={backgroundStyle}>
-			<div css={modalStyle}>
-				<CloseIcon css={closeIconStyle} onClick={onCancel} />
-				<div css={bodyContainer}>
-					<div css={titleContainer}>
-						<AppealIcon />
-						<h1 css={titleStyle}>{`${potName} ${userPotRole} 역할`}</h1>
-					</div>
-					<div css={dateContainer}>
-						<p css={dateStyle}>{potStartDate}</p>
-						<p css={dateStyle}>~</p>
-						<p css={dateStyle}>{potEndDate}</p>
-					</div>
-					<div css={dividerStyle} />
-					<div css={bodyTitleContainer}>
-						<BookIcon />
-						<p css={bodyTitleStyle}>소개</p>
-					</div>
-					<p css={contentStyle}>{potSummary}</p>
-					<div css={dividerStyle} />
-					<div css={bodyTitleContainer}>
-						<CreateIcon />
-						<p css={bodyTitleStyle}>여기서 저는요</p>
-					</div>
-					<p css={contentStyle}>{appealContent}</p>
+		<div
+			css={backgroundStyle}
+			onClick={(e) => { if (e.target === e.currentTarget) onCancel(); }}
+		>
+			<dialog
+				css={modalStyle}
+				ref={modalRef}
+				aria-labelledby="pot-summary-title"
+				onClick={(e) => e.stopPropagation()}
+				open
+			>
+				<button css={closeBtnStyle} aria-label="닫기" onClick={onCancel}>
+					<CloseIcon />
+				</button>
+
+				<div css={headerStyle}>
+					<div id="pot-summary-title" css={titleStyle}>여기서 저는요 👋</div>
 				</div>
-			</div>
-		</div>
+
+				<ul css={badgeListStyle} aria-label="활동 역할 및 획득 뱃지">
+					<li css={badgeItemStyle}>
+						<Badge content={userPotRole} />
+					</li>
+					{myBadges?.map((b) => (
+						<li key={b.badgeId} css={badgeItemStyle}>
+							<Badge content={b.badgeName} />
+						</li>
+					))}
+				</ul>
+
+				<div id="pot-summary-content" css={contentStyle}>
+					{appealContent ? <div >{appealContent}</div> : <div css={emptyContentStyle}> <WavingHandIcon />설명을 작성하지 않았어요.</div>}
+				</div>
+
+				<div css={footerStyle}>
+					<Button variant="full" type="button" onClick={onCancel}>
+						확인했어요
+					</Button>
+				</div>
+			</dialog>
+		</div >
 	);
 };
 

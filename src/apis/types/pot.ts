@@ -154,10 +154,11 @@ export interface PatchPotParams {
 }
 
 export interface GetPotsRecruitingResponse {
-  potId: number;
-  potName: string;
-  members: Record<Role, number>;
-  dday: string;
+  size: number;
+  totalPages: number;
+  pots: Pots[];
+  currentPage: number;
+  totalElelments: number;
 }
 
 export interface GetPotsCompletedParams {

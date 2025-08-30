@@ -47,6 +47,7 @@ export interface Feeds {
 	commentCount: number;
 	isCommented: boolean;
 	createdAt: string;
+	seriesId: string;
 }
 
 interface CompletedPots {
@@ -56,7 +57,7 @@ interface CompletedPots {
 	potEndDate: string;
 	potLan: string;
 	members: string;
-	userPotRole: string;
+	userPotRole: Role;
 	myBadges: MyBadges[];
 	memberCounts: number;
 }
@@ -71,16 +72,9 @@ export interface GetMyPagePotsParams {
 }
 
 export interface FinishedModalResponse {
-	potId: number;
-	potName: string;
-	userId: number;
-	potStartDate: string;
-	potEndDate: string;
-	potContent: string;
-	potStatus: string;
-	potSummary: string;
-	appealContent: string;
-	userPotRole: string;
+	appealContent: string,
+	userPotRole: Role,
+	myBadges: MyBadges[],
 }
 
 export interface GetFinishedModalParams {
@@ -119,11 +113,17 @@ export interface GetUsersInfoParams {
 export interface DescriptionResponse {
 	userDescription: string;
 }
-
+export interface GetFeedsParams {
+	nextCursor?: number;
+	size: number;
+	userId?: number;
+	seriesId?: number;
+}
 export interface MyPageFeedsResponse {
 	id: number;
 	seriesComments: string[];
 	feeds: Feeds[];
+	nextCursor: number | null;
 }
 
 export interface MyPagePotItem {
