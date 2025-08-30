@@ -33,13 +33,19 @@ const PotDetail = () => {
           <div css={bodyContainerStyle}>
             <PotInformation
               potStartDate={data.potDetail.potStartDate}
+              potEndDate={data.potDetail.potEndDate}
+              deadline={data.potDetail.potRecruitmentDeadline}
               potModeOfOperation={data.potDetail.potModeOfOperation}
               recruitmentDetails={data.potDetail.recruitmentDetails}
-              potDuration={data.potDetail.potDuration}
               potLan={data.potDetail.potLan}
             />
             <p css={contentStyle}>{data.potDetail.potContent}</p>
-            <PostButton postType="save" initialState={false} />
+            <PostButton
+              type="pot"
+              postType="save"
+              isToggled={data.potDetail.isSaved}
+              id={potIdNumber}
+            />
             <div css={dividerStyle} />
           </div>
           {data.potDetail.owner &&

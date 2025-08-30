@@ -73,6 +73,9 @@ export interface GetFeedDetailParams {
 
 export interface GetFeedDetailResponse {
   feed: FeedDetail;
+  isLiked: boolean;
+  isSaved: boolean;
+  commentCount: number;
   owner: boolean;
 }
 
@@ -84,7 +87,6 @@ export interface FeedDetail {
   title: string;
   content: string;
   likeCount: number;
-  isLiked: boolean;
   createdAt: string;
   categories: Role[];
   interests: string[];
