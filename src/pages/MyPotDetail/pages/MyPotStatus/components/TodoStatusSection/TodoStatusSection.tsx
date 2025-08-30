@@ -1,9 +1,14 @@
 import { StateBadge } from "@components/index";
 import { PlusButtonIcon } from "@assets/svgs";
-import { toDoStatusContainer, toDoStatusHeader, plusButtonStyle } from "../../MyPotStatus.style";
+import {
+  toDoStatusContainer,
+  toDoStatusHeader,
+  plusButtonStyle,
+} from "../../MyPotStatus.style";
 import TaskCardList from "../TaskCardList/TaskCardList";
 import { Task } from "apis/types/myPot";
 import { AnotherTaskStatus } from "types/taskStatus";
+import routes from "@constants/routes";
 
 interface TodoStatusSectionProps {
   status: AnotherTaskStatus;
@@ -19,13 +24,16 @@ const TodoStatusSection: React.FC<TodoStatusSectionProps> = ({
   onTaskCardClick,
 }) => {
   return (
-  <div css={toDoStatusContainer}>
-    <div css={toDoStatusHeader}>
-      <StateBadge badgeType="task" taskState={status} />
-      <PlusButtonIcon css={plusButtonStyle} onClick={onOpenModal} />
+    <div css={toDoStatusContainer}>
+      <div css={toDoStatusHeader}>
+        <StateBadge badgeType="task" taskState={status} />
+        {!location.pathname.includes(routes.finishedPot) && (
+          <PlusButtonIcon css={plusButtonStyle} onClick={onOpenModal} />
+        )}
+      </div>
+      <TaskCardList tasks={tasks} onTaskCardClick={onTaskCardClick} />
     </div>
-    <TaskCardList tasks={tasks} onTaskCardClick={onTaskCardClick} />
-  </div>);
+  );
 };
 
 export default TodoStatusSection;

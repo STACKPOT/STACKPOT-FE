@@ -84,6 +84,7 @@ export const navLinkStyle = (isActive: boolean) => css`
   text-decoration: none;
   padding: 1.2rem 3rem;
   ${theme.font.title2};
+  cursor: pointer;
   &:hover {
     color: ${theme.color.point.hero};
   }

@@ -26,6 +26,7 @@ import { Global } from "@emotion/react";
 import { Button } from "@components/index";
 import { WavingHandIcon } from "@assets/svgs";
 import { AboutWorkModal } from "@pages/MyPotDetail/components";
+import routes from "@constants/routes";
 
 const MyPotCalendar = () => {
   const { potId, taskId } = useParams();
@@ -120,7 +121,11 @@ const MyPotCalendar = () => {
                   )} (${getDayOfWeek(date)})`
                 : ""}
             </p>
-            <Button variant="cta" onClick={handleOpenModal}>
+            <Button
+              variant="cta"
+              onClick={handleOpenModal}
+              disabled={location.pathname.includes(routes.finishedPot)}
+            >
               새로운 업무 추가
             </Button>
           </div>

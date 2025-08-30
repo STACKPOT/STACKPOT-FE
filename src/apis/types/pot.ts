@@ -188,7 +188,7 @@ export interface PatchAppealPotParam {
 }
 
 export interface AppealPotPatch {
-  appealContent: string;
+  appealContent: string | null;
 }
 
 export interface PatchPotCompleteParams {

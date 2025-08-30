@@ -42,3 +42,4 @@ export { default as WhiteCalendarIcon } from "./whiteCalendarIcon.svg?react";
 export { default as BellIcon } from "./bell.svg?react";
 export { default as BellFilledIcon } from "./bellFilled.svg?react";
 export { default as WandStarIcon } from "./wand_star.svg?react";
+export { default as ArrowSelector } from "./arrowSelector.svg?react";
