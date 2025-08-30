@@ -1,4 +1,3 @@
-import React from "react";
 import { LeftIcon } from "@assets/svgs";
 import {
   contentStyle,
@@ -22,6 +21,7 @@ import { roleImages } from "@constants/roleImage";
 import routes from "@constants/routes";
 import { Button, CommentSection, PostButton } from "@components/index";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
+import MDEditor from "@uiw/react-md-editor";
 
 const FeedDetail = () => {
   const { feedId } = useParams();
@@ -83,14 +83,7 @@ const FeedDetail = () => {
         <div css={dividerStyle} />
       </div>
       <div css={sectionContainer}>
-        <div css={contentStyle}>
-          {data?.feed.content.split("\n").map((line, index) => (
-            <React.Fragment key={index}>
-              {line}
-              <br />
-            </React.Fragment>
-          ))}
-        </div>
+        <MDEditor.Markdown source={data?.feed.content} />
         <div css={postButtonsContainer}>
           <PostButton
             type="feed"
