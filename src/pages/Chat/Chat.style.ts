@@ -100,12 +100,12 @@ export const chatRoomTimeStyle = css`
 
 export const chatRoomDescStyle = css`
   ${theme.font.body1}
+  
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 20rem;
-  text-align: center;
-
+  text-align: left;
 `;
 
 export const chatMainStyle = css`
