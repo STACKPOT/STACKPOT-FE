@@ -1,144 +1,144 @@
-import { Participation } from 'types/participation';
-import { PotStatus } from 'types/potStatus';
-import { Role } from 'types/role';
+import { Participation } from "types/participation";
+import { PotStatus } from "types/potStatus";
+import { Role } from "types/role";
 
 export interface LogInResponse {
-	tokenServiceResponse: TokenServiceResponse;
-	isNewUser: boolean;
-	role: Role | null;
+  tokenServiceResponse: TokenServiceResponse;
+  isNewUser: boolean;
+  role: Role | null;
 }
 
 export interface TokenServiceResponse {
-	accessToken: string;
-	refreshToken: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface GetUserResponse {
-	id: number;
-	email: string;
-	nickname: string;
-	role: Role;
-	interest: string[];
-	userTemperature: number;
-	userIntroduction: string;
+  id: number;
+  email: string;
+  nickname: string;
+  role: Role;
+  interest: string[];
+  userTemperature: number;
+  userIntroduction: string;
 }
 
 export interface postSignInPayload {
-	role: Role;
-	interest: string[];
+  roles: Role[];
+  interest: string[];
 }
 
 export interface SignInResponse {
-	id: number;
-	role: Role;
+  id: number;
+  roles: Role[];
 }
 
 export interface Feeds {
-	writerId: number;
-	feedId: number;
-	writer: string;
-	writerRole: Role;
-	title: string;
-	content: string;
-	likeCount: number;
-	isLiked: boolean;
-	saveCount: number;
-	isSaved: boolean;
-	commentCount: number;
-	isCommented: boolean;
-	createdAt: string;
-	seriesId: string;
+  writerId: number;
+  feedId: number;
+  writer: string;
+  writerRole: Role;
+  title: string;
+  content: string;
+  likeCount: number;
+  isLiked: boolean;
+  saveCount: number;
+  isSaved: boolean;
+  commentCount: number;
+  isCommented: boolean;
+  createdAt: string;
+  seriesId: string;
 }
 
 interface CompletedPots {
-	potId: number;
-	potName: string;
-	potStartDate: string;
-	potEndDate: string;
-	potLan: string;
-	members: string;
-	userPotRole: Role;
-	myBadges: MyBadges[];
-	memberCounts: number;
+  potId: number;
+  potName: string;
+  potStartDate: string;
+  potEndDate: string;
+  potLan: string;
+  members: string;
+  userPotRole: Role;
+  myBadges: MyBadges[];
+  memberCounts: number;
 }
 
 interface MyBadges {
-	badgeId: number;
-	badgeName: string;
+  badgeId: number;
+  badgeName: string;
 }
 
 export interface GetMyPagePotsParams {
-	potStatus: 'all' | 'recruiting' | 'ongoing' | 'completed';
+  potStatus: "all" | "recruiting" | "ongoing" | "completed";
 }
 
 export interface FinishedModalResponse {
-	appealContent: string,
-	userPotRole: Role,
-	myBadges: MyBadges[],
+  appealContent: string;
+  userPotRole: Role;
+  myBadges: MyBadges[];
 }
 
 export interface GetFinishedModalParams {
-	potId: number;
+  potId: number;
 }
 
 export interface PatchUserProfileUpdateParams {
-	role: Role;
-	interest: string[];
-	userIntroduction: string;
-	nickname: string;
+  role: Role;
+  interest: string[];
+  userIntroduction: string;
+  nickname: string;
 }
 
 export interface NicknameResponse {
-	nickname: string;
+  nickname: string;
 }
 
 export interface GetUsersMyPagesParams {
-	userId: number;
-	dataType: string | null;
+  userId: number;
+  dataType: string | null;
 }
 
 export interface GetUsersMyPagesResponse {
-	id: number;
-	nickname: string;
-	role: Role;
-	userTemperature: number;
-	userIntroduction: string;
-	completedPots: CompletedPots[];
-	feeds: Feeds[];
+  id: number;
+  nickname: string;
+  role: Role;
+  userTemperature: number;
+  userIntroduction: string;
+  completedPots: CompletedPots[];
+  feeds: Feeds[];
 }
 
 export interface GetUsersInfoParams {
-	userId: number;
+  userId: number;
 }
 export interface DescriptionResponse {
-	userDescription: string;
+  userDescription: string;
 }
 export interface GetFeedsParams {
-	nextCursor?: number;
-	size: number;
-	userId?: number;
-	seriesId?: number;
+  nextCursor?: number;
+  size: number;
+  userId?: number;
+  seriesId?: number;
 }
 export interface MyPageFeedsResponse {
-	id: number;
-	seriesComments: string[];
-	feeds: Feeds[];
-	nextCursor: number | null;
+  id: number;
+  seriesComments: string[];
+  feeds: Feeds[];
+  nextCursor: number | null;
 }
 
 export interface MyPagePotItem {
-	potId: number;
-	potName: string;
-	potStartDate: string;
-	potEndDate: string;
-	potStatus: PotStatus;
-	potModeOfOperation: Participation;
-	potRecruitmentDeadline: string;
-	potContent: string;
-	isOwner: boolean;
-	members: Record<string, number>;
-	isMember: boolean;
-	dday: string;
+  potId: number;
+  potName: string;
+  potStartDate: string;
+  potEndDate: string;
+  potStatus: PotStatus;
+  potModeOfOperation: Participation;
+  potRecruitmentDeadline: string;
+  potContent: string;
+  isOwner: boolean;
+  members: Record<string, number>;
+  isMember: boolean;
+  dday: string;
 }
 
 export type MyPagePotsResponse = MyPagePotItem[];
