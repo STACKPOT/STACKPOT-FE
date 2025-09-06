@@ -67,7 +67,6 @@ const SignUp = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    setIsCompleteModalOpen(true);
   };
 
   const handleModalCancel = () => {
