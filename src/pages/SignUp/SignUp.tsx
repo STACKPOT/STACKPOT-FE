@@ -73,6 +73,11 @@ const SignUp = () => {
     setIsCompleteModalOpen(false);
   };
 
+  const handleConfirm = () => {
+    setIsModalOpen(false);
+    setIsCompleteModalOpen(true);
+  };
+
   return (
     <main css={container}>
       <FormProvider {...methods}>
@@ -103,7 +108,7 @@ const SignUp = () => {
         </form>
       </FormProvider>
       {isModalOpen && responseData?.roles && (
-        <ProfileModal onModalCancel={handleCancel} />
+        <ProfileModal onModalCancel={handleCancel} onConfirm={handleConfirm} />
       )}
       {isCompleteModalOpen && (
         <CompleteModal onModalCancel={handleModalCancel} />

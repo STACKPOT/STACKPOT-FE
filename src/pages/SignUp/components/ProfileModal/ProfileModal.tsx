@@ -17,9 +17,11 @@ import usePostNickname from "apis/hooks/users/usePostNickname";
 import { SproutImage } from "@assets/images";
 interface ProfileModalProps {
   onModalCancel: () => void;
+  onConfirm: () => void;
 }
 const ProfileModal: React.FC<ProfileModalProps> = ({
   onModalCancel,
+  onConfirm,
 }: ProfileModalProps) => {
   const { mutate: getNickname, isPending } = useGetNickname();
   const { mutate: postNickname } = usePostNickname();
@@ -44,7 +46,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
     if (nickname) {
       postNickname(nickname, {
         onSuccess: () => {
-          onModalCancel();
+          onConfirm();
         },
       });
     }
