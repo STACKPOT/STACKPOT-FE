@@ -39,7 +39,7 @@ const CategorySelection = ({ type, title }: CategorySelectionProps) => {
               <CategoryButton
                 selected={
                   type === "roles"
-                    ? selectedCategory.includes(partMap[item]) // 변환!
+                    ? selectedCategory.includes(partMap[item])
                     : selectedCategory.includes(item)
                 }
                 onClick={() => handleSelectCategory(item)}

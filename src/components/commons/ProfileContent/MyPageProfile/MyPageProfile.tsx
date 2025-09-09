@@ -11,12 +11,10 @@ import {
 import TemperatureBar from "@components/commons/TemperatureBar/TemperatureBar";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import { roleImages } from "@constants/roleImage";
 import { categoryText } from "@constants/categories";
 import { Badge } from "@components/index";
-import { Role } from "types/role";
 import useGetProfile from "apis/hooks/users/useGetProfile";
-
+import { SproutImage } from "@assets/images";
 type Props = { userId?: number, viewerIsOwner?: boolean };
 
 const MyPageProfile: React.FC<Props> = ({ userId, viewerIsOwner }) => {
@@ -27,8 +25,8 @@ const MyPageProfile: React.FC<Props> = ({ userId, viewerIsOwner }) => {
   const userIntroduction = data?.userIntroduction || "소개가 없습니다.";
   const userTemperature = data?.userTemperature ?? 0;
   const roles = data?.roles;
-  const profileImage = roleImages[data?.roles[0] as Role || "UNKNOWN"];
-  // const profileImage = ProfileImage;
+  const profileImage = SproutImage;
+
   const handleSetUp = () => {
     navigate(routes.setting);
   };
