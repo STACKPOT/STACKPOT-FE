@@ -5,7 +5,7 @@ import { Role } from "types/role";
 export interface LogInResponse {
 	tokenServiceResponse: TokenServiceResponse;
 	isNewUser: boolean;
-	role: Role | null;
+	roles: Role | null;
 }
 
 export interface TokenServiceResponse {
@@ -47,7 +47,6 @@ export interface Feeds {
 	commentCount: number;
 	isCommented: boolean;
 	createdAt: string;
-	seriesId: string;
 }
 
 interface CompletedPots {

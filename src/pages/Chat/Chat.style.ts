@@ -299,7 +299,7 @@ export const modalProfileStyle = css`
 
 export const modalProfileImageStyle = css`
   width: 6.4rem;
-  height: 6.rem;
+  height: 6.4rem;
 `;
 
 export const modalNicknameTextStyle = css`
