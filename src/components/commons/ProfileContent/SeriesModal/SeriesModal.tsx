@@ -3,6 +3,7 @@ import { CloseIcon } from "@assets/svgs";
 import { useState } from "react";
 import { modalBodyStyle, modalCloseButtonStyle, modalContainerStyle, modalExplainStyle, modalHeaderStyle, modalInputStyle, modalOverlayStyle, modalSeriesInputStyle, modalTagCloseButtonStyle, modalTagListStyle, modalTagStyle, modalTitleStyle } from "./SeriesModal.style";
 import { Button } from "@components/index";
+import { useSnackbar } from "providers";
 
 
 interface SeriesModalProps {
@@ -15,7 +16,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
   const [series, setSeries] = useState(defaultSeriesList);
   const [newSeries, setNewSeries] = useState("");
   const [isComposing, setIsComposing] = useState(false);
-
+  const { showSnackbar } = useSnackbar();
   return (
     <div css={modalOverlayStyle}>
       <div css={modalContainerStyle}>
@@ -61,6 +62,7 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
               ))}
               <input
                 value={newSeries}
+                maxLength={5}
                 onChange={(e) => setNewSeries(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !isComposing) {
@@ -69,6 +71,11 @@ const SeriesModal = ({ defaultSeriesList, onConfirm, onClose }: SeriesModalProps
                     if (trimmed && trimmed !== '전체보기' && series.filter((s) => s.comments !== '전체보기').length < 5) {
                       setSeries([...series, { comments: trimmed }]);
                       setNewSeries("");
+                    } else {
+                      showSnackbar({
+                        message: "시리즈는 최대 5개까지 추가할 수 있어요.",
+                        severity: "error",
+                      });
                     }
                   }
                 }}

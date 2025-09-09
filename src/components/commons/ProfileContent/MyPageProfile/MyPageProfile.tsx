@@ -26,9 +26,9 @@ const MyPageProfile: React.FC<Props> = ({ userId, viewerIsOwner }) => {
   const nickname = data?.nickname || "사용자";
   const userIntroduction = data?.userIntroduction || "소개가 없습니다.";
   const userTemperature = data?.userTemperature ?? 0;
-  const role = data?.role || "FRONTEND";
-  const profileImage = roleImages[role as Role];
-
+  const roles = data?.roles;
+  const profileImage = roleImages[data?.roles[0] as Role || "UNKNOWN"];
+  // const profileImage = ProfileImage;
   const handleSetUp = () => {
     navigate(routes.setting);
   };
@@ -38,12 +38,16 @@ const MyPageProfile: React.FC<Props> = ({ userId, viewerIsOwner }) => {
       <img css={profileStyle} src={profileImage} alt="프로필 이미지" />
       <div css={contentContainer}>
         <div css={nicknameContainer}>
-          <h1 css={nicknameStyle}>{nickname} <Badge content={categoryText[role]} /></h1>
+          <h1 css={nicknameStyle}>{nickname}
+            {roles?.map((role) =>
+              <Badge key={role} content={categoryText[role]} />
+            )}
+          </h1>
           {viewerIsOwner && (
             <SetUpIcon type="button" css={setUpIconStyle} onClick={handleSetUp} />
           )}
         </div>
-        <div css={introductionStyle}>{userIntroduction}</div>
+        <div css={introductionStyle}>{userIntroduction?.replace(/PLANNING/gi, 'PLAN') ?? ''}</div>
         <TemperatureBar temperature={userTemperature} />
       </div>
     </div>

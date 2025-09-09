@@ -37,11 +37,11 @@ export const interests = [
 
 export const interestKoreanMap: {
   [key: string]:
-    | "사이드 프로젝트"
-    | "1인 개발"
-    | "공모전"
-    | "창업"
-    | "네트워킹 행사";
+  | "사이드 프로젝트"
+  | "1인 개발"
+  | "공모전"
+  | "창업"
+  | "네트워킹 행사";
 } = {
   SIDE_PROJECT: "사이드 프로젝트",
   SOLO_DEVELOPMENT: "1인 개발",
