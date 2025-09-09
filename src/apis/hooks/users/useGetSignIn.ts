@@ -14,9 +14,11 @@ const useGetSignIn = () => {
       if (data.result) {
         const { accessToken, refreshToken } = data.result.tokenServiceResponse;
         const roles = data.result.roles ?? null;
+
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("refreshToken", refreshToken);
-        localStorage.setItem("roles", roles?.toString() ?? "UNKNOWN");
+        localStorage.setItem("roles", JSON.stringify(roles ?? ["UNKNOWN"]));
+
         setRole(roles?.toString() ?? "UNKNOWN");
         if (data.result.isNewUser) {
           navigate(routes.signUp);
