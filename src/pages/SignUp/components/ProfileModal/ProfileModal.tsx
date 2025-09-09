@@ -10,19 +10,18 @@ import {
   profileContainer,
   supportingTextStyle,
 } from "./ProfileModal.style";
-import { Role } from "types/role";
 import { useState } from "react";
 import useGetNickname from "apis/hooks/users/useGetNickname";
 import { useAuthStore } from "stores/useAuthStore";
 import usePostNickname from "apis/hooks/users/usePostNickname";
 import { SproutImage } from "@assets/images";
 interface ProfileModalProps {
-  role: Role;
   onModalCancel: () => void;
+  onConfirm: () => void;
 }
 const ProfileModal: React.FC<ProfileModalProps> = ({
-  role,
   onModalCancel,
+  onConfirm,
 }: ProfileModalProps) => {
   const { mutate: getNickname, isPending } = useGetNickname();
   const { mutate: postNickname } = usePostNickname();
@@ -33,7 +32,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   const [showEditWarning, setShowEditWarning] = useState(false);
 
   const handleClick = () => {
-    getNickname(role, {
+    getNickname(undefined, {
       onSuccess: (response) => {
         if (response.result?.nickname) {
           setNicknameStore(response.result.nickname);
@@ -47,7 +46,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
     if (nickname) {
       postNickname(nickname, {
         onSuccess: () => {
-          onModalCancel();
+          onConfirm();
         },
       });
     }
