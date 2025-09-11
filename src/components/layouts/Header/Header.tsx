@@ -32,15 +32,11 @@ const Header: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
 
-  const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("accessToken")
-  );
-  const [role, setRole] = useState(localStorage.getItem("role"));
+  const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  const guestMode = role === "UNKNOWN";
   const handleClick = () => {
     setIsLoginModalOpen(true);
   };
@@ -64,10 +60,6 @@ const Header: React.FC = () => {
     setAccessToken(token);
   }, [localStorage.getItem("accessToken")]);
 
-  useEffect(() => {
-    const roles = localStorage.getItem("roles");
-    setRole(roles);
-  }, [localStorage.getItem("roles")]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -131,11 +123,11 @@ const Header: React.FC = () => {
 
             <div css={profileContainer}>
               <img
-                css={guestMode ? guestProfileStyle : profileStyle}
-                src={guestMode ? ProfileImage : SproutImage}
+                css={accessToken ? profileStyle : guestProfileStyle}
+                src={accessToken ? SproutImage : ProfileImage}
                 alt="profileImage"
               />
-              {!guestMode && (
+              {accessToken && (
                 <ArrowDropdownIcon
                   type="button"
                   css={iconStyle(isHomePage)}

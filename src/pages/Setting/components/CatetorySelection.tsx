@@ -15,7 +15,6 @@ const CategorySelection = ({ type, title }: CategorySelectionProps) => {
   const { control, setValue } = useFormContext<{ interest: string[]; roles: string[] }>();
   const roles = useWatch({ control, name: "roles", defaultValue: [] });
   const interest = useWatch({ control, name: "interest", defaultValue: [] });
-  console.log(roles);
   const categories = type === "roles" ? Object.keys(partMap) : interests;
   const selectedCategory = type === "roles" ? roles : interest;
 

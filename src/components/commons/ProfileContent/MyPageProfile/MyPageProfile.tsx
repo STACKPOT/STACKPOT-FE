@@ -45,7 +45,7 @@ const MyPageProfile: React.FC<Props> = ({ userId, viewerIsOwner }) => {
             <SetUpIcon type="button" css={setUpIconStyle} onClick={handleSetUp} />
           )}
         </div>
-        <div css={introductionStyle}>{userIntroduction?.replace(/PLANNING/gi, 'PLAN') ?? ''}</div>
+        <div css={introductionStyle}>{userIntroduction}</div>
         <TemperatureBar temperature={userTemperature} />
       </div>
     </div>
