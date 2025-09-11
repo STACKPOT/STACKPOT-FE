@@ -10,7 +10,7 @@ import { Role } from "types/role";
 export const roleImages: Record<Role, string> = {
   FRONTEND: MushroomImage,
   BACKEND: OnionImage,
-  PLANNING: CarrotImage,
+  PLAN: CarrotImage,
   DESIGN: BroccoliImage,
   UNKNOWN: ProfileImage,
 } as const;

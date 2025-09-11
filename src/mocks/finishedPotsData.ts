@@ -18,7 +18,7 @@ const finishedPotsData: {
             endDate: "2025.2.27",
             stacks: "프론트엔드(2), 디자이너(1)",
             languages: "React, Javascripts ",
-            members: ["BACKEND", "DESIGN", "FRONTEND", "PLANNING", "BACKEND"],
+            members: ["BACKEND", "DESIGN", "FRONTEND", "PLAN", "BACKEND"],
         },
         {
             id: 1,
@@ -28,7 +28,7 @@ const finishedPotsData: {
             endDate: "2025.2.27",
             stacks: "프론트엔드(2), 디자이너(1)",
             languages: "React, Javascripts ",
-            members: ["BACKEND", "DESIGN", "FRONTEND", "PLANNING", "BACKEND"],
+            members: ["BACKEND", "DESIGN", "FRONTEND", "PLAN", "BACKEND"],
         },
         {
             id: 2,
@@ -38,7 +38,7 @@ const finishedPotsData: {
             endDate: "2025.2.27",
             stacks: "프론트엔드(2), 디자이너(1)",
             languages: "React, Javascripts ",
-            members: ["BACKEND", "DESIGN", "FRONTEND", "PLANNING", "BACKEND"],
+            members: ["BACKEND", "DESIGN", "FRONTEND", "PLAN", "BACKEND"],
         }
     ]
 

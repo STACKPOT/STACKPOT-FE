@@ -1,32 +1,46 @@
 import { CategoryButton } from "@components/index";
 import { useFormContext, useWatch } from "react-hook-form";
-import { interests } from "@constants/categories";
 import {
   categoryContainer,
   content,
   contentHeader,
 } from "./CategorySelection.style";
+import { interests, partMap } from "@constants/categories";
+interface CategorySelectionProps {
+  type: "roles" | "interest";
+  title: string;
+}
 
-const CategorySelection = () => {
-  const { control, setValue } = useFormContext<{ interest: string[] }>();
+const CategorySelection = ({ type, title }: CategorySelectionProps) => {
+  const { control, setValue } = useFormContext<{ interest: string[]; roles: string[] }>();
+  const roles = useWatch({ control, name: "roles", defaultValue: [] });
   const interest = useWatch({ control, name: "interest", defaultValue: [] });
+  const categories = type === "roles" ? Object.keys(partMap) : interests;
+  const selectedCategory = type === "roles" ? roles : interest;
 
-  const handleSelectCategory = (selected: string) => {
-    const next = interest.includes(selected)
-      ? interest.filter((v) => v !== selected)
-      : [...interest, selected];
-    setValue("interest", next, { shouldDirty: true });
+  const handleSelectCategory = (category: string) => {
+    const categoryEnum = type === "roles" ? partMap[category] : category;
+
+    const updated = selectedCategory.includes(categoryEnum)
+      ? selectedCategory.filter((item) => item !== categoryEnum)
+      : [...selectedCategory, categoryEnum];
+
+    setValue(type, updated);
   };
 
   return (
     <div css={content(false)}>
       <div css={contentHeader}>
-        <div>관심사</div>
+        <div>{title}</div>
         <div css={categoryContainer}>
-          {interests.map((item) => (
+          {categories.map((item) => (
             <div key={item}>
               <CategoryButton
-                selected={interest.includes(item)}
+                selected={
+                  type === "roles"
+                    ? selectedCategory.includes(partMap[item])
+                    : selectedCategory.includes(item)
+                }
                 onClick={() => handleSelectCategory(item)}
               >
                 {item}

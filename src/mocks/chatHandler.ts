@@ -15,7 +15,7 @@ const chatRooms = [
       { userId: 3, userName: "열정적인 사자", role: "DESIGN" },
       { userId: 4, userName: "졸린 양파", role: "FRONTEND" },
       { userId: 5, userName: "게으른 토끼", role: "BACKEND" },
-      { userId: 6, userName: "열정적인 사자", role: "PLANNING" },
+      { userId: 6, userName: "열정적인 사자", role: "PLAN" },
 
     ],
   },
@@ -42,7 +42,7 @@ const chatRooms = [
     participants: [
       { userId: 1, userName: "졸린 양파", role: "FRONTEND" },
       { userId: 2, userName: "게으른 토끼", role: "BACKEND" },
-      { userId: 3, userName: "열정적인 사자", role: "PLANNING" },
+      { userId: 3, userName: "열정적인 사자", role: "PLAN" },
     ],
   },
 ];

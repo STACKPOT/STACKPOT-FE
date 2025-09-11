@@ -20,11 +20,11 @@ import Button from "@components/commons/Button/Button";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import { roleImages } from "@constants/roleImage";
 import ProfileDropdown from "@components/commons/Dropdown/ProfileDropdown/ProfileDropdown";
 import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
 import Notification from "./components/Notification/Notification";
 import { ProfileImage } from "@assets/images";
+import { SproutImage } from "@assets/images";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -32,16 +32,10 @@ const Header: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
 
-  const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("accessToken")
-  );
-  const [role, setRole] = useState(localStorage.getItem("role"));
+  const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [roleProfileImage, setRoleProfileImage] = useState<string>("");
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
-  const guestMode = role === "UNKNOWN";
 
   const handleClick = () => {
     setIsLoginModalOpen(true);
@@ -66,12 +60,6 @@ const Header: React.FC = () => {
     setAccessToken(token);
   }, [localStorage.getItem("accessToken")]);
 
-  useEffect(() => {
-    const role = localStorage.getItem("role");
-    setRole(role);
-    const profileImage = roleImages[role as keyof typeof roleImages] || "";
-    setRoleProfileImage(profileImage);
-  }, [localStorage.getItem("role")]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -135,11 +123,11 @@ const Header: React.FC = () => {
 
             <div css={profileContainer}>
               <img
-                css={guestMode ? guestProfileStyle : profileStyle}
-                src={guestMode ? ProfileImage : roleProfileImage}
+                css={accessToken ? profileStyle : guestProfileStyle}
+                src={accessToken ? SproutImage : ProfileImage}
                 alt="profileImage"
               />
-              {!guestMode && (
+              {accessToken && (
                 <ArrowDropdownIcon
                   type="button"
                   css={iconStyle(isHomePage)}

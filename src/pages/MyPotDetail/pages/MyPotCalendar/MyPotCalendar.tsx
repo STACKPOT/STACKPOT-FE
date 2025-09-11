@@ -77,6 +77,7 @@ const MyPotCalendar = () => {
         <AboutWorkModal
           taskId={taskNumber}
           potId={potIdNumber}
+          deadLine={date ? formatDate(date) : undefined}
           onClose={() => setIsModalOpen(false)}
           type={"post"}
         />
@@ -113,11 +114,11 @@ const MyPotCalendar = () => {
             <p css={dateStyle}>
               {date
                 ? `${date.getFullYear()}. ${String(
-                    date.getMonth() + 1
-                  ).padStart(2, "0")}. ${String(date.getDate()).padStart(
-                    2,
-                    "0"
-                  )} (${getDayOfWeek(date)})`
+                  date.getMonth() + 1
+                ).padStart(2, "0")}. ${String(date.getDate()).padStart(
+                  2,
+                  "0"
+                )} (${getDayOfWeek(date)})`
                 : ""}
             </p>
             <Button variant="cta" onClick={handleOpenModal}>
