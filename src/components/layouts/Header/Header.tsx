@@ -32,7 +32,9 @@ const Header: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
   const notificationRef = useRef<HTMLDivElement>(null);
 
-  const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken")
+  );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -60,7 +62,6 @@ const Header: React.FC = () => {
     setAccessToken(token);
   }, [localStorage.getItem("accessToken")]);
 
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -84,6 +85,12 @@ const Header: React.FC = () => {
 
   const handleNotificationClick = () => {
     setIsNotificationOpen((prev) => !prev);
+  };
+
+  const handleProfileClick = () => {
+    if (accessToken) {
+      navigate("/my-page");
+    }
   };
 
   return (
@@ -122,11 +129,13 @@ const Header: React.FC = () => {
             </div>
 
             <div css={profileContainer}>
-              <img
-                css={accessToken ? profileStyle : guestProfileStyle}
-                src={accessToken ? SproutImage : ProfileImage}
-                alt="profileImage"
-              />
+              <button onClick={handleProfileClick}>
+                <img
+                  css={accessToken ? profileStyle : guestProfileStyle}
+                  src={accessToken ? SproutImage : ProfileImage}
+                  alt="profileImage"
+                />
+              </button>
               {accessToken && (
                 <ArrowDropdownIcon
                   type="button"

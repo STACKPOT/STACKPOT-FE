@@ -13,6 +13,7 @@ export const globalStyles = css`
   }
 
   button {
+    background-color: transparent;
     border: none;
     cursor: pointer;
   }
