@@ -29,7 +29,7 @@ const theme = {
     accent: {
       blueBg: "#D3EBFD",
       greenBg: "#EAF6EC",
-      pinkBg: "#FBEBF0",
+      pinkBg: "#FBEFF0",
       purpleBg: "#EBE2FF",
       yellowBg: "#FFF3DB",
       redBg: "#FFB0B0",
