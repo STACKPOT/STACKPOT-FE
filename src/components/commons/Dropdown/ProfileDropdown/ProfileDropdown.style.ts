@@ -3,52 +3,31 @@ import theme from "@styles/theme";
 
 export const dropdownStyle = css`
   position: absolute;
-  top: calc(100% + 21px);
+  top: calc(100% + 14px);
   right: 0;
-  border: 1px solid ${theme.color.object.alternative};
-  border-radius: 16px;
-  width: 16rem;
+  border-radius: 8px;
+  width: 12.5rem;
   display: flex;
   flex-direction: column;
   background-color: ${theme.color.base.white};
+  padding: 0.8rem 0;
 `;
 
-export const containerStyle = (edit: boolean) => css`
-  color: ${theme.color.object.assistive};
+export const itemStyle = (edit: boolean) => css`
+  ${theme.font.body2};
+  color: ${theme.color.base.black};
   text-decoration: none;
-  ${theme.font.caption3};
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 1rem;
+  padding: 0.8rem 0;
   position: relative;
-
-  &:first-child {
-    border-radius: 16px 16px 0 0;
-  }
-
-  &:last-child {
-    border-radius: 0 0 16px 16px;
-  }
-
-  &:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: ${theme.color.object.alternative};
-  }
 
   &:hover {
     color: ${edit ? theme.color.point.hero : theme.color.feedback.negative};
-    background-color: ${theme.color.object.faded};
-    text-decoration: ${edit ? "none" : "underline"};
+    background-color: ${edit
+      ? theme.color.point.normal
+      : theme.color.accent.pinkBg};
   }
-`;
-
-export const bodyStyle = css`
-  height: 2.8rem;
 `;
