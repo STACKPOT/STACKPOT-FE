@@ -197,7 +197,11 @@ const FinishedPotDetail = () => {
               [appealData.userPotRole as string]
                 .concat(appealData.myBadges.map((badge) => badge.badgeName))
                 .map((badge, index) => (
-                  <Badge content={badge} color={badgeColors[index / 5]} />
+                  <Badge
+                    key={`${badge}-${index}`}
+                    content={badge}
+                    color={badgeColors[index % 5]}
+                  />
                 ))}
           </div>
         </div>
@@ -215,7 +219,11 @@ const FinishedPotDetail = () => {
             <div css={languageListContainer}>
               {potSummaryData &&
                 potSummaryData.potLan.map((language, index) => (
-                  <Badge content={language} color={badgeColors[index / 5]} />
+                  <Badge
+                    key={`${language}-${index}`}
+                    content={language}
+                    color={badgeColors[index % 5]}
+                  />
                 ))}
             </div>
           </div>

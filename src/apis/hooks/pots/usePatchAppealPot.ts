@@ -11,6 +11,9 @@ const usePatchAppealPot = () => {
       queryClient.invalidateQueries({
         queryKey: ["profile", "feeds", variables.potId, "me"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["summary", variables.potId],
+      });
     },
   });
 };

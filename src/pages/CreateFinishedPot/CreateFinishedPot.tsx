@@ -20,7 +20,7 @@ const CreateFinishedPot = () => {
       },
       {
         onSuccess: () => {
-          navigate(`${routes.finishedPot}/${potIdNumber}`);
+          navigate(`${routes.finishedPot}/${potIdNumber}/my`);
         },
       }
     );
