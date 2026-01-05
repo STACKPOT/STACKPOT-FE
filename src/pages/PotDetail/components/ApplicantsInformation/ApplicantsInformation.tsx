@@ -86,7 +86,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
               <MemberCard
                 userId={applicant.userId}
                 nickname={applicant.userNickname}
-                role={applicant.potRole}
+                role={applicant.potRole.name}
                 type="selection"
                 selected={selectedApplicants.includes(applicant)}
                 onClick={() => handleSelectApplicant(applicant)}
@@ -108,7 +108,7 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
           type="profile"
           title={`지원자의 프로필을 살펴보세요!${"\n"}다양한 활동이 궁금하신가요?`}
           buttonText="지원자 활동 더보기"
-          role={showProfileMember.potRole}
+          role={showProfileMember.potRole.name}
           nickname={showProfileMember.userNickname}
           onButtonClick={handleMemberProfile}
           onCancel={() => setShowProfileMember(null)}
@@ -118,7 +118,10 @@ const ApplicantsInformation = ({ potId }: ApplicantsInformationProps) => {
         <StartPotModal
           potId={potId}
           selectedApplicants={selectedApplicants}
-          onStartPotSuccess={() => {}}
+          onStartPotSuccess={() => {
+            navigate(`${routes.myPot.task}/${potId}`, { replace: true });
+            window.scrollTo(0, 0);
+          }}
           onCancelModal={() => setShowStartModal(false)}
         />
       )}

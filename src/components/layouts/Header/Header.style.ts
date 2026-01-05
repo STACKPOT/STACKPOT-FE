@@ -13,13 +13,8 @@ export const headerStyle = (isHomePage: boolean) => css`
     ${isHomePage ? theme.color.point.darkblue : theme.color.object.alternative};
 `;
 
-export const searchIconStyle = (isHomePage: boolean) => css`
-  /* width: 2.2rem;
-  height: 2.2rem; */
-  /* margin: 0.8rem; */
-  color: ${isHomePage
-    ? theme.color.point.yellow
-    : theme.color.interactive.inactive};
+export const headerIconStyle = (isHomePage: boolean) => css`
+  color: ${isHomePage ? theme.color.point.yellow : theme.color.object.hero};
   cursor: pointer;
 `;
 

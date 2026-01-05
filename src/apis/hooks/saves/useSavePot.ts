@@ -8,6 +8,7 @@ const usePostSavePot = () => {
     mutationFn: (potId: number) => postSavePot(potId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["pots"] });
+      queryClient.invalidateQueries({ queryKey: ["search"] });
     },
   });
 };

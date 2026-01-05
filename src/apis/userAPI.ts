@@ -1,4 +1,3 @@
-import { Role } from "types/role";
 import {
   apiGet,
   authApiDelete,
@@ -11,18 +10,22 @@ import {
   postSignInPayload,
   SignInResponse,
   GetUserResponse,
-  MyPageResponse,
-  GetMyPageParams,
   FinishedModalResponse,
   NicknameResponse,
   PatchUserProfileUpdateParams,
-  GetUsersMyPagesParams,
-  GetUsersMyPagesResponse,
   GetUsersInfoParams,
   TokenServiceResponse,
   DescriptionResponse,
+  GetMyPagePotsParams,
+  MyPagePotsResponse,
+  MyPageFeedsResponse,
+  GetFeedsParams,
 } from "./types/user";
-import { PatchDescriptionBody, PatchPotCompleteBody, PostPotResponse } from "./types/pot";
+import {
+  PatchDescriptionBody,
+  PatchPotCompleteBody,
+  PostPotResponse,
+} from "./types/pot";
 
 export const getKakaoLogIn = async (code: string) => {
   return apiGet<LogInResponse>("/users/oauth/kakao", { code });
@@ -31,32 +34,40 @@ export const getKakaoLogIn = async (code: string) => {
 export const GetMyUser = async () => {
   return authApiGet<GetUserResponse>("/users");
 };
-export const patchSignIn = async ({
-  role,
-  interest
-}: postSignInPayload) => {
+export const patchSignIn = async ({ roles, interest }: postSignInPayload) => {
   return authApiPatch<SignInResponse>("/users/profile", {
-    role,
-    interest
+    roles,
+    interest,
   });
 };
 
-export const getNickname = async (role: Role) => {
-  return authApiGet<NicknameResponse>("/users/nickname", { role });
+export const getNickname = async () => {
+  return authApiGet<NicknameResponse>("/users/nickname");
 };
 
 export const postNickname = async (nickname: string) => {
-  return authApiPost<TokenServiceResponse>("/users/nickname/save", undefined, { nickname });
+  return authApiPost<TokenServiceResponse>("/users/nickname/save", undefined, {
+    nickname,
+  });
 };
 
-export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
-  if (dataType === 'feed') {
-    return authApiGet<MyPageResponse>("/users/mypages");
-  } else if (dataType === 'pot') {
-    return authApiGet<MyPageResponse>("/users/mypages", { dataType });
-  } else {
-    return authApiGet<DescriptionResponse>("/users/description");
-  }
+export const getMyPageFeeds = async ({
+  nextCursor,
+  size,
+  seriesId,
+}: GetFeedsParams) => {
+  return authApiGet<MyPageFeedsResponse>("/users/feeds", {
+    nextCursor,
+    size,
+    seriesId,
+  });
+};
+
+export const getMyPagePots = async ({ potStatus }: GetMyPagePotsParams) => {
+  return authApiGet<MyPagePotsResponse>("/users/pots", { potStatus });
+};
+export const getMyPageDescription = async () => {
+  return authApiGet<DescriptionResponse>("/users/description");
 };
 
 export const GetFinishedModal = async (potId: number) => {
@@ -77,13 +88,30 @@ export const deleteUser = () => {
   return authApiDelete("/users/delete");
 };
 
-export const getUsersMyPages = async ({
+export const getUsersMyPagesFeeds = async ({
+  nextCursor,
+  size,
   userId,
-  dataType,
-}: GetUsersMyPagesParams) => {
-  return authApiGet<GetUsersMyPagesResponse>(`/users/${userId}/mypages`, {
-    dataType,
+  seriesId,
+}: GetFeedsParams) => {
+  return authApiGet<MyPageFeedsResponse>(`/users/${userId}/feeds`, {
+    nextCursor,
+    size,
+    seriesId,
   });
+};
+
+export const getUsersMyPagesPots = async (
+  userId: number,
+  potStatus?: GetMyPagePotsParams["potStatus"]
+) => {
+  const url = `/users/pots/${userId}`;
+  const params = potStatus ? { potStatus } : undefined;
+  return authApiGet<MyPagePotsResponse>(url, params);
+};
+
+export const getUsersMyPagesDescription = async (userId: number) => {
+  return authApiGet<DescriptionResponse>(`/users/description/${userId}`);
 };
 
 export const getUsersInfo = async ({ userId }: GetUsersInfoParams) => {
@@ -97,8 +125,27 @@ export const patchFinishedPot = async (
   return authApiPatch<PostPotResponse>(`/users/${potId}`, body);
 };
 
-export const patchDescription = async (
-  body: PatchDescriptionBody,
+export const patchDescription = async (body: PatchDescriptionBody) => {
+  return authApiPatch("/users/description", body);
+};
+
+export const getMyPagesPotAppealContent = async (potId: number) => {
+  return authApiGet<FinishedModalResponse>(`/users/potAppealContent/${potId}`);
+};
+
+export const getUsersMyPagesPotAppealContent = async (
+  potId: number,
+  userId: number
 ) => {
-  return authApiPatch('/users/description', body);
-}
+  return authApiGet<FinishedModalResponse>(
+    `/users/potAppealContent/${potId}/${userId}`
+  );
+};
+
+export const getFeedSeries = async () => {
+  return authApiGet<Record<string, string>>(`/feeds/series`);
+};
+
+export const getUserFeedSeries = async (userId: number) => {
+  return authApiGet<Record<string, string>>(`/feeds/series/${userId}`);
+};

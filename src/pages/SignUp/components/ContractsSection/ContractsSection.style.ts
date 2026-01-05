@@ -5,7 +5,7 @@ export const container = css`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  padding-top: 4.4rem;
+  margin-bottom: 5.2rem;
 `;
 export const contractContainer = css`
   display: flex;
@@ -13,13 +13,13 @@ export const contractContainer = css`
   gap: 1rem;
 `;
 export const contractStyle = css`
-  ${theme.font.caption3}
-  color: ${theme.color.object.assistive};
+  ${theme.font.body3}
+  color: ${theme.color.point.gray};
 `;
 export const detailButtonStyle = css`
   margin-left: auto;
-  ${theme.font.caption3};
-  color: ${theme.color.base.darkgray};
+  ${theme.font.caption2};
+  color: ${theme.color.object.hero};
   text-decoration: solid underline;
   background-color: transparent;
   border: none;

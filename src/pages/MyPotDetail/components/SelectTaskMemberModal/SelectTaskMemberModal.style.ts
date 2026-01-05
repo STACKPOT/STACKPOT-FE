@@ -21,7 +21,6 @@ export const descriptionStyle = css`
   align-self: flex-start;
   margin-top: 0.8rem;
 `;
-
 export const memberListContainer = css`
   width: 100%;
   display: grid;

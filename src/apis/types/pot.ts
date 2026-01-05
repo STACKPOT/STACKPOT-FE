@@ -68,7 +68,7 @@ export interface GetPotsApplyResponse {
   potStatus: PotStatus;
   potName: string;
   potStartDate: string;
-  potDuration: string;
+  potEndDate: string;
   potModeOfOperation: Participation;
   potContent: string;
   recruitmentRoles: Role[];
@@ -102,8 +102,7 @@ export interface PotDetail {
 }
 export interface GetPotApplicationResponse {
   applicationId: number;
-  potRole: Role;
-  status: string;
+  potRole: PotRole;
   userId: number;
   userNickname: string;
 }
@@ -155,10 +154,11 @@ export interface PatchPotParams {
 }
 
 export interface GetPotsRecruitingResponse {
-  potId: number;
-  potName: string;
-  members: Record<Role, number>;
-  dday: string;
+  size: number;
+  totalPages: number;
+  pots: Pots[];
+  currentPage: number;
+  totalElelments: number;
 }
 
 export interface GetPotsCompletedParams {

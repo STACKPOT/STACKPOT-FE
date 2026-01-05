@@ -32,7 +32,7 @@ export const nicknameDateContainer = css`
 	gap: 0.4rem;
 `;
 export const nicknameStyle = css`
-	${theme.font.bodyBold1}
+	${theme.font.caption3}
 	color:${theme.color.base.black};
 	&:hover {
 		text-decoration: underline;

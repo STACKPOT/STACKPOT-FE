@@ -8,39 +8,34 @@ import {
 import {
   bellContainer,
   guestProfileStyle,
+  headerIconStyle,
   headerStyle,
   iconContainer,
   iconStyle,
   logoStyle,
   profileContainer,
-  ProfileStyle,
   profileStyle,
-  searchIconStyle,
 } from "./Header.style";
 import Button from "@components/commons/Button/Button";
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import { roleImages } from "@constants/roleImage";
 import ProfileDropdown from "@components/commons/Dropdown/ProfileDropdown/ProfileDropdown";
 import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
 import Notification from "./components/Notification/Notification";
+import { ProfileImage } from "@assets/images";
+import { SproutImage } from "@assets/images";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const ref = useRef<HTMLDivElement>(null);
+  const notificationRef = useRef<HTMLDivElement>(null);
 
-  const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("accessToken")
-  );
-  const [role, setRole] = useState(localStorage.getItem("role"));
+  const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [roleProfileImage, setRoleProfileImage] = useState<string>("");
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
-  const guestMode = role === "UNKNOWN";
 
   const handleClick = () => {
     setIsLoginModalOpen(true);
@@ -65,17 +60,19 @@ const Header: React.FC = () => {
     setAccessToken(token);
   }, [localStorage.getItem("accessToken")]);
 
-  useEffect(() => {
-    const role = localStorage.getItem("role");
-    setRole(role);
-    const profileImage = roleImages[role as keyof typeof roleImages] || "";
-    setRoleProfileImage(profileImage);
-  }, [localStorage.getItem("role")]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+
+      if (
+        ref.current &&
+        !ref.current.contains(target) &&
+        notificationRef.current &&
+        !notificationRef.current.contains(target)
+      ) {
         setIsDropdownOpen(false);
+        setIsNotificationOpen(false);
       }
     };
 
@@ -83,7 +80,7 @@ const Header: React.FC = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref]);
+  }, []);
 
   const handleNotificationClick = () => {
     setIsNotificationOpen((prev) => !prev);
@@ -101,26 +98,36 @@ const Header: React.FC = () => {
           <div css={iconContainer}>
             <SearchIcon
               type="button"
-              css={searchIconStyle(isHomePage)}
+              css={headerIconStyle(isHomePage)}
               onClick={handleSearchClick}
             />
             <div css={bellContainer}>
               {isNotificationOpen ? (
-                <BellFilledIcon onClick={handleNotificationClick} />
+                <BellFilledIcon
+                  css={headerIconStyle(isHomePage)}
+                  onClick={handleNotificationClick}
+                />
               ) : (
-                <BellIcon onClick={handleNotificationClick} />
+                <BellIcon
+                  css={headerIconStyle(isHomePage)}
+                  onClick={handleNotificationClick}
+                />
               )}
 
-              {isNotificationOpen && <Notification />}
+              {isNotificationOpen && (
+                <div ref={notificationRef}>
+                  <Notification onClose={() => setIsNotificationOpen(false)} />
+                </div>
+              )}
             </div>
 
             <div css={profileContainer}>
               <img
-                css={guestMode ? guestProfileStyle : profileStyle}
-                src={roleProfileImage}
+                css={accessToken ? profileStyle : guestProfileStyle}
+                src={accessToken ? SproutImage : ProfileImage}
                 alt="profileImage"
               />
-              {!guestMode && (
+              {accessToken && (
                 <ArrowDropdownIcon
                   type="button"
                   css={iconStyle(isHomePage)}

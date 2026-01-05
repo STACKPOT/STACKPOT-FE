@@ -5,7 +5,7 @@ export const container = css`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 3.2rem;
 `;
 export const titleContainer = css`
   display: flex;
@@ -14,7 +14,7 @@ export const titleContainer = css`
 `;
 export const titleStyle = css`
   ${theme.font.title1}
-  color: ${theme.color.base.darkgray};
+  color: ${theme.color.point.gray};
 `;
 export const potIconStyle = css`
   width: 2.4rem;
@@ -23,7 +23,7 @@ export const potIconStyle = css`
 `;
 
 export const descriptionStyle = css`
-  ${theme.font.caption3}
-  color: ${theme.color.object.assistive};
+  ${theme.font.body3}
+  color: ${theme.color.point.gray};
   white-space: pre-wrap;
 `;

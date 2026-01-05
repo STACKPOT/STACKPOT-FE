@@ -85,20 +85,20 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
     );
   };
 
-  const handleSeriesClick = (selected: string) => {
-    setSelectedSeriesName(selectedSeriesName ? null : selected);
-    if (series) {
-      const selectedId = Object.entries(series)
-        .find(([_, value]) => value === selected)
-        ?.at(0);
-      const selectedIdNumber = Number(selectedId);
-      if (selectedId) {
-        setValue(
-          "seriesId",
-          selectedIdNumber === selectedSeries ? null : selectedIdNumber
-        );
-      }
-    }
+  const handleSeriesClick = (label: string) => {
+    if (!series) return;
+
+    // label(=시리즈명)로 seriesId 찾기
+    const entry = Object.entries(series).find(([, v]) => v === label);
+    if (!entry) return;
+
+    const [idStr] = entry;         // 키는 문자열
+    const id = Number(idStr);      // 숫자로 변환
+    const isSame = selectedSeries === id; // 이미 선택된 것을 다시 클릭하면 해제
+
+    // 선택 토글
+    setSelectedSeriesName(isSame ? null : label);
+    setValue("seriesId", isSame ? null : id, { shouldDirty: true, shouldValidate: true });
   };
 
   return (
@@ -110,8 +110,8 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
             Object.values(series).map((item) => (
               <CategoryButton
                 key={item}
-                style="pot"
-                onClick={handleSeriesClick}
+                style="basic"
+                onClick={() => handleSeriesClick(item)}
                 selected={selectedSeriesName === item}
               >
                 {item}
@@ -152,7 +152,7 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
             {Object.keys(partMap).map((partName) => (
               <CategoryButton
                 key={partName}
-                style="pot"
+                style="basic"
                 selected={selectedCategories.includes(partMap[partName])}
                 onClick={handleCategoryClick}
               >
@@ -167,7 +167,7 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
             {interests.map((interestName) => (
               <CategoryButton
                 key={interestName}
-                style="pot"
+                style="basic"
                 selected={selectedInterests.includes(interestMap[interestName])}
                 onClick={handleInterestClick}
               >

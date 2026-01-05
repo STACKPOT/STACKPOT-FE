@@ -24,7 +24,7 @@ const SearchInput = ({ query, setQuery, onSearch }: SearchInputProps) => {
     <div css={searchInputStyle}>
       <input
         css={inputStyle}
-        placeholder="무엇이든 검색해 보세요"
+        placeholder="검색어 입력"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
