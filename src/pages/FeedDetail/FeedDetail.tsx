@@ -17,11 +17,11 @@ import {
 } from "./FeedDetail.style";
 import useGetFeedDetail from "apis/hooks/feeds/useGetFeedDetail";
 import { useNavigate, useParams } from "react-router-dom";
-import { roleImages } from "@constants/roleImage";
 import routes from "@constants/routes";
 import { Button, CommentSection, PostButton } from "@components/index";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 import MDEditor from "@uiw/react-md-editor";
+import { SproutImage } from "@assets/images";
 
 const FeedDetail = () => {
   const { feedId } = useParams();
@@ -31,10 +31,6 @@ const FeedDetail = () => {
   const { data } = useGetFeedDetail(numericFeedId);
 
   const navigate = useNavigate();
-
-  const profileImage = data?.feed.writerRole
-    ? roleImages[data.feed.writerRole]
-    : undefined;
 
   const handleClick = () => {
     navigate(-1);
@@ -69,7 +65,7 @@ const FeedDetail = () => {
         <div css={profileContainer}>
           <img
             css={profileStyle}
-            src={profileImage}
+            src={SproutImage}
             alt="profileImage"
             onClick={handleUserClick}
           />

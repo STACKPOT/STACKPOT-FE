@@ -7,8 +7,7 @@ import {
 } from "./CtaCard.style";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import { useEffect, useState } from "react";
-import { roleImages } from "@constants/roleImage";
+import { SproutImage } from "@assets/images";
 
 interface CtaCardProps {
   type: "pot" | "feed";
@@ -16,26 +15,22 @@ interface CtaCardProps {
 
 const CtaCard: React.FC<CtaCardProps> = ({ type }: CtaCardProps) => {
   const navigate = useNavigate();
-  const [roleProfileImage, setRoleProfileImage] = useState<string>("");
-
-  useEffect(() => {
-    const role = localStorage.getItem("role");
-    const profileImage = roleImages[role as keyof typeof roleImages] || "";
-    setRoleProfileImage(profileImage);
-  }, [localStorage.getItem("role")]);
+  const accessToken = localStorage.getItem("accessToken");
 
   const handleClick = () => {
-    if (type === "feed") {
-      navigate(routes.writePost);
-    } else if (type === "pot") {
-      navigate(routes.createPot);
+    if (accessToken) {
+      if (type === "feed") {
+        navigate(routes.writePost);
+      } else if (type === "pot") {
+        navigate(routes.createPot);
+      }
+      window.scrollTo(0, 0);
     }
-    window.scrollTo(0, 0);
   };
 
   return (
     <div css={container} onClick={handleClick}>
-      <img css={profileImageStyle} src={roleProfileImage} />
+      <img css={profileImageStyle} src={SproutImage} />
       <p css={bodyTextStyle}>
         {type == "feed"
           ? "오늘 작업하다가 무슨 일이 있었냐면..."
