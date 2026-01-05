@@ -25,7 +25,7 @@ const appliedPotsData: {
             period: "단기/3개월",
             method: "온라인",
             stacks: "프론트엔드(2), 디자이너(1)",
-            members: { BACKEND: 0, FRONTEND: 1, DESIGN: 2, PLANNING: 4 },
+            members: { BACKEND: 0, FRONTEND: 1, DESIGN: 2, PLAN: 4, UNKNOWN: 0 },
             languages: "React, Javascripts ",
         },
         {
@@ -39,7 +39,7 @@ const appliedPotsData: {
             period: "단기/3개월",
             method: "온라인",
             stacks: "프론트엔드(2), 디자이너(1)",
-            members: { BACKEND: 0, FRONTEND: 1, DESIGN: 2, PLANNING: 4 },
+            members: { BACKEND: 0, FRONTEND: 1, DESIGN: 2, PLAN: 4, UNKNOWN: 0 },
             languages: "React, Javascripts ",
         },
         {
@@ -53,7 +53,7 @@ const appliedPotsData: {
             period: "단기/3개월",
             method: "온라인",
             stacks: "프론트엔드(2), 디자이너(1)",
-            members: { BACKEND: 0, FRONTEND: 1, DESIGN: 2, PLANNING: 4 },
+            members: { BACKEND: 0, FRONTEND: 1, DESIGN: 2, PLAN: 4, UNKNOWN: 0 },
             languages: "React, Javascripts ",
         }
     ]

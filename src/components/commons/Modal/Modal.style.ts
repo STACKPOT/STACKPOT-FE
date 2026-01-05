@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 import { media } from "@styles/media";
 import theme from "@styles/theme";
 
@@ -15,19 +15,21 @@ export const background = css`
   z-index: 1000;
 `;
 
-export const container = css`
+export const container = (customStyle?: SerializedStyles) => css`
   width: 40rem;
   ${media[1440]} {
-    width: 56rem;
+    width: ${!customStyle && `56rem`};
   }
   ${media[1920]} {
-    width: 76rem;
+    width: ${!customStyle && `76rem`};
   }
   padding: 2.4rem;
   background: ${theme.color.base.white};
   border: 1px solid ${theme.color.object.assistive};
+  border-radius: 8px;
   display: inline-flex;
   flex-direction: column;
+  ${customStyle};
 `;
 
 export const closeIconStyle = css`
@@ -53,9 +55,6 @@ export const messageStyle = css`
   ${theme.font.body3};
   white-space: pre-line;
   overflow-y: auto;
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 export const footer = css`

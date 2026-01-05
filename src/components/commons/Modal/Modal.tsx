@@ -9,6 +9,7 @@ import {
 } from "./Modal.style";
 import { CloseIcon } from "@assets/svgs";
 import Button from "../Button/Button";
+import { SerializedStyles } from "@emotion/react";
 
 interface ModalProps {
   /** 모달의 제목 */
@@ -28,15 +29,19 @@ interface ModalProps {
 
   /**
    * 취소 버튼에 표시될 문구.
-   * 기본 값은 "취소"
+   * 미지정시 취소 버튼 없음
    */
   cancelButton?: string;
 
   /**
    * 확인 버튼에 표시될 문구.
-   * 기본값은 "동의합니다"
    */
-  confirmButton?: string;
+  confirmButton: string;
+
+  /**
+   * container에 적용할 커스텀 스타일 (width 등)
+   */
+  customContainerStyle?: SerializedStyles;
 
   /** 확인 버튼 클릭 시 호출되는 콜백함수 */
   onConfirm: () => void;
@@ -67,21 +72,24 @@ const Modal: React.FC<ModalProps> = ({
   confirmType = "normal",
   cancelButton,
   confirmButton,
+  customContainerStyle,
   onConfirm,
   onCancel,
 }) => {
   return (
     <div css={background}>
-      <div css={container}>
+      <div css={container(customContainerStyle)}>
         <CloseIcon css={closeIconStyle} onClick={onCancel} />
         <div css={titleContentContainer}>
           <p css={titleStyle}>{title}</p>
           <p css={messageStyle}>{message}</p>
         </div>
         <div css={footer}>
-          <Button variant="action" actionType="alt" onClick={onCancel}>
-            {cancelButton ?? "취소"}
-          </Button>
+          {cancelButton && (
+            <Button variant="action" actionType="alt" onClick={onCancel}>
+              {cancelButton}
+            </Button>
+          )}
           <Button
             onClick={onConfirm}
             variant="action"

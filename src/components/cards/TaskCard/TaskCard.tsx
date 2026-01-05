@@ -28,6 +28,7 @@ import { TaskStatus } from "types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
 import { displayStatus } from "@constants/categories";
 import { AboutWorkModal } from "@pages/MyPotDetail/components";
+import routes from "@constants/routes";
 
 interface Participant {
   role: string;
@@ -138,12 +139,14 @@ const TaskCard: React.FC<TaskCardProps> = ({
               event.stopPropagation();
             }}
           >
-            <MyFeedDropdown
-              topMessage="수정하기"
-              bottomMessage="삭제하기"
-              onTop={handleOpenModal}
-              onBottom={handleDeleteTaskModal}
-            />
+            {!location.pathname.includes(routes.finishedPot) && (
+              <MyFeedDropdown
+                topMessage="수정하기"
+                bottomMessage="삭제하기"
+                onTop={handleOpenModal}
+                onBottom={handleDeleteTaskModal}
+              />
+            )}
           </div>
         </div>
         <p css={titleTextStyle}>{title}</p>

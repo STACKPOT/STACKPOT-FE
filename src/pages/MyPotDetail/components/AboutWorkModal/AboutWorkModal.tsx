@@ -36,6 +36,7 @@ interface AboutWorkModalProps {
   onClose: () => void;
   taskId: number;
   potId: number;
+  deadLine?: string;
 }
 
 const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
@@ -43,6 +44,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   onClose,
   taskId,
   potId,
+  deadLine,
 }) => {
   const { showSnackbar } = useSnackbar();
   const [step, setStep] = useState<"content" | "member">("content");
@@ -106,7 +108,6 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   };
 
   if (isLoading) return <Loading />;
-
   return (
     <FormProvider {...methods}>
       <form css={aboutWorkModalOverlayStyle}>
@@ -148,7 +149,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
                       onChange={(date) =>
                         field.onChange(date.format("YYYY-MM-DD"))
                       }
-                      date={dayjs(deadLineValue)}
+                      date={deadLineValue !== undefined ? dayjs(deadLineValue) : dayjs(deadLine)}
                     />
                   )}
                 />

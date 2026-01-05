@@ -8,7 +8,7 @@ import {
   categoryContainer,
   buttonStyle,
 } from "./SignUp.style";
-import { Button } from "@components/index";
+import { Button, Modal } from "@components/index";
 import {
   CategorySelection,
   ContractsSection,
@@ -20,22 +20,24 @@ import usePatchSignIn from "apis/hooks/users/usePatchSignIn";
 import { useState } from "react";
 import { SignInResponse } from "apis/types/user";
 import { Role } from "types/role";
+import { useBlocker } from "react-router-dom";
 import CompleteModal from "./components/CompleteModal/CompleteModal";
 
 type SignInFormData = {
-  role: Role;
+  roles: Role[];
   interest: string[];
 };
 
 const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
+  const [isSignupComplete, setIsSignupComplete] = useState(false);
   const [responseData, setResponseData] = useState<SignInResponse | null>(null);
 
   const methods = useForm({
     mode: "onChange",
     defaultValues: {
-      role: "UNKNOWN" as Role,
+      roles: [],
       interest: [],
       contractsAgreed: false,
     },
@@ -45,13 +47,13 @@ const SignUp = () => {
     register,
     handleSubmit,
     watch,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = methods;
 
   const { mutate } = usePatchSignIn();
 
-  const [role, interest, contractsAgreed] = watch([
-    "role",
+  const [roles, interest, contractsAgreed] = watch([
+    "roles",
     "interest",
     "contractsAgreed",
   ]);
@@ -61,17 +63,24 @@ const SignUp = () => {
       onSuccess: (response) => {
         setResponseData(response.result ?? null);
         setIsModalOpen(true);
+        setIsSignupComplete(true);
       },
     });
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    setIsCompleteModalOpen(true);
   };
+
+  const blocker = useBlocker(isDirty);
 
   const handleModalCancel = () => {
     setIsCompleteModalOpen(false);
+  };
+
+  const handleConfirm = () => {
+    setIsModalOpen(false);
+    setIsCompleteModalOpen(true);
   };
 
   return (
@@ -103,11 +112,21 @@ const SignUp = () => {
           </Button>
         </form>
       </FormProvider>
-      {isModalOpen && responseData?.role && (
-        <ProfileModal onModalCancel={handleCancel} role={responseData?.role} />
+      {isModalOpen && responseData?.roles && (
+        <ProfileModal onModalCancel={handleCancel} onConfirm={handleConfirm} />
       )}
       {isCompleteModalOpen && (
         <CompleteModal onModalCancel={handleModalCancel} />
+      )}
+      {blocker.state === "blocked" && !isSignupComplete && (
+        <Modal
+          title="페이지를 나가시겠어요?"
+          message="입력한 내용을 처음부터 시작해야 해요."
+          confirmButton="나가기"
+          cancelButton="취소"
+          onConfirm={blocker.proceed}
+          onCancel={blocker.reset}
+        />
       )}
     </main>
   );

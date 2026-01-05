@@ -101,7 +101,7 @@ export const GetPotsCompleted = async ({
 };
 
 export const PatchAppealPot = async (potId: number, body: AppealPotPatch) => {
-  return authApiPatch(`/pots/${potId}/members/appeal`, body);
+  return authApiPatch<string>(`/pots/${potId}/members/appeal`, body);
 };
 
 export const PatchPotComplete = async (

@@ -14,7 +14,7 @@ import {
 } from "./MyPotCalendar.style";
 import { TaskBox } from "./components";
 import useGetTasksMonth from "apis/hooks/myPots/useGetTasksMonth";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import useGetTasksCalendar from "apis/hooks/myPots/useGetTasksCalendar";
 
 import { format } from "date-fns";
@@ -26,8 +26,10 @@ import { Global } from "@emotion/react";
 import { Button } from "@components/index";
 import { WavingHandIcon } from "@assets/svgs";
 import { AboutWorkModal } from "@pages/MyPotDetail/components";
+import routes from "@constants/routes";
 
 const MyPotCalendar = () => {
+  const location = useLocation();
   const { potId, taskId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const potIdNumber = Number(potId);
@@ -77,6 +79,7 @@ const MyPotCalendar = () => {
         <AboutWorkModal
           taskId={taskNumber}
           potId={potIdNumber}
+          deadLine={date ? formatDate(date) : undefined}
           onClose={() => setIsModalOpen(false)}
           type={"post"}
         />
@@ -120,7 +123,11 @@ const MyPotCalendar = () => {
                   )} (${getDayOfWeek(date)})`
                 : ""}
             </p>
-            <Button variant="cta" onClick={handleOpenModal}>
+            <Button
+              variant="cta"
+              onClick={handleOpenModal}
+              disabled={location.pathname.includes(routes.finishedPot)}
+            >
               새로운 업무 추가
             </Button>
           </div>
