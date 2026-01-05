@@ -27,7 +27,6 @@ const PotDetail = () => {
             potId={potIdNumber}
             potStatus={data.potDetail.potStatus}
             nickname={data.potDetail.userNickname || ""}
-            profileImage={roleImages[data.potDetail.userRole]}
             dday={data.potDetail.dday}
           />
           <div css={bodyContainerStyle}>

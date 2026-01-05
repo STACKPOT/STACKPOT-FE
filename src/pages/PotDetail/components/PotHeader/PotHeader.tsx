@@ -27,7 +27,6 @@ interface PotHeaderProps {
   potId: number;
   potStatus: PotStatus;
   nickname: string;
-  profileImage: string;
   dday: string;
 }
 const PotHeader: React.FC<PotHeaderProps> = ({
@@ -37,7 +36,6 @@ const PotHeader: React.FC<PotHeaderProps> = ({
   potId,
   potStatus,
   nickname,
-  profileImage,
   dday,
 }: PotHeaderProps) => {
   const navigate = useNavigate();

@@ -14,7 +14,6 @@ import {
   profileTextContainer,
   textAreaStyle,
 } from "./Comment.style";
-import { roleImages } from "@constants/roleImage";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import React, { useState } from "react";
@@ -28,6 +27,7 @@ import usePostPotCommentReply from "apis/hooks/comments/usePostPotCommentReply";
 import useDeletePotComment from "apis/hooks/comments/useDeletePotComment";
 import EditingComment from "./EditingComment";
 import DeletedComment from "./DeletedComent";
+import { SproutImage } from "@assets/images";
 
 interface CommentProps {
   id: number;
@@ -123,11 +123,7 @@ const Comment: React.FC<CommentProps> = ({
           {!isEditing ? (
             <>
               <div css={profileContainer}>
-                <img
-                  css={profileImageStyle}
-                  src={roleImages["UNKNOWN"]}
-                  alt="profile"
-                />
+                <img css={profileImageStyle} src={SproutImage} alt="profile" />
                 <div css={profileTextContainer}>
                   <div css={nicknameContainer}>
                     <button
@@ -177,7 +173,6 @@ const Comment: React.FC<CommentProps> = ({
           ) : (
             <EditingComment
               id={id}
-              role={"UNKNOWN"}
               userName={userName}
               comment={comment}
               commentId={commentId}

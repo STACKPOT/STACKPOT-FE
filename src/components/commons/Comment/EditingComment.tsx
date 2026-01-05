@@ -1,4 +1,3 @@
-import { roleImages } from "@constants/roleImage";
 import {
   editCommentContainer,
   editCommentTextAreaStyle,
@@ -7,15 +6,14 @@ import {
   submitButtonContainer,
 } from "./EditingComment.style";
 import Button from "../Button/Button";
-import { Role } from "types/role";
 import { useEffect, useRef, useState } from "react";
 import usePatchFeedComment from "apis/hooks/comments/usePatchFeedComment";
 import usePatchPotComment from "apis/hooks/comments/usePatchPotComment";
 import { profileContainer, profileImageStyle } from "./Comment.style";
+import { SproutImage } from "@assets/images";
 
 interface EditingCommentProps {
   id: number;
-  role: Role;
   userName: string;
   comment: string;
   commentId: number;
@@ -25,7 +23,6 @@ interface EditingCommentProps {
 
 const EditingComment: React.FC<EditingCommentProps> = ({
   id,
-  role,
   userName,
   comment,
   commentId,
@@ -57,7 +54,7 @@ const EditingComment: React.FC<EditingCommentProps> = ({
     <>
       <div css={editCommentContainer}>
         <div css={profileContainer}>
-          <img css={profileImageStyle} src={roleImages[role]} alt="profile" />
+          <img css={profileImageStyle} src={SproutImage} alt="profile" />
           <p css={nicknameStyle}>{userName}</p>
         </div>
         <textarea
