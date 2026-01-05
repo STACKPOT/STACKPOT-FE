@@ -18,7 +18,7 @@ export const contentContainer = css`
 `;
 
 export const informationContainer = css`
-  width: 35.1rem;
+  width: 35.8rem;
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
@@ -78,7 +78,7 @@ export const elementContentStyle = css`
 `;
 
 export const layerStyle = css`
-  width: 35.1rem;
+  width: 35.5rem;
   height: 100%;
   display: flex;
   justify-content: center;

@@ -13,7 +13,6 @@ import {
   PotMain,
   AllPotPage,
   AppliedPotPage,
-  MadePotPage,
   SignUpPage,
   CreatePotPage,
   MyPotDetailMainPage,
@@ -30,6 +29,7 @@ import {
   EditPotPage,
   FeedDetailPage,
   ChatPage,
+  FinishedPotDetailPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -91,7 +91,6 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <AllPotPage /> },
           { path: routes.pot.applied, element: <AppliedPotPage /> },
-          { path: routes.pot.madeByMe, element: <MadePotPage /> },
         ],
       },
       {
@@ -140,6 +139,10 @@ const router = createBrowserRouter([
       {
         path: `${routes.feed.base}/:feedId`,
         element: <FeedDetailPage />,
+      },
+      {
+        path: `${routes.finishedPot}/:potId`,
+        element: <FinishedPotDetailPage />,
       },
     ],
   },

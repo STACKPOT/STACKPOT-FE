@@ -20,20 +20,22 @@ import usePatchSignIn from "apis/hooks/users/usePatchSignIn";
 import { useState } from "react";
 import { SignInResponse } from "apis/types/user";
 import { Role } from "types/role";
+import CompleteModal from "./components/CompleteModal/CompleteModal";
 
 type SignInFormData = {
-  role: Role;
+  roles: Role[];
   interest: string[];
 };
 
 const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
   const [responseData, setResponseData] = useState<SignInResponse | null>(null);
 
   const methods = useForm({
     mode: "onChange",
     defaultValues: {
-      role: "UNKNOWN" as Role,
+      roles: [],
       interest: [],
       contractsAgreed: false,
     },
@@ -48,14 +50,13 @@ const SignUp = () => {
 
   const { mutate } = usePatchSignIn();
 
-  const [role, interest, contractsAgreed] = watch([
-    "role",
+  const [roles, interest, contractsAgreed] = watch([
+    "roles",
     "interest",
     "contractsAgreed",
   ]);
 
   const onSubmit: SubmitHandler<SignInFormData> = (data) => {
-    console.log(data);
     mutate(data, {
       onSuccess: (response) => {
         setResponseData(response.result ?? null);
@@ -66,6 +67,15 @@ const SignUp = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  const handleModalCancel = () => {
+    setIsCompleteModalOpen(false);
+  };
+
+  const handleConfirm = () => {
+    setIsModalOpen(false);
+    setIsCompleteModalOpen(true);
   };
 
   return (
@@ -97,8 +107,11 @@ const SignUp = () => {
           </Button>
         </form>
       </FormProvider>
-      {isModalOpen && responseData?.role && (
-        <ProfileModal onModalCancel={handleCancel} role={responseData?.role} />
+      {isModalOpen && responseData?.roles && (
+        <ProfileModal onModalCancel={handleCancel} onConfirm={handleConfirm} />
+      )}
+      {isCompleteModalOpen && (
+        <CompleteModal onModalCancel={handleModalCancel} />
       )}
     </main>
   );

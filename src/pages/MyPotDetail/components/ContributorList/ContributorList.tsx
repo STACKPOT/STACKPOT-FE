@@ -6,7 +6,7 @@ import {
   profileImageStyle,
 } from "./ContributorList.style";
 import { useParams } from "react-router-dom";
-import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemeber";
+import { useGetMyPotMembers } from "apis/hooks/myPots/useGetMyPotMemebers";
 import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
 
@@ -24,10 +24,14 @@ const ContributorList: React.FC<ContributorListProps> = ({
   const { data } = useGetMyPotMembers({ potId: potIdNumber });
 
   return (
-    <div key={JSON.stringify(participants)} css={contributorButtonOuterContainer}>
+    <div
+      key={JSON.stringify(participants)}
+      css={contributorButtonOuterContainer}
+    >
       {data?.result?.map((member) => {
         const isSelected = participants.includes(member.potMemberId);
-        const profileImage = roleImages[member.potRole as Role] || roleImages.DEFAULT;
+        const profileImage =
+          roleImages[member.potRole as Role] || roleImages.DEFAULT;
         return (
           <div
             key={member.potMemberId}
@@ -35,7 +39,11 @@ const ContributorList: React.FC<ContributorListProps> = ({
             onClick={() => setSelectedParticipants(member.potMemberId)}
           >
             <div css={contributorButtonInnerContainer}>
-              <img src={profileImage} alt="프로필 이미지" css={profileImageStyle} />
+              <img
+                src={profileImage}
+                alt="프로필 이미지"
+                css={profileImageStyle}
+              />
               <div css={nicknameStyle}>{member.nickname}</div>
             </div>
           </div>
@@ -43,7 +51,6 @@ const ContributorList: React.FC<ContributorListProps> = ({
       })}
     </div>
   );
-  
 };
 
 export default ContributorList;

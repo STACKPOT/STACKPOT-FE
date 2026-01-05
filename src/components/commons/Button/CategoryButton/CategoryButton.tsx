@@ -1,10 +1,7 @@
 import { SerializedStyles } from "@emotion/react";
 import {
-  beButtonStyle,
+  backgroundButtonStyle,
   buttonStyle,
-  deButtonStyle,
-  feButtonStyle,
-  pmButtonStyle,
   potButtonStyle,
 } from "./CategoryButton.style";
 
@@ -12,27 +9,19 @@ interface CategoryButtonProps {
   children: string;
   selected: boolean;
   onClick: (category: string) => void;
-  style: "pot" | "FRONTEND" | "BACKEND" | "PLANNING" | "DESIGN";
+  style?: "basic"| "background";
 }
 
 const CategoryButton: React.FC<CategoryButtonProps> = ({
   children,
   selected,
   onClick,
-  style,
+  style="basic",
 }: CategoryButtonProps) => {
   const buttonType: SerializedStyles =
-    style === "pot"
+    style === "basic"
       ? potButtonStyle(selected)
-      : style === "FRONTEND"
-      ? feButtonStyle(selected)
-      : style === "BACKEND"
-      ? beButtonStyle(selected)
-      : style === "PLANNING"
-      ? pmButtonStyle(selected)
-      : style === "DESIGN"
-      ? deButtonStyle(selected)
-      : potButtonStyle(selected);
+      : backgroundButtonStyle(selected);
 
   return (
     <button

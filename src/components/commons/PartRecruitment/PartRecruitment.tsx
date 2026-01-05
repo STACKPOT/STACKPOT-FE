@@ -61,7 +61,6 @@ const PartRecruitment: React.FC<PartRecruitmentProps> = ({ initialRecruitment, o
             {Object.keys(partMap).map((partName) => (
                 <div key={partName} css={partButtonContainer}>
                     <CategoryButton
-                        style={partMap[partName]}
                         selected={visibleInputs[partMap[partName]]}
                         onClick={() => handlePartClick(partMap[partName])}
                     >

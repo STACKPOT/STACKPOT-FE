@@ -2,24 +2,40 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 export const container = css`
+  position: relative;
+  min-height: 60rem;
   display: flex;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
+  overflow: hidden;
 `;
 
-export const ImageStyle = css`
-  width: 37.8rem;
+export const bgImage = css`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 854px;
+  max-width: 90vw;
+  height: auto;
+
+`;
+
+export const foreground = css`
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: center;
 `;
 
 export const titleStyle = css`
-  ${theme.font.display1};
-  margin-top: 3.2rem;
+  ${theme.font.title2};
 `;
 
 export const contentStyle = css`
-  ${theme.font.caption3};
-  color: ${theme.color.base.darkgray};
-  text-align: center;
-  margin: 2.4rem 0 4.8rem 0;
+  ${theme.font.body3};
+  color: ${theme.color.object.hero};
 `;

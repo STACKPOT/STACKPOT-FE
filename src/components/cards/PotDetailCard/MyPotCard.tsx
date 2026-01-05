@@ -26,9 +26,18 @@ import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import Modal from "@components/commons/Modal/Modal";
 import useCancelApply from "apis/hooks/pots/useCancelApply";
-import { PotSummaryModal } from "@pages/MyPage/components";
+import { PotSummaryModal } from "@components/commons/ProfileContent";
 import { DateRangeIcon, FlagIcon, WebTrafficIcon } from "@assets/svgs";
 import { participationKoreanMap } from "@constants/categories";
+
+const potCardButtonMap: {
+  [key: string]: "" | "지원 취소하기" | "다 끓였어요 🔥" | "여기서 저는요 👋";
+} = {
+  NONE: "",
+  CANCEL_APPLY: "지원 취소하기",
+  FINISH_POT: "다 끓였어요 🔥",
+  APPEAL: "여기서 저는요 👋",
+};
 
 interface MyPotCardProps {
   potId: number;
@@ -39,17 +48,13 @@ interface MyPotCardProps {
   members?: Record<Role, number>;
   potModeOfOperation: Participation;
   potStartDate: string;
-  potDuration: string;
-  recruitmentRoles: Role[];
+  potEndDate: string;
+  recruitmentRoles?: string[];
+  isOwner?: boolean;
+  isMember: boolean;
   type: "myPage" | "myPot" | "applied" | "recruiting";
+  userId?: number
 }
-
-const buttonTexts = {
-  myPage: "여기서 저는요 👋",
-  myPot: "다 끓였어요 🔥",
-  applied: "지원 취소하기",
-  recruiting: "",
-};
 
 const MyPotCard: React.FC<MyPotCardProps> = ({
   potId,
@@ -60,14 +65,26 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   members,
   potModeOfOperation,
   potStartDate,
-  potDuration,
+  potEndDate,
   recruitmentRoles,
+  isOwner,
   type,
+  userId,
 }: MyPotCardProps) => {
   const navigate = useNavigate();
   const [showButton, setShowButton] = useState(false);
   const [showCancelApplyModal, setShowCancelApplyModal] = useState(false);
   const [showSummaryModal, setShowSummaryModal] = useState<number | null>(null);
+  const buttonType =
+    type === "applied" && potStatus === "RECRUITING"
+      ? "CANCEL_APPLY"
+      : type === "myPage" && potStatus === "COMPLETED"
+        ? "APPEAL"
+        : (type === "myPot" || type === "myPage") &&
+          potStatus === "ONGOING" &&
+          isOwner
+          ? "FINISH_POT"
+          : "NONE";
 
   const recruitments = Object.entries(members ?? {}).flatMap(([role, count]) =>
     Array(count).fill(role as Role)
@@ -76,23 +93,31 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
   const { mutate: cancelApply } = useCancelApply();
 
   const handleMouseOver = (mouseOver: boolean) => {
-    if (type !== "recruiting") {
+    if (buttonType !== "NONE") {
       setShowButton(mouseOver);
     }
   };
 
   const handleCardClick = () => {
-    navigate(`${routes.pot.base}/${potId}`);
+    if (potStatus === "COMPLETED") {
+      navigate(`${routes.finishedPot}/${potId}`);
+    } else if (potStatus === "ONGOING" /* && isMember */) {
+      navigate(`${routes.myPot.task}/${potId}`);
+    } else {
+      navigate(`${routes.pot.base}/${potId}`);
+    }
     window.scrollTo(0, 0);
   };
 
   const handleButtonClick = () => {
-    if (type === "myPage") {
+    if (buttonType === "APPEAL") {
       setShowSummaryModal(potId);
-    } else if (type === "myPot") {
-    } else if (type === "applied") {
+    } else if (buttonType === "FINISH_POT") {
+      navigate(`${routes.createFinishedPot}/${potId}`);
+    } else if (buttonType === "CANCEL_APPLY") {
       setShowCancelApplyModal(true);
     }
+    window.scrollTo(0, 0);
   };
 
   const handleCancelApplyModalConfirm = () => {
@@ -106,8 +131,18 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
       label: "진행 방식",
       content: participationKoreanMap[potModeOfOperation],
     },
-    { icon: FlagIcon, label: "시작 날짜", content: potStartDate },
-    { icon: DateRangeIcon, label: "예상 기간", content: potDuration },
+    {
+      icon: FlagIcon,
+      label: "시작 날짜",
+      content: potStartDate.split("-").join("."),
+    },
+    {
+      icon: DateRangeIcon,
+      label: "예상 기간",
+      content: `${potStartDate.split("-").join(".")} - ${potEndDate
+        .split("-")
+        .join(".")}`,
+    },
   ];
 
   return (
@@ -121,7 +156,7 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
           </div>
           <p css={contentStyle}>{potContent}</p>
           <div css={partBadgeContainer}>
-            {recruitmentRoles.map((category) => (
+            {recruitmentRoles?.map((category) => (
               <Badge content={category} key={category} />
             ))}
           </div>
@@ -147,14 +182,18 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
         {showButton && (
           <div onMouseLeave={() => handleMouseOver(false)}>
             <div css={layerStyle}>
-              <div css={layerBackground(type === "applied" ? "red" : "blue")} />
+              <div
+                css={layerBackground(
+                  buttonType === "CANCEL_APPLY" ? "red" : "blue"
+                )}
+              />
               <Button
                 variant="action"
-                actionType={type === "applied" ? "neg" : "basic"}
+                actionType={buttonType === "CANCEL_APPLY" ? "neg" : "basic"}
                 customStyle={buttonStyle}
                 onClick={handleButtonClick}
               >
-                {buttonTexts[type]}
+                {potCardButtonMap[buttonType]}
               </Button>
             </div>
           </div>
@@ -175,6 +214,7 @@ const MyPotCard: React.FC<MyPotCardProps> = ({
         <PotSummaryModal
           potId={potId}
           onCancel={() => setShowSummaryModal(null)}
+          userId={userId}
         />
       )}
     </>

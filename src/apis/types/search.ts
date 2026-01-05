@@ -1,4 +1,5 @@
 import { Role } from "types/role";
+import { Feeds } from "./user";
 
 export interface GetSearchParams {
   type: string;
@@ -6,7 +7,12 @@ export interface GetSearchParams {
   page: number;
   size: number;
 }
-
+export interface GetFeedsSearchParams {
+  keyword: string;
+  nextCursor?: number;
+  size: number;
+  userId?: number;
+}
 export interface SearchResponse {
   currentPage: number;
   totalPages: number;
@@ -14,6 +20,10 @@ export interface SearchResponse {
   totalElements: number;
 }
 
+export interface MyPageSearchResponse {
+  feeds: Feeds[];
+  nextCursor: number | null;
+}
 export interface Content {
   userId: number;
   userRole: Role;

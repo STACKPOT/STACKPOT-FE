@@ -7,23 +7,16 @@ import {
 	tabsContainer,
 	tabsTextStyle,
 } from './MyPage.style';
-import { MyPageProfile } from './components';
-import { CtaCard, FloatingButton } from '@components/index';
-import useGetMyPage from 'apis/hooks/users/useGetMyPage';
-import MyPageContent from './components/MyPageContent/MyPageContent';
-
-
+import { CtaCard, } from '@components/index';
+import ProfileContent from '@components/commons/ProfileContent/ProfileContent';
+import { MyPageProfile } from '@components/commons/ProfileContent';
 
 const MyPage = () => {
 	const [contentType, setContentType] = useState<'feed' | 'pot' | 'introduction'>('feed');
-	const { data } = useGetMyPage({ dataType: contentType });
-	if (!data) {
-		return <div>데이터가 없습니다.</div>;
-	}
 
 	return (
 		<main css={container}>
-			<MyPageProfile />
+			<MyPageProfile viewerIsOwner={true} />
 			<div css={dividerStyle} />
 			<div css={bodyContainer}>
 				<div css={tabsContainer}>
@@ -37,12 +30,11 @@ const MyPage = () => {
 						소개
 					</p>
 				</div>
-				{contentType !== 'introduction' && <CtaCard type="feed" />}
+				{contentType === 'feed' && <CtaCard type="feed" />}
 				<div css={listContainer(contentType)}>
-					<MyPageContent contentType={contentType} data={data} />
+					<ProfileContent contentType={contentType} viewerIsOwner={true} />
 				</div>
 			</div>
-			<FloatingButton type={'feed'} />
 		</main>
 	);
 };

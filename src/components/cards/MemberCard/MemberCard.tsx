@@ -36,7 +36,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
   };
   const handleProfileClick = (e: React.MouseEvent<HTMLImageElement>) => {
     e.stopPropagation();
-    onProfileClick && onProfileClick();
+    onProfileClick?.();
   };
 
   return (

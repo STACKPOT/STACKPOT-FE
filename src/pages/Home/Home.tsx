@@ -1,11 +1,10 @@
-import { PotIcon, RightIcon } from "@assets/svgs";
-import { Button, CtaCard, FloatingButton } from "@components/index";
+import { RightIcon } from "@assets/svgs";
+import { Button, CtaCard } from "@components/index";
 
 import {
   container,
   content,
   contentTitle,
-  iconStyle,
   bannerStyle,
   bannerTitleStyle,
   spanStyle,
@@ -67,7 +66,6 @@ const Home: React.FC = () => {
             <Feed />
           </div>
         </div>
-        <FloatingButton type="feed" />
       </main>
       {isLoginModalOpen && (
         <LoginModal onCancel={() => setIsLoginModalOpen(false)} />

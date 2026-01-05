@@ -9,7 +9,6 @@ import PotDetailPage from "./PotDetail/PotDetail";
 import PotMain from "./Pots/PotMain";
 import AllPotPage from "./Pots/pages/AllPot/AllPotPage";
 import AppliedPotPage from "./Pots/pages/AppliedPot/AppliedPot";
-import MadePotPage from "./Pots/pages/MadePot/MadePot";
 import SignUpPage from "./SignUp/SignUp";
 import CreatePotPage from "./CreatePot/CreatePot";
 import MyPotDetailMainPage from "./MyPotDetail/MyPotDetail";
@@ -26,6 +25,7 @@ import EditPotPage from "./EditPot/EditPot";
 import FeedDetailPage from "./FeedDetail/FeedDetail";
 import MyPotsPage from "./MyPots/MyPots";
 import ChatPage from "@pages/Chat/Chat";
+import FinishedPotDetailPage from "./FinishedPotDetail/FinishedPotDetail";
 
 export {
   HomePage,
@@ -39,7 +39,6 @@ export {
   PotMain,
   AllPotPage,
   AppliedPotPage,
-  MadePotPage,
   SignUpPage,
   CreatePotPage,
   MyPotDetailMainPage,
@@ -56,4 +55,5 @@ export {
   EditPotPage,
   FeedDetailPage,
   ChatPage,
+  FinishedPotDetailPage,
 };

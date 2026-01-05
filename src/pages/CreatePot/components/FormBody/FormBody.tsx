@@ -142,7 +142,6 @@ const FormBody = forwardRef<HTMLDivElement>(
             {participation.map((participation) => (
               <CategoryButton
                 key={participation}
-                style="pot"
                 selected={
                   potModeOfOperation ===
                   participationMap[participation]
@@ -165,7 +164,6 @@ const FormBody = forwardRef<HTMLDivElement>(
             {period.map((period) => (
               <CategoryButton
                 key={period}
-                style="pot"
                 selected={potDuration === period}
                 onClick={() => setValue("potDuration", period)}
               >
