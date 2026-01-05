@@ -20,17 +20,23 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
     const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
 
     const updateCategory = (category: string) => {
-      const updated = selectedCategory.includes(category)
-        ? selectedCategory.filter((item) => item !== category)
-        : [...selectedCategory, category];
-
-      setSelectedCategory(updated);
-
       if (type === "interest") {
-        setValue("interest", updated);
+        setSelectedCategory((prev) => {
+          const updated = prev.includes(category)
+            ? prev.filter((item) => item !== category)
+            : [...prev, category];
+          setValue("interest", updated, {
+            shouldValidate: true,
+            shouldDirty: true,
+          });
+          return updated;
+        });
       } else if (type === "role") {
-        const roles = updated.map((item) => partMap[item]);
-        setValue("roles", roles);
+        setSelectedCategory([category]);
+        setValue("roles", [partMap[category]], {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
       }
     };
 
