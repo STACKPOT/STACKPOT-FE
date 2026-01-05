@@ -42,6 +42,10 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
     }
   }, [isDataSet]);
 
+  useEffect(() => {
+    register("content", { required: true });
+  }, []);
+
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue("title", e.target.value, {
       shouldValidate: true,
