@@ -18,6 +18,7 @@ import { PotStatus } from "types/potStatus";
 import routes from "@constants/routes";
 import { PostPotApplicationResponse } from "apis/types/pot";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
+import { SproutImage } from "@assets/images";
 
 interface PotHeaderProps {
   title: string;
@@ -26,7 +27,6 @@ interface PotHeaderProps {
   potId: number;
   potStatus: PotStatus;
   nickname: string;
-  profileImage: string;
   dday: string;
 }
 const PotHeader: React.FC<PotHeaderProps> = ({
@@ -36,7 +36,6 @@ const PotHeader: React.FC<PotHeaderProps> = ({
   potId,
   potStatus,
   nickname,
-  profileImage,
   dday,
 }: PotHeaderProps) => {
   const navigate = useNavigate();
@@ -105,7 +104,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({
         <div css={profileContainer}>
           <img
             css={profileStyle}
-            src={profileImage}
+            src={SproutImage}
             alt="profile"
             onClick={handleUserClick}
           />

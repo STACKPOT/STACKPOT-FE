@@ -44,7 +44,6 @@ export interface PatchCommentParams {
 export interface CommentResponse {
   userId: number;
   userName: string;
-  role: Role;
   isCommentWriter: boolean;
   commentId: number;
   comment: string;

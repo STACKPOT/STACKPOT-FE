@@ -14,13 +14,13 @@ import { CategoryButton } from "@components/index";
 import { interestMap, interests, partMap } from "@constants/categories";
 import { PostFeedParams } from "apis/types/feed";
 import useGetFeedSeries from "apis/hooks/feeds/useGetFeedSeries";
+import MDEditor from "@uiw/react-md-editor";
 
 interface PostFormProps {
   isDataSet?: boolean;
 }
 const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
-  const contentRef = useRef<HTMLTextAreaElement>(null);
   const { register, watch, setValue } = useFormContext<PostFeedParams>();
   const [selectedCategories, selectedInterests, selectedSeries] = watch([
     "categories",
@@ -42,6 +42,10 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
     }
   }, [isDataSet]);
 
+  useEffect(() => {
+    register("content", { required: true });
+  }, []);
+
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue("title", e.target.value, {
       shouldValidate: true,
@@ -53,17 +57,6 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
   const handleTitleFocus = (focus: boolean) => {
     if (watch("title").length < 50) {
       setTitleState(focus ? "focus" : "blur");
-    }
-  };
-
-  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue("content", e.target.value, {
-      shouldValidate: true,
-      shouldDirty: true,
-    });
-    if (contentRef.current) {
-      contentRef.current.style.height = "0px";
-      contentRef.current.style.height = contentRef.current.scrollHeight + "px";
     }
   };
 
@@ -92,13 +85,16 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
     const entry = Object.entries(series).find(([, v]) => v === label);
     if (!entry) return;
 
-    const [idStr] = entry;         // 키는 문자열
-    const id = Number(idStr);      // 숫자로 변환
+    const [idStr] = entry; // 키는 문자열
+    const id = Number(idStr); // 숫자로 변환
     const isSame = selectedSeries === id; // 이미 선택된 것을 다시 클릭하면 해제
 
     // 선택 토글
     setSelectedSeriesName(isSame ? null : label);
-    setValue("seriesId", isSame ? null : id, { shouldDirty: true, shouldValidate: true });
+    setValue("seriesId", isSame ? null : id, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
   };
 
   return (
@@ -136,13 +132,16 @@ const PostForm: React.FC<PostFormProps> = ({ isDataSet }: PostFormProps) => {
           {titleRef.current?.value.length ?? 0}/50
         </p>
       </div>
-      <textarea
-        css={textareaStyle}
-        placeholder="나의 열정을 이야기해봐요"
-        {...register("content", { required: true })}
-        ref={contentRef}
+
+      <MDEditor
         value={watch("content")}
-        onChange={handleContentChange}
+        onChange={(value) =>
+          setValue("content", value ?? "", {
+            shouldValidate: true,
+            shouldDirty: true,
+          })
+        }
+        height={340}
       />
 
       <div css={categoryContainer}>

@@ -1,4 +1,3 @@
-import React from "react";
 import { LeftIcon } from "@assets/svgs";
 import {
   contentStyle,
@@ -18,10 +17,11 @@ import {
 } from "./FeedDetail.style";
 import useGetFeedDetail from "apis/hooks/feeds/useGetFeedDetail";
 import { useNavigate, useParams } from "react-router-dom";
-import { roleImages } from "@constants/roleImage";
 import routes from "@constants/routes";
 import { Button, CommentSection, PostButton } from "@components/index";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
+import MDEditor from "@uiw/react-md-editor";
+import { SproutImage } from "@assets/images";
 
 const FeedDetail = () => {
   const { feedId } = useParams();
@@ -31,10 +31,6 @@ const FeedDetail = () => {
   const { data } = useGetFeedDetail(numericFeedId);
 
   const navigate = useNavigate();
-
-  const profileImage = data?.feed.writerRole
-    ? roleImages[data.feed.writerRole]
-    : undefined;
 
   const handleClick = () => {
     navigate(-1);
@@ -69,7 +65,7 @@ const FeedDetail = () => {
         <div css={profileContainer}>
           <img
             css={profileStyle}
-            src={profileImage}
+            src={SproutImage}
             alt="profileImage"
             onClick={handleUserClick}
           />
@@ -83,21 +79,20 @@ const FeedDetail = () => {
         <div css={dividerStyle} />
       </div>
       <div css={sectionContainer}>
-        <div css={contentStyle}>
-          {data?.feed.content.split("\n").map((line, index) => (
-            <React.Fragment key={index}>
-              {line}
-              <br />
-            </React.Fragment>
-          ))}
-        </div>
+        <MDEditor.Markdown source={data?.feed.content} />
         <div css={postButtonsContainer}>
           <PostButton
+            type="feed"
             postType="like"
-            isToggled={data?.feed.isLiked ?? false}
+            isToggled={data?.isLiked ?? false}
             id={numericFeedId}
           />
-          <PostButton postType="save" isToggled={false} id={numericFeedId} />
+          <PostButton
+            type="feed"
+            postType="save"
+            isToggled={data?.isSaved ?? false}
+            id={numericFeedId}
+          />
         </div>
       </div>
       <CommentSection type="feed" id={numericFeedId} />

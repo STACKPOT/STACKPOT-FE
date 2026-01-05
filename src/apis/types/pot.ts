@@ -87,18 +87,18 @@ export interface PotDetail {
   potName: string;
   potStartDate: string;
   potEndDate: string;
-  potDuration: string;
   potLan: string;
   potStatus: PotStatus;
   applied: boolean;
   potModeOfOperation: Participation;
   potContent: string;
+  potSummary: string;
+  isSaved: boolean;
   potRecruitmentDeadline: string;
   recruitmentDetails: string;
   recruitingMembers: Record<Role, number>;
   owner: boolean;
   dday: string;
-  potSummary: string;
 }
 export interface GetPotApplicationResponse {
   applicationId: number;
@@ -188,7 +188,7 @@ export interface PatchAppealPotParam {
 }
 
 export interface AppealPotPatch {
-  appealContent: string;
+  appealContent: string | null;
 }
 
 export interface PatchPotCompleteParams {

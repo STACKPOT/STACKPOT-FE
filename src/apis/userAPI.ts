@@ -19,6 +19,7 @@ import {
   GetMyPagePotsParams,
   MyPagePotsResponse,
   MyPageFeedsResponse,
+  GetPotSummaryResponse,
   GetFeedsParams,
 } from "./types/user";
 import {
@@ -141,6 +142,10 @@ export const patchFinishedPot = async (
   body: PatchPotCompleteBody
 ) => {
   return authApiPatch<PostPotResponse>(`/users/${potId}`, body);
+};
+
+export const getPotSummary = async (potId: number) => {
+  return authApiGet<GetPotSummaryResponse>(`/users/potSummary/${potId}`);
 };
 
 export const patchDescription = async (body: PatchDescriptionBody) => {

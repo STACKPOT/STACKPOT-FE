@@ -7,9 +7,9 @@ import {
 } from "./CtaCard.style";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import { useEffect, useState } from "react";
-import { roleImages } from "@constants/roleImage";
+import { useState } from "react";
 import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
+import { SproutImage } from "@assets/images";
 
 interface CtaCardProps {
   type: "pot" | "feed";
@@ -17,14 +17,7 @@ interface CtaCardProps {
 
 const CtaCard: React.FC<CtaCardProps> = ({ type }: CtaCardProps) => {
   const navigate = useNavigate();
-  const [roleProfileImage, setRoleProfileImage] = useState<string>("");
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
-  useEffect(() => {
-    const role = localStorage.getItem("role") ?? "UNKNOWN";
-    const profileImage = roleImages[role as keyof typeof roleImages] || "";
-    setRoleProfileImage(profileImage);
-  }, [localStorage.getItem("role")]);
 
   const handleClick = () => {
     const token = localStorage.getItem("accessToken");
@@ -43,7 +36,7 @@ const CtaCard: React.FC<CtaCardProps> = ({ type }: CtaCardProps) => {
   return (
     <>
       <div css={container} onClick={handleClick}>
-        <img css={profileImageStyle} src={roleProfileImage} />
+        <img css={profileImageStyle} src={SproutImage} />
         <p css={bodyTextStyle}>
           {type == "feed"
             ? "오늘 작업하다가 무슨 일이 있었냐면..."

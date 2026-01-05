@@ -14,8 +14,6 @@ import {
   profileTextContainer,
   textAreaStyle,
 } from "./Comment.style";
-import { Role } from "types/role";
-import { roleImages } from "@constants/roleImage";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import React, { useState } from "react";
@@ -29,12 +27,12 @@ import usePostPotCommentReply from "apis/hooks/comments/usePostPotCommentReply";
 import useDeletePotComment from "apis/hooks/comments/useDeletePotComment";
 import EditingComment from "./EditingComment";
 import DeletedComment from "./DeletedComent";
+import { SproutImage } from "@assets/images";
 
 interface CommentProps {
   id: number;
   type: "feed" | "pot";
   userId: number;
-  role: Role;
   userName: string;
   createdAt: string;
   comment: string;
@@ -50,7 +48,6 @@ const Comment: React.FC<CommentProps> = ({
   id,
   type,
   userId,
-  role,
   userName,
   createdAt,
   comment,
@@ -126,11 +123,7 @@ const Comment: React.FC<CommentProps> = ({
           {!isEditing ? (
             <>
               <div css={profileContainer}>
-                <img
-                  css={profileImageStyle}
-                  src={roleImages[role]}
-                  alt="profile"
-                />
+                <img css={profileImageStyle} src={SproutImage} alt="profile" />
                 <div css={profileTextContainer}>
                   <div css={nicknameContainer}>
                     <button
@@ -180,7 +173,6 @@ const Comment: React.FC<CommentProps> = ({
           ) : (
             <EditingComment
               id={id}
-              role={role}
               userName={userName}
               comment={comment}
               commentId={commentId}

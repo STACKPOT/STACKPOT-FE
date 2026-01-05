@@ -52,15 +52,13 @@ export const postFeedLike = async (feedId: number) => {
   return authApiPost(`/feeds/${feedId}/like`);
 };
 
-export const postFeedSave = async (feedId: number) => {
-  return authApiPost(`/saves/feeds/${feedId}`);
+export const postFeedSave = async (feed_id: number) => {
+  return authApiPost(`/saves/feeds/${feed_id}`);
 };
-
 
 export const DeleteFeed = async (feedId: number) => {
   return authApiDelete(`/feeds/${feedId}`);
 };
-
 
 export const postFeedSeries = async (body: PostFeedSeriesParams) => {
   return authApiPost<Record<number, string>>(`/feeds/series`, body);
