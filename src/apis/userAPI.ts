@@ -1,4 +1,3 @@
-import { Role } from "types/role";
 import {
   apiGet,
   authApiDelete,
@@ -36,15 +35,16 @@ export const getKakaoLogIn = async (code: string) => {
 export const GetMyUser = async () => {
   return authApiGet<GetUserResponse>("/users");
 };
-export const patchSignIn = async ({ role, interest }: postSignInPayload) => {
+
+export const patchSignIn = async ({ roles, interest }: postSignInPayload) => {
   return authApiPatch<SignInResponse>("/users/profile", {
-    role,
+    roles,
     interest,
   });
 };
 
-export const getNickname = async (role: Role) => {
-  return authApiGet<NicknameResponse>("/users/nickname", { role });
+export const getNickname = async () => {
+  return authApiGet<NicknameResponse>("/users/nickname");
 };
 
 export const postNickname = async (nickname: string) => {
@@ -130,6 +130,7 @@ export const patchFinishedPot = async (
 export const getPotSummary = async (potId: number) => {
   return authApiGet<GetPotSummaryResponse>(`/users/potSummary/${potId}`);
 };
+
 export const patchDescription = async (body: PatchDescriptionBody) => {
   return authApiPatch("/users/description", body);
 };

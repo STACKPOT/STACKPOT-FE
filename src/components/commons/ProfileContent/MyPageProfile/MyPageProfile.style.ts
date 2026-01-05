@@ -23,7 +23,9 @@ export const nicknameContainer = css`
 `;
 export const nicknameStyle = css`
 	${theme.font.title2};
+	display: flex;
 	align-items: center;
+	gap: 0.8rem;
 	color: ${theme.color.base.black};
 `;
 export const setUpIconStyle = css`

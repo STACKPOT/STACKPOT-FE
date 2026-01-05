@@ -28,13 +28,12 @@ const Setting = () => {
   const navigate = useNavigate();
   const { mutate } = usePatchUserProfileUpdate();
   const { data: profile } = useGetMyProfile();
-
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
 
   const methods = useForm<PatchUserProfileUpdateParams>({
     mode: "onChange",
     defaultValues: {
-      role: undefined,
+      roles: [],
       interest: [],
       userIntroduction: "",
       nickname: "",
@@ -47,7 +46,7 @@ const Setting = () => {
 
   useEffect(() => {
     if (profile) {
-      setValue("role", profile?.role);
+      setValue("roles", profile?.roles);
       setValue("interest", profile?.interest);
       setValue("userIntroduction", profile?.userIntroduction);
       setValue("nickname", profile?.nickname);
@@ -85,7 +84,8 @@ const Setting = () => {
           </div>
           <div css={detailContainer}>
             {profile && <NicknameUpdate profile={profile} />}
-            <CategorySelection />
+            <CategorySelection type="roles" title="역할" />
+            <CategorySelection type="interest" title="관심사" />
 
             <div css={content(true)}>
               <p css={contentHeader}>한줄소개 수정</p>
@@ -129,14 +129,6 @@ const Setting = () => {
       </FormProvider>
 
       {isWithdrawModalOpen && (
-        // <ExplainModal
-        //   type="profile"
-        //   title="정말로 탈퇴하시겠습니까?"
-        //   buttonText="탈퇴하기"
-        //   // subtitle={`탈퇴 후 30일 이내에는 계정을 복구할 수 있습니다.\n이후에는 모든 데이터가 영구적으로 삭제됩니다`}
-        //   onButtonClick={handleClick}
-        //   onCancel={() => setIsWithdrawModalOpen(false)}
-        // />
         <Modal
           title="정말로 탈퇴하시겠습니까?"
           message={`탈퇴 후 30일 이내에는 계정을 복구할 수 있습니다.\n이후에는 모든 데이터가 영구적으로 삭제됩니다.`}

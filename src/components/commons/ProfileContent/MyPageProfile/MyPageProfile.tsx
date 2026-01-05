@@ -11,12 +11,10 @@ import {
 import TemperatureBar from "@components/commons/TemperatureBar/TemperatureBar";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
-import { roleImages } from "@constants/roleImage";
 import { categoryText } from "@constants/categories";
 import { Badge } from "@components/index";
-import { Role } from "types/role";
 import useGetProfile from "apis/hooks/users/useGetProfile";
-
+import { SproutImage } from "@assets/images";
 type Props = { userId?: number, viewerIsOwner?: boolean };
 
 const MyPageProfile: React.FC<Props> = ({ userId, viewerIsOwner }) => {
@@ -26,8 +24,8 @@ const MyPageProfile: React.FC<Props> = ({ userId, viewerIsOwner }) => {
   const nickname = data?.nickname || "사용자";
   const userIntroduction = data?.userIntroduction || "소개가 없습니다.";
   const userTemperature = data?.userTemperature ?? 0;
-  const role = data?.role || "FRONTEND";
-  const profileImage = roleImages[role as Role];
+  const roles = data?.roles;
+  const profileImage = SproutImage;
 
   const handleSetUp = () => {
     navigate(routes.setting);
@@ -38,7 +36,11 @@ const MyPageProfile: React.FC<Props> = ({ userId, viewerIsOwner }) => {
       <img css={profileStyle} src={profileImage} alt="프로필 이미지" />
       <div css={contentContainer}>
         <div css={nicknameContainer}>
-          <h1 css={nicknameStyle}>{nickname} <Badge content={categoryText[role]} /></h1>
+          <h1 css={nicknameStyle}>{nickname}
+            {roles?.map((role) =>
+              <Badge key={role} content={categoryText[role]} />
+            )}
+          </h1>
           {viewerIsOwner && (
             <SetUpIcon type="button" css={setUpIconStyle} onClick={handleSetUp} />
           )}

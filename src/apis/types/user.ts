@@ -5,7 +5,7 @@ import { Role } from "types/role";
 export interface LogInResponse {
   tokenServiceResponse: TokenServiceResponse;
   isNewUser: boolean;
-  role: Role | null;
+  roles: Role | null;
 }
 
 export interface TokenServiceResponse {
@@ -17,20 +17,20 @@ export interface GetUserResponse {
   id: number;
   email: string;
   nickname: string;
-  role: Role;
+  roles: Role[];
   interest: string[];
   userTemperature: number;
   userIntroduction: string;
 }
 
 export interface postSignInPayload {
-  role: Role;
+  roles: Role[];
   interest: string[];
 }
 
 export interface SignInResponse {
   id: number;
-  role: Role;
+  roles: Role[];
 }
 
 export interface Feeds {
@@ -47,7 +47,6 @@ export interface Feeds {
   commentCount: number;
   isCommented: boolean;
   createdAt: string;
-  seriesId: string;
 }
 
 interface CompletedPots {
@@ -82,7 +81,7 @@ export interface GetFinishedModalParams {
 }
 
 export interface PatchUserProfileUpdateParams {
-  role: Role;
+  roles: Role[];
   interest: string[];
   userIntroduction: string;
   nickname: string;

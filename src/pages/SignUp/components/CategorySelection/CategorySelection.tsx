@@ -19,18 +19,18 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
     const categories = type === "role" ? Object.keys(partMap) : interests;
     const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
 
-    const handleSelectCategory = (category: string) => {
+    const updateCategory = (category: string) => {
+      const updated = selectedCategory.includes(category)
+        ? selectedCategory.filter((item) => item !== category)
+        : [...selectedCategory, category];
+
+      setSelectedCategory(updated);
+
       if (type === "interest") {
-        setSelectedCategory((prev) => {
-          const updated = prev.includes(category)
-            ? prev.filter((item) => item !== category)
-            : [...prev, category];
-          setValue("interest", updated);
-          return updated;
-        });
+        setValue("interest", updated);
       } else if (type === "role") {
-        setSelectedCategory([category]);
-        setValue("role", partMap[category]);
+        const roles = updated.map((item) => partMap[item]);
+        setValue("roles", roles);
       }
     };
 
@@ -42,7 +42,7 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
             <CategoryButton
               key={category}
               selected={selectedCategory.includes(category)}
-              onClick={() => handleSelectCategory(category)}
+              onClick={() => updateCategory(category)}
             >
               {category}
             </CategoryButton>
