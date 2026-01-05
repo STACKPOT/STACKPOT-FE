@@ -3,7 +3,7 @@ import { getPotSummary } from "apis/userAPI";
 
 const useGetPotSummary = (potId: number) => {
   return useQuery({
-    queryKey: ["potSummary", potId],
+    queryKey: ["summary", potId],
     queryFn: () => getPotSummary(potId),
     select: (data) => data.result,
   });

@@ -14,7 +14,7 @@ import {
 } from "./MyPotCalendar.style";
 import { TaskBox } from "./components";
 import useGetTasksMonth from "apis/hooks/myPots/useGetTasksMonth";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import useGetTasksCalendar from "apis/hooks/myPots/useGetTasksCalendar";
 
 import { format } from "date-fns";
@@ -29,6 +29,7 @@ import { AboutWorkModal } from "@pages/MyPotDetail/components";
 import routes from "@constants/routes";
 
 const MyPotCalendar = () => {
+  const location = useLocation();
   const { potId, taskId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const potIdNumber = Number(potId);
@@ -115,11 +116,11 @@ const MyPotCalendar = () => {
             <p css={dateStyle}>
               {date
                 ? `${date.getFullYear()}. ${String(
-                  date.getMonth() + 1
-                ).padStart(2, "0")}. ${String(date.getDate()).padStart(
-                  2,
-                  "0"
-                )} (${getDayOfWeek(date)})`
+                    date.getMonth() + 1
+                  ).padStart(2, "0")}. ${String(date.getDate()).padStart(
+                    2,
+                    "0"
+                  )} (${getDayOfWeek(date)})`
                 : ""}
             </p>
             <Button
