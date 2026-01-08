@@ -3,10 +3,14 @@ import { NavLink, Outlet } from "react-router-dom";
 import routes from "@constants/routes";
 
 const PotMain: React.FC = () => {
-  const tabs = [
-    { label: "모든 팟", path: routes.pot.base },
-    { label: "지원한 팟", path: routes.pot.applied },
-  ];
+  const accessToken = localStorage.getItem("accessToken");
+
+  const tabs = accessToken
+    ? [
+        { label: "모든 팟", path: routes.pot.base },
+        { label: "지원한 팟", path: routes.pot.applied },
+      ]
+    : [{ label: "모든 팟", path: routes.pot.base }];
 
   return (
     <main css={container}>

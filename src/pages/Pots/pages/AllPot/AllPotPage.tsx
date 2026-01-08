@@ -21,6 +21,7 @@ const AllPotPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("전체보기");
   const [isMyPot, setIsMyPot] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const accessToken = localStorage.getItem("accessToken");
 
   const { data } = useGetPots({
     page: currentPage,
@@ -51,19 +52,20 @@ const AllPotPage: React.FC = () => {
   return (
     <div css={container}>
       <div css={categoryStyle}>
-        {Object.keys(searchPartMap)
-          .concat(["내가 만든 팟"])
-          .map((partName) => (
-            <div key={partName} css={categoryButtonWrapper}>
-              <CategoryButton
-                style={partName === "내가 만든 팟" ? "background" : "basic"}
-                selected={selectedCategory === partName}
-                onClick={() => handleClick(partName)}
-              >
-                {partName}
-              </CategoryButton>
-            </div>
-          ))}
+        {(accessToken
+          ? Object.keys(searchPartMap).concat(["내가 만든 팟"])
+          : Object.keys(searchPartMap)
+        ).map((partName) => (
+          <div key={partName} css={categoryButtonWrapper}>
+            <CategoryButton
+              style={partName === "내가 만든 팟" ? "background" : "basic"}
+              selected={selectedCategory === partName}
+              onClick={() => handleClick(partName)}
+            >
+              {partName}
+            </CategoryButton>
+          </div>
+        ))}
       </div>
       <div css={ctaCardWrapper}>
         <CtaCard type="pot" />
