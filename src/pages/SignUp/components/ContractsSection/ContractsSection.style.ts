@@ -32,3 +32,7 @@ export const detailButtonStyle = css`
 export const modalContainerStyle = css`
   width: 76rem;
 `;
+
+export const modalContentStyle = css`
+  max-height: none;
+`;
