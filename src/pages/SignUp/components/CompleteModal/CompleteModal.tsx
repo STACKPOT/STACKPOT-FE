@@ -29,7 +29,7 @@ function CompleteModal({ onModalCancel }: CompleteModalProps) {
       title={`가입이 완료되었어요! 완성된 나의 프로필이에요.`}
       buttonText="메인으로"
       onButtonClick={handleConfirm}
-      onCancel={onModalCancel}
+      onCancel={handleConfirm}
       customContainerStyle={modalStyle}
     >
       <div css={bodyContainer}>
