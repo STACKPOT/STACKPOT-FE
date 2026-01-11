@@ -22,6 +22,7 @@ import routes from "@constants/routes";
 import useGetMyProfile from "apis/hooks/users/useGetMyProfile";
 
 import { useNavigate } from "react-router-dom";
+import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
 
 const options = [
   { label: "최신 순", key: "new" },
@@ -46,6 +47,8 @@ const Feed = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>("전체보기");
   const [sort, setSort] = useState<string>("new");
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   const { data: user } = useGetMyProfile(!!localStorage.getItem("accessToken"));
 
   const handleCategoryClick = (partName: string) => {
@@ -65,10 +68,7 @@ const Feed = () => {
     if (token) {
       navigate(routes.writePost);
     } else {
-      const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY
-        }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI
-        }&response_type=code&scope=account_email&prompt=login`;
-      window.location.href = link;
+      setIsLoginModalOpen(true);
     }
   };
 
@@ -172,6 +172,9 @@ const Feed = () => {
           </div>
         )}
       </div>
+      {isLoginModalOpen && (
+        <LoginModal onCancel={() => setIsLoginModalOpen(false)} />
+      )}
     </>
   );
 };

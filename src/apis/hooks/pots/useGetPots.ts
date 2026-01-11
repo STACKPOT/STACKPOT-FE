@@ -5,12 +5,18 @@ import { GetPotsParams } from "apis/types/pot";
 const useGetPots = ({
   page,
   size,
-  recruitmentRole,
+  recruitmentRoles,
   onlyMine,
 }: GetPotsParams) => {
   return useQuery({
-    queryKey: ["pots", page, recruitmentRole, onlyMine],
-    queryFn: () => GetPots({ page, size, recruitmentRole, onlyMine }),
+    queryKey: ["pots", page, size, recruitmentRoles ?? null, onlyMine],
+    queryFn: () =>
+      GetPots({
+        page,
+        size,
+        recruitmentRoles: recruitmentRoles ?? null,
+        onlyMine,
+      }),
     select: (data) => data.result,
   });
 };

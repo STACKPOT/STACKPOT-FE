@@ -19,20 +19,19 @@ import "swiper";
 import { useNavigate } from "react-router-dom";
 import routes from "@constants/routes";
 import { Feed, PopularPots } from "./components";
+import { useState } from "react";
+import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_REST_API_KEY
-    }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
-&scope=account_email
-&prompt=login`;
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const handleClick = () => {
     const token = localStorage.getItem("accessToken");
     if (token) {
       navigate(routes.createPot);
     } else {
-      window.location.href = link;
+      setIsLoginModalOpen(true);
     }
   };
 
@@ -68,6 +67,9 @@ const Home: React.FC = () => {
           </div>
         </div>
       </main>
+      {isLoginModalOpen && (
+        <LoginModal onCancel={() => setIsLoginModalOpen(false)} />
+      )}
     </>
   );
 };

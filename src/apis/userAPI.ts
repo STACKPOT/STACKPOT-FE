@@ -28,8 +28,16 @@ import {
   PostPotResponse,
 } from "./types/pot";
 
+export const getGoogleLogIn = async (code: string) => {
+  return apiGet<LogInResponse>("/users/oauth/google", { code });
+};
+
 export const getKakaoLogIn = async (code: string) => {
   return apiGet<LogInResponse>("/users/oauth/kakao", { code });
+};
+
+export const getNaverLogIn = async (code: string) => {
+  return apiGet<LogInResponse>("/users/oauth/naver", { code });
 };
 
 export const GetMyUser = async () => {
@@ -53,6 +61,15 @@ export const postNickname = async (nickname: string) => {
   });
 };
 
+// export const GetMyPage = async ({ dataType }: GetMyPageParams) => {
+//   if (dataType === "feed") {
+//     return authApiGet<MyPageResponse>("/users/mypages");
+//   } else if (dataType === "pot") {
+//     return authApiGet<MyPageResponse>("/users/mypages", { dataType });
+//   } else {
+//     return authApiGet<DescriptionResponse>("/users/description");
+//   }
+// };
 export const getMyPageFeeds = async ({
   nextCursor,
   size,

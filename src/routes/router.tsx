@@ -94,7 +94,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: routes.callback,
+        path: `${routes.callback}/:loginType`,
         element: <CallbackPage />,
       },
       {

@@ -32,13 +32,13 @@ export const PostPot = async (postPotParams: PostPotParams) => {
 export const GetPots = async ({
   page,
   size,
-  recruitmentRole,
+  recruitmentRoles,
   onlyMine,
 }: GetPotsParams) => {
   return authApiGet<PotsResponse>("pots", {
     page,
     size,
-    recruitmentRole,
+    recruitmentRoles,
     onlyMine,
   });
 };

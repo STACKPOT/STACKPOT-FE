@@ -20,13 +20,21 @@ interface LoginModalProps {
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({ onCancel }) => {
-  const googleLoginLink = "";
+  const googleLoginLink = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${
+    import.meta.env.VITE_REST_GOOGLE_API_KEY
+  }&redirect_uri=${
+    import.meta.env.VITE_GOOGLE_REDIRECT_URI
+  }&response_type=code&scope=email`;
+
   const kakaoLoginLink = `https://kauth.kakao.com/oauth/authorize?client_id=${
     import.meta.env.VITE_REST_API_KEY
   }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}&response_type=code
 &scope=account_email
 &prompt=login`;
-  const naverLoginLink = "";
+
+  const naverLoginLink = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${
+    import.meta.env.VITE_REST_NAVER_API_KEY
+  }&redirect_uri=${import.meta.env.VITE_NAVER_REDIRECT_URI}`;
 
   const handleLogin = (link: string) => {
     window.location.href = link;
