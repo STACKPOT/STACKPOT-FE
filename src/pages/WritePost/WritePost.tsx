@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   container,
   contentTitle,
@@ -13,9 +13,12 @@ import { useBlocker, useNavigate } from "react-router-dom";
 import usePostFeed from "apis/hooks/feeds/usePostFeed";
 import { FormProvider, useForm, SubmitHandler } from "react-hook-form";
 import { PostFeedParams } from "apis/types/feed";
+import routes from "@constants/routes";
 
 const WritePost: React.FC = () => {
   const navigate = useNavigate();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [feedId, setFeedId] = useState<number | undefined>(undefined);
 
   const methods = useForm<PostFeedParams>({
     mode: "onChange",
@@ -28,19 +31,31 @@ const WritePost: React.FC = () => {
     },
   });
 
-  const { handleSubmit, formState, watch } = methods;
+  const {
+    handleSubmit,
+    formState: { isValid, isDirty },
+  } = methods;
 
   const postFeedMutation = usePostFeed();
 
-  const blocker = useBlocker(({ currentLocation, nextLocation }) => {
-    return (
-      formState.isDirty && currentLocation.pathname !== nextLocation.pathname
-    );
-  });
+  const blocker = useBlocker(isDirty && !isSuccess);
 
   const onSubmit: SubmitHandler<PostFeedParams> = (data) => {
-    postFeedMutation.mutate(data);
+    postFeedMutation.mutate(data, {
+      onSuccess: (response) => {
+        setIsSuccess(true);
+        setFeedId(response.result?.feedId);
+      },
+    });
   };
+
+  useEffect(() => {
+    if (isSuccess && feedId !== undefined) {
+      navigate(`${routes.feed.base}/${feedId}`, {
+        replace: true,
+      });
+    }
+  }, [isSuccess, feedId, navigate]);
 
   return (
     <main>
@@ -52,11 +67,7 @@ const WritePost: React.FC = () => {
               피드 작성하기
               <PotIcon css={iconStyle} />
               <div css={buttonContainer}>
-                <Button
-                  variant="action"
-                  type="submit"
-                  disabled={!formState.isValid}
-                >
+                <Button variant="action" type="submit" disabled={!isValid}>
                   피드 업로드
                 </Button>
               </div>

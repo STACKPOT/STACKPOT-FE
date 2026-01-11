@@ -43,6 +43,11 @@ interface ModalProps {
    */
   customContainerStyle?: SerializedStyles;
 
+  /**
+   * content에 적용할 커스텀 스타일
+   */
+  customContentStyle?: SerializedStyles;
+
   /** 확인 버튼 클릭 시 호출되는 콜백함수 */
   onConfirm: () => void;
 
@@ -73,6 +78,7 @@ const Modal: React.FC<ModalProps> = ({
   cancelButton,
   confirmButton,
   customContainerStyle,
+  customContentStyle,
   onConfirm,
   onCancel,
 }) => {
@@ -82,7 +88,7 @@ const Modal: React.FC<ModalProps> = ({
         <CloseIcon css={closeIconStyle} onClick={onCancel} />
         <div css={titleContentContainer}>
           <p css={titleStyle}>{title}</p>
-          <p css={messageStyle}>{message}</p>
+          <p css={[messageStyle, customContentStyle]}>{message}</p>
         </div>
         <div css={footer}>
           {cancelButton && (

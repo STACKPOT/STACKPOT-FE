@@ -136,6 +136,7 @@ const PotHeader: React.FC<PotHeaderProps> = ({
         <ExplainModal
           type="profile"
           title={`지원이 완료되었어요!${"\n"}팟 게시자가 회원님의 프로필을 확인할 수 있어요.`}
+          centerTitle={true}
           buttonText="확인했어요"
           role={showApplyProfileModal.potRole.name}
           nickname={showApplyProfileModal.userNickname}
