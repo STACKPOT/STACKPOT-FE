@@ -13,8 +13,10 @@ const useGetSignIn = (signInType: string | undefined) => {
           return getGoogleLogIn(code);
         case "kakao":
           return getKakaoLogIn(code);
-        default:
+        case "naver":
           return getNaverLogIn(code);
+        default:
+          throw new Error(`Invalid login type: ${signInType}`);
       }
     },
     onSuccess: (data) => {

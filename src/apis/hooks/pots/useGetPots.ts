@@ -9,8 +9,14 @@ const useGetPots = ({
   onlyMine,
 }: GetPotsParams) => {
   return useQuery({
-    queryKey: ["pots", page, recruitmentRoles, onlyMine],
-    queryFn: () => GetPots({ page, size, recruitmentRoles, onlyMine }),
+    queryKey: ["pots", page, size, recruitmentRoles ?? null, onlyMine],
+    queryFn: () =>
+      GetPots({
+        page,
+        size,
+        recruitmentRoles: recruitmentRoles ?? null,
+        onlyMine,
+      }),
     select: (data) => data.result,
   });
 };

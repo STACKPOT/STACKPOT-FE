@@ -25,14 +25,13 @@ const AllPotPage: React.FC = () => {
   const { data } = useGetPots({
     page: currentPage,
     size: 9,
-    recruitmentRoles: partMap[selectedCategory],
+    recruitmentRoles: partMap[selectedCategory] ?? null,
     onlyMine: isMyPot,
   });
 
   const handleClick = (partName: string) => {
     const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken && partName === "내가 만든 팟") {
-    } else {
+    if (accessToken || partName !== "내가 만든 팟") {
       setCurrentPage(1);
       setSelectedCategory(partName);
       setIsMyPot(partName === "내가 만든 팟");
