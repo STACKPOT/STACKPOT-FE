@@ -50,12 +50,12 @@ const WritePost: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && feedId !== undefined) {
       navigate(`${routes.feed.base}/${feedId}`, {
         replace: true,
       });
     }
-  }, [isSuccess, feedId]);
+  }, [isSuccess, feedId, navigate]);
 
   return (
     <main>
