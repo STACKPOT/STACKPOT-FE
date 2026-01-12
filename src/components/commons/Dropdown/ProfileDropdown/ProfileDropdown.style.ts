@@ -11,6 +11,7 @@ export const dropdownStyle = css`
   flex-direction: column;
   background-color: ${theme.color.base.white};
   padding: 0.8rem 0;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.16);
 `;
 
 export const itemStyle = (edit: boolean) => css`
