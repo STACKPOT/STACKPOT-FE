@@ -42,8 +42,10 @@ export const guestProfileStyle = css`
 export const profileContainer = css`
   position: relative;
   display: flex;
+  justify-content: center;
   gap: 1.2rem;
   align-items: center;
+  height: 4rem;
 `;
 
 export const iconStyle = (isHomePage: boolean) => css`
@@ -55,6 +57,7 @@ export const iconStyle = (isHomePage: boolean) => css`
 
 export const bellContainer = css`
   position: relative;
+  height: 4rem;
 `;
 
 export const ProfileStyle = css`
