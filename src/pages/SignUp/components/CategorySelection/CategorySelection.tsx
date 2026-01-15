@@ -32,10 +32,19 @@ const CategorySelection = forwardRef<HTMLDivElement, CategorySelectionProps>(
           return updated;
         });
       } else if (type === "role") {
-        setSelectedCategory([category]);
-        setValue("roles", [partMap[category]], {
-          shouldValidate: true,
-          shouldDirty: true,
+        setSelectedCategory((prev) => {
+          const updated = prev.includes(category)
+            ? prev.filter((item) => item !== category)
+            : [...prev, category];
+          setValue(
+            "roles",
+            updated.map((item) => partMap[item]),
+            {
+              shouldValidate: true,
+              shouldDirty: true,
+            }
+          );
+          return updated;
         });
       }
     };
