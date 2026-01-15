@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker, DatePickerProps } from "@mui/x-date-pickers/DatePicker";
@@ -95,7 +95,7 @@ const ButtonField = (props: ButtonFieldProps) => {
     >
       <div css={buttonContainer}>
         <WhiteCalendarIcon />
-        날짜 선택하기
+        {props.value?.format("YYYY. MM. DD") ?? "날짜 선택하기"}
       </div>
     </Button>
   );

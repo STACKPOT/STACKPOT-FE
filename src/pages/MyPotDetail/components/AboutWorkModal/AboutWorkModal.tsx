@@ -15,9 +15,9 @@ import {
   modalStyle,
   aboutWorkModalOverlayStyle,
 } from "./AboutWorkModal.style";
-import { AnotherTaskStatus } from "../../../../types/taskStatus";
+import { AnotherTaskStatus, TaskStatus } from "../../../../types/taskStatus";
 import useGetMyPotTaskDetail from "apis/hooks/myPots/useGetMyPotTaskDetail";
-import { displayStatus } from "@constants/categories";
+import { displayStatus, reverseDisplayStatus } from "@constants/categories";
 import { useSnackbar } from "providers";
 import { ExplainModal, Modal } from "@components/index";
 import dayjs from "dayjs";
@@ -37,6 +37,7 @@ interface AboutWorkModalProps {
   taskId: number;
   potId: number;
   deadLine?: string;
+  initialStatus?: TaskStatus;
 }
 
 const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
@@ -45,6 +46,7 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   taskId,
   potId,
   deadLine,
+  initialStatus,
 }) => {
   const { showSnackbar } = useSnackbar();
   const [step, setStep] = useState<"content" | "member">("content");
@@ -60,7 +62,11 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
   const defaultValues = {
     title: taskDetail?.result?.title || "",
     deadline: taskDetail?.result?.deadLine || undefined,
-    taskboardStatus: displayStatus[taskDetail?.result?.status ?? "OPEN"],
+    taskboardStatus:
+      displayStatus[
+        taskDetail?.result?.status ??
+          reverseDisplayStatus[initialStatus ?? "진행 전"]
+      ],
     description: taskDetail?.result?.description || "",
     participants: taskDetail?.result?.participants
       ? taskDetail.result.participants.map((p: any) => p.potMemberId)
@@ -149,7 +155,11 @@ const AboutWorkModal: React.FC<AboutWorkModalProps> = ({
                       onChange={(date) =>
                         field.onChange(date.format("YYYY-MM-DD"))
                       }
-                      date={deadLineValue !== undefined ? dayjs(deadLineValue) : dayjs(deadLine)}
+                      date={
+                        deadLineValue !== undefined
+                          ? dayjs(deadLineValue)
+                          : dayjs(deadLine)
+                      }
                     />
                   )}
                 />
