@@ -30,6 +30,7 @@ import routes from "@constants/routes";
 import usePostFeedLike from "apis/hooks/feeds/usePostFeedLike";
 import usePostFeedSave from "apis/hooks/feeds/usePostFeedSave";
 import useDeleteFeed from "apis/hooks/feeds/useDeleteFeed";
+import { SproutImage } from "@assets/images";
 
 interface PostCardProps {
   role: Role;
@@ -125,7 +126,7 @@ const PostCard: React.FC<PostCardProps> = ({
               handleUserClick(e, writerId);
             }}
             css={profileImageStyle}
-            src={profileImage}
+            src={SproutImage}
             alt="profile"
           />
           <div css={nicknameDateContainer}>
@@ -176,10 +177,7 @@ const PostCard: React.FC<PostCardProps> = ({
           <p css={textStyle}>{saveCount >= 100 ? "99+" : saveCount}</p>
         </div>
         <div css={iconGroup}>
-          <CommentIcon
-            type="button"
-            css={IconStyle(accessToken !== null)}
-          />
+          <CommentIcon type="button" css={IconStyle(accessToken !== null)} />
           <p css={textStyle}>{commentCount >= 100 ? "99+" : commentCount}</p>
         </div>
       </div>
