@@ -1,4 +1,4 @@
-import { PlusButtonIcon } from "@assets/svgs";
+import { PlusButtonIcon, ReplyIcon } from "@assets/svgs";
 import {
   container,
   contentStyle,
@@ -123,6 +123,7 @@ const Comment: React.FC<CommentProps> = ({
           {!isEditing ? (
             <>
               <div css={profileContainer}>
+                {parentCommentId !== null && <ReplyIcon />}
                 <img css={profileImageStyle} src={SproutImage} alt="profile" />
                 <div css={profileTextContainer}>
                   <div css={nicknameContainer}>
