@@ -75,6 +75,7 @@ const MyPotStatusPage: React.FC = () => {
           onClose={() => setIsModalOpen(false)}
           potId={potIdNumber}
           taskId={taskIdNumber}
+          initialStatus={activeStatus}
         />
       )}
       <StatusBar />

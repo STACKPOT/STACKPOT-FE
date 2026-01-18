@@ -1,7 +1,13 @@
 import { SerializedStyles } from "@emotion/react";
-import Button from "../Button/Button"
-import { container, recommentCancelStyle, submitButtonContainer, textAreaStyle } from "./CommentWriter.style"
+import Button from "../Button/Button";
+import {
+  container,
+  recommentCancelStyle,
+  submitButtonContainer,
+  textAreaStyle,
+} from "./CommentWriter.style";
 import { useRef, useState } from "react";
+import { useSnackbar } from "providers";
 
 interface CommentWriterProps {
   onSubmit: (content: string) => void;
@@ -13,6 +19,7 @@ const CommentWriter: React.FC<CommentWriterProps> = ({
   onCancel,
   textAreaCustomStyle,
 }: CommentWriterProps) => {
+  const { showSnackbar } = useSnackbar();
   const [content, setContent] = useState("");
   const textRef = useRef<HTMLTextAreaElement>(null);
 
@@ -22,12 +29,19 @@ const CommentWriter: React.FC<CommentWriterProps> = ({
       textRef.current.style.height = "0px";
       textRef.current.style.height = textRef.current.scrollHeight + "px";
     }
-  }
+  };
 
   const handleSubmit = () => {
+    if (content.length <= 0) {
+      showSnackbar({
+        message: "댓글을 입력하세요",
+        severity: "warning",
+      });
+      return;
+    }
     onSubmit(content);
     setContent("");
-  }
+  };
 
   const handleCancel = () => {
     setContent("");
@@ -35,7 +49,7 @@ const CommentWriter: React.FC<CommentWriterProps> = ({
       textRef.current.style.height = textRef.current.scrollHeight + "px";
     }
     onCancel();
-  }
+  };
 
   return (
     <div css={container}>
@@ -45,12 +59,17 @@ const CommentWriter: React.FC<CommentWriterProps> = ({
         css={[textAreaStyle, textAreaCustomStyle]}
         value={content}
         placeholder="칭찬은 개발자를 춤추게 합니다.."
-        onChange={handleInputChange} />
+        onChange={handleInputChange}
+      />
       <div css={submitButtonContainer}>
-        <button css={recommentCancelStyle} onClick={handleCancel}>취소</button>
-        <Button variant="action" onClick={handleSubmit}>댓글 작성</Button>
+        <button css={recommentCancelStyle} onClick={handleCancel}>
+          취소
+        </button>
+        <Button variant="action" onClick={handleSubmit}>
+          댓글 작성
+        </Button>
       </div>
     </div>
-  )
-}
+  );
+};
 export default CommentWriter;

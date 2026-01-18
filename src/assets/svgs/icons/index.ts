@@ -43,3 +43,4 @@ export { default as BellIcon } from "./bell.svg?react";
 export { default as BellFilledIcon } from "./bellFilled.svg?react";
 export { default as WandStarIcon } from "./wand_star.svg?react";
 export { default as ArrowSelector } from "./arrowSelector.svg?react";
+export { default as ReplyIcon } from "./reply.svg?react";

@@ -57,8 +57,12 @@ export const TaskImgageStyle = css`
 
 export const subTitleStyle = css`
   ${theme.font.title1};
-  color: ${theme.color.object.assistive};
+  color: ${theme.color.object.hero};
   margin: 2rem 0 2.4rem 0;
+`;
+
+export const scrollInfoTextStyle = css`
+  color: ${theme.color.object.hero};
 `;
 
 export const iconContainer = css`

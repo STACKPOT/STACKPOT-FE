@@ -19,6 +19,7 @@ import {
   profileImageStyle,
   profileTextContainer,
   rightIconStyle,
+  scrollInfoTextStyle,
   sloganContainer,
   subTitleStyle,
   TaskImgageStyle,
@@ -65,7 +66,9 @@ const Landing = () => {
       <img src={TaskImage} alt="taskImage" css={TaskImgageStyle} />
       <div css={iconContainer}>
         <ExpandMoreIcon />
-        <p>스크롤을 내려 어떤 서비스인지 알아볼까요?</p>
+        <p css={scrollInfoTextStyle}>
+          스크롤을 내려 어떤 서비스인지 알아볼까요?
+        </p>
       </div>
 
       <Step1 />

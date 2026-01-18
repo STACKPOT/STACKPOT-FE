@@ -32,7 +32,7 @@ const StatusBar = () => {
       <div css={titleContainer}>
         <MypotFillIcon />
         <p css={boardTextStyle}>
-          {data?.title}- 안녕하세요,
+          {data?.title}- 안녕하세요,{" "}
           <span css={highlightStyle}>{data?.nickname ?? ""}</span> 님! 오늘 할
           일이 <span css={highlightStyle}>{data?.taskCount ?? 0}</span>개
           있어요.

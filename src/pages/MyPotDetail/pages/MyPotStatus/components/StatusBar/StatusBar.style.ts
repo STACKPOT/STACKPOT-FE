@@ -16,6 +16,7 @@ export const boardStyle = css`
 export const titleContainer = css`
   display: flex;
   gap: 1.6rem;
+  align-items: center;
 `;
 
 export const boardTextStyle = css`
