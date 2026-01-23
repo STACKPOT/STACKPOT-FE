@@ -13,7 +13,7 @@ import {
   tildeStyle,
 } from "./FormBody.style";
 import { useFormContext } from "react-hook-form";
-import { participation, participationMap, partKoreanNameMap, period } from "@constants/categories";
+import { participation, participationMap, partKoreanNameMap } from "@constants/categories";
 import { CategoryButton, DatePickerButton } from "@components/index";
 import DatePicker from "../DatePicker/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
@@ -52,12 +52,12 @@ const FormBody = forwardRef<HTMLDivElement>(
 
     const handleStartDate = (day: Dayjs | null) => {
       if (day) {
-        setValue("potStartDate", day.format("YYYY-MM-DD"));
+        setValue("potStartDate", day.format("YYYY.MM"));
       }
     };
     const handleEndDate = (day: Dayjs | null) => {
       if (day) {
-        setValue("potEndDate", day.format("YYYY-MM-DD"));
+        setValue("potEndDate", day.format("YYYY.MM"));
       }
     };
 
@@ -158,20 +158,6 @@ const FormBody = forwardRef<HTMLDivElement>(
             ))}
           </div>
         </div>
-        {/* <div css={labelStyle}>
-          예상 기간
-          <div css={buttonContainer}>
-            {period.map((period) => (
-              <CategoryButton
-                key={period}
-                selected={potDuration === period}
-                onClick={() => setValue("potDuration", period)}
-              >
-                {period}
-              </CategoryButton>
-            ))}
-          </div>
-        </div> */}
         <div css={roleLabelStyle}>
           <div> 모집 파트</div>
           <div css={roleButtonContainer}>

@@ -28,6 +28,7 @@ const usePostFeedLike = () => {
     onError: () => {
       showSnackbar({
         message: "피드 좋아요에 실패했습니다.",
+        severity: "error",
       });
     },
   });
