@@ -121,7 +121,7 @@ const FormBody = forwardRef<HTMLDivElement>(
             <div css={labelStyle}>
               예상 기간
               <DatePicker
-                date={dayjs(potStartDate)}
+                date={dayjs(potStartDate, "YYYY.MM")}
                 onChange={handleStartDate}
               />
             </div>
@@ -130,7 +130,7 @@ const FormBody = forwardRef<HTMLDivElement>(
             </div>
             <div css={labelStyle}>
               <DatePicker
-                date={dayjs(potEndDate)}
+                date={dayjs(potEndDate, "YYYY.MM")}
                 onChange={handleEndDate}
               />
             </div>
