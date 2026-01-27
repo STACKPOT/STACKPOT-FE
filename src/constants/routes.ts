@@ -29,6 +29,7 @@ const routes = {
   login: "/login",
   chat: "/chat",
   finishedPot: "/finished-pot",
+  engagement: "/engagement",
 } as const;
 
 export default routes;

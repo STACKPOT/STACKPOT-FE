@@ -30,6 +30,7 @@ import {
   FeedDetailPage,
   ChatPage,
   FinishedPotDetailPage,
+  EngagementPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -143,6 +144,10 @@ const router = createBrowserRouter([
       {
         path: `${routes.finishedPot}/:potId/:userId`,
         element: <FinishedPotDetailPage />,
+      },
+      {
+        path: `${routes.engagement}`,
+        element: <EngagementPage />,
       },
     ],
   },
