@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router";
 import App from "../App";
 import routes from "@constants/routes";
 import {
@@ -151,6 +151,11 @@ const router = createBrowserRouter([
         path: routes.engagement.base,
         element: <EngagementPage />,
         children: [
+          {
+            index: true,
+            element: <Navigate to={routes.engagement.likes} replace />,
+          },
+
           {
             path: `${routes.engagement.likes}`,
             element: <MyLikesPage />,
