@@ -32,7 +32,7 @@ const CommentWriter: React.FC<CommentWriterProps> = ({
   };
 
   const handleSubmit = () => {
-    if (content.length <= 0) {
+    if (content.length <= 0 || content.trim().length === 0) {
       showSnackbar({
         message: "댓글을 입력하세요",
         severity: "warning",
