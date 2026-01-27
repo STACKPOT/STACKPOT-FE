@@ -34,5 +34,6 @@ export const modalContainerStyle = css`
 `;
 
 export const modalContentStyle = css`
-  max-height: none;
+  max-height: 43.5rem;
+  overflow-y: scroll;
 `;
