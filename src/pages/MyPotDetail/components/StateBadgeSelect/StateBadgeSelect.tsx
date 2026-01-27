@@ -3,7 +3,7 @@ import { firstSectionContainer } from "../TextInput/TextInput.style";
 import { badgeContainer } from "./StateBadgeSelect.style";
 import { labelTextStyle } from "../AboutWorkModal/AboutWorkModal.style";
 import { taskStatue } from "@constants/categories";
-import { StateBadge, StateButton } from "@components/index";
+import { StateBadge } from "@components/index";
 
 interface StatusBadgeSelectorProps {
   selectedStatus: AnotherTaskStatus | null;
