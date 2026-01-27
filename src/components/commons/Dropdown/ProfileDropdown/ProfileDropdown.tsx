@@ -25,7 +25,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ onClose }) => {
       <Link to={routes.setting} css={itemStyle(true)} onClick={onClose}>
         설정
       </Link>
-      <Link to={routes.engagement} css={itemStyle(true)} onClick={onClose}>
+      <Link to={routes.engagement.base} css={itemStyle(true)} onClick={onClose}>
         공감/저장
       </Link>
       <div onClick={handleLogout} css={itemStyle(false)}>
