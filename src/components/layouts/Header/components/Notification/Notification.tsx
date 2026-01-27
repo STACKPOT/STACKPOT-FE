@@ -19,7 +19,7 @@ interface NotificationProps {
 const Notification: React.FC<NotificationProps> = ({ onClose }) => {
   const navigate = useNavigate();
 
-  const { data: notifications } = useGetNotification();
+  const { data: notifications } = useGetNotification(true);
 
   const { mutate } = usePostNotification();
 
@@ -39,7 +39,7 @@ const Notification: React.FC<NotificationProps> = ({ onClose }) => {
             }
           }
         },
-      }
+      },
     );
   };
 

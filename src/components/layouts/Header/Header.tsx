@@ -1,5 +1,7 @@
 import {
   ArrowDropdownIcon,
+  BellActiveFilledIcon,
+  BellActiveIcon,
   BellFilledIcon,
   BellIcon,
   Logo,
@@ -25,6 +27,7 @@ import LoginModal from "@components/commons/Modal/LoginModal/LoginModal";
 import Notification from "./components/Notification/Notification";
 import { ProfileImage } from "@assets/images";
 import { SproutImage } from "@assets/images";
+import useGetNotification from "apis/hooks/notification/useGetNotification";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
@@ -33,11 +36,13 @@ const Header: React.FC = () => {
   const notificationRef = useRef<HTMLDivElement>(null);
 
   const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("accessToken")
+    localStorage.getItem("accessToken"),
   );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const { data: notifications } = useGetNotification(accessToken !== null);
 
   const handleClick = () => {
     setIsLoginModalOpen(true);
@@ -109,7 +114,19 @@ const Header: React.FC = () => {
               onClick={handleSearchClick}
             />
             <div css={bellContainer}>
-              {isNotificationOpen ? (
+              {notifications && notifications.length > 0 ? (
+                isNotificationOpen ? (
+                  <BellActiveFilledIcon
+                    css={headerIconStyle(isHomePage)}
+                    onClick={handleNotificationClick}
+                  />
+                ) : (
+                  <BellActiveIcon
+                    css={headerIconStyle(isHomePage)}
+                    onClick={handleNotificationClick}
+                  />
+                )
+              ) : isNotificationOpen ? (
                 <BellFilledIcon
                   css={headerIconStyle(isHomePage)}
                   onClick={handleNotificationClick}

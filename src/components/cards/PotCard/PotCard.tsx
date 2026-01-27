@@ -15,12 +15,12 @@ import {
   titleStyle,
 } from "./PotCard.style";
 import { useNavigate } from "react-router-dom";
-import { roleImages } from "@constants/roleImage";
 import { Role } from "types/role";
 import routes from "@constants/routes";
 import { SaveFilledIcon, SaveIcon } from "@assets/svgs";
 import usePostSavePot from "apis/hooks/saves/useSavePot";
 import { useSnackbar } from "providers";
+import { SproutImage } from "@assets/images";
 
 interface PotCardProps {
   userId: number;
@@ -38,7 +38,6 @@ interface PotCardProps {
 const PotCard: React.FC<PotCardProps> = ({
   userId,
   potId,
-  role,
   nickname,
   dday,
   title,
@@ -75,8 +74,6 @@ const PotCard: React.FC<PotCardProps> = ({
     }
   };
 
-  const profileImage = roleImages[role];
-
   return (
     <div css={cardStyle} onClick={handleCardClick}>
       <div css={cardHeader}>
@@ -87,7 +84,7 @@ const PotCard: React.FC<PotCardProps> = ({
               e.stopPropagation();
               handleUserClick();
             }}
-            src={profileImage}
+            src={SproutImage}
             alt="profile"
           />
           <p
