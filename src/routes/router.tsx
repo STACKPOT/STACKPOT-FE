@@ -31,6 +31,8 @@ import {
   ChatPage,
   FinishedPotDetailPage,
   EngagementPage,
+  MyLikesPage,
+  MySavesPage,
 } from "@pages/index";
 
 const router = createBrowserRouter([
@@ -146,8 +148,18 @@ const router = createBrowserRouter([
         element: <FinishedPotDetailPage />,
       },
       {
-        path: `${routes.engagement}`,
+        path: routes.engagement.base,
         element: <EngagementPage />,
+        children: [
+          {
+            path: `${routes.engagement.likes}`,
+            element: <MyLikesPage />,
+          },
+          {
+            path: `${routes.engagement.saves}`,
+            element: <MySavesPage />,
+          },
+        ],
       },
     ],
   },

@@ -27,6 +27,8 @@ import MyPotsPage from "./MyPots/MyPots";
 import ChatPage from "@pages/Chat/Chat";
 import FinishedPotDetailPage from "./FinishedPotDetail/FinishedPotDetail";
 import EngagementPage from "@pages/Engagement/Engagement";
+import MyLikesPage from "@pages/Engagement/pages/MyLikes/MyLikes";
+import MySavesPage from "@pages/Engagement/pages/MySaves/MySaves";
 
 export {
   HomePage,
@@ -58,4 +60,6 @@ export {
   ChatPage,
   FinishedPotDetailPage,
   EngagementPage,
+  MyLikesPage,
+  MySavesPage,
 };
