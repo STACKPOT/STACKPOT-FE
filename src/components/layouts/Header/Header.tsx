@@ -1,6 +1,8 @@
 import {
   ArrowDropdownIcon,
+  BellActiveFilledIcon,
   BellActiveIcon,
+  BellFilledIcon,
   BellIcon,
   Logo,
   SearchIcon,
@@ -113,7 +115,19 @@ const Header: React.FC = () => {
             />
             <div css={bellContainer}>
               {notifications && notifications.length > 0 ? (
-                <BellActiveIcon
+                isNotificationOpen ? (
+                  <BellActiveFilledIcon
+                    css={headerIconStyle(isHomePage)}
+                    onClick={handleNotificationClick}
+                  />
+                ) : (
+                  <BellActiveIcon
+                    css={headerIconStyle(isHomePage)}
+                    onClick={handleNotificationClick}
+                  />
+                )
+              ) : isNotificationOpen ? (
+                <BellFilledIcon
                   css={headerIconStyle(isHomePage)}
                   onClick={handleNotificationClick}
                 />
