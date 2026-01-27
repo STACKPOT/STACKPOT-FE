@@ -8,4 +8,5 @@ export { default as TodoCheckIcon } from "./todoCheckIcon.svg?react";
 export { default as FireIcon } from "./fire.svg?react";
 export { default as ChattingIcon } from "./chat.svg?react";
 export { default as MypotFillIcon } from "./pot.svg?react";
-
+export { default as HeartIcon } from "./heart.svg?react";
+export { default as BookmarkIcon } from "./bookmark.svg?react";
