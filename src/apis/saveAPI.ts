@@ -7,9 +7,9 @@ export const postSavePot = async (potId: number) => {
 };
 
 export const getSaveFeeds = async (params: { page: number; size: number }) => {
-  return authApiGet<FeedEngagementResponse>("saves/feeds", params);
+  return authApiGet<FeedEngagementResponse>("/saves/feeds", params);
 };
 
 export const getSavePots = async (params: { page: number; size: number }) => {
-  return authApiGet<SavedPotsResponse>("saves/pots", params);
+  return authApiGet<SavedPotsResponse>("/saves/pots", params);
 };
