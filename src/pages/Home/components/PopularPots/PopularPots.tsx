@@ -7,14 +7,14 @@ import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { cardStyle } from "@components/cards/PotCard/PotCard.style";
 import "react-loading-skeleton/dist/skeleton.css";
-import PaginationButton from "@components/commons/Pagination/Pagination";
+import PaginationButton from "@pages/Home/components/Pagination/Pagination";
 
 const PopularPots = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data, isLoading } = useGetPots({
     page: 1,
     size: 9,
-    recruitmentRole: null,
+    recruitmentRoles: null,
     onlyMine: false,
   });
 

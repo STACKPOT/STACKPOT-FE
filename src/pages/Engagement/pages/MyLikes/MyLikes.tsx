@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CategoryButton, PostCard, NoData } from "@components/index";
 import { Pagination, PaginationItem } from "@mui/material";
 import * as styles from "./MyLikes.syls";
-import useGetFeedsLikes from "apis/hooks/saves/useGetFeedsLikes";
+import useGetFeedsLikes from "apis/hooks/feeds/useGetFeedsLikes";
 
 const PAGE_SIZE = 4;
 

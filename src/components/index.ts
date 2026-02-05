@@ -32,7 +32,6 @@ import PostButton from "./commons/Button/PostButton/PostButton";
 import DatePickerButton from "./commons/DatePicker/DatePickerButton/DatePickerButton";
 import NoData from "./commons/NoData/NoData";
 import StateButton from "./commons/Button/StateButton/StateButton";
-import Pagination from "./commons/Pagination/Pagination";
 
 export {
   Modal,
@@ -69,5 +68,4 @@ export {
   DatePickerButton,
   NoData,
   StateButton,
-  Pagination,
 };
