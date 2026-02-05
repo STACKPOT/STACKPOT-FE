@@ -1,3 +1,4 @@
+import { FeedEngagementResponse } from "apis/types/common";
 import {
   authApiGet,
   authApiPost,
@@ -13,7 +14,6 @@ import {
   PatchFeedResponse,
   GetFeedDetailResponse,
   PostFeedSeriesParams,
-  FeedsLikesResponse,
 } from "./types/feed";
 
 export const getFeeds = async ({
@@ -66,5 +66,5 @@ export const postFeedSeries = async (body: PostFeedSeriesParams) => {
 };
 
 export const getFeedsLikes = async (params: { page: number; size: number }) => {
-  return authApiGet<FeedsLikesResponse>("/feeds/likes", params);
+  return authApiGet<FeedEngagementResponse>("/feeds/likes", params);
 };

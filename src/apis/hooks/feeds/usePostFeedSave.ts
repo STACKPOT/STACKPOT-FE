@@ -27,6 +27,9 @@ const usePostFeedSave = () => {
       queryClient.invalidateQueries({
         queryKey: ["feed-likes"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["save-feeds"],
+      });
     },
     onError: () => {
       showSnackbar({
