@@ -1,15 +1,12 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { CategoryButton, PostCard, NoData } from "@components/index";
 import { Pagination, PaginationItem } from "@mui/material";
 import * as styles from "./MyLikes.syls";
 import useGetFeedsLikes from "apis/hooks/saves/useGetFeedsLikes";
-// import { noDataContainerStyle } from "./MyLikes.syls"; // 이미 styles에 있으면 생략/수정
 
 const PAGE_SIZE = 4;
 
 const MyLikes = () => {
-  const navigate = useNavigate();
   const [page, setPage] = useState(1);
 
   const { data, isLoading } = useGetFeedsLikes(page, PAGE_SIZE);
@@ -33,9 +30,7 @@ const MyLikes = () => {
       </nav>
 
       {isEmpty ? (
-        <NoData
-          message={`😥\n내 공감이 없어요`}
-        />
+        <NoData message={`😥\n내 공감이 없어요`} />
       ) : (
         <>
           <div css={styles.itemContainer}>
