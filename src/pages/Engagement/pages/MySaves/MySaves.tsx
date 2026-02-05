@@ -1,8 +1,8 @@
 import { CategoryButton } from "@components/index";
 import * as styles from "./MySaves.styles";
 import { useState } from "react";
-import MySavedPots from "@pages/Engagement/pages/MySaves/components/MySavedPots/MySavedPots";
 import MySavedFeeds from "@pages/Engagement/pages/MySaves/components/MySavedFeeds/MySavedFeeds";
+import MySavedPots from "@pages/Engagement/pages/MySaves/components/MySavedPots/MySavedPots";
 
 type Category = "pot" | "feed";
 

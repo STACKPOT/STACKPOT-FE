@@ -17,12 +17,11 @@ import { useGetMyPotTask } from "apis/hooks/myPots/useGetMyPotTask";
 import { displayStatus, WorkModal } from "@constants/categories";
 import {
   MyPotTodoList,
-  Pagination,
   StatusBar,
   TodoStatusSection,
 } from "./components";
 import { PotIcon } from "@assets/svgs";
-import { Button } from "@components/index";
+import { Button, Pagination } from "@components/index";
 
 const MyPotStatusPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);

@@ -54,7 +54,7 @@ const MyLikes = () => {
             ))}
           </div>
 
-          {totalPages > 1 && (
+          {!isEmpty && (
             <Pagination
               count={totalPages}
               page={page}

@@ -1,25 +1,25 @@
 import { Role } from "types/role";
 
-export interface FeedLikeItem {
-  feedId: number;
-  writerId: number;
-  writer: string;
-  writerRoles: Role[];
-  title: string;
-  content: string;
-  likeCount: number;
-  commentCount: number;
-  saveCount: number;
-  isLiked: boolean;
+export interface SavedPotItem {
+  userId: number;
+  userRoles: Role;
+  userNickname: string;
+
+  potId: number;
+  potName: string;
+  potContent: string;
+
+  recruitmentRoles: string[];
   isSaved: boolean;
-  createdAt: string;
-  isOwner: boolean;
+  potSaveCount: number;
+  isMember: boolean;
+  dday: string;
 }
 
-export interface FeedsLikesResponse {
+export interface SavedPotsResponse {
   size: number;
   totalPages: number;
-  feeds: FeedLikeItem[];
+  pots: SavedPotItem[];
   currentPage: number;
   totalElements: number;
 }
