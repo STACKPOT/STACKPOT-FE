@@ -24,6 +24,9 @@ const usePostFeedSave = () => {
         queryKey: ["my-page", "search", "users"],
         exact: false, // prefix match으로 userId·keyword·size 포함 모든 검색 피드 무효화
       });
+      queryClient.invalidateQueries({
+        queryKey: ["feed-likes"],
+      });
     },
     onError: () => {
       showSnackbar({
