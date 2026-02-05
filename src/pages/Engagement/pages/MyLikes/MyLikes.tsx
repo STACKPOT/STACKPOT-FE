@@ -49,7 +49,7 @@ const MyLikes = () => {
                 isLiked={item.isLiked}
                 isSaved={item.isSaved}
                 feedId={item.feedId}
-                isMyPost={item.isMyPost}
+                isMyPost={item.isOwner}
               />
             ))}
           </div>

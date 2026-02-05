@@ -28,9 +28,9 @@ const MySavedPots = () => {
       ) : (
         <>
           <div css={styles.itemContainer}>
-            {items.map((pot, index) => (
+            {items.map((pot) => (
               <PotCard
-                key={index}
+                key={pot.potId}
                 userId={pot.userId}
                 potId={pot.potId}
                 role={pot.userRoles}

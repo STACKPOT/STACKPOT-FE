@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 import routes from "@constants/routes";
 import {
@@ -157,11 +157,11 @@ const router = createBrowserRouter([
           },
 
           {
-            path: `${routes.engagement.likes}`,
+            path: routes.likes,
             element: <MyLikesPage />,
           },
           {
-            path: `${routes.engagement.saves}`,
+            path: routes.saves,
             element: <MySavesPage />,
           },
         ],
