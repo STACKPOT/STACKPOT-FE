@@ -8,12 +8,10 @@ import { useParams } from "react-router-dom";
 import { ApplicantsInformation, PotHeader } from "./components";
 import { CommentSection, PostButton, PotInformation } from "@components/index";
 import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
-import { roleImages } from "@constants/roleImage";
 
 const PotDetail = () => {
   const { potId } = useParams();
   const potIdNumber = Number(potId);
-
   const { data } = useGetPotDetail(potIdNumber);
 
   return (
@@ -26,9 +24,10 @@ const PotDetail = () => {
             isApplied={data.potDetail.applied}
             potId={potIdNumber}
             potStatus={data.potDetail.potStatus}
-            nickname={data.potDetail.userNickname || ""}
-            dday={data.potDetail.dday}
-          />
+            nickname={data.potDetail.userNickname}
+            dday={data.potDetail.dday} 
+            userId={data.potDetail.userId}
+            />
           <div css={bodyContainerStyle}>
             <PotInformation
               potStartDate={data.potDetail.potStartDate}

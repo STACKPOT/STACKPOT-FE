@@ -5,7 +5,7 @@ import { AnotherTaskStatus } from "types/taskStatus";
 
 export const taskBadgeStyle = (
   content: AnotherTaskStatus,
-  clickable = false
+  clickable = false,
 ) => css`
   display: flex;
   padding: 1.2rem 2rem;
@@ -43,4 +43,10 @@ export const potBadgeStyle = (type: PotStatus) => css`
       : theme.color.point.darkblue};
   ${theme.font.caption1};
   white-space: nowrap;
+`;
+
+export const unselectedStyle = css`
+  ${taskBadgeStyle("진행 전")}
+  background-color: ${theme.color.object.alternative};
+  color: ${theme.color.object.hero};
 `;

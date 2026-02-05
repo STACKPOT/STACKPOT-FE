@@ -42,8 +42,8 @@ const PotForm: React.FC<PotFormProps> = ({
       potLan: "",
       potModeOfOperation: undefined,
       potContent: "",
-      potStartDate: dayjs().format("YYYY-MM-DD"),
-      potEndDate: dayjs().format("YYYY-MM-DD"),
+      potStartDate: dayjs().format("YYYY.MM"),
+      potEndDate: dayjs().format("YYYY.MM"),
       potRecruitmentDeadline: dayjs().format("YYYY-MM-DD"),
       recruitmentDetails: undefined,
       recruitingMembers: undefined,
@@ -100,8 +100,8 @@ const PotForm: React.FC<PotFormProps> = ({
         participationMap[potData.potModeOfOperation]
       );
       setValue("potContent", potData.potContent);
-      setValue("potStartDate", potData.potStartDate.split(". ").join("-"));
-      setValue("potEndDate", potData.potEndDate.split(". ").join("-"));
+      setValue("potStartDate", potData.potStartDate);
+      setValue("potEndDate", potData.potEndDate);
       setValue(
         "potRecruitmentDeadline",
         potData.potRecruitmentDeadline.split(". ").join("-")

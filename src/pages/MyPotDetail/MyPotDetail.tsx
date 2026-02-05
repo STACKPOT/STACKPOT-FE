@@ -71,7 +71,6 @@ const MyPotDetail: React.FC = () => {
 
   const handleChattingClick = () => {
     navigate(`${routes.chat}`);
-    //TODO: 해당 채팅방으로 연결
   };
 
   const handleModifyClick = () => {
@@ -84,8 +83,14 @@ const MyPotDetail: React.FC = () => {
 
   const handleButtonClick = () => {
     if (potId && selectedUserId) {
-      console.log(potId, selectedUserId);
-      delegate({ potId: potIdNumber, memberId: selectedUserId });
+      delegate(
+        { potId: potIdNumber, memberId: selectedUserId },
+        {
+          onSuccess: () => {
+            setIsModalOpen(false);
+          },
+        },
+      );
     }
   };
 
@@ -164,17 +169,21 @@ const MyPotDetail: React.FC = () => {
           customContainerStyle={css({ width: "78rem" })}
         >
           <div css={memberListContainer}>
-            {members?.result?.map((member) => (
-              <MemberCard
-                key={member.potMemberId}
-                userId={member.potMemberId}
-                nickname={member.nickname}
-                role={member.potRole as Role}
-                type="selection"
-                selected={selectedUserId === member.potMemberId}
-                onClick={() => setSelectedUserId(member.potMemberId)}
-              />
-            ))}
+            {members?.result
+              ?.filter((member) => {
+                return !member.owner;
+              })
+              .map((member) => (
+                <MemberCard
+                  key={member.potMemberId}
+                  userId={member.potMemberId}
+                  nickname={member.nickname}
+                  role={member.potRole as Role}
+                  type="selection"
+                  selected={selectedUserId === member.potMemberId}
+                  onClick={() => setSelectedUserId(member.potMemberId)}
+                />
+              ))}
           </div>
         </ExplainModal>
       )}

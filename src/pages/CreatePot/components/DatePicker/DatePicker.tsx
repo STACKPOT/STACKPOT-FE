@@ -16,15 +16,15 @@ const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DesktopDatePicker
-        // views={["year", "month"]}
-        format="YYYY.MM.DD"
+        views={["year", "month"]}
+        format="YYYY.MM"
         css={datePickerStyle}
         slots={{
           layout: StyledPickersLayout,
           textField: DatePickerTextField,
         }}
         value={date}
-        onChange={onChange}
+        onAccept={onChange}
       />
     </LocalizationProvider>
   );

@@ -17,7 +17,6 @@ import useCancelApply from "apis/hooks/pots/useCancelApply";
 import { PotStatus } from "types/potStatus";
 import routes from "@constants/routes";
 import { PostPotApplicationResponse } from "apis/types/pot";
-import useGetPotDetail from "apis/hooks/pots/useGetPotDetail";
 import { SproutImage } from "@assets/images";
 
 interface PotHeaderProps {
@@ -28,6 +27,7 @@ interface PotHeaderProps {
   potStatus: PotStatus;
   nickname: string;
   dday: string;
+  userId: number;
 }
 const PotHeader: React.FC<PotHeaderProps> = ({
   title,
@@ -37,21 +37,18 @@ const PotHeader: React.FC<PotHeaderProps> = ({
   potStatus,
   nickname,
   dday,
+  userId
 }: PotHeaderProps) => {
   const navigate = useNavigate();
   const { mutate: cancelApply } = useCancelApply();
-
-  const { data } = useGetPotDetail(potId);
-  const handleUserClick = () => {
-    const userId = data?.potDetail.userId;
-    navigate(`${routes.userProfile}/${userId}`);
-  };
-
   const [showCancelApplyModal, setShowCancelApplyModal] =
     useState<boolean>(false);
   const [showApplyModal, setShowApplyModal] = useState<boolean>(false);
-  const [showApplyProfileModal, setShowApplyProfileModal] =
-    useState<PostPotApplicationResponse | null>(null);
+  const [showApplyProfileModal, setShowApplyProfileModal] = useState<PostPotApplicationResponse | null>(null);
+
+  const handleUserClick = () => {
+    navigate(`${routes.userProfile}/${userId}`);
+  };
 
   const handleEdit = () => {
     navigate(`${routes.editPot}/${potId}`);
