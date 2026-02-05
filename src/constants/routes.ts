@@ -34,8 +34,8 @@ const routes = {
     likes: "/engagement/likes",
     saves: "/engagement/saves",
   },
-  likes: "/likes",
-  saves: "/saves",
+  likes: "likes",
+  saves: "saves",
 } as const;
 
 export default routes;
