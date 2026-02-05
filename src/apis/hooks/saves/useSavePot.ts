@@ -10,6 +10,7 @@ const usePostSavePot = () => {
       queryClient.invalidateQueries({ queryKey: ["pots"] });
       queryClient.invalidateQueries({ queryKey: ["search"] });
       queryClient.invalidateQueries({ queryKey: ["potDetail", variables] });
+      queryClient.invalidateQueries({ queryKey: ["save-pots"] });
     },
   });
 };
