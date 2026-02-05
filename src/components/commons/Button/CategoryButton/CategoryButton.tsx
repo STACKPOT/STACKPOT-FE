@@ -8,15 +8,15 @@ import {
 interface CategoryButtonProps {
   children: string;
   selected: boolean;
-  onClick: (category: string) => void;
-  style?: "basic"| "background";
+  onClick?: (category: string) => void;
+  style?: "basic" | "background";
 }
 
 const CategoryButton: React.FC<CategoryButtonProps> = ({
   children,
   selected,
-  onClick,
-  style="basic",
+  onClick = () => {},
+  style = "basic",
 }: CategoryButtonProps) => {
   const buttonType: SerializedStyles =
     style === "basic"
