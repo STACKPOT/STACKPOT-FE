@@ -23,7 +23,7 @@ export const buttonStyle = css`
   ${theme.font.caption3};
 `;
 
-export const StyledPickersLayout = styled(PickersLayout)({
+export const StyledPickersLayout = styled(PickersLayout)<any>({
   ".MuiPickersCalendarHeader-label": {
     fontSize: "1.3rem",
   },

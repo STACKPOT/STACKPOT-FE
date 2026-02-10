@@ -33,7 +33,7 @@ const visibleRoles = Object.entries(roleImages)
   });
 
 const FormBody = forwardRef<HTMLDivElement>(
-  ({ }, ref) => {
+  (_props, ref) => {
     const {
       register,
       watch,
@@ -115,6 +115,7 @@ const FormBody = forwardRef<HTMLDivElement>(
             <DatePickerButton
               date={dayjs(potRecruitmentDeadline)}
               onChange={handleDeadline}
+              minDate={dayjs()}
             />
           </div>
           <div css={potDateStyle}>
@@ -132,6 +133,7 @@ const FormBody = forwardRef<HTMLDivElement>(
               <DatePicker
                 date={dayjs(potEndDate, "YYYY.MM")}
                 onChange={handleEndDate}
+                minDate={dayjs(potStartDate, "YYYY.MM")}
               />
             </div>
           </div>

@@ -8,10 +8,14 @@ dayjs.locale("ko");
 interface DatePickerProps {
   date?: Dayjs;
   onChange: (date: Dayjs | null) => void;
+  minDate?: Dayjs;
+  maxDate?: Dayjs;
 }
 const DatePicker: React.FC<DatePickerProps> = ({
   date,
   onChange,
+  minDate,
+  maxDate,
 }: DatePickerProps) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -25,6 +29,8 @@ const DatePicker: React.FC<DatePickerProps> = ({
         }}
         value={date}
         onAccept={onChange}
+        minDate={minDate}
+        maxDate={maxDate}
       />
     </LocalizationProvider>
   );

@@ -74,6 +74,8 @@ interface ButtonFieldProps
 interface ButtonDatePickerProps {
   onChange: (date: Dayjs | null) => void;
   date?: Dayjs;
+  minDate?: Dayjs;
+  maxDate?: Dayjs;
 }
 
 const ButtonField = (props: ButtonFieldProps) => {
@@ -135,12 +137,16 @@ const ButtonDatePicker = (
 const DatePickerButton: React.FC<ButtonDatePickerProps> = ({
   onChange,
   date,
+  minDate,
+  maxDate,
 }: ButtonDatePickerProps) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ko">
       <ButtonDatePicker
         value={date}
         onChange={(newValue) => onChange(newValue)}
+        minDate={minDate}
+        maxDate={maxDate}
       />
     </LocalizationProvider>
   );
